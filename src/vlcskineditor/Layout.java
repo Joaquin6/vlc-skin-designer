@@ -287,6 +287,11 @@ public class Layout implements ActionListener{
       }
     }
   }
+  public void draw(Graphics2D g) {
+    for(Item i:items) {
+      i.draw(g);
+    }
+  }
   public String returnCode() {
     String code ="<Layout";
     if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";

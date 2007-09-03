@@ -84,6 +84,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
+  PreviewWindow pvwin;
   public boolean saved = false;
   int res_tree_sel_x, res_tree_sel_y;
   
@@ -371,15 +372,19 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items.setSize(200,200);
     items.setVisible(true); 
     
+    pvwin = new PreviewWindow();
+    
     jdesk.add(resources);
     jdesk.add(windows);
-    jdesk.add(items);
+    jdesk.add(items);    
+    jdesk.add(pvwin.frame);
     
     resources.setLocation(0,0);
     windows.setLocation(0,200);
     items.setLocation(0,350);
+    pvwin.frame.setLocation(250,0);
     
-     res_add_bitmap_pu = new JPopupMenu();
+    res_add_bitmap_pu = new JPopupMenu();
     res_add_bitmap_pu_b = new JMenuItem("Add Bitmap/s");
     res_add_bitmap_pu_b.addActionListener(this);
     res_add_bitmap_pu.add(res_add_bitmap_pu_b);
@@ -446,10 +451,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_add_pu_video = new JMenuItem("Video");
     items_add_pu_video.addActionListener(this);
     items_add_pu.add(items_add_pu_video);
-    jdesk.add(items_add_pu);  
+    jdesk.add(items_add_pu);   
+    
     
     jdesk.setMinimumSize(new Dimension(800,600));
     add(jdesk);    
+    
     if(System.getProperty("os.name").indexOf("Windows")!=-1) {
       try {      
         Registry r = new Registry();               
@@ -987,10 +994,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         if(type.equals("Window")) {          
           selected_window = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           selected_layout = null;
+          pvwin.clearLayout();
           items_tree_model.setRoot(new DefaultMutableTreeNode("Root: Items"));                   
         }
         else if(type.equals("Layout")) {
           selected_layout = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
+          pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
           s.updateItems();
         }
       }

@@ -378,6 +378,33 @@ public class Skin implements ActionListener{
     }
     return r;
   }
+  /** Returns the image object of a bitmap **/
+  public Image getBitmapImage(String id) {
+    Resource r = getResource(id);
+    if(r==null) {
+      return null;
+    }
+    else {
+      if(r.type.equals("Bitmap")) {
+        try {
+          Bitmap b = (Bitmap)r;
+          return b.image;
+        }
+        catch(Exception e) {
+          try {
+            SubBitmap sb = (SubBitmap)r;
+            return sb.image;
+          }
+          catch(Exception e2) {
+            
+          }
+        }
+        
+      }
+      else return null;
+    }
+    return null;
+  }
   /** Returns the window represented by the given id **/
   public Window getWindow(String id) {
     Window win = null;

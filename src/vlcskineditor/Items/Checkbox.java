@@ -405,7 +405,10 @@ public class Checkbox extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    if(true) g.drawImage(s.getBitmapImage(up1),x,y,Color.BLACK,null);
+  }
+  public void draw(Graphics2D g, int x_, int y_) {
+    if(true) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,Color.BLACK,null);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Checkbox: "+id);    

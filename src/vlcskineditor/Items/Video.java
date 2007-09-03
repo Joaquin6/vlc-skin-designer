@@ -272,6 +272,10 @@ public class Video extends Item implements ActionListener{
     g.setColor(Color.BLACK);
     g.fillRect(x,y,width,height);    
   }
+  public void draw(Graphics2D g, int x_, int y_) {
+    g.setColor(Color.BLACK);
+    g.fillRect(x+x_,y+y_,width,height);    
+  }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Video: "+id);      
     return node;

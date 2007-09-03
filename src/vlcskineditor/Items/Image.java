@@ -287,7 +287,10 @@ public class Image extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    g.drawImage(s.getBitmapImage(image),x,y,Color.BLACK,null);
+  }
+   public void draw(Graphics2D g,int x_, int y_) {
+    g.drawImage(s.getBitmapImage(image),x+x_,y+y_,Color.BLACK,null);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Image: "+id);         

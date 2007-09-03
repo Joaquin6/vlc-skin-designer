@@ -49,12 +49,12 @@ public class Anchor extends Item implements ActionListener{
   /** Creates a new instance of Anchor */
   public Anchor(String xmlcode, Skin s_) {
     s=s_;
-    if (xmlcode.indexOf("points=\"")!=-1) points = XML.getValue(xmlcode,"points");
+    if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
     priority = XML.getIntValue(xmlcode,"priority");
-    if (xmlcode.indexOf("range=\"")!=-1) range = XML.getIntValue(xmlcode,"range");
-    if (xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if (xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");
+    if (xmlcode.indexOf(" range=\"")!=-1) range = XML.getIntValue(xmlcode,"range");
+    if (xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
+    if (xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
+    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
     else id = "Anchor #"+s.getNewId();
     if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");    
   }
@@ -205,9 +205,13 @@ public class Anchor extends Item implements ActionListener{
     code+=" priority=\""+String.valueOf(priority)+"\"";
     if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";    
     code+="/>";
+    if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
   }
   public void draw(Graphics2D g) {
+    /* empty */
+  }
+  public void draw(Graphics2D g,int x_,int y_) {
     /* empty */
   }
   public DefaultMutableTreeNode getTreeNode() {

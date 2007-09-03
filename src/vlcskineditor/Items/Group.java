@@ -203,8 +203,11 @@ public class Group extends Item implements ActionListener{
     code+="\n</Group>";
     return code;
   }
-  public void draw(Graphics2D g) {
-    
+  public void draw(Graphics2D g) {     
+     for(Item i:items) i.draw(g,x,y);
+  }
+  public void draw(Graphics2D g,int x_,int y_) {
+    for(Item i:items) i.draw(g,x+x,y+y_);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Group: "+id);      

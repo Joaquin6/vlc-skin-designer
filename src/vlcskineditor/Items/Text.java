@@ -324,6 +324,9 @@ public class Text extends Item implements ActionListener{
   public void draw(Graphics2D g) {
     
   }
+  public void draw(Graphics2D g, int x_, int y_) {
+    
+  }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Text: "+id);      
     return node;

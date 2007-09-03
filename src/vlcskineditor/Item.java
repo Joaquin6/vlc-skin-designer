@@ -67,6 +67,8 @@ public abstract class Item {
   public abstract String returnCode();
   /** Draws the item to a graphics context */
   public abstract void draw(Graphics2D g);
+   /** Draws the item to a graphics context with the offset x,y */
+  public abstract void draw(Graphics2D g, int x, int y);
   /** Creates a DefaultMutableTreeNode to be displayed in the items tree */
   public abstract DefaultMutableTreeNode getTreeNode(); 
   /** If the given id is that of this item or one of the item's contained items the fitting item will be returned, else null **/
