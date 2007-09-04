@@ -696,9 +696,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="About"> 
     else if(e.getSource().equals(m_help_about)) {
-      JOptionPane.showMessageDialog(this,"©2007 Daniel Dreibrodt\n" +
+      JOptionPane.showMessageDialog(this,"Copyright 2007 Daniel Dreibrodt\n" +
             "daniel.dreibrodt@gmx.de\n" +
-            "http://www.d-gfx.net.tc\n\n" +
+            "http://www.d-gfx.net.tc\n" +
+            "http://www.videolan.org\n" +
             "Released under terms of the GPL 2+\n" +
             "This program uses the Java Tar Package and the Windows Registry API Native Interface by Timothy Gerard Endres (time@gjt.org)\n" +
             "which are released under public domain.",
