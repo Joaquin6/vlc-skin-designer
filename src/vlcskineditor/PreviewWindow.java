@@ -36,15 +36,15 @@ public class PreviewWindow extends Canvas{
   
   public JInternalFrame frame;
   Layout l;
-  FrameUpdater fu;
-  BufferedImage bi;
+  FrameUpdater fu;  
+  //BufferedImage bi;
   
   /** Creates a new instance of PreviewWindow */
   public PreviewWindow() {
     frame = new JInternalFrame("No Layout selected");
     frame.add(this);
     frame.setVisible(false);
-    frame.setResizable(false);    
+    frame.setResizable(false);        
   }
   public void clearLayout() {
     l=null;
@@ -60,20 +60,19 @@ public class PreviewWindow extends Canvas{
     setMaximumSize(new Dimension(l.width,l.height));
     frame.setTitle(w_.id + "-" + l.id);
     frame.pack();
-    frame.setVisible(true);    
+    frame.setVisible(true);        
     if(fu==null) {
       fu = new FrameUpdater(this,25);
       fu.start();
     }
+  }    
+  public void paint(Graphics g) {  
+    if(l==null) return;   
+    BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
+    l.draw(bi.createGraphics());
+    g.drawImage(bi, 0, 0, this);
   }
-  public void prepare() {
-    bi = (BufferedImage) createImage(getWidth(),getHeight());
-    Graphics2D g = bi.createGraphics();
-    g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-    l.draw(g);
-  }
-  public void paint(Graphics g_) {  
-    if(l==null || bi==null) return;        
-    g_.drawImage(bi, 0, 0, this);
-  }
+  public void update(Graphics g) {
+    paint(g);
+  }  
 }

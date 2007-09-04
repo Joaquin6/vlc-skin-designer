@@ -30,12 +30,12 @@ import java.awt.*;
  */
 public class FrameUpdater extends Thread{
   
-  PreviewWindow c;
+  Canvas c;
   int fps = 1;
   boolean run = false;
   
   /** Creates a new instance of FrameUpdater */
-  public FrameUpdater(PreviewWindow c_, int fps_) {
+  public FrameUpdater(Canvas c_, int fps_) {
     c=c_;
     fps=fps_;
   }
@@ -43,10 +43,9 @@ public class FrameUpdater extends Thread{
   public void run () {
     run = true;
     while(true) {     
-      try {
-        c.prepare();
-        sleep(1000/fps);
+      try {        
         c.repaint();
+        sleep(1000/fps);        
       }
       catch (Exception e) {
         e.printStackTrace();
