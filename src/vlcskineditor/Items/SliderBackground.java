@@ -25,6 +25,7 @@ package vlcskineditor.Items;
 import vlcskineditor.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -48,6 +49,8 @@ public class SliderBackground extends Item implements ActionListener{
   JFrame frame;
   JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
   JButton gen_btn, ok_btn, help_btn;
+  BufferedImage bi = null;
+  String bitmap_str = "";
   
     
   /** Creates a new instance of SliderBackground */
@@ -73,7 +76,12 @@ public class SliderBackground extends Item implements ActionListener{
     nbhoriz = Integer.parseInt(nbhoriz_tf.getText());
     nbvert = Integer.parseInt(nbvert_tf.getText());
     padhoriz = Integer.parseInt(padhoriz_tf.getText());
-    padvert = Integer.parseInt(padvert_tf.getText());   
+    padvert = Integer.parseInt(padvert_tf.getText());       
+  }
+  public void prepareImage() {    
+    bitmap_str = s.getBitmapImage(image).toString();
+    bi = (BufferedImage)s.getBitmapImage(image);    
+    bi = bi.getSubimage(0,0,(bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz,(bi.getHeight()-padvert*(nbvert-1))/nbvert);
   }
   public void showOptions() {
     //TODO: Implement VLCSliderBGGen
@@ -212,10 +220,11 @@ public class SliderBackground extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    
+    if(bi==null || bitmap_str!=s.getBitmapImage(image).toString()) prepareImage();
+    g.drawImage(bi,x+x_,y+y_,null);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("SliderBackground: "+id);       

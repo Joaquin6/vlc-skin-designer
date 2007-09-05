@@ -405,6 +405,33 @@ public class Skin implements ActionListener{
     }
     return null;
   }
+  public java.awt.Font getFont(String id) {
+    if(id.equals("defaultfont")) {
+      java.awt.Font f = null;
+      try {      
+        f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
+        f = f.deriveFont(12);
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+        f=null;
+      }
+      return f;
+    }
+    Resource r = getResource(id);
+    if(r==null) return null;
+    try {
+      if(r.type.equals("Font")) {
+        vlcskineditor.Resources.Font fr = (vlcskineditor.Resources.Font)r;
+        return fr.f;
+      }
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+    return null;
+  }
   /** Returns the window represented by the given id **/
   public Window getWindow(String id) {
     Window win = null;
@@ -417,7 +444,7 @@ public class Skin implements ActionListener{
   }
   /** Returns <b>true</b> if the resource with the given id is in use by any item of the skin **/
   public boolean isUsed(String id_) {
-    //TODO: 
+    //TODO: Maybe or maybe not
     return false;
   }
   /** Returns the parent element that contains the item of the given id **/
@@ -524,7 +551,7 @@ public class Skin implements ActionListener{
     }
     code+="\n";
     for (int i=0;i<windows.size();i++) {
-      code+=windows.get(i).returnCode();
+      code+=windows.get(i).returnCode();      
     }
     code += "\n</Theme>";
     return code;

@@ -540,10 +540,24 @@ public class Playtree extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    
+    Font f = s.getFont(font);
+    g.setFont(f);
+    FontMetrics fm = g.getFontMetrics();
+    if(!bgimage.startsWith("none")) {
+      g.drawImage(s.getBitmapImage(bgimage),x+x_,y+y_,null);
+    }
+    else {      
+      g.setColor(Color.decode(bgcolor1));
+      g.fillRect(x+x_,y+y_,width,height);
+      for(int i=fm.getHeight();i<height;i=i+fm.getHeight()*2) {
+        g.setColor(Color.decode(bgcolor2));
+        g.fillRect(x,y+y_+i,width,fm.getHeight());
+      }
+    }
+    slider.draw(g);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Playtree: "+id); 

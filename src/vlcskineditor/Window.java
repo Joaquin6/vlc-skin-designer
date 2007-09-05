@@ -230,7 +230,7 @@ public class Window implements ActionListener{
     for (int i=0;i<layouts.size();i++) {
       code+="\n"+layouts.get(i).returnCode();
     }
-    code+="\n</Window>";    
+    code+="\n</Window>\n";    
     return code;
   }
   public Layout getLayout(String id_) {

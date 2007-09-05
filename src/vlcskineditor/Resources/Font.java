@@ -44,6 +44,7 @@ public class Font extends Resource implements ActionListener{
   JTextField id_tf, file_tf, size_tf;
   JButton file_btn, ok_btn, help_btn;
   JFileChooser fc;
+  public java.awt.Font f;
   
   /** Creates a new instance of Font */
   public Font(String xmlcode, Skin s_) {
@@ -54,6 +55,28 @@ public class Font extends Resource implements ActionListener{
     if(xmlcode.indexOf("size=\"")!=-1) {
       size = Integer.parseInt(XML.getValue(xmlcode,"size"));
     }
+    try {      
+      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
+      f = f.deriveFont((float)size);
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+      if(file.indexOf(".otf")==-1) {
+        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        showOptions();
+      }
+      else {
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it. In the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        try {      
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = f.deriveFont(12);
+        }
+        catch(Exception ex) {
+          ex.printStackTrace();
+          f=null;
+        }
+      }      
+    }
   }
   public Font(String id_,String file_,int size_, Skin s_) {
     type="Font";
@@ -61,12 +84,30 @@ public class Font extends Resource implements ActionListener{
     id=id_;
     file=file_;
     size=size_;
+    try {      
+      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
+      f = f.deriveFont((float)size);
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
+      showOptions();
+    }
   }
   public Font(Skin s_, File f_) {
     s = s_;
     type = "Font";
     id = f_.getName().substring(0,f_.getName().lastIndexOf("."));
     file = f_.getPath().replace(s.skinfolder,"");    
+    try {      
+      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
+      f = f.deriveFont((float)size);
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
+      showOptions();
+    }
   }
   public Font(Skin s_) {
     s=s_;
@@ -85,6 +126,16 @@ public class Font extends Resource implements ActionListener{
       id=id_tf.getText();
       s.updateResources();
     }
+    try {      
+      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
+      f = f.deriveFont((float)size);
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
+      showOptions();
+    }
+    
   }
   public void showOptions() {
     if(frame==null) {

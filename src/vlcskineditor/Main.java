@@ -59,7 +59,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JButton res_add_bitmap, res_add_font, res_edit, res_del;
   JPopupMenu res_add_bitmap_pu;
   JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
-  JButton win_add_window, win_add_layout, win_edit, win_del;  
+  JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_edit, win_del;  
   JButton items_add, items_up, items_down, items_edit, items_del;
   JPopupMenu items_add_pu;  
   JMenu items_add_pu_tp;
@@ -264,6 +264,16 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_add_layout.setMaximumSize(new Dimension(24,24));
     win_add_layout.setPreferredSize(new Dimension(24,24));
     win_add_layout.addActionListener(this);
+    win_layout_up = new JButton("",up_icon);
+    win_layout_up.setToolTipText("Move selected layout up in hierarchy (last layout is the default layout for the window)");
+    win_layout_up.setMaximumSize(new Dimension(24,12));
+    win_layout_up.setPreferredSize(new Dimension(24,12));
+    win_layout_up.addActionListener(this);
+    win_layout_down = new JButton("",down_icon);
+    win_layout_down.setToolTipText("Move selected layout down in hierarchy (last layout is the default layout for the window)");
+    win_layout_down.setMaximumSize(new Dimension(24,12));
+    win_layout_down.setPreferredSize(new Dimension(24,12));
+    win_layout_down.addActionListener(this);
     win_edit = new JButton("",edit_icon);
     win_edit.setToolTipText("Edit the selected resource");
     win_edit.setMaximumSize(new Dimension(24,24));
@@ -277,21 +287,28 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     windows.add(win_add_window);
     windows.add(win_add_layout);
     windows.add(win_edit);
+    windows.add(win_layout_up);
+    windows.add(win_layout_down);
     windows.add(win_del);        
     
     win_layout.putConstraint(SpringLayout.WEST, win_tree_sp,5,SpringLayout.WEST, windows.getContentPane());   
     win_layout.putConstraint(SpringLayout.NORTH, win_tree_sp,5,SpringLayout.NORTH, windows.getContentPane());        
     win_layout.putConstraint(SpringLayout.NORTH, win_add_window,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_add_layout,5,SpringLayout.SOUTH, win_tree_sp);
+    win_layout.putConstraint(SpringLayout.NORTH, win_layout_up,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_del,5,SpringLayout.SOUTH, win_tree_sp);    
     win_layout.putConstraint(SpringLayout.NORTH, win_add_window,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_add_layout,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);
+    win_layout.putConstraint(SpringLayout.NORTH, win_layout_up,5,SpringLayout.SOUTH, win_tree_sp);
+    win_layout.putConstraint(SpringLayout.NORTH, win_layout_down,0,SpringLayout.SOUTH, win_layout_up);
+    win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);    
     win_layout.putConstraint(SpringLayout.NORTH, win_del,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.WEST, win_add_window,5,SpringLayout.WEST, windows.getContentPane());
     win_layout.putConstraint(SpringLayout.WEST, win_add_layout,5,SpringLayout.EAST, win_add_window);
-    win_layout.putConstraint(SpringLayout.WEST, win_edit,5,SpringLayout.EAST, win_add_layout);
+    win_layout.putConstraint(SpringLayout.WEST, win_layout_up,5,SpringLayout.EAST, win_add_layout);
+    win_layout.putConstraint(SpringLayout.WEST, win_layout_down,5,SpringLayout.EAST, win_add_layout);
+    win_layout.putConstraint(SpringLayout.WEST, win_edit,5,SpringLayout.EAST, win_layout_up);
     win_layout.putConstraint(SpringLayout.WEST, win_del,5,SpringLayout.EAST, win_edit);    
     win_layout.putConstraint(SpringLayout.SOUTH, windows.getContentPane(),24+5+5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, windows.getContentPane(),5,SpringLayout.NORTH, win_tree_sp);
@@ -539,6 +556,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       int returnVal = fc.showOpenDialog(this);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
             setTitle(fc.getSelectedFile().toString()+" - VLC Skin Editor "+VERSION);
+            pvwin.clearLayout();
             s.open(fc.getSelectedFile());                  
             selected_resource = null;
             selected_in_windows = null;

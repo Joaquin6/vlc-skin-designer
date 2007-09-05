@@ -25,6 +25,7 @@ package vlcskineditor.Items;
 import vlcskineditor.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -56,19 +57,19 @@ public class Text extends Item implements ActionListener{
   public Text(String xmlcode, Skin s_) {
     s = s_;
     font = XML.getValue(xmlcode,"font");
-    if(xmlcode.indexOf("text=\"")!=-1) text = XML.getValue(xmlcode,"text");
-    if(xmlcode.indexOf("alignment=\"")!=-1) alignment = XML.getValue(xmlcode,"alignment");
-    if(xmlcode.indexOf("scrolling=\"")!=-1) scrolling = XML.getValue(xmlcode,"scrolling");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");
+    if(xmlcode.indexOf(" text=\"")!=-1) text = XML.getValue(xmlcode,"text");
+    if(xmlcode.indexOf(" alignment=\"")!=-1) alignment = XML.getValue(xmlcode,"alignment");
+    if(xmlcode.indexOf(" scrolling=\"")!=-1) scrolling = XML.getValue(xmlcode,"scrolling");
+    if(xmlcode.indexOf(" color=\"")!=-1) color = XML.getValue(xmlcode,"color");
+    if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
+    if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
+    if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");    
+    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
     else id = "Unnamed text #"+s.getNewId();
-    if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
+    if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
+    if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
+    if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
+    if(xmlcode.indexOf(" ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
   }
   public Text(Skin s_) {
     s = s_;
@@ -310,6 +311,7 @@ public class Text extends Item implements ActionListener{
     String code = "<Text";
     code+=" text=\""+text+"\"";
     code+=" font=\""+font+"\"";
+    if (color!=COLOR_DEFAULT) code+=" color=\""+color+"\"";
     if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
@@ -322,9 +324,36 @@ public class Text extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    Font f = s.getFont(font);
+    g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+    g.setFont(f);
+    g.setColor(Color.decode(color));
+    BufferedImage bi;
+    if(width==0) {
+      bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(text,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+    }
+    else bi = new BufferedImage(width,g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g2d = bi.createGraphics();    
+    g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+    g2d.setFont(f);
+    g2d.setColor(Color.decode(color));
+    if(width!=0 && alignment.equals("right")) {
+      g2d.drawString(text,(int)(width-g2d.getFontMetrics().getStringBounds(text,g).getWidth()),0+g2d.getFontMetrics().getAscent());
+    }    
+    else if(width!=0 && alignment.equals("center")) {
+      g2d.drawString(text,(int)((width-g2d.getFontMetrics().getStringBounds(text,g).getWidth())/2),0+g2d.getFontMetrics().getAscent());
+    }
+    else {
+      g2d.drawString(text,0,0+g2d.getFontMetrics().getAscent());  
+    }
+    
+    
+    
+    
+    g.drawImage(bi,x+x_,y+y_,null);      
     
   }
   public DefaultMutableTreeNode getTreeNode() {

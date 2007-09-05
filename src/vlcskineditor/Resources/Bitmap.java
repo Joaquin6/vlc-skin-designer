@@ -109,11 +109,13 @@ public class Bitmap extends Resource implements ActionListener{
   public void update() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file)); 
+      image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);            
       for(int i=0;i<SubBitmaps.size();i++) {
         SubBitmaps.get(i).update(image);
       }
     }
     catch(Exception ex) {      
+      ex.printStackTrace();
       JOptionPane.showMessageDialog(null,ex.getMessage()+"\n"+s.skinfolder+file,"Bitmap \""+id+"\" caused an error",JOptionPane.ERROR_MESSAGE); 
       showOptions();
       return;
@@ -261,6 +263,10 @@ public class Bitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Please choose a file!","File not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
+      if(Integer.parseInt(nbframes_tf.getText())<1) {
+        JOptionPane.showMessageDialog(frame,"The number of frames cannot be smaller than 1","Nbframes not valid",JOptionPane.INFORMATION_MESSAGE);
+        return;
+      }      
       frame.setVisible(false);
       update(id_tf.getText(),file_tf.getText(),alphacolor_tf.getText(),Integer.parseInt(nbframes_tf.getText()),Integer.parseInt(fps_tf.getText()));      
     }

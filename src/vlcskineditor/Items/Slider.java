@@ -428,10 +428,10 @@ public class Slider extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    
+    draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    
+    if(sbg!=null) sbg.draw(g,x+x_,y+y_);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Slider: "+id);
@@ -440,6 +440,7 @@ public class Slider extends Item implements ActionListener{
   }
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
+    else if(sbg==null) return null;
     else if(sbg.id.equals(id_)) return sbg;
     else return null;
   }

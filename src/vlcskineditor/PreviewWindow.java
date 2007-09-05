@@ -53,12 +53,12 @@ public class PreviewWindow extends Canvas{
   }
   public void setLayout(Window w_, Layout l_) {
     l=l_;
-    frame.setSize(l.width,l.height);
-    setSize(l.width,l.height);
-    setPreferredSize(new Dimension(l.width,l.height));
-    setMinimumSize(new Dimension(l.width,l.height));
-    setMaximumSize(new Dimension(l.width,l.height));
-    frame.setTitle(w_.id + "-" + l.id);
+    //Somehow there are always added 4 pixels to the actual height of the layout
+    setPreferredSize(new Dimension(l.width,l.height-4));
+    setMinimumSize(new Dimension(l.width,l.height-4));
+    setMaximumSize(new Dimension(l.width,l.height-4));
+    setSize(l.width,l.height-4);
+    frame.setTitle("Window: "+w_.id + " - Layout: " + l.id);
     frame.pack();
     frame.setVisible(true);        
     if(fu==null) {
@@ -69,7 +69,17 @@ public class PreviewWindow extends Canvas{
   public void paint(Graphics g) {  
     if(l==null) return;   
     BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
-    l.draw(bi.createGraphics());
+    Graphics2D g2d = bi.createGraphics();
+    g2d.setColor(Color.WHITE);
+    g2d.fillRect(0,0,getWidth(),getHeight());
+    g2d.setColor(Color.LIGHT_GRAY);
+    for(int x=0;x<getWidth();x=x+20) {
+      for(int y=0;y<getHeight();y=y+20) {
+        g2d.fillRect(x,y,10,10);
+        g2d.fillRect(x+10,y+10,10,10);
+      }
+    }
+    l.draw(g2d);
     g.drawImage(bi, 0, 0, this);
   }
   public void update(Graphics g) {
