@@ -24,6 +24,7 @@ package vlcskineditor;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 
@@ -32,7 +33,7 @@ import javax.swing.*;
  * The WYSIWYG renderer
  * @author Daniel Dreibrodt
  */
-public class PreviewWindow extends Canvas{
+public class PreviewWindow extends Canvas implements MouseListener, MouseMotionListener{
   
   public JInternalFrame frame;
   Layout l;
@@ -45,6 +46,8 @@ public class PreviewWindow extends Canvas{
     frame.add(this);
     frame.setVisible(false);
     frame.setResizable(false);        
+    addMouseListener(this);
+    addMouseMotionListener(this);
   }
   public void clearLayout() {
     l=null;
@@ -85,4 +88,22 @@ public class PreviewWindow extends Canvas{
   public void update(Graphics g) {
     paint(g);
   }  
+  public void mouseClicked(MouseEvent e) {
+  
+  }
+  public void mouseDragged(MouseEvent e) {
+  
+  }  
+  public void mouseEntered(MouseEvent e) {
+  }
+  public void mouseExited(MouseEvent e) {
+  }
+  public void mouseMoved(MouseEvent e) {    
+  }
+  public void mousePressed(MouseEvent e) {
+    fu.fps=25;
+  }
+  public void  mouseReleased(MouseEvent e) {
+    fu.fps=5;
+  }
 }

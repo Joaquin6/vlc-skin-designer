@@ -72,7 +72,7 @@ public class CustomFileFilter extends FileFilter{
         String extension = getExtension(f);   
         if(extension==null) return false;
         for(int i=0;i<ext.length;i++) {
-          if(extension.equals(ext[i])) return true;
+          if(extension.toLowerCase().equals(ext[i].toLowerCase())) return true;
         }
         return false;
    }
