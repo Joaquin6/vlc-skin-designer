@@ -1,7 +1,9 @@
-VLC Skin Editor release 0.3.5a
+VLC Skin Editor release 0.3.5b
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.3.5b - NullPointerException fix for Playtree rendering
+       - VLT files can be imported
 0.3.5a - Preview of Layouts
        - XML parsing/generating fixes
 0.3.0b - All items can be edited

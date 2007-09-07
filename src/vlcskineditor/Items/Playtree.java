@@ -562,19 +562,20 @@ public class Playtree extends Item implements ActionListener{
     BufferedImage ofi = s.getBitmapImage(openimage);
     BufferedImage iti = s.getBitmapImage(itemimage);
     int lineheight = fm.getHeight();    
+    int cfi_offset=0,ofi_offset=0,iti_offset=0;
     if(cfi!=null) {
       if(cfi.getHeight()>lineheight) lineheight=cfi.getHeight();
+       cfi_offset = (lineheight-cfi.getHeight())/2;
     }
     if(ofi!=null) {
       if(ofi.getHeight()>lineheight) lineheight=ofi.getHeight();
+      ofi_offset = (lineheight-ofi.getHeight())/2;
     }
     if(iti!=null) {
       if(iti.getHeight()>lineheight) lineheight=iti.getHeight();
+      iti_offset = (lineheight-iti.getHeight())/2; 
     }
-    int text_offset = (lineheight-fm.getAscent())/2;
-    int cfi_offset = (lineheight-cfi.getHeight())/2;
-    int ofi_offset = (lineheight-ofi.getHeight())/2;
-    int iti_offset = (lineheight-iti.getHeight())/2;    
+    int text_offset = (lineheight-fm.getAscent())/2;      
     
     g.setColor(Color.decode(fgcolor));
     if(cfi!=null && !flat) {        

@@ -74,7 +74,7 @@ public class Skin implements ActionListener{
     m=m_;
   }
   /** Creates the file in which to save the new skin **/
-  public void createnew(File f) {
+  public void createNew(File f) {
     skinfile=f;
     skinfolder = f.getParentFile().getAbsolutePath()+f.separator;    
     try {
