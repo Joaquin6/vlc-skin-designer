@@ -62,6 +62,7 @@ public class SubBitmap extends Resource implements ActionListener{
   public SubBitmap(Skin s_,BufferedImage parent_) {
     s=s_;
     parent=parent_;
+    type="Bitmap";
     id = "Unnamed subbitmap #"+s.getNewId();
     x = 0;
     y = 0;
@@ -71,7 +72,7 @@ public class SubBitmap extends Resource implements ActionListener{
     showOptions();
   }
   public void update() {
-    image = parent.getSubimage(x,y,width,height);
+    image = parent.getSubimage(x,y,width,height);    
     s.updateResources();    
   }
   public void update(BufferedImage parent_) {

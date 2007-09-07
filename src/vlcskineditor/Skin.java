@@ -25,6 +25,7 @@ package vlcskineditor;
 import vlcskineditor.Resources.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -379,7 +380,7 @@ public class Skin implements ActionListener{
     return r;
   }
   /** Returns the image object of a bitmap **/
-  public Image getBitmapImage(String id) {
+  public BufferedImage getBitmapImage(String id) {
     Resource r = getResource(id);
     if(r==null) {
       return null;

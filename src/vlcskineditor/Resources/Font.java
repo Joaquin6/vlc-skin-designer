@@ -66,7 +66,7 @@ public class Font extends Resource implements ActionListener{
         showOptions();
       }
       else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it. In the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
           f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
           f = f.deriveFont(12);
@@ -90,8 +90,21 @@ public class Font extends Resource implements ActionListener{
     }
     catch(Exception e) {
       e.printStackTrace();
-      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
-      showOptions();
+      if(file.indexOf(".otf")==-1) {
+        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        showOptions();
+      }
+      else {
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        try {      
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = f.deriveFont(12);
+        }
+        catch(Exception ex) {
+          ex.printStackTrace();
+          f=null;
+        }
+      }  
     }
   }
   public Font(Skin s_, File f_) {
@@ -105,8 +118,21 @@ public class Font extends Resource implements ActionListener{
     }
     catch(Exception e) {
       e.printStackTrace();
-      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
-      showOptions();
+      if(file.indexOf(".otf")==-1) {
+        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        showOptions();
+      }
+      else {
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        try {      
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = f.deriveFont(12);
+        }
+        catch(Exception ex) {
+          ex.printStackTrace();
+          f=null;
+        }
+      }  
     }
   }
   public Font(Skin s_) {
@@ -132,8 +158,21 @@ public class Font extends Resource implements ActionListener{
     }
     catch(Exception e) {
       e.printStackTrace();
-      JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file","Font file not valid",JOptionPane.INFORMATION_MESSAGE);
-      showOptions();
+      if(file.indexOf(".otf")==-1) {
+        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        showOptions();
+      }
+      else {
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        try {      
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = f.deriveFont(12);
+        }
+        catch(Exception ex) {
+          ex.printStackTrace();
+          f=null;
+        }
+      }  
     }
     
   }

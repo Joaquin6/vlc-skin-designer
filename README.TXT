@@ -1,7 +1,9 @@
-VLC Skin Editor release 0.3.0b
+VLC Skin Editor release 0.3.5a
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.3.5a - Preview of Layouts
+       - XML parsing/generating fixes
 0.3.0b - All items can be edited
        - Theme attributes can be edited
        - VLT packages can be exported
@@ -25,19 +27,16 @@ Changelog:
 -----------------------------------------------------------
 System Requirements
 -----------------------------------------------------------
-Java Runtime Environment 6+ (java.sun.com)
-at least 256MB RAM and a half-decent cpu
+Java SE RE 6 or later (DL at java.sun.com)
+approximately at least 256MB RAM and a 500-1000MHz CPU
 -----------------------------------------------------------
 Usage:
 -----------------------------------------------------------
 To run the skin editor simply open the jar file.
 Or manually run "java -jar VLCSkinEditor.jar".
-
-To edit things select the item in the trees and click on
-the edit button. To add things use the add buttons. Self-
-explanatory isn't it?
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2007 Daniel "aLtgLasS" Dreibrodt (altglass@nurfuerspam.de)
+(c)2007 Daniel "aLtgLasS" Dreibrodt 
+	(altglass@nurfuerspam.de)    
 See LICENSE.TXT for further details

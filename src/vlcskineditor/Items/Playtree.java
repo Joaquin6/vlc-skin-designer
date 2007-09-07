@@ -25,6 +25,7 @@ package vlcskineditor.Items;
 import vlcskineditor.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -65,7 +66,6 @@ public class Playtree extends Item implements ActionListener{
   public String closedimage = CLOSEDIMAGE_DEFAULT;
   
   Slider slider = null;
-  
   
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, width_tf, height_tf;
@@ -546,7 +546,7 @@ public class Playtree extends Item implements ActionListener{
     Font f = s.getFont(font);
     g.setFont(f);
     FontMetrics fm = g.getFontMetrics();
-    if(!bgimage.startsWith("none")) {
+    if(!bgimage.equals("none")) {
       g.drawImage(s.getBitmapImage(bgimage),x+x_,y+y_,null);
     }
     else {      
@@ -557,6 +557,83 @@ public class Playtree extends Item implements ActionListener{
         g.fillRect(x,y+y_+i,width,fm.getHeight());
       }
     }
+    int liney = y+y_;    
+    BufferedImage cfi = s.getBitmapImage(closedimage);
+    BufferedImage ofi = s.getBitmapImage(openimage);
+    BufferedImage iti = s.getBitmapImage(itemimage);
+    int lineheight = fm.getHeight();    
+    if(cfi!=null) {
+      if(cfi.getHeight()>lineheight) lineheight=cfi.getHeight();
+    }
+    if(ofi!=null) {
+      if(ofi.getHeight()>lineheight) lineheight=ofi.getHeight();
+    }
+    if(iti!=null) {
+      if(iti.getHeight()>lineheight) lineheight=iti.getHeight();
+    }
+    int text_offset = (lineheight-fm.getAscent())/2;
+    int cfi_offset = (lineheight-cfi.getHeight())/2;
+    int ofi_offset = (lineheight-ofi.getHeight())/2;
+    int iti_offset = (lineheight-iti.getHeight())/2;    
+    
+    g.setColor(Color.decode(fgcolor));
+    if(cfi!=null && !flat) {        
+      g.drawImage(cfi,x+x_,liney+cfi_offset,null);
+      liney+=lineheight;
+      g.drawString("Closed folder",x+x_+cfi.getWidth()+2,liney-text_offset);          
+    }
+    if(ofi!=null && !flat) {
+      g.drawImage(ofi,x+x_,liney+ofi_offset,null);
+      liney+=lineheight;
+      g.drawString("Open folder",x+x_+ofi.getWidth()+2,liney-text_offset);          
+    }
+    if(ofi!=null && iti!=null && !flat) {
+      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      liney+=lineheight;
+      g.drawString("Normal item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+    }
+    else if(iti!=null) {
+      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      liney+=fm.getHeight();
+      g.drawString("Normal item",x+x_+iti.getWidth()+4,liney-text_offset);
+    }
+    else {
+      liney+=fm.getHeight();
+      g.drawString("Normal item",x+x_,liney-text_offset);
+    }
+    g.setColor(Color.decode(playcolor));
+    if(ofi!=null && iti!=null && !flat) {
+      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      liney+=lineheight;
+      g.drawString("Playing item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+    }
+    else if(iti!=null) {
+      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      liney+=lineheight;
+      g.drawString("Playing item",x+x_+iti.getWidth()+2,liney-text_offset);
+    }
+    else {
+      liney+=lineheight;
+      g.drawString("Playing item",x+x_,liney-text_offset);
+    }
+    g.setColor(Color.decode(selcolor));
+    g.fillRect(x+x_,liney,width,lineheight);
+    g.setColor(Color.decode(fgcolor));
+    if(ofi!=null && iti!=null && !flat) {
+      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      liney+=lineheight;
+      g.drawString("Selected item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+    }
+    else if(iti!=null) {
+      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      liney+=lineheight;
+      g.drawString("Selected item",x+x_+iti.getWidth()+2,liney-text_offset);
+    }
+    else {
+      liney+=lineheight;
+      g.drawString("Selected item",x+x_,liney-text_offset);
+    }
+    
     slider.draw(g);
   }
   public DefaultMutableTreeNode getTreeNode() {

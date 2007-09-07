@@ -109,7 +109,19 @@ public class Bitmap extends Resource implements ActionListener{
   public void update() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file)); 
-      image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);            
+      image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes); 
+      BufferedImage bi = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_ARGB);
+      Graphics g2d = bi.createGraphics();      
+      int alphargb = Color.decode(alphacolor).getRGB();
+      for(int x=0;x<image.getWidth();x++) {
+        for(int y=0;y<image.getHeight();y++) {
+          if(image.getRGB(x,y)!=alphargb) {
+            g2d.setColor(new Color(image.getRGB(x,y)));
+            g2d.drawRect(x,y,0,0);
+          }
+        }        
+      }
+      image = bi;
       for(int i=0;i<SubBitmaps.size();i++) {
         SubBitmaps.get(i).update(image);
       }
