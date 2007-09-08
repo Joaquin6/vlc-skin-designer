@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener{
-  final String VERSION = "0.3.5a";
+  final String VERSION = "0.4.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -541,7 +541,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             if(ze.isDirectory()) zef.mkdirs();
             else {                
               InputStream zeis = zip.getInputStream(ze);
-              BufferedInputStream zebis = new BufferedInputStream(zeis);
+              BufferedInputStream zebis = new BufferedInputStream(zeis);              
+              zef.getParentFile().mkdirs();
               FileOutputStream fos = new FileOutputStream(zef);
               BufferedOutputStream bos = new BufferedOutputStream(fos);
               for(int b=0;(b=zebis.read())!=-1;) bos.write((byte)b);
@@ -564,13 +565,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             GZIPInputStream gzis = new GZIPInputStream(fis);
             //BufferedInputStream bis = new BufferedInputStream(gzis);
             TarInputStream tis = new TarInputStream(gzis);                   
-            for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {
-              System.out.println("Trying to unpack: "+te.getName());
+            for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {              
               File tef = new File(unpackfolder,te.getName());
               if(te.getName().endsWith("theme.xml")) f=tef;
               if(te.isDirectory()) tef.mkdirs();
               else {                                
-                BufferedInputStream tebis = new BufferedInputStream(tis);
+                BufferedInputStream tebis = new BufferedInputStream(tis);                
+                tef.getParentFile().mkdirs();
                 FileOutputStream fos = new FileOutputStream(tef);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
                 for(int b=0;(b=tebis.read())!=-1;) bos.write((byte)b);
@@ -712,7 +713,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                 files.add(fn);
               }
             }
-            catch (Exception ex) {};
+            catch (IOException ex) {
+              ex.printStackTrace();
+              JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
+            }       
+            catch (Exception ex){}
           }
           else if(s.resources.get(i).type.equals("Font")) {
             try {
@@ -731,18 +736,19 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                 files.add(fn);
               }
             }
-            catch (Exception ex) {};
+            catch (IOException ex) {
+              ex.printStackTrace();
+              JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
+            }
           }
         }   
         
         tgz.close();
+        JOptionPane.showMessageDialog(this,"VLT file created successfully!","VLT file created",JOptionPane.INFORMATION_MESSAGE);        
       }
       catch (Exception ex) {
-        String exp ="";
-        for(int i=0;i<ex.getStackTrace().length;i++) {
-          exp+=ex.getStackTrace()[i]+"\n";
-        }         
-        System.err.println(exp);
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);        
         return;
       }   
     }
@@ -1108,6 +1114,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(items_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
       selected_item = selection.substring(selection.indexOf(": ")+2);
+      pvwin.selectItem(s.getItem(selected_item));
     }
   }
   public void windowActivated(WindowEvent e) {}

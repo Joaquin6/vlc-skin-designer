@@ -349,7 +349,15 @@ public class Text extends Item implements ActionListener{
     else {
       g2d.drawString(text,0,0+g2d.getFontMetrics().getAscent());  
     }   
-    g.drawImage(bi,x+x_,y+y_,null);         
+    g.drawImage(bi,x+x_,y+y_,null);  
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,width,f.getSize());
+    }
+  }
+  public boolean contains(int x_, int y_) {
+    Font f = s.getFont(font);
+    return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+f.getSize()+offsety);    
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Text: "+id);      

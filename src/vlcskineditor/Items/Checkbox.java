@@ -66,22 +66,24 @@ public class Checkbox extends Item implements ActionListener{
     up1 = XML.getValue(xmlcode,"up1");
     up2 = XML.getValue(xmlcode,"up2");
     state = XML.getValue(xmlcode,"state");
-    if(xmlcode.indexOf("down1=\"")!=-1) down1 = XML.getValue(xmlcode,"down1");
-    if(xmlcode.indexOf("down2=\"")!=-1) down2 = XML.getValue(xmlcode,"down2");
-    if(xmlcode.indexOf("up1=\"")!=-1) up1 = XML.getValue(xmlcode,"up1");
-    if(xmlcode.indexOf("up2=\"")!=-1) up2 = XML.getValue(xmlcode,"up2");
-    if(xmlcode.indexOf("action1=\"")!=-1) action1 = XML.getValue(xmlcode,"action1");
-    if(xmlcode.indexOf("action2=\"")!=-1) action2 = XML.getValue(xmlcode,"action2");
-    if(xmlcode.indexOf("tooltiptext1=\"")!=-1) tooltiptext1 = XML.getValue(xmlcode,"tooltiptext1");
-    if(xmlcode.indexOf("tooltiptext2=\"")!=-1) tooltiptext2 = XML.getValue(xmlcode,"tooltiptext2");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");
+    if(xmlcode.indexOf(" over1=\"")!=-1) over1 = XML.getValue(xmlcode,"over1");
+    if(xmlcode.indexOf(" over2=\"")!=-1) over2 = XML.getValue(xmlcode,"over2");
+    if(xmlcode.indexOf(" down1=\"")!=-1) down1 = XML.getValue(xmlcode,"down1");
+    if(xmlcode.indexOf(" down2=\"")!=-1) down2 = XML.getValue(xmlcode,"down2");
+    if(xmlcode.indexOf(" up1=\"")!=-1) up1 = XML.getValue(xmlcode,"up1");
+    if(xmlcode.indexOf(" up2=\"")!=-1) up2 = XML.getValue(xmlcode,"up2");
+    if(xmlcode.indexOf(" action1=\"")!=-1) action1 = XML.getValue(xmlcode,"action1");
+    if(xmlcode.indexOf(" action2=\"")!=-1) action2 = XML.getValue(xmlcode,"action2");
+    if(xmlcode.indexOf(" tooltiptext1=\"")!=-1) tooltiptext1 = XML.getValue(xmlcode,"tooltiptext1");
+    if(xmlcode.indexOf(" tooltiptext2=\"")!=-1) tooltiptext2 = XML.getValue(xmlcode,"tooltiptext2");
+    if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
+    if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
+    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
     else id = "Unnamed checkbox #"+s.getNewId();
-    if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
+    if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
+    if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
+    if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
+    if(xmlcode.indexOf(" ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
   }
   public Checkbox(Skin s_) {
     s = s_;
@@ -107,10 +109,10 @@ public class Checkbox extends Item implements ActionListener{
     down1 = down1_tf.getText();
     action1 = action1_tf.getText();
     tooltiptext1 = tooltiptext1_tf.getText();
-    up2 = up1_tf.getText();
-    over2 = over1_tf.getText();
-    down2 = down1_tf.getText();
-    action2 = action1_tf.getText();
+    up2 = up2_tf.getText();
+    over2 = over2_tf.getText();
+    down2 = down2_tf.getText();
+    action2 = action2_tf.getText();
     tooltiptext2 = tooltiptext2_tf.getText();
     state = state_tf.getText();
     
@@ -405,10 +407,28 @@ public class Checkbox extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    if(true) g.drawImage(s.getBitmapImage(up1),x,y,Color.BLACK,null);
+    draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    if(true) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,Color.BLACK,null);
+    java.awt.image.BufferedImage bi = s.getBitmapImage(up2);
+    if(false==true) {      
+      if(!hovered) g.drawImage(bi,x+x_,y+y_,Color.BLACK,null);
+      else if(!clicked) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,Color.BLACK,null);
+      else g.drawImage(s.getBitmapImage(down2),x+x_,y+y_,Color.BLACK,null);      
+    }
+    else {
+      if(!hovered) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,Color.BLACK,null);
+      else if(!clicked) g.drawImage(s.getBitmapImage(over1),x+x_,y+y_,Color.BLACK,null);
+      else g.drawImage(s.getBitmapImage(down1),x+x_,y+y_,Color.BLACK,null);      
+    }
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
+    }
+  }
+  public boolean contains(int x_, int y_) {
+    java.awt.image.BufferedImage bi = s.getBitmapImage(up1);
+    return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Checkbox: "+id);    

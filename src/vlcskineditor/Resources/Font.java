@@ -68,7 +68,7 @@ public class Font extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
           f = f.deriveFont(12);
         }
         catch(Exception ex) {
@@ -97,7 +97,7 @@ public class Font extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
           f = f.deriveFont(12);
         }
         catch(Exception ex) {
@@ -125,7 +125,7 @@ public class Font extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
           f = f.deriveFont(12);
         }
         catch(Exception ex) {
@@ -165,7 +165,7 @@ public class Font extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toString()));
+          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
           f = f.deriveFont(12);
         }
         catch(Exception ex) {

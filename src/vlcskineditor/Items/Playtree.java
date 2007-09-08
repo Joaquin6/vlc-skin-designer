@@ -636,6 +636,14 @@ public class Playtree extends Item implements ActionListener{
     }
     
     slider.draw(g);
+    
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,width,height);
+    }
+  }
+  public boolean contains (int x_, int y_) {
+    return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Playtree: "+id); 

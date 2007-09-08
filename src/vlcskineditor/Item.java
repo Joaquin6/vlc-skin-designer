@@ -33,7 +33,7 @@ import javax.swing.tree.*;
  */
 public abstract class Item {
   /** Represents the skin to which an item belongs */
-  public Skin s;
+  public Skin s;  
   
   /* Common attributes */
   
@@ -58,6 +58,13 @@ public abstract class Item {
   public String help = HELP_DEFAULT;
   public String type = "undefined";
   
+  public boolean selected = false;
+  public boolean hovered = false;
+  public boolean clicked = false;
+  
+  public int offsetx = 0;
+  public int offsety = 0;
+  
   /** Creates a new instance of Item */
   public Item() {
   }
@@ -76,7 +83,30 @@ public abstract class Item {
     if(id.equals(id_)) return this;
     else return null;
   }
+  /** If an item contains a subitem of the given id the list containing the subitem is returned **/
   public java.util.List<Item> getParentOf(String id_) {
     return null;
   }
+  /** Sets whether the item is selected in the tree or not **/
+  public void setSelected(boolean s) {
+    selected = s;
+  }
+  /** Sets whether the item is hovered by the mouse in the tree or not **/
+  public void setHover(boolean h) {
+    hovered = h;
+  }
+  /** Sets whether the item is clicked in the tree or not **/
+  public void setClicked(boolean c) {
+    clicked = c;
+  }
+  /** Checks whether the given coordinate is inside the item **/
+  public boolean contains(int x_, int y_) {
+    return (x==x_ && y==y_);   
+  }
+  /** Set offset **/
+  public void setOffset(int x_, int y_) {
+    offsetx=x_;
+    offsety=y_;
+  }
+  
 }

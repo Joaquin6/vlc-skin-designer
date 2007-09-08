@@ -25,6 +25,7 @@ package vlcskineditor.Items;
 import vlcskineditor.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -209,10 +210,35 @@ public class Anchor extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    /* empty */
+    draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g,int x_,int y_) {
-    /* empty */
+    if(selected) {        
+      String[] pnts = points.split("\\),\\(");
+      int[] xpos = new int[pnts.length];
+      int[] ypos = new int[pnts.length];
+      for(int i=0;i<pnts.length;i++) {
+        String pnt = pnts[i];      
+        String[] coords = pnt.split(",");        
+        xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
+        ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
+      }
+      g.setColor(Color.RED);
+      g.drawPolyline(xpos,ypos,pnts.length);
+    }
+  }
+  public boolean contains(int x_, int y_) {
+    String[] pnts = points.split("\\),\\(");
+    Path2D.Double path = new Path2D.Double();
+    for(int i=0;i<pnts.length;i++) {
+      String pnt = pnts[i];      
+      String[] coords = pnt.split(",");        
+      int xpos = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
+      int ypos = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
+      if(i==0) path.moveTo(xpos,ypos);
+      else path.lineTo(xpos,ypos);
+    }
+    return(path.getBounds2D().contains(x_,y_));
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Anchor: "+id);  

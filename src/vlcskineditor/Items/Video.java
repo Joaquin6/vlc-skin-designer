@@ -269,12 +269,18 @@ public class Video extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    g.setColor(Color.BLACK);
-    g.fillRect(x,y,width,height);    
+    draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
     g.setColor(Color.BLACK);
-    g.fillRect(x+x_,y+y_,width,height);    
+    g.fillRect(x+x_,y+y_,width,height);   
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,width-1,height-1);
+    }
+  }
+  public boolean contains(int x_, int y_) {
+    return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Video: "+id);      

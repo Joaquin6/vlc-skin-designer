@@ -303,10 +303,21 @@ public class Button extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {
-    g.drawImage(s.getBitmapImage(up),x,y,Color.BLACK,null);
+    draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    g.drawImage(s.getBitmapImage(up),x+x_,y+y_,Color.BLACK,null);
+    java.awt.image.BufferedImage bi = s.getBitmapImage(up);
+    if(!hovered) g.drawImage(bi,x+x_,y+y_,Color.BLACK,null);
+    else if(!clicked) g.drawImage(s.getBitmapImage(over),x+x_,y+y_,Color.BLACK,null);
+    else g.drawImage(s.getBitmapImage(down),x+x_,y+y_,Color.BLACK,null);
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
+    }
+  }
+  public boolean contains(int x_, int y_) {
+    java.awt.image.BufferedImage bi = s.getBitmapImage(up);
+    return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Button: "+id);     

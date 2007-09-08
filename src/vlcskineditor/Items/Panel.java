@@ -105,6 +105,9 @@ public class Panel extends Item implements ActionListener{
         }                
       }
     }
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
   }
   public Panel(Skin s_) {
     type = "Panel";
@@ -113,6 +116,9 @@ public class Panel extends Item implements ActionListener{
     height = 0;
     id = "Unnamed panel #"+s.getNewId();
     showOptions();
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
   }
   public void update() {
     id = id_tf.getText();
@@ -129,6 +135,9 @@ public class Panel extends Item implements ActionListener{
     height = Integer.parseInt(height_tf.getText());
     
     s.updateItems();    
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
   }
   public void showOptions() {
     if(frame==null) {
@@ -305,10 +314,20 @@ public class Panel extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {     
-     for(Item i:items) i.draw(g,x,y);
+     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g,int x_,int y_) {
-    for(Item i:items) i.draw(g,x+x,y+y_);
+    for(Item i:items) {
+      i.draw(g,x+x,y+y_);
+      i.setOffset(x+offsetx,y+offsety);
+    }
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,width-1,height-1);
+    }
+  }
+   public boolean contains(int x_, int y_) {    
+    return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Panel: "+id);       

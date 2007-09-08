@@ -225,6 +225,14 @@ public class SliderBackground extends Item implements ActionListener{
   public void draw(Graphics2D g, int x_, int y_) {
     if(bi==null || bitmap_str!=s.getBitmapImage(image).toString()) prepareImage();
     g.drawImage(bi,x+x_,y+y_,null);
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
+    }
+  }
+  public boolean contains(int x_,int y_) {
+    if(bi==null || bitmap_str!=s.getBitmapImage(image).toString()) prepareImage();
+    return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("SliderBackground: "+id);       

@@ -63,7 +63,7 @@ public class Skin implements ActionListener{
   public Main m;
   Window active_window = null;
   Layout active_layout = null;
-  int unnamed_ids = 0;
+  int unnamed_ids = 0;  
   
   JFrame theme_frame;
   JTextField themeinfo_name_tf, themeinfo_author_tf, themeinfo_email_tf, themeinfo_webpage_tf;

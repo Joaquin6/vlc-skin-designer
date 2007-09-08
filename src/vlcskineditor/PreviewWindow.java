@@ -38,10 +38,12 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   public JInternalFrame frame;
   Layout l;
   FrameUpdater fu;  
-  //BufferedImage bi;
+  Item selected_item;
+  boolean starteddragging = false;
+  int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
   
   /** Creates a new instance of PreviewWindow */
-  public PreviewWindow() {
+  public PreviewWindow() {   
     frame = new JInternalFrame("No Layout selected");
     frame.add(this);
     frame.setVisible(false);
@@ -68,7 +70,13 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
       fu = new FrameUpdater(this,25);
       fu.start();
     }
-  }    
+  }
+  public void selectItem(Item i) {    
+    if(selected_item!=null) selected_item.setSelected(false);
+    if(i==null) return;
+    selected_item = i;
+    selected_item.setSelected(true);
+  }
   public void paint(Graphics g) {  
     if(l==null) return;   
     BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
@@ -88,22 +96,46 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   public void update(Graphics g) {
     paint(g);
   }  
-  public void mouseClicked(MouseEvent e) {
-  
+  public void mouseClicked(MouseEvent e) {    
   }
   public void mouseDragged(MouseEvent e) {
-  
+    if(!starteddragging && selected_item.contains(e.getX(),e.getY())) {
+      dragstartx=e.getX();
+      dragstarty=e.getY();
+      dragstartitemx=selected_item.x;
+      dragstartitemy=selected_item.y;
+      starteddragging=true;
+    }
+    else {
+      selected_item.x=dragstartitemx+e.getX()-dragstartx;
+      selected_item.y=dragstartitemy+e.getY()-dragstarty;
+    }
   }  
   public void mouseEntered(MouseEvent e) {
   }
   public void mouseExited(MouseEvent e) {
   }
-  public void mouseMoved(MouseEvent e) {    
+  public void mouseMoved(MouseEvent e) {
+    if(selected_item.contains(e.getX(),e.getY())) {
+      selected_item.setHover(true);
+      setCursor(new Cursor(Cursor.MOVE_CURSOR));
+    }
+    else {
+      selected_item.setHover(false);
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
   }
   public void mousePressed(MouseEvent e) {
     fu.fps=25;
+    selected_item.setClicked(true);
   }
   public void  mouseReleased(MouseEvent e) {
     fu.fps=5;
+    selected_item.setClicked(false);
+    starteddragging=false;
+    dragstartx=selected_item.x+selected_item.offsetx;
+    dragstarty=selected_item.y+selected_item.offsety;
+    dragstartitemx=selected_item.x;
+    dragstartitemy=selected_item.y;
   }
 }

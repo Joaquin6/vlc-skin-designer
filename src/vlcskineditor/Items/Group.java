@@ -94,17 +94,26 @@ public class Group extends Item implements ActionListener{
         }                
       }
     }
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
   }
   public Group(Skin s_) {
     type="Group";
     s=s_;
     id = "Unnamed group #"+s.getNewId();
     showOptions();
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
   }
   public void update(String id_, int x_, int y_) {
     id=id_;
     x=x_;
     y=y_;
+    for(Item i:items) {
+      i.setOffset(x,y);
+    }
     s.updateItems();    
   }
   public void showOptions() {
@@ -204,10 +213,16 @@ public class Group extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g) {     
-     for(Item i:items) i.draw(g,x,y);
+     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g,int x_,int y_) {
-    for(Item i:items) i.draw(g,x+x,y+y_);
+    for(Item i:items) {
+      i.draw(g,x+x,y+y_);
+      i.setOffset(x+offsetx,y+offsety);
+    }    
+  }
+  public boolean contains(int x_, int y_) {    
+    return (x_>=x+offsetx && y_>=y+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Group: "+id);      
