@@ -912,6 +912,26 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
     }
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Move layout">
+    else if(e.getSource().equals(win_layout_up)) {
+      Window w = s.getWindow(selected_window);
+      Layout l = w.getLayout(selected_layout);
+      if(l==null) return;      
+      int index = w.layouts.indexOf(l);
+      if(index<=0) return;      
+      w.layouts.set(index,w.layouts.set(index-1,l));
+      s.updateWindows();
+    }
+    else if(e.getSource().equals(win_layout_down)) {
+      Window w = s.getWindow(selected_window);
+      Layout l = w.getLayout(selected_layout);
+      if(l==null) return;      
+      int index = w.layouts.indexOf(l);
+      if(index>=w.layouts.size()-1) return;      
+      w.layouts.set(index,w.layouts.set(index+1,l));
+      s.updateWindows();
+    }
+    //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Window edit">
     else if(e.getSource().equals(win_edit)) {
       if (selected_layout!=null && selected_window!=null) {
@@ -968,6 +988,26 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       items_add_pu.show(items_add,0,0);  
     }
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Move item">
+    else if(e.getSource().equals(items_up)) {
+      Item i = s.getItem(selected_item);
+      if(i==null) return;
+      java.util.List<Item> l = s.getParentOf(selected_item);
+      int index = l.indexOf(i);
+      if(index<=0) return;      
+      l.set(index,l.set(index-1,i));
+      s.updateItems();
+    }
+    else if(e.getSource().equals(items_down)) {
+      Item i = s.getItem(selected_item);
+      if(i==null) return;
+      java.util.List<Item> l = s.getParentOf(selected_item);
+      int index = l.indexOf(i);
+      if(index>=l.size()-1) return;      
+      l.set(index,l.set(index+1,i));
+      s.updateItems();
+    }
+    //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item edit">
     else if(e.getSource().equals(items_edit)) {
       if(selected_item!=null) {
