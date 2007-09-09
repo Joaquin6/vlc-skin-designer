@@ -1,6 +1,6 @@
 #! /bin/sh
 
-mkdir build
+mkdir -p build/vlcskineditor
 cd src/
 `javac -d ../build vlcskineditor/Main.java`
 cd ..
