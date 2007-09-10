@@ -30,8 +30,9 @@ import javax.swing.tree.*;
 /**
  * Playlist item
  * @author Daniel Dreibrodt
+ * @Deprecated All Playlists are automatically converted to flat playtrees
  */
-public class Playlist extends Item{
+@Deprecated public class Playlist extends Item{
   
   /** Creates a new instance of Playlist */
   public Playlist(String xmlcode, Skin s_) {

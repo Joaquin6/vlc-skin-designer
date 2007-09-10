@@ -116,7 +116,8 @@ public class Checkbox extends Item implements ActionListener{
     tooltiptext2 = tooltiptext2_tf.getText();
     state = state_tf.getText();
     
-    s.updateItems();    
+    s.updateItems();   
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {

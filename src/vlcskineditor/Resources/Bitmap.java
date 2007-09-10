@@ -95,7 +95,7 @@ public class Bitmap extends Resource implements ActionListener{
     type = "Bitmap";
     id = f_.getName().substring(0,f_.getName().lastIndexOf("."));
     file = f_.getPath().replace(s.skinfolder,"");
-    s.updateResources();
+    s.updateResources();    
     update();
   }
   public Bitmap(Skin s_) {
@@ -104,6 +104,7 @@ public class Bitmap extends Resource implements ActionListener{
     id = "Unnamed bitmap #"+s.getNewId();
     file = "";
     s.updateResources();
+    s.expandResource(id);
     showOptions();
   }
   public void update() {
@@ -141,6 +142,7 @@ public class Bitmap extends Resource implements ActionListener{
     if(!id_.equals(id)) {
       id=id_;
       s.updateResources();
+      s.expandResource(id);
     }
     update();
   }
@@ -322,5 +324,10 @@ public class Bitmap extends Resource implements ActionListener{
     }
     return node;
   }
-  
+  public Resource getParentOf(String id_) {
+    for(SubBitmap sbmp:SubBitmaps) {
+      if(sbmp.id.equals(id_)) return this;
+    }
+    return null;
+  }
 }

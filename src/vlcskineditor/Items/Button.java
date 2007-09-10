@@ -91,6 +91,7 @@ public class Button extends Item implements ActionListener{
     tooltiptext = tooltiptext_tf.getText();
     
     s.updateItems();    
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {

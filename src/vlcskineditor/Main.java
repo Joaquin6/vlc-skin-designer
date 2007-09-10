@@ -921,6 +921,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(index<=0) return;      
       w.layouts.set(index,w.layouts.set(index-1,l));
       s.updateWindows();
+      s.expandLayout(l.id);
     }
     else if(e.getSource().equals(win_layout_down)) {
       Window w = s.getWindow(selected_window);
@@ -930,6 +931,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(index>=w.layouts.size()-1) return;      
       w.layouts.set(index,w.layouts.set(index+1,l));
       s.updateWindows();
+      s.expandLayout(l.id);
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Window edit">
@@ -992,20 +994,23 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(items_up)) {
       Item i = s.getItem(selected_item);
       if(i==null) return;
-      java.util.List<Item> l = s.getParentOf(selected_item);
+      java.util.List<Item> l = s.getParentListOf(selected_item);
+      if(l==null) return;
       int index = l.indexOf(i);
       if(index<=0) return;      
       l.set(index,l.set(index-1,i));
-      s.updateItems();
+      s.updateItems();      
+      s.expandItem(selected_item);
     }
     else if(e.getSource().equals(items_down)) {
       Item i = s.getItem(selected_item);
       if(i==null) return;
-      java.util.List<Item> l = s.getParentOf(selected_item);
+      java.util.List<Item> l = s.getParentListOf(selected_item);
       int index = l.indexOf(i);
       if(index>=l.size()-1) return;      
       l.set(index,l.set(index+1,i));
-      s.updateItems();
+      s.updateItems();      
+      s.expandItem(selected_item);
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item edit">
@@ -1019,55 +1024,55 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     //<editor-fold defaultstate="collapsed" desc="Add Item popups">
     else if(e.getSource().equals(items_add_pu_anchor)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Anchor(s));           
     }
     else if(e.getSource().equals(items_add_pu_button)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_checkbox)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_panel)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_image)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_playtree)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Playtree(s));           
     }
     else if(e.getSource().equals(items_add_pu_slider)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Slider(s));           
     }
     else if(e.getSource().equals(items_add_pu_text)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Text(s));           
     }
     else if(e.getSource().equals(items_add_pu_video)) {      
       java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentOf(selected_item);
+      if (selected_item!=null ) i = s.getParentListOf(selected_item);
       else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Video(s));           
     }
@@ -1111,7 +1116,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Item delete">
     else if(e.getSource().equals(items_del)) {
       if(selected_item!=null) {
-        java.util.List<Item> p = s.getParentOf(selected_item);
+        java.util.List<Item> p = s.getParentListOf(selected_item);
         if(p!=null) {
           Object[] options= {"Yes","No"};
           int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+selected_item+"\"?","Confirmation",

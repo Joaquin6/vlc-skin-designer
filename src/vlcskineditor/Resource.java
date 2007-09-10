@@ -43,4 +43,8 @@ public abstract class Resource {
   public abstract String returnCode();
   /** Creates a DefaultMutableTreeNode to be displayed in the resources tree */
   public abstract DefaultMutableTreeNode getTreeNode();  
+  /** If an Resource does contain another Resource of the given id (e.g. a SubBitmap) the containing Resource is returned **/
+  public Resource getParentOf(String id_) {
+    return null;
+  }
 }

@@ -87,7 +87,8 @@ public class Image extends Item implements ActionListener{
     action = action_cb.getSelectedItem().toString();
     action2 = action2_tf.getText();   
     
-    s.updateItems();    
+    s.updateItems();      
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {

@@ -84,7 +84,11 @@ public abstract class Item {
     else return null;
   }
   /** If an item contains a subitem of the given id the list containing the subitem is returned **/
-  public java.util.List<Item> getParentOf(String id_) {
+  public java.util.List<Item> getParentListOf(String id_) {
+    return null;
+  }
+  /** If an item contains a subitem of the given id the itemis returned **/
+  public Item getParentOf(String id_) {
     return null;
   }
   /** Sets whether the item is selected in the tree or not **/

@@ -449,8 +449,8 @@ public class Skin implements ActionListener{
     return false;
   }
   /** Returns the parent element that contains the item of the given id **/
-  public java.util.List<Item> getParentOf(String id_) {
-    return active_layout.getParentOf(id_);    
+  public java.util.List<Item> getParentListOf(String id_) {
+    return active_layout.getParentListOf(id_);    
   }
   /** Returns the list of the given Group/Panel that contains the items **/
   public java.util.List<Item> getListOf(String id_) {
@@ -558,9 +558,59 @@ public class Skin implements ActionListener{
     return code;
   }
   /** Recreates the resource hierarchies **/
-  public void updateResources() {    
-    m.res_tree_model.setRoot(getResourcesTree());    
+  public void updateResources() {  
+    m.res_tree_model.setRoot(getResourcesTree());
     m.saved=false;
+  }
+  /** Make an Resource of the given id visible in the tree (expand the TreePath) **/
+  public void expandResource(String id) {   
+    Resource r = getResource(id);
+    if(r==null) return;
+    if(r.type.equals("Bitmap")) {
+      TreePath tp = findInTree(m.res_tree,"Root: Bitmaps");
+      m.res_tree.expandPath(tp);
+    }
+    else if(r.type.equals("Font")) {
+      TreePath tp = findInTree(m.res_tree,"Root: Fonts");
+      m.res_tree.expandPath(tp);
+    }
+    else {
+      System.err.println("Resource of the given id is neither a Font nor a Bitmap its a "+r.type);
+      return;
+    }   
+    java.util.List<String> parents = new ArrayList<String>();
+    
+    Resource pr = r;
+    while(pr!=null) {
+      for(Resource res:resources) {
+        pr = res.getParentOf(r.id);
+        if(pr!=null) {
+          parents.add(pr.id);
+          break;
+        }        
+      }
+    }
+    for(int i=parents.size()-1;i>=0;i--) {      
+      TreePath tp = findInTree(m.res_tree,parents.get(i));
+      if(tp==null) {
+        System.err.println("Could not find Parent: "+parents.get(i));
+        return;
+      }
+      m.res_tree.expandPath(tp);
+      TreePath stp = findInTree(m.res_tree,id);
+      if(stp==null) return;
+      m.res_tree.setSelectionPath(stp);
+    }    
+  }
+  /** Make a Layout of the given id visible **/
+  public void expandLayout(String id) {   
+    TreePath wtp = findInTree(m.win_tree,active_window.id);
+    if(wtp==null) return;
+    m.win_tree.expandPath(wtp);
+    
+    TreePath ltp = findInTree(m.win_tree,id);
+    if(ltp==null) return;
+    m.win_tree.setSelectionPath(ltp);
   }
   /** Recreates the window hierarchies **/
   public void updateWindows() {    
@@ -568,22 +618,46 @@ public class Skin implements ActionListener{
     m.saved=false;
   }
   /** Recreates the item hierarchies **/
-  public void updateItems() {    
+  public void updateItems() {
     m.items_tree_model.setRoot(getItemsTree());
     m.saved=false;
+  }  
+  /** Make an item of the given id visible in the tree (expand the TreePath) **/
+  public void expandItem(String id) {
+    java.util.List<String> parents = new ArrayList<String>();
+    Item p = getItem(id);
+    while((p=active_layout.getParentOf(p.id))!=null) {      
+      parents.add(p.id);
+    }
+    for(int i=parents.size()-1;i>=0;i--) {      
+      TreePath tp = findInTree(m.items_tree,parents.get(i));
+      if(tp==null) {
+        System.err.println("Could not find Parent: "+parents.get(i));
+        return;
+      }
+      m.items_tree.expandPath(tp);
+      TreePath stp = findInTree(m.items_tree,id);
+      if(stp==null) return;
+      m.items_tree.setSelectionPath(stp);
+    }    
   }
-  /** Redraws the preview window (deprecated already before it was used)
-   *  @Deprecated useless! Preview is now planned to be updated automatically every 1000/25 ms
-   **/
-  @Deprecated public void updatePreview() {
-    /**empty*/
+  /** Finds the first occurence of id in the first expanded tree in the given JTree**/
+  public TreePath findInTree(JTree jt, String id) {    
+    int max = jt.getRowCount();		
+    int row = 0;
+    do {
+        TreePath path = jt.getPathForRow(row);
+        String text = path.getLastPathComponent().toString();
+        if (text.toUpperCase().indexOf(id.toUpperCase())!=-1) return path;
+        row = (row + 1 + max) % max;
+    } while (row != 0);
+    return null;
   }
   /** Updates everything **/
   public void update() {
     updateResources();
     updateWindows();
-    updateItems();
-    updatePreview();
+    updateItems();    
     m.saved=false;
   }
 }

@@ -74,6 +74,7 @@ public class SubBitmap extends Resource implements ActionListener{
   public void update() {
     image = parent.getSubimage(x,y,width,height);    
     s.updateResources();    
+    s.expandResource(id);
   }
   public void update(BufferedImage parent_) {
     parent = parent_;

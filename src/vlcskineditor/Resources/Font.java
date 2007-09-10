@@ -141,16 +141,17 @@ public class Font extends Resource implements ActionListener{
     id = "Unnamed font #"+s.getNewId();
     file="";
     s.updateResources();
+    s.expandResource(id);
     showOptions();
   }
   public void update() {
     type="Font";    
     file=file_tf.getText();
-    size=Integer.parseInt(size_tf.getText());
-    s.updateResources();
+    size=Integer.parseInt(size_tf.getText());    
     if(!id_tf.getText().equals(id)) {
       id=id_tf.getText();
       s.updateResources();
+      s.expandResource(id);
     }
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));

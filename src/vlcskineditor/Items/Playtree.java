@@ -129,6 +129,7 @@ public class Playtree extends Item implements ActionListener{
     slider = new Slider(s,true);
     showOptions();
     s.updateItems();
+    s.expandItem(id);
   }
   public void update()  {
     id = id_tf.getText();
@@ -154,6 +155,9 @@ public class Playtree extends Item implements ActionListener{
     bgcolor1 = bgcolor1_tf.getText();
     bgcolor2 = bgcolor2_tf.getText();
     flat = (Boolean)flat_cb.getSelectedItem();
+    
+    s.updateItems();
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {
@@ -653,5 +657,12 @@ public class Playtree extends Item implements ActionListener{
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
     else return slider.getItem(id_);
+  }
+  public Item getParentOf(String id_) {
+   if(slider!=null) {
+     if(slider.id.equals(id_)) return this;
+     else return slider.getParentOf(id_);
+   }
+   else return null;
   }
 }

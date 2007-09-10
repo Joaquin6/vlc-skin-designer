@@ -74,6 +74,7 @@ public class Anchor extends Item implements ActionListener{
     points=pts_;
     range=r_;
     s.updateItems();
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {

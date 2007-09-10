@@ -125,6 +125,8 @@ public class Slider extends Item implements ActionListener{
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
     showOptions();
+    s.updateItems();
+    s.expandItem(id);
   }
   public Slider(Skin s_, boolean ipt) {
     s = s_;
@@ -152,7 +154,8 @@ public class Slider extends Item implements ActionListener{
     if(!inPlaytree) value = (String)value_cb.getSelectedItem();
     tooltiptext = tooltiptext_tf.getText();
     
-    s.updateItems();    
+    s.updateItems();   
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {
@@ -479,5 +482,12 @@ public class Slider extends Item implements ActionListener{
     else if(sbg==null) return null;
     else if(sbg.id.equals(id_)) return sbg;
     else return null;
+  }
+  public Item getParentOf(String id_) {
+   if(sbg!=null) {
+     if(sbg.id.equals(id_)) return this;
+     else return null;
+   }
+   else return null;
   }
 }

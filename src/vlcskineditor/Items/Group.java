@@ -102,10 +102,9 @@ public class Group extends Item implements ActionListener{
     type="Group";
     s=s_;
     id = "Unnamed group #"+s.getNewId();
-    showOptions();
-    for(Item i:items) {
-      i.setOffset(x,y);
-    }
+    showOptions();    
+    s.updateItems();    
+    s.expandItem(id);
   }
   public void update(String id_, int x_, int y_) {
     id=id_;
@@ -115,6 +114,7 @@ public class Group extends Item implements ActionListener{
       i.setOffset(x,y);
     }
     s.updateItems();    
+    s.expandItem(id);
   }
   public void showOptions() {
     if(frame==null) {
@@ -241,17 +241,27 @@ public class Group extends Item implements ActionListener{
     }
     return null;
   }
-  public java.util.List<Item> getParentOf(String id_) {
+  public java.util.List<Item> getParentListOf(String id_) {
     for(int x=0;x<items.size();x++) {
       Item i = items.get(x);
-      if(i.id.equals(id_)) {
-        System.out.println(id+": I is parent of "+id_);
+      if(i.id.equals(id_)) {        
         return items;        
       }
       if (i.type.equals("Group")||i.type.equals("Panel")) {
-        java.util.List<Item> p = i.getParentOf(id_);
+        java.util.List<Item> p = i.getParentListOf(id_);
         if (p!=null) return p;
       }
+    }
+    return null;
+  }
+  public Item getParentOf(String id_) {
+    for(int x=0;x<items.size();x++) {
+      Item i = items.get(x);
+      if(i.id.equals(id_)) {        
+        return this;        
+      }
+      Item it = i.getParentOf(id_);
+      if (it!=null) return it;      
     }
     return null;
   }
