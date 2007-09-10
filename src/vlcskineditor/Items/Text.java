@@ -327,13 +327,15 @@ public class Text extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
     g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
     g.setFont(f);
     g.setColor(Color.decode(color));
     BufferedImage bi;
+    String ptext = s.gvars.parseString(text);
     if(width==0) {
-      bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(text,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+      bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(ptext,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
     }
     else bi = new BufferedImage(width,g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
     Graphics2D g2d = bi.createGraphics();    
@@ -341,13 +343,13 @@ public class Text extends Item implements ActionListener{
     g2d.setFont(f);
     g2d.setColor(Color.decode(color));
     if(width!=0 && alignment.equals("right")) {
-      g2d.drawString(text,(int)(width-g2d.getFontMetrics().getStringBounds(text,g).getWidth()),0+g2d.getFontMetrics().getAscent());
+      g2d.drawString(ptext,(int)(width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth()),0+g2d.getFontMetrics().getAscent());
     }    
     else if(width!=0 && alignment.equals("center")) {
-      g2d.drawString(text,(int)((width-g2d.getFontMetrics().getStringBounds(text,g).getWidth())/2),0+g2d.getFontMetrics().getAscent());
+      g2d.drawString(ptext,(int)((width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth())/2),0+g2d.getFontMetrics().getAscent());
     }
     else {
-      g2d.drawString(text,0,0+g2d.getFontMetrics().getAscent());  
+      g2d.drawString(ptext,0,0+g2d.getFontMetrics().getAscent());  
     }   
     g.drawImage(bi,x+x_,y+y_,null);  
     if(selected) {

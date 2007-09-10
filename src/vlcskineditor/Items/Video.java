@@ -272,6 +272,7 @@ public class Video extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(s.gvars.parseBoolean(visible)==false) return;
     g.setColor(Color.BLACK);
     g.fillRect(x+x_,y+y_,width,height);   
     if(selected) {

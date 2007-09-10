@@ -70,6 +70,8 @@ public class Skin implements ActionListener{
   JTextField theme_magnet_tf, theme_alpha_tf, theme_movealpha_tf;
   JButton theme_ok_btn, theme_help_btn;
   
+  public GlobalVariables gvars = new GlobalVariables();
+  
   public Skin(Main m_) {
     m=m_;
   }

@@ -547,6 +547,7 @@ public class Playtree extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
     g.setFont(f);
     FontMetrics fm = g.getFontMetrics();

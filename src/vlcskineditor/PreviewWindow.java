@@ -101,6 +101,7 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   public void mouseClicked(MouseEvent e) {    
   }
   public void mouseDragged(MouseEvent e) {
+    if(selected_item==null) return;
     if(!starteddragging && selected_item.contains(e.getX(),e.getY())) {
       dragstartx=e.getX();
       dragstarty=e.getY();
@@ -118,6 +119,7 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   public void mouseExited(MouseEvent e) {
   }
   public void mouseMoved(MouseEvent e) {
+    if(selected_item==null) return;
     if(selected_item.contains(e.getX(),e.getY())) {
       selected_item.setHover(true);
       setCursor(new Cursor(Cursor.MOVE_CURSOR));
@@ -129,11 +131,11 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   }
   public void mousePressed(MouseEvent e) {
     fu.fps=25;
-    selected_item.setClicked(true);
+    if(selected_item!=null) selected_item.setClicked(true);
   }
   public void  mouseReleased(MouseEvent e) {
     fu.fps=5;
-    selected_item.setClicked(false);
+    if(selected_item!=null) selected_item.setClicked(false);
     starteddragging=false;
     dragstartx=selected_item.x+selected_item.offsetx;
     dragstarty=selected_item.y+selected_item.offsety;

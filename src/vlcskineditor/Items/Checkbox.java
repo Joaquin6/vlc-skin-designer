@@ -411,8 +411,9 @@ public class Checkbox extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up2);
-    if(false==true) {      
+    if(s.gvars.parseBoolean(state)) {      
       if(!hovered) g.drawImage(bi,x+x_,y+y_,Color.BLACK,null);
       else if(!clicked) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,Color.BLACK,null);
       else g.drawImage(s.getBitmapImage(down2),x+x_,y+y_,Color.BLACK,null);      
