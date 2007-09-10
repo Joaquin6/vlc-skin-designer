@@ -53,6 +53,8 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
   }
   public void clearLayout() {
     l=null;
+    if(selected_item!=null) selected_item.setSelected(false);
+    selected_item=null;
     frame.setVisible(false);
     fu=null;
   }
