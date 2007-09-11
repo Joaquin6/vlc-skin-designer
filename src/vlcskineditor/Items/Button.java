@@ -299,7 +299,7 @@ public class Button extends Item implements ActionListener{
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
     if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (tooltiptext!=TOOLTIPTEXT_DEFAULT) code+=" help=\""+help+"\"";
+    if (tooltiptext!=TOOLTIPTEXT_DEFAULT) code+=" tooltiptext=\""+tooltiptext+"\"";
     code+="/>";
     return code;
   }

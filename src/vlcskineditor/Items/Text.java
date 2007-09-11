@@ -311,6 +311,7 @@ public class Text extends Item implements ActionListener{
     String code = "<Text";
     code+=" text=\""+text+"\"";
     code+=" font=\""+font+"\"";
+    if(alignment!=ALIGNMENT_DEFAULT) code+=" alignment=\""+alignment+"\"";
     if (color!=COLOR_DEFAULT) code+=" color=\""+color+"\"";
     if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";

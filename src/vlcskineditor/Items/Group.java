@@ -205,7 +205,7 @@ public class Group extends Item implements ActionListener{
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";    
     code+=">";
-    if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
+    //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     for (int i=0;i<items.size();i++) {
       code+="\n"+items.get(i).returnCode();
     }
