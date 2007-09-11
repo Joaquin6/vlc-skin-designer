@@ -658,7 +658,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(m_file_test))  {
       s.save();
       saved=true;            
-      String[] command = { vlc_dir+"vlc", "-I", "skins2", "--skins2-last="+s.skinfile.toString(), "--skins2-config=\"\"","--skins2-systray" };
+      String[] command = { vlc_dir+"vlc", "-I", "skins2", "--skins2-last="+s.skinfile.toString(), /*"--skins2-config=\"\"",*/"--skins2-systray" };
       try {
         Runtime.getRuntime().exec(command);
       }

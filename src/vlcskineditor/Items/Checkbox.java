@@ -414,14 +414,14 @@ public class Checkbox extends Item implements ActionListener{
     if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up2);
     if(s.gvars.parseBoolean(state)) {      
-      if(!hovered) g.drawImage(bi,x+x_,y+y_,Color.BLACK,null);
-      else if(!clicked) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,Color.BLACK,null);
-      else g.drawImage(s.getBitmapImage(down2),x+x_,y+y_,Color.BLACK,null);      
+      if(!hovered) g.drawImage(bi,x+x_,y+y_,null,null);
+      else if(!clicked) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,null);
+      else g.drawImage(s.getBitmapImage(down2),x+x_,y+y_,null);      
     }
     else {
-      if(!hovered) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,Color.BLACK,null);
-      else if(!clicked) g.drawImage(s.getBitmapImage(over1),x+x_,y+y_,Color.BLACK,null);
-      else g.drawImage(s.getBitmapImage(down1),x+x_,y+y_,Color.BLACK,null);      
+      if(!hovered) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,null);
+      else if(!clicked) g.drawImage(s.getBitmapImage(over1),x+x_,y+y_,null);
+      else g.drawImage(s.getBitmapImage(down1),x+x_,y+y_,null);      
     }
     if(selected) {
       g.setColor(Color.RED);

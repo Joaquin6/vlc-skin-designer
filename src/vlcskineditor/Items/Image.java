@@ -275,8 +275,10 @@ public class Image extends Item implements ActionListener{
   }
   public String returnCode() {
     String code = "<Image";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";    
     code+=" image=\""+image+"\"";
+    if (action!=ACTION_DEFAULT) code+=" id=\""+id+"\"";
+    if (action2!=ACTION2_DEFAULT) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
@@ -292,7 +294,7 @@ public class Image extends Item implements ActionListener{
   }
    public void draw(Graphics2D g,int x_, int y_) {
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
-    g.drawImage(bi,x+x_,y+y_,Color.BLACK,null);
+    g.drawImage(bi,x+x_,y+y_,null);
     if(selected) {
       g.setColor(Color.RED);
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
