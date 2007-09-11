@@ -265,6 +265,7 @@ public class Video extends Item implements ActionListener{
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
     if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
+    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
     code+="/>";
     return code;
   }

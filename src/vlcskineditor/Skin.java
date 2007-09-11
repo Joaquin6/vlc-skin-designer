@@ -410,19 +410,10 @@ public class Skin implements ActionListener{
   }
   public java.awt.Font getFont(String id) {
     if(id.equals("defaultfont")) {
-      java.awt.Font f = null;
-      try {      
-        f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
-        f = f.deriveFont(12);
-      }
-      catch(Exception e) {
-        e.printStackTrace();
-        f=null;
-      }
-      return f;
+      return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     }
     Resource r = getResource(id);
-    if(r==null) return null;
+    if(r==null) return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     try {
       if(r.type.equals("Font")) {
         vlcskineditor.Resources.Font fr = (vlcskineditor.Resources.Font)r;
@@ -431,9 +422,9 @@ public class Skin implements ActionListener{
     }
     catch(Exception e) {
       e.printStackTrace();
-      return null;
+      return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     }
-    return null;
+    return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
   }
   /** Returns the window represented by the given id **/
   public Window getWindow(String id) {

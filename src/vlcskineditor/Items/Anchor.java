@@ -207,7 +207,7 @@ public class Anchor extends Item implements ActionListener{
     code+=" priority=\""+String.valueOf(priority)+"\"";
     if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";    
     code+="/>";
-    if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
+    //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
   }
   public void draw(Graphics2D g) {

@@ -827,6 +827,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         for(int i=0;i<files.length;i++) {
           s.resources.add(new vlcskineditor.Resources.Bitmap(s,files[i]));
         }
+        s.updateResources();
       }      
     }
     // </editor-fold>

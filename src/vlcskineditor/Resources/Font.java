@@ -63,17 +63,18 @@ public class Font extends Resource implements ActionListener{
       e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
         JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         showOptions();
       }
       else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font instead.","Notice",JOptionPane.INFORMATION_MESSAGE);
         try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
           f = f.deriveFont(12);
         }
         catch(Exception ex) {
           ex.printStackTrace();
-          f=null;
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }      
     }
@@ -92,6 +93,7 @@ public class Font extends Resource implements ActionListener{
       e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
         JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         showOptions();
       }
       else {
@@ -102,7 +104,7 @@ public class Font extends Resource implements ActionListener{
         }
         catch(Exception ex) {
           ex.printStackTrace();
-          f=null;
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }  
     }
@@ -120,6 +122,7 @@ public class Font extends Resource implements ActionListener{
       e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
         JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         showOptions();
       }
       else {
@@ -130,7 +133,7 @@ public class Font extends Resource implements ActionListener{
         }
         catch(Exception ex) {
           ex.printStackTrace();
-          f=null;
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }  
     }
@@ -161,6 +164,7 @@ public class Font extends Resource implements ActionListener{
       e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
         JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         showOptions();
       }
       else {
@@ -171,7 +175,7 @@ public class Font extends Resource implements ActionListener{
         }
         catch(Exception ex) {
           ex.printStackTrace();
-          f=null;
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }  
     }

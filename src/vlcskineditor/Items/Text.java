@@ -321,6 +321,7 @@ public class Text extends Item implements ActionListener{
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
     if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
+    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
     code+="/>";
     return code;
   }
@@ -330,6 +331,16 @@ public class Text extends Item implements ActionListener{
   public void draw(Graphics2D g, int x_, int y_) {
     if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
+    if(f==null) {
+      Resource fr = s.getResource(font);
+      if(fr.type.equals("Font")) {
+        vlcskineditor.Resources.Font fnt = (vlcskineditor.Resources.Font)fr;
+        f = new Font(Font.SANS_SERIF,Font.PLAIN,fnt.size);
+      }
+      else {
+        f = new Font(Font.SANS_SERIF,Font.PLAIN,12);
+      }      
+    }
     g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
     g.setFont(f);
     g.setColor(Color.decode(color));
