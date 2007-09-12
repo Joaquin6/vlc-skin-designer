@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener{
-  final String VERSION = "0.4.0a";
+  final String VERSION = "0.4.5a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -81,7 +81,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   ImageIcon add_icon = createIcon("icons/add.png");
   ImageIcon up_icon = createIcon("icons/move_up.png");
   ImageIcon down_icon = createIcon("icons/move_down.png");
-  ImageIcon icon = createIcon("icons/icon.png");
+  public ImageIcon help_icon = createIcon("icons/help.png");
+  ImageIcon icon = createIcon("icons/icon.png");  
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;

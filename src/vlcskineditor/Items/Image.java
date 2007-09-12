@@ -45,7 +45,7 @@ public class Image extends Item implements ActionListener{
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, image_tf, action2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb;
-  JButton ok_btn, help_btn;
+  JButton visible_btn, action2_btn, ok_btn, help_btn;
   
   /** Creates a new instance of Image */
   public Image(String xmlcode, Skin s_) {
@@ -64,6 +64,7 @@ public class Image extends Item implements ActionListener{
     if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
     if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
+    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
   }
   public Image(Skin s_) {
     s = s_;
@@ -120,6 +121,8 @@ public class Image extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText("When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.");
       JLabel visible_l = new JLabel("Visibility:");
       visible_tf = new JTextField();
+      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn.addActionListener(this);
       JLabel help_l = new JLabel("Help Text:");
       help_tf = new JTextField();
       help_tf.setToolTipText("Help text for the current control. The variable '$H' will be expanded to this value when the mouse hovers the current control.");
@@ -138,6 +141,8 @@ public class Image extends Item implements ActionListener{
       JLabel action2_l = new JLabel("Double-click Action:");
       action2_tf = new JTextField();
       action2_tf.setToolTipText("Action triggered by a double-click on the control.");
+      action2_btn = new JButton("",s.m.help_icon);
+      action2_btn.addActionListener(this);
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
@@ -175,8 +180,10 @@ public class Image extends Item implements ActionListener{
       ykeepratio_cb.setBounds(85,195,150,24);
       general.add(visible_l);
       general.add(visible_tf);
+      general.add(visible_btn);
       visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,150,24);
+      visible_tf.setBounds(85,225,120,24);
+      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
@@ -197,13 +204,15 @@ public class Image extends Item implements ActionListener{
       resize_l.setBounds(5,45,75,24);
       resize_cb.setBounds(85,45,150,24);
       image.add(action_l);
-      image.add(action_cb);
+      image.add(action_cb);      
       action_l.setBounds(5,75,75,24);
       action_cb.setBounds(85,75,150,24);
       image.add(action2_l);
       image.add(action2_tf);
+      image.add(action2_btn);
       action2_l.setBounds(5,105,75,24);
-      action2_tf.setBounds(85,105,150,24);
+      action2_tf.setBounds(85,105,120,24);
+      action2_btn.setBounds(210,105,24,24);
       image.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Image Attributes"));
       image.setMinimumSize(new Dimension(240,135));
       image.setPreferredSize(new Dimension(240,135));
@@ -270,6 +279,33 @@ public class Image extends Item implements ActionListener{
       }
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(action2_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(visible_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
       }
     }
   }

@@ -72,7 +72,7 @@ public class Playtree extends Item implements ActionListener{
   JTextField font_tf, bgimage_tf, itemimage_tf, openimage_tf, closedimage_tf;
   JTextField fgcolor_tf, playcolor_tf, selcolor_tf, bgcolor1_tf, bgcolor2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, flat_cb;
-  JButton bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
+  JButton visible_btn, bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
   
   /** Creates a new instance of Playtree */
   public Playtree(String xmlcode, Skin s_) {
@@ -102,6 +102,7 @@ public class Playtree extends Item implements ActionListener{
     if(xmllines[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmllines[0],"rightbottom");
     if(xmllines[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"xkeepratio");
     if(xmllines[0].indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"ykeepratio");
+    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     
     int i=1;
     if(xmllines.length>1) {
@@ -189,6 +190,8 @@ public class Playtree extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText("When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.");
       JLabel visible_l = new JLabel("Visibility:");
       visible_tf = new JTextField();
+      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn.addActionListener(this);      
       JLabel help_l = new JLabel("Help Text:");
       help_tf = new JTextField();
       help_tf.setToolTipText("Help text for the current control. The variable '$H' will be expanded to this value when the mouse hovers the current control.");
@@ -274,8 +277,10 @@ public class Playtree extends Item implements ActionListener{
       ykeepratio_cb.setBounds(85,195,150,24);
       general.add(visible_l);
       general.add(visible_tf);
+      general.add(visible_btn);
       visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,150,24);
+      visible_tf.setBounds(85,225,120,24);
+      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
@@ -512,6 +517,21 @@ public class Playtree extends Item implements ActionListener{
             }
       }
       else JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);
+    }
+    else if(e.getSource().equals(visible_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
     }
   }
   public String returnCode() {

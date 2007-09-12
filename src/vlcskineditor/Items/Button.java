@@ -47,7 +47,7 @@ public class Button extends Item implements ActionListener{
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, up_tf, down_tf, over_tf, action_tf, tooltiptext_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
-  JButton ok_btn, help_btn;
+  JButton visible_btn, action_btn, ok_btn, help_btn;
   
   
   /** Creates a new instance of Button */
@@ -66,6 +66,7 @@ public class Button extends Item implements ActionListener{
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
     if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
     if(xmlcode.indexOf("tooltiptext=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"tooltiptext");
+    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
   }
   public Button(Skin s_) {
     s=s_;
@@ -123,6 +124,8 @@ public class Button extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText("When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.");
       JLabel visible_l = new JLabel("Visibility:");
       visible_tf = new JTextField();
+      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn.addActionListener(this);
       JLabel help_l = new JLabel("Help Text:");
       help_tf = new JTextField();
       help_tf.setToolTipText("Help text for the current control. The variable '$H' will be expanded to this value when the mouse hovers the current control.");
@@ -135,6 +138,8 @@ public class Button extends Item implements ActionListener{
       down_tf = new JTextField();
       JLabel action_l = new JLabel("Action:");
       action_tf = new JTextField();
+      action_btn = new JButton("",s.m.help_icon);
+      action_btn.addActionListener(this);
       JLabel tooltiptext_l = new JLabel("Tooltiptext:");
       tooltiptext_tf = new JTextField();
       
@@ -174,8 +179,10 @@ public class Button extends Item implements ActionListener{
       ykeepratio_cb.setBounds(85,195,150,24);
       general.add(visible_l);
       general.add(visible_tf);
+      general.add(visible_btn);
       visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,150,24);
+      visible_tf.setBounds(85,225,120,24);
+      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
@@ -201,8 +208,10 @@ public class Button extends Item implements ActionListener{
       down_tf.setBounds(85,75,150,24);
       button.add(action_l);
       button.add(action_tf);
+      button.add(action_btn);
       action_l.setBounds(5,105,75,24);
-      action_tf.setBounds(85,105,150,24);
+      action_tf.setBounds(85,105,120,24);
+      action_btn.setBounds(210,105,24,24);
       button.add(tooltiptext_l);
       button.add(tooltiptext_tf);
       tooltiptext_l.setBounds(5,135,75,24);
@@ -275,6 +284,36 @@ public class Button extends Item implements ActionListener{
             desktop = Desktop.getDesktop();
             try {
               desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Button"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(visible_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(action_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
