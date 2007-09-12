@@ -1,11 +1,13 @@
-VLC Skin Editor release 0.4.0a
+VLC Skin Editor release 0.4.5a
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.4.5a - Several bugfixes
+       - Text variables are interpreted in the preview
 0.4.0a - Items can be positioned with the mouse
        - Trees don't collapse anymore completely when an
          element in it is updated, they automatically
-	 expand the path to the updated item and select it
+	       expand the path to the updated item and select it
 0.3.5b - NullPointerException fix for Playtree rendering
        - VLT files can be imported
 0.3.5a - Preview of Layouts
