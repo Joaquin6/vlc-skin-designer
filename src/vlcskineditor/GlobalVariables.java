@@ -22,6 +22,8 @@
 
 package vlcskineditor;
 
+import java.util.*;
+
 /**
  * GlobalVariables
  * Simulates the global variables in VLC
@@ -86,8 +88,30 @@ public class GlobalVariables {
     p = p.replaceAll("\\$S",$S);
     return p;    
   }
-  public boolean parseBoolean(String b) {
-    /** help please*/
+  /** Parses a boolean condition and finds out whether it is true
+    * Based on /trunk/modules/gui/skins2/parser/interpreter.cpp
+   **/
+  public boolean parseBoolean(String rName) {
+    
+    List<Boolean> varStack = new ArrayList<Boolean>();
+    
+    // Convert the expression into Reverse Polish Notation
+    BooleanExpressionEvaluator evaluator = new BooleanExpressionEvaluator();
+    evaluator.parse(rName);
+    // Get the first token from the RPN stack
+    String token = evaluator.getToken();
+    while(!token.isEmpty()) {
+      if(token.equals("and")) {
+        // Get the 2 last variables on the stack
+        if(varStack.isEmpty()) {
+          System.err.println("invalid boolean expression: "+rName);
+          return false;
+        }
+        Boolean pVar1 = varStack.get(varStack.size()-1);
+        varStack.remove(varStack.get(varStack.size()-1));
+        //CONTINUE TRANSLATING HERE
+      }
+    }
     return true;
   }
   
