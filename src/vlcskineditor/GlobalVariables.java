@@ -73,6 +73,11 @@ public class GlobalVariables {
   public GlobalVariables() {
     
   }
+  /**
+   * Parses text variables in a string
+   * @param p The string to parse
+   * @return The parsed string
+   */
   public String parseString(String p) {
     p = p.replaceAll("\\$B",$B);
     p = p.replaceAll("\\$V",$V);
@@ -88,10 +93,31 @@ public class GlobalVariables {
     p = p.replaceAll("\\$S",$S);
     return p;    
   }
-  /** Parses a boolean condition and finds out whether it is true
-    * Based on /trunk/modules/gui/skins2/parser/interpreter.cpp
-   **/
-  public boolean parseBoolean(String rName) {
+  /**
+   * Parses a boolean condition and finds out whether it is true
+   * Based on vlc/trunk/modules/gui/skins2/parser/interpreter.cpp
+   * Original code by Cyril Deguet (asmax_at_via.ecp.fr)
+   * @param bool The boolean expression to parse
+   * @return The evaluated expression
+   */
+  public boolean parseBoolean(String bool) {
+    String rName = bool;
+    rName = rName.replaceAll("equalizer.isEnabled",String.valueOf(equalizer_isEnabled));
+    rName = rName.replaceAll("vlc.hasVout",String.valueOf(vlc_hasVout));
+    rName = rName.replaceAll("vlc.hasAudio",String.valueOf(vlc_hasAudio));
+    rName = rName.replaceAll("vlc.isFullscreen",String.valueOf(vlc_isFullscreen));
+    rName = rName.replaceAll("vlc.isPlaying",String.valueOf(vlc_isPlaying));
+    rName = rName.replaceAll("vlc.isPaused",String.valueOf(vlc_isPaused));
+    rName = rName.replaceAll("vlc.isSeekable",String.valueOf(vlc_isSeekable));
+    rName = rName.replaceAll("vlc.isMute",String.valueOf(vlc_isMute));
+    rName = rName.replaceAll("vlc.isOnTop",String.valueOf(vlc_isOnTop));
+    rName = rName.replaceAll("playlist.isRandom",String.valueOf(playlist_isRandom));
+    rName = rName.replaceAll("playlist.isLoop",String.valueOf(playlist_isLoop));
+    rName = rName.replaceAll("playlist.isRepeat",String.valueOf(playlist_isRepeat));
+    rName = rName.replaceAll("dvd.isActive",String.valueOf(dvd_isActive));
+    
+    //Now all expressions that VLC Skin Editor supports are replaced by true or false
+    //The remaining expressions like WindowID.isVisible are automatically resolved to false
     
     List<Boolean> varStack = new ArrayList<Boolean>();
     
@@ -101,6 +127,7 @@ public class GlobalVariables {
     // Get the first token from the RPN stack
     String token = evaluator.getToken();
     while(!token.isEmpty()) {
+      //System.out.println("  current token: "+token);
       if(token.equals("and")) {
         // Get the 2 last variables on the stack
         if(varStack.isEmpty()) {
@@ -109,10 +136,69 @@ public class GlobalVariables {
         }
         Boolean pVar1 = varStack.get(varStack.size()-1);
         varStack.remove(varStack.get(varStack.size()-1));
-        //CONTINUE TRANSLATING HERE
+        if(varStack.isEmpty()) {
+          System.err.println("invalid boolean expression: "+rName);
+          return false;
+        }
+        Boolean pVar2 = varStack.get(varStack.size()-1);
+        varStack.remove(varStack.get(varStack.size()-1));
+        //Add the result of (pVar1 && pVar2) to the varStack
+        if(pVar1.booleanValue() && pVar2.booleanValue()) {          
+          varStack.add(Boolean.TRUE);
+        }
+        else {          
+          varStack.add(Boolean.FALSE);
+        }        
       }
+      else if(token.equals("or")) {
+        // Get the 2 last variables on the stack
+        if(varStack.isEmpty()) {          
+          return false;
+        }
+        Boolean pVar1 = varStack.get(varStack.size()-1);
+        varStack.remove(varStack.get(varStack.size()-1));
+        if(varStack.isEmpty()) {          
+          return false;
+        }
+        Boolean pVar2 = varStack.get(varStack.size()-1);
+        varStack.remove(varStack.get(varStack.size()-1));
+        //Add the result of (pVar1 || pVar2) to the varStack
+        if(pVar1.booleanValue() || pVar2.booleanValue()) {          
+          varStack.add(Boolean.TRUE);
+        }
+        else {          
+          varStack.add(Boolean.FALSE);
+        }  
+      }
+      else if(token.equals("not")) {
+        // Get the last variables on the stack
+        if(varStack.isEmpty()) {
+          System.err.println("invalid boolean expression: "+rName);
+          return false;
+        }
+        Boolean pVar1 = varStack.get(varStack.size()-1);
+        varStack.remove(varStack.get(varStack.size()-1));        
+        //Add the result of (!pVar1) to the varStack
+        if(!pVar1.booleanValue()) {          
+          varStack.add(Boolean.TRUE);
+        }
+        else {          
+          varStack.add(Boolean.FALSE);
+        }  
+      }
+      else {        
+        varStack.add(new Boolean(token));
+      }
+      // Get the first token from the RPN stack
+      token = evaluator.getToken();
     }
-    return true;
+    // The stack should contain a single variable
+    if(varStack.size()!=1) {
+      System.err.println("invalid boolean expression: "+rName);
+      return false;
+    }
+    //System.out.println("The boolean expression: "+bool+" was resolved to "+rName+" and parsed as "+varStack.get(varStack.size()-1).toString());
+    return varStack.get(varStack.size()-1).booleanValue();
   }
   
 }

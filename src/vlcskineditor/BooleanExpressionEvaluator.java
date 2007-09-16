@@ -26,7 +26,8 @@ import java.util.*;
 
 /**
  * BooleanExpressionEvaluator
- * conversion of /trunk/modules/gui/skins2/parser/expr_evaluator.cpp
+ * conversion of vlc/trunk/modules/gui/skins2/parser/expr_evaluator.cpp
+ * Original code by  Cyril Deguet <asmax@via.ecp.fr>
  * @author Daniel Dreibrodt
  */
 public class BooleanExpressionEvaluator {
@@ -48,47 +49,49 @@ public class BooleanExpressionEvaluator {
     // Tokenize the expression
     int begin = 0;
     int end = 0;
-    while(pString[begin]==' ') {
-      begin++;
-    }
-    if( pString[begin] == '(' ) {
-      // '(' found: push it on the stack and continue
-      opStack.add( "(" );
-      begin++;
-    }
-    else if( pString[begin] == ')' ) {
-      // ')' found: pop the stack until a '(' is found
-      while(!opStack.isEmpty()) {
-        // Pop the stack
-        String lastOp = opStack.get(opStack.size()-1);
-        opStack.remove(opStack.size()-1);
-        if (lastOp=="(") break;
-        // Push the operator on the RPN stack
-        m_stack.add(lastOp);
+    while(begin<pString.length) {
+      while(pString[begin] == ' ') {
+        begin++;
       }
-      begin++;
-    }
-    else {
-       // Skip white spaces
-      end = begin;
-      while( pString[end]!=' ' && pString[end]!=' ' && pString[end]!=')' ) end++;
-      // Get the next token
-      token = rExpr.substring(begin,end-begin);
-      begin = end;
-      if( token.equals("not") || token.equals("or") || token.equals("and") ) {
-        // Pop the operator stack while the operator has a higher
-        // precedence than the top of the stack
-        while(!opStack.isEmpty() && hasPrecedency(token,opStack.get(opStack.size()-1))) {
+      if( pString[begin] == '(' ) {
+        // '(' found: push it on the stack and continue
+        opStack.add( "(" );
+        begin++;
+      }
+      else if( pString[begin] == ')' ) {
+        // ')' found: pop the stack until a '(' is found
+        while(!opStack.isEmpty()) {
           // Pop the stack
           String lastOp = opStack.get(opStack.size()-1);
           opStack.remove(opStack.size()-1);
-          m_stack.add( lastOp );
+          if (lastOp.equals("(")) break;
+          // Push the operator on the RPN stack
+          m_stack.add(lastOp);
         }
-        opStack.add(token);
+        begin++;
       }
       else {
-        m_stack.add(token);
-      }      
+        // Skip white spaces
+        end = begin;        
+        while(end<pString.length && pString[end]!=' ' && pString[end]!=' ' && pString[end]!=')' ) end++;
+        // Get the next token
+        token = rExpr.substring(begin,begin+(end-begin));
+        begin = end;
+        if( token.equals("not") || token.equals("or") || token.equals("and") ) {
+          // Pop the operator stack while the operator has a higher
+          // precedence than the top of the stack
+          while(!opStack.isEmpty() && hasPrecedency(token,opStack.get(opStack.size()-1))) {
+            // Pop the stack
+            String lastOp = opStack.get(opStack.size()-1);
+            opStack.remove(opStack.size()-1);
+            m_stack.add( lastOp );
+          }
+          opStack.add(token);
+        }
+        else {
+          m_stack.add(token);
+        }      
+      }
     }
     // Finish popping the operator stack
     while( !opStack.isEmpty() )
