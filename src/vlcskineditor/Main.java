@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener{
-  final String VERSION = "0.4.5a";
+  final String VERSION = "0.5.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -782,7 +782,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     // </editor-fold>
     else if(e.getSource().equals(m_edit_theme)) s.showThemeOptions();
-    else if(e.getSource().equals(m_edit_global)) return;
+    else if(e.getSource().equals(m_edit_global)) s.gvars.showOptions();
     // <editor-fold defaultstate="collapsed" desc="Open Help "> 
     else if(e.getSource().equals(m_help_doc)) {
       Desktop desktop;
@@ -1218,5 +1218,4 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public static void main(String[] args) {
     new Main();  
   }
-  
 }

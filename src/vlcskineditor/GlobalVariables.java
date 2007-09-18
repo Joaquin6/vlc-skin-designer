@@ -22,14 +22,19 @@
 
 package vlcskineditor;
 
+import java.awt.Desktop;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.event.*;
 import java.util.*;
+import javax.swing.*;
 
 /**
  * GlobalVariables
  * Simulates the global variables in VLC
  * @author Daniel Dreibrodt
  */
-public class GlobalVariables {
+public class GlobalVariables implements ActionListener{
   
   /** The audio stream bitrate **/
   public String $B = "128";
@@ -58,6 +63,7 @@ public class GlobalVariables {
   boolean vlc_hasAudio = true;
   boolean vlc_isFullscreen = false;
   boolean vlc_isPlaying = false;
+  boolean vlc_isStopped = false;
   boolean vlc_isPaused = true;
   boolean vlc_isSeekable = true;
   boolean vlc_isMute = false;
@@ -67,7 +73,10 @@ public class GlobalVariables {
   boolean playlist_isRepeat = true;
   boolean dvd_isActive = false;
   
-  
+  JFrame frame;
+  JComboBox eq_cb,vout_cb,audio_cb,fullscreen_cb,playing_cb,stopped_cb,
+            paused_cb,seekable_cb,mute_cb,ontop_cb,random_cb,loop_cb,repeat_cb,dvd_cb;
+  JButton ok_btn,help_btn;
   
   /** Creates a new instance of GlobalVariables */
   public GlobalVariables() {
@@ -200,5 +209,143 @@ public class GlobalVariables {
     //System.out.println("The boolean expression: "+bool+" was resolved to "+rName+" and parsed as "+varStack.get(varStack.size()-1).toString());
     return varStack.get(varStack.size()-1).booleanValue();
   }
-  
+  /** Creates and shows the dialog to modify the global variables */
+  public void showOptions() {
+    if(frame==null) {
+      frame = new JFrame("Global variables");
+      frame.setResizable(false);
+      frame.setLayout(new FlowLayout());
+      
+      JLabel desc_l = new JLabel("These variables only affect the preview.");
+      Object[] bool_values = { true, false };
+      JLabel eq_l = new JLabel("equalizer.isEnabled");
+      eq_cb = new JComboBox(bool_values);
+      JLabel vout_l = new JLabel("vlc.hasVout");
+      vout_cb = new JComboBox(bool_values);
+      JLabel audio_l = new JLabel("vlc.hasAudio");
+      audio_cb = new JComboBox(bool_values);
+      JLabel fullscreen_l = new JLabel("vlc.isFullscreen");
+      fullscreen_cb = new JComboBox(bool_values);
+      JLabel playing_l = new JLabel("vlc.isPlaying");
+      playing_cb = new JComboBox(bool_values);
+      JLabel stopped_l = new JLabel("vlc.isStopped");
+      stopped_cb = new JComboBox(bool_values);
+      JLabel paused_l = new JLabel("vlc.isPaused");
+      paused_cb = new JComboBox(bool_values);
+      JLabel seekable_l = new JLabel("vlc.isSeekable");
+      seekable_cb = new JComboBox(bool_values);
+      JLabel mute_l = new JLabel("vlc.isMute");
+      mute_cb = new JComboBox(bool_values);
+      JLabel ontop_l = new JLabel("vlc.isOnTop");
+      ontop_cb = new JComboBox(bool_values);
+      JLabel random_l = new JLabel("playlist.isRandom");
+      random_cb = new JComboBox(bool_values);
+      JLabel loop_l = new JLabel("vlc.isLoop");
+      loop_cb = new JComboBox(bool_values);
+      JLabel repeat_l = new JLabel("vlc.isRepeat");
+      repeat_cb = new JComboBox(bool_values);
+      JLabel dvd_l = new JLabel("dvd.isActive");
+      dvd_cb = new JComboBox(bool_values);
+      
+      ok_btn = new JButton("OK");
+      ok_btn.addActionListener(this);
+      help_btn = new JButton("Help");
+      help_btn.addActionListener(this);
+      
+      frame.add(desc_l);
+      JPanel panel = new JPanel(new GridLayout(0,2,5,5));      
+      panel.add(eq_l);
+      panel.add(eq_cb);
+      panel.add(vout_l);
+      panel.add(vout_cb);
+      panel.add(audio_l);
+      panel.add(audio_cb);
+      panel.add(fullscreen_l);
+      panel.add(fullscreen_cb);
+      panel.add(playing_l);
+      panel.add(playing_cb);
+      panel.add(stopped_l);
+      panel.add(stopped_cb);
+      panel.add(paused_l);
+      panel.add(paused_cb);
+      panel.add(seekable_l);
+      panel.add(seekable_cb);
+      panel.add(mute_l);
+      panel.add(mute_cb);
+      panel.add(ontop_l);
+      panel.add(ontop_cb);
+      panel.add(random_l);
+      panel.add(random_cb);
+      panel.add(loop_l);
+      panel.add(loop_cb);
+      panel.add(repeat_l);
+      panel.add(repeat_cb);
+      panel.add(dvd_l);
+      panel.add(dvd_cb);
+      panel.add(ok_btn);
+      panel.add(help_btn);
+      frame.add(panel);
+      frame.pack();
+      
+      frame.setSize(frame.getWidth()/2,frame.getHeight()+20);
+    }
+    eq_cb.setSelectedItem(equalizer_isEnabled);
+    vout_cb.setSelectedItem(vlc_hasVout);
+    audio_cb.setSelectedItem(vlc_hasAudio);
+    fullscreen_cb.setSelectedItem(vlc_isFullscreen);
+    playing_cb.setSelectedItem(vlc_isPlaying);
+    stopped_cb.setSelectedItem(vlc_isStopped);
+    paused_cb.setSelectedItem(vlc_isPaused);
+    seekable_cb.setSelectedItem(vlc_isSeekable);
+    mute_cb.setSelectedItem(vlc_isMute);
+    ontop_cb.setSelectedItem(vlc_isOnTop);
+    random_cb.setSelectedItem(playlist_isRandom);
+    loop_cb.setSelectedItem(playlist_isLoop);
+    repeat_cb.setSelectedItem(playlist_isRepeat);
+    dvd_cb.setSelectedItem(dvd_isActive);
+    frame.setVisible(true);
+  }
+  /**
+   * Sets the variables to the selected values
+   */
+  public void update() {
+    equalizer_isEnabled = Boolean.parseBoolean(eq_cb.getSelectedItem().toString());
+    vlc_hasVout = Boolean.parseBoolean(vout_cb.getSelectedItem().toString());
+    vlc_hasAudio = Boolean.parseBoolean(audio_cb.getSelectedItem().toString());
+    vlc_isFullscreen = Boolean.parseBoolean(fullscreen_cb.getSelectedItem().toString());
+    vlc_isPlaying = Boolean.parseBoolean(playing_cb.getSelectedItem().toString());
+    vlc_isStopped = Boolean.parseBoolean(stopped_cb.getSelectedItem().toString());
+    vlc_isPaused = Boolean.parseBoolean(paused_cb.getSelectedItem().toString());
+    vlc_isSeekable = Boolean.parseBoolean(seekable_cb.getSelectedItem().toString());
+    vlc_isMute = Boolean.parseBoolean(mute_cb.getSelectedItem().toString());
+    vlc_isOnTop = Boolean.parseBoolean(ontop_cb.getSelectedItem().toString());
+    playlist_isRandom = Boolean.parseBoolean(random_cb.getSelectedItem().toString());
+    playlist_isLoop = Boolean.parseBoolean(loop_cb.getSelectedItem().toString());
+    playlist_isRepeat = Boolean.parseBoolean(repeat_cb.getSelectedItem().toString());
+    dvd_isActive = Boolean.parseBoolean(dvd_cb.getSelectedItem().toString());
+  }
+  /**
+   * Handles actions triggered by components listened to
+   */
+  public void actionPerformed(ActionEvent e) {
+    if(e.getSource().equals(ok_btn)) {
+      update();
+      frame.setVisible(false);
+    }
+    else if(e.getSource().equals(help_btn)) {
+      Desktop desktop;
+      if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+            try {
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+            }
+            catch (Exception ex) {
+              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+            }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+  }
 }

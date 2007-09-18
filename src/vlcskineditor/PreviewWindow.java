@@ -69,9 +69,9 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
     frame.pack();
     frame.setVisible(true);        
     if(fu==null) {
-      fu = new FrameUpdater(this,25);
-      fu.start();
-    }
+      fu = new FrameUpdater(this,5);
+      fu.start();      
+    }    
   }
   public void selectItem(Item i) {    
     if(selected_item!=null) selected_item.setSelected(false);
@@ -115,8 +115,10 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
     }
   }  
   public void mouseEntered(MouseEvent e) {
+    
   }
   public void mouseExited(MouseEvent e) {
+    
   }
   public void mouseMoved(MouseEvent e) {
     if(selected_item==null) return;
@@ -134,9 +136,10 @@ public class PreviewWindow extends Canvas implements MouseListener, MouseMotionL
     if(selected_item!=null) selected_item.setClicked(true);
   }
   public void  mouseReleased(MouseEvent e) {
-    fu.fps=5;
-    if(selected_item!=null) selected_item.setClicked(false);
+    fu.fps=5;    
     starteddragging=false;
+    if(selected_item!=null) selected_item.setClicked(false);
+    else return;
     dragstartx=selected_item.x+selected_item.offsetx;
     dragstarty=selected_item.y+selected_item.offsety;
     dragstartitemx=selected_item.x;

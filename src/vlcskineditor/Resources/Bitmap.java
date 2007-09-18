@@ -110,8 +110,7 @@ public class Bitmap extends Resource implements ActionListener{
   public void update() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file));       
-      image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);   
-      System.err.println("Loaded "+file+" as "+id+" with the image type "+image.getType());
+      image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);         
       if(image.getType()!=13) { //If PNG is not indexed
         BufferedImage bi = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_ARGB);
         Graphics g2d = bi.createGraphics();      
