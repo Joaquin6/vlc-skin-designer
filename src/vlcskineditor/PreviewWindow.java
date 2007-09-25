@@ -33,7 +33,7 @@ import javax.swing.*;
  * The WYSIWYG renderer
  * @author Daniel Dreibrodt
  */
-public class PreviewWindow extends Canvas implements MouseListener, MouseMotionListener{
+public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener{
   
   public JInternalFrame frame;
   Layout l;

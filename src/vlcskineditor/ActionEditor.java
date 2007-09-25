@@ -1,5 +1,5 @@
 /*****************************************************************************
- * FrameUpdater.java
+ * ActionEditor.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -22,34 +22,39 @@
 
 package vlcskineditor;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.*;
 
 /**
- * FrameUpdater
+ * ActionEditor
  * @author Daniel Dreibrodt
  */
-public class FrameUpdater extends Thread{
+public class ActionEditor extends JFrame implements ActionListener{
   
-  JPanel c;
-  int fps = 1;
-  boolean run = false;
+  String[] actions;
+  java.util.List<ActionPanel> aPanels = new ArrayList<ActionPanel>();
+  SpringLayout layout = new SpringLayout();
   
-  /** Creates a new instance of FrameUpdater */
-  public FrameUpdater(JPanel c_, int fps_) {
-    c=c_;
-    fps=fps_;
+  JScrollPane sPane = new JScrollPane();
+  JButton ok_btn = new JButton("OK");
+  
+  /** Creates a new instance of ActionEditor */
+  public ActionEditor(String a) {
+    super("Edit Action");
+    setLayout(layout);
+    add(sPane);
+    add(ok_btn);
+    ok_btn.addActionListener(this);
+    actions = a.split(";");
+    for(String act:actions) act=act.trim();
   }
-  /** Starts the repainting loop **/
-  public void run () {
-    run = true;
-    while(true) {     
-      try {        
-        c.repaint();
-        sleep(1000/fps);        
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-      }           
-    }
+  public String showEditDialog() {
+    aPanels.clear();
+    
+    return actions[0];
+  }
+  public void actionPerformed(ActionEvent e) {
+    
   }
 }

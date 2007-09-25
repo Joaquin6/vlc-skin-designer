@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   String vlc_skins_dir = "";
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
-  JMenuItem m_file_new, m_file_open, m_file_import, m_file_save, m_file_test, m_file_vlt, m_file_quit;
+  JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_quit;
   JMenuItem m_edit_theme, m_edit_global;
   JMenuItem m_help_doc, m_help_about;  
   JDesktopPane jdesk;
@@ -71,18 +71,25 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JMenuItem items_add_pu_image, items_add_pu_panel;
   JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;  
   Skin s;
-  ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");
-  ImageIcon add_subbitmap_icon = createIcon("icons/add_subbitmap.png");
-  ImageIcon add_font_icon = createIcon("icons/add_font.png");
-  ImageIcon edit_icon = createIcon("icons/edit.png");
-  ImageIcon delete_icon = createIcon("icons/delete.png");
-  ImageIcon add_window_icon = createIcon("icons/add_window.png");
-  ImageIcon add_layout_icon = createIcon("icons/add_layout.png");  
-  ImageIcon add_icon = createIcon("icons/add.png");
-  ImageIcon up_icon = createIcon("icons/move_up.png");
-  ImageIcon down_icon = createIcon("icons/move_down.png");
+  public ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");  
+  public ImageIcon add_font_icon = createIcon("icons/add_font.png");
+  public ImageIcon edit_icon = createIcon("icons/edit.png");
+  public ImageIcon delete_icon = createIcon("icons/delete.png");
+  public ImageIcon add_window_icon = createIcon("icons/add_window.png");
+  public ImageIcon add_layout_icon = createIcon("icons/add_layout.png");  
+  public ImageIcon add_icon = createIcon("icons/add.png");
+  public ImageIcon up_icon = createIcon("icons/move_up.png");
+  public ImageIcon down_icon = createIcon("icons/move_down.png");
   public ImageIcon help_icon = createIcon("icons/help.png");
-  ImageIcon icon = createIcon("icons/icon.png");  
+  public ImageIcon icon = createIcon("icons/icon.png");  
+  public ImageIcon open_icon = createIcon("icons/open.png");
+  public ImageIcon save_icon = createIcon("icons/save.png");
+  public ImageIcon new_icon = createIcon("icons/new.png");
+  public ImageIcon exit_icon = createIcon("icons/exit.png");
+  public ImageIcon resources_icon = createIcon("icons/resources.png");
+  public ImageIcon windows_icon = createIcon("icons/windows.png");
+  public ImageIcon items_icon = createIcon("icons/items.png");
+  
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
@@ -108,17 +115,17 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file = new JMenu("File");
     m_file.setMnemonic("F".charAt(0));
     m_file_new = new JMenuItem("New");
+    m_file_new.setIcon(new_icon);
     m_file_new.setMnemonic("N".charAt(0));
     m_file_new.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
     m_file_new.addActionListener(this);
     m_file_open = new JMenuItem("Open");
+    m_file_open.setIcon(open_icon);
     m_file_open.setMnemonic("O".charAt(0));
     m_file_open.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
-    m_file_open.addActionListener(this);
-    m_file_import = new JMenuItem("Import a VLT file...");
-    m_file_import.setMnemonic("I".charAt(0));    
-    m_file_import.addActionListener(this);
+    m_file_open.addActionListener(this);    
     m_file_save = new JMenuItem("Save");
+    m_file_save.setIcon(save_icon);
     m_file_save.setMnemonic("S".charAt(0));
     m_file_save.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));   
     m_file_save.addActionListener(this);
@@ -130,6 +137,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file_vlt.setAccelerator(KeyStroke.getKeyStroke("ctrl v"));   
     m_file_vlt.addActionListener(this);
     m_file_quit = new JMenuItem("Quit");
+    m_file_quit.setIcon(exit_icon);
     m_file_quit.setMnemonic("Q".charAt(0));
     m_file_quit.setAccelerator(KeyStroke.getKeyStroke("ctrl Q"));
     m_file_quit.addActionListener(this);
@@ -147,6 +155,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit = new JMenu("Edit");
     m_edit.setMnemonic("E".charAt(0));
     m_edit_theme = new JMenuItem("Theme settings");
+    m_edit_theme.setIcon(edit_icon);
     m_edit_theme.setMnemonic("I".charAt(0));
     m_edit_theme.setAccelerator(KeyStroke.getKeyStroke("ctrl I"));
     m_edit_theme.addActionListener(this);
@@ -160,8 +169,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit.add(m_edit_global);
         
     m_help = new JMenu("Help");
-    m_help.setMnemonic("H".charAt(0));
-    m_help_doc = new JMenuItem("Skins2 documentation");
+    m_help.setMnemonic("H".charAt(0));    
+    m_help_doc = new JMenuItem("Skins2 documentation");    
+    m_help_doc.setIcon(help_icon);
     m_help_doc.setMnemonic("D".charAt(0));
     m_help_doc.addActionListener(this);
     m_help_doc.setAccelerator(KeyStroke.getKeyStroke("F1"));    
@@ -183,6 +193,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     s = new Skin(this);
     
     resources = new JInternalFrame("Resources",true,false);    
+    resources.setFrameIcon(resources_icon);
     resources.setMinimumSize(new Dimension(150,200));    
     SpringLayout res_layout = new SpringLayout();
     resources.setLayout(res_layout);     
@@ -244,7 +255,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     resources.setSize(200,200);
     resources.setVisible(true);    
     
-    windows = new JInternalFrame("Windows",true,false);  
+    windows = new JInternalFrame("Windows",true,false); 
+    windows.setFrameIcon(windows_icon);
     windows.setMinimumSize(new Dimension(150,150));   
     SpringLayout win_layout = new SpringLayout();
     windows.setLayout(win_layout);     
@@ -324,6 +336,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     windows.setVisible(true);   
     
     items = new JInternalFrame("Items",true,false);   
+    items.setFrameIcon(items_icon);
     items.setMinimumSize(new Dimension(150,150));   
     SpringLayout items_layout = new SpringLayout();
     items.setLayout(items_layout);     
@@ -520,8 +533,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     String[] exts = { "xml","vlt" };
     fc.setFileFilter(new CustomFileFilter(fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
     int returnVal = fc.showOpenDialog(this);
-    if (returnVal == JFileChooser.APPROVE_OPTION) {
+    if (returnVal == JFileChooser.APPROVE_OPTION) {      
       File f = fc.getSelectedFile();
+      ProgressWindow pwin = new ProgressWindow(this,"");  
       if(f.toString().toLowerCase().endsWith(".vlt")) {
         String vltname = f.getName().replaceAll(".vlt","");
         Object[] options= {"Yes, unpack", "No, cancel"};
@@ -531,11 +545,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
         unpackfolder.mkdirs();
         boolean unpacked=false;
+        pwin.setText("Unpacking VLT file...");      
+        pwin.setVisible(true);        
         // <editor-fold defaultstate="collapsed" desc="zip">
         try {          
           ZipFile zip = new ZipFile(f);         
           Enumeration entries = zip.entries();
-          while(entries.hasMoreElements()) {
+          while(entries.hasMoreElements()) {            
             ZipEntry ze = (ZipEntry)entries.nextElement();
             File zef = new File(unpackfolder,ze.getName());
             if(ze.getName().endsWith("theme.xml")) f=zef;
@@ -561,6 +577,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="tar.gz">
         if(!unpacked) {
+          
           try {
             FileInputStream fis = new FileInputStream(f);
             GZIPInputStream gzis = new GZIPInputStream(fis);
@@ -588,18 +605,23 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           catch(IOException ex) {
             ex.printStackTrace();
           }
-        }
+        }        
         //</editor-fold>
         if(!unpacked) {
+          pwin.setVisible(false);
           JOptionPane.showMessageDialog(this,"VLT file could not be unpacked!","Could not unpack VLT file",JOptionPane.ERROR_MESSAGE);
           return;
         }
         if(f==fc.getSelectedFile()) {
+          pwin.setVisible(false);
           JOptionPane.showMessageDialog(this,"Could not find \"theme.xml\" inside the unpacked contents of the VLT file\n" +
           "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
           return;
         }
-      }      
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      }     
+      pwin.setText("Parsing XML...");
+      pwin.setVisible(true);
       setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
       pvwin.clearLayout();
       s.open(f);                  
@@ -608,6 +630,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       selected_window = null;
       selected_item = null;
       saved=true;
+      pwin.setVisible(false);
     }
   }
   public void createNew() {
@@ -1216,6 +1239,6 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    new Main();  
+    new Main();      
   }
 }

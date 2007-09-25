@@ -37,8 +37,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
   ImageIcon window_icon = createIcon("icons/window.png");
   ImageIcon layout_icon = createIcon("icons/layout.png");
   ImageIcon panel_icon = createIcon("icons/panel.png");
-  ImageIcon group_icon = createIcon("icons/group.png");
-  ImageIcon playlist_icon = createIcon("icons/playlist.png");
+  ImageIcon group_icon = createIcon("icons/group.png");  
   ImageIcon playtree_icon = createIcon("icons/playtree.png");
   ImageIcon slider_icon = createIcon("icons/slider.png");
   ImageIcon sliderbackground_icon = createIcon("icons/sliderbackground.png");
@@ -79,8 +78,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     else if(name.startsWith("Anchor:")) return anchor_icon;
     else if(name.startsWith("Button:")) return button_icon;
     else if(name.startsWith("Checkbox:")) return checkbox_icon;
-    else if(name.startsWith("Image:")) return image_icon;
-    else if(name.startsWith("Playlist:")) return playlist_icon;
+    else if(name.startsWith("Image:")) return image_icon;    
     else if(name.startsWith("Playtree:")) return playtree_icon;
     else if(name.startsWith("Slider:")) return slider_icon;
     else if(name.startsWith("RadialSlider:")) return radialslider_icon;

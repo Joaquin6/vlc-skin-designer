@@ -1,5 +1,5 @@
 /*****************************************************************************
- * FrameUpdater.java
+ * ProgressWindow.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -22,34 +22,32 @@
 
 package vlcskineditor;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
- * FrameUpdater
+ * ProgressWindow
  * @author Daniel Dreibrodt
  */
-public class FrameUpdater extends Thread{
+public class ProgressWindow extends JDialog{
   
-  JPanel c;
-  int fps = 1;
-  boolean run = false;
+    float position = 0;
+  String title = "...";
+  JProgressBar pbar;
   
-  /** Creates a new instance of FrameUpdater */
-  public FrameUpdater(JPanel c_, int fps_) {
-    c=c_;
-    fps=fps_;
-  }
-  /** Starts the repainting loop **/
-  public void run () {
-    run = true;
-    while(true) {     
-      try {        
-        c.repaint();
-        sleep(1000/fps);        
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-      }           
-    }
+  /** Creates a new instance of ProgressWindow */
+  public ProgressWindow(JFrame p_, String t_) {
+    super(p_,"",false);
+    setLayout(new BorderLayout());
+    pbar = new JProgressBar();
+    add(pbar,BorderLayout.CENTER);
+    setBounds(p_.getX()+p_.getWidth()/2,p_.getY()+p_.getHeight()/2,300,50);
+    setResizable(false);    
+    pbar.setString(t_);
+    pbar.setStringPainted(true);
+    pbar.setIndeterminate(true);
+  }  
+  public void setText(String s) {
+    pbar.setString(s);
   }
 }
