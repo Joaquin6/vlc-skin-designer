@@ -31,6 +31,7 @@ import javax.swing.tree.*;
  * @author Daniel
  */
 public class TreeRenderer extends DefaultTreeCellRenderer {
+  
   ImageIcon bitmap_icon = createIcon("icons/bitmap.png");
   ImageIcon font_icon = createIcon("icons/font.png");
   ImageIcon bitmapfont_icon = createIcon("icons/bitmapfont.png");
@@ -48,7 +49,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
   ImageIcon anchor_icon = createIcon("icons/anchor.png");
   ImageIcon button_icon = createIcon("icons/button.png");
   ImageIcon checkbox_icon = createIcon("icons/checkbox.png");
-  ImageIcon node_icon = createIcon("icons/tree_node.png");
+  
   /** Creates a new instance of TreeRenderer */
   public TreeRenderer() {
   }
@@ -85,7 +86,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     else if(name.startsWith("SliderBackground:")) return sliderbackground_icon;
     else if(name.startsWith("Video:")) return video_icon;
     else if(name.startsWith("Text:")) return text_icon;
-    else return node_icon;
+    else return (ImageIcon)getDefaultLeafIcon();
     
   }
   /**
