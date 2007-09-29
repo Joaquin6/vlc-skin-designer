@@ -31,6 +31,7 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Slider item
@@ -126,8 +127,7 @@ public class Slider extends Item implements ActionListener{
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
     showOptions();
-    s.updateItems();
-    s.expandItem(id);
+    s.updateItems();    
   }
   public Slider(Skin s_, boolean ipt) {
     s = s_;
@@ -157,6 +157,7 @@ public class Slider extends Item implements ActionListener{
     
     s.updateItems();   
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -241,7 +242,7 @@ public class Slider extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -268,7 +269,7 @@ public class Slider extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -303,7 +304,7 @@ public class Slider extends Item implements ActionListener{
       button.add(tooltiptext_tf);
       tooltiptext_l.setBounds(5,195,75,24);
       tooltiptext_tf.setBounds(85,195,150,24);
-      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Slider Attributes"));
+      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Slider Attributes"));
       button.setMinimumSize(new Dimension(240,225));
       button.setPreferredSize(new Dimension(240,225));
       button.setMaximumSize(new Dimension(240,225));
@@ -314,7 +315,7 @@ public class Slider extends Item implements ActionListener{
       back.add(sbg_btn);
       sbg_chb.setBounds(5,15,150,24);
       sbg_btn.setBounds(160,15,75,24);
-      back.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Slider background"));
+      back.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Slider background"));
       back.setMinimumSize(new Dimension(240,45));
       back.setPreferredSize(new Dimension(240,45));
       back.setMaximumSize(new Dimension(240,45));

@@ -27,6 +27,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Checkbox item
@@ -59,6 +60,8 @@ public class Checkbox extends Item implements ActionListener{
   JTextField up2_tf, down2_tf, over2_tf, action2_tf, tooltiptext2_tf, state_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
   JButton visible_btn, action1_btn, action2_btn, state_btn, ok_btn, help_btn;
+  
+  ActionEditor action1_ae, action2_ae;
   
   /** Creates a new instance of Checkbox */
   public Checkbox(String xmlcode, Skin s_) {
@@ -119,6 +122,7 @@ public class Checkbox extends Item implements ActionListener{
     
     s.updateItems();   
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -164,7 +168,7 @@ public class Checkbox extends Item implements ActionListener{
       down1_tf = new JTextField();
       JLabel action1_l = new JLabel("Action:");
       action1_tf = new JTextField();
-      action1_btn = new JButton("",s.m.help_icon);
+      action1_btn = new JButton("",s.m.editor_icon);
       action1_btn.addActionListener(this);
       JLabel tooltiptext1_l = new JLabel("Tooltiptext:");
       tooltiptext1_tf = new JTextField();
@@ -176,7 +180,7 @@ public class Checkbox extends Item implements ActionListener{
       down2_tf = new JTextField();
       JLabel action2_l = new JLabel("Action:");
       action2_tf = new JTextField();
-      action2_btn = new JButton("",s.m.help_icon);
+      action2_btn = new JButton("",s.m.editor_icon);
       action2_btn.addActionListener(this);
       JLabel tooltiptext2_l = new JLabel("Tooltiptext:");
       tooltiptext2_tf = new JTextField();
@@ -231,7 +235,7 @@ public class Checkbox extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(240,135,75,24);
       help_tf.setBounds(325,135,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(495,165));
       general.setPreferredSize(new Dimension(495,165));
       general.setMaximumSize(new Dimension(495,165));
@@ -244,7 +248,7 @@ public class Checkbox extends Item implements ActionListener{
       state_l.setBounds(5,15,75,24);
       state_tf.setBounds(85,15,120,24);
       state_btn.setBounds(210,15,24,24);
-      state.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Checkbox state"));
+      state.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Checkbox state"));
       state.setMinimumSize(new Dimension(495,45));
       state.setPreferredSize(new Dimension(495,45));
       state.setMaximumSize(new Dimension(495,45));
@@ -417,34 +421,12 @@ public class Checkbox extends Item implements ActionListener{
       }
     }
     else if(e.getSource().equals(action1_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
-      }
+      if(action1_ae==null) action1_ae = new ActionEditor(this);
+      action1_ae.editAction(action1_tf.getText());
     }
     else if(e.getSource().equals(action2_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
-      }
+      if(action2_ae==null) action2_ae = new ActionEditor(this);
+      action2_ae.editAction(action2_tf.getText());
     }
     else if(e.getSource().equals(visible_btn)) {
       Desktop desktop;
@@ -461,6 +443,10 @@ public class Checkbox extends Item implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+  }
+  public void actionWasEdited(ActionEditor ae) {
+    if(ae==action1_ae) action1_tf.setText(action1_ae.getCode());
+    else if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
   public String returnCode() {
     String code = "<Checkbox";

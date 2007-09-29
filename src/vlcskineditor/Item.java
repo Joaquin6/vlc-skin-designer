@@ -112,5 +112,9 @@ public abstract class Item {
     offsetx=x_;
     offsety=y_;
   }
+  /** Tells the item that an action attribute has been changed by the ActionEditor <code>ae</code>**/
+  public void actionWasEdited(ActionEditor ae) {
+    
+  }
   
 }

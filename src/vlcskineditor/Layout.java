@@ -28,6 +28,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Handles a windows' layout and it's content
@@ -195,7 +196,7 @@ public class Layout implements ActionListener{
       general.add(id_tf);
       id_l.setBounds(5,15,75,24);
       id_tf.setBounds(85,15,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,45));
       general.setPreferredSize(new Dimension(240,45));
       general.setMaximumSize(new Dimension(240,45));
@@ -226,7 +227,7 @@ public class Layout implements ActionListener{
       dim.add(maxheight_tf);
       maxheight_l.setBounds(5,165,75,24);
       maxheight_tf.setBounds(85,165,150,24);
-      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Dimensions"));
+      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
       dim.setMinimumSize(new Dimension(240,195));
       dim.setPreferredSize(new Dimension(240,195));
       dim.setMaximumSize(new Dimension(240,195));

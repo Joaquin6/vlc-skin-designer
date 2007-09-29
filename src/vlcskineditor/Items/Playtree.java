@@ -28,6 +28,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Playtree item
@@ -129,8 +130,7 @@ public class Playtree extends Item implements ActionListener{
     id = "Unnamed playtree #"+s.getNewId();
     slider = new Slider(s,true);
     showOptions();
-    s.updateItems();
-    s.expandItem(id);
+    s.updateItems();    
   }
   public void update()  {
     id = id_tf.getText();
@@ -159,6 +159,7 @@ public class Playtree extends Item implements ActionListener{
     
     s.updateItems();
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -258,7 +259,7 @@ public class Playtree extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -293,7 +294,7 @@ public class Playtree extends Item implements ActionListener{
       general.add(height_tf);
       height_l.setBounds(5,315,75,24);
       height_tf.setBounds(85,315,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,345));
       general.setPreferredSize(new Dimension(240,345));
       general.setMaximumSize(new Dimension(240,345));
@@ -354,7 +355,7 @@ public class Playtree extends Item implements ActionListener{
       ptp.add(closedimage_tf);
       closedimage_l.setBounds(5,315,75,24);
       closedimage_tf.setBounds(85,315,150,24);      
-      ptp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Playtree Attributes"));
+      ptp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Playtree Attributes"));
       ptp.setMinimumSize(new Dimension(240,3455));
       ptp.setPreferredSize(new Dimension(240,345));
       ptp.setMaximumSize(new Dimension(240,345));

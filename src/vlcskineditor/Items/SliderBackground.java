@@ -28,6 +28,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * SliderBackground item
@@ -77,6 +78,7 @@ public class SliderBackground extends Item implements ActionListener{
     nbvert = Integer.parseInt(nbvert_tf.getText());
     padhoriz = Integer.parseInt(padhoriz_tf.getText());
     padvert = Integer.parseInt(padvert_tf.getText());       
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void prepareImage() {    
     bitmap_str = s.getBitmapImage(image).toString();
@@ -119,7 +121,7 @@ public class SliderBackground extends Item implements ActionListener{
       general.add(id_tf);
       id_l.setBounds(5,15,75,24);
       id_tf.setBounds(85,15,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,45));
       general.setPreferredSize(new Dimension(240,45));
       general.setMaximumSize(new Dimension(240,45));
@@ -148,7 +150,7 @@ public class SliderBackground extends Item implements ActionListener{
       specific.add(padvert_tf);
       padvert_l.setBounds(5,135,75,24);
       padvert_tf.setBounds(85,135,150,24);
-      specific.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Background Attributes"));
+      specific.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Background Attributes"));
       specific.setMinimumSize(new Dimension(240,165));
       specific.setPreferredSize(new Dimension(240,165));
       specific.setMaximumSize(new Dimension(240,165));

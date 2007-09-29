@@ -27,6 +27,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Button item
@@ -49,6 +50,7 @@ public class Button extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
   JButton visible_btn, action_btn, ok_btn, help_btn;
   
+  ActionEditor action_ae;
   
   /** Creates a new instance of Button */
   public Button(String xmlcode, Skin s_) {
@@ -93,6 +95,7 @@ public class Button extends Item implements ActionListener{
     
     s.updateItems();    
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -138,7 +141,7 @@ public class Button extends Item implements ActionListener{
       down_tf = new JTextField();
       JLabel action_l = new JLabel("Action:");
       action_tf = new JTextField();
-      action_btn = new JButton("",s.m.help_icon);
+      action_btn = new JButton("",s.m.editor_icon);
       action_btn.addActionListener(this);
       JLabel tooltiptext_l = new JLabel("Tooltiptext:");
       tooltiptext_tf = new JTextField();
@@ -160,7 +163,7 @@ public class Button extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -187,7 +190,7 @@ public class Button extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -216,7 +219,7 @@ public class Button extends Item implements ActionListener{
       button.add(tooltiptext_tf);
       tooltiptext_l.setBounds(5,135,75,24);
       tooltiptext_tf.setBounds(85,135,150,24);
-      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Button Attributes"));
+      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Button Attributes"));
       button.setMinimumSize(new Dimension(240,165));
       button.setPreferredSize(new Dimension(240,165));
       button.setMaximumSize(new Dimension(240,165));
@@ -309,20 +312,12 @@ public class Button extends Item implements ActionListener{
       }
     }
     else if(e.getSource().equals(action_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
-      }
+      if (action_ae==null) action_ae = new ActionEditor(this);
+      action_ae.editAction(action_tf.getText());      
     }
+  }
+  public void actionWasEdited(ActionEditor ae) {
+    if(ae==action_ae) action_tf.setText(ae.getCode());
   }
   public String returnCode() {
     String code = "<Button";
@@ -364,6 +359,5 @@ public class Button extends Item implements ActionListener{
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Button: "+id);     
     return node;
-  }
-  
+  }  
 }

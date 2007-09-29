@@ -26,6 +26,7 @@ import vlcskineditor.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -219,7 +220,7 @@ public class Font extends Resource implements ActionListener{
       size_l.setBounds(5,75,75,24);
       size_tf.setBounds(85,75,150,24);
       
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));       
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
       general.setMinimumSize(new Dimension(345,110));
       general.setPreferredSize(new Dimension(345,110));
       general.setMaximumSize(new Dimension(345,110));

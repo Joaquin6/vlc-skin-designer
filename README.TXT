@@ -5,6 +5,9 @@ Changelog:
 0.5.0a - Boolean variables are interpreted in the preview
        - Global variables can be edited (boolean only atm)
        - Preview window perfomance improvements
+       - Adding of an action editor
+       - Some bugfixes
+       - New icons
 0.4.5a - Several bugfixes
        - Text variables are interpreted in the preview
 0.4.0a - Items can be positioned with the mouse
@@ -48,6 +51,9 @@ Or manually run "java -jar VLCSkinEditor.jar".
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2007 Daniel "aLtgLasS" Dreibrodt 
-	(altglass@nurfuerspam.de)    
+(c)2007 Daniel Dreibrodt (altglass@nurfuerspam.de)    
+Credits go to the Tango! Desktop Project for some icons I
+used (licensed under cc-sa), to Timothy Gerard Endres 
+(time@gjt.org) for his Windows registry access and TAR 
+access packages for Java (licensed under public domain)
 See LICENSE.TXT for further details

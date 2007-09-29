@@ -48,6 +48,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     frame.add(this);
     frame.setVisible(false);
     frame.setResizable(false);        
+    frame.setFrameIcon(createIcon("icons/preview.png"));
     addMouseListener(this);
     addMouseMotionListener(this);
   }
@@ -144,5 +145,16 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     dragstarty=selected_item.y+selected_item.offsety;
     dragstartitemx=selected_item.x;
     dragstartitemy=selected_item.y;
+  }
+  public ImageIcon createIcon(String filename) {
+      java.awt.Image img = null;
+      try {
+        img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));
+        //img = ImageIO.read(file);
+        return new ImageIcon(img);  
+      } catch (Exception e) {
+        System.out.println(e);
+        return null;
+      }
   }
 }

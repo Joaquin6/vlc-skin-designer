@@ -27,6 +27,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Video item
@@ -84,6 +85,7 @@ public class Video extends Item implements ActionListener{
     autoresize = Boolean.parseBoolean(autoresize_cb.getSelectedItem().toString());
     
     s.updateItems();    
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -148,7 +150,7 @@ public class Video extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -175,7 +177,7 @@ public class Video extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -194,7 +196,7 @@ public class Video extends Item implements ActionListener{
       video.add(autoresize_cb);
       autoresize_l.setBounds(5,75,75,24);
       autoresize_cb.setBounds(85,75,150,24);
-      video.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Video Attributes"));
+      video.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Video Attributes"));
       video.setMinimumSize(new Dimension(240,105));
       video.setPreferredSize(new Dimension(240,105));
       video.setMaximumSize(new Dimension(240,105));

@@ -28,6 +28,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Represents a Panel item
@@ -116,8 +117,7 @@ public class Panel extends Item implements ActionListener{
     height = 0;
     id = "Unnamed panel #"+s.getNewId();
     showOptions();
-    s.updateItems();
-    s.expandItem(id);
+    s.updateItems();    
   }
   public void update() {
     id = id_tf.getText();
@@ -138,6 +138,7 @@ public class Panel extends Item implements ActionListener{
     for(Item i:items) {
       i.setOffset(x,y);
     }
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -194,7 +195,7 @@ public class Panel extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -219,7 +220,7 @@ public class Panel extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -234,7 +235,7 @@ public class Panel extends Item implements ActionListener{
       dim.add(height_tf);
       height_l.setBounds(5,45,75,24);
       height_tf.setBounds(85,45,150,24);
-      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Dimensions"));
+      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
       dim.setMinimumSize(new Dimension(240,75));
       dim.setPreferredSize(new Dimension(240,75));
       dim.setMaximumSize(new Dimension(240,75));

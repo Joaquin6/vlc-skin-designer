@@ -27,6 +27,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Handles windows and their layouts
@@ -139,12 +140,12 @@ public class Window implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);
+      y_tf.setBounds(85,75,150,24);
       general.add(visible_l);
       general.add(visible_tf);
       visible_l.setBounds(5,105,75,24);
       visible_tf.setBounds(85,105,75,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,140));
       general.setPreferredSize(new Dimension(240,140));
       general.setMaximumSize(new Dimension(240,140));
@@ -159,7 +160,7 @@ public class Window implements ActionListener{
       options.add(playondrop_tf);
       playondrop_l.setBounds(5,45,75,24);
       playondrop_tf.setBounds(85,45,150,24);
-      options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Drag and drop options"));
+      options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Drag and drop options"));
       options.setMinimumSize(new Dimension(240,85));
       options.setPreferredSize(new Dimension(240,85));
       options.setMaximumSize(new Dimension(240,85));

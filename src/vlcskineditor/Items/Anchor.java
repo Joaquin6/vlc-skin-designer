@@ -28,6 +28,7 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Anchor item
@@ -75,6 +76,7 @@ public class Anchor extends Item implements ActionListener{
     range=r_;
     s.updateItems();
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -123,7 +125,7 @@ public class Anchor extends Item implements ActionListener{
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,75,75,24);
       lefttop_cb.setBounds(85,75,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));       
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
       general.setMinimumSize(new Dimension(240,110));
       general.setPreferredSize(new Dimension(240,110));
       general.setMaximumSize(new Dimension(240,110));

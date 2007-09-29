@@ -28,6 +28,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Represents a Group item
@@ -103,8 +104,7 @@ public class Group extends Item implements ActionListener{
     s=s_;
     id = "Unnamed group #"+s.getNewId();
     showOptions();    
-    s.updateItems();    
-    s.expandItem(id);
+    s.updateItems();        
   }
   public void update(String id_, int x_, int y_) {
     id=id_;
@@ -115,6 +115,7 @@ public class Group extends Item implements ActionListener{
     }
     s.updateItems();    
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -148,7 +149,7 @@ public class Group extends Item implements ActionListener{
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
       y_tf.setBounds(85,75,75,24);      
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,110));
       general.setPreferredSize(new Dimension(240,110));
       general.setMaximumSize(new Dimension(240,110));

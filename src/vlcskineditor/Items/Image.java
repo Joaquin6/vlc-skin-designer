@@ -27,6 +27,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 
 /**
  * Image item
@@ -46,6 +47,8 @@ public class Image extends Item implements ActionListener{
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, image_tf, action2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb;
   JButton visible_btn, action2_btn, ok_btn, help_btn;
+  
+  ActionEditor action2_ae;
   
   /** Creates a new instance of Image */
   public Image(String xmlcode, Skin s_) {
@@ -90,6 +93,7 @@ public class Image extends Item implements ActionListener{
     
     s.updateItems();      
     s.expandItem(id);
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
@@ -141,7 +145,7 @@ public class Image extends Item implements ActionListener{
       JLabel action2_l = new JLabel("Double-click Action:");
       action2_tf = new JTextField();
       action2_tf.setToolTipText("Action triggered by a double-click on the control.");
-      action2_btn = new JButton("",s.m.help_icon);
+      action2_btn = new JButton("",s.m.editor_icon);
       action2_btn.addActionListener(this);
       
       ok_btn = new JButton("OK");
@@ -161,7 +165,7 @@ public class Image extends Item implements ActionListener{
       general.add(y_l);
       general.add(y_tf);
       y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
+      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
       lefttop_l.setBounds(5,105,75,24);
@@ -188,7 +192,7 @@ public class Image extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -213,7 +217,7 @@ public class Image extends Item implements ActionListener{
       action2_l.setBounds(5,105,75,24);
       action2_tf.setBounds(85,105,120,24);
       action2_btn.setBounds(210,105,24,24);
-      image.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Image Attributes"));
+      image.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Image Attributes"));
       image.setMinimumSize(new Dimension(240,135));
       image.setPreferredSize(new Dimension(240,135));
       image.setMaximumSize(new Dimension(240,135));
@@ -282,19 +286,8 @@ public class Image extends Item implements ActionListener{
       }
     }
     else if(e.getSource().equals(action2_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#actions"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
-      }
+      if(action2_ae==null) action2_ae = new ActionEditor(this);
+      action2_ae.editAction(action2_tf.getText());
     }
     else if(e.getSource().equals(visible_btn)) {
       Desktop desktop;
@@ -308,6 +301,9 @@ public class Image extends Item implements ActionListener{
             }
       }
     }
+  }
+  public void actionWasEdited(ActionEditor ae) {
+    if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
   public String returnCode() {
     String code = "<Image";

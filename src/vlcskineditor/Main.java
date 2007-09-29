@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener{
-  final String VERSION = "0.5.0a";
+  final String VERSION = "0.4.8a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -74,6 +74,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");  
   public ImageIcon add_font_icon = createIcon("icons/add_font.png");
   public ImageIcon edit_icon = createIcon("icons/edit.png");
+  public ImageIcon editor_icon = createIcon("icons/editor.png");
   public ImageIcon delete_icon = createIcon("icons/delete.png");
   public ImageIcon add_window_icon = createIcon("icons/add_window.png");
   public ImageIcon add_layout_icon = createIcon("icons/add_layout.png");  
@@ -89,7 +90,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public ImageIcon resources_icon = createIcon("icons/resources.png");
   public ImageIcon windows_icon = createIcon("icons/windows.png");
   public ImageIcon items_icon = createIcon("icons/items.png");
-  
+    
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
@@ -103,13 +104,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     setDefaultCloseOperation(EXIT_ON_CLOSE);    
     addWindowListener(this);
     setSize(800,700);
-    setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));
-    try {	
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } 
-    catch (Exception e) {
-      
-    }
+    setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));    
     mbar = new JMenuBar();
     
     m_file = new JMenu("File");
@@ -829,9 +824,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             "daniel.dreibrodt@gmx.de\n" +
             "http://www.d-gfx.net.tc\n" +
             "http://www.videolan.org\n" +
-            "Released under terms of the GPL 2+\n" +
-            "This program uses the Java Tar Package and the Windows Registry API Native Interface by Timothy Gerard Endres (time@gjt.org)\n" +
-            "which are released under public domain.",
+            "Released under terms of the GPL 2+\n\n" +
+            "Credits:\n" +
+            "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (licensed under public domain)\n" +
+            "The Tango! Desktop Project (http:0//tango.freedesktop.org/) for some icons (licensed under cc-sa)",
             "About VLC Skin Editor", JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    
@@ -1239,6 +1235,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+    try {	
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } 
+    catch (Exception e) {
+      
+    }
+    JFrame.setDefaultLookAndFeelDecorated(true);
     new Main();      
   }
 }

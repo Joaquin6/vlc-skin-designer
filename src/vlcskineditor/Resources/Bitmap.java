@@ -26,6 +26,7 @@ import vlcskineditor.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import javax.swing.border.*;
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -202,7 +203,7 @@ public class Bitmap extends Resource implements ActionListener{
       alphacolor_l.setBounds(5,75,75,24);
       alphacolor_tf.setBounds(85,75,150,24);
       alphacolor_btn.setBounds(240,75,100,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "General Attributes"));       
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
       general.setMinimumSize(new Dimension(345,110));
       general.setPreferredSize(new Dimension(345,110));
       general.setMaximumSize(new Dimension(345,110));
@@ -217,7 +218,7 @@ public class Bitmap extends Resource implements ActionListener{
       nbframes_tf.setBounds(160,15,150,24);
       fps_l.setBounds(5,45,150,24);
       fps_tf.setBounds(160,45,150,24);
-      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Animation Attributes"));       
+      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animation Attributes"));       
       animation.setMinimumSize(new Dimension(345,80));
       animation.setPreferredSize(new Dimension(345,80));
       animation.setMaximumSize(new Dimension(345,80));      
