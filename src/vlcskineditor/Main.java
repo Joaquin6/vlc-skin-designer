@@ -44,8 +44,8 @@ import com.ice.jni.registry.*;
  * The main class holds the GUI
  * @author Daniel
  */
-public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener{
-  final String VERSION = "0.4.8a";
+public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
+  final String VERSION = "0.5.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -200,6 +200,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_tree.setShowsRootHandles(true);
     res_tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     res_tree.addTreeSelectionListener(this);
+    res_tree.addMouseListener(this);
     JScrollPane res_tree_sp = new JScrollPane(res_tree);
     resources.add(res_tree_sp);       
     res_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
@@ -263,6 +264,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_tree.setShowsRootHandles(true);
     win_tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     win_tree.addTreeSelectionListener(this);
+    win_tree.addMouseListener(this);
     JScrollPane win_tree_sp = new JScrollPane(win_tree);
     windows.add(win_tree_sp);       
     win_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
@@ -343,6 +345,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     items_tree.addTreeSelectionListener(this);
     items_tree.setShowsRootHandles(true);
+    items_tree.addMouseListener(this);
     JScrollPane items_tree_sp = new JScrollPane(items_tree);
     items.add(items_tree_sp);       
     items_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
@@ -826,8 +829,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             "http://www.videolan.org\n" +
             "Released under terms of the GPL 2+\n\n" +
             "Credits:\n" +
-            "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (licensed under public domain)\n" +
-            "The Tango! Desktop Project (http:0//tango.freedesktop.org/) for some icons (licensed under cc-sa)",
+            "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (Public Domain)\n" +
+            "The Tango! Desktop Project (http:0//tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\n" +
+            "Cyril Deguet (asmax@via.ecp.fr) for the boolean expression parser from VLC (GPL 2+)",
             "About VLC Skin Editor", JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    
@@ -1213,7 +1217,18 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void windowDeactivated(WindowEvent e) {}
   public void windowDeiconified(WindowEvent e) {}
   public void windowIconified(WindowEvent e) {}
-  public void windowOpened(WindowEvent e) {}
+  public void windowOpened(WindowEvent e) {}  
+  public void mouseClicked(MouseEvent e) {
+    if(e.getClickCount()>1) {
+      if(e.getSource().equals(res_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
+      else if(e.getSource().equals(win_tree)) actionPerformed(new ActionEvent(win_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
+      else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
+    }
+  }
+  public void mousePressed(MouseEvent e) {}
+  public void mouseReleased(MouseEvent e) {}
+  public void mouseEntered(MouseEvent e) {}
+  public void mouseExited(MouseEvent e) {}
   /**
    * Creates an ImageIcon of an image included in the JAR
    * @param filename  The path to the image file inside the JAR
