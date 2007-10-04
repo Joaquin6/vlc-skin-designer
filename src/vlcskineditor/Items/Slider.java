@@ -86,7 +86,12 @@ public class Slider extends Item implements ActionListener{
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     if(code.length>1) {
       for(int i=0;i<code.length;i++) {
-        if(code[i].startsWith("<SliderBackground")) {
+        if (code[i].startsWith("<!--")) {
+          while(code[i].indexOf("-->")==-1) {
+            i++;
+          }
+        }
+        else if(code[i].startsWith("<SliderBackground")) {
           sbg = new SliderBackground(code[i],s);
           break;
         } 
@@ -461,20 +466,22 @@ public class Slider extends Item implements ActionListener{
   }
   public void draw(Graphics2D g, int x_, int y_) {
     if(s.gvars.parseBoolean(visible)==false) return;
+    String[] pnts = points.split("\\),\\(");
+    int[] xpos = new int[pnts.length];
+    int[] ypos = new int[pnts.length];
+    for(int i=0;i<pnts.length;i++) {
+      String pnt = pnts[i];      
+      String[] coords = pnt.split(",");        
+      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
+      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
+    }          
     if(sbg!=null) {
       sbg.draw(g,x+x_,y+y_);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
+    java.awt.image.BufferedImage si = s.getBitmapImage(up);
+    g.drawImage(si,xpos[0]-si.getWidth()/2,ypos[0]-si.getHeight()/2,null);
     if(selected) {        
-      String[] pnts = points.split("\\),\\(");
-      int[] xpos = new int[pnts.length];
-      int[] ypos = new int[pnts.length];
-      for(int i=0;i<pnts.length;i++) {
-        String pnt = pnts[i];      
-        String[] coords = pnt.split(",");        
-        xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
-        ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
-      }
       g.setColor(Color.RED);
       g.drawPolyline(xpos,ypos,pnts.length);
     }
