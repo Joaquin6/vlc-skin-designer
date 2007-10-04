@@ -63,6 +63,9 @@ public class Slider extends Item implements ActionListener{
   JCheckBox sbg_chb;
   JButton visible_btn, ok_btn, help_btn, sbg_btn;
   
+  Bezier b;
+  int[] xpos,ypos;
+  
   /** Creates a new instance of Slider */
   public Slider(String xmlcode, Skin s_) {
     type = "SliderBackground";
@@ -71,7 +74,8 @@ public class Slider extends Item implements ActionListener{
     up = XML.getValue(code[0],"up");
     if(code[0].indexOf(" down=\"")!=-1) down = XML.getValue(code[0],"down");
     if(code[0].indexOf(" over=\"")!=-1) over = XML.getValue(code[0],"over");
-    points = XML.getValue(code[0],"points");
+    points = XML.getValue(code[0],"points");  
+    updateBezier();
     if(code[0].indexOf(" thickness=\"")!=-1) thickness = XML.getIntValue(code[0],"thickness");
     if(code[0].indexOf(" value=\"")!=-1) value = XML.getValue(code[0],"value");
     if(code[0].indexOf(" tooltiptext=\"")!=-1) tooltiptext = XML.getValue(code[0],"tooltiptext");
@@ -107,6 +111,7 @@ public class Slider extends Item implements ActionListener{
     if(code[0].indexOf("down=\"")!=-1) down = XML.getValue(code[0],"down");
     if(code[0].indexOf("over=\"")!=-1) over = XML.getValue(code[0],"over");
     points = XML.getValue(code[0],"points");
+    updateBezier();
     if(code[0].indexOf("thickness=\"")!=-1) thickness = XML.getIntValue(code[0],"thickness");
     //if(code[0].indexOf("value=\"")!=-1) value = XML.getValue(code[0],"value");
     if(code[0].indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(code[0],"tooltiptext");
@@ -131,7 +136,8 @@ public class Slider extends Item implements ActionListener{
     s = s_;
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
-    showOptions();
+    updateBezier();
+    showOptions();    
     s.updateItems();    
   }
   public Slider(Skin s_, boolean ipt) {
@@ -140,6 +146,18 @@ public class Slider extends Item implements ActionListener{
     id = "Unnamed slider #"+s.getNewId();
     inPlaytree = ipt;
     //showOptions();
+  }
+  public void updateBezier() {
+    String[] pnts = points.split("\\),\\(");
+    xpos = new int[pnts.length];
+    ypos = new int[pnts.length];
+    for(int i=0;i<pnts.length;i++) {
+      String pnt = pnts[i];      
+      String[] coords = pnt.split(",");        
+      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""));
+      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""));
+    }          
+    b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
   public void update() {
     id = id_tf.getText();
@@ -159,6 +177,8 @@ public class Slider extends Item implements ActionListener{
     thickness = Integer.parseInt(thickness_tf.getText());
     if(!inPlaytree) value = (String)value_cb.getSelectedItem();
     tooltiptext = tooltiptext_tf.getText();
+    
+    updateBezier();
     
     s.updateItems();   
     s.expandItem(id);
@@ -465,42 +485,32 @@ public class Slider extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    if(s.gvars.parseBoolean(visible)==false) return;
-    String[] pnts = points.split("\\),\\(");
-    int[] xpos = new int[pnts.length];
-    int[] ypos = new int[pnts.length];
-    for(int i=0;i<pnts.length;i++) {
-      String pnt = pnts[i];      
-      String[] coords = pnt.split(",");        
-      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
-      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
-    }          
+    offsetx=x_;
+    offsety=y_;
+    if(s.gvars.parseBoolean(visible)==false) return;        
     if(sbg!=null) {
       sbg.draw(g,x+x_,y+y_);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
     java.awt.image.BufferedImage si = s.getBitmapImage(up);
-    g.drawImage(si,xpos[0]-si.getWidth()/2,ypos[0]-si.getHeight()/2,null);
+    Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
+    g.drawImage(si,(int)p.getX()+x+x_-si.getWidth()/2,(int)p.getY()+y+y_-si.getHeight()/2,null);
     if(selected) {        
       g.setColor(Color.RED);
-      g.drawPolyline(xpos,ypos,pnts.length);
+      for(float f=0f;f<=1f;f=f+0.1f) {
+        Point2D.Float p1 = b.getPoint(f);
+        Point2D.Float p2 = b.getPoint(f+0.1f);        
+        g.drawLine((int)p1.getX()+x+x_,(int)p1.getY()+y+y_,(int)p2.getX()+x+x_,(int)p2.getY()+y+y_);
+      }
+      for(int i=0;i<xpos.length;i++) {
+        g.fillOval(xpos[i]+x+x_-1,ypos[i]+y+y_-1,3,3);
+      }
     }
   }
-  public boolean contains(int x_,int y_) {
-    if(sbg!=null) return sbg.contains(x_,y_);
-    else {
-      String[] pnts = points.split("\\),\\(");
-      Path2D.Double path = new Path2D.Double();
-      for(int i=0;i<pnts.length;i++) {
-        String pnt = pnts[i];      
-        String[] coords = pnt.split(",");        
-        int xpos = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
-        int ypos = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
-        if(i==0) path.moveTo(xpos,ypos);
-        else path.lineTo(xpos,ypos);
-      }
-      return(path.getBounds().contains(x_,y_));
-    }
+  public boolean contains(int x_,int y_) {    
+    int h = b.getHeight();
+    int w = b.getWidth();
+    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y<=y+offsety+h);   
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Slider: "+id);

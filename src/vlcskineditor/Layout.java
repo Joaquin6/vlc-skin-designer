@@ -71,7 +71,12 @@ public class Layout implements ActionListener{
     if(code[0].indexOf("maxheight=\"")!=-1) maxheight = XML.getIntValue(code[0],"maxheight");
     
     for(int i=1;i<code.length;i++) {
-      if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
+      if (code[i].startsWith("<!--")) {
+        while(code[i].indexOf("-->")==-1) {
+          i++;
+        }
+      }
+      else if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
       else if(code[i].startsWith("<Button")) items.add(new vlcskineditor.Items.Button(code[i],s));
       else if(code[i].startsWith("<Checkbox")) items.add(new vlcskineditor.Items.Checkbox(code[i],s));
       else if(code[i].startsWith("<Image")) items.add(new vlcskineditor.Items.Image(code[i],s));

@@ -107,7 +107,12 @@ public class Playtree extends Item implements ActionListener{
     
     int i=1;
     if(xmllines.length>1) {
-      if(xmllines[i].startsWith("<Slider")) {
+      if (xmllines[i].startsWith("<!--")) {
+        while(xmllines[i].indexOf("-->")==-1) {
+          i++;
+        }
+      }
+      else if(xmllines[i].startsWith("<Slider")) {
         if(xmllines[i].indexOf("/>")!=-1) {
           slider = new Slider(xmllines[i],s,true);
         }

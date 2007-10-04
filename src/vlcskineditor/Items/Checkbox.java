@@ -478,13 +478,13 @@ public class Checkbox extends Item implements ActionListener{
     if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up2);
     if(s.gvars.parseBoolean(state)) {      
-      if(!hovered) g.drawImage(bi,x+x_,y+y_,null,null);
-      else if(!clicked) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,null);
+      if(!hovered || ( (over2.equals("none") && !clicked)||(clicked && down2.equals("none")) )) g.drawImage(bi,x+x_,y+y_,null,null);
+      else if(!clicked || down2.equals("none")) g.drawImage(s.getBitmapImage(over2),x+x_,y+y_,null);
       else g.drawImage(s.getBitmapImage(down2),x+x_,y+y_,null);      
     }
     else {
-      if(!hovered) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,null);
-      else if(!clicked) g.drawImage(s.getBitmapImage(over1),x+x_,y+y_,null);
+      if(!hovered || ( (over1.equals("none") && !clicked)||(clicked && down1.equals("none")) )) g.drawImage(s.getBitmapImage(up1),x+x_,y+y_,null);
+      else if(!clicked || down1.equals("none")) g.drawImage(s.getBitmapImage(over1),x+x_,y+y_,null);
       else g.drawImage(s.getBitmapImage(down1),x+x_,y+y_,null);      
     }
     if(selected) {

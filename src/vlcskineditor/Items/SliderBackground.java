@@ -79,14 +79,8 @@ public class SliderBackground extends Item implements ActionListener{
     padhoriz = Integer.parseInt(padhoriz_tf.getText());
     padvert = Integer.parseInt(padvert_tf.getText());       
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-  }
-  public void prepareImage() {    
-    bitmap_str = s.getBitmapImage(image).toString();
-    bi = (BufferedImage)s.getBitmapImage(image);    
-    bi = bi.getSubimage(0,0,(bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz,(bi.getHeight()-padvert*(nbvert-1))/nbvert);
-  }
-  public void showOptions() {
-    //TODO: Implement VLCSliderBGGen
+  }  
+  public void showOptions() {    
     if(frame==null) {
       frame = new JFrame("Slider background settings");
       frame.setResizable(false);
@@ -209,6 +203,9 @@ public class SliderBackground extends Item implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+    else if(e.getSource().equals(gen_btn)) {
+      
+    }
   }
   public String returnCode() {
     String code = "<SliderBackground";
@@ -225,7 +222,17 @@ public class SliderBackground extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
-    if(bi==null || bitmap_str!=s.getBitmapImage(image).toString()) prepareImage();
+    bi = (BufferedImage)s.getBitmapImage(image);  
+    int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
+    int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;
+    float f = s.gvars.getSliderValue();
+    int fields = nbhoriz*nbvert;
+    int n = (int)(fields*f);
+    int fypos = n/nbhoriz-1;
+    if (fypos<0) fypos=0;
+    int fxpos = n%nbhoriz;    
+    if (fxpos<0) fxpos=0;
+    bi = bi.getSubimage(fxpos*fwidth+fxpos*padhoriz, fypos*fheight+fypos*padvert ,fwidth,fheight);
     g.drawImage(bi,x+x_,y+y_,null);
     if(selected) {
       g.setColor(Color.RED);
@@ -233,7 +240,7 @@ public class SliderBackground extends Item implements ActionListener{
     }
   }
   public boolean contains(int x_,int y_) {
-    if(bi==null || bitmap_str!=s.getBitmapImage(image).toString()) prepareImage();
+    if(bi==null) return false;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {

@@ -70,7 +70,12 @@ public class Window implements ActionListener{
     if(code[0].indexOf("playondrop=\"")!=-1) playondrop = XML.getBoolValue(code[0],"playondrop");
     String layoutcode = "";
     for (int i=1;i<code.length;i++) {
-      if(code[i].startsWith("<Layout")) {        
+      if (code[i].startsWith("<!--")) {
+        while(code[i].indexOf("-->")==-1) {
+          i++;
+        }
+      }
+      else if(code[i].startsWith("<Layout")) {        
         layoutcode = code[i];
       }
       else if(code[i].startsWith("</Layout>")) {

@@ -73,9 +73,12 @@ public class GlobalVariables implements ActionListener{
   boolean playlist_isRepeat = true;
   boolean dvd_isActive = false;
   
+  float slider_value = 0f;
+  
   JFrame frame;
   JComboBox eq_cb,vout_cb,audio_cb,fullscreen_cb,playing_cb,stopped_cb,
             paused_cb,seekable_cb,mute_cb,ontop_cb,random_cb,loop_cb,repeat_cb,dvd_cb;
+  JSlider slider_s;
   JButton ok_btn,help_btn;
   
   /** Creates a new instance of GlobalVariables */
@@ -214,7 +217,7 @@ public class GlobalVariables implements ActionListener{
     if(frame==null) {
       frame = new JFrame("Global variables");
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
+      frame.setLayout(new BoxLayout(frame.getContentPane(),BoxLayout.Y_AXIS));
       
       JLabel desc_l = new JLabel("These variables only affect the preview.");
       Object[] bool_values = { true, false };
@@ -246,6 +249,13 @@ public class GlobalVariables implements ActionListener{
       repeat_cb = new JComboBox(bool_values);
       JLabel dvd_l = new JLabel("dvd.isActive");
       dvd_cb = new JComboBox(bool_values);
+      JLabel slider_l = new JLabel("Slider position");
+      slider_s = new JSlider(JSlider.HORIZONTAL,0,100,0);
+      slider_s.setMajorTickSpacing(10);
+      slider_s.setMinorTickSpacing(5);
+      slider_s.setPaintTicks(true);
+      slider_s.setSize(100,20);
+
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
@@ -282,12 +292,14 @@ public class GlobalVariables implements ActionListener{
       panel.add(repeat_cb);
       panel.add(dvd_l);
       panel.add(dvd_cb);
+      panel.add(slider_l);
+      panel.add(slider_s);
       panel.add(ok_btn);
-      panel.add(help_btn);
+      panel.add(help_btn);      
       frame.add(panel);
       frame.pack();
       
-      frame.setSize(frame.getWidth()/2,frame.getHeight()+20);
+      //frame.setSize(frame.getWidth()/2,frame.getHeight()+20);
     }
     eq_cb.setSelectedItem(equalizer_isEnabled);
     vout_cb.setSelectedItem(vlc_hasVout);
@@ -303,6 +315,7 @@ public class GlobalVariables implements ActionListener{
     loop_cb.setSelectedItem(playlist_isLoop);
     repeat_cb.setSelectedItem(playlist_isRepeat);
     dvd_cb.setSelectedItem(dvd_isActive);
+    slider_s.setValue((int)(slider_value*100));
     frame.setVisible(true);
   }
   /**
@@ -323,6 +336,7 @@ public class GlobalVariables implements ActionListener{
     playlist_isLoop = Boolean.parseBoolean(loop_cb.getSelectedItem().toString());
     playlist_isRepeat = Boolean.parseBoolean(repeat_cb.getSelectedItem().toString());
     dvd_isActive = Boolean.parseBoolean(dvd_cb.getSelectedItem().toString());
+    slider_value = (float)(slider_s.getValue())/100;
   }
   /**
    * Handles actions triggered by components listened to
@@ -347,5 +361,11 @@ public class GlobalVariables implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+  }
+  /**
+   * Gets the slider value
+   */
+  public float getSliderValue() {
+    return slider_value;
   }
 }

@@ -118,8 +118,13 @@ public class Skin implements ActionListener{
           eof = true;
           break;
         }    
+        if (line.startsWith("<!--")) {
+          while(line.indexOf("-->")==-1) {
+            line = br.readLine();
+          }
+        }
         //<editor-fold defaultstate="collapsed" desc=" ThemeInfo tag "> 
-        if(line.startsWith("<ThemeInfo")) {         
+        else if(line.startsWith("<ThemeInfo")) {         
           if(line.indexOf("name")!=-1) themeinfo_name = XML.getValue(line,"name");
           if(line.indexOf("author")!=-1) themeinfo_author = XML.getValue(line,"author");
           if(line.indexOf("email")!=-1) themeinfo_email = XML.getValue(line,"email");

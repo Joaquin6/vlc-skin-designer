@@ -344,8 +344,8 @@ public class Button extends Item implements ActionListener{
   public void draw(Graphics2D g, int x_, int y_) {
     if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up);
-    if(!hovered) g.drawImage(bi,x+x_,y+y_,null);
-    else if(!clicked) g.drawImage(s.getBitmapImage(over),x+x_,y+y_,null);
+    if(!hovered || ( (over.equals("none") && !clicked)||(clicked && down.equals("none")) ) ) g.drawImage(bi,x+x_,y+y_,null);
+    else if(!clicked || down.equals("none"))g.drawImage(s.getBitmapImage(over),x+x_,y+y_,null);
     else g.drawImage(s.getBitmapImage(down),x+x_,y+y_,null);
     if(selected) {
       g.setColor(Color.RED);

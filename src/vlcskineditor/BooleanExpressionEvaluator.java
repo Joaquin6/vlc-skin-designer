@@ -27,7 +27,7 @@ import java.util.*;
 /**
  * BooleanExpressionEvaluator
  * conversion of vlc/trunk/modules/gui/skins2/parser/expr_evaluator.cpp
- * Original code by  Cyril Deguet <asmax@via.ecp.fr>
+ * Original code by Cyril Deguet <asmax@via.ecp.fr>
  * @author Daniel Dreibrodt
  */
 public class BooleanExpressionEvaluator {
@@ -39,6 +39,9 @@ public class BooleanExpressionEvaluator {
   public BooleanExpressionEvaluator() {
     
   }
+  /**
+   * Converts an infix boolean expression to reverse polish notation
+   */
   public void parse(String rExpr) {
     m_stack.clear();   
     
@@ -101,6 +104,9 @@ public class BooleanExpressionEvaluator {
         m_stack.add( lastOp );
     }
   }
+  /**
+   * Gets the first token from the stack and deletes it from the stack
+   */
   String getToken() {
     if( !m_stack.isEmpty() )
     {
@@ -110,6 +116,9 @@ public class BooleanExpressionEvaluator {
     }
     return "";
   }
+  /**
+   * Checks wether the first operator <code>op1</code> has to be applied before the operator <code>op2</code>
+   */
   boolean hasPrecedency(String op1, String op2) {
     // FIXME
     if( op1.equals("(") )
@@ -126,6 +135,14 @@ public class BooleanExpressionEvaluator {
     }
     return false;
   }
-  
+  public static void main (String[] args) {
+    BooleanExpressionEvaluator bee = new BooleanExpressionEvaluator();
+    bee.parse("( bool1 and bool2 ) or not ( bool3 and bool4 )");
+    String token = bee.getToken();
+    while(!token.isEmpty()) {
+      System.out.println(token);
+      token = bee.getToken();
+    }
+  }
   
 }

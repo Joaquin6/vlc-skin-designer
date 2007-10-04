@@ -63,6 +63,11 @@ public class Panel extends Item implements ActionListener{
     if(code[0].indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"ykeepratio");
     
     for(int i=1;i<code.length;i++) {
+      if (code[i].startsWith("<!--")) {
+        while(code[i].indexOf("-->")==-1) {
+          i++;
+        }
+      }
       if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
       else if(code[i].startsWith("<Button")) items.add(new Button(code[i],s));
       else if(code[i].startsWith("<Checkbox")) items.add(new Checkbox(code[i],s));

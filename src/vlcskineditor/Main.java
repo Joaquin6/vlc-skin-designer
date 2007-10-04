@@ -96,12 +96,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
   PreviewWindow pvwin;
   public boolean saved = false;
+  boolean opening = false;
   int res_tree_sel_x, res_tree_sel_y;
   
   /** Launches the skin editor and initializes GUI and Skin DOM*/
   public Main() {
     setTitle("New skin - VLC Skin Editor "+VERSION);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);    
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
     addWindowListener(this);
     setSize(800,700);
     setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));    
@@ -528,6 +529,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     } 
   }
   public void openFile() {
+    opening = true;
     String[] exts = { "xml","vlt" };
     fc.setFileFilter(new CustomFileFilter(fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
     int returnVal = fc.showOpenDialog(this);
@@ -608,26 +610,29 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         if(!unpacked) {
           pwin.setVisible(false);
           JOptionPane.showMessageDialog(this,"VLT file could not be unpacked!","Could not unpack VLT file",JOptionPane.ERROR_MESSAGE);
+          opening=false;
           return;
         }
         if(f==fc.getSelectedFile()) {
           pwin.setVisible(false);
           JOptionPane.showMessageDialog(this,"Could not find \"theme.xml\" inside the unpacked contents of the VLT file\n" +
           "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
+          opening=false;
           return;
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       }     
       pwin.setText("Parsing XML...");
       pwin.setVisible(true);
-      setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
+      setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      
       pvwin.clearLayout();
       s.open(f);                  
       selected_resource = null;
       selected_in_windows = null;
       selected_window = null;
       selected_item = null;
-      saved=true;
+      saved = true;      
+      opening = false;
       pwin.setVisible(false);
     }
   }
@@ -831,7 +836,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             "Credits:\n" +
             "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (Public Domain)\n" +
             "The Tango! Desktop Project (http:0//tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\n" +
-            "Cyril Deguet (asmax@via.ecp.fr) for the boolean expression parser from VLC (GPL 2+)",
+            "The VideoLAN Team for the Boolean Expression Evaluator and Bezier code (GPL 2+)",
             "About VLC Skin Editor", JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    
@@ -1158,6 +1163,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   
   /** Reacts to tree selections */
   public void valueChanged(TreeSelectionEvent e) {    
+    if(opening) return;
     if(e.getSource().equals(res_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
       selected_resource = selection.substring(selection.indexOf(": ")+2);      
@@ -1208,7 +1214,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
       else if(n==1) {
         System.exit(0);
-      }       
+      }     
+      else {
+        return;
+      }
     }
     else {
       System.exit(0);
@@ -1222,7 +1231,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     if(e.getClickCount()>1) {
       if(e.getSource().equals(res_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
       else if(e.getSource().equals(win_tree)) actionPerformed(new ActionEvent(win_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
-      else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
+      else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(items_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
     }
   }
   public void mousePressed(MouseEvent e) {}
