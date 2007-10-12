@@ -510,7 +510,7 @@ public class Slider extends Item implements ActionListener{
   public boolean contains(int x_,int y_) {    
     int h = b.getHeight();
     int w = b.getWidth();
-    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y<=y+offsety+h);   
+    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);   
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Slider: "+id);

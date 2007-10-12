@@ -235,10 +235,7 @@ public class Bezier {
   
   /** x^n */
   private float power( float x, int n ) {
-    if( n > 0 )
-        return x * (float)Math.pow( x, n - 1);
-    else
-        return 1;
+    return (float)Math.pow( x, n );
   } 
  
 }

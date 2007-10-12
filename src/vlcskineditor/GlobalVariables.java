@@ -73,7 +73,7 @@ public class GlobalVariables implements ActionListener{
   boolean playlist_isRepeat = true;
   boolean dvd_isActive = false;
   
-  float slider_value = 0f;
+  float slider_value = 0.5f;
   
   JFrame frame;
   JComboBox eq_cb,vout_cb,audio_cb,fullscreen_cb,playing_cb,stopped_cb,

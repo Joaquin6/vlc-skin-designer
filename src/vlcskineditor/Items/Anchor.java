@@ -48,10 +48,14 @@ public class Anchor extends Item implements ActionListener{
   JComboBox lefttop_cb;
   JButton ok_btn, help_btn;
   
+  Bezier b;
+  int[] xpos,ypos;
+  
   /** Creates a new instance of Anchor */
   public Anchor(String xmlcode, Skin s_) {
     s=s_;
     if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
+    updateBezier();
     priority = XML.getIntValue(xmlcode,"priority");
     if (xmlcode.indexOf(" range=\"")!=-1) range = XML.getIntValue(xmlcode,"range");
     if (xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
@@ -64,7 +68,20 @@ public class Anchor extends Item implements ActionListener{
     s = s_;
     priority = 0;
     id = "Anchor #"+s.getNewId();
+    updateBezier();
     showOptions();
+  }
+  public void updateBezier() {
+    String[] pnts = points.split("\\),\\(");
+    xpos = new int[pnts.length];
+    ypos = new int[pnts.length];
+    for(int i=0;i<pnts.length;i++) {
+      String pnt = pnts[i];      
+      String[] coords = pnt.split(",");        
+      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""));
+      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""));
+    }          
+    b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
   public void update(String id_, int p_, String lt_, int x_, int y_, String pts_, int r_) {
     id=id_;
@@ -74,6 +91,7 @@ public class Anchor extends Item implements ActionListener{
     y=y_;
     points=pts_;
     range=r_;
+    updateBezier();
     s.updateItems();
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
@@ -148,7 +166,7 @@ public class Anchor extends Item implements ActionListener{
       bounds.add(range_tf);
       range_l.setBounds(5,105,75,24);
       range_tf.setBounds(85,105,150,24);
-      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Boundaries"));       
+      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Boundaries"));       
       bounds.setMinimumSize(new Dimension(240,140));
       bounds.setPreferredSize(new Dimension(240,140));
       bounds.setMaximumSize(new Dimension(240,140));
@@ -217,31 +235,21 @@ public class Anchor extends Item implements ActionListener{
   }
   public void draw(Graphics2D g,int x_,int y_) {
     if(selected) {        
-      String[] pnts = points.split("\\),\\(");
-      int[] xpos = new int[pnts.length];
-      int[] ypos = new int[pnts.length];
-      for(int i=0;i<pnts.length;i++) {
-        String pnt = pnts[i];      
-        String[] coords = pnt.split(",");        
-        xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
-        ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
-      }
       g.setColor(Color.RED);
-      g.drawPolyline(xpos,ypos,pnts.length);
+      for(float f=0f;f<=1f;f=f+0.1f) {
+        Point2D.Float p1 = b.getPoint(f);
+        Point2D.Float p2 = b.getPoint(f+0.1f);        
+        g.drawLine((int)p1.getX()+x+x_,(int)p1.getY()+y+y_,(int)p2.getX()+x+x_,(int)p2.getY()+y+y_);
+      }
+      for(int i=0;i<xpos.length;i++) {
+        g.fillOval(xpos[i]+x+x_-1,ypos[i]+y+y_-1,3,3);
+      }
     }
   }
   public boolean contains(int x_, int y_) {
-    String[] pnts = points.split("\\),\\(");
-    Path2D.Double path = new Path2D.Double();
-    for(int i=0;i<pnts.length;i++) {
-      String pnt = pnts[i];      
-      String[] coords = pnt.split(",");        
-      int xpos = Integer.parseInt(coords[0].replaceAll("\\(",""))+x+x_;
-      int ypos = Integer.parseInt(coords[1].replaceAll("\\)",""))+y+y_;
-      if(i==0) path.moveTo(xpos,ypos);
-      else path.lineTo(xpos,ypos);
-    }
-    return(path.getBounds2D().contains(x_,y_));
+    int h = b.getHeight();
+    int w = b.getWidth();
+    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);  
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Anchor: "+id);  

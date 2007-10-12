@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
-  final String VERSION = "0.5.0a";
+  public final String VERSION = "0.5.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -96,8 +96,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
   PreviewWindow pvwin;
   public boolean saved = false;
-  boolean opening = false;
-  int res_tree_sel_x, res_tree_sel_y;
+  boolean opening = false;  
   
   /** Launches the skin editor and initializes GUI and Skin DOM*/
   public Main() {
@@ -485,8 +484,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_add_pu_video = new JMenuItem("Video");
     items_add_pu_video.addActionListener(this);
     items_add_pu.add(items_add_pu_video);
-    jdesk.add(items_add_pu);   
-    
+    jdesk.add(items_add_pu);     
     
     jdesk.setMinimumSize(new Dimension(800,600));
     add(jdesk);    
@@ -1232,6 +1230,26 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(e.getSource().equals(res_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
       else if(e.getSource().equals(win_tree)) actionPerformed(new ActionEvent(win_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
       else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(items_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
+    }
+    else {
+      if(e.getSource().equals(res_tree)) {
+        TreePath tp = res_tree.getSelectionPath();
+        if(tp==null) return;
+        if(res_tree.isExpanded(tp)) res_tree.collapsePath(tp);
+        else res_tree.expandPath(tp);
+      }
+      else if(e.getSource().equals(win_tree)) {
+        TreePath tp = win_tree.getSelectionPath();
+        if(tp==null) return;
+        if(win_tree.isExpanded(tp)) win_tree.collapsePath(tp);
+        else win_tree.expandPath(tp);
+      }
+      else if(e.getSource().equals(items_tree)) {
+        TreePath tp = items_tree.getSelectionPath();
+        if(tp==null) return;
+        if(items_tree.isExpanded(tp)) items_tree.collapsePath(tp);
+        else items_tree.expandPath(tp);
+      }
     }
   }
   public void mousePressed(MouseEvent e) {}
