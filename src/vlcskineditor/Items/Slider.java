@@ -48,7 +48,7 @@ public class Slider extends Item implements ActionListener{
   public String up;
   public String down = DOWN_DEFAULT;
   public String over = OVER_DEFAULT;
-  public String points;
+  public String points ="(0,0)";
   public int thickness = THICKNESS_DEFAULT;
   public String value = VALUE_DEFAULT;
   public String tooltiptext = TOOLTIPTEXT_DEFAULT;
@@ -493,6 +493,7 @@ public class Slider extends Item implements ActionListener{
       sbg.setOffset(x+offsetx,y+offsety);
     }    
     java.awt.image.BufferedImage si = s.getBitmapImage(up);
+    if(si==null) return;
     Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
     g.drawImage(si,(int)p.getX()+x+x_-si.getWidth()/2,(int)p.getY()+y+y_-si.getHeight()/2,null);
     if(selected) {        
