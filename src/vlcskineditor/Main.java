@@ -45,7 +45,7 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
-  public final String VERSION = "0.5.0a";
+  public final String VERSION = "0.6.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
   JMenuBar mbar;
@@ -512,6 +512,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     fc.setCurrentDirectory(new File(vlc_skins_dir));
     
     setVisible(true);   
+    setSize(800,600);
     
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
     int n = JOptionPane.showOptionDialog(this,"What would you like to do?","Welcome to the VLC Skin Editor",
@@ -984,6 +985,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+l.id+"\"?","Confirmation",
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
+            pvwin.clearLayout();
             w.layouts.remove(l);
             s.updateWindows();
             s.updateItems();
@@ -1232,20 +1234,20 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(items_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
     }
     else {
-      if(e.getSource().equals(res_tree)) {
-        TreePath tp = res_tree.getSelectionPath();
+      if(e.getSource().equals(res_tree)) {        
+        TreePath tp = res_tree.getPathForLocation(e.getX(),e.getY());
         if(tp==null) return;
         if(res_tree.isExpanded(tp)) res_tree.collapsePath(tp);
         else res_tree.expandPath(tp);
       }
       else if(e.getSource().equals(win_tree)) {
-        TreePath tp = win_tree.getSelectionPath();
+        TreePath tp = win_tree.getPathForLocation(e.getX(),e.getY());
         if(tp==null) return;
         if(win_tree.isExpanded(tp)) win_tree.collapsePath(tp);
         else win_tree.expandPath(tp);
       }
       else if(e.getSource().equals(items_tree)) {
-        TreePath tp = items_tree.getSelectionPath();
+        TreePath tp = items_tree.getPathForLocation(e.getX(),e.getY());
         if(tp==null) return;
         if(items_tree.isExpanded(tp)) items_tree.collapsePath(tp);
         else items_tree.expandPath(tp);

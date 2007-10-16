@@ -86,8 +86,8 @@ public class SliderBGGen extends JFrame implements ActionListener{
     header1_l.setBounds(0,0,540,50);
     card_step1.add(header1_l); 
     
-    JLabel welcome_l = new JLabel("<html>Welcome to the slider background generator.<br>" +
-                                  "As a first step, please choose whether the slider is going from left to right or from the bottom to the top and what size the background should have.</html>");    
+    JLabel welcome_l = new JLabel("<html><div style=\"width:400px;margin-top:2px\">Welcome to the slider background generator.<br>" +
+                                  "As a first step, please choose whether the slider is going from left to right or from the bottom to the top and what size the background should have.</div></html>");    
     card_step1.add(welcome_l);    
     welcome_l.setBounds(5,25,630,100);
     ltr_rb = new JRadioButton("");    
@@ -117,14 +117,16 @@ public class SliderBGGen extends JFrame implements ActionListener{
     
     JLabel width_l = new JLabel("Width:");
     width_tf = new JTextField();    
+    width_tf.setDocument(new NumbersOnlyDocument(false));
     
     card_step1.add(width_l);
     width_l.setBounds(5,230,75,25);
     card_step1.add(width_tf);
-    width_tf.setBounds(80,230,150,25);
+    width_tf.setBounds(80,230,150,25);    
     
     JLabel height_l = new JLabel("Height:");
     height_tf = new JTextField();
+    height_tf.setDocument(new NumbersOnlyDocument(false));
     
     card_step1.add(height_l);
     height_l.setBounds(5,265,75,25);
@@ -154,20 +156,41 @@ public class SliderBGGen extends JFrame implements ActionListener{
     header2_l.setBounds(0,0,540,50);
     card_step2.add(header2_l); 
     
+    JSeparator step2_horz_s = new JSeparator(JSeparator.HORIZONTAL);
+    step2_prev_btn = new JButton("< Previous");
+    step2_prev_btn.addActionListener(this);
+    step2_finish_btn = new JButton("Finish");
+    step2_finish_btn.addActionListener(this);
+    step2_cancel_btn = new JButton("Cancel");
+    step2_cancel_btn.addActionListener(this);    
+    
+    card_step2.add(step2_horz_s);
+    card_step2.add(step2_prev_btn);
+    card_step2.add(step2_finish_btn);
+    card_step2.add(step2_cancel_btn);
+    
+    step2_horz_s.setBounds(5,345,525,5);    
+    step2_prev_btn.setBounds(275,350,90,20);
+    step2_finish_btn.setBounds(370,350,75,20);
+    step2_cancel_btn.setBounds(450,350,75,20);    
   
-    add(card_step2,STEP2);
-    
-    
+    add(card_step2,STEP2);    
     
     setSize(540,400);
     setResizable(false);
   }
   public void actionPerformed(ActionEvent e) {
-    if(e.getSource().equals(step1_cancel_btn)) {
+    if(e.getActionCommand().equals("Cancel")) {
       System.exit(1);
     }
     else if (e.getSource().equals(step1_next_btn)) {
       layout.show(getContentPane(),STEP2);
+    }
+    else if (e.getSource().equals(step2_prev_btn)) {
+      layout.show(getContentPane(),STEP1);
+    }
+    else if (e.getSource().equals(step2_finish_btn)) {
+      //Do something
     }
   }
   /**

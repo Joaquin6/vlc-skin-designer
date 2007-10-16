@@ -74,6 +74,7 @@ public class Playtree extends Item implements ActionListener{
   JTextField fgcolor_tf, playcolor_tf, selcolor_tf, bgcolor1_tf, bgcolor2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, flat_cb;
   JButton visible_btn, bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
+  JButton cancel_btn;
   
   /** Creates a new instance of Playtree */
   public Playtree(String xmlcode, Skin s_) {
@@ -128,6 +129,7 @@ public class Playtree extends Item implements ActionListener{
         }                
       }
     }
+    created=true;
   }
   public Playtree(Skin s_) {
     s = s_;
@@ -165,13 +167,14 @@ public class Playtree extends Item implements ActionListener{
     s.updateItems();
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created=true;
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Playtree settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -249,6 +252,8 @@ public class Playtree extends Item implements ActionListener{
       slider_btn.addActionListener(this);
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -372,6 +377,7 @@ public class Playtree extends Item implements ActionListener{
       slider_btn.setMaximumSize(new Dimension(490,24));
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -537,6 +543,16 @@ public class Playtree extends Item implements ActionListener{
       }
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l==null) frame.setVisible(false);
+        else l.remove(this);
+      }
+      else {
+        frame.setVisible(false);
       }
     }
   }

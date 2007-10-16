@@ -601,8 +601,10 @@ public class Skin implements ActionListener{
     }    
   }
   /** Make a Layout of the given id visible **/
-  public void expandLayout(String id) {   
-    TreePath wtp = findInTree(m.win_tree,active_window.id);
+  public void expandLayout(String id) {       
+    TreePath wtp = null;
+    if(active_window!=null) wtp = findInTree(m.win_tree,active_window.id);
+    else wtp = findInTree(m.win_tree,m.selected_window);
     if(wtp==null) return;
     m.win_tree.expandPath(wtp);
     
@@ -624,6 +626,7 @@ public class Skin implements ActionListener{
   public void expandItem(String id) {
     java.util.List<String> parents = new ArrayList<String>();
     Item p = getItem(id);
+    if(p==null) return;
     while((p=active_layout.getParentOf(p.id))!=null) {      
       parents.add(p.id);
     }

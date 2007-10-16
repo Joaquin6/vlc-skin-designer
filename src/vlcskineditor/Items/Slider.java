@@ -61,7 +61,7 @@ public class Slider extends Item implements ActionListener{
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, up_tf, down_tf, over_tf, points_tf, thickness_tf, tooltiptext_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb, value_cb;
   JCheckBox sbg_chb;
-  JButton visible_btn, ok_btn, help_btn, sbg_btn;
+  JButton visible_btn, ok_btn, cancel_btn, help_btn, sbg_btn;
   
   Bezier b;
   int[] xpos,ypos;
@@ -100,7 +100,8 @@ public class Slider extends Item implements ActionListener{
           break;
         } 
       }        
-    }    
+    }        
+    created=true;
   }
   public Slider(String xmlcode, Skin s_, boolean ipt) {
     type = "SliderBackground";
@@ -130,7 +131,8 @@ public class Slider extends Item implements ActionListener{
           break;
         } 
       }        
-    }        
+    }       
+    created=true;
   }
   public Slider(Skin s_) {
     s = s_;
@@ -138,14 +140,15 @@ public class Slider extends Item implements ActionListener{
     id = "Unnamed slider #"+s.getNewId();
     updateBezier();
     showOptions();    
-    s.updateItems();    
+    s.updateItems();
+    s.expandItem(id);
   }
   public Slider(Skin s_, boolean ipt) {
     s = s_;
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
     inPlaytree = ipt;
-    //showOptions();
+    created=true;
   }
   public void updateBezier() {
     String[] pnts = points.split("\\),\\(");
@@ -182,6 +185,7 @@ public class Slider extends Item implements ActionListener{
     
     s.updateItems();   
     s.expandItem(id);
+    created=true;
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
@@ -189,7 +193,7 @@ public class Slider extends Item implements ActionListener{
       frame = new JFrame("Slider settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -252,6 +256,8 @@ public class Slider extends Item implements ActionListener{
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -347,6 +353,7 @@ public class Slider extends Item implements ActionListener{
       frame.add(back);
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -451,6 +458,16 @@ public class Slider extends Item implements ActionListener{
       }
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l==null) frame.setVisible(false);
+        else l.remove(this);
+      }
+      else {
+        frame.setVisible(false);
       }
     }
   }

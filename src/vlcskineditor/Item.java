@@ -65,6 +65,8 @@ public abstract class Item {
   public int offsetx = 0;
   public int offsety = 0;
   
+  public boolean created = false;
+  
   /** Creates a new instance of Item */
   public Item() {
   }
@@ -115,6 +117,5 @@ public abstract class Item {
   /** Tells the item that an action attribute has been changed by the ActionEditor <code>ae</code>**/
   public void actionWasEdited(ActionEditor ae) {
     
-  }
-  
+  } 
 }
