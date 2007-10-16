@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
   JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_quit;
-  JMenuItem m_edit_theme, m_edit_global;
+  JMenuItem m_edit_theme, m_edit_global, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
   JMenuItem m_help_doc, m_help_about;  
   JDesktopPane jdesk;
   JInternalFrame resources,windows,items,current_window;  
@@ -158,10 +158,27 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit_global.setMnemonic("G".charAt(0));
     m_edit_global.setAccelerator(KeyStroke.getKeyStroke("ctrl G"));
     m_edit_global.addActionListener(this);
+    m_edit_up = new JMenuItem("Move selected item up");
+    m_edit_up.setAccelerator(KeyStroke.getKeyStroke("ctrl UP"));
+    m_edit_up.addActionListener(this);
+    m_edit_down = new JMenuItem("Move selected item down");
+    m_edit_down.setAccelerator(KeyStroke.getKeyStroke("ctrl DOWN"));    
+    m_edit_down.addActionListener(this);
+    m_edit_left = new JMenuItem("Move selected item left");
+    m_edit_left.setAccelerator(KeyStroke.getKeyStroke("ctrl LEFT"));
+    m_edit_left.addActionListener(this);
+    m_edit_right = new JMenuItem("Move selected item right");
+    m_edit_right.setAccelerator(KeyStroke.getKeyStroke("ctrl RIGHT"));
+    m_edit_right.addActionListener(this);
     
     m_edit.add(m_edit_theme);
     m_edit.addSeparator();
     m_edit.add(m_edit_global);
+    m_edit.addSeparator();
+    m_edit.add(m_edit_up);
+    m_edit.add(m_edit_down);
+    m_edit.add(m_edit_left);
+    m_edit.add(m_edit_right);
         
     m_help = new JMenu("Help");
     m_help.setMnemonic("H".charAt(0));    
@@ -511,7 +528,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     fc = new JFileChooser();    
     fc.setCurrentDirectory(new File(vlc_skins_dir));
     
-    setVisible(true);   
+    setVisible(true);       
     setSize(800,600);
     
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
@@ -532,7 +549,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     String[] exts = { "xml","vlt" };
     fc.setFileFilter(new CustomFileFilter(fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
     int returnVal = fc.showOpenDialog(this);
-    if (returnVal == JFileChooser.APPROVE_OPTION) {      
+    if(returnVal == JFileChooser.APPROVE_OPTION) {      
       File f = fc.getSelectedFile();
       ProgressWindow pwin = new ProgressWindow(this,"");  
       if(f.toString().toLowerCase().endsWith(".vlt")) {
@@ -638,7 +655,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void createNew() {
       fc.setFileFilter(new CustomFileFilter(fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
       int returnVal=fc.showSaveDialog(this);        
-      if (returnVal != JFileChooser.APPROVE_OPTION) return;      
+      if(returnVal != JFileChooser.APPROVE_OPTION) return;      
       File f = fc.getSelectedFile();
       if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
       setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
@@ -703,7 +720,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
       int returnVal = vlt_saver.showSaveDialog(this);
       File f = null;
-      if (returnVal == JFileChooser.APPROVE_OPTION) {
+      if(returnVal == JFileChooser.APPROVE_OPTION) {
         f = vlt_saver.getSelectedFile();
       }      
       else return;
@@ -811,7 +828,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Open Help "> 
     else if(e.getSource().equals(m_help_doc)) {
       Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
+      if(Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
               desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html"));
@@ -850,7 +867,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         bitmap_adder.setMultiSelectionEnabled(true);
       }
       int returnVal = bitmap_adder.showOpenDialog(this);
-      if (returnVal == JFileChooser.APPROVE_OPTION) {
+      if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = bitmap_adder.getSelectedFiles();
         for(int i=0;i<files.length;i++) {
           s.resources.add(new vlcskineditor.Resources.Bitmap(s,files[i]));
@@ -892,7 +909,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         font_adder.setMultiSelectionEnabled(true);
       }
       int returnVal = font_adder.showOpenDialog(this);
-      if (returnVal == JFileChooser.APPROVE_OPTION) {
+      if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = font_adder.getSelectedFiles();
         for(int i=0;i<files.length;i++) {
           s.resources.add(new vlcskineditor.Resources.Font(s,files[i]));
@@ -932,7 +949,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add layout">
     else if(e.getSource().equals(win_add_layout)) {
-      if (selected_window!=null) {
+      if(selected_window!=null) {
         Window w = s.getWindow(selected_window);
         if(w!=null) w.addLayout();
       }
@@ -965,7 +982,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Window edit">
     else if(e.getSource().equals(win_edit)) {
-      if (selected_layout!=null && selected_window!=null) {
+      if(selected_layout!=null && selected_window!=null) {
         Layout l = s.getWindow(selected_window).getLayout(selected_layout);
         if(l!=null) l.showOptions();
       }
@@ -1053,57 +1070,57 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Add Item popups">
     else if(e.getSource().equals(items_add_pu_anchor)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Anchor(s));           
     }
     else if(e.getSource().equals(items_add_pu_button)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_checkbox)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_panel)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_image)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new vlcskineditor.Items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_playtree)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Playtree(s));           
     }
     else if(e.getSource().equals(items_add_pu_slider)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Slider(s));           
     }
     else if(e.getSource().equals(items_add_pu_text)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Text(s));           
     }
     else if(e.getSource().equals(items_add_pu_video)) {      
-      java.util.List<Item> i;
-      if (selected_item!=null ) i = s.getParentListOf(selected_item);
-      else i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      java.util.List<Item> i = null;
+      if(selected_item!=null ) i = s.getParentListOf(selected_item);
+      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
       i.add(new Video(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_anchor)) {      
@@ -1158,6 +1175,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         }       
       }
     }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Move selected item">
+    else if(e.getSource().equals(m_edit_up)) pvwin.moveItem(0,-1);
+    else if(e.getSource().equals(m_edit_down)) pvwin.moveItem(0,1);
+    else if(e.getSource().equals(m_edit_right)) pvwin.moveItem(1,0);
+    else if(e.getSource().equals(m_edit_left)) pvwin.moveItem(-1,0);
     // </editor-fold>
   }
   

@@ -65,6 +65,7 @@ public abstract class Item {
   public int offsetx = 0;
   public int offsety = 0;
   
+  /** Determines whether the process of creating the object has finished **/
   public boolean created = false;
   
   /** Creates a new instance of Item */

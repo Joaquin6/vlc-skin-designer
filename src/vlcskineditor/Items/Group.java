@@ -40,7 +40,7 @@ public class Group extends Item implements ActionListener{
   public java.util.List<Item> items = new ArrayList<Item>();  
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf;
-  JButton ok_btn, help_btn;  
+  JButton ok_btn, cancel_btn, help_btn;  
   
   /** Creates a new instance of Group */
   public Group(String xmlcode, Skin s_) {
@@ -103,6 +103,7 @@ public class Group extends Item implements ActionListener{
     for(Item i:items) {
       i.setOffset(x,y);
     }
+    created = true;
   }
   public Group(Skin s_) {
     type="Group";
@@ -121,13 +122,14 @@ public class Group extends Item implements ActionListener{
     s.updateItems();    
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Group settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -138,6 +140,8 @@ public class Group extends Item implements ActionListener{
       y_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -161,6 +165,7 @@ public class Group extends Item implements ActionListener{
       frame.add(general);
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -205,6 +210,13 @@ public class Group extends Item implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l!=null) l.remove(this);
+      }
+      frame.setVisible(false);
+    }
   }
   public String returnCode() {
     String code = "<Group";    
@@ -221,7 +233,7 @@ public class Group extends Item implements ActionListener{
   public void draw(Graphics2D g) {     
      draw(g,offsetx,offsety);
   }
-  public void draw(Graphics2D g,int x_,int y_) {
+  public void draw(Graphics2D g,int x_,int y_) {    
     for(Item i:items) {
       i.draw(g,x+x,y+y_);
       i.setOffset(x+offsetx,y+offsety);

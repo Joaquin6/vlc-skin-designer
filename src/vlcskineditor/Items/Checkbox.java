@@ -59,7 +59,7 @@ public class Checkbox extends Item implements ActionListener{
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, up1_tf, down1_tf, over1_tf, action1_tf, tooltiptext1_tf;
   JTextField up2_tf, down2_tf, over2_tf, action2_tf, tooltiptext2_tf, state_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
-  JButton visible_btn, action1_btn, action2_btn, state_btn, ok_btn, help_btn;
+  JButton visible_btn, action1_btn, action2_btn, state_btn, ok_btn, cancel_btn, help_btn;
   
   ActionEditor action1_ae, action2_ae;
   
@@ -88,6 +88,7 @@ public class Checkbox extends Item implements ActionListener{
     if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
     if(xmlcode.indexOf(" ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
+    created = true;
   }
   public Checkbox(Skin s_) {
     s = s_;
@@ -123,6 +124,7 @@ public class Checkbox extends Item implements ActionListener{
     s.updateItems();   
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
   }
   public void showOptions() {
     if(frame==null) {
@@ -193,6 +195,8 @@ public class Checkbox extends Item implements ActionListener{
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -314,6 +318,7 @@ public class Checkbox extends Item implements ActionListener{
       
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -443,6 +448,13 @@ public class Checkbox extends Item implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l!=null) l.remove(this);
+      }
+      frame.setVisible(false);
+    }
   }
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action1_ae) action1_tf.setText(action1_ae.getCode());
@@ -475,6 +487,7 @@ public class Checkbox extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(!created) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up2);
     if(s.gvars.parseBoolean(state)) {      

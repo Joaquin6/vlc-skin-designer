@@ -48,7 +48,7 @@ public class Button extends Item implements ActionListener{
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, up_tf, down_tf, over_tf, action_tf, tooltiptext_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
-  JButton visible_btn, action_btn, ok_btn, help_btn;
+  JButton visible_btn, action_btn, ok_btn, cancel_btn, help_btn;
   
   ActionEditor action_ae;
   
@@ -69,6 +69,7 @@ public class Button extends Item implements ActionListener{
     if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
     if(xmlcode.indexOf("tooltiptext=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"tooltiptext");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
+    created = true;
   }
   public Button(Skin s_) {
     s=s_;
@@ -96,13 +97,14 @@ public class Button extends Item implements ActionListener{
     s.updateItems();    
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Button settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -148,6 +150,8 @@ public class Button extends Item implements ActionListener{
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -227,6 +231,7 @@ public class Button extends Item implements ActionListener{
       
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -315,6 +320,13 @@ public class Button extends Item implements ActionListener{
       if (action_ae==null) action_ae = new ActionEditor(this);
       action_ae.editAction(action_tf.getText());      
     }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l!=null) l.remove(this);        
+      }
+      frame.setVisible(false);
+    }
   }
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action_ae) action_tf.setText(ae.getCode());
@@ -342,6 +354,7 @@ public class Button extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(!created) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(up);
     if(!hovered || ( (over.equals("none") && !clicked)||(clicked && down.equals("none")) ) ) g.drawImage(bi,x+x_,y+y_,null);

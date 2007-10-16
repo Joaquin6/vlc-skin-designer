@@ -227,12 +227,9 @@ public class Anchor extends Item implements ActionListener{
     else if(e.getSource().equals(cancel_btn)) {
       if(!created) {
         java.util.List<Item> l = s.getParentListOf(id);
-        if(l==null) frame.setVisible(false);
-        else l.remove(this);
+        if(l!=null) l.remove(this);
       }
-      else {
-        frame.setVisible(false);
-      }
+      frame.setVisible(false);
     }
   }
   public String returnCode() {
@@ -249,6 +246,7 @@ public class Anchor extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
   public void draw(Graphics2D g,int x_,int y_) {
+    if(!created) return;
     if(selected) {        
       g.setColor(Color.RED);
       for(float f=0f;f<=1f;f=f+0.1f) {

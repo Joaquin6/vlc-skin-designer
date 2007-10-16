@@ -434,7 +434,7 @@ public class Slider extends Item implements ActionListener{
     }
     else if(e.getSource().equals(sbg_chb)) {
       if(sbg_chb.isSelected()) {
-        sbg = new SliderBackground(s);
+        sbg = new SliderBackground(s,this);
         sbg_btn.setEnabled(true);
       }
       else {
@@ -463,13 +463,16 @@ public class Slider extends Item implements ActionListener{
     else if(e.getSource().equals(cancel_btn)) {
       if(!created) {
         java.util.List<Item> l = s.getParentListOf(id);
-        if(l==null) frame.setVisible(false);
-        else l.remove(this);
+        if(l!=null) l.remove(this);        
       }
-      else {
-        frame.setVisible(false);
-      }
+      frame.setVisible(false);
     }
+  }
+  public void removeBG() {
+    if(sbg==null) return;    
+    sbg = null;
+    sbg_chb.setSelected(false);
+    sbg_btn.setEnabled(false);
   }
   public String returnCode() {
     String code = "<Slider";
@@ -502,6 +505,7 @@ public class Slider extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(!created) return;
     offsetx=x_;
     offsety=y_;
     if(s.gvars.parseBoolean(visible)==false) return;        

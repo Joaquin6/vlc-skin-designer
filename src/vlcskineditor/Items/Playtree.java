@@ -548,12 +548,9 @@ public class Playtree extends Item implements ActionListener{
     else if(e.getSource().equals(cancel_btn)) {
       if(!created) {
         java.util.List<Item> l = s.getParentListOf(id);
-        if(l==null) frame.setVisible(false);
-        else l.remove(this);
+        if(l!=null) l.remove(this);
       }
-      else {
-        frame.setVisible(false);
-      }
+      frame.setVisible(false);
     }
   }
   public String returnCode() {
@@ -590,6 +587,7 @@ public class Playtree extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(!created) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
     g.setFont(f);

@@ -33,7 +33,7 @@ import javax.swing.*;
  * The WYSIWYG renderer
  * @author Daniel Dreibrodt
  */
-public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener{
+public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener {
   
   public JInternalFrame frame;
   Layout l;
@@ -41,6 +41,8 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   Item selected_item;
   boolean starteddragging = false;
   int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
+  
+  JMenuItem up, down, right, left;
   
   /** Creates a new instance of PreviewWindow */
   public PreviewWindow() {   
@@ -50,7 +52,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     frame.setResizable(false);        
     frame.setFrameIcon(createIcon("icons/preview.png"));
     addMouseListener(this);
-    addMouseMotionListener(this);
+    addMouseMotionListener(this);    
   }
   public void clearLayout() {
     l=null;
@@ -136,7 +138,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     fu.fps=25;
     if(selected_item!=null) selected_item.setClicked(true);
   }
-  public void  mouseReleased(MouseEvent e) {
+  public void mouseReleased(MouseEvent e) {
     fu.fps=5;    
     starteddragging=false;
     if(selected_item!=null) selected_item.setClicked(false);
@@ -146,15 +148,24 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     dragstartitemx=selected_item.x;
     dragstartitemy=selected_item.y;
   }
+  public void moveItem(int x, int y) {    
+    try {
+      selected_item.x+=x;
+      selected_item.y+=y;
+    }
+    catch (NullPointerException ex) {
+      /* empty */
+    }
+  }
   public ImageIcon createIcon(String filename) {
-      java.awt.Image img = null;
-      try {
-        img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));
-        //img = ImageIO.read(file);
-        return new ImageIcon(img);  
-      } catch (Exception e) {
-        System.out.println(e);
-        return null;
-      }
+    java.awt.Image img = null;    
+    try {
+      img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));
+      //img = ImageIO.read(file);
+      return new ImageIcon(img);  
+    } catch (Exception e) {
+      System.out.println(e);
+      return null;
+    }
   }
 }

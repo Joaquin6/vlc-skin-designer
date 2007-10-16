@@ -49,9 +49,10 @@ public class SliderBackground extends Item implements ActionListener{
   
   JFrame frame;
   JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
-  JButton gen_btn, ok_btn, help_btn;
+  JButton gen_btn, ok_btn, cancel_btn, help_btn;
   BufferedImage bi = null;
   String bitmap_str = "";
+  Slider sl;
   
     
   /** Creates a new instance of SliderBackground */
@@ -64,9 +65,11 @@ public class SliderBackground extends Item implements ActionListener{
     if(xmlcode.indexOf("padvert=\"")!=-1) padvert = XML.getIntValue(xmlcode,"padvert");   
     if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");  
     else id = "Unnamed slider background #"+s.getNewId();
+    created = true;
   }
-  public SliderBackground(Skin s_) {
+  public SliderBackground(Skin s_, Slider sl_) {
     s = s_;
+    sl = sl_;
     image = "none";
     id = "Unnamed slider background #"+s.getNewId();
     showOptions();
@@ -79,13 +82,14 @@ public class SliderBackground extends Item implements ActionListener{
     padhoriz = Integer.parseInt(padhoriz_tf.getText());
     padvert = Integer.parseInt(padvert_tf.getText());       
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
   }  
   public void showOptions() {    
     if(frame==null) {
       frame = new JFrame("Slider background settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       gen_btn = new JButton("Open slider background wizard...");
@@ -106,6 +110,8 @@ public class SliderBackground extends Item implements ActionListener{
       padvert_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -151,6 +157,7 @@ public class SliderBackground extends Item implements ActionListener{
       frame.add(specific);
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(new JLabel("* required attribute"));
       
@@ -204,7 +211,11 @@ public class SliderBackground extends Item implements ActionListener{
       }
     }
     else if(e.getSource().equals(gen_btn)) {
-      
+      //TODO
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
+      if(!created) sl.removeBG();      
     }
   }
   public String returnCode() {

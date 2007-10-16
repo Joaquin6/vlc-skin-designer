@@ -46,7 +46,7 @@ public class Image extends Item implements ActionListener{
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, image_tf, action2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb;
-  JButton visible_btn, action2_btn, ok_btn, help_btn;
+  JButton visible_btn, action2_btn, ok_btn, cancel_btn, help_btn;
   
   ActionEditor action2_ae;
   
@@ -68,6 +68,7 @@ public class Image extends Item implements ActionListener{
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
     if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
+    created = true;
   }
   public Image(Skin s_) {
     s = s_;
@@ -94,13 +95,14 @@ public class Image extends Item implements ActionListener{
     s.updateItems();      
     s.expandItem(id);
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Image settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -150,6 +152,8 @@ public class Image extends Item implements ActionListener{
       
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -225,6 +229,7 @@ public class Image extends Item implements ActionListener{
       
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(new JLabel("* required attribute"));
       
@@ -301,6 +306,13 @@ public class Image extends Item implements ActionListener{
             }
       }
     }
+    else if(e.getSource().equals(cancel_btn)) {
+      if(!created) {
+        java.util.List<Item> l = s.getParentListOf(id);
+        if(l!=null) l.remove(this);
+      }
+      frame.setVisible(false);
+    }
   }
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
@@ -326,6 +338,7 @@ public class Image extends Item implements ActionListener{
     draw(g,offsetx,offsety);
   }
    public void draw(Graphics2D g,int x_, int y_) {
+    if(!created) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
     g.drawImage(bi,x+x_,y+y_,null);
     if(selected) {

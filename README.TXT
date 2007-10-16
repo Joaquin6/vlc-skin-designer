@@ -1,7 +1,14 @@
-VLC Skin Editor release 0.5.0a
+VLC Skin Editor release 0.6.0a
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.6.0a - Resources/windows/layouts/items can be edited by
+         doubleclicking on them in the hiearchy trees
+       - Sliders are rendered completely as in VLC
+       - Cancel buttons for editing dialogs
+       - Items can be moved in the preview window with the
+         arrow keys when the preview window is focused and
+         the CONTROL button is pressed.
 0.5.0a - Boolean variables are interpreted in the preview
        - Global variables can be edited (boolean only atm)
        - Preview window perfomance improvements
