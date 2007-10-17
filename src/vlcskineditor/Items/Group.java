@@ -37,7 +37,7 @@ import javax.swing.border.*;
 public class Group extends Item implements ActionListener{
   
   /** The items contained in the group */
-  public java.util.List<Item> items = new ArrayList<Item>();  
+  public java.util.List<Item> items = new LinkedList<Item>();  
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf;
   JButton ok_btn, cancel_btn, help_btn;  

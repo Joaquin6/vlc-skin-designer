@@ -51,11 +51,13 @@ public class Layout implements ActionListener{
   
   JFrame frame = null;
   JTextField id_tf, width_tf, height_tf, minwidth_tf, minheight_tf, maxwidth_tf, maxheight_tf;
-  JButton ok_btn, help_btn;
+  JButton ok_btn, cancel_btn, help_btn;
   
-  java.util.List<Item> items = new ArrayList<Item>();
+  java.util.List<Item> items = new LinkedList<Item>();
   
   String type = "List";
+  
+  boolean created = false;
   
   /** Creates a new instance of Layout */
   public Layout(String xmlcode, Skin s_) {
@@ -139,6 +141,7 @@ public class Layout implements ActionListener{
         }                
       }
     }
+    created = true;
   }
   public Layout(Skin s_) {
     s=s_;
@@ -157,13 +160,15 @@ public class Layout implements ActionListener{
     maxheight=maxh_;
     s.updateWindows();
     s.expandLayout(id);
+    created = true;
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Layout settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Name of the layout (it may be used for actions). Two layouts cannot have the same id.");
@@ -193,6 +198,8 @@ public class Layout implements ActionListener{
       maxheight_tf.setToolTipText("Maximum height of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as maximum width.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -239,6 +246,7 @@ public class Layout implements ActionListener{
       frame.add(dim);
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(new JLabel("* required attribute"));
       
@@ -291,6 +299,14 @@ public class Layout implements ActionListener{
       }
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+      }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
+      if(!created) {
+        for (Window w:s.windows) {
+          if(w.getLayout(id)!=null) w.layouts.remove(this);
+        }
       }
     }
   }

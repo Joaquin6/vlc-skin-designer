@@ -43,7 +43,7 @@ public class Font extends Resource implements ActionListener{
   
   JFrame frame = null;
   JTextField id_tf, file_tf, size_tf;
-  JButton file_btn, ok_btn, help_btn;
+  JButton file_btn, ok_btn, cancel_btn, help_btn;
   JFileChooser fc;
   public java.awt.Font f;
   
@@ -113,8 +113,12 @@ public class Font extends Resource implements ActionListener{
   public Font(Skin s_, File f_) {
     s = s_;
     type = "Font";
-    id = f_.getName().substring(0,f_.getName().lastIndexOf("."));
+    String id_t = f_.getName().substring(0,f_.getName().lastIndexOf("."));
+    if(s.idExists(id_t)) id_t += "_"+s.getNewId();
+    id = id_t;
     file = f_.getPath().replace(s.skinfolder,"");    
+    s.updateResources();
+    s.expandResource(id);
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
       f = f.deriveFont((float)size);
@@ -137,7 +141,7 @@ public class Font extends Resource implements ActionListener{
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }  
-    }
+    }    
   }
   public Font(Skin s_) {
     s=s_;
@@ -151,12 +155,10 @@ public class Font extends Resource implements ActionListener{
   public void update() {
     type="Font";    
     file=file_tf.getText();
-    size=Integer.parseInt(size_tf.getText());    
-    if(!id_tf.getText().equals(id)) {
-      id=id_tf.getText();
-      s.updateResources();
-      s.expandResource(id);
-    }
+    size=Integer.parseInt(size_tf.getText());        
+    id=id_tf.getText();
+    s.updateResources();
+    s.expandResource(id);
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
       f = f.deriveFont((float)size);
@@ -179,15 +181,13 @@ public class Font extends Resource implements ActionListener{
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         }
       }  
-    }
-    
+    }    
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Font settings");
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      frame.setLayout(new FlowLayout());      
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the font that will be used with controls.");
@@ -201,6 +201,8 @@ public class Font extends Resource implements ActionListener{
       size_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -224,10 +226,10 @@ public class Font extends Resource implements ActionListener{
       general.setMinimumSize(new Dimension(345,110));
       general.setPreferredSize(new Dimension(345,110));
       general.setMaximumSize(new Dimension(345,110));
-      frame.add(general);    
-     
+      frame.add(general);         
      
       frame.add(ok_btn); 
+      frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(new JLabel("Attributes marked with a star must be specified."));
       
@@ -235,8 +237,7 @@ public class Font extends Resource implements ActionListener{
       frame.setPreferredSize(new Dimension(355,175));
       frame.setMaximumSize(new Dimension(355,175));
       
-      frame.pack();
-      
+      frame.pack();      
     }
     id_tf.setText(id);
     file_tf.setText(file);
@@ -250,8 +251,7 @@ public class Font extends Resource implements ActionListener{
         String[] ext = { "ttf" , "otf" };
         fc.setFileFilter(new CustomFileFilter(fc,ext,"*.otf/*.ttf (Open and true type fonts) inside the XML file's directory",true,s.skinfolder));
         fc.setCurrentDirectory(new File(s.skinfolder));   
-        fc.setAcceptAllFileFilterUsed(false);
-        
+        fc.setAcceptAllFileFilterUsed(false);        
       }
       int returnVal = fc.showOpenDialog(frame);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -290,6 +290,9 @@ public class Font extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
     }
   }
   public String returnCode() {

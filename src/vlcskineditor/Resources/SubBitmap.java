@@ -43,12 +43,15 @@ public class SubBitmap extends Resource implements ActionListener{
   int nbframes = NBFRAMES_DEFAULT;
   final int FPS_DEFAULT = 0;
   int fps = FPS_DEFAULT;
-  public BufferedImage parent,image; 
+  public BufferedImage image; 
+  private Bitmap parent;
   
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, width_tf, height_tf, nbframes_tf, fps_tf;
-  JButton file_btn, ok_btn, help_btn;
+  JButton file_btn, ok_btn, cancel_btn, help_btn;
   JFileChooser fc;
+  
+  boolean created = false;
   
   /** Creates a new instance of SubBitmap */
   public SubBitmap(String xmlcode, Skin s_) {
@@ -59,8 +62,9 @@ public class SubBitmap extends Resource implements ActionListener{
     y = XML.getIntValue(xmlcode,"y");
     width = XML.getIntValue(xmlcode,"width");
     height = XML.getIntValue(xmlcode,"height");
+    created = true;
   }  
-  public SubBitmap(Skin s_,BufferedImage parent_) {
+  public SubBitmap(Skin s_,Bitmap parent_) {
     s=s_;
     parent=parent_;
     type="Bitmap";
@@ -69,37 +73,30 @@ public class SubBitmap extends Resource implements ActionListener{
     y = 0;
     width = 1;
     height = 1;
-    s.updateResources();
-    showOptions();
+    showOptions();        
   }
   public void update() {
-    image = parent.getSubimage(x,y,width,height);    
-    s.updateResources();    
-    s.expandResource(id);
-  }
-  public void update(BufferedImage parent_) {
-    parent = parent_;
-    update();
-  }
+    image = parent.image.getSubimage(x,y,width,height);        
+  }  
   public void update(String id_, int x_, int y_, int width_, int height_, int nbframes_, int fps_) {    
     x=x_;
     y=y_;
     width=width_;
     height=height_;
     nbframes=nbframes_;
-    fps=fps_;
-    if(!id_.equals(id)) {
-      id=id_;
-      s.updateResources();
-    }
+    fps=fps_;    
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    created = true;
     update();
+    s.updateResources();
+    s.expandResource(id);
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Subbitmap settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the font that will be used with controls..");
@@ -125,6 +122,8 @@ public class SubBitmap extends Resource implements ActionListener{
       fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -178,8 +177,9 @@ public class SubBitmap extends Resource implements ActionListener{
       frame.add(animation);
      
       frame.add(ok_btn); 
+      frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel("Attributes marked with a star must be specified."));
+      frame.add(new JLabel("* must be specified."));
       
       frame.setMinimumSize(new Dimension(355,355));     
       frame.setPreferredSize(new Dimension(355,355));
@@ -195,8 +195,7 @@ public class SubBitmap extends Resource implements ActionListener{
     height_tf.setText(String.valueOf(height));
     nbframes_tf.setText(String.valueOf(nbframes));
     fps_tf.setText(String.valueOf(fps));
-    frame.setVisible(true);
-    
+    frame.setVisible(true);    
   }
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
@@ -235,6 +234,10 @@ public class SubBitmap extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
+      if(!created) parent.SubBitmaps.remove(this);
     }
   }
   public String returnCode() {

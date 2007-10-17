@@ -37,8 +37,8 @@ import java.util.*;
  */
 public class Skin implements ActionListener{
   
-  java.util.List<Resource> resources = new ArrayList<Resource>();
-  java.util.List<Window> windows = new ArrayList<Window>();
+  java.util.List<Resource> resources = new LinkedList<Resource>();
+  java.util.List<Window> windows = new LinkedList<Window>();
   final String HEADER = "<!DOCTYPE Theme PUBLIC \"-//VideoLAN//DTD VLC Skins V2.0//EN\" \"skin.dtd\">";
   final String THEME_VERSION_DEFAULT = "2.0";
   final String THEME_TOOLTIPFONT_DEFAULT = "defaultfont";
@@ -406,8 +406,7 @@ public class Skin implements ActionListener{
           catch(Exception e2) {
             
           }
-        }
-        
+        }        
       }
       else return null;
     }
@@ -576,7 +575,7 @@ public class Skin implements ActionListener{
       System.err.println("Resource of the given id is neither a Font nor a Bitmap its a "+r.type);
       return;
     }   
-    java.util.List<String> parents = new ArrayList<String>();
+    java.util.List<String> parents = new LinkedList<String>();
     
     Resource pr = r;
     while(pr!=null) {
@@ -624,7 +623,7 @@ public class Skin implements ActionListener{
   }  
   /** Make an item of the given id visible in the tree (expand the TreePath) **/
   public void expandItem(String id) {
-    java.util.List<String> parents = new ArrayList<String>();
+    java.util.List<String> parents = new LinkedList<String>();
     Item p = getItem(id);
     if(p==null) return;
     while((p=active_layout.getParentOf(p.id))!=null) {      

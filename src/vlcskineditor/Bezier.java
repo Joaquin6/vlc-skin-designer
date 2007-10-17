@@ -45,18 +45,18 @@ public class Bezier {
   /** number of control points */
   int m_nbCtrlPt;
   /** lists containing the coordinates of the control points */
-  List<Float> m_ptx = new ArrayList<Float>();
-  List<Float> m_pty = new ArrayList<Float>();
+  List<Float> m_ptx = new LinkedList<Float>();
+  List<Float> m_pty = new LinkedList<Float>();
   /** Vector containing precalculated factoriels */
-  List<Float> m_ft = new ArrayList<Float>();
+  List<Float> m_ft = new LinkedList<Float>();
   
   /** Number of points (=pixels) used by the curve */
   int m_nbPoints;
   /** Vectors with the coordinates of the different points of the curve */
-  List<Integer> m_leftVect = new ArrayList<Integer>();
-  List<Integer> m_topVect = new ArrayList<Integer>();
+  List<Integer> m_leftVect = new LinkedList<Integer>();
+  List<Integer> m_topVect = new LinkedList<Integer>();
   /** Vector with the percentages associated with the points of the curve */
-  List<Float> m_percVect = new ArrayList<Float>();
+  List<Float> m_percVect = new LinkedList<Float>();
   
   /** Creates a new instance of Bezier */
   public Bezier(int[] x_,int[] y_, int flag) {

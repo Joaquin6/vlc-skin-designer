@@ -737,7 +737,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         }  
         xmlfis.close();
         tgz.closeEntry();
-        ArrayList<String> files = new ArrayList<String>();
+        java.util.List<String> files = new LinkedList<String>();
         for(int i=0;i<s.resources.size();i++) {
           if(s.resources.get(i).type.equals("Bitmap")) {
             try {
@@ -883,7 +883,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         if(r!=null) {
           if(r.type.equals("Bitmap")) {
             vlcskineditor.Resources.Bitmap b = (vlcskineditor.Resources.Bitmap)r;
-            b.SubBitmaps.add(new vlcskineditor.Resources.SubBitmap(s,b.image));  
+            b.SubBitmaps.add(new vlcskineditor.Resources.SubBitmap(s,b));  
           }
           else {
             JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add sub bitmap",JOptionPane.INFORMATION_MESSAGE);
@@ -1034,6 +1034,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           if(i.type.equals("Panel")) items_add_pu_tp.setEnabled(true);                            
         }         
       }
+      items_add_pu.setSelected(null);
       items_add_pu.show(items_add,0,0);  
     }
     // </editor-fold>

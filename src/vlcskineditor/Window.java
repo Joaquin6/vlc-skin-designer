@@ -50,13 +50,14 @@ public class Window implements ActionListener{
   boolean dragdrop = DRAGDROP_DEFAULT;
   boolean playondrop = PLAYONDROP_DEFAULT;
   
-  java.util.List<Layout> layouts = new ArrayList<Layout>();
+  java.util.List<Layout> layouts = new LinkedList<Layout>();
   
   Skin s;
   
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, visible_tf, dragdrop_tf, playondrop_tf;
-  JButton ok_btn, help_btn;
+  JButton ok_btn, cancel_btn, help_btn;
+  boolean created = false;
   
   public Window(String xmlcode, Skin s_) {
     s = s_;
@@ -87,6 +88,7 @@ public class Window implements ActionListener{
         layoutcode+="\n"+code[i];
       }
     }
+    created = true;
   }
   public Window(Skin s_) {
     s=s_;
@@ -100,14 +102,16 @@ public class Window implements ActionListener{
     visible=v_;
     dragdrop=dd_;
     playondrop=pod_;
-    s.updateWindows();
+    s.updateWindows();    
+    created = true;
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Window settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Name of the window (it may be used for actions). Two windows cannot have the same id.");
@@ -130,6 +134,8 @@ public class Window implements ActionListener{
       playondrop_tf.setToolTipText("Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to \"false\".");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -172,6 +178,7 @@ public class Window implements ActionListener{
       frame.add(options);
       
       frame.add(ok_btn);
+      frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(new JLabel("* required attribute"));
       
@@ -219,6 +226,10 @@ public class Window implements ActionListener{
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
+      if(!created) s.windows.remove(this);
     }
   }
   public void addLayout() {

@@ -33,7 +33,7 @@ import java.util.*;
  */
 public class ActionEditor extends JFrame implements ActionListener{
   
-  java.util.List<ActionPanel> aPanels = new ArrayList<ActionPanel>();  
+  java.util.List<ActionPanel> aPanels = new LinkedList<ActionPanel>();  
   
   public ImageIcon add_icon = createIcon("icons/add.png");
   public ImageIcon delete_icon = createIcon("icons/delete.png");  

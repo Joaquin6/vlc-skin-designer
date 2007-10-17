@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class BooleanExpressionEvaluator {
   
-  List<String> m_stack = new ArrayList<String>();
+  List<String> m_stack = new LinkedList<String>();
   
   
   /** Creates a new instance of BooleanExpressionEvaluator */
@@ -46,7 +46,7 @@ public class BooleanExpressionEvaluator {
     m_stack.clear();   
     
     char[] pString = rExpr.toCharArray();
-    List<String> opStack = new ArrayList<String>(); // operator stack    
+    List<String> opStack = new LinkedList<String>(); // operator stack    
     String token;
     
     // Tokenize the expression

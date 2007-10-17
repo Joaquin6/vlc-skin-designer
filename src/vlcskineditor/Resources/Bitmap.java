@@ -47,12 +47,12 @@ public class Bitmap extends Resource implements ActionListener{
   public int nbframes = NBFRAMES_DEFAULT;
   public final int FPS_DEFAULT = 0;
   public int fps = FPS_DEFAULT;
-  public java.util.List<SubBitmap> SubBitmaps = new ArrayList<SubBitmap>();
+  public java.util.List<SubBitmap> SubBitmaps = new LinkedList<SubBitmap>();
   public BufferedImage image;
   
   JFrame frame = null;
   JTextField id_tf, file_tf, alphacolor_tf, nbframes_tf, fps_tf;
-  JButton file_btn, alphacolor_btn, ok_btn, help_btn;
+  JButton file_btn, alphacolor_btn, ok_btn, cancel_btn, help_btn;
   JFileChooser fc;
   
   
@@ -93,21 +93,16 @@ public class Bitmap extends Resource implements ActionListener{
   }
   public Bitmap(Skin s_, File f_) {
     s = s_;
-    type = "Bitmap";
-    id = f_.getName().substring(0,f_.getName().lastIndexOf("."));
+    type = "Bitmap";    
+    //Gets the relative path to the bitmap file
     file = f_.getPath().replace(s.skinfolder,"");
+    //Sets the bitmap's id according to the pattern subfolder_filename
+    String id_t = file.replaceAll("\\\\","_").replaceAll("/","_").substring(0,file.lastIndexOf("."));
+    if(s.idExists(id_t)) id_t += "_"+s.getNewId();
+    id = id_t;
     s.updateResources();    
     update();
-  }
-  public Bitmap(Skin s_) {
-    s = s_;
-    type = "Bitmap";
-    id = "Unnamed bitmap #"+s.getNewId();
-    file = "";
-    s.updateResources();
-    s.expandResource(id);
-    showOptions();
-  }
+  } 
   public void update() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file));       
@@ -132,7 +127,7 @@ public class Bitmap extends Resource implements ActionListener{
         image = bi;
       }
       for(int i=0;i<SubBitmaps.size();i++) {
-        SubBitmaps.get(i).update(image);
+        SubBitmaps.get(i).update();
       }
     }
     catch(Exception ex) {      
@@ -158,8 +153,7 @@ public class Bitmap extends Resource implements ActionListener{
     if(frame==null) {
       frame = new JFrame("Bitmap settings");
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      frame.setLayout(new FlowLayout());      
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the bitmap that will be used with controls. Two bitmaps cannot have the same id.");
@@ -183,6 +177,8 @@ public class Bitmap extends Resource implements ActionListener{
       fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      cancel_btn = new JButton("Cancel");
+      cancel_btn.addActionListener(this);
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
       
@@ -225,6 +221,7 @@ public class Bitmap extends Resource implements ActionListener{
       frame.add(animation);
      
       frame.add(ok_btn); 
+      frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(new JLabel("Attributes marked with a star must be specified."));
       
@@ -306,6 +303,9 @@ public class Bitmap extends Resource implements ActionListener{
       else {
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
+    }
+    else if(e.getSource().equals(cancel_btn)) {
+      frame.setVisible(false);
     }
   }
   public String returnCode() {

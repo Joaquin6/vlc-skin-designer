@@ -37,7 +37,7 @@ import javax.swing.border.*;
 public class Panel extends Item implements ActionListener{
   
   /** The items contained in the panel */
-  public java.util.List<Item> items = new ArrayList<Item>();
+  public java.util.List<Item> items = new LinkedList<Item>();
   
   int width, height;
   

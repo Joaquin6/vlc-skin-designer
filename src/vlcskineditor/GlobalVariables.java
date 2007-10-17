@@ -131,7 +131,7 @@ public class GlobalVariables implements ActionListener{
     //Now all expressions that VLC Skin Editor supports are replaced by true or false
     //The remaining expressions like WindowID.isVisible are automatically resolved to false
     
-    List<Boolean> varStack = new ArrayList<Boolean>();
+    List<Boolean> varStack = new LinkedList<Boolean>();
     
     // Convert the expression into Reverse Polish Notation
     BooleanExpressionEvaluator evaluator = new BooleanExpressionEvaluator();

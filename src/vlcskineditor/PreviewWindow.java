@@ -62,7 +62,11 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     fu=null;
   }
   public void setLayout(Window w_, Layout l_) {
-    l=l_;
+    if(l_==null) {
+      clearLayout();
+      return;
+    }
+    l=l_;    
     //Somehow there are always added 4 pixels to the actual height of the layout
     setPreferredSize(new Dimension(l.width,l.height-4));
     setMinimumSize(new Dimension(l.width,l.height-4));
