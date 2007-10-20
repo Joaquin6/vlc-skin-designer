@@ -93,7 +93,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
-  JFileChooser fc, bitmap_adder, font_adder, vlt_saver;
+  JFileChooser base_fc, bitmap_adder, font_adder, vlt_saver;
   PreviewWindow pvwin;
   public boolean saved = false;
   boolean opening = false;  
@@ -525,8 +525,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     
     
-    fc = new JFileChooser();    
-    fc.setCurrentDirectory(new File(vlc_skins_dir));
+    base_fc = new JFileChooser();    
+    base_fc.setCurrentDirectory(new File(vlc_skins_dir));
     
     setVisible(true);       
     setSize(800,600);
@@ -547,10 +547,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void openFile() {
     opening = true;
     String[] exts = { "xml","vlt" };
-    fc.setFileFilter(new CustomFileFilter(fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
-    int returnVal = fc.showOpenDialog(this);
+    base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
+    int returnVal = base_fc.showOpenDialog(this);
     if(returnVal == JFileChooser.APPROVE_OPTION) {      
-      File f = fc.getSelectedFile();
+      File f = base_fc.getSelectedFile();
       ProgressWindow pwin = new ProgressWindow(this,"");  
       if(f.toString().toLowerCase().endsWith(".vlt")) {
         String vltname = f.getName().replaceAll(".vlt","");
@@ -629,7 +629,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           opening=false;
           return;
         }
-        if(f==fc.getSelectedFile()) {
+        if(f==base_fc.getSelectedFile()) {
           pwin.setVisible(false);
           JOptionPane.showMessageDialog(this,"Could not find \"theme.xml\" inside the unpacked contents of the VLT file\n" +
           "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
@@ -653,10 +653,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
   }
   public void createNew() {
-      fc.setFileFilter(new CustomFileFilter(fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
-      int returnVal=fc.showSaveDialog(this);        
+      base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
+      int returnVal=base_fc.showSaveDialog(this);        
       if(returnVal != JFileChooser.APPROVE_OPTION) return;      
-      File f = fc.getSelectedFile();
+      File f = base_fc.getSelectedFile();
       if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
       setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
       s.createNew(f);                  
@@ -670,20 +670,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void actionPerformed(ActionEvent e) {
     // <editor-fold defaultstate="collapsed" desc="New File"> 
     if(e.getSource().equals(m_file_new)) {
-      s = new Skin(this);
-      int returnVal = JFileChooser.CANCEL_OPTION;;
-      while (returnVal != JFileChooser.APPROVE_OPTION) {
-        returnVal=fc.showSaveDialog(this);        
-      } 
-      File f = fc.getSelectedFile();
-      if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
-      setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
-      s.createNew(f);             
-      selected_resource = null;
-      selected_in_windows = null;
-      selected_window = null;
-      selected_item = null;
-      saved=false;
+      createNew();
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Open File"> 
@@ -851,7 +838,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             "Released under terms of the GPL 2+\n\n" +
             "Credits:\n" +
             "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (Public Domain)\n" +
-            "The Tango! Desktop Project (http:0//tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\n" +
+            "The Tango! Desktop Project (http://tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\n" +
             "The VideoLAN Team for the Boolean Expression Evaluator and Bezier code (GPL 2+)",
             "About VLC Skin Editor", JOptionPane.INFORMATION_MESSAGE,icon);
     }

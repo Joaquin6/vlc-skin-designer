@@ -76,7 +76,7 @@ public class SubBitmap extends Resource implements ActionListener{
     showOptions();        
   }
   public void update() {
-    image = parent.image.getSubimage(x,y,width,height);        
+    if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);        
   }  
   public void update(String id_, int x_, int y_, int width_, int height_, int nbframes_, int fps_) {    
     x=x_;
@@ -122,10 +122,13 @@ public class SubBitmap extends Resource implements ActionListener{
       fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
+      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
+      help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel general = new JPanel(null);
       general.add(id_l);

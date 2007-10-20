@@ -134,10 +134,13 @@ public class Window implements ActionListener{
       playondrop_tf.setToolTipText("Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to \"false\".");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
+      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
+      help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel general = new JPanel(null);
       general.add(id_l);

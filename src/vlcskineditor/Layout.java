@@ -198,10 +198,13 @@ public class Layout implements ActionListener{
       maxheight_tf.setToolTipText("Maximum height of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as maximum width.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
+      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
+      help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel general = new JPanel(null);
       general.add(id_l);

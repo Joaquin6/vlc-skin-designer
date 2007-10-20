@@ -201,10 +201,13 @@ public class Font extends Resource implements ActionListener{
       size_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
+      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
+      help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel general = new JPanel(null);
       general.add(id_l);

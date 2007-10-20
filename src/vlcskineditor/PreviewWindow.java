@@ -156,6 +156,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     try {
       selected_item.x+=x;
       selected_item.y+=y;
+      repaint();
     }
     catch (NullPointerException ex) {
       /* empty */

@@ -1,3 +1,4 @@
+rd /S /Q build
 md build
 cd src
 javac -d ../build vlcskineditor/Main.java

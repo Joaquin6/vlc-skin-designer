@@ -123,7 +123,7 @@ public class Bitmap extends Resource implements ActionListener{
               g2d.drawRect(x,y,0,0);
             } 
             else if(alpha>0) {
-              g2d.setColor(Color.BLACK);
+              g2d.setColor(new Color(red,green,blue));
               g2d.drawRect(x,y,0,0);
             }
           }        
@@ -181,10 +181,14 @@ public class Bitmap extends Resource implements ActionListener{
       fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
+      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
+      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
+      help_btn.setPreferredSize(new Dimension(70,25));
+      
       
       JPanel general = new JPanel(null);
       general.add(id_l);

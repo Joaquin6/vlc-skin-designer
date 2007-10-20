@@ -68,7 +68,7 @@ public class Skin implements ActionListener{
   JFrame theme_frame;
   JTextField themeinfo_name_tf, themeinfo_author_tf, themeinfo_email_tf, themeinfo_webpage_tf;
   JTextField theme_magnet_tf, theme_alpha_tf, theme_movealpha_tf;
-  JButton theme_ok_btn, theme_help_btn;
+  JButton theme_ok_btn, theme_cancel_btn, theme_help_btn;
   
   public GlobalVariables gvars = new GlobalVariables();
   
@@ -253,8 +253,13 @@ public class Skin implements ActionListener{
       theme_alpha_tf.setToolTipText("Sets the alpha transparency of the windows when they are moved.");
       theme_ok_btn = new JButton("OK");
       theme_ok_btn.addActionListener(this);
+      theme_ok_btn.setPreferredSize(new Dimension(70,25));
+      theme_cancel_btn = new JButton("Cancel");
+      theme_cancel_btn.addActionListener(this);
+      theme_cancel_btn.setPreferredSize(new Dimension(70,25));
       theme_help_btn = new JButton("Help");
       theme_help_btn.addActionListener(this);
+      theme_help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel themeinfo_p = new JPanel(null);
       themeinfo_p.add(themeinfo_name_l);
@@ -299,6 +304,7 @@ public class Skin implements ActionListener{
       
       theme_frame.add(theme_p);
       theme_frame.add(theme_ok_btn);
+      theme_frame.add(theme_cancel_btn);
       theme_frame.add(theme_help_btn);
       
       theme_frame.setMinimumSize(new Dimension(325,330));
@@ -350,6 +356,7 @@ public class Skin implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
+    else if(e.getSource().equals(theme_cancel_btn)) theme_frame.setVisible(false);
   }
   /** Generates a new number for unnamed items so that every id is unique **/  
   public int getNewId() {
