@@ -1,3 +1,2 @@
-#!/bin/sh
+#! /bin/sh
 java -jar VLCSkinEditor.jar
-
