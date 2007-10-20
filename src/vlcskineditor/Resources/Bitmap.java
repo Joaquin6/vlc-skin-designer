@@ -121,7 +121,11 @@ public class Bitmap extends Resource implements ActionListener{
             if(image.getRGB(x,y)!=alphargb && alpha>=255) {
               g2d.setColor(new Color(image.getRGB(x,y)));
               g2d.drawRect(x,y,0,0);
-            }             
+            } 
+            else if(alpha>0) {
+              g2d.setColor(Color.BLACK);
+              g2d.drawRect(x,y,0,0);
+            }
           }        
         }
         image = bi;
@@ -310,7 +314,7 @@ public class Bitmap extends Resource implements ActionListener{
   }
   public String returnCode() {
     String code = "<Bitmap id=\""+id+"\" file=\""+file+"\"";
-    if (alphacolor!=ALPHACOLOR_DEFAULT) code+=" alphacolor=\""+alphacolor+"\"";
+    code+=" alphacolor=\""+alphacolor+"\"";
     if (nbframes!=NBFRAMES_DEFAULT) code+=" nbframes=\""+String.valueOf(nbframes)+"\"";
     if (fps!=FPS_DEFAULT) code+=" fps=\""+String.valueOf(fps)+"\"";    
     if(SubBitmaps.size()>0) {
