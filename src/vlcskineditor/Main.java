@@ -99,7 +99,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   boolean opening = false;  
   
   /** Launches the skin editor and initializes GUI and Skin DOM*/
-  public Main() {
+  public Main(String[] args) {
     setTitle("New skin - VLC Skin Editor "+VERSION);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
     addWindowListener(this);
@@ -531,6 +531,16 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     setVisible(true);       
     setSize(800,600);
     
+    if(args.length>0) {
+      File f = new File(args[0]);
+      if (f.exists()) openFile(f);
+      else {
+       
+      }
+    }
+    else showWelcomeDialog();
+  }
+  public void showWelcomeDialog() {
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
     int n = JOptionPane.showOptionDialog(this,"What would you like to do?","Welcome to the VLC Skin Editor",
                                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -550,121 +560,137 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
     int returnVal = base_fc.showOpenDialog(this);
     if(returnVal == JFileChooser.APPROVE_OPTION) {      
-      File f = base_fc.getSelectedFile();
-      ProgressWindow pwin = new ProgressWindow(this,"");  
-      if(f.toString().toLowerCase().endsWith(".vlt")) {
-        String vltname = f.getName().replaceAll(".vlt","");
-        Object[] options= {"Yes, unpack", "No, cancel"};
-        int n = JOptionPane.showOptionDialog(this,"The VLT file will be unpacked to a subfolder called \""+vltname+"_unpacked\".\nDo you want to continue?","Importing a VLT file",
-                           JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-        if(n!=0) return;
-        File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
-        unpackfolder.mkdirs();
-        boolean unpacked=false;
-        pwin.setText("Unpacking VLT file...");      
-        pwin.setVisible(true);        
-        // <editor-fold defaultstate="collapsed" desc="zip">
-        try {          
-          ZipFile zip = new ZipFile(f);         
-          Enumeration entries = zip.entries();
-          while(entries.hasMoreElements()) {            
-            ZipEntry ze = (ZipEntry)entries.nextElement();
-            File zef = new File(unpackfolder,ze.getName());
-            if(ze.getName().endsWith("theme.xml")) f=zef;
-            if(ze.isDirectory()) zef.mkdirs();
-            else {                
-              InputStream zeis = zip.getInputStream(ze);
-              BufferedInputStream zebis = new BufferedInputStream(zeis);              
-              zef.getParentFile().mkdirs();
-              FileOutputStream fos = new FileOutputStream(zef);
+      openFile(base_fc.getSelectedFile());
+    }
+    else {
+      showWelcomeDialog();
+    }
+    opening = false;
+  }
+  public void openFile(File f) {
+    if(!f.exists()) {
+      JOptionPane.showMessageDialog(this,"The file \""+f.getPath()+"\" does not exist and thus could not be opened!","Error while opening file",JOptionPane.ERROR_MESSAGE);
+      showWelcomeDialog();
+      return;
+    }
+    opening = true;    
+    ProgressWindow pwin = new ProgressWindow(this,"");  
+    if(f.toString().toLowerCase().endsWith(".vlt")) {
+      String vltname = f.getName().replaceAll(".vlt","");
+      Object[] options= {"Yes, unpack", "No, cancel"};
+      int n = JOptionPane.showOptionDialog(this,"The VLT file will be unpacked to a subfolder called \""+vltname+"_unpacked\".\nDo you want to continue?","Importing a VLT file",
+                         JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+      if(n!=0) return;
+      File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
+      unpackfolder.mkdirs();
+      boolean unpacked=false;
+      pwin.setText("Unpacking VLT file...");      
+      pwin.setVisible(true);        
+      // <editor-fold defaultstate="collapsed" desc="zip">
+      try {          
+        ZipFile zip = new ZipFile(f);         
+        Enumeration entries = zip.entries();
+        while(entries.hasMoreElements()) {            
+          ZipEntry ze = (ZipEntry)entries.nextElement();
+          File zef = new File(unpackfolder,ze.getName());
+          if(ze.getName().endsWith("theme.xml")) f=zef;
+          if(ze.isDirectory()) zef.mkdirs();
+          else {                
+            InputStream zeis = zip.getInputStream(ze);
+            BufferedInputStream zebis = new BufferedInputStream(zeis);              
+            zef.getParentFile().mkdirs();
+            FileOutputStream fos = new FileOutputStream(zef);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            for(int b=0;(b=zebis.read())!=-1;) bos.write((byte)b);
+            bos.close();
+            fos.close();
+            zebis.close();
+            zeis.close();
+          }
+        }
+        unpacked=true;
+      }
+      catch (IOException ex2) {
+        ex2.printStackTrace();                    
+      }      
+      // </editor-fold>
+      // <editor-fold defaultstate="collapsed" desc="tar.gz">
+      if(!unpacked) {
+
+        try {
+          FileInputStream fis = new FileInputStream(f);
+          GZIPInputStream gzis = new GZIPInputStream(fis);
+          //BufferedInputStream bis = new BufferedInputStream(gzis);
+          TarInputStream tis = new TarInputStream(gzis);                   
+          for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {              
+            File tef = new File(unpackfolder,te.getName());
+            if(te.getName().endsWith("theme.xml")) f=tef;
+            if(te.isDirectory()) tef.mkdirs();
+            else {                                
+              BufferedInputStream tebis = new BufferedInputStream(tis);                
+              tef.getParentFile().mkdirs();
+              FileOutputStream fos = new FileOutputStream(tef);
               BufferedOutputStream bos = new BufferedOutputStream(fos);
-              for(int b=0;(b=zebis.read())!=-1;) bos.write((byte)b);
+              for(int b=0;(b=tebis.read())!=-1;) bos.write((byte)b);
               bos.close();
-              fos.close();
-              zebis.close();
-              zeis.close();
+              fos.close();                              
             }
           }
+          tis.close();
+          gzis.close();
+          fis.close();
           unpacked=true;
         }
-        catch (IOException ex2) {
-          ex2.printStackTrace();                    
-        }      
-        // </editor-fold>
-        // <editor-fold defaultstate="collapsed" desc="tar.gz">
-        if(!unpacked) {
-          
-          try {
-            FileInputStream fis = new FileInputStream(f);
-            GZIPInputStream gzis = new GZIPInputStream(fis);
-            //BufferedInputStream bis = new BufferedInputStream(gzis);
-            TarInputStream tis = new TarInputStream(gzis);                   
-            for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {              
-              File tef = new File(unpackfolder,te.getName());
-              if(te.getName().endsWith("theme.xml")) f=tef;
-              if(te.isDirectory()) tef.mkdirs();
-              else {                                
-                BufferedInputStream tebis = new BufferedInputStream(tis);                
-                tef.getParentFile().mkdirs();
-                FileOutputStream fos = new FileOutputStream(tef);
-                BufferedOutputStream bos = new BufferedOutputStream(fos);
-                for(int b=0;(b=tebis.read())!=-1;) bos.write((byte)b);
-                bos.close();
-                fos.close();                              
-              }
-            }
-            tis.close();
-            gzis.close();
-            fis.close();
-            unpacked=true;
-          }
-          catch(IOException ex) {
-            ex.printStackTrace();
-          }
-        }        
-        //</editor-fold>
-        if(!unpacked) {
-          pwin.setVisible(false);
-          JOptionPane.showMessageDialog(this,"VLT file could not be unpacked!","Could not unpack VLT file",JOptionPane.ERROR_MESSAGE);
-          opening=false;
-          return;
+        catch(IOException ex) {
+          ex.printStackTrace();
         }
-        if(f==base_fc.getSelectedFile()) {
-          pwin.setVisible(false);
-          JOptionPane.showMessageDialog(this,"Could not find \"theme.xml\" inside the unpacked contents of the VLT file\n" +
-          "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
-          opening=false;
-          return;
-        }
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-      }     
-      pwin.setText("Parsing XML...");
-      pwin.setVisible(true);
-      setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      
-      pvwin.clearLayout();
-      s.open(f);                  
-      selected_resource = null;
-      selected_in_windows = null;
-      selected_window = null;
-      selected_item = null;
-      saved = true;      
-      opening = false;
-      pwin.setVisible(false);
-    }
+      }        
+      //</editor-fold>
+      if(!unpacked) {
+        pwin.setVisible(false);
+        JOptionPane.showMessageDialog(this,"VLT file could not be unpacked!","Could not unpack VLT file",JOptionPane.ERROR_MESSAGE);
+        opening=false;
+        return;
+      }
+      if(f==base_fc.getSelectedFile()) {
+        pwin.setVisible(false);
+        JOptionPane.showMessageDialog(this,"Could not find \"theme.xml\" inside the unpacked contents of the VLT file\n" +
+        "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
+        opening=false;
+        return;
+      }
+      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }     
+    pwin.setText("Parsing XML...");
+    pwin.setVisible(true);
+    setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      
+    pvwin.clearLayout();
+    s.open(f);                  
+    selected_resource = null;
+    selected_in_windows = null;
+    selected_window = null;
+    selected_item = null;
+    saved = true;      
+    opening = false;
+    pwin.setVisible(false);    
   }
   public void createNew() {
       base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
       int returnVal=base_fc.showSaveDialog(this);        
-      if(returnVal != JFileChooser.APPROVE_OPTION) return;      
-      File f = base_fc.getSelectedFile();
-      if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
-      setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
-      s.createNew(f);                  
-      selected_resource = null;
-      selected_in_windows = null;
-      selected_window = null;
-      selected_item = null;
-      saved=false;
+      if(returnVal != JFileChooser.APPROVE_OPTION) {
+        showWelcomeDialog();        
+      }
+      else {
+        File f = base_fc.getSelectedFile();
+        if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
+        setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
+        s.createNew(f);                  
+        selected_resource = null;
+        selected_in_windows = null;
+        selected_window = null;
+        selected_item = null;
+        saved=false;
+      }
   }
   /** Reacts to GUI actions */
   public void actionPerformed(ActionEvent e) {
@@ -1297,6 +1323,6 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       
     }
     JFrame.setDefaultLookAndFeelDecorated(true);
-    new Main();      
+    new Main(args);      
   }
 }
