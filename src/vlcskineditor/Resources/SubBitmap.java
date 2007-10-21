@@ -85,11 +85,12 @@ public class SubBitmap extends Resource implements ActionListener{
     height=height_;
     nbframes=nbframes_;
     fps=fps_;    
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
     update();
     s.updateResources();
-    s.expandResource(id);
+    if(created) s.expandResource(id);
+    else s.expandResource(parent.id);
+    created = true;
   }
   public void showOptions() {
     if(frame==null) {
