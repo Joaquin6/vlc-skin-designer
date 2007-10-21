@@ -79,6 +79,7 @@ public class SubBitmap extends Resource implements ActionListener{
     if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);        
   }  
   public void update(String id_, int x_, int y_, int width_, int height_, int nbframes_, int fps_) {    
+    id=id_;
     x=x_;
     y=y_;
     width=width_;
@@ -88,8 +89,7 @@ public class SubBitmap extends Resource implements ActionListener{
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
     update();
     s.updateResources();
-    if(created) s.expandResource(id);
-    else s.expandResource(parent.id);
+    s.expandResource(id);
     created = true;
   }
   public void showOptions() {

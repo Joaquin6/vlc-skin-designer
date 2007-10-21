@@ -581,30 +581,23 @@ public class Skin implements ActionListener{
     else {
       System.err.println("Resource of the given id is neither a Font nor a Bitmap its a "+r.type);
       return;
-    }   
-    java.util.List<String> parents = new LinkedList<String>();
+    }     
     
     Resource pr = r;
-    while(pr!=null) {
-      for(Resource res:resources) {
-        pr = res.getParentOf(r.id);
-        if(pr!=null) {
-          parents.add(pr.id);
-          break;
-        }        
+    for(Resource res:resources) {
+      if(res.getParentOf(id)!=null) {
+        TreePath tp = findInTree(m.res_tree,res.id);
+        if(tp==null) {
+          System.err.println("Could not find Parent: "+res.id);
+          return;
+        }
+        m.res_tree.expandPath(tp);
+        TreePath stp = findInTree(m.res_tree,id);
+        if(stp==null) return;
+        m.res_tree.setSelectionPath(stp);
+        break;
       }
     }
-    for(int i=parents.size()-1;i>=0;i--) {      
-      TreePath tp = findInTree(m.res_tree,parents.get(i));
-      if(tp==null) {
-        System.err.println("Could not find Parent: "+parents.get(i));
-        return;
-      }
-      m.res_tree.expandPath(tp);
-      TreePath stp = findInTree(m.res_tree,id);
-      if(stp==null) return;
-      m.res_tree.setSelectionPath(stp);
-    }    
   }
   /** Make a Layout of the given id visible **/
   public void expandLayout(String id) {       
