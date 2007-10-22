@@ -103,7 +103,7 @@ public class Playtree extends Item implements ActionListener{
     if(xmllines[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmllines[0],"lefttop");
     if(xmllines[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmllines[0],"rightbottom");
     if(xmllines[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"xkeepratio");
-    if(xmllines[0].indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"ykeepratio");
+    if(xmllines[0].indexOf("ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmllines[0],"ykeepratio");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     
     int i=1;

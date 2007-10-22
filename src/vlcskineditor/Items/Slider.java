@@ -86,7 +86,7 @@ public class Slider extends Item implements ActionListener{
     if(code[0].indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
     if(code[0].indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
     if(code[0].indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
-    if(code[0].indexOf(" ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"ykeepratio");
+    if(code[0].indexOf(" ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(code[0],"ykeepratio");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     if(code.length>1) {
       for(int i=0;i<code.length;i++) {
