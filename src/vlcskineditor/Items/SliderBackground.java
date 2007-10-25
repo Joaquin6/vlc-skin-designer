@@ -237,7 +237,9 @@ public class SliderBackground extends Item implements ActionListener{
     draw(g,0,0);
   }
   public void draw(Graphics2D g, int x_, int y_) {
+    if(!created) return;
     bi = (BufferedImage)s.getBitmapImage(image);  
+    if(bi==null) return;
     int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
     int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;
     float f = s.gvars.getSliderValue();

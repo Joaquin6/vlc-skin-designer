@@ -99,6 +99,7 @@ public class Window implements ActionListener{
   public void update(String id_, int x_, int y_, String v_, boolean dd_, boolean pod_) {
     id=id_;
     x=x_;
+    y=y_;
     visible=v_;
     dragdrop=dd_;
     playondrop=pod_;

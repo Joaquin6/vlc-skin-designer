@@ -241,7 +241,7 @@ public class Slider extends Item implements ActionListener{
         value_cb = new JComboBox(values);
       }
       else {
-        String[] values = { "time" , "volume", "equalizer.band(0)", "equalizer.band(1)", "equalizer.band(2)", "equalizer.band(3)", "equalizer.band(4)", "equalizer.band(5)", "equalizer.band(6)",  "equalizer.band(7)",  "equalizer.band(8)",  "equalizer.band(9)"};
+        String[] values = { "time" , "volume", "equalizer.preamp", "equalizer.band(0)", "equalizer.band(1)", "equalizer.band(2)", "equalizer.band(3)", "equalizer.band(4)", "equalizer.band(5)", "equalizer.band(6)",  "equalizer.band(7)",  "equalizer.band(8)",  "equalizer.band(9)"};
         value_cb = new JComboBox(values);
       }      
       JLabel tooltiptext_l = new JLabel("Tooltiptext:");
