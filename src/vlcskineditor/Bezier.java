@@ -30,7 +30,7 @@ import java.util.*;
  * @author Daniel Dreibrodt
  * Conversion of VLC /trunk/modules/gui/skins2/utils/bezier.cpp
  * original authors: Cyril Deguet     <asmax@via.ecp.fr>
- *                   Olivier Teulière <ipkiss@via.ecp.fr>
+ *                   Olivier TeuliÃ©re <ipkiss@via.ecp.fr>
  */
 public class Bezier {
   
