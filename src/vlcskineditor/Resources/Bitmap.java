@@ -76,7 +76,7 @@ public class Bitmap extends Resource implements ActionListener{
     if (xmlcode.indexOf("\n")!=-1) {
       String[] lines = xmlcode.split("\n");
       for(int i=1;i<lines.length-1;i++) {
-        if(lines[i].startsWith("<SubBitmap")) SubBitmaps.add(new SubBitmap(lines[i],s));
+        if(lines[i].startsWith("<SubBitmap")) SubBitmaps.add(new SubBitmap(lines[i],s,this));
       }
     }    
     update();

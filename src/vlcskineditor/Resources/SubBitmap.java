@@ -54,8 +54,9 @@ public class SubBitmap extends Resource implements ActionListener{
   boolean created = false;
   
   /** Creates a new instance of SubBitmap */
-  public SubBitmap(String xmlcode, Skin s_) {
+  public SubBitmap(String xmlcode, Skin s_, Bitmap parent_) {
     type="Bitmap";
+    parent=parent_;
     s=s_;
     id = XML.getValue(xmlcode,"id");
     x = XML.getIntValue(xmlcode,"x");
