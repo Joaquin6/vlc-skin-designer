@@ -682,7 +682,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
       else {
         File f = base_fc.getSelectedFile();
-        if(!f.getPath().endsWith(".xml")) f = new File(f.getPath()+".xml");
+        if(!f.getPath().toLowerCase().endsWith(".xml")) f = new File(f.getPath()+".xml");
         setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
         s.createNew(f);                  
         selected_resource = null;
@@ -735,8 +735,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       File f = null;
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         f = vlt_saver.getSelectedFile();
+        if(!f.getPath().toLowerCase().endsWith(".vlt")) f = new File(f.getPath()+".vlt");
       }      
       else return;
+      ProgressWindow pwin = new ProgressWindow(this,"");  
+      pwin.setText("Creating VLT archive...");
+      pwin.setVisible(true);
       try {        
         TarGzOutputStream tgz = new TarGzOutputStream(new FileOutputStream(f));
         TarEntry sf = new TarEntry(s.skinfile);
@@ -771,6 +775,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             }
             catch (IOException ex) {
               ex.printStackTrace();
+              pwin.setVisible(false);
               JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
             }       
             catch (Exception ex){}
@@ -792,18 +797,21 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                 files.add(fn);
               }
             }
-            catch (IOException ex) {
+            catch (IOException ex) {              
               ex.printStackTrace();
+              pwin.setVisible(false);
               JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
             }
           }
         }   
         
         tgz.close();
+        pwin.setVisible(false);
         JOptionPane.showMessageDialog(this,"VLT file created successfully!","VLT file created",JOptionPane.INFORMATION_MESSAGE);        
       }
-      catch (Exception ex) {
+      catch (Exception ex) {        
         ex.printStackTrace();
+        pwin.setVisible(false);
         JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);        
         return;
       }   

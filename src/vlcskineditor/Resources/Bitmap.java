@@ -122,7 +122,7 @@ public class Bitmap extends Resource implements ActionListener{
               g2d.setColor(new Color(image.getRGB(x,y)));
               g2d.drawRect(x,y,0,0);
             } 
-            else if(alpha>0) {
+            else if(image.getRGB(x,y)!=alphargb && alpha>0) {
               g2d.setColor(new Color(red,green,blue));
               g2d.drawRect(x,y,0,0);
             }
