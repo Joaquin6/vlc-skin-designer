@@ -26,12 +26,12 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * ProgressWindow
+ * A window displaying a progress bar running back and forth.
  * @author Daniel Dreibrodt
  */
 public class ProgressWindow extends JDialog{
   
-    float position = 0;
+  float position = 0;
   String title = "...";
   JProgressBar pbar;
   
@@ -47,6 +47,7 @@ public class ProgressWindow extends JDialog{
     pbar.setStringPainted(true);
     pbar.setIndeterminate(true);
   }  
+  /** Sets the text displayed on the progress bar */
   public void setText(String s) {
     pbar.setString(s);
   }

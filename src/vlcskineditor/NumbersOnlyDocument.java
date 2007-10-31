@@ -27,6 +27,7 @@ import javax.swing.text.*;
 /**
  * NumbersOnlyDocument
  * allows only numbers to be entered into a component
+ * @see javax.swing.text.Document
  * @author Daniel Dreibrodt
  */
 public class NumbersOnlyDocument extends PlainDocument{
@@ -37,12 +38,14 @@ public class NumbersOnlyDocument extends PlainDocument{
   public NumbersOnlyDocument() {
     super();
   }
-  /** Creates a new instance of NumbersOnlyDocument that allows only positive numbers if [pre]negative[/pre] is false**/
+  /**
+   * Creates a new instance of NumbersOnlyDocument that allows only positive numbers if <pre>negative</pre> is false*
+   */
   public NumbersOnlyDocument(boolean negative) {
     super();
     allow_negative = negative;
   }  
-  /** Does nothing if [pre]str[/pre] is not a digit or a dash, otherwise calls the super function **/
+  /** Does nothing if <pre>str</pre> is not a digit or a dash, otherwise calls the super function **/
   public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
     if(str.matches("[-]") && allow_negative) {
       if(offset>0) return;

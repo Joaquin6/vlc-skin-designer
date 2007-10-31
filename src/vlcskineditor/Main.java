@@ -45,6 +45,9 @@ import com.ice.jni.registry.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
+  /**
+   * The version identification of the current build.
+   */
   public final String VERSION = "0.6.0a";
   String vlc_dir = "";
   String vlc_skins_dir = "";
@@ -82,6 +85,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public ImageIcon up_icon = createIcon("icons/move_up.png");
   public ImageIcon down_icon = createIcon("icons/move_down.png");
   public ImageIcon help_icon = createIcon("icons/help.png");
+  //The VLC Skin Editor icon.
   public ImageIcon icon = createIcon("icons/icon.png");  
   public ImageIcon open_icon = createIcon("icons/open.png");
   public ImageIcon save_icon = createIcon("icons/save.png");
@@ -95,10 +99,18 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   JFileChooser base_fc, bitmap_adder, font_adder, vlt_saver;
   PreviewWindow pvwin;
+  //Specifies whether changes were made without having saved the skin.  
   public boolean saved = false;
+  //Specifies whether a file is currently being opened
   boolean opening = false;  
+  //Specifies if a file was opened
+  boolean opened = false;
   
-  /** Launches the skin editor and initializes GUI and Skin DOM*/
+  /**
+   * Launches the skin editor and initializes the GUI.
+   * @param args Command line arguments passed by the console.
+   * If there exist one or more arguments, the first argument is intepreted as a file locator for a skin to be loaded.
+   */
   public Main(String[] args) {
     setTitle("New skin - VLC Skin Editor "+VERSION);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
@@ -540,6 +552,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     else showWelcomeDialog();
   }
+  /**
+   * Shows a dialog from which the user can choose to either create a new skin, open an existing skin or quit the skin editor.
+   */
   public void showWelcomeDialog() {
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
     int n = JOptionPane.showOptionDialog(this,"What would you like to do?","Welcome to the VLC Skin Editor",
@@ -554,6 +569,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       System.exit(0);
     } 
   }
+  /**
+   * Shows the "Open File" dialog.
+   */
   public void openFile() {
     opening = true;
     String[] exts = { "xml","vlt" };
@@ -561,16 +579,21 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     int returnVal = base_fc.showOpenDialog(this);
     if(returnVal == JFileChooser.APPROVE_OPTION) {      
       openFile(base_fc.getSelectedFile());
+      opening = false;
     }
     else {
-      showWelcomeDialog();
+      opening = false;
+      if(!opened) showWelcomeDialog();
     }
-    opening = false;
   }
+  /**
+   * Opens the given file as a skin.
+   * @param f The skin file.
+   */
   public void openFile(File f) {
     if(!f.exists()) {
       JOptionPane.showMessageDialog(this,"The file \""+f.getPath()+"\" does not exist and thus could not be opened!","Error while opening file",JOptionPane.ERROR_MESSAGE);
-      showWelcomeDialog();
+      if(!opened) showWelcomeDialog();
       return;
     }
     opening = true;    
@@ -672,13 +695,17 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     selected_item = null;
     saved = true;      
     opening = false;
+    opened = true;
     pwin.setVisible(false);    
   }
+  /**
+   * Shows a dialog to specify the new skin's location and creates an empty skin.
+   */
   public void createNew() {
       base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
       int returnVal=base_fc.showSaveDialog(this);        
       if(returnVal != JFileChooser.APPROVE_OPTION) {
-        showWelcomeDialog();        
+        if(!opened) showWelcomeDialog();     
       }
       else {
         File f = base_fc.getSelectedFile();
@@ -689,10 +716,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         selected_in_windows = null;
         selected_window = null;
         selected_item = null;
-        saved=false;
+        saved = false;
+        opened = true;
       }
   }
-  /** Reacts to GUI actions */
+  /**
+   * Reacts to GUI actions
+   */
   public void actionPerformed(ActionEvent e) {
     // <editor-fold defaultstate="collapsed" desc="New File"> 
     if(e.getSource().equals(m_file_new)) {
@@ -1206,7 +1236,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
   }
   
-  /** Reacts to tree selections */
+  /**
+   * Reacts to tree selections
+   */
   public void valueChanged(TreeSelectionEvent e) {    
     if(opening) return;
     if(e.getSource().equals(res_tree)) {
@@ -1305,8 +1337,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void mouseExited(MouseEvent e) {}
   /**
    * Creates an ImageIcon of an image included in the JAR
-   * @param filename  The path to the image file inside the JAR
-   * @return         An ImageIcon representing the given file
+   * @param filename The path to the image file inside the JAR
+   * @return An ImageIcon representing the given file
    */
   public ImageIcon createIcon(String filename) {
       java.awt.Image img = null;

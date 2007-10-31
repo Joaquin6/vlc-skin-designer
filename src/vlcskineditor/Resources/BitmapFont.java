@@ -28,8 +28,8 @@ import javax.swing.tree.*;
 
 /**
  * Represents a BitmapFont
- * <i>This class exists only to show BitmapFonts in the resources tree,
- * you can't create a new BitmapFont in the editor nor are they displayed in the preview!</i>
+ * <i>This class exists only to show BitmapFonts in the resources tree.
+ * You can't create or edit a BitmapFont in the editor nor are they displayed in the preview!</i>
  * @author Daniel Dreibrodt
  */
 public class BitmapFont extends Resource{
@@ -45,6 +45,9 @@ public class BitmapFont extends Resource{
     if(xmlcode.indexOf("type=\"")!=-1) {
       type = XML.getValue(xmlcode,"type");
     }
+  }
+  public void update() {
+    
   }
   public void showOptions() {
     

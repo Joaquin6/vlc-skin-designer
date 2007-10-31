@@ -39,7 +39,9 @@ public abstract class Resource {
   }  
   /** Show a dialog to modify the resource's parameters */
   public abstract void showOptions();  
-  /** Creates the XML code representing the resource */
+  /** Update the Resource's attributes according to user input */
+  public abstract void update();
+  /** Creates the XML code representing the resource */  
   public abstract String returnCode();
   /** Creates a DefaultMutableTreeNode to be displayed in the resources tree */
   public abstract DefaultMutableTreeNode getTreeNode();  

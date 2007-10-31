@@ -51,7 +51,11 @@ public class Anchor extends Item implements ActionListener{
   Bezier b;
   int[] xpos,ypos;
   
-  /** Creates a new instance of Anchor */
+  /**
+   * Creates a new Anchor from XML.
+   * @param xmlcode The XML code from which the Anchor should be created. One line per tag.
+   * @param s_ The skin in which the Anchor is used.
+   */
   public Anchor(String xmlcode, Skin s_) {
     s=s_;
     if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
@@ -65,6 +69,10 @@ public class Anchor extends Item implements ActionListener{
     if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");  
     created = true;
   }
+  /**
+   * Creates a new Anchor from user input.
+   * @param s_ The Skin in which the Anchor is used.
+   */
   public Anchor(Skin s_) {
     s = s_;
     priority = 0;
@@ -84,14 +92,14 @@ public class Anchor extends Item implements ActionListener{
     }          
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
-  public void update(String id_, int p_, String lt_, int x_, int y_, String pts_, int r_) {
-    id=id_;
-    priority=p_;
-    lefttop=lt_;
-    x=x_;
-    y=y_;
-    points=pts_;
-    range=r_;
+  public void update() {
+    id=id_tf.getText();
+    priority=Integer.parseInt(priority_tf.getText());
+    lefttop=lefttop_cb.getSelectedItem().toString();
+    x=Integer.parseInt(x_tf.getText());
+    y=Integer.parseInt(y_tf.getText());
+    points=points_tf.getText();
+    range=Integer.parseInt(range_tf.getText());
     updateBezier();
     s.updateItems();
     s.expandItem(id);
@@ -210,7 +218,7 @@ public class Anchor extends Item implements ActionListener{
         }
       }
       frame.setVisible(false);
-      update(id_tf.getText(),Integer.parseInt(priority_tf.getText()),(String)lefttop_cb.getSelectedItem(),Integer.parseInt(x_tf.getText()),Integer.parseInt(y_tf.getText()),points_tf.getText(),Integer.parseInt(range_tf.getText()));
+      update();
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

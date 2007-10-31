@@ -25,8 +25,8 @@ package vlcskineditor;
 import java.util.*;
 
 /**
- * BooleanExpressionEvaluator
- * conversion of vlc/trunk/modules/gui/skins2/parser/expr_evaluator.cpp
+ * Helper class to evaluate boolean expressions.
+ * conversion of vlc/trunk/modules/gui/skins2/parser/expr_evaluator.cpp. <br>
  * Original code by Cyril Deguet <asmax@via.ecp.fr>
  * @author Daniel Dreibrodt
  */

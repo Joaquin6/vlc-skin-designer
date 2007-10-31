@@ -45,9 +45,16 @@ public class Font extends Resource implements ActionListener{
   JTextField id_tf, file_tf, size_tf;
   JButton file_btn, ok_btn, cancel_btn, help_btn;
   JFileChooser fc;
+  /**
+   * The font represented by this Font object as a Java AWT Font.
+   */
   public java.awt.Font f;
   
-  /** Creates a new instance of Font */
+  /**
+   * Creates a Font from XML.
+   * @param xmlcode The XML code from which the Font should be created. One line per tag.
+   * @param s_ The Skin in which the Font is used.
+   */
   public Font(String xmlcode, Skin s_) {
     type = "Font";
     s = s_;
@@ -80,6 +87,13 @@ public class Font extends Resource implements ActionListener{
       }      
     }
   }
+  /**
+   * Creates a new Font from the given attributes.
+   * @param id_ The ID of the Font.
+   * @param file_ The relative path to the font file.
+   * @param size_ The Font's size.
+   * @param s_ The Skin in which the Font is used.
+   */
   public Font(String id_,String file_,int size_, Skin s_) {
     type="Font";
     s=s_;
@@ -110,6 +124,12 @@ public class Font extends Resource implements ActionListener{
       }  
     }
   }
+  /**
+   * Creates a new Font from a given file.
+   * @param s_ The skin in which the Font is used.
+   * @param f_ The font file. TrueType or OpenType. Notice that only OpenType fonts in a TrueType container
+   * can be displayed by the Skin Editor. VLC can display both.
+   */
   public Font(Skin s_, File f_) {
     s = s_;
     type = "Font";
@@ -143,6 +163,10 @@ public class Font extends Resource implements ActionListener{
       }  
     }    
   }
+  /**
+   * Creates a new Font from user input.
+   * @param s_ The skin in which the Font is used.
+   */
   public Font(Skin s_) {
     s=s_;
     type="Font";

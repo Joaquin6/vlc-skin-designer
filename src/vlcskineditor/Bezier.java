@@ -26,11 +26,11 @@ import java.awt.geom.Point2D;
 import java.util.*;
 
 /**
- * Bezier
+ * Helper class for drawing beziers in sliders and anchors.
+ * Conversion of VLC /trunk/modules/gui/skins2/utils/bezier.cpp <br>
+ * original authors: Cyril Deguet     <asmax@via.ecp.fr> and
+ *                   Olivier Teuli&egrave;re <ipkiss@via.ecp.fr>
  * @author Daniel Dreibrodt
- * Conversion of VLC /trunk/modules/gui/skins2/utils/bezier.cpp
- * original authors: Cyril Deguet     <asmax@via.ecp.fr>
- *                   Olivier Teuliére <ipkiss@via.ecp.fr>
  */
 public class Bezier {
   

@@ -112,10 +112,10 @@ public class Group extends Item implements ActionListener{
     showOptions();    
     s.updateItems();        
   }
-  public void update(String id_, int x_, int y_) {
-    id=id_;
-    x=x_;
-    y=y_;
+  public void update() {
+    id=id_tf.getText();
+    x=Integer.parseInt(x_tf.getText());
+    y=Integer.parseInt(y_tf.getText());
     for(Item i:items) {
       i.setOffset(x,y);
     }
@@ -196,7 +196,7 @@ public class Group extends Item implements ActionListener{
         }
       }
       frame.setVisible(false);
-      update(id_tf.getText(),Integer.parseInt(x_tf.getText()),Integer.parseInt(y_tf.getText()));
+      update();
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

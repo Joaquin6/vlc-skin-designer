@@ -27,7 +27,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
- * ActionPanel
+ * A visual representation of a single action providing input components for modifying/deleting the represented action
  * @author Daniel Dreibrodt
  */
 public class ActionPanel extends JPanel {
@@ -174,6 +174,11 @@ public class ActionPanel extends JPanel {
     setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));   
     setMaximumSize(new Dimension(445,30));
   }
+  /** 
+   * Generates the action string from the type of the represented action and from user modifications.
+   * The string ends with a semicolon.
+   * @return A string readable by VLC representing the action that is represented by the panel
+   */
   public String getActionCode() {
     if(action_type.equals("static")) return action;
     else if (action.indexOf(".setRandom")!=-1) return "playlist.setRandom("+( (bool_cb.getSelectedIndex()==0) ? "true" : "false" )+")";

@@ -39,7 +39,6 @@ import java.io.*;
  */
 public class Bitmap extends Resource implements ActionListener{
   
-  /** Creates a new instance of Bitmap */  
   public String file;
   public final String ALPHACOLOR_DEFAULT = "#000000";
   public String alphacolor = ALPHACOLOR_DEFAULT;
@@ -47,15 +46,22 @@ public class Bitmap extends Resource implements ActionListener{
   public int nbframes = NBFRAMES_DEFAULT;
   public final int FPS_DEFAULT = 0;
   public int fps = FPS_DEFAULT;
+  //The list containing the bitmap's SubBitmaps  
   public java.util.List<SubBitmap> SubBitmaps = new LinkedList<SubBitmap>();
+  //The image represented by the Bitmap item
   public BufferedImage image;
   
-  JFrame frame = null;
-  JTextField id_tf, file_tf, alphacolor_tf, nbframes_tf, fps_tf;
-  JButton file_btn, alphacolor_btn, ok_btn, cancel_btn, help_btn;
-  JFileChooser fc;
+  private JFrame frame = null;
+  private JTextField id_tf, file_tf, alphacolor_tf, nbframes_tf, fps_tf;
+  private JButton file_btn, alphacolor_btn, ok_btn, cancel_btn, help_btn;
+  private JFileChooser fc;
   
-  
+  /**
+   * Creates a new Bitmap from xml code
+   * @param xmlcode The XML code from which the Bitmap should be created. One line per tag.
+   * @param s_ The skin in which the Bitmap is used.
+   * This is necessary in order that the image file can be located relatively to the skin file.
+   */  
   public Bitmap(String xmlcode, Skin s_) {    
     type = "Bitmap";
     s = s_;
@@ -79,8 +85,18 @@ public class Bitmap extends Resource implements ActionListener{
         if(lines[i].startsWith("<SubBitmap")) SubBitmaps.add(new SubBitmap(lines[i],s,this));
       }
     }    
-    update();
+    updateImage();
   }
+  /**
+   * Creates a new Bitmap from given attributes
+   * @param id_ The ID of the new Bitmap
+   * @param file_ The relative path to the image file.
+   * @param alphacolor_ The alphacolor of the Bitmap. Format is #RRGGBB.
+   * @param nbframes_ If the Bitmap is animated this defines the number of frames.
+   * @param fps_ If the Bitmap is animated this defines the frames displayed per second.
+   * @param s_ The skin in which the Bitmap is used.
+   * This is necessary in order that the image file can be located relatively to the skin file.
+   */
   public Bitmap(String id_, String file_, String alphacolor_, int nbframes_, int fps_, Skin s_) {
     type="Bitmap";
     s=s_;
@@ -89,8 +105,14 @@ public class Bitmap extends Resource implements ActionListener{
     alphacolor=alphacolor_;
     nbframes=nbframes_;
     fps=fps_;        
-    update();
+    updateImage();
   }
+  /**
+   * Creates a new Bitmap from a given file.
+   * @param s_ The skin in which the Bitmap is used.
+   * This is necessary in order that the image file can be located relatively to the skin file.
+   * @param f_ The image file represented by this Bitmap.
+   */
   public Bitmap(Skin s_, File f_) {
     s = s_;
     type = "Bitmap";    
@@ -101,9 +123,12 @@ public class Bitmap extends Resource implements ActionListener{
     if(s.idExists(id_t)) id_t += "_"+s.getNewId();
     id = id_t;
     s.updateResources();    
-    update();
+    updateImage();
   } 
-  public void update() {
+  /**
+   * Regenerates the image represented by the Bitmap object.
+   */
+  public void updateImage() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file));       
       image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);         
@@ -131,7 +156,7 @@ public class Bitmap extends Resource implements ActionListener{
         image = bi;
       }
       for(int i=0;i<SubBitmaps.size();i++) {
-        SubBitmaps.get(i).update();
+        SubBitmaps.get(i).updateImage();
       }
     }
     catch(Exception ex) {      
@@ -141,17 +166,17 @@ public class Bitmap extends Resource implements ActionListener{
       return;
     }    
   }
-  public void update(String id_, String file_, String alphacolor_, int nbframes_, int fps_) {
-    file=file_;
-    alphacolor=alphacolor_;
-    nbframes=nbframes_;
-    fps=fps_;    
-    if(!id_.equals(id)) {
-      id=id_;
+  public void update() {
+    file=file_tf.getText();
+    alphacolor=alphacolor_tf.getText();
+    nbframes=Integer.parseInt(nbframes_tf.getText());
+    fps=Integer.parseInt(fps_tf.getText());   
+    if(!id_tf.getText().equals(id)) {
+      id=id_tf.getText();
       s.updateResources();
       s.expandResource(id);
     }
-    update();
+    updateImage();
   }
   public void showOptions() {
     if(frame==null) {
@@ -295,7 +320,7 @@ public class Bitmap extends Resource implements ActionListener{
         return;
       }      
       frame.setVisible(false);
-      update(id_tf.getText(),file_tf.getText(),alphacolor_tf.getText(),Integer.parseInt(nbframes_tf.getText()),Integer.parseInt(fps_tf.getText()));      
+      update();      
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

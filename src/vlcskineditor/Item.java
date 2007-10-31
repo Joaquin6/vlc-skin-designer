@@ -73,6 +73,8 @@ public abstract class Item {
   }
   /** Show a dialog to modify the items's parameters */
   public abstract void showOptions();  
+  /** Update the Item's attributes according to the user input */
+  public abstract void update();
   /** Creates the XML code representing the item */
   public abstract String returnCode();
   /** Draws the item to a graphics context */

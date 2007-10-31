@@ -34,6 +34,7 @@ import java.awt.event.*;
 import java.io.*;
 /**
  * Handles SubBitmap resources
+ * @see Bitmap
  * @author Daniel
  */
 public class SubBitmap extends Resource implements ActionListener{
@@ -43,7 +44,9 @@ public class SubBitmap extends Resource implements ActionListener{
   int nbframes = NBFRAMES_DEFAULT;
   final int FPS_DEFAULT = 0;
   int fps = FPS_DEFAULT;
+  //The image represented by the SubBitmap
   public BufferedImage image; 
+  //The parent bitmap
   private Bitmap parent;
   
   JFrame frame = null;
@@ -53,7 +56,12 @@ public class SubBitmap extends Resource implements ActionListener{
   
   boolean created = false;
   
-  /** Creates a new instance of SubBitmap */
+  /**
+   * Creates a new SubBitmap from XML.
+   * @param xmlcode The XML code from which the SubBitmap should be created. One line per tag.
+   * @param s_ The skin in which the SubBitmap is used.
+   * @param parent_ The parent Bitmap. This is necessary to create the image represented by the SubBitmap.
+   */
   public SubBitmap(String xmlcode, Skin s_, Bitmap parent_) {
     type="Bitmap";
     parent=parent_;
@@ -65,6 +73,11 @@ public class SubBitmap extends Resource implements ActionListener{
     height = XML.getIntValue(xmlcode,"height");
     created = true;
   }  
+  /**
+   * Creates a new SubBitmap from user input.
+   * @param s_ The skin in which the SubBitmap is used.
+   * @param parent_ The parent Bitmap.
+   */
   public SubBitmap(Skin s_,Bitmap parent_) {
     s=s_;
     parent=parent_;
@@ -76,19 +89,22 @@ public class SubBitmap extends Resource implements ActionListener{
     height = 1;
     showOptions();        
   }
-  public void update() {
+  /**
+   * Regenerates the image represented by the SubBitmap object.
+   */
+  public void updateImage() {
     if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);        
   }  
-  public void update(String id_, int x_, int y_, int width_, int height_, int nbframes_, int fps_) {    
-    id=id_;
-    x=x_;
-    y=y_;
-    width=width_;
-    height=height_;
-    nbframes=nbframes_;
-    fps=fps_;    
+  public void update() {    
+    id=id_tf.getText();
+    x=Integer.parseInt(x_tf.getText());
+    y=Integer.parseInt(y_tf.getText());
+    width=Integer.parseInt(width_tf.getText());
+    height=Integer.parseInt(height_tf.getText());
+    nbframes=Integer.parseInt(nbframes_tf.getText());
+    fps=Integer.parseInt(fps_tf.getText());   
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
-    update();
+    updateImage();
     s.updateResources();
     s.expandResource(id);
     created = true;
@@ -223,7 +239,7 @@ public class SubBitmap extends Resource implements ActionListener{
         return;
       }
       frame.setVisible(false);
-      update(id_tf.getText(),Integer.parseInt(x_tf.getText()),Integer.parseInt(y_tf.getText()),Integer.parseInt(width_tf.getText()),Integer.parseInt(height_tf.getText()),Integer.parseInt(nbframes_tf.getText()),Integer.parseInt(fps_tf.getText()));      
+      update();      
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

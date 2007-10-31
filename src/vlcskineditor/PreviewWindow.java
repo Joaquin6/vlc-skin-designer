@@ -29,12 +29,14 @@ import javax.swing.*;
 
 
 /**
- * PreviewWindow
- * The WYSIWYG renderer
+ * Handles the preview window and user interaction with it.
  * @author Daniel Dreibrodt
  */
 public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener {
   
+  /**
+   * The JFrame in which a Layout of a Skin will be shown.
+   */
   public JInternalFrame frame;
   Layout l;
   FrameUpdater fu;  
@@ -44,7 +46,9 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   
   JMenuItem up, down, right, left;
   
-  /** Creates a new instance of PreviewWindow */
+  /**
+   * Creates a new PreviewWindow that is initially hidden.
+   */
   public PreviewWindow() {   
     frame = new JInternalFrame("No Layout selected");
     frame.add(this);
@@ -54,6 +58,11 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     addMouseListener(this);
     addMouseMotionListener(this);    
   }
+  /**
+   * Is invoked when the user deselects a layout.
+   * All references to the old layout are cleared and the window is hidden.
+   * Additionally the FrameUpdater is stopped.
+   */
   public void clearLayout() {
     l=null;
     if(selected_item!=null) selected_item.setSelected(false);
@@ -61,6 +70,12 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     frame.setVisible(false);
     fu=null;
   }
+  /**
+   * Invoked when the user selects a Layout.
+   * Shows the preview window and there draws the selected layout.
+   * @param w_ The Window containing the Layout.
+   * @param l_ The Layout that should be displayed.
+   */
   public void setLayout(Window w_, Layout l_) {
     if(l_==null) {
       clearLayout();
@@ -80,12 +95,20 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       fu.start();      
     }    
   }
+  /**
+   * Invoked when a user selects an Item. This tells the PreviewWindow which item should be moved when the user interacts with the window.
+   * @param i The Item selected by the user.
+   */
   public void selectItem(Item i) {    
     if(selected_item!=null) selected_item.setSelected(false);
     if(i==null) return;
     selected_item = i;
     selected_item.setSelected(true);
   }
+  /**
+   * Paints the selected layout into the window.
+   * @param g The Graphics context into which is drawn.
+   */
   public void paint(Graphics g) {  
     if(l==null) return;   
     BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
@@ -152,6 +175,11 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     dragstartitemx=selected_item.x;
     dragstartitemy=selected_item.y;
   }
+  /**
+   * Moves the currently selected item about the given distance.
+   * @param x Movement along the X-Axis.
+   * @param y Movement along the Y-Axis.
+   */
   public void moveItem(int x, int y) {    
     try {
       selected_item.x+=x;
@@ -162,6 +190,9 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       /* empty */
     }
   }
+  /**
+   * Creates an ImageIcon from a file.
+   */
   public ImageIcon createIcon(String filename) {
     java.awt.Image img = null;    
     try {

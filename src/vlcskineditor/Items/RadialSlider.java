@@ -28,8 +28,9 @@ import javax.swing.*;
 import javax.swing.tree.*;
 
 /**
- * RadialSlider item
- * Not planned to be implemented for use (to complicated to display^^)
+ * RadialSlider item. 
+ * <i>Not planned to be implemented for use</i><br>
+ * If you know how RadialSliders actually work or are displayed, let me know or fill out the missing parts of this file.
  * @author Daniel Dreibrodt
  */
 public class RadialSlider extends Item{
@@ -68,6 +69,9 @@ public class RadialSlider extends Item{
     s = s_;
     id = "Unnamed radial slider #"+s.getNewId();
     showOptions();
+  }
+  public void update() {
+    
   }
   public void showOptions() {
     

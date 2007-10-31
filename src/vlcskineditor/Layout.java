@@ -59,7 +59,11 @@ public class Layout implements ActionListener{
   
   boolean created = false;
   
-  /** Creates a new instance of Layout */
+  /**
+   * Creates a new Layout from XML.
+   * @param xmlcode The XML code from which the Layout should be created.
+   * @param s_ The Skin in which the Layout is used.
+   */
   public Layout(String xmlcode, Skin s_) {
     s=s_;
     String[] code = xmlcode.split("\n");   
@@ -143,6 +147,10 @@ public class Layout implements ActionListener{
     }
     created = true;
   }
+  /**
+   * Creates a new Layout from user input.
+   * @param s_ The Skin in which the Layout is used.
+   */
   public Layout(Skin s_) {
     s=s_;
     id = "Unnamed layout #"+s.getNewId();
@@ -150,19 +158,25 @@ public class Layout implements ActionListener{
     height=0;
     showOptions();
   }
-  public void update(String id_, int w_, int h_, int minw_, int minh_, int maxw_, int maxh_) {
-    id=id_;
-    width=w_;
-    height=h_;
-    minwidth=minw_;
-    minheight=minh_;
-    maxwidth=maxw_;
-    maxheight=maxh_;
+  /**
+   * Updates the Layout's attributes according to the user input.
+   */
+  public void update() {
+    id=id_tf.getText();
+    width=Integer.parseInt(width_tf.getText());
+    height=Integer.parseInt(height_tf.getText());
+    minwidth=Integer.parseInt(minwidth_tf.getText());
+    minheight=Integer.parseInt(minheight_tf.getText());
+    maxwidth=Integer.parseInt(maxwidth_tf.getText());
+    maxheight=Integer.parseInt(maxheight_tf.getText());
     s.updateWindows();
     s.expandLayout(id);
     created = true;
     frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
   }
+  /**
+   * Shows a dialog to edit this Layout's attributes.
+   */
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Layout settings");
@@ -266,6 +280,9 @@ public class Layout implements ActionListener{
     maxheight_tf.setText(String.valueOf(maxheight));
     frame.setVisible(true);
   }
+  /**
+   * Handles the user interaction with the editing dialog.
+   */
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -287,7 +304,7 @@ public class Layout implements ActionListener{
         return;
       }
       frame.setVisible(false);
-      update(id_tf.getText(),Integer.parseInt(width_tf.getText()),Integer.parseInt(height_tf.getText()),Integer.parseInt(minwidth_tf.getText()),Integer.parseInt(minheight_tf.getText()),Integer.parseInt(maxwidth_tf.getText()),Integer.parseInt(maxheight_tf.getText()));
+      update();
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -313,11 +330,19 @@ public class Layout implements ActionListener{
       }
     }
   }
+  /**
+   * Draws the Layout.
+   * @param g The Graphics2D context onto which the Layout will be drawn.
+   */
   public void draw(Graphics2D g) {
     for(Item i:items) {
       i.draw(g);
     }
   }
+  /**
+   * Generates the XML code represented by this Layout.
+   * @return The XML code.
+   */
   public String returnCode() {
     String code ="<Layout";
     if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
@@ -333,10 +358,19 @@ public class Layout implements ActionListener{
     code+="\n</Layout>";
     return code;
   }
+  /**
+   * Creates a TreeNode visualizing this Layout in the windows and layouts tree.
+   * @return The TreeNode to display this Layout in a JTree.
+   */
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Layout: "+id);    
     return node;
   }  
+  /**
+   * Gets the Item of the given id if it is contained in the Layout.
+   * @param id_ The ID of the desired Item.
+   * @return If the Item was found the Item object is returned. Otherwise <pre>null</pre> is returned.
+   */
   public Item getItem(String id_) {    
     for(int x=0;x<items.size();x++) {
       Item i = items.get(x).getItem(id_);
@@ -344,6 +378,12 @@ public class Layout implements ActionListener{
     }
     return null;
   }
+  /**
+   * Gets the List in which the Item specified by the given ID is stored.
+   * @param id_ The ID of the desired Item.
+   * @return If the Item was found in the Layout the List containing the Item is returned. Otherwise <pre>null</pre> is returned.
+   * @see java.util.List
+   */
   public java.util.List<Item> getParentListOf(String id_) {
     for(int x=0;x<items.size();x++) {
       Item i = items.get(x);
@@ -357,6 +397,11 @@ public class Layout implements ActionListener{
     }
     return null;
   }
+  /**
+   * Gets the parent Item of the Item specified by the given ID.
+   * @param id_ The ID of the Item of which one wants the parent.
+   * @return If the Item was found in the Layout its parent is returned. Otherwise <pre>null</pre> is returned.
+   */
   public Item getParentOf(String id_) {
     for(int x=0;x<items.size();x++) {
       Item i = items.get(x);

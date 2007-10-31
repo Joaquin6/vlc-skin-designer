@@ -28,19 +28,26 @@ import java.awt.event.*;
 import java.util.*;
 
 /**
- * ActionEditor
+ * A window representing a specific action chain, that allows the user to add
+ * actions to the chain. Actions are edited within the ActionPanels generated
+ * for each action in the chain
+ * @see ActionPanel
  * @author Daniel Dreibrodt
  */
 public class ActionEditor extends JFrame implements ActionListener{
   
+  //The actions in the chain, respectively the Panels representing them 
   java.util.List<ActionPanel> aPanels = new LinkedList<ActionPanel>();  
   
   public ImageIcon add_icon = createIcon("icons/add.png");
   public ImageIcon delete_icon = createIcon("icons/delete.png");  
   
+  //The panel that handels the scrolling through the list of actions
   JScrollPane sPane;
+  //The panel containing the actual ActionPanels
   JPanel actions_p = new JPanel();
-  JButton add_btn = new JButton(add_icon);
+  //Opens a PopupMenu from which the user can add an action to the end of the chain
+  JButton add_btn = new JButton(add_icon);  
   JButton ok_btn = new JButton("OK");
   
   JPopupMenu actions_pu = new JPopupMenu("Actions");
@@ -99,6 +106,7 @@ public class ActionEditor extends JFrame implements ActionListener{
   JMenuItem actions_windows_unmaximize = new JMenuItem("Unmaximize a window");
   JMenuItem actions_windows_setLayout = new JMenuItem("Change the layout of a window");
   
+  //The skin item to which the represented action chain belongs
   Item parent;
   
   /** Creates a new instance of ActionEditor */
@@ -288,11 +296,20 @@ public class ActionEditor extends JFrame implements ActionListener{
     setSize(460,385);    
     setResizable(false);    
   }
+  /**
+   * Generates the code by calling the getActionCode() function of each ActionPanel
+   * @see ActionPanel#getActionCode()
+   * @return A string readable by VLC representing the action chain
+   */
   public String getCode() {     
     String code = "";
     for(ActionPanel act:aPanels) code+=act.getActionCode()+";";
     return code;
   }
+  /**
+   * Replaces the current action chain by a new one
+   * @param a The action string
+   */
   public void updateActions(String a) {
     actions_p.removeAll();
     aPanels.clear();
@@ -300,6 +317,10 @@ public class ActionEditor extends JFrame implements ActionListener{
     for(String act:actions) addAction(act);
     actions_p.updateUI();
   }
+  /**
+   * Adds an action to the chain
+   * @param act The action string
+   */
   public void addAction(String act) {
     act=act.trim();
     act=act.replaceAll(";","");
@@ -307,10 +328,17 @@ public class ActionEditor extends JFrame implements ActionListener{
     actions_p.add(aPanels.get(aPanels.size()-1));
     actions_p.updateUI();
   }
+  /**
+   * Shows the dialog for editing the given action
+   * @param a The action string to be edited
+   */
   public void editAction(String a) {
     updateActions(a);
     setVisible(true);
   }
+  /**
+   * Reacts to user interaction
+   */
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(add_btn)) actions_pu.show(add_btn,0,0);
     else if (e.getSource().equals(ok_btn)) {
@@ -331,6 +359,9 @@ public class ActionEditor extends JFrame implements ActionListener{
       }
     }
   }
+  /**
+   * Creates an ImageIcon out of a file
+   */
   public ImageIcon createIcon(String filename) {
       java.awt.Image img = null;
       try {
