@@ -20,9 +20,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor.Resources;
+package vlcskineditor.resources;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -167,6 +168,7 @@ public class Bitmap extends Resource implements ActionListener{
     }    
   }
   public void update() {
+    BitmapEditEvent be = new BitmapEditEvent(this);
     file=file_tf.getText();
     alphacolor=alphacolor_tf.getText();
     nbframes=Integer.parseInt(nbframes_tf.getText());
@@ -177,6 +179,8 @@ public class Bitmap extends Resource implements ActionListener{
       s.expandResource(id);
     }
     updateImage();
+    be.setNew();
+    s.m.hist.addEvent(be);
   }
   public void showOptions() {
     if(frame==null) {

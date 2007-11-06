@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor.Resources;
+package vlcskineditor.resources;
 
 import vlcskineditor.*;
 import java.util.*;
@@ -32,6 +32,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import java.io.*;
+import vlcskineditor.history.SubBitmapAddEvent;
 /**
  * Handles SubBitmap resources
  * @see Bitmap
@@ -39,11 +40,11 @@ import java.io.*;
  */
 public class SubBitmap extends Resource implements ActionListener{
   
-  int x, y, width, height;
+  public int x, y, width, height;
   final int NBFRAMES_DEFAULT = 1;
-  int nbframes = NBFRAMES_DEFAULT;
+  public int nbframes = NBFRAMES_DEFAULT;
   final int FPS_DEFAULT = 0;
-  int fps = FPS_DEFAULT;
+  public int fps = FPS_DEFAULT;
   //The image represented by the SubBitmap
   public BufferedImage image; 
   //The parent bitmap
@@ -96,18 +97,35 @@ public class SubBitmap extends Resource implements ActionListener{
     if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);        
   }  
   public void update() {    
-    id=id_tf.getText();
-    x=Integer.parseInt(x_tf.getText());
-    y=Integer.parseInt(y_tf.getText());
-    width=Integer.parseInt(width_tf.getText());
-    height=Integer.parseInt(height_tf.getText());
-    nbframes=Integer.parseInt(nbframes_tf.getText());
-    fps=Integer.parseInt(fps_tf.getText());   
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
-    updateImage();
-    s.updateResources();
-    s.expandResource(id);
-    created = true;
+    if(!created) {      
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      width=Integer.parseInt(width_tf.getText());
+      height=Integer.parseInt(height_tf.getText());
+      nbframes=Integer.parseInt(nbframes_tf.getText());
+      fps=Integer.parseInt(fps_tf.getText());   
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
+      updateImage();
+      s.updateResources();
+      s.expandResource(id);
+      SubBitmapAddEvent sae = new SubBitmapAddEvent(parent,this);
+      s.m.hist.addEvent(sae);
+      created = true;
+    }
+    else {
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      width=Integer.parseInt(width_tf.getText());
+      height=Integer.parseInt(height_tf.getText());
+      nbframes=Integer.parseInt(nbframes_tf.getText());
+      fps=Integer.parseInt(fps_tf.getText());   
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
+      updateImage();
+      s.updateResources();
+      s.expandResource(id);
+    }    
   }
   public void showOptions() {
     if(frame==null) {

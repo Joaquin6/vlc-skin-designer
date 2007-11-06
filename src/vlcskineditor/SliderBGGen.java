@@ -25,10 +25,10 @@ package vlcskineditor;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import vlcskineditor.Items.SliderBackground;
+import vlcskineditor.items.SliderBackground;
 
 /**
- * SliderBGGen
+ * A wizard that generates a slider background from several image files.
  * @author Daniel Dreibrodt
  */
 public class SliderBGGen extends JFrame implements ActionListener{
@@ -50,16 +50,35 @@ public class SliderBGGen extends JFrame implements ActionListener{
   
   JPanel card_step2;
   
-  JTextField bg_tf, e1_tf, md_tf, e2_tf;
+  /** Contains the path to the background image file */
+  JTextField bg_tf;
+  /** Contains the path to the image file for the left or upper edge of the bar */
+  JTextField e1_tf;
+  /** Contains the path to the image file for the middle part of the bar */
+  JTextField md_tf;
+  /** Contains the path to the image file for the right or bottom edge of the bar */
+  JTextField e2_tf;
+  /** Sets whether the background image should be tiled to fill the slider background size */
+  JRadioButton bgt_rb;
+  /** Sets whether the background image should be stretched to fill the slider background size */
+  JRadioButton bgs_rb;
+  /** Sets whether the middle image should be tiled to fill the slider background size */
+  JRadioButton mdt_rb;
+  /** Sets whether the middle image should be stretched to fill the slider background size */
+  JRadioButton mds_rb;  
   JButton bg_btn, e1_btn, md_btn, e2_btn;
   JFileChooser bg_fc, e1_fc, md_fc, e2_fc;
-  JButton step2_prev_btn, step2_finish_btn, step2_cancel_btn;
+  JButton step2_prev_btn, step2_finish_btn, step2_cancel_btn;  
   
-  public ImageIcon editor_icon = createIcon("icons/editor.png");
-  public ImageIcon ltr_icon = createIcon("icons/sliderbg_ltr.png");
-  public ImageIcon btt_icon = createIcon("icons/sliderbg_btt.png");  
+  ImageIcon editor_icon = createIcon("icons/editor.png");
+  ImageIcon ltr_icon = createIcon("icons/sliderbg_ltr.png");
+  ImageIcon btt_icon = createIcon("icons/sliderbg_btt.png");  
   
-  /** Creates a new instance of SliderBGGen */
+  /**
+   * Creates a new Slider Background Generator
+   * @param sbg_ The SliderBackground object into which the generated slider background should be stored.
+   * @param s_ The Skin in which the slider background will be used.
+   */
   public SliderBGGen(SliderBackground sbg_, Skin s_) {    
     sbg=sbg_;
     s=s_;
@@ -78,8 +97,6 @@ public class SliderBGGen extends JFrame implements ActionListener{
     header_bgh+=Integer.toHexString(header_bgc.getBlue()).toUpperCase();   
     
     String header_str = "<html><body style=\"background:"+header_bgh+";color:#FFFFFF;width:540px;\"><h1>&nbsp;Slider Background Generator</h1></body></html>";
-    
-    
     
     card_step1 = new JPanel(null);    
     JLabel header1_l = new JLabel(header_str);     
@@ -156,6 +173,12 @@ public class SliderBGGen extends JFrame implements ActionListener{
     header2_l.setBounds(0,0,540,50);
     card_step2.add(header2_l); 
     
+    JPanel bg_p = new JPanel(null);
+    JLabel bg_l = new JLabel("Image file:");
+    bg_tf = new JTextField("");
+    bg_btn = new JButton("Open...");
+    
+    
     JSeparator step2_horz_s = new JSeparator(JSeparator.HORIZONTAL);
     step2_prev_btn = new JButton("< Previous");
     step2_prev_btn.addActionListener(this);
@@ -195,8 +218,8 @@ public class SliderBGGen extends JFrame implements ActionListener{
   }
   /**
    * Creates an ImageIcon of an image included in the JAR
-   * @param filename  The path to the image file inside the JAR
-   * @return         An ImageIcon representing the given file
+   * @param filename The path to the image file inside the JAR
+   * @return An ImageIcon representing the given file
    */
   public ImageIcon createIcon(String filename) {      
       java.awt.Image img = null;

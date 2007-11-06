@@ -22,7 +22,7 @@
 
 package vlcskineditor;
 
-import vlcskineditor.Items.*;
+import vlcskineditor.items.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -83,9 +83,9 @@ public class Layout implements ActionListener{
         }
       }
       else if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
-      else if(code[i].startsWith("<Button")) items.add(new vlcskineditor.Items.Button(code[i],s));
-      else if(code[i].startsWith("<Checkbox")) items.add(new vlcskineditor.Items.Checkbox(code[i],s));
-      else if(code[i].startsWith("<Image")) items.add(new vlcskineditor.Items.Image(code[i],s));
+      else if(code[i].startsWith("<Button")) items.add(new vlcskineditor.items.Button(code[i],s));
+      else if(code[i].startsWith("<Checkbox")) items.add(new vlcskineditor.items.Checkbox(code[i],s));
+      else if(code[i].startsWith("<Image")) items.add(new vlcskineditor.items.Image(code[i],s));
       else if(code[i].startsWith("<Text")) items.add(new Text(code[i],s));
       else if(code[i].startsWith("<Video")) items.add(new Video(code[i],s));
       else if(code[i].startsWith("<RadialSlider")) items.add(new RadialSlider(code[i],s));
@@ -107,7 +107,7 @@ public class Layout implements ActionListener{
           i++;
         }
         itemcode += "\n"+code[i];
-        items.add(new vlcskineditor.Items.Panel(itemcode,s));        
+        items.add(new vlcskineditor.items.Panel(itemcode,s));        
       }
       else if(code[i].startsWith("<Playlist")) {
         String itemcode = code[i];

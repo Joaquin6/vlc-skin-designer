@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor.Items;
+package vlcskineditor.items;
 
 import vlcskineditor.*;
 import java.awt.event.*;
@@ -374,7 +374,7 @@ public class Text extends Item implements ActionListener{
     if(f==null) {
       Resource fr = s.getResource(font);
       if(fr.type.equals("Font")) {
-        vlcskineditor.Resources.Font fnt = (vlcskineditor.Resources.Font)fr;
+        vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)fr;
         f = new Font(Font.SANS_SERIF,Font.PLAIN,fnt.size);
       }
       else {

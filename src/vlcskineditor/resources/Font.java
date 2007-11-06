@@ -20,9 +20,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor.Resources;
+package vlcskineditor.resources;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -63,6 +64,54 @@ public class Font extends Resource implements ActionListener{
     if(xmlcode.indexOf("size=\"")!=-1) {
       size = Integer.parseInt(XML.getValue(xmlcode,"size"));
     }
+    updateFont();
+  }
+  /**
+   * Creates a new Font from the given attributes.
+   * @param id_ The ID of the Font.
+   * @param file_ The relative path to the font file.
+   * @param size_ The Font's size.
+   * @param s_ The Skin in which the Font is used.
+   */
+  public Font(String id_,String file_,int size_, Skin s_) {
+    type="Font";
+    s=s_;
+    id=id_;
+    file=file_;
+    size=size_;
+    updateFont();
+  }
+  /**
+   * Creates a new Font from a given file.
+   * @param s_ The skin in which the Font is used.
+   * @param f_ The font file. TrueType or OpenType. Notice that only OpenType fonts in a TrueType container
+   * can be displayed by the Skin Editor. VLC can display both.
+   */
+  public Font(Skin s_, File f_) {
+    s = s_;
+    type = "Font";
+    String id_t = f_.getName().substring(0,f_.getName().lastIndexOf("."));
+    if(s.idExists(id_t)) id_t += "_"+s.getNewId();
+    id = id_t;
+    file = f_.getPath().replace(s.skinfolder,"");    
+    s.updateResources();
+    s.expandResource(id);
+    updateFont();
+  }
+  /**
+   * Creates a new Font from user input.
+   * @param s_ The skin in which the Font is used.
+   */
+  public Font(Skin s_) {
+    s=s_;
+    type="Font";
+    id = "Unnamed font #"+s.getNewId();
+    file="";
+    s.updateResources();
+    s.expandResource(id);
+    showOptions();
+  }
+  public void updateFont() {
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
       f = f.deriveFont((float)size);
@@ -87,125 +136,17 @@ public class Font extends Resource implements ActionListener{
       }      
     }
   }
-  /**
-   * Creates a new Font from the given attributes.
-   * @param id_ The ID of the Font.
-   * @param file_ The relative path to the font file.
-   * @param size_ The Font's size.
-   * @param s_ The Skin in which the Font is used.
-   */
-  public Font(String id_,String file_,int size_, Skin s_) {
-    type="Font";
-    s=s_;
-    id=id_;
-    file=file_;
-    size=size_;
-    try {      
-      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
-      f = f.deriveFont((float)size);
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-      if(file.indexOf(".otf")==-1) {
-        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        showOptions();
-      }
-      else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
-        try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
-          f = f.deriveFont(12);
-        }
-        catch(Exception ex) {
-          ex.printStackTrace();
-          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        }
-      }  
-    }
-  }
-  /**
-   * Creates a new Font from a given file.
-   * @param s_ The skin in which the Font is used.
-   * @param f_ The font file. TrueType or OpenType. Notice that only OpenType fonts in a TrueType container
-   * can be displayed by the Skin Editor. VLC can display both.
-   */
-  public Font(Skin s_, File f_) {
-    s = s_;
-    type = "Font";
-    String id_t = f_.getName().substring(0,f_.getName().lastIndexOf("."));
-    if(s.idExists(id_t)) id_t += "_"+s.getNewId();
-    id = id_t;
-    file = f_.getPath().replace(s.skinfolder,"");    
-    s.updateResources();
-    s.expandResource(id);
-    try {      
-      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
-      f = f.deriveFont((float)size);
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-      if(file.indexOf(".otf")==-1) {
-        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        showOptions();
-      }
-      else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
-        try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
-          f = f.deriveFont(12);
-        }
-        catch(Exception ex) {
-          ex.printStackTrace();
-          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        }
-      }  
-    }    
-  }
-  /**
-   * Creates a new Font from user input.
-   * @param s_ The skin in which the Font is used.
-   */
-  public Font(Skin s_) {
-    s=s_;
-    type="Font";
-    id = "Unnamed font #"+s.getNewId();
-    file="";
-    s.updateResources();
-    s.expandResource(id);
-    showOptions();
-  }
   public void update() {
+    FontEditEvent fe = new FontEditEvent(this);
     type="Font";    
     file=file_tf.getText();
     size=Integer.parseInt(size_tf.getText());        
     id=id_tf.getText();
     s.updateResources();
     s.expandResource(id);
-    try {      
-      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
-      f = f.deriveFont((float)size);
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-      if(file.indexOf(".otf")==-1) {
-        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        showOptions();
-      }
-      else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nIn the Skin Editor you will see instead of the chosen font the default font FreeSans","Notice",JOptionPane.INFORMATION_MESSAGE);
-        try {      
-          f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(Main.class.getResource("FreeSans.ttf").toURI()));
-          f = f.deriveFont(12);
-        }
-        catch(Exception ex) {
-          ex.printStackTrace();
-          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        }
-      }  
-    }    
+    updateFont();
+    fe.setNew();
+    s.m.hist.addEvent(fe);
   }
   public void showOptions() {
     if(frame==null) {

@@ -22,7 +22,9 @@
 
 package vlcskineditor;
 
-import vlcskineditor.Resources.*;
+import vlcskineditor.resources.Bitmap;
+import vlcskineditor.resources.BitmapFont;
+import vlcskineditor.resources.SubBitmap;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -171,7 +173,7 @@ public class Skin implements ActionListener{
           }
         }
         //</editor-fold>
-        else if(line.startsWith("<Font")) resources.add(new vlcskineditor.Resources.Font(line,this));
+        else if(line.startsWith("<Font")) resources.add(new vlcskineditor.resources.Font(line,this));
         else if(line.startsWith("<BitmapFont")) resources.add(new BitmapFont(line,this));        
         //<editor-fold defaultstate="collapsed" desc=" Window tag "> 
         else if(line.startsWith("<Window")) {
@@ -427,7 +429,7 @@ public class Skin implements ActionListener{
     if(r==null) return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     try {
       if(r.type.equals("Font")) {
-        vlcskineditor.Resources.Font fr = (vlcskineditor.Resources.Font)r;
+        vlcskineditor.resources.Font fr = (vlcskineditor.resources.Font)r;
         return fr.f;
       }
     }
@@ -461,12 +463,12 @@ public class Skin implements ActionListener{
     Item i = getItem(id_);    
     java.util.List<Item> l = null;          
     try {
-      vlcskineditor.Items.Panel p = (vlcskineditor.Items.Panel)i;
+      vlcskineditor.items.Panel p = (vlcskineditor.items.Panel)i;
       l = p.items;
     }
     catch(Exception ex1) {
       try {
-        vlcskineditor.Items.Group g = (vlcskineditor.Items.Group)i;
+        vlcskineditor.items.Group g = (vlcskineditor.items.Group)i;
         l = g.items;
       }
       catch(Exception ex2) {

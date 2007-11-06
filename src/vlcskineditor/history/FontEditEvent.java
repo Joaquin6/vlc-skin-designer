@@ -1,9 +1,9 @@
 /*****************************************************************************
- * Resource.java
+ * FontEditEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
- * This file is part of VLC Skin Editor
+ * This file is part of vlcskineditor.history
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,33 +20,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor;
+package vlcskineditor.history;
 
-import javax.swing.*;
-import javax.swing.tree.*;
+import vlcskineditor.resources.Font;
+
 /**
- * Abstract superclass representing a Bitmap, SubBitmap or Font
+ * Represents the action of editing a Font
  * @author Daniel Dreibrodt
  */
-public abstract class Resource {
+public class FontEditEvent extends HistoryEvent{
   
-  /** Value should be either Bitmap or Font */
-  public String id;
-  public String type;
-  /** Represents the skin to which the resource belongs */
-  public Skin s;
-  public Resource() {
-  }  
-  /** Show a dialog to modify the resource's parameters */
-  public abstract void showOptions();  
-  /** Update the Resource's attributes according to user input */
-  public abstract void update();
-  /** Creates the XML code representing the resource */  
-  public abstract String returnCode();
-  /** Creates a DefaultMutableTreeNode to be displayed in the resources tree */
-  public abstract DefaultMutableTreeNode getTreeNode();  
-  /** If a Resource does contain another Resource of the given id (e.g. a SubBitmap) the containing Resource is returned **/
-  public Resource getParentOf(String id_) {
-    return null;
+  private Font f;
+  private String file_old, file_new;
+  private int size_old, size_new;
+  
+  /** Creates a new instance of FontEditEvent */
+  public FontEditEvent(Font fnt) {
+    f = fnt;
+    file_old = f.file;
+    size_old = f.size;
+  }
+  /** Sets the new state of the Font*/
+  public void setNew() {
+    file_new = f.file;
+    size_new = f.size;
+  }
+  public void undo() {
+    f.file = file_old;
+    f.size = size_old;
+    f.updateFont();
+  }
+  public void redo() {
+    f.file = file_new;
+    f.size = size_new;
+    f.updateFont();
+  }
+  public String getDescription() {
+    return "Edit Font";
   }
 }

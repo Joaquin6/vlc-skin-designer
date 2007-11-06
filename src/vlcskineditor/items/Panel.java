@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor.Items;
+package vlcskineditor.items;
 
 import vlcskineditor.*;
 import java.util.*;

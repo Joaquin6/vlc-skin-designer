@@ -34,10 +34,11 @@ import javax.swing.event.*;
 import javax.swing.border.*;
 import java.util.zip.*;
 import javax.imageio.*;
-import vlcskineditor.Items.*;
-import vlcskineditor.Resources.*;
+import vlcskineditor.resources.Bitmap;
+import vlcskineditor.items.*;
 import com.ice.tar.*;
 import com.ice.jni.registry.*;
+import vlcskineditor.history.*;
 
 
 /**
@@ -54,7 +55,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
   JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_quit;
-  JMenuItem m_edit_theme, m_edit_global, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
+  JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_global, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
   JMenuItem m_help_doc, m_help_about;  
   JDesktopPane jdesk;
   JInternalFrame resources,windows,items,current_window;  
@@ -77,6 +78,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");  
   public ImageIcon add_font_icon = createIcon("icons/add_font.png");
   public ImageIcon edit_icon = createIcon("icons/edit.png");
+  public ImageIcon edit_undo_icon = createIcon("icons/edit-undo.png");
+  public ImageIcon edit_redo_icon = createIcon("icons/edit-redo.png");
   public ImageIcon editor_icon = createIcon("icons/editor.png");
   public ImageIcon delete_icon = createIcon("icons/delete.png");
   public ImageIcon add_window_icon = createIcon("icons/add_window.png");
@@ -106,6 +109,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   //Specifies if a file was opened
   boolean opened = false;
   
+  public History hist;
+  
   /**
    * Launches the skin editor and initializes the GUI.
    * @param args Command line arguments passed by the console.
@@ -128,24 +133,24 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file_new.addActionListener(this);
     m_file_open = new JMenuItem("Open");
     m_file_open.setIcon(open_icon);
-    m_file_open.setMnemonic("O".charAt(0));
+    m_file_open.setMnemonic('O');
     m_file_open.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
     m_file_open.addActionListener(this);    
     m_file_save = new JMenuItem("Save");
     m_file_save.setIcon(save_icon);
-    m_file_save.setMnemonic("S".charAt(0));
+    m_file_save.setMnemonic('S');
     m_file_save.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));   
     m_file_save.addActionListener(this);
     m_file_test = new JMenuItem("Test skin in VLC...");
-    m_file_test.setMnemonic("T".charAt(0));
+    m_file_test.setMnemonic('T');
     m_file_test.addActionListener(this);
     m_file_vlt = new JMenuItem("Export as VLT...");
-    m_file_vlt.setMnemonic("V".charAt(0));
+    m_file_vlt.setMnemonic('V');
     m_file_vlt.setAccelerator(KeyStroke.getKeyStroke("ctrl v"));   
     m_file_vlt.addActionListener(this);
     m_file_quit = new JMenuItem("Quit");
     m_file_quit.setIcon(exit_icon);
-    m_file_quit.setMnemonic("Q".charAt(0));
+    m_file_quit.setMnemonic('Q');
     m_file_quit.setAccelerator(KeyStroke.getKeyStroke("ctrl Q"));
     m_file_quit.addActionListener(this);
     
@@ -161,13 +166,23 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
     m_edit = new JMenu("Edit");
     m_edit.setMnemonic("E".charAt(0));
+    m_edit_undo = new JMenuItem("Undo");
+    m_edit_undo.setIcon(edit_undo_icon);
+    m_edit_undo.setMnemonic('U');
+    m_edit_undo.setAccelerator(KeyStroke.getKeyStroke("ctrl Z"));
+    m_edit_undo.addActionListener(this);
+    m_edit_redo = new JMenuItem("Redo");
+    m_edit_redo.setIcon(edit_redo_icon);
+    m_edit_redo.setMnemonic('R');    
+    m_edit_redo.setAccelerator(KeyStroke.getKeyStroke("ctrl Y"));
+    m_edit_redo.addActionListener(this);
     m_edit_theme = new JMenuItem("Theme settings");
     m_edit_theme.setIcon(edit_icon);
-    m_edit_theme.setMnemonic("I".charAt(0));
+    m_edit_theme.setMnemonic('I');
     m_edit_theme.setAccelerator(KeyStroke.getKeyStroke("ctrl I"));
     m_edit_theme.addActionListener(this);
     m_edit_global = new JMenuItem("Global variables");
-    m_edit_global.setMnemonic("G".charAt(0));
+    m_edit_global.setMnemonic('G');
     m_edit_global.setAccelerator(KeyStroke.getKeyStroke("ctrl G"));
     m_edit_global.addActionListener(this);
     m_edit_up = new JMenuItem("Move selected item up");
@@ -183,6 +198,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit_right.setAccelerator(KeyStroke.getKeyStroke("ctrl RIGHT"));
     m_edit_right.addActionListener(this);
     
+    m_edit.add(m_edit_undo);
+    m_edit.add(m_edit_redo);
+    m_edit.addSeparator();
     m_edit.add(m_edit_theme);
     m_edit.addSeparator();
     m_edit.add(m_edit_global);
@@ -193,14 +211,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit.add(m_edit_right);
         
     m_help = new JMenu("Help");
-    m_help.setMnemonic("H".charAt(0));    
+    m_help.setMnemonic('H');    
     m_help_doc = new JMenuItem("Skins2 documentation");    
     m_help_doc.setIcon(help_icon);
-    m_help_doc.setMnemonic("D".charAt(0));
+    m_help_doc.setMnemonic('D');
     m_help_doc.addActionListener(this);
     m_help_doc.setAccelerator(KeyStroke.getKeyStroke("F1"));    
     m_help_about = new JMenuItem("About");
-    m_help_about.setMnemonic("H".charAt(0));
+    m_help_about.setMnemonic('A');
     m_help_about.addActionListener(this);
     
     m_help.add(m_help_doc);
@@ -681,8 +699,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         "try opening it manually.","Could not find theme.xml",JOptionPane.ERROR_MESSAGE);
         opening=false;
         return;
-      }
-      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      }      
+      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));      
     }     
     pwin.setText("Parsing XML...");
     pwin.setVisible(true);
@@ -697,6 +715,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     opening = false;
     opened = true;
     pwin.setVisible(false);    
+    hist = new History(this);
   }
   /**
    * Shows a dialog to specify the new skin's location and creates an empty skin.
@@ -718,6 +737,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         selected_item = null;
         saved = false;
         opened = true;
+        hist = new History(this);
       }
   }
   /**
@@ -812,7 +832,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           }
           else if(s.resources.get(i).type.equals("Font")) {
             try {
-              vlcskineditor.Resources.Font fnt = (vlcskineditor.Resources.Font)s.resources.get(i);              
+              vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)s.resources.get(i);              
               String fn = s.skinfolder+fnt.file;              
               if(!files.contains(fn)) { //To avoid double files (e.g. one font file used by several font objects)
                 tgz.putNextEntry(new TarEntry(fnt.file));
@@ -921,7 +941,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = bitmap_adder.getSelectedFiles();
         for(int i=0;i<files.length;i++) {
-          s.resources.add(new vlcskineditor.Resources.Bitmap(s,files[i]));
+          s.resources.add(new vlcskineditor.resources.Bitmap(s,files[i]));
         }
         s.updateResources();
       }      
@@ -933,8 +953,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         Resource r = s.getResource(selected_resource);
         if(r!=null) {
           if(r.type.equals("Bitmap")) {
-            vlcskineditor.Resources.Bitmap b = (vlcskineditor.Resources.Bitmap)r;
-            b.SubBitmaps.add(new vlcskineditor.Resources.SubBitmap(s,b));  
+            vlcskineditor.resources.Bitmap b = (vlcskineditor.resources.Bitmap)r;
+            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
           }
           else {
             JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add sub bitmap",JOptionPane.INFORMATION_MESSAGE);
@@ -963,7 +983,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = font_adder.getSelectedFiles();
         for(int i=0;i<files.length;i++) {
-          s.resources.add(new vlcskineditor.Resources.Font(s,files[i]));
+          s.resources.add(new vlcskineditor.resources.Font(s,files[i]));
         }
         s.updateResources();
       }    
@@ -1131,25 +1151,25 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       java.util.List<Item> i = null;
       if(selected_item!=null ) i = s.getParentListOf(selected_item);
       if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
-      i.add(new vlcskineditor.Items.Button(s));           
+      i.add(new vlcskineditor.items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_checkbox)) {      
       java.util.List<Item> i = null;
       if(selected_item!=null ) i = s.getParentListOf(selected_item);
       if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
-      i.add(new vlcskineditor.Items.Checkbox(s));           
+      i.add(new vlcskineditor.items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_panel)) {      
       java.util.List<Item> i = null;
       if(selected_item!=null ) i = s.getParentListOf(selected_item);
       if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
-      i.add(new vlcskineditor.Items.Panel(s));           
+      i.add(new vlcskineditor.items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_image)) {      
       java.util.List<Item> i = null;
       if(selected_item!=null ) i = s.getParentListOf(selected_item);
       if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
-      i.add(new vlcskineditor.Items.Image(s));           
+      i.add(new vlcskineditor.items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_playtree)) {      
       java.util.List<Item> i = null;
@@ -1177,39 +1197,39 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     else if(e.getSource().equals(items_add_pu_tp_anchor)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Anchor(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Anchor(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_button)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Button(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_checkbox)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Checkbox(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_image)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Image(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_panel)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Panel(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_playtree)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Playtree(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Playtree(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_slider)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Slider(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Slider(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_text)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Text(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Text(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_video)) {      
       java.util.List<Item> l = s.getListOf(selected_item);
-      if(l!=null) l.add(new vlcskineditor.Items.Video(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Video(s));           
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item delete">
@@ -1234,6 +1254,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(m_edit_right)) pvwin.moveItem(1,0);
     else if(e.getSource().equals(m_edit_left)) pvwin.moveItem(-1,0);
     // </editor-fold>
+    else if(e.getSource().equals(m_edit_undo)) {
+      if(hist!=null) hist.undo();
+    }
+    else if(e.getSource().equals(m_edit_redo)) {
+      if(hist!=null) hist.redo();
+    }
   }
   
   /**
@@ -1335,6 +1361,24 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void mouseReleased(MouseEvent e) {}
   public void mouseEntered(MouseEvent e) {}
   public void mouseExited(MouseEvent e) {}
+  /** Sets the activity state of the undo menu item to the given argument */
+  public void setUndoEnabled(boolean enabled) {
+    m_edit_undo.setEnabled(enabled);
+  }
+  /** Sets the activity state of the redo menu item to the given argument */
+  public void setRedoEnabled(boolean enabled) {
+    m_edit_redo.setEnabled(enabled);
+  }
+  /** Sets the action description that can be undone */
+  public void setUndoString(String s) {
+    if(s.isEmpty()) m_edit_undo.setText("Undo");
+    else m_edit_undo.setText("Undo: "+s);
+  }
+  /** Sets the action description that can be redone */
+  public void setRedoString(String s) {
+    if(s.isEmpty()) m_edit_redo.setText("Redo");
+    else m_edit_redo.setText("Redo: "+s);
+  }
   /**
    * Creates an ImageIcon of an image included in the JAR
    * @param filename The path to the image file inside the JAR

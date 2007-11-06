@@ -1,9 +1,9 @@
 /*****************************************************************************
- * Resource.java
+ * SubBitmapAddEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
- * This file is part of VLC Skin Editor
+ * This file is part of vlcskineditor.history
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,33 +20,36 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package vlcskineditor;
+package vlcskineditor.history;
 
-import javax.swing.*;
-import javax.swing.tree.*;
+import vlcskineditor.resources.Bitmap;
+import vlcskineditor.resources.SubBitmap;
+
 /**
- * Abstract superclass representing a Bitmap, SubBitmap or Font
+ * Represents the action of adding a SubBitmap
  * @author Daniel Dreibrodt
  */
-public abstract class Resource {
+public class SubBitmapAddEvent extends HistoryEvent{
   
-  /** Value should be either Bitmap or Font */
-  public String id;
-  public String type;
-  /** Represents the skin to which the resource belongs */
-  public Skin s;
-  public Resource() {
-  }  
-  /** Show a dialog to modify the resource's parameters */
-  public abstract void showOptions();  
-  /** Update the Resource's attributes according to user input */
-  public abstract void update();
-  /** Creates the XML code representing the resource */  
-  public abstract String returnCode();
-  /** Creates a DefaultMutableTreeNode to be displayed in the resources tree */
-  public abstract DefaultMutableTreeNode getTreeNode();  
-  /** If a Resource does contain another Resource of the given id (e.g. a SubBitmap) the containing Resource is returned **/
-  public Resource getParentOf(String id_) {
-    return null;
+  private Bitmap b;
+  private SubBitmap sb;
+  
+  /** Creates a new instance of SubBitmapAddEvent */
+  public SubBitmapAddEvent(Bitmap bmp, SubBitmap sbmp) {
+    b = bmp;
+    sb = sbmp;
+  }
+  public void undo() {
+    b.SubBitmaps.remove(sb);
+    b.s.updateResources();
+    b.s.expandItem(b.id);
+  }
+  public void redo() {
+    b.SubBitmaps.add(sb);
+    b.s.updateResources();
+    b.s.expandItem(sb.id);
+  }
+  public String getDescription() {
+    return "Add SubBitmap";
   }
 }
