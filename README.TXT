@@ -9,6 +9,8 @@ Changelog:
        - Items can be moved in the preview window with the
          arrow keys when the preview window is focused and
          the CONTROL button is pressed.
+       - Many bugfixes
+       - Many actions can be undone/redone
 0.5.0a - Boolean variables are interpreted in the preview
        - Global variables can be edited (boolean only atm)
        - Preview window perfomance improvements
