@@ -22,6 +22,7 @@
 
 package vlcskineditor;
 
+import vlcskineditor.history.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -35,7 +36,6 @@ import javax.swing.border.*;
  */
 public class Window implements ActionListener{
   
-  /** Creates a new instance of Window */
   final String ID_DEFAULT="none";  
   final String VISIBLE_DEFAULT = "true";
   final int X_DEFAULT = 0;
@@ -43,22 +43,23 @@ public class Window implements ActionListener{
   final boolean DRAGDROP_DEFAULT=true;
   final boolean PLAYONDROP_DEFAULT=true;
   
-  String id=ID_DEFAULT;
-  String visible = VISIBLE_DEFAULT;
-  int x = X_DEFAULT;
-  int y = Y_DEFAULT;
-  boolean dragdrop = DRAGDROP_DEFAULT;
-  boolean playondrop = PLAYONDROP_DEFAULT;
+  public String id=ID_DEFAULT;
+  public String visible = VISIBLE_DEFAULT;
+  public int x = X_DEFAULT;
+  public int y = Y_DEFAULT;
+  public boolean dragdrop = DRAGDROP_DEFAULT;
+  public boolean playondrop = PLAYONDROP_DEFAULT;
   
-  java.util.List<Layout> layouts = new LinkedList<Layout>();
+  public java.util.List<Layout> layouts = new LinkedList<Layout>();
   
-  Skin s;
+  public Skin s;
   
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, visible_tf, dragdrop_tf, playondrop_tf;
   JButton ok_btn, cancel_btn, help_btn;
   boolean created = false;
   
+  /** Creates a new instance of Window */
   public Window(String xmlcode, Skin s_) {
     s = s_;
     String[] code = xmlcode.split("\n");
@@ -81,7 +82,7 @@ public class Window implements ActionListener{
       }
       else if(code[i].startsWith("</Layout>")) {
         layoutcode+="\n"+code[i];
-        layouts.add(new Layout(layoutcode,s));
+        layouts.add(new Layout(layoutcode,this,s));
         layoutcode = "";
       }
       else {
@@ -96,16 +97,32 @@ public class Window implements ActionListener{
     s.updateWindows();
     showOptions();
   }
-  public void update(String id_, int x_, int y_, String v_, boolean dd_, boolean pod_) {
-    id=id_;
-    x=x_;
-    y=y_;
-    visible=v_;
-    dragdrop=dd_;
-    playondrop=pod_;
-    s.updateWindows();    
-    created = true;
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+  public void update() {
+    if(!created) {
+      WindowAddEvent wae = new WindowAddEvent(s,this);
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      visible=visible_tf.getText();
+      dragdrop=Boolean.parseBoolean(dragdrop_tf.getText());
+      playondrop=Boolean.parseBoolean(playondrop_tf.getText());
+      s.updateWindows();    
+      created = true;
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);      
+      s.m.hist.addEvent(wae);
+    }
+    else {
+      WindowEditEvent wee = new WindowEditEvent(this);
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      visible=visible_tf.getText();
+      dragdrop=Boolean.parseBoolean(dragdrop_tf.getText());
+      playondrop=Boolean.parseBoolean(playondrop_tf.getText());
+      s.updateWindows();    
+      wee.setNew();
+      s.m.hist.addEvent(wee);
+    }    
   }
   public void showOptions() {
     if(frame==null) {
@@ -214,7 +231,7 @@ public class Window implements ActionListener{
         }
       }
       frame.setVisible(false);
-      update(id_tf.getText(),Integer.parseInt(x_tf.getText()),Integer.parseInt(y_tf.getText()),visible_tf.getText(),Boolean.parseBoolean(dragdrop_tf.getText()),Boolean.parseBoolean(playondrop_tf.getText()));
+      update();
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -237,7 +254,7 @@ public class Window implements ActionListener{
     }
   }
   public void addLayout() {
-    layouts.add(new Layout(s));
+    layouts.add(new Layout(this,s));
   }
   public String returnCode() {
     String code = "<Window";

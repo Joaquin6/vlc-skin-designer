@@ -39,8 +39,8 @@ import java.util.*;
  */
 public class Skin implements ActionListener{
   
-  java.util.List<Resource> resources = new LinkedList<Resource>();
-  java.util.List<Window> windows = new LinkedList<Window>();
+  public java.util.List<Resource> resources = new LinkedList<Resource>();
+  public java.util.List<Window> windows = new LinkedList<Window>();
   final String HEADER = "<!DOCTYPE Theme PUBLIC \"-//VideoLAN//DTD VLC Skins V2.0//EN\" \"skin.dtd\">";
   final String THEME_VERSION_DEFAULT = "2.0";
   final String THEME_TOOLTIPFONT_DEFAULT = "defaultfont";

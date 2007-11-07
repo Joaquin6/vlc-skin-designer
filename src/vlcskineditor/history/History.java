@@ -43,13 +43,14 @@ public class History {
     main = new DummyEvent();
     current = main;
   }
-  /** Adds an Event to the history */
+  /** Adds an Event at the current point in the history list and removes any actions that could be redone*/
   public void addEvent(HistoryEvent h) {    
     current.setNext(h);
     h.setPrevious(current);
     current = current.getNext();
     m.setRedoEnabled(false);
     m.setUndoEnabled(true);
+    m.setUndoString(current.getDescription());
   }
   /** Redoes the action that is next in the history list */
   public void redo() {    

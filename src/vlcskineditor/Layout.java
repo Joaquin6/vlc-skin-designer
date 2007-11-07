@@ -23,6 +23,7 @@
 package vlcskineditor;
 
 import vlcskineditor.items.*;
+import vlcskineditor.history.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -48,6 +49,7 @@ public class Layout implements ActionListener{
   public int maxheight = MAXHEIGHT_DEFAULT;
   public int width, height;
   Skin s;
+  Window parent;
   
   JFrame frame = null;
   JTextField id_tf, width_tf, height_tf, minwidth_tf, minheight_tf, maxwidth_tf, maxheight_tf;
@@ -64,8 +66,9 @@ public class Layout implements ActionListener{
    * @param xmlcode The XML code from which the Layout should be created.
    * @param s_ The Skin in which the Layout is used.
    */
-  public Layout(String xmlcode, Skin s_) {
+  public Layout(String xmlcode, Window w_, Skin s_) {
     s=s_;
+    parent=w_;
     String[] code = xmlcode.split("\n");   
     width = XML.getIntValue(code[0],"width");
     height = XML.getIntValue(code[0],"height");
@@ -151,8 +154,9 @@ public class Layout implements ActionListener{
    * Creates a new Layout from user input.
    * @param s_ The Skin in which the Layout is used.
    */
-  public Layout(Skin s_) {
+  public Layout(Window w_, Skin s_) {
     s=s_;
+    parent=w_;
     id = "Unnamed layout #"+s.getNewId();
     width=0;
     height=0;
@@ -162,17 +166,35 @@ public class Layout implements ActionListener{
    * Updates the Layout's attributes according to the user input.
    */
   public void update() {
-    id=id_tf.getText();
-    width=Integer.parseInt(width_tf.getText());
-    height=Integer.parseInt(height_tf.getText());
-    minwidth=Integer.parseInt(minwidth_tf.getText());
-    minheight=Integer.parseInt(minheight_tf.getText());
-    maxwidth=Integer.parseInt(maxwidth_tf.getText());
-    maxheight=Integer.parseInt(maxheight_tf.getText());
-    s.updateWindows();
-    s.expandLayout(id);
-    created = true;
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    if(!created) {
+      LayoutAddEvent lae = new LayoutAddEvent(parent,this);
+      id=id_tf.getText();
+      width=Integer.parseInt(width_tf.getText());
+      height=Integer.parseInt(height_tf.getText());
+      minwidth=Integer.parseInt(minwidth_tf.getText());
+      minheight=Integer.parseInt(minheight_tf.getText());
+      maxwidth=Integer.parseInt(maxwidth_tf.getText());
+      maxheight=Integer.parseInt(maxheight_tf.getText());
+      s.updateWindows();
+      s.expandLayout(id);
+      created = true;
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      s.m.hist.addEvent(lae);
+    }
+    else {
+      LayoutEditEvent lee = new LayoutEditEvent(this);
+      id=id_tf.getText();
+      width=Integer.parseInt(width_tf.getText());
+      height=Integer.parseInt(height_tf.getText());
+      minwidth=Integer.parseInt(minwidth_tf.getText());
+      minheight=Integer.parseInt(minheight_tf.getText());
+      maxwidth=Integer.parseInt(maxwidth_tf.getText());
+      maxheight=Integer.parseInt(maxheight_tf.getText());
+      s.updateWindows();
+      s.expandLayout(id);      
+      lee.setNew();
+      s.m.hist.addEvent(lee);
+    }
   }
   /**
    * Shows a dialog to edit this Layout's attributes.
