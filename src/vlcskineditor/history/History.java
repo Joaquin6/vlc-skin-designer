@@ -31,7 +31,7 @@ import vlcskineditor.Main;
  */
 public class History {
   
-  private HistoryEvent main, current;
+  private HistoryEvent root, current;
   private Main m;  
   
   
@@ -40,8 +40,8 @@ public class History {
     m = m_;
     m.setUndoEnabled(false);
     m.setRedoEnabled(false);
-    main = new DummyEvent();
-    current = main;
+    root = new DummyEvent();
+    current = root;
   }
   /** Adds an Event at the current point in the history list and removes any actions that could be redone*/
   public void addEvent(HistoryEvent h) {    
@@ -49,8 +49,17 @@ public class History {
     h.setPrevious(current);
     current = current.getNext();
     m.setRedoEnabled(false);
+    m.setRedoString("");
     m.setUndoEnabled(true);
     m.setUndoString(current.getDescription());
+    
+    //Remove any link to an event that is more than 50 edits ago
+    HistoryEvent he = current.getPrevious();
+    for (int i=1;i<50;i++) {
+      if(he.getPrevious()==null) break;
+      he = he.getPrevious();
+    }
+    if(he!=root) he.setPrevious(root);
   }
   /** Redoes the action that is next in the history list */
   public void redo() {    
@@ -65,12 +74,12 @@ public class History {
   }
   /** Undoes the current action */
   public void undo() {
-    if(current==main) return;
+    if(current==root) return;
     current.undo();
     current = current.getPrevious();
     m.setRedoEnabled(true);    
     m.setRedoString(current.getNext().getDescription());
-    m.setUndoEnabled(current!=main);
+    m.setUndoEnabled(current!=root);
     m.setUndoString(current.getDescription());
   }
 }

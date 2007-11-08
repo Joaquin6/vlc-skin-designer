@@ -452,7 +452,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items.setSize(200,200);
     items.setVisible(true); 
     
-    pvwin = new PreviewWindow();
+    pvwin = new PreviewWindow(this);
     
     jdesk.add(resources);
     jdesk.add(windows);

@@ -26,6 +26,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.swing.*;
+import vlcskineditor.history.*;
 
 
 /**
@@ -45,11 +46,14 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
   
   JMenuItem up, down, right, left;
+  ItemMoveEvent ime = null;
+  Main m;
   
   /**
    * Creates a new PreviewWindow that is initially hidden.
    */
-  public PreviewWindow() {   
+  public PreviewWindow(Main m_) {   
+    m = m_;
     frame = new JInternalFrame("No Layout selected");
     frame.add(this);
     frame.setVisible(false);
@@ -135,6 +139,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     if(!starteddragging && selected_item.contains(e.getX(),e.getY())) {
       dragstartx=e.getX();
       dragstarty=e.getY();
+      ime = new ItemMoveEvent(selected_item);
       dragstartitemx=selected_item.x;
       dragstartitemy=selected_item.y;
       starteddragging=true;
@@ -167,6 +172,10 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   }
   public void mouseReleased(MouseEvent e) {
     fu.fps=5;    
+    if(starteddragging) {
+      ime.setNew();
+      m.hist.addEvent(ime);
+    }
     starteddragging=false;
     if(selected_item!=null) selected_item.setClicked(false);
     else return;
