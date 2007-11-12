@@ -1,5 +1,5 @@
 /*****************************************************************************
- * ItemMoveEvent.java
+ * AnchorEditEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -22,36 +22,42 @@
 
 package vlcskineditor.history;
 
-import vlcskineditor.Item;
+import vlcskineditor.items.Anchor;
 
 /**
- * Represents the action of moving an Item
+ * Represents the action of editing an Anchor
  * @author Daniel Dreibrodt
  */
-public class ItemMoveEvent extends HistoryEvent{
+public class AnchorEditEvent extends HistoryEvent{
   
-  private Item i;
-  private int x_old, x_new, y_old, y_new;
+  private Anchor a;
+  private String points_old, points_new;
+  private int priority_old, priority_new;
+  private int range_old, range_new;
   
-  /** Creates a new instance of ItemMoveEvent */
-  public ItemMoveEvent(Item ite) {
-    i = ite;
-    x_new = x_old = i.x;
-    x_new = y_old = i.y;
+  /** Creates a new instance of AnchorEditEvent */
+  public AnchorEditEvent(Anchor anc) {
+    a = anc;
+    points_old = a.points;
+    priority_old = a.priority;
+    range_old = a.range;
   }
-  public void setNew() {
-    x_new = i.x;
-    y_new = i.y;
+  public void setNew() {   
+    points_new = a.points;
+    priority_new = a.priority;
+    range_new = a.range;
   }
   public void undo() {
-    i.x = x_old;
-    i.y = y_old;
+    a.points = points_old;
+    a.priority = priority_old;
+    a.range = range_old;
   }
   public void redo() {
-    i.x = x_new;
-    i.y = y_new;
+    a.points = points_new;
+    a.priority = priority_new;
+    a.range = range_new;
   }
   public String getDescription() {
-    return "Move Item";
+    return "Edit Anchor";
   }
 }

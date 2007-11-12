@@ -22,6 +22,7 @@
 
 package vlcskineditor;
 
+import vlcskineditor.history.*;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.BitmapFont;
 import vlcskineditor.resources.SubBitmap;
@@ -34,7 +35,7 @@ import javax.swing.tree.*;
 import java.util.*;
 
 /**
- *
+ * Represents a skin file. Stores all Resources and Windows, which in turn store the Layouts that contain the items.
  * @author Daniel
  */
 public class Skin implements ActionListener{
@@ -49,17 +50,17 @@ public class Skin implements ActionListener{
   final int THEME_MOVEALPHA_DEFAULT = 255;
   String theme_version = THEME_VERSION_DEFAULT;
   String theme_tooltipfont = THEME_TOOLTIPFONT_DEFAULT;
-  int theme_magnet = THEME_MAGNET_DEFAULT;
-  int theme_alpha = THEME_ALPHA_DEFAULT;
-  int theme_movealpha = THEME_MOVEALPHA_DEFAULT;
+  public int theme_magnet = THEME_MAGNET_DEFAULT;
+  public int theme_alpha = THEME_ALPHA_DEFAULT;
+  public int theme_movealpha = THEME_MOVEALPHA_DEFAULT;
   final String THEMEINFO_NAME_DEFAULT = "Unnamed Theme";
   final String THEMEINFO_AUTHOR_DEFAULT = "Unknown Author";
   final String THEMEINFO_EMAIL_DEFAULT = "Unknown";
   final String THEMEINFO_WEBPAGE_DEFAULT = "http://www.videolan.org/vlc/";
-  String themeinfo_name = THEMEINFO_NAME_DEFAULT;
-  String themeinfo_author = THEMEINFO_AUTHOR_DEFAULT;
-  String themeinfo_email = THEMEINFO_EMAIL_DEFAULT;
-  String themeinfo_webpage = THEMEINFO_EMAIL_DEFAULT;
+  public String themeinfo_name = THEMEINFO_NAME_DEFAULT;
+  public String themeinfo_author = THEMEINFO_AUTHOR_DEFAULT;
+  public String themeinfo_email = THEMEINFO_EMAIL_DEFAULT;
+  public String themeinfo_webpage = THEMEINFO_EMAIL_DEFAULT;
   File skinfile;
   public String skinfolder;
   public Main m;
@@ -334,6 +335,7 @@ public class Skin implements ActionListener{
         JOptionPane.showMessageDialog(theme_frame,"Please enter a valid movealpha value!","Movealpha value not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
+      ThemeEditEvent tee = new ThemeEditEvent(this);
       themeinfo_name = themeinfo_name_tf.getText();
       themeinfo_author = themeinfo_author_tf.getText();
       themeinfo_email = themeinfo_email_tf.getText();
@@ -342,6 +344,8 @@ public class Skin implements ActionListener{
       theme_alpha = Integer.parseInt(theme_alpha_tf.getText());
       theme_movealpha = Integer.parseInt(theme_movealpha_tf.getText());
       theme_frame.setVisible(false);
+      tee.setNew();
+      m.hist.addEvent(tee);
     }
     else if(e.getSource().equals(theme_help_btn)) {
       Desktop desktop;

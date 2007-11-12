@@ -175,6 +175,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     if(starteddragging) {
       ime.setNew();
       m.hist.addEvent(ime);
+      ime = null;
     }
     starteddragging=false;
     if(selected_item!=null) selected_item.setClicked(false);
@@ -191,8 +192,14 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
    */
   public void moveItem(int x, int y) {    
     try {
+      if(ime==null) {
+        ime = new ItemMoveEvent(selected_item);
+        m.hist.addEvent(ime);
+      }      
       selected_item.x+=x;
       selected_item.y+=y;
+      if(ime.getNext()==null) ime.setNew();
+      else ime = null;
       repaint();
     }
     catch (NullPointerException ex) {

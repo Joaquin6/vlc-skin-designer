@@ -1,5 +1,5 @@
 /*****************************************************************************
- * ItemMoveEvent.java
+ * AnchorAddEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -22,36 +22,34 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.items.Anchor;
 import vlcskineditor.Item;
+import java.util.List;
 
 /**
- * Represents the action of moving an Item
+ * Represents the action of adding an Anchor
  * @author Daniel Dreibrodt
  */
-public class ItemMoveEvent extends HistoryEvent{
+public class AnchorAddEvent extends HistoryEvent{
   
-  private Item i;
-  private int x_old, x_new, y_old, y_new;
+  private Anchor a;
+  private List<Item> parent;
   
-  /** Creates a new instance of ItemMoveEvent */
-  public ItemMoveEvent(Item ite) {
-    i = ite;
-    x_new = x_old = i.x;
-    x_new = y_old = i.y;
-  }
-  public void setNew() {
-    x_new = i.x;
-    y_new = i.y;
+  /** Creates a new instance of AnchorAddEvent */
+  public AnchorAddEvent(List<Item> par, Anchor anc) {
+    parent = par;
+    a = anc;
   }
   public void undo() {
-    i.x = x_old;
-    i.y = y_old;
+    parent.remove(a);
+    a.s.updateItems();
   }
   public void redo() {
-    i.x = x_new;
-    i.y = y_new;
+    parent.add(a);
+    a.s.updateItems();
+    a.s.expandItem(a.id);
   }
   public String getDescription() {
-    return "Move Item";
+    return "Add Anchor";
   }
 }

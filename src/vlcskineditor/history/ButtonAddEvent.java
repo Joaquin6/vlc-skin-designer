@@ -1,5 +1,5 @@
 /*****************************************************************************
- * ItemMoveEvent.java
+ * ButtonAddEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -23,35 +23,33 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
+import vlcskineditor.items.Button;
+import java.util.List;
 
 /**
- * Represents the action of moving an Item
+ * ButtonAddEvent
  * @author Daniel Dreibrodt
  */
-public class ItemMoveEvent extends HistoryEvent{
+public class ButtonAddEvent extends HistoryEvent{
   
-  private Item i;
-  private int x_old, x_new, y_old, y_new;
+  private List<Item> parent;
+  private Button b;
   
-  /** Creates a new instance of ItemMoveEvent */
-  public ItemMoveEvent(Item ite) {
-    i = ite;
-    x_new = x_old = i.x;
-    x_new = y_old = i.y;
-  }
-  public void setNew() {
-    x_new = i.x;
-    y_new = i.y;
+  /** Creates a new instance of ButtonAddEvent */
+  public ButtonAddEvent(List<Item> par, Button but) {
+    parent = par;
+    b = but;
   }
   public void undo() {
-    i.x = x_old;
-    i.y = y_old;
+    parent.remove(b);
+    b.s.updateItems();
   }
   public void redo() {
-    i.x = x_new;
-    i.y = y_new;
+    parent.add(b);
+    b.s.updateItems();
+    b.s.expandItem(b.id);
   }
   public String getDescription() {
-    return "Move Item";
+    return "Add Button";
   }
 }

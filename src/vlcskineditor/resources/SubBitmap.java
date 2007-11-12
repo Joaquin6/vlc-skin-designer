@@ -57,6 +57,8 @@ public class SubBitmap extends Resource implements ActionListener{
   
   boolean created = false;
   
+  SubBitmapEditWindow sbew = null;
+  
   /**
    * Creates a new SubBitmap from XML.
    * @param xmlcode The XML code from which the SubBitmap should be created. One line per tag.
@@ -235,6 +237,7 @@ public class SubBitmap extends Resource implements ActionListener{
     nbframes_tf.setText(String.valueOf(nbframes));
     fps_tf.setText(String.valueOf(fps));
     frame.setVisible(true);    
+    sbew = new SubBitmapEditWindow(parent,this);    
   }
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
@@ -257,6 +260,9 @@ public class SubBitmap extends Resource implements ActionListener{
         return;
       }
       frame.setVisible(false);
+      sbew.frame.setVisible(false);
+      sbew.frame = null;
+      sbew = null;
       update();      
     }
     else if(e.getSource().equals(help_btn)) {
@@ -276,7 +282,10 @@ public class SubBitmap extends Resource implements ActionListener{
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
-      if(!created) parent.SubBitmaps.remove(this);
+      sbew.frame.setVisible(false);
+      sbew.frame = null;
+      sbew = null;
+      if(!created) parent.SubBitmaps.remove(this);      
     }
   }
   public String returnCode() {

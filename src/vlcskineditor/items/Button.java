@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -78,26 +79,55 @@ public class Button extends Item implements ActionListener{
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    up = up_tf.getText();
-    over = over_tf.getText();
-    down = down_tf.getText();
-    action = action_tf.getText();
-    tooltiptext = tooltiptext_tf.getText();
-    
-    s.updateItems();    
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up = up_tf.getText();
+      over = over_tf.getText();
+      down = down_tf.getText();
+      action = action_tf.getText();
+      tooltiptext = tooltiptext_tf.getText();
+      
+      ButtonAddEvent bae = new ButtonAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(bae);
+
+      s.updateItems();    
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      created = true;      
+    }
+    else {
+      ButtonEditEvent bee = new ButtonEditEvent(this);
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up = up_tf.getText();
+      over = over_tf.getText();
+      down = down_tf.getText();
+      action = action_tf.getText();
+      tooltiptext = tooltiptext_tf.getText();
+      
+      bee.setNew();
+      s.m.hist.addEvent(bee);
+      
+      s.updateItems();    
+      s.expandItem(id);
+    }
   }
   public void showOptions() {
     if(frame==null) {

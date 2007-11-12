@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -93,18 +94,35 @@ public class Anchor extends Item implements ActionListener{
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
   public void update() {
-    id=id_tf.getText();
-    priority=Integer.parseInt(priority_tf.getText());
-    lefttop=lefttop_cb.getSelectedItem().toString();
-    x=Integer.parseInt(x_tf.getText());
-    y=Integer.parseInt(y_tf.getText());
-    points=points_tf.getText();
-    range=Integer.parseInt(range_tf.getText());
-    updateBezier();
-    s.updateItems();
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id=id_tf.getText();
+      priority=Integer.parseInt(priority_tf.getText());
+      lefttop=lefttop_cb.getSelectedItem().toString();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      points=points_tf.getText();
+      range=Integer.parseInt(range_tf.getText());
+      updateBezier();
+      s.updateItems();
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      created = true;
+      AnchorAddEvent aae = new AnchorAddEvent(s.getParentListOf(id),this);
+    } 
+    else {
+      AnchorEditEvent aee = new AnchorEditEvent(this);
+      id=id_tf.getText();
+      priority=Integer.parseInt(priority_tf.getText());
+      lefttop=lefttop_cb.getSelectedItem().toString();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      points=points_tf.getText();
+      range=Integer.parseInt(range_tf.getText());
+      updateBezier();
+      s.updateItems();
+      s.expandItem(id);      
+      aee.setNew();
+    }   
   }
   public void showOptions() {
     if(frame==null) {
