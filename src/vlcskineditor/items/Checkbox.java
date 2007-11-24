@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -99,32 +100,68 @@ public class Checkbox extends Item implements ActionListener{
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    up1 = up1_tf.getText();
-    over1 = over1_tf.getText();
-    down1 = down1_tf.getText();
-    action1 = action1_tf.getText();
-    tooltiptext1 = tooltiptext1_tf.getText();
-    up2 = up2_tf.getText();
-    over2 = over2_tf.getText();
-    down2 = down2_tf.getText();
-    action2 = action2_tf.getText();
-    tooltiptext2 = tooltiptext2_tf.getText();
-    state = state_tf.getText();
-    
-    s.updateItems();   
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up1 = up1_tf.getText();
+      over1 = over1_tf.getText();
+      down1 = down1_tf.getText();
+      action1 = action1_tf.getText();
+      tooltiptext1 = tooltiptext1_tf.getText();
+      up2 = up2_tf.getText();
+      over2 = over2_tf.getText();
+      down2 = down2_tf.getText();
+      action2 = action2_tf.getText();
+      tooltiptext2 = tooltiptext2_tf.getText();
+      state = state_tf.getText();
+      
+      CheckboxAddEvent cae = new CheckboxAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(cae);
+      
+      s.updateItems();   
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      created = true;
+    }
+    else {
+      CheckboxEditEvent cee = new CheckboxEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up1 = up1_tf.getText();
+      over1 = over1_tf.getText();
+      down1 = down1_tf.getText();
+      action1 = action1_tf.getText();
+      tooltiptext1 = tooltiptext1_tf.getText();
+      up2 = up2_tf.getText();
+      over2 = over2_tf.getText();
+      down2 = down2_tf.getText();
+      action2 = action2_tf.getText();
+      tooltiptext2 = tooltiptext2_tf.getText();
+      state = state_tf.getText();
+      
+      cee.setNew();
+      s.m.hist.addEvent(cee);
+      
+      s.updateItems();   
+      s.expandItem(id);
+    }
   }
   public void showOptions() {
     if(frame==null) {
