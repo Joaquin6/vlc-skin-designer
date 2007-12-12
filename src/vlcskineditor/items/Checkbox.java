@@ -321,7 +321,7 @@ public class Checkbox extends Item implements ActionListener{
       state1.add(tooltiptext1_tf);
       tooltiptext1_l.setBounds(5,135,75,24);
       tooltiptext1_tf.setBounds(85,135,150,24);
-      state1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "If state is false:"));
+      state1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "If state is false:"));
       state1.setMinimumSize(new Dimension(240,165));
       state1.setPreferredSize(new Dimension(240,165));
       state1.setMaximumSize(new Dimension(240,165));
@@ -350,7 +350,7 @@ public class Checkbox extends Item implements ActionListener{
       state2.add(tooltiptext2_tf);
       tooltiptext2_l.setBounds(5,135,75,24);
       tooltiptext2_tf.setBounds(85,135,150,24);
-      state2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "If state is true:"));
+      state2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "If state is true:"));
       state2.setMinimumSize(new Dimension(240,165));
       state2.setPreferredSize(new Dimension(240,165));
       state2.setMaximumSize(new Dimension(240,165));

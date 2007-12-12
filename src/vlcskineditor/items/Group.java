@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.util.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -113,23 +114,42 @@ public class Group extends Item implements ActionListener{
     s.updateItems();        
   }
   public void update() {
-    id=id_tf.getText();
-    x=Integer.parseInt(x_tf.getText());
-    y=Integer.parseInt(y_tf.getText());
-    for(Item i:items) {
-      i.setOffset(x,y);
+    if(!created) {
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      for(Item i:items) {
+        i.setOffset(x,y);
+      }
+      s.updateItems();    
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created = true;
+      
+      GroupAddEvent gaa = new GroupAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(gaa);
     }
-    s.updateItems();    
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    else {
+      GroupEditEvent gee = new GroupEditEvent(this);
+      id=id_tf.getText();
+      x=Integer.parseInt(x_tf.getText());
+      y=Integer.parseInt(y_tf.getText());
+      for(Item i:items) {
+        i.setOffset(x,y);
+      }
+      s.updateItems();    
+      s.expandItem(id);
+      
+      gee.setNew();
+      s.m.hist.addEvent(gee);
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Group settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
