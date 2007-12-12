@@ -52,6 +52,7 @@ public class ButtonEditEvent extends HistoryEvent{
     ykeepratio_old = b.ykeepratio;
     x_old = b.x;
     y_old = b.y;
+    help_old = b.help;
     
     up_old = b.up;
     over_old = b.over;
@@ -68,6 +69,7 @@ public class ButtonEditEvent extends HistoryEvent{
     ykeepratio_new = b.ykeepratio;
     x_new = b.x;
     y_new = b.y;
+    help_new = b.help;
     
     up_new = b.up;
     over_new = b.over;
@@ -84,6 +86,7 @@ public class ButtonEditEvent extends HistoryEvent{
     b.ykeepratio = ykeepratio_old;
     b.x = x_old;
     b.y = y_old;
+    b.help = help_old;
     
     b.up = up_old;
     b.over = over_old;
@@ -100,6 +103,7 @@ public class ButtonEditEvent extends HistoryEvent{
     b.ykeepratio = ykeepratio_new;
     b.x = x_new;
     b.y = y_new;
+    b.help = help_new;
     
     b.up = up_new;
     b.over = over_new;

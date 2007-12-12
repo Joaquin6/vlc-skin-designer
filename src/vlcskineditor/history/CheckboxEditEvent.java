@@ -56,6 +56,7 @@ public class CheckboxEditEvent extends HistoryEvent{
     ykeepratio_old = c.ykeepratio;
     x_old = c.x;
     y_old = c.y;
+    help_old = c.help;
     
     down1_old = c.down1;
     down2_old = c.down2;
@@ -78,6 +79,7 @@ public class CheckboxEditEvent extends HistoryEvent{
     ykeepratio_new = c.ykeepratio;
     x_new = c.x;
     y_new = c.y;
+    help_new = c.help;
     
     down1_new = c.down1;
     down2_new = c.down2;
@@ -100,6 +102,7 @@ public class CheckboxEditEvent extends HistoryEvent{
     c.ykeepratio = ykeepratio_old;
     c.x = x_old;
     c.y = y_old;    
+    c.help = help_old;
     
     c.down1 = down1_old;
     c.down2 = down2_old;
@@ -121,7 +124,8 @@ public class CheckboxEditEvent extends HistoryEvent{
     c.xkeepratio = xkeepratio_new;
     c.ykeepratio = ykeepratio_new;
     c.x = x_new;
-    c.y = y_new;    
+    c.y = y_new;  
+    c.help = help_new;
     
     c.down1 = down1_new;
     c.down2 = down2_new;

@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -77,32 +78,58 @@ public class Image extends Item implements ActionListener{
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    image = image_tf.getText();
-    resize = resize_cb.getSelectedItem().toString();
-    action = action_cb.getSelectedItem().toString();
-    action2 = action2_tf.getText();   
-    
-    s.updateItems();      
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      image = image_tf.getText();
+      resize = resize_cb.getSelectedItem().toString();
+      action = action_cb.getSelectedItem().toString();
+      action2 = action2_tf.getText();   
+
+      s.updateItems();      
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created = true;
+      
+      ImageAddEvent iae = new ImageAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(iae);
+    }
+    else {
+      ImageEditEvent iee = new ImageEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      image = image_tf.getText();
+      resize = resize_cb.getSelectedItem().toString();
+      action = action_cb.getSelectedItem().toString();
+      action2 = action2_tf.getText();   
+      
+      iee.setNew();
+      s.m.hist.addEvent(iee);
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Image settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -205,30 +232,30 @@ public class Image extends Item implements ActionListener{
       general.setMaximumSize(new Dimension(240,285));
       frame.add(general);
       
-      JPanel image = new JPanel(null);
-      image.add(image_l);
-      image.add(image_tf);
+      JPanel image_settings = new JPanel(null);
+      image_settings.add(image_l);
+      image_settings.add(image_tf);
       image_l.setBounds(5,15,75,24);
       image_tf.setBounds(85,15,150,24);
-      image.add(resize_l);
-      image.add(resize_cb);
+      image_settings.add(resize_l);
+      image_settings.add(resize_cb);
       resize_l.setBounds(5,45,75,24);
       resize_cb.setBounds(85,45,150,24);
-      image.add(action_l);
-      image.add(action_cb);      
+      image_settings.add(action_l);
+      image_settings.add(action_cb);      
       action_l.setBounds(5,75,75,24);
       action_cb.setBounds(85,75,150,24);
-      image.add(action2_l);
-      image.add(action2_tf);
-      image.add(action2_btn);
+      image_settings.add(action2_l);
+      image_settings.add(action2_tf);
+      image_settings.add(action2_btn);
       action2_l.setBounds(5,105,75,24);
       action2_tf.setBounds(85,105,120,24);
       action2_btn.setBounds(210,105,24,24);
-      image.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Image Attributes"));
-      image.setMinimumSize(new Dimension(240,135));
-      image.setPreferredSize(new Dimension(240,135));
-      image.setMaximumSize(new Dimension(240,135));
-      frame.add(image);
+      image_settings.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Image Attributes"));
+      image_settings.setMinimumSize(new Dimension(240,135));
+      image_settings.setPreferredSize(new Dimension(240,135));
+      image_settings.setMaximumSize(new Dimension(240,135));
+      frame.add(image_settings);
       
       
       frame.add(ok_btn);
