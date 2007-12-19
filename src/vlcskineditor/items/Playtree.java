@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -140,41 +141,80 @@ public class Playtree extends Item implements ActionListener{
     s.updateItems();    
   }
   public void update()  {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    width = Integer.parseInt(width_tf.getText());
-    height = Integer.parseInt(height_tf.getText());
-    font = font_tf.getText();
-    bgimage = bgimage_tf.getText();
-    itemimage = itemimage_tf.getText();
-    openimage = openimage_tf.getText();
-    closedimage = closedimage_tf.getText();
-    fgcolor = fgcolor_tf.getText();
-    selcolor = selcolor_tf.getText();
-    playcolor = playcolor_tf.getText();
-    bgcolor1 = bgcolor1_tf.getText();
-    bgcolor2 = bgcolor2_tf.getText();
-    flat = (Boolean)flat_cb.getSelectedItem();
-    
-    s.updateItems();
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created=true;
+    if(!created) {
+      PlaytreeAddEvent paa = new PlaytreeAddEvent(s.getParentListOf(id),this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());
+      height = Integer.parseInt(height_tf.getText());
+      font = font_tf.getText();
+      bgimage = bgimage_tf.getText();
+      itemimage = itemimage_tf.getText();
+      openimage = openimage_tf.getText();
+      closedimage = closedimage_tf.getText();
+      fgcolor = fgcolor_tf.getText();
+      selcolor = selcolor_tf.getText();
+      playcolor = playcolor_tf.getText();
+      bgcolor1 = bgcolor1_tf.getText();
+      bgcolor2 = bgcolor2_tf.getText();
+      flat = (Boolean)flat_cb.getSelectedItem();
+
+      s.updateItems();
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created=true;
+      
+      s.m.hist.addEvent(paa);
+    }
+    else {
+      PlaytreeEditEvent pee = new PlaytreeEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());
+      height = Integer.parseInt(height_tf.getText());
+      font = font_tf.getText();
+      bgimage = bgimage_tf.getText();
+      itemimage = itemimage_tf.getText();
+      openimage = openimage_tf.getText();
+      closedimage = closedimage_tf.getText();
+      fgcolor = fgcolor_tf.getText();
+      selcolor = selcolor_tf.getText();
+      playcolor = playcolor_tf.getText();
+      bgcolor1 = bgcolor1_tf.getText();
+      bgcolor2 = bgcolor2_tf.getText();
+      flat = (Boolean)flat_cb.getSelectedItem();
+
+      s.updateItems();
+      s.expandItem(id);
+      
+      pee.setNew();
+      s.m.hist.addEvent(pee);
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Playtree settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -692,6 +732,7 @@ public class Playtree extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,width,height);
     }
   }
+  @Override
   public boolean contains (int x_, int y_) {
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
@@ -700,10 +741,12 @@ public class Playtree extends Item implements ActionListener{
     node.add(slider.getTreeNode());
     return node;
   }
+  @Override
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
     else return slider.getItem(id_);
   }
+  @Override
   public Item getParentOf(String id_) {
    if(slider!=null) {
      if(slider.id.equals(id_)) return this;
