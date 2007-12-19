@@ -1,5 +1,5 @@
 /*****************************************************************************
- * GroupEditEvent.java
+ * PanelAddEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  * 
@@ -23,50 +23,34 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
-import vlcskineditor.items.Group;
+import vlcskineditor.items.Panel;
+import java.util.List;
 
 /**
- * Represents the action of editing a Group
- * @author Daniel
+ * Represents the action of adding a Panel
+ * @author Daniel Dreibrodt
  */
-public class GroupEditEvent extends HistoryEvent{
-  private Group g;
-  private String id_old, id_new;
-  private int x_old, x_new, y_old, y_new;
-    
-  public GroupEditEvent(Group gro) {
-    g = gro;      
-    id_old = g.id;
-    x_old = g.x;
-    y_old = g.y;
-  }
-  public void setNew() {
-    id_new = g.id;
-    x_new = g.x;
-    y_new = g.y;
+public class PanelAddEvent extends HistoryEvent{
+  
+  Panel p;
+  List<Item> parent;
+  
+  public PanelAddEvent(List<Item> lis, Panel pan) {
+    parent = lis;
+    p = pan;
   }
   @Override
   public void undo() {
-    g.id = id_old;
-    g.x = x_old;
-    g.y = y_old;
-    
-    for(Item i:g.items) {
-      i.setOffset(x_old,y_old);
-    }
+    parent.remove(p);
+    p.s.updateItems();
   }
   @Override
   public void redo() {
-    g.id = id_new;
-    g.x = x_new;
-    g.y = y_new;
-    
-    for(Item i:g.items) {
-      i.setOffset(x_new,y_new);
-    }
+    parent.add(p);
+    p.s.updateItems();
   }
   @Override
   public String getDescription() {
-    return "Edit Group";
+    return "Add Panel";
   }
 }

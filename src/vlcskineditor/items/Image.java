@@ -367,7 +367,7 @@ public class Image extends Item implements ActionListener{
   public void draw(Graphics2D g) {
     draw(g,offsetx,offsety);
   }
-   public void draw(Graphics2D g,int x_, int y_) {
+  public void draw(Graphics2D g,int x_, int y_) {
     if(!created) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
     g.drawImage(bi,x+x_,y+y_,null);
@@ -376,10 +376,10 @@ public class Image extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
     }
   }
-   public boolean contains(int x_, int y_) {
+  public boolean contains(int x_, int y_) {
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
-   }
+  }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Image: "+id);         
     return node;

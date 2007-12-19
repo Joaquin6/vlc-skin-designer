@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -39,7 +40,7 @@ public class Panel extends Item implements ActionListener{
   /** The items contained in the panel */
   public java.util.List<Item> items = new LinkedList<Item>();
   
-  int width, height;
+  public int width, height;
   
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, width_tf, height_tf, help_tf, visible_tf;
@@ -126,26 +127,57 @@ public class Panel extends Item implements ActionListener{
     s.updateItems();    
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    width = Integer.parseInt(width_tf.getText());
-    height = Integer.parseInt(height_tf.getText());
-    
-    s.updateItems();    
-    s.expandItem(id);
-    for(Item i:items) {
-      i.setOffset(x,y);
+    if(!created) {
+      PanelAddEvent paa = new PanelAddEvent(s.getParentListOf(id),this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());
+      height = Integer.parseInt(height_tf.getText());
+
+      s.updateItems();    
+      s.expandItem(id);
+      for(Item i:items) {
+        i.setOffset(x,y);
+      }
+      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      created = true;
+      
+      s.m.hist.addEvent(paa);
     }
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    else {
+      PanelEditEvent pee = new PanelEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());
+      height = Integer.parseInt(height_tf.getText());
+
+      s.updateItems();    
+      s.expandItem(id);
+      for(Item i:items) {
+        i.setOffset(x,y);
+      }
+      
+      pee.setNew();
+      s.m.hist.addEvent(pee);
+    }
   }
   public void showOptions() {
     if(frame==null) {
