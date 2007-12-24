@@ -58,6 +58,7 @@ public class Anchor extends Item implements ActionListener{
    * @param s_ The skin in which the Anchor is used.
    */
   public Anchor(String xmlcode, Skin s_) {
+    type = "Anchor";
     s=s_;
     if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
     updateBezier();
@@ -75,6 +76,7 @@ public class Anchor extends Item implements ActionListener{
    * @param s_ The Skin in which the Anchor is used.
    */
   public Anchor(Skin s_) {
+    type = "Anchor";
     s = s_;
     priority = 0;
     id = "Anchor #"+s.getNewId();
@@ -107,7 +109,8 @@ public class Anchor extends Item implements ActionListener{
       s.expandItem(id);
       frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
       created = true;
-      AnchorAddEvent aae = new AnchorAddEvent(s.getParentListOf(id),this);
+      ItemAddEvent aae = new ItemAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(aae);
     } 
     else {
       AnchorEditEvent aee = new AnchorEditEvent(this);
@@ -122,6 +125,7 @@ public class Anchor extends Item implements ActionListener{
       s.updateItems();
       s.expandItem(id);      
       aee.setNew();
+      s.m.hist.addEvent(aee);
     }   
   }
   public void showOptions() {

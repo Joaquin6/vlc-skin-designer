@@ -144,7 +144,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       dragstartitemy=selected_item.y;
       starteddragging=true;
     }
-    else {
+    else if(starteddragging) {
       selected_item.x=dragstartitemx+e.getX()-dragstartx;
       selected_item.y=dragstartitemy+e.getY()-dragstarty;
     }

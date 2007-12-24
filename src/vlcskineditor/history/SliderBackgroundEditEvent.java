@@ -1,5 +1,5 @@
 /*****************************************************************************
- * PlaytreeAddEvent.java
+ * SliderBackgroundEditEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  * 
@@ -22,35 +22,58 @@
 
 package vlcskineditor.history;
 
-import vlcskineditor.Item;
-import vlcskineditor.items.Playtree;
-import java.util.List;
+import vlcskineditor.items.SliderBackground;
 
 /**
- * Represents the action of adding a Playtree
+ * Represents the action of editing a slider background
  * @author Daniel Dreibrodt
  */
-public class PlaytreeAddEvent extends HistoryEvent{
+public class SliderBackgroundEditEvent extends HistoryEvent{
   
-  private List<Item> parent;
-  private Playtree p;
+  SliderBackground s;
   
-  public PlaytreeAddEvent(List<Item> par, Playtree pla) {
-    parent = par;
-    p = pla;
+  private String id_old, id_new, image_old, image_new;
+  private int nbhoriz_old, nbhoriz_new, nbvert_old, nbvert_new;
+  private int padhoriz_old, padhoriz_new, padvert_old, padvert_new;
+  
+  public SliderBackgroundEditEvent(SliderBackground sli) {
+    s = sli;
+    
+    id_old = s.id;
+    image_old = s.image;
+    nbhoriz_old = s.nbhoriz;
+    nbvert_old = s.nbvert;
+    padhoriz_old = s.padhoriz;
+    padvert_old = s.padvert;
+  }
+  public void setNew() {
+    id_new = s.id;
+    image_new = s.image;
+    nbhoriz_new = s.nbhoriz;
+    nbvert_new = s.nbvert;
+    padhoriz_new = s.padhoriz;
+    padvert_new = s.padvert;
   }
   @Override
   public void undo() {
-    parent.remove(p);
-    p.s.updateItems();
+    s.id = id_old;
+    s.image = image_old;
+    s.nbhoriz = nbhoriz_old;
+    s.nbvert = nbvert_old;
+    s.padhoriz = padhoriz_old;
+    s.padvert = padvert_old;
   }
   @Override
   public void redo() {
-    parent.add(p);
-    p.s.updateItems();
+    s.id = id_new;
+    s.image = image_new;
+    s.nbhoriz = nbhoriz_new;
+    s.nbvert = nbvert_new;
+    s.padhoriz = padhoriz_new;
+    s.padvert = padvert_new;
   }
   @Override
   public String getDescription() {
-    return "Add Panel";
+    return "Edit SliderBackground";
   }
 }

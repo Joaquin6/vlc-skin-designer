@@ -22,10 +22,8 @@
 
 package vlcskineditor.items;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.ListIterator;
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -68,7 +66,7 @@ public class Slider extends Item implements ActionListener{
   
   /** Creates a new instance of Slider */
   public Slider(String xmlcode, Skin s_) {
-    type = "SliderBackground";
+    type = "Slider";
     s = s_;
     String[] code = xmlcode.split("\n");
     up = XML.getValue(code[0],"up");
@@ -104,7 +102,7 @@ public class Slider extends Item implements ActionListener{
     created=true;
   }
   public Slider(String xmlcode, Skin s_, boolean ipt) {
-    type = "SliderBackground";
+    type = "Slider";
     s = s_;
     String[] code = xmlcode.split("\n");
     inPlaytree = ipt;
@@ -135,6 +133,7 @@ public class Slider extends Item implements ActionListener{
     created=true;
   }
   public Slider(Skin s_) {
+    type = "Slider";
     s = s_;
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
@@ -144,6 +143,7 @@ public class Slider extends Item implements ActionListener{
     s.expandItem(id);
   }
   public Slider(Skin s_, boolean ipt) {
+    type = "Slider";
     s = s_;
     up = "none";
     id = "Unnamed slider #"+s.getNewId();
@@ -163,37 +163,71 @@ public class Slider extends Item implements ActionListener{
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    up = up_tf.getText();
-    over = over_tf.getText();
-    down = down_tf.getText();
-    points = points_tf.getText();
-    thickness = Integer.parseInt(thickness_tf.getText());
-    if(!inPlaytree) value = (String)value_cb.getSelectedItem();
-    tooltiptext = tooltiptext_tf.getText();
-    
-    updateBezier();
-    
-    s.updateItems();   
-    s.expandItem(id);
-    created=true;
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+    if(!created) {
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up = up_tf.getText();
+      over = over_tf.getText();
+      down = down_tf.getText();
+      points = points_tf.getText();
+      thickness = Integer.parseInt(thickness_tf.getText());
+      if(!inPlaytree) value = (String)value_cb.getSelectedItem();
+      tooltiptext = tooltiptext_tf.getText();
+
+      updateBezier();
+
+      s.updateItems();   
+      s.expandItem(id);
+      created=true;
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      
+      ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(sae);
+    }
+    else {
+      SliderEditEvent see = new SliderEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      up = up_tf.getText();
+      over = over_tf.getText();
+      down = down_tf.getText();
+      points = points_tf.getText();
+      thickness = Integer.parseInt(thickness_tf.getText());
+      if(!inPlaytree) value = (String)value_cb.getSelectedItem();
+      tooltiptext = tooltiptext_tf.getText();
+
+      updateBezier();
+
+      s.updateItems();   
+      s.expandItem(id);
+      
+      see.setNew();
+      s.m.hist.addEvent(see);      
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Slider settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -532,6 +566,7 @@ public class Slider extends Item implements ActionListener{
       }
     }
   }
+  @Override
   public boolean contains(int x_,int y_) {    
     int h = b.getHeight();
     int w = b.getWidth();
@@ -542,12 +577,14 @@ public class Slider extends Item implements ActionListener{
     if(sbg!=null) node.add(sbg.getTreeNode());
     return node;
   }
+  @Override
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
     else if(sbg==null) return null;
     else if(sbg.id.equals(id_)) return sbg;
     else return null;
   }
+  @Override
   public Item getParentOf(String id_) {
    if(sbg!=null) {
      if(sbg.id.equals(id_)) return this;

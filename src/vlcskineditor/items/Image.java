@@ -53,6 +53,7 @@ public class Image extends Item implements ActionListener{
   
   /** Creates a new instance of Image */
   public Image(String xmlcode, Skin s_) {
+    type = "Image";
     s=s_;
     image = XML.getValue(xmlcode,"image");
     if(xmlcode.indexOf("resize=\"")!=-1) resize = XML.getValue(xmlcode,"resize");
@@ -72,6 +73,7 @@ public class Image extends Item implements ActionListener{
     created = true;
   }
   public Image(Skin s_) {
+    type = "Image";
     s = s_;
     image = "";
     id = "Unnamed image #"+s.getNewId();
@@ -99,7 +101,7 @@ public class Image extends Item implements ActionListener{
       frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;
       
-      ImageAddEvent iae = new ImageAddEvent(s.getParentListOf(id),this);
+      ItemAddEvent iae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(iae);
     }
     else {

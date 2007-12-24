@@ -66,6 +66,7 @@ public class Checkbox extends Item implements ActionListener{
   
   /** Creates a new instance of Checkbox */
   public Checkbox(String xmlcode, Skin s_) {
+    type = "Checkbox";
     s = s_;
     up1 = XML.getValue(xmlcode,"up1");
     up2 = XML.getValue(xmlcode,"up2");
@@ -92,6 +93,7 @@ public class Checkbox extends Item implements ActionListener{
     created = true;
   }
   public Checkbox(Skin s_) {
+    type = "Checkbox";
     s = s_;
     up1="none";
     up2="none";
@@ -123,7 +125,7 @@ public class Checkbox extends Item implements ActionListener{
       tooltiptext2 = tooltiptext2_tf.getText();
       state = state_tf.getText();
       
-      CheckboxAddEvent cae = new CheckboxAddEvent(s.getParentListOf(id),this);
+      ItemAddEvent cae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(cae);
       
       s.updateItems();   

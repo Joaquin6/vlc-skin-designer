@@ -127,9 +127,7 @@ public class Panel extends Item implements ActionListener{
     s.updateItems();    
   }
   public void update() {
-    if(!created) {
-      PanelAddEvent paa = new PanelAddEvent(s.getParentListOf(id),this);
-      
+    if(!created) {     
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
       y = Integer.parseInt(y_tf.getText());
@@ -151,6 +149,7 @@ public class Panel extends Item implements ActionListener{
       frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
       created = true;
       
+      ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(paa);
     }
     else {

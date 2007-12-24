@@ -23,11 +23,13 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.history.ItemAddEvent;
 
 /**
  * Video item
@@ -50,6 +52,7 @@ public class Video extends Item implements ActionListener{
   
   /** Creates a new instance of Video */
   public Video(String xmlcode, Skin s_) {
+    type = "Video";
     s = s_;
     if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");
     if(xmlcode.indexOf(" height=\"")!=-1) height = XML.getIntValue(xmlcode,"height");
@@ -66,35 +69,65 @@ public class Video extends Item implements ActionListener{
     created = true;
   }
   public Video(Skin s_) {
+    type = "Video";
     s = s_;    
     id = "Unnamed video #"+s.getNewId();
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    width = Integer.parseInt(width_tf.getText());  
-    height = Integer.parseInt(height_tf.getText());  
-    autoresize = Boolean.parseBoolean(autoresize_cb.getSelectedItem().toString());
-    
-    s.updateItems();    
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());  
+      height = Integer.parseInt(height_tf.getText());  
+      autoresize = Boolean.parseBoolean(autoresize_cb.getSelectedItem().toString());
+
+      s.updateItems();   
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created = true;
+      
+      ItemAddEvent vae = new ItemAddEvent(s.getParentListOf(id), this);
+      s.m.hist.addEvent(vae);
+    }
+    else {
+      VideoEditEvent vee = new VideoEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      width = Integer.parseInt(width_tf.getText());  
+      height = Integer.parseInt(height_tf.getText());  
+      autoresize = Boolean.parseBoolean(autoresize_cb.getSelectedItem().toString());
+
+      s.updateItems();   
+      s.expandItem(id);
+      
+      vee.setNew();
+      s.m.hist.addEvent(vee);
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Video settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -319,6 +352,7 @@ public class Video extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,width-1,height-1);
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }

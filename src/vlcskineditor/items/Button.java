@@ -55,6 +55,7 @@ public class Button extends Item implements ActionListener{
   
   /** Creates a new instance of Button */
   public Button(String xmlcode, Skin s_) {
+    type = "Button";
     s = s_;
     up = XML.getValue(xmlcode,"up");
     if(xmlcode.indexOf("down=\"")!=-1) down = XML.getValue(xmlcode,"down");
@@ -73,6 +74,7 @@ public class Button extends Item implements ActionListener{
     created = true;
   }
   public Button(Skin s_) {
+    type = "Button";
     s=s_;
     up = "";
     id = "Unnamed button #"+s.getNewId();
@@ -96,7 +98,7 @@ public class Button extends Item implements ActionListener{
       action = action_tf.getText();
       tooltiptext = tooltiptext_tf.getText();
       
-      ButtonAddEvent bae = new ButtonAddEvent(s.getParentListOf(id),this);
+      ItemAddEvent bae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(bae);
 
       s.updateItems();    

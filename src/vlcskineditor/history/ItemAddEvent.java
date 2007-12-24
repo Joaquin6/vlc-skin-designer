@@ -1,5 +1,5 @@
 /*****************************************************************************
- * ImageAddEvent.java
+ * ItemAddEvent.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  * 
@@ -23,21 +23,20 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
-import vlcskineditor.items.Image;
 import java.util.List;
 
 /**
- * Represents the action of adding an Image
+ * Represents the action of adding an Item
  * @author Daniel Dreibrodt
  */
-public class ImageAddEvent extends HistoryEvent{
+public class ItemAddEvent extends HistoryEvent{
   
-  private List<Item> parent;
-  private Image i;
+  List<Item> parent;
+  Item i;
   
-  public ImageAddEvent(List<Item> par, Image ima) {
+  public ItemAddEvent(List<Item> par, Item ite) {
     parent = par;
-    i = ima;
+    i = ite;
   }
   @Override
   public void undo() {
@@ -51,7 +50,6 @@ public class ImageAddEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Add Image";
+    return "Add "+i.type;
   }
-  
 }

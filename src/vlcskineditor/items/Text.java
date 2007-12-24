@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -56,6 +57,7 @@ public class Text extends Item implements ActionListener{
   
   /** Creates a new instance of Text */
   public Text(String xmlcode, Skin s_) {
+    type = "Text";
     s = s_;
     font = XML.getValue(xmlcode,"font");
     if(xmlcode.indexOf(" text=\"")!=-1) text = XML.getValue(xmlcode,"text");
@@ -75,40 +77,72 @@ public class Text extends Item implements ActionListener{
     created = true;
   }
   public Text(Skin s_) {
+    type = "Text";
     s = s_;
     font = "defaultfont";
     id = "Unnamed text #"+s.getNewId();
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    x = Integer.parseInt(x_tf.getText());
-    y = Integer.parseInt(y_tf.getText());
-    lefttop = lefttop_cb.getSelectedItem().toString();
-    rightbottom = rightbottom_cb.getSelectedItem().toString();
-    xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
-    ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-    visible = visible_tf.getText();
-    help = help_tf.getText();
-    
-    text = text_tf.getText();
-    font = font_tf.getText();
-    color = color_tf.getText();
-    width = Integer.parseInt(width_tf.getText());
-    alignment = alignment_cb.getSelectedItem().toString();
-    scrolling = scrolling_cb.getSelectedItem().toString();
-    
-    s.updateItems();
-    s.expandItem(id);
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      text = text_tf.getText();
+      font = font_tf.getText();
+      color = color_tf.getText();
+      width = Integer.parseInt(width_tf.getText());
+      alignment = alignment_cb.getSelectedItem().toString();
+      scrolling = scrolling_cb.getSelectedItem().toString();
+
+      s.updateItems();
+      s.expandItem(id);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created = true;
+      
+      ItemAddEvent tae = new ItemAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(tae);
+    }
+    else {      
+      TextEditEvent tee = new TextEditEvent(this);
+      
+      id = id_tf.getText();
+      x = Integer.parseInt(x_tf.getText());
+      y = Integer.parseInt(y_tf.getText());
+      lefttop = lefttop_cb.getSelectedItem().toString();
+      rightbottom = rightbottom_cb.getSelectedItem().toString();
+      xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
+      ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
+      visible = visible_tf.getText();
+      help = help_tf.getText();
+
+      text = text_tf.getText();
+      font = font_tf.getText();
+      color = color_tf.getText();
+      width = Integer.parseInt(width_tf.getText());
+      alignment = alignment_cb.getSelectedItem().toString();
+      scrolling = scrolling_cb.getSelectedItem().toString();
+
+      s.updateItems();
+      s.expandItem(id);
+      
+      tee.setNew();
+      s.m.hist.addEvent(tee);      
+    }
   }
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Text settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -310,15 +344,15 @@ public class Text extends Item implements ActionListener{
       }
     }
     else if (e.getSource().equals(color_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose text color",Color.decode(color_tf.getText()));
-      if (color != null) {
+      Color color_c = JColorChooser.showDialog(frame,"Choose text color",Color.decode(color_tf.getText()));
+      if (color_c != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color_c.getRed()<16) hex+="0";
+        hex+=Integer.toHexString(color_c.getRed()).toUpperCase();
+        if(color_c.getGreen()<16) hex+="0";
+        hex+=Integer.toHexString(color_c.getGreen()).toUpperCase();
+        if(color_c.getBlue()<16) hex+="0";
+        hex+=Integer.toHexString(color_c.getBlue()).toUpperCase();
         color_tf.setText(hex);
       }
     }    
@@ -409,13 +443,14 @@ public class Text extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,width,f.getSize());
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
     Font f = s.getFont(font);
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+f.getSize()+offsety);    
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Text: "+id);      
     return node;
-  }
-  
+  }  
 }

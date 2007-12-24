@@ -126,7 +126,7 @@ public class Group extends Item implements ActionListener{
       frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;
       
-      GroupAddEvent gaa = new GroupAddEvent(s.getParentListOf(id),this);
+      ItemAddEvent gaa = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(gaa);
     }
     else {

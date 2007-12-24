@@ -23,6 +23,7 @@
 package vlcskineditor.items;
 
 import vlcskineditor.*;
+import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -57,6 +58,7 @@ public class SliderBackground extends Item implements ActionListener{
     
   /** Creates a new instance of SliderBackground */
   public SliderBackground(String xmlcode, Skin s_) {
+    type = "SliderBackground";
     s = s_;
     image = XML.getValue(xmlcode,"image");
     if(xmlcode.indexOf("nbhoriz=\"")!=-1) nbhoriz = XML.getIntValue(xmlcode,"nbhoriz");
@@ -68,6 +70,7 @@ public class SliderBackground extends Item implements ActionListener{
     created = true;
   }
   public SliderBackground(Skin s_, Slider sl_) {
+    type = "SliderBackground";
     s = s_;
     sl = sl_;
     image = "none";
@@ -75,21 +78,39 @@ public class SliderBackground extends Item implements ActionListener{
     showOptions();
   }
   public void update() {
-    id = id_tf.getText();
-    image = image_tf.getText();
-    nbhoriz = Integer.parseInt(nbhoriz_tf.getText());
-    nbvert = Integer.parseInt(nbvert_tf.getText());
-    padhoriz = Integer.parseInt(padhoriz_tf.getText());
-    padvert = Integer.parseInt(padvert_tf.getText());       
-    frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
-    created = true;
+    if(!created) {
+      id = id_tf.getText();
+      image = image_tf.getText();
+      nbhoriz = Integer.parseInt(nbhoriz_tf.getText());
+      nbvert = Integer.parseInt(nbvert_tf.getText());
+      padhoriz = Integer.parseInt(padhoriz_tf.getText());
+      padvert = Integer.parseInt(padvert_tf.getText());
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      created = true;
+      
+      ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id),this);
+      s.m.hist.addEvent(sae);
+    }
+    else {
+      SliderBackgroundEditEvent see = new SliderBackgroundEditEvent(this);
+      
+      id = id_tf.getText();
+      image = image_tf.getText();
+      nbhoriz = Integer.parseInt(nbhoriz_tf.getText());
+      nbvert = Integer.parseInt(nbvert_tf.getText());
+      padhoriz = Integer.parseInt(padhoriz_tf.getText());
+      padvert = Integer.parseInt(padvert_tf.getText());
+      
+      see.setNew();
+      s.m.hist.addEvent(see);
+    }
   }  
   public void showOptions() {    
     if(frame==null) {
       frame = new JFrame("Slider background settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       gen_btn = new JButton("Open slider background wizard...");
@@ -256,6 +277,7 @@ public class SliderBackground extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
     }
   }
+  @Override
   public boolean contains(int x_,int y_) {
     if(bi==null) return false;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);

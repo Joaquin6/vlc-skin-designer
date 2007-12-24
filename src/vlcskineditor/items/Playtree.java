@@ -133,6 +133,7 @@ public class Playtree extends Item implements ActionListener{
     created=true;
   }
   public Playtree(Skin s_) {
+    type = "Playtree";
     s = s_;
     font = "defaultfont";
     id = "Unnamed playtree #"+s.getNewId();
@@ -142,8 +143,6 @@ public class Playtree extends Item implements ActionListener{
   }
   public void update()  {
     if(!created) {
-      PlaytreeAddEvent paa = new PlaytreeAddEvent(s.getParentListOf(id),this);
-      
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
       y = Integer.parseInt(y_tf.getText());
@@ -173,6 +172,7 @@ public class Playtree extends Item implements ActionListener{
       frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created=true;
       
+      ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id),this);      
       s.m.hist.addEvent(paa);
     }
     else {
