@@ -27,7 +27,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.filechooser.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
@@ -46,11 +45,12 @@ import vlcskineditor.history.*;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
-  /**
-   * The version identification of the current build.
-   */
-  public final String VERSION = "0.6.0a";
+  
+  //The version identification of the current build.   
+  public final String VERSION = "0.6.0b";
+  //The directory in which the VLC executable is found
   String vlc_dir = "";
+  //The directory from which VLC loads its skins
   String vlc_skins_dir = "";
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
@@ -108,7 +108,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   boolean opening = false;  
   //Specifies if a file was opened
   boolean opened = false;
-  
+  //Handles undoing and redoing of actions
   public History hist;
   
   /**
@@ -537,9 +537,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     add(jdesk);    
     
     if(System.getProperty("os.name").indexOf("Windows")!=-1) {
-      try {      
-        Registry r = new Registry();               
-        RegistryKey vlc_key = r.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);        
+      try {
+        RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);        
         String installDir = vlc_key.getStringValue("InstallDir");      
         vlc_dir = installDir+File.separator;
         vlc_skins_dir = vlc_dir+"skins";
@@ -1007,7 +1006,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+selected_resource+"\"?","Confirmation",
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
         if(n==0) {
-          s.resources.remove(s.getResource(selected_resource));
+          Resource r = s.getResource(selected_resource);
+          ResourceDeletionEvent rde = new ResourceDeletionEvent(s,r,s.resources.indexOf(r));
+          hist.addEvent(rde);
+          s.resources.remove(r);
           s.updateResources();          
         }
       }
@@ -1073,10 +1075,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+l.id+"\"?","Confirmation",
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
+            LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
             pvwin.clearLayout();
             w.layouts.remove(l);
             s.updateWindows();
             s.updateItems();
+            hist.addEvent(lde);
           }
         }
       }
@@ -1087,8 +1091,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+w.id+"\"?","Confirmation",
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
+            WindowDeletionEvent wde = new WindowDeletionEvent(w, s, s.windows.indexOf(w));
             s.windows.remove(w);
             s.updateWindows();
+            hist.addEvent(wde);
           }
         }
       }
@@ -1241,8 +1247,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           int n = JOptionPane.showOptionDialog(this,"Do you really want to delete \""+selected_item+"\"?","Confirmation",
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
+            Item i = s.getItem(selected_item);
+            ItemDeletionEvent ide = new ItemDeletionEvent(p,i,p.indexOf(i),s);
             p.remove(s.getItem(selected_item));
-            s.updateItems();
+            s.updateItems();            
+            hist.addEvent(ide);
           }
         }       
       }
@@ -1287,8 +1296,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
           s.updateItems();
         }
-      }
-      
+        else {
+          selected_window = null;
+          selected_layout = null;
+          pvwin.clearLayout();
+          pvwin.setVisible(false);
+          s.updateItems();
+        }
+      }      
     }
     else if(e.getSource().equals(items_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
