@@ -47,7 +47,7 @@ import vlcskineditor.history.*;
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
   
   //The version identification of the current build.   
-  public final String VERSION = "0.6.0b";
+  public final String VERSION = "0.7.0.a";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
