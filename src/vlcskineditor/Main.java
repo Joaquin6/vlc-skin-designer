@@ -47,7 +47,7 @@ import vlcskineditor.history.*;
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
   
   //The version identification of the current build.   
-  public final String VERSION = "0.7.0.a";
+  public final String VERSION = "0.6.1.b";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -1076,7 +1076,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
             LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
-            pvwin.clearLayout();
+            pvwin.clearLayout();            
             w.layouts.remove(l);
             s.updateWindows();
             s.updateItems();
@@ -1295,14 +1295,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           selected_layout = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
           s.updateItems();
-        }
-        else {
-          selected_window = null;
-          selected_layout = null;
-          pvwin.clearLayout();
-          pvwin.setVisible(false);
-          s.updateItems();
-        }
+        }        
       }      
     }
     else if(e.getSource().equals(items_tree)) {

@@ -157,8 +157,8 @@ public class Slider extends Item implements ActionListener{
     for(int i=0;i<pnts.length;i++) {
       String pnt = pnts[i];      
       String[] coords = pnt.split(",");        
-      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(",""));
-      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)",""));
+      xpos[i] = Integer.parseInt(coords[0].replaceAll("\\(","").trim());
+      ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)","").trim());
     }          
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }

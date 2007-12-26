@@ -1,7 +1,9 @@
-VLC Skin Editor release 0.6.0a
+VLC Skin Editor release 0.6.1b
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.6.1b - Critical bufix for the Preview Window 
+       - Bugfix for slider points parsing and XML parsing
 0.6.0a - Resources/windows/layouts/items can be edited by
          doubleclicking on them in the hiearchy trees
        - Sliders are rendered completely as in VLC

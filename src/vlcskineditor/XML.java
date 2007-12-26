@@ -45,7 +45,7 @@ public class XML {
   public static int getIntValue(String line, String field) {
     int i = 0;
     try {
-      i = Integer.parseInt(getValue(line,field));
+      i = Integer.parseInt(getValue(line,field).trim());
     }
     catch (Exception e) {
       System.out.println("Could not parse int from getValue("+line+","+field+"): "+getValue(line,field));
@@ -55,7 +55,7 @@ public class XML {
   public static boolean getBoolValue(String line, String field) {
     boolean b = false;
     try {
-      b = Boolean.parseBoolean(getValue(line,field));
+      b = Boolean.parseBoolean(getValue(line,field).trim());
     }
     catch (Exception e) {
       System.out.println("Could not parse boolean from getValue("+line+","+field+"): "+getValue(line,field));
