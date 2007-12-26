@@ -31,7 +31,7 @@ import javax.swing.*;
  * Gives the user the possibilty to edit a SubBitmap visually
  * @author Daniel Dreibrodt
  */
-public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseMotionListener{
+public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseMotionListener, KeyListener, WindowListener{
   
   public JFrame frame;
   Bitmap b;
@@ -42,6 +42,7 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
   int x1, y1, x2, y2;
   int x1_org, y1_org, x2_org, y2_org;
   int maxx, maxy;
+  int drawcount;
   
   
   /** Creates a new instance of SubBitmapEditWindow */
@@ -68,8 +69,10 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
     addMouseListener(this);
     addMouseMotionListener(this);
   }
-  public void paint(Graphics g) {
+  @Override
+  public void paint(Graphics g) {    
     if(b.image==null) return;
+    if(drawcount>=40) drawcount = 0;
     g.clearRect(0,0,getWidth(),getHeight());
     g.drawImage(b.image,0,0,frame);
     g.setColor(Color.RED);
@@ -83,8 +86,11 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
     y[1] = y1;
     y[2] = y2;
     y[3] = y2;
-    g.drawPolygon(x,y,4);
+    if(drawcount<=20 || starteddragging)
+    g.drawPolygon(x,y,4);    
+    drawcount++;
   }
+  @Override
   public void update(Graphics g) {
     paint(g);
   }  
@@ -138,5 +144,41 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
   public void mouseEntered(MouseEvent e) {
   }
   public void mouseExited(MouseEvent e) {
+  }   
+  public void updateDimensions() {
+    if(!starteddragging) {
+      try {
+        x1 = Integer.parseInt(sb.x_tf.getText());
+        x2 = x1 + Integer.parseInt(sb.width_tf.getText());
+        y1 = Integer.parseInt(sb.y_tf.getText());
+        y2 = y1 + Integer.parseInt(sb.height_tf.getText()); 
+      }
+      catch(NumberFormatException ex) {
+        /*empty*/
+      }
+    }
+  }
+  public void keyTyped(KeyEvent e) {    
+  }
+  public void keyPressed(KeyEvent e) {
+    updateDimensions();
+  }
+  public void keyReleased(KeyEvent e) {
+    updateDimensions();
+  }
+  public void windowOpened(WindowEvent e) {    
+  }
+  public void windowClosing(WindowEvent e) {
+    sb.destroyEditWindow();
+  }
+  public void windowClosed(WindowEvent e) {
+  }
+  public void windowIconified(WindowEvent e) {
+  }
+  public void windowDeiconified(WindowEvent e) {
+  }
+  public void windowActivated(WindowEvent e) {
+  }
+  public void windowDeactivated(WindowEvent e) {
   }
 }

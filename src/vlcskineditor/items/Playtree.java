@@ -637,7 +637,7 @@ public class Playtree extends Item implements ActionListener{
     g.setFont(f);
     FontMetrics fm = g.getFontMetrics();
     if(!bgimage.equals("none")) {
-      g.drawImage(s.getBitmapImage(bgimage),x+x_,y+y_,null);
+      g.drawImage(s.getBitmapImage(bgimage).getSubimage(0, 0, width, height),x+x_,y+y_,null);
     }
     else {      
       g.setColor(Color.decode(bgcolor1));

@@ -541,7 +541,7 @@ public class Slider extends Item implements ActionListener{
   public void draw(Graphics2D g) {
     draw(g,0,0);
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g, int x_, int y_) {    
     if(!created) return;
     offsetx=x_;
     offsety=y_;
@@ -554,7 +554,7 @@ public class Slider extends Item implements ActionListener{
     if(si==null) return;
     Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
     g.drawImage(si,(int)p.getX()+x+x_-si.getWidth()/2,(int)p.getY()+y+y_-si.getHeight()/2,null);
-    if(selected) {        
+    if(selected) {
       g.setColor(Color.RED);
       for(float f=0f;f<=1f;f=f+0.1f) {
         Point2D.Float p1 = b.getPoint(f);

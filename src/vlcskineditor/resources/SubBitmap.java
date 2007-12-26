@@ -107,7 +107,7 @@ public class SubBitmap extends Resource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);
@@ -123,7 +123,7 @@ public class SubBitmap extends Resource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);    
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);
@@ -134,7 +134,7 @@ public class SubBitmap extends Resource implements ActionListener{
       frame = new JFrame("Subbitmap settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the font that will be used with controls..");
@@ -189,7 +189,7 @@ public class SubBitmap extends Resource implements ActionListener{
       bounds.add(height_l);
       bounds.add(height_tf);
       x_l.setBounds(5,15,75,24);
-      x_tf.setBounds(85,15,150,24);
+      x_tf.setBounds(85,15,150,24);      
       y_l.setBounds(5,45,75,24);
       y_tf.setBounds(85,45,150,24);
       width_l.setBounds(5,75,75,24);
@@ -238,6 +238,11 @@ public class SubBitmap extends Resource implements ActionListener{
     fps_tf.setText(String.valueOf(fps));
     frame.setVisible(true);    
     sbew = new SubBitmapEditWindow(parent,this);    
+    x_tf.addKeyListener(sbew);
+    y_tf.addKeyListener(sbew);
+    width_tf.addKeyListener(sbew);
+    height_tf.addKeyListener(sbew);
+    frame.addWindowListener(sbew);
   }
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
@@ -259,10 +264,16 @@ public class SubBitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Height must be greater 0!","Height not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      frame.setVisible(false);
-      sbew.frame.setVisible(false);
-      sbew.frame = null;
-      sbew = null;
+      if(Integer.parseInt(x_tf.getText())+Integer.parseInt(width_tf.getText())>parent.image.getWidth()) {
+        JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
+        return;
+      }
+      if(Integer.parseInt(y_tf.getText())+Integer.parseInt(height_tf.getText())>parent.image.getHeight()) {
+        JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
+        return;
+      }
+      frame.setVisible(false);            
+      destroyEditWindow();
       update();      
     }
     else if(e.getSource().equals(help_btn)) {
@@ -282,11 +293,19 @@ public class SubBitmap extends Resource implements ActionListener{
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
-      sbew.frame.setVisible(false);
-      sbew.frame = null;
-      sbew = null;
+      destroyEditWindow();
       if(!created) parent.SubBitmaps.remove(this);      
     }
+  }
+  public void destroyEditWindow() {
+    sbew.frame.setVisible(false);
+    x_tf.removeKeyListener(sbew);
+    y_tf.removeKeyListener(sbew);
+    width_tf.removeKeyListener(sbew);
+    height_tf.removeKeyListener(sbew);
+    frame.removeWindowListener(sbew);
+    sbew.frame = null;
+    sbew = null;
   }
   public String returnCode() {
     String code="<SubBitmap id=\""+id+"\" x=\""+String.valueOf(x)+"\" y=\""+String.valueOf(y)+"\"";

@@ -414,8 +414,7 @@ public class Text extends Item implements ActionListener{
       else {
         f = new Font(Font.SANS_SERIF,Font.PLAIN,12);
       }      
-    }
-    g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+    }    
     g.setFont(f);
     g.setColor(Color.decode(color));
     BufferedImage bi;
