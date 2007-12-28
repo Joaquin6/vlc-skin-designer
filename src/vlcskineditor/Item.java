@@ -121,4 +121,11 @@ public abstract class Item {
   public void actionWasEdited(ActionEditor ae) {
     
   } 
+  /**
+   * Checks whether the resource with the given ID is used by this item or one of its subitems
+   * @param id_ The resource's id
+   */
+  public boolean uses(String id_) {
+    return false;
+  }
 }

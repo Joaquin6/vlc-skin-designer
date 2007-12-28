@@ -346,6 +346,7 @@ public class Image extends Item implements ActionListener{
       frame.setVisible(false);
     }
   }
+  @Override
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
@@ -378,6 +379,7 @@ public class Image extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
@@ -385,5 +387,9 @@ public class Image extends Item implements ActionListener{
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Image: "+id);         
     return node;
+  }
+  @Override
+  public boolean uses(String id_) {
+    return (image.equals(id_));
   }
 }

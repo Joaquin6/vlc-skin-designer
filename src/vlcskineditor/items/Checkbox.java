@@ -130,7 +130,7 @@ public class Checkbox extends Item implements ActionListener{
       
       s.updateItems();   
       s.expandItem(id);
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;
     }
     else {
@@ -170,7 +170,7 @@ public class Checkbox extends Item implements ActionListener{
       frame = new JFrame("Checkbox settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -287,18 +287,18 @@ public class Checkbox extends Item implements ActionListener{
       general.setMaximumSize(new Dimension(495,165));
       frame.add(general);
       
-      JPanel state = new JPanel(null);
-      state.add(state_l);
-      state.add(state_tf);
-      state.add(state_btn);
+      JPanel state_panel = new JPanel(null);
+      state_panel.add(state_l);
+      state_panel.add(state_tf);
+      state_panel.add(state_btn);
       state_l.setBounds(5,15,75,24);
       state_tf.setBounds(85,15,120,24);
       state_btn.setBounds(210,15,24,24);
-      state.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Checkbox state"));
-      state.setMinimumSize(new Dimension(495,45));
-      state.setPreferredSize(new Dimension(495,45));
-      state.setMaximumSize(new Dimension(495,45));
-      frame.add(state);
+      state_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Checkbox state"));
+      state_panel.setMinimumSize(new Dimension(495,45));
+      state_panel.setPreferredSize(new Dimension(495,45));
+      state_panel.setMaximumSize(new Dimension(495,45));
+      frame.add(state_panel);
       
       JPanel state1 = new JPanel(null);
       state1.add(up1_l);
@@ -406,7 +406,7 @@ public class Checkbox extends Item implements ActionListener{
           return;
         }
       }
-      if(state_tf.getText()=="") {
+      if(state_tf.getText().equals("")) {
         JOptionPane.showMessageDialog(frame,"Please provide the state condition!","State not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
@@ -498,6 +498,7 @@ public class Checkbox extends Item implements ActionListener{
       frame.setVisible(false);
     }
   }
+  @Override
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action1_ae) action1_tf.setText(action1_ae.getCode());
     else if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
@@ -547,6 +548,7 @@ public class Checkbox extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
     java.awt.image.BufferedImage bi = s.getBitmapImage(up1);
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
@@ -555,5 +557,8 @@ public class Checkbox extends Item implements ActionListener{
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Checkbox: "+id);    
     return node;
   }
-  
+  @Override
+  public boolean uses(String id_) {
+    return (up1.equals(id_)||up2.equals(id_)||over1.equals(id_)||over2.equals(id_)||down1.equals(id_)||down2.equals(id_));
+  }
 }

@@ -286,5 +286,8 @@ public class SliderBackground extends Item implements ActionListener{
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("SliderBackground: "+id);       
     return node;
   }
-  
+  @Override
+  public boolean uses(String id_) {
+    return (image.equals(id_));
+  }
 }

@@ -452,4 +452,8 @@ public class Text extends Item implements ActionListener{
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Text: "+id);      
     return node;
   }  
+  @Override
+  public boolean uses(String id_) {
+    return (font.equals(id_));
+  }
 }

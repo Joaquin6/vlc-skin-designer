@@ -455,7 +455,11 @@ public class Skin implements ActionListener{
   }
   /** Returns <b>true</b> if the resource with the given id is in use by any item of the skin **/
   public boolean isUsed(String id_) {
-    //TODO: Maybe or maybe not
+    for(Window w:windows) {
+      for(Layout l:w.layouts) {
+        if(l.uses(id_)) return true;
+      }
+    }
     return false;
   }
   /** Returns the parent element that contains the item of the given id **/

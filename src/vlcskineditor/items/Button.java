@@ -103,7 +103,7 @@ public class Button extends Item implements ActionListener{
 
       s.updateItems();    
       s.expandItem(id);
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;      
     }
     else {
@@ -136,7 +136,7 @@ public class Button extends Item implements ActionListener{
       frame = new JFrame("Button settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -400,6 +400,7 @@ public class Button extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
     java.awt.image.BufferedImage bi = s.getBitmapImage(up);
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
@@ -408,4 +409,8 @@ public class Button extends Item implements ActionListener{
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Button: "+id);     
     return node;
   }  
+  @Override
+  public boolean uses(String id_) {
+    return (up.equals(id_)||over.equals(id_)||down.equals(id_));
+  }
 }

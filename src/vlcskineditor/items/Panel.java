@@ -146,7 +146,7 @@ public class Panel extends Item implements ActionListener{
       for(Item i:items) {
         i.setOffset(x,y);
       }
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;
       
       ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id),this);
@@ -183,7 +183,7 @@ public class Panel extends Item implements ActionListener{
       frame = new JFrame("Panel settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();      
       JLabel x_l = new JLabel("X:");
@@ -378,7 +378,8 @@ public class Panel extends Item implements ActionListener{
       g.drawRect(x+x_,y+y_,width-1,height-1);
     }
   }
-   public boolean contains(int x_, int y_) {    
+  @Override
+  public boolean contains(int x_, int y_) {    
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {
@@ -388,19 +389,19 @@ public class Panel extends Item implements ActionListener{
     }    
     return node;
   }
+  @Override
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
     else {
-      for(int x=0;x<items.size();x++) {
-        Item i = items.get(x).getItem(id_);
-        if (i!=null) return i;      
+      for(Item i:items) {        
+        if (i.getItem(id_)!=null) return i.getItem(id_);      
       }    
     }
     return null;
   }
+  @Override
   public java.util.List<Item> getParentListOf(String id_) {
-    for(int x=0;x<items.size();x++) {
-      Item i = items.get(x);
+    for(Item i:items) {      
       if(i.id.equals(id_)) {        
         return items;        
       }
@@ -411,9 +412,9 @@ public class Panel extends Item implements ActionListener{
     }
     return null;
   }
+  @Override
   public Item getParentOf(String id_) {
-    for(int x=0;x<items.size();x++) {
-      Item i = items.get(x);
+    for(Item i:items) {      
       if(i.id.equals(id_)) {        
         return this;        
       }
@@ -421,5 +422,12 @@ public class Panel extends Item implements ActionListener{
       if (it!=null) return it;      
     }
     return null;
+  }
+  @Override
+  public boolean uses(String id_) {
+    for(Item i:items) {
+      if(i.uses(id_)) return true;
+    }
+    return false;
   }
 }

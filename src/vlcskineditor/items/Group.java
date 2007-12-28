@@ -262,6 +262,7 @@ public class Group extends Item implements ActionListener{
       i.setOffset(x+offsetx,y+offsety);
     }    
   }
+  @Override
   public boolean contains(int x_, int y_) {    
     return (x_>=x+offsetx && y_>=y+offsety);
   }
@@ -272,19 +273,17 @@ public class Group extends Item implements ActionListener{
     }
     return node;
   }
+  @Override
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
     else {
-      for(int x=0;x<items.size();x++) {
-        Item i = items.get(x).getItem(id_);
-        if (i!=null) return i;      
-      }    
+      for(Item i:items) if(i.getItem(id_)!=null) return i.getItem(id_);          
     }
     return null;
   }
+  @Override
   public java.util.List<Item> getParentListOf(String id_) {
-    for(int x=0;x<items.size();x++) {
-      Item i = items.get(x);
+    for(Item i:items) {      
       if(i.id.equals(id_)) {        
         return items;        
       }
@@ -295,9 +294,9 @@ public class Group extends Item implements ActionListener{
     }
     return null;
   }
+  @Override
   public Item getParentOf(String id_) {
-    for(int x=0;x<items.size();x++) {
-      Item i = items.get(x);
+    for(Item i:items) {      
       if(i.id.equals(id_)) {        
         return this;        
       }
@@ -305,5 +304,12 @@ public class Group extends Item implements ActionListener{
       if (it!=null) return it;      
     }
     return null;
+  }
+  @Override
+  public boolean uses(String id_) {
+    for(Item i:items) {
+      if(i.uses(id_)) return true;
+    }
+    return false;
   }
 }

@@ -592,4 +592,8 @@ public class Slider extends Item implements ActionListener{
    }
    else return null;
   }
+  @Override
+  public boolean uses(String id_) {
+    return(((sbg!=null)?sbg.uses(id_):false)||up.equals(id_)||over.equals(id_)||down.equals(id_));
+  }
 }

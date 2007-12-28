@@ -178,7 +178,7 @@ public class Layout implements ActionListener{
       s.updateWindows();
       s.expandLayout(id);
       created = true;
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       s.m.hist.addEvent(lae);
     }
     else {
@@ -204,7 +204,7 @@ public class Layout implements ActionListener{
       frame = new JFrame("Layout settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Name of the layout (it may be used for actions). Two layouts cannot have the same id.");
@@ -434,5 +434,15 @@ public class Layout implements ActionListener{
       if (it!=null) return it;      
     }
     return null;
+  }
+  /**
+   * Checks whether an item in this layout uses the resource of the given ID
+   * @param id_ The ID of the resource
+   */
+  public boolean uses(String id_) {
+    for(Item i:items) {
+      if(i.uses(id_)) return true;
+    }
+    return false;
   }
 }
