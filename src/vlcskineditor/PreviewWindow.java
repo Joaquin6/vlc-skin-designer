@@ -25,6 +25,8 @@ package vlcskineditor;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import vlcskineditor.history.*;
 
@@ -219,6 +221,22 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     } catch (Exception e) {
       System.out.println(e);
       return null;
+    }
+  }
+  /**
+   * Saves a preview of the selected layout to a file
+   */
+  public void savePNG(File f) {
+    BufferedImage bi = new BufferedImage(l.width, l.height, BufferedImage.TYPE_INT_ARGB);
+    if(selected_item!=null) selected_item.setSelected(false);
+    l.draw(bi.createGraphics());
+    if(selected_item!=null) selected_item.setSelected(true);
+    try {
+      ImageIO.write(bi, "png", f);
+    }
+    catch (Exception e) {
+      JOptionPane.showMessageDialog(m,"Could not save image!\n"+e.toString(),"Exception caught!",JOptionPane.ERROR_MESSAGE);
+      return;
     }
   }
 }

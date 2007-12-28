@@ -54,7 +54,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   String vlc_skins_dir = "";
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
-  JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_quit;
+  JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
   JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_global, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
   JMenuItem m_help_doc, m_help_about;  
   JDesktopPane jdesk;
@@ -143,11 +143,16 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file_save.addActionListener(this);
     m_file_test = new JMenuItem("Test skin in VLC...");
     m_file_test.setMnemonic('T');
-    m_file_test.addActionListener(this);
+    m_file_test.setAccelerator(KeyStroke.getKeyStroke("ctrl shift t"));
+    m_file_test.addActionListener(this);    
     m_file_vlt = new JMenuItem("Export as VLT...");
     m_file_vlt.setMnemonic('V');
-    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke("ctrl v"));   
+    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke("ctrl shift v"));   
     m_file_vlt.addActionListener(this);
+    m_file_png = new JMenuItem("Save current preview as image");
+    m_file_png.setMnemonic('p');
+    m_file_png.addActionListener(this);
+    m_file_png.setEnabled(false);
     m_file_quit = new JMenuItem("Quit");
     m_file_quit.setIcon(exit_icon);
     m_file_quit.setMnemonic('Q');
@@ -161,6 +166,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file.addSeparator();
     m_file.add(m_file_test);
     m_file.add(m_file_vlt);
+    m_file.add(m_file_png);
     m_file.addSeparator();
     m_file.add(m_file_quit);
     
@@ -544,9 +550,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         vlc_skins_dir = vlc_dir+"skins";
       }
       catch (Exception e) {
-        System.err.println(e);
-        StackTraceElement[] stack = e.getStackTrace();
-        for(int i=0;i<stack.length;i++) System.err.println("  "+stack[i]);
+        e.printStackTrace();
       }  
     }   
     else if(System.getProperty("os.name").indexOf("Linux")!=-1){            
@@ -705,6 +709,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     pwin.setVisible(true);
     setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      
     pvwin.clearLayout();
+    m_file_png.setEnabled(false);
     s.open(f);                  
     selected_resource = null;
     selected_in_windows = null;
@@ -753,7 +758,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       openFile();
     }
     // </editor-fold>    
-    // <editor-fold defaultstate="collapsed" desc="Save File ">
+    // <editor-fold defaultstate="collapsed" desc="Save File">
     else if(e.getSource().equals(m_file_save))  {
       s.save();
       saved=true;
@@ -866,7 +871,21 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }   
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Quit "> 
+    // <editor-fold defaultstate="collapsed" desc="Save Preview"> 
+    else if(e.getSource().equals(m_file_png)) {
+      JFileChooser png_fc = new JFileChooser();
+      png_fc.setAcceptAllFileFilterUsed(false);
+      png_fc.setFileFilter(new CustomFileFilter(png_fc, "png", "*.PNG (Portable Network Graphic)", false, ""));
+      int i = png_fc.showSaveDialog(this);
+      if(i==JFileChooser.APPROVE_OPTION) {
+        File f = png_fc.getSelectedFile();
+        if(!f.getPath().toLowerCase().endsWith(".png")) 
+          f = new File(f.getPath()+".png");
+        pvwin.savePNG(f);
+      }
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Quit"> 
     else if(e.getSource().equals(m_file_quit)) {
       if(!saved) {
         Object[] options= { "Yes", "No", "Don't quit" };
@@ -895,7 +914,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     else if(e.getSource().equals(m_edit_theme)) s.showThemeOptions();
     else if(e.getSource().equals(m_edit_global)) s.gvars.showOptions();
-    // <editor-fold defaultstate="collapsed" desc="Open Help "> 
+    // <editor-fold defaultstate="collapsed" desc="Open Help"> 
     else if(e.getSource().equals(m_help_doc)) {
       Desktop desktop;
       if(Desktop.isDesktopSupported()) {
@@ -1076,7 +1095,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                                          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
             LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
-            pvwin.clearLayout();            
+            pvwin.clearLayout();   
+            m_file_png.setEnabled(false);
             w.layouts.remove(l);
             s.updateWindows();
             s.updateItems();
@@ -1268,7 +1288,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     else if(e.getSource().equals(m_edit_redo)) {
       if(hist!=null) hist.redo();
-    }
+    }    
   }
   
   /**
@@ -1289,11 +1309,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           selected_window = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           selected_layout = null;
           pvwin.clearLayout();
+          m_file_png.setEnabled(false);
           items_tree_model.setRoot(new DefaultMutableTreeNode("Root: Items"));                   
         }
         else if(type.equals("Layout")) {
           selected_layout = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
+          m_file_png.setEnabled(true);
           s.updateItems();
         }        
       }      

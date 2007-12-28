@@ -116,8 +116,7 @@ public class Font extends Resource implements ActionListener{
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
       f = f.deriveFont((float)size);
     }
-    catch(Exception e) {
-      e.printStackTrace();
+    catch(Exception e) {      
       if(file.indexOf(".otf")==-1) {
         JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
         f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
