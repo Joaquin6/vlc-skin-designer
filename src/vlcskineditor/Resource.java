@@ -49,4 +49,18 @@ public abstract class Resource {
   public Resource getParentOf(String id_) {
     return null;
   }
+  /** Renames the Resource after the copy process **/
+  public void renameForCopy() {
+    if(id.indexOf("_copy")!=-1) {
+      id = id.substring(0,id.indexOf("_copy"));
+    } 
+    String newid_base = id+="_copy";     
+    String newid = newid_base;
+    int i = 1;
+    while(s.idExists(newid)) {
+      i++;
+      newid = newid_base+"_"+String.valueOf(i);
+    }
+    id = newid;
+  }
 }

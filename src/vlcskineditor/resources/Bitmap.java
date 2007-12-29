@@ -375,4 +375,9 @@ public class Bitmap extends Resource implements ActionListener{
     }
     return null;
   }
+  @Override
+  public void renameForCopy() {
+    super.renameForCopy();
+    for(SubBitmap sb:SubBitmaps) sb.renameForCopy();
+  }
 }

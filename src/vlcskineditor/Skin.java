@@ -371,33 +371,28 @@ public class Skin implements ActionListener{
   }
   /** Checks whether an id exists already **/
   public boolean idExists(String id) {
-    for (int i=0;i<resources.size();i++) {
-      if(resources.get(i).id.equals(id)) return true;
-    }
-    for (int i=0;i<windows.size();i++) {
-      if(windows.get(i).id.equals(id)) return true;
-      for (int l=0;l<windows.get(i).layouts.size();l++) {
-        if(windows.get(i).layouts.get(l).id.equals(id)) return true;
-        for(int x=0;x<windows.get(i).layouts.get(l).items.size();x++) {
-          if(windows.get(i).layouts.get(l).items.get(x).id.equals(id)) return true;
-        }
+    if(getResource(id)!=null) return true;
+    for(Window w:windows) {
+      if(w.id.equals(id)) return true;
+      for(Layout l:w.layouts) {
+        if(l.id.equals(id)) return true;
+        if(l.getItem(id)!=null) return true;
       }
     }
     return false;
   }
   /** Returns the resource represented by the given id **/
-  public Resource getResource(String id) {
-    Resource r = null;
-    for (int i=0;i<resources.size();i++) {
-      if(resources.get(i).id.equals(id)) r=resources.get(i);
-      if(resources.get(i).type.equals("Bitmap")) {
-        Bitmap bmp = (Bitmap)resources.get(i);
-        for(int x=0;x<bmp.SubBitmaps.size();x++) {
-          if(bmp.SubBitmaps.get(x).id.equals(id)) r=bmp.SubBitmaps.get(x);
+  public Resource getResource(String id) {    
+    for (Resource r:resources) {
+      if(r.id.equals(id)) return r;
+      if(r.getClass()==Bitmap.class) {
+        Bitmap bmp = (Bitmap)r;
+        for(SubBitmap s:bmp.SubBitmaps) {
+          if(s.id.equals(id)) return s;
         }
       }
     }
-    return r;
+    return null;
   }
   /** Returns the image object of a bitmap **/
   public BufferedImage getBitmapImage(String id) {
@@ -406,24 +401,16 @@ public class Skin implements ActionListener{
       return null;
     }
     else {
-      if(r.type.equals("Bitmap")) {
-        try {
-          Bitmap b = (Bitmap)r;
-          return b.image;
-        }
-        catch(Exception e) {
-          try {
-            SubBitmap sb = (SubBitmap)r;
-            return sb.image;
-          }
-          catch(Exception e2) {
-            
-          }
-        }        
+      if(r.getClass()==Bitmap.class) {        
+        Bitmap b = (Bitmap)r;
+        return b.image;        
+      }
+      else if(r.getClass()==SubBitmap.class) {
+        SubBitmap sb = (SubBitmap)r;
+        return sb.image;
       }
       else return null;
     }
-    return null;
   }
   public java.awt.Font getFont(String id) {
     if(id.equals("defaultfont")) {
@@ -432,7 +419,7 @@ public class Skin implements ActionListener{
     Resource r = getResource(id);
     if(r==null) return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     try {
-      if(r.type.equals("Font")) {
+      if(r.getClass()==vlcskineditor.resources.Font.class) {
         vlcskineditor.resources.Font fr = (vlcskineditor.resources.Font)r;
         return fr.f;
       }
@@ -505,14 +492,14 @@ public class Skin implements ActionListener{
     DefaultMutableTreeNode top = new DefaultMutableTreeNode("Root: Resources");     
     DefaultMutableTreeNode bitmaps_node = new DefaultMutableTreeNode("Root: Bitmaps");
     DefaultMutableTreeNode fonts_node = new DefaultMutableTreeNode("Root: Fonts");
-    for(int i=0;i<resources.size();i++) {
-      if(resources.get(i).type=="Bitmap") {
-        bitmaps_node.add(resources.get(i).getTreeNode());
+    for(Resource r:resources) {
+      if(r.getClass()==Bitmap.class) {
+        bitmaps_node.add(r.getTreeNode());
       }
     }
-    for(int i=0;i<resources.size();i++) {
-      if(resources.get(i).type=="Font") {
-        DefaultMutableTreeNode node = resources.get(i).getTreeNode();       
+    for(Resource r:resources) {
+      if(r.getClass()==vlcskineditor.resources.Font.class) {
+        DefaultMutableTreeNode node = r.getTreeNode();       
         fonts_node.add(node);
       }
     }

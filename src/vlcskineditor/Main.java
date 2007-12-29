@@ -32,12 +32,13 @@ import javax.swing.tree.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 import java.util.zip.*;
-import javax.imageio.*;
-import vlcskineditor.resources.Bitmap;
+import javax.imageio.*; 
 import vlcskineditor.items.*;
 import com.ice.tar.*;
 import com.ice.jni.registry.*;
 import vlcskineditor.history.*;
+import vlcskineditor.resources.Bitmap;
+import vlcskineditor.resources.SubBitmap;
 
 
 /**
@@ -61,7 +62,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JInternalFrame resources,windows,items,current_window;  
   JTree res_tree,win_tree,items_tree;  
   DefaultTreeModel res_tree_model, win_tree_model, items_tree_model;
-  JButton res_add_bitmap, res_add_font, res_edit, res_del;
+  JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
   JPopupMenu res_add_bitmap_pu;
   JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
   JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_edit, win_del;  
@@ -77,6 +78,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   Skin s;
   public ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");  
   public ImageIcon add_font_icon = createIcon("icons/add_font.png");
+  public ImageIcon copy_icon = createIcon("icons/copy.png");
   public ImageIcon edit_icon = createIcon("icons/edit.png");
   public ImageIcon edit_undo_icon = createIcon("icons/edit-undo.png");
   public ImageIcon edit_redo_icon = createIcon("icons/edit-redo.png");
@@ -267,6 +269,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_add_font.setMaximumSize(new Dimension(24,24));
     res_add_font.setPreferredSize(new Dimension(24,24));
     res_add_font.addActionListener(this);
+    res_duplicate = new JButton("",copy_icon);
+    res_duplicate.setToolTipText("Create copy of the selected item");
+    res_duplicate.setPreferredSize(new Dimension(24,24));
+    res_duplicate.addActionListener(this);
     res_edit = new JButton("",edit_icon);
     res_edit.setToolTipText("Edit the selected item");
     res_edit.setMaximumSize(new Dimension(24,24));
@@ -279,6 +285,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_del.addActionListener(this);
     resources.add(res_add_bitmap);
     resources.add(res_add_font);
+    resources.add(res_duplicate);
     resources.add(res_edit);
     resources.add(res_del);        
     
@@ -286,6 +293,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_layout.putConstraint(SpringLayout.NORTH, res_tree_sp,5,SpringLayout.NORTH, resources.getContentPane());        
     res_layout.putConstraint(SpringLayout.NORTH, res_add_bitmap,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_add_font,5,SpringLayout.SOUTH, res_tree_sp);
+    res_layout.putConstraint(SpringLayout.NORTH, res_duplicate,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_edit,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_del,5,SpringLayout.SOUTH, res_tree_sp);    
     res_layout.putConstraint(SpringLayout.NORTH, res_add_bitmap,5,SpringLayout.SOUTH, res_tree_sp);
@@ -294,7 +302,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_layout.putConstraint(SpringLayout.NORTH, res_del,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.WEST, res_add_bitmap,5,SpringLayout.WEST, resources.getContentPane());
     res_layout.putConstraint(SpringLayout.WEST, res_add_font,5,SpringLayout.EAST, res_add_bitmap);
-    res_layout.putConstraint(SpringLayout.WEST, res_edit,5,SpringLayout.EAST, res_add_font);
+    res_layout.putConstraint(SpringLayout.WEST, res_duplicate,5,SpringLayout.EAST, res_add_font);
+    res_layout.putConstraint(SpringLayout.WEST, res_edit,5,SpringLayout.EAST, res_duplicate);
     res_layout.putConstraint(SpringLayout.WEST, res_del,5,SpringLayout.EAST, res_edit);    
     res_layout.putConstraint(SpringLayout.SOUTH, resources.getContentPane(),24+5+5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, resources.getContentPane(),5,SpringLayout.NORTH, res_tree_sp);
@@ -970,20 +979,25 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_resource!=null) {
         Resource r = s.getResource(selected_resource);
         if(r!=null) {
-          if(r.type.equals("Bitmap")) {
-            vlcskineditor.resources.Bitmap b = (vlcskineditor.resources.Bitmap)r;
+          if(r.getClass()==Bitmap.class) {
+            Bitmap b = (Bitmap)r;
+            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
+          }
+          else if(r.getClass()==SubBitmap.class) {
+            SubBitmap sb = (SubBitmap)r;
+            Bitmap b = sb.getParentBitmap();
             b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
           }
           else {
-            JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add sub bitmap",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"The selected resource is no bitmap!","Could not add subbitmap",JOptionPane.INFORMATION_MESSAGE);
           }
         }
         else {
-          JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add sub bitmap",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add subbitmap",JOptionPane.INFORMATION_MESSAGE);
         }
       }
       else {
-        JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add sub bitmap",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,"No parent bitmap selected!","Could not add subbitmap",JOptionPane.INFORMATION_MESSAGE);
       }
     }
     // </editor-fold>
@@ -1005,6 +1019,37 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         }
         s.updateResources();
       }    
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Duplicate resource">
+    else if(e.getSource().equals(res_duplicate)) {
+      if(selected_resource==null) return;
+      Resource r = s.getResource(selected_resource);
+      if(r==null) return;
+      if(r.getClass()==Bitmap.class) {
+        Bitmap b = (Bitmap)r;        
+        Bitmap b2 = new Bitmap(b.returnCode(),s);
+        b2.renameForCopy();
+        s.resources.add(b2);
+        s.updateResources();
+        s.expandResource(b.id);
+      }
+      else if(r.getClass()==SubBitmap.class) {
+        SubBitmap sb = (SubBitmap)r;        
+        SubBitmap sb2 = new SubBitmap(sb.returnCode(),s,sb.getParentBitmap());
+        sb2.renameForCopy();
+        sb.getParentBitmap().SubBitmaps.add(sb2);
+        s.updateResources();
+        s.expandResource(sb.id);
+      }
+      else {
+        vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;        
+        vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font(f.returnCode(),s);
+        f2.renameForCopy();
+        s.resources.add(f2);
+        s.updateResources();
+        s.expandResource(f.id);
+      }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Resource edit">

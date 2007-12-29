@@ -90,10 +90,9 @@ public class SubBitmapEditWindow extends JPanel implements ActionListener, Mouse
   @Override
   public void paint(Graphics g) {    
     if(b.image==null) return;
-    if(drawcount>=40) drawcount = 0;
+    if(drawcount>=30) drawcount = 0;
     g.clearRect(0,0,getWidth(),getHeight());
-    g.drawImage(b.image, 0, 0, p_width*z_fact, p_height*z_fact, frame);
-    //g.drawImage(b.image,0,0,frame);
+    g.drawImage(b.image, 0, 0, p_width*z_fact, p_height*z_fact, frame);    
     g.setColor(Color.RED);
     int[] x = new int[4];
     x[0] = x1*z_fact;

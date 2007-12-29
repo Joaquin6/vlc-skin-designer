@@ -319,4 +319,7 @@ public class SubBitmap extends Resource implements ActionListener{
     DefaultMutableTreeNode top = new DefaultMutableTreeNode("Bitmap: "+id);   
     return top;
   }
+  public Bitmap getParentBitmap() {
+    return parent;
+  }
 }
