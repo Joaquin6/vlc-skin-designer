@@ -3,6 +3,7 @@ VLC Skin Editor release 0.6.1b
 Changelog:
 -----------------------------------------------------------
 0.7.0a - Preview can be saved as image
+       - Improved SubBitmap editing
 0.6.1b - Critical bufix for the Preview Window 
        - Bugfix for slider points parsing and XML parsing
 0.6.0b - Resources/windows/layouts/items can be edited by

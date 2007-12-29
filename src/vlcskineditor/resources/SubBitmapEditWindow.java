@@ -31,9 +31,14 @@ import javax.swing.*;
  * Gives the user the possibilty to edit a SubBitmap visually
  * @author Daniel Dreibrodt
  */
-public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseMotionListener, KeyListener, WindowListener{
+public class SubBitmapEditWindow extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyListener, WindowListener{
   
   public JFrame frame;
+  JScrollPane scroll_pane;
+  JPanel zoom_panel;
+  JButton zoom_more, zoom_less;
+  JLabel zoom_label;
+  int z_fact = 1;
   Bitmap b;
   SubBitmap sb;
   FrameUpdater fu;
@@ -41,7 +46,7 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
   boolean starteddragging = false;
   int x1, y1, x2, y2;
   int x1_org, y1_org, x2_org, y2_org;
-  int maxx, maxy;
+  int p_width, p_height;
   int drawcount;
   
   
@@ -54,15 +59,28 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
     x2_org = x2 = sb.x+sb.width;
     y2_org = y2 = sb.y+sb.height;
     frame = new JFrame("Edit SubBitmap");
-    frame.setLayout(new GridLayout(1,1));
-    frame.add(this);
-    maxx = b.image.getWidth();
-    maxy = b.image.getHeight();
-    setMinimumSize(new Dimension(maxx,maxy));
-    setPreferredSize(new Dimension(maxx,maxy));    
+    frame.setLayout(new BorderLayout());
+    zoom_panel = new JPanel();
+    zoom_panel.setLayout(new FlowLayout());
+    zoom_less = new JButton("-");   
+    zoom_less.addActionListener(this);
+    zoom_panel.add(zoom_less);
+    zoom_label = new JLabel("Zoom factor: 1x");
+    zoom_panel.add(zoom_label);
+    zoom_more = new JButton("+");
+    zoom_more.addActionListener(this);
+    zoom_panel.add(zoom_more);
+    zoom_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);    
+    frame.add(zoom_panel, BorderLayout.PAGE_START);
+    p_width = b.image.getWidth();
+    p_height = b.image.getHeight();    
+    setPreferredSize(new Dimension(p_width,p_height));  
+    scroll_pane = new JScrollPane(this);    
+    scroll_pane.setPreferredSize(new Dimension(p_width+20,p_height+20));
+    frame.add(scroll_pane,BorderLayout.CENTER);     
     frame.pack();
     frame.setLocation(sb.frame.getX()+sb.frame.getWidth()+5,sb.frame.getY());
-    frame.setResizable(false);
+    frame.setMinimumSize(new Dimension(200,100));
     frame.setVisible(true);
     fu = new FrameUpdater(this,25);    
     fu.start();
@@ -74,18 +92,19 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
     if(b.image==null) return;
     if(drawcount>=40) drawcount = 0;
     g.clearRect(0,0,getWidth(),getHeight());
-    g.drawImage(b.image,0,0,frame);
+    g.drawImage(b.image, 0, 0, p_width*z_fact, p_height*z_fact, frame);
+    //g.drawImage(b.image,0,0,frame);
     g.setColor(Color.RED);
     int[] x = new int[4];
-    x[0] = x1;
-    x[1] = x2;
-    x[2] = x2;
-    x[3] = x1;
+    x[0] = x1*z_fact;
+    x[1] = x2*z_fact;
+    x[2] = x2*z_fact;
+    x[3] = x1*z_fact;
     int[] y = new int[4];
-    y[0] = y1;
-    y[1] = y1;
-    y[2] = y2;
-    y[3] = y2;
+    y[0] = y1*z_fact;
+    y[1] = y1*z_fact;
+    y[2] = y2*z_fact;
+    y[3] = y2*z_fact;
     if(drawcount<=20 || starteddragging)
     g.drawPolygon(x,y,4);    
     drawcount++;
@@ -102,16 +121,16 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
       y1_org = y1;
       x2_org = x2;
       y2_org = y2;
-      x2 = x1 = e.getX();
-      y2 = y1 = e.getY();
+      x2 = x1 = e.getX()/z_fact;
+      y2 = y1 = e.getY()/z_fact;
     }    
     else {      
-      if(e.getX()>=maxx) x2=maxx;
-      else if(e.getX()<0) x2=0;
-      else x2 = e.getX();
-      if(e.getY()>=maxy) y2=maxy;
-      else if(e.getY()<0) y2=0;
-      else y2 = e.getY();
+      if(e.getX()/z_fact>=p_width) x2=p_width;
+      else if(e.getX()/z_fact<0) x2=0;
+      else x2 = e.getX()/z_fact;
+      if(e.getY()/z_fact>=p_height) y2=p_height;
+      else if(e.getY()/z_fact<0) y2=0;
+      else y2 = e.getY()/z_fact;
     }
   }
   public void mouseMoved(MouseEvent e) {
@@ -180,5 +199,19 @@ public class SubBitmapEditWindow extends JPanel implements MouseListener, MouseM
   public void windowActivated(WindowEvent e) {
   }
   public void windowDeactivated(WindowEvent e) {
+  }
+  public void actionPerformed(ActionEvent e) {
+    if(e.getSource().equals(zoom_less)) {
+      if(z_fact>1) z_fact--;
+      zoom_label.setText("Zoom factor: "+z_fact+"x");
+      setSize(p_width*z_fact, p_height*z_fact);
+      setPreferredSize(new Dimension(p_width*z_fact, p_height*z_fact));
+    }
+    else if(e.getSource().equals(zoom_more)) {
+      if(z_fact<16) z_fact++;
+      zoom_label.setText("Zoom factor: "+z_fact+"x");
+      setSize(p_width*z_fact, p_height*z_fact);
+      setPreferredSize(new Dimension(p_width*z_fact, p_height*z_fact));
+    }
   }
 }
