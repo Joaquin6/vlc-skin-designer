@@ -490,7 +490,9 @@ public class Playtree extends Item implements ActionListener{
         return;
       }
       update();
-      frame.setVisible(false);           
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
     else if (e.getSource().equals(bgcolor1_btn)) {
       Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(bgcolor1_tf.getText()));    
@@ -595,33 +597,33 @@ public class Playtree extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {
     String code = "<Playtree";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     code+=" font=\""+font+"\"";
-    if(bgcolor1!=BGCOLOR1_DEFAULT) code+=" bgcolor1=\""+bgcolor1+"\"";
-    if(bgcolor2!=BGCOLOR2_DEFAULT) code+=" bgcolor2=\""+bgcolor2+"\"";
-    if(fgcolor!=FGCOLOR_DEFAULT) code+=" fgcolor=\""+fgcolor+"\"";
-    if(selcolor!=SELCOLOR_DEFAULT) code+=" selcolor=\""+selcolor+"\"";
-    if(playcolor!=PLAYCOLOR_DEFAULT) code+=" playcolor=\""+playcolor+"\"";
-    if(bgimage!=BGIMAGE_DEFAULT) code+=" bgimage=\""+bgimage+"\"";
-    if(itemimage!=ITEMIMAGE_DEFAULT) code+=" itemimage=\""+itemimage+"\"";
-    if(openimage!=OPENIMAGE_DEFAULT) code+=" openimage=\""+openimage+"\"";
-    if(closedimage!=CLOSEDIMAGE_DEFAULT) code+=" closedimage=\""+closedimage+"\"";
-    if(var!=VAR_DEFAULT) code+=" var=\""+var+"\"";
+    if(!bgcolor1.equals(BGCOLOR1_DEFAULT)) code+=" bgcolor1=\""+bgcolor1+"\"";
+    if(!bgcolor2.equals(BGCOLOR2_DEFAULT)) code+=" bgcolor2=\""+bgcolor2+"\"";
+    if(!fgcolor.equals(FGCOLOR_DEFAULT)) code+=" fgcolor=\""+fgcolor+"\"";
+    if(!selcolor.equals(SELCOLOR_DEFAULT)) code+=" selcolor=\""+selcolor+"\"";
+    if(!playcolor.equals(PLAYCOLOR_DEFAULT)) code+=" playcolor=\""+playcolor+"\"";
+    if(!bgimage.equals(BGIMAGE_DEFAULT)) code+=" bgimage=\""+bgimage+"\"";
+    if(!itemimage.equals(ITEMIMAGE_DEFAULT)) code+=" itemimage=\""+itemimage+"\"";
+    if(!openimage.equals(OPENIMAGE_DEFAULT)) code+=" openimage=\""+openimage+"\"";
+    if(!closedimage.equals(CLOSEDIMAGE_DEFAULT)) code+=" closedimage=\""+closedimage+"\"";
+    if(!var.equals(VAR_DEFAULT)) code+=" var=\""+var+"\"";
     if(flat!=FLAT_DEFAULT) code+=" flat=\""+String.valueOf(flat)+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
-    if (width!=WIDTH_DEFAULT) code+=" width=\""+String.valueOf(width)+"\"";
-    if (height!=HEIGHT_DEFAULT) code+=" height=\""+String.valueOf(height)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
+    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
+    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";    
     code+=">\n";    
     code+=slider.returnCode();
     code+="\n</Playtree>";

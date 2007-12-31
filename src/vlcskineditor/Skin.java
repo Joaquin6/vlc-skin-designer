@@ -33,6 +33,7 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.util.*;
+import javax.swing.border.EtchedBorder;
 
 /**
  * Represents a skin file. Stores all Resources and Windows, which in turn store the Layouts that contain the items.
@@ -75,13 +76,16 @@ public class Skin implements ActionListener{
   
   public GlobalVariables gvars = new GlobalVariables();
   
+  //Central window handle for all editing dialogs of res/win/layout/items
+  public JFrame edit_frame; 
+  
   public Skin(Main m_) {
-    m=m_;
+    m=m_;    
   }
   /** Creates the file in which to save the new skin **/
   public void createNew(File f) {
     skinfile=f;
-    skinfolder = f.getParentFile().getAbsolutePath()+f.separator;    
+    skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
     try {
       skinfile.createNewFile();
     }
@@ -94,7 +98,7 @@ public class Skin implements ActionListener{
     resources.clear();
     windows.clear();
     skinfile=f;
-    skinfolder = f.getParentFile().getAbsolutePath()+f.separator;    
+    skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
     try {
       //System.out.println("Creating Buffered Reader...");
       BufferedReader br = new BufferedReader(new FileReader(f));
@@ -232,7 +236,7 @@ public class Skin implements ActionListener{
       theme_frame = new JFrame("Theme settings");
       theme_frame.setResizable(false);
       theme_frame.setLayout(new FlowLayout());
-      theme_frame.setDefaultCloseOperation(theme_frame.HIDE_ON_CLOSE);
+      theme_frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       
       JLabel themeinfo_name_l = new JLabel("Name:");
       themeinfo_name_tf = new JTextField();
@@ -281,7 +285,7 @@ public class Skin implements ActionListener{
       themeinfo_p.add(themeinfo_webpage_tf);      
       themeinfo_webpage_l.setBounds(5,105,150,24);
       themeinfo_webpage_tf.setBounds(160,105,150,24);      
-      themeinfo_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Theme Information"));
+      themeinfo_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Theme Information"));
       themeinfo_p.setMinimumSize(new Dimension(315,135));
       themeinfo_p.setMaximumSize(new Dimension(315,135));
       themeinfo_p.setPreferredSize(new Dimension(315,135));
@@ -300,7 +304,7 @@ public class Skin implements ActionListener{
       theme_p.add(theme_movealpha_tf);
       theme_movealpha_l.setBounds(5,75,150,24);
       theme_movealpha_tf.setBounds(160,75,150,24);
-      theme_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY), "Theme Attributes"));
+      theme_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Theme Attributes"));
       theme_p.setMinimumSize(new Dimension(315,105));
       theme_p.setMaximumSize(new Dimension(315,105));
       theme_p.setPreferredSize(new Dimension(315,105));
@@ -344,6 +348,8 @@ public class Skin implements ActionListener{
       theme_alpha = Integer.parseInt(theme_alpha_tf.getText());
       theme_movealpha = Integer.parseInt(theme_movealpha_tf.getText());
       theme_frame.setVisible(false);
+      theme_frame.dispose();
+      theme_frame = null;
       tee.setNew();
       m.hist.addEvent(tee);
     }
@@ -362,7 +368,11 @@ public class Skin implements ActionListener{
         JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
-    else if(e.getSource().equals(theme_cancel_btn)) theme_frame.setVisible(false);
+    else if(e.getSource().equals(theme_cancel_btn)) {
+      theme_frame.setVisible(false);
+      theme_frame.dispose();
+      theme_frame = null;
+    }
   }
   /** Generates a new number for unnamed items so that every id is unique **/  
   public int getNewId() {
@@ -536,7 +546,7 @@ public class Skin implements ActionListener{
     String code ="";
     code += HEADER+"\n";
     code += "<Theme version=\""+theme_version+"\"";
-    if(theme_tooltipfont!=THEME_TOOLTIPFONT_DEFAULT) code+=" tooltipfont=\""+theme_tooltipfont+"\"";
+    if(!theme_tooltipfont.equals(THEME_TOOLTIPFONT_DEFAULT)) code+=" tooltipfont=\""+theme_tooltipfont+"\"";
     if(theme_magnet!=THEME_MAGNET_DEFAULT) code+=" magnet=\""+String.valueOf(theme_magnet)+"\"";
     if(theme_alpha!=THEME_ALPHA_DEFAULT) code+=" alpha=\""+String.valueOf(theme_alpha)+"\"";
     if(theme_movealpha!=THEME_MOVEALPHA_DEFAULT) code+=" movealpha=\""+String.valueOf(theme_movealpha)+"\"";

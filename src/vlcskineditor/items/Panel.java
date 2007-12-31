@@ -323,7 +323,9 @@ public class Panel extends Item implements ActionListener{
         }
       }
       update();
-      frame.setVisible(false);      
+      frame.setVisible(false);  
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -346,6 +348,8 @@ public class Panel extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {
@@ -353,12 +357,12 @@ public class Panel extends Item implements ActionListener{
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" width=\""+String.valueOf(width)+"\" height=\""+String.valueOf(height)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
     code+=">";
-    if (id!=ID_DEFAULT) code+="<!--  id=\""+id+"\" -->";
+    if (!id.equals(ID_DEFAULT)) code+="<!--  id=\""+id+"\" -->";
     for (int i=0;i<items.size();i++) {
       code+="\n"+items.get(i).returnCode();
     }

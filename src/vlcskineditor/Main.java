@@ -113,7 +113,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   //Handles undoing and redoing of actions
   public History hist;
   
-  /**
+   /**
    * Launches the skin editor and initializes the GUI.
    * @param args Command line arguments passed by the console.
    * If there exist one or more arguments, the first argument is intepreted as a file locator for a skin to be loaded.

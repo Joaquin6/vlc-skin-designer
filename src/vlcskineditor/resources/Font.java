@@ -240,8 +240,10 @@ public class Font extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Please choose a file!","File not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
+      update(); 
       frame.setVisible(false);
-      update();      
+      frame.dispose();
+      frame = null;           
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -260,6 +262,8 @@ public class Font extends Resource implements ActionListener{
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {

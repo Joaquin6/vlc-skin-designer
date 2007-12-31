@@ -107,7 +107,7 @@ public class SubBitmap extends Resource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
+      //frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);
@@ -123,7 +123,7 @@ public class SubBitmap extends Resource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
+      //frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);
@@ -272,9 +272,11 @@ public class SubBitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      frame.setVisible(false);            
-      destroyEditWindow();
       update();      
+      frame.setVisible(false);        
+      destroyEditWindow();
+      frame.dispose();
+      frame = null;      
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -292,8 +294,10 @@ public class SubBitmap extends Resource implements ActionListener{
       }
     }
     else if(e.getSource().equals(cancel_btn)) {
-      frame.setVisible(false);
+      frame.setVisible(false);      
       destroyEditWindow();
+      frame.dispose();
+      frame = null;
       if(!created) parent.SubBitmaps.remove(this);      
     }
   }
@@ -304,6 +308,7 @@ public class SubBitmap extends Resource implements ActionListener{
     width_tf.removeKeyListener(sbew);
     height_tf.removeKeyListener(sbew);
     frame.removeWindowListener(sbew);
+    sbew.frame.dispose();
     sbew.frame = null;
     sbew = null;
   }

@@ -218,7 +218,9 @@ public class SliderBackground extends Item implements ActionListener{
         return;
       }
       update();
-      frame.setVisible(false);      
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -240,12 +242,14 @@ public class SliderBackground extends Item implements ActionListener{
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
       if(!created) sl.removeBG();      
     }
   }
   public String returnCode() {
     String code = "<SliderBackground";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     code+=" image=\""+image+"\"";
     if (nbhoriz!=NBHORIZ_DEFAULT) code+=" nbhoriz=\""+String.valueOf(nbhoriz)+"\"";
     if (nbvert!=NBVERT_DEFAULT) code+=" nbvert=\""+String.valueOf(nbvert)+"\"";

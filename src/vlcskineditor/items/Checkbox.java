@@ -435,7 +435,9 @@ public class Checkbox extends Item implements ActionListener{
         return;
       }
       update();
-      frame.setVisible(false);      
+      frame.setVisible(false); 
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -496,6 +498,8 @@ public class Checkbox extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   @Override
@@ -506,23 +510,23 @@ public class Checkbox extends Item implements ActionListener{
   public String returnCode() {
     String code = "<Checkbox";
     code+=" state=\""+state+"\" up1=\""+up1+"\" up2=\""+up2+"\"";
-    if (down1!=ID_DEFAULT) code+=" down1=\""+down1+"\"";
-    if (down2!=ID_DEFAULT) code+=" down2=\""+down2+"\"";
-    if (over1!=ID_DEFAULT) code+=" over1=\""+over1+"\"";
-    if (over2!=ID_DEFAULT) code+=" over2=\""+over2+"\"";
-    if (action1!=ID_DEFAULT) code+=" action1=\""+action1+"\"";
-    if (action2!=ID_DEFAULT) code+=" action2=\""+action2+"\"";
-    if (tooltiptext1!=ID_DEFAULT) code+=" tooltiptext1=\""+tooltiptext1+"\"";
-    if (tooltiptext2!=ID_DEFAULT) code+=" tooltiptext2=\""+tooltiptext2+"\"";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+    if (!down1.equals(ID_DEFAULT)) code+=" down1=\""+down1+"\"";
+    if (!down2.equals(ID_DEFAULT)) code+=" down2=\""+down2+"\"";
+    if (!over1.equals(ID_DEFAULT)) code+=" over1=\""+over1+"\"";
+    if (!over2.equals(ID_DEFAULT)) code+=" over2=\""+over2+"\"";
+    if (!action1.equals(ID_DEFAULT)) code+=" action1=\""+action1+"\"";
+    if (!action2.equals(ID_DEFAULT)) code+=" action2=\""+action2+"\"";
+    if (!tooltiptext1.equals(ID_DEFAULT)) code+=" tooltiptext1=\""+tooltiptext1+"\"";
+    if (!tooltiptext2.equals(ID_DEFAULT)) code+=" tooltiptext2=\""+tooltiptext2+"\"";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
+    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
+    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";
     code+="/>";
     return code;
   }

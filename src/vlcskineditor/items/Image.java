@@ -305,7 +305,9 @@ public class Image extends Item implements ActionListener{
         return;
       }
       update();
-      frame.setVisible(false);      
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -344,6 +346,8 @@ public class Image extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   @Override
@@ -351,19 +355,21 @@ public class Image extends Item implements ActionListener{
     if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
   public String returnCode() {
-    String code = "<Image";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";    
-    code+=" image=\""+image+"\"";
-    if (action!=ACTION_DEFAULT) code+=" action=\""+action+"\"";
-    if (action2!=ACTION2_DEFAULT) code+=" action2=\""+action2+"\"";
+    String code = "<Image";    
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    
+    code+=" image=\""+image+"\"";
+    if (!action.equals(ACTION_DEFAULT)) code+=" action=\""+action+"\"";
+    if (!action2.equals(ACTION2_DEFAULT)) code+=" action2=\""+action2+"\"";
+    
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
+    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
+    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";
     code+="/>";
     return code;
   }

@@ -323,8 +323,10 @@ public class Bitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"The number of frames cannot be smaller than 1","Nbframes not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }      
+      update();    
       frame.setVisible(false);
-      update();      
+      frame.dispose();
+      frame = null;        
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -343,6 +345,8 @@ public class Bitmap extends Resource implements ActionListener{
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {
@@ -369,6 +373,7 @@ public class Bitmap extends Resource implements ActionListener{
     }
     return node;
   }
+  @Override
   public Resource getParentOf(String id_) {
     for(SubBitmap sbmp:SubBitmaps) {
       if(sbmp.id.equals(id_)) return this;

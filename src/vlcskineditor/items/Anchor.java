@@ -107,7 +107,7 @@ public class Anchor extends Item implements ActionListener{
       updateBezier();
       s.updateItems();
       s.expandItem(id);
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       created = true;
       ItemAddEvent aae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(aae);
@@ -133,7 +133,7 @@ public class Anchor extends Item implements ActionListener{
       frame = new JFrame("Anchor settings");
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel("ID:");
       id_tf = new JTextField();
       JLabel x_l = new JLabel("X:");
@@ -239,8 +239,10 @@ public class Anchor extends Item implements ActionListener{
           return;
         }
       }
-      frame.setVisible(false);
       update();
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;      
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -263,6 +265,8 @@ public class Anchor extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {
@@ -270,7 +274,7 @@ public class Anchor extends Item implements ActionListener{
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" priority=\""+String.valueOf(priority)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";    
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";    
     code+="/>";
     //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
@@ -292,10 +296,12 @@ public class Anchor extends Item implements ActionListener{
       }
     }
   }
+  @Override
   public boolean contains(int x_, int y_) {
-    int h = b.getHeight();
+    return true;
+    /*int h = b.getHeight();
     int w = b.getWidth();
-    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);  
+    return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);*/
   }
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Anchor: "+id);  

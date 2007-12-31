@@ -319,7 +319,9 @@ public class Button extends Item implements ActionListener{
         return;
       }
       update();
-      frame.setVisible(false);      
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -361,27 +363,30 @@ public class Button extends Item implements ActionListener{
         if(l!=null) l.remove(this);        
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
+  @Override
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action_ae) action_tf.setText(ae.getCode());
   }
   public String returnCode() {
     String code = "<Button";
     code+=" up=\""+up+"\"";
-    if (down!=DOWN_DEFAULT) code+=" down=\""+down+"\"";
-    if (over!=OVER_DEFAULT) code+=" over=\""+over+"\"";
-    if (action!=ACTION_DEFAULT) code+=" action=\""+action+"\"";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+    if (!down.equals(DOWN_DEFAULT)) code+=" down=\""+down+"\"";
+    if (!over.equals(OVER_DEFAULT)) code+=" over=\""+over+"\"";
+    if (!action.equals(ACTION_DEFAULT)) code+=" action=\""+action+"\"";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
-    if (tooltiptext!=TOOLTIPTEXT_DEFAULT) code+=" tooltiptext=\""+tooltiptext+"\"";
+    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
+    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";
+    if (!tooltiptext.equals(TOOLTIPTEXT_DEFAULT)) code+=" tooltiptext=\""+tooltiptext+"\"";
     code+="/>";
     return code;
   }

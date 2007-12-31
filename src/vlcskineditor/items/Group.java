@@ -215,8 +215,10 @@ public class Group extends Item implements ActionListener{
           return;
         }
       }
-      frame.setVisible(false);
       update();
+      frame.setVisible(false);
+      frame.dispose();
+      frame = null;      
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
@@ -239,6 +241,8 @@ public class Group extends Item implements ActionListener{
         if(l!=null) l.remove(this);
       }
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
   }
   public String returnCode() {
