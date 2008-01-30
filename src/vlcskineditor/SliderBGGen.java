@@ -43,11 +43,12 @@ public class SliderBGGen extends JFrame implements ActionListener{
   
   JPanel card_step1;
   JRadioButton ltr_rb, btt_rb;
+  JTextField width_tf, height_tf;
+  JTextField margin_l_tf, margin_r_tf, margin_t_tf, margin_b_tf;
   
   JSeparator step1_horz_s;
   JButton step1_next_btn, step1_cancel_btn;
-  JTextField width_tf, height_tf;
-  
+    
   JPanel card_step2;
   
   /** Contains the path to the background image file */
@@ -72,7 +73,13 @@ public class SliderBGGen extends JFrame implements ActionListener{
   
   ImageIcon editor_icon = createIcon("icons/editor.png");
   ImageIcon ltr_icon = createIcon("icons/sliderbg_ltr.png");
-  ImageIcon btt_icon = createIcon("icons/sliderbg_btt.png");  
+  ImageIcon btt_icon = createIcon("icons/sliderbg_btt.png");
+  ImageIcon width_i = createIcon("icons/sbg_width.png");
+  ImageIcon height_i = createIcon("icons/sbg_height.png");
+  ImageIcon margin_l_i = createIcon("icons/sbg_margin_l.png");
+  ImageIcon margin_r_i = createIcon("icons/sbg_margin_r.png");
+  ImageIcon margin_t_i = createIcon("icons/sbg_margin_t.png");
+  ImageIcon margin_b_i = createIcon("icons/sbg_margin_b.png");
   
   /**
    * Creates a new Slider Background Generator
@@ -87,7 +94,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     layout = new CardLayout();
     setLayout(layout);
     
-    Color header_bgc = getBackground().darker().darker();    
+    Color header_bgc = getBackground().darker().darker(); //Adapts to the system style    
     String header_bgh = "#";
     if(header_bgc.getRed()<16) header_bgh+="0";
     header_bgh+=Integer.toHexString(header_bgc.getRed()).toUpperCase();
@@ -132,23 +139,59 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(horz2_s);
     horz2_s.setBounds(5,215,525,215);    
     
-    JLabel width_l = new JLabel("Width:");
+    JLabel width_l = new JLabel("Width:",width_i,JLabel.RIGHT);
     width_tf = new JTextField();    
     width_tf.setDocument(new NumbersOnlyDocument(false));
+    width_l.setLabelFor(width_tf);
     
     card_step1.add(width_l);
-    width_l.setBounds(5,230,75,25);
+    width_l.setBounds(5,230,80,25);
     card_step1.add(width_tf);
-    width_tf.setBounds(80,230,150,25);    
+    width_tf.setBounds(90,230,50,25);    
     
-    JLabel height_l = new JLabel("Height:");
+    JLabel height_l = new JLabel("Height:",height_i,JLabel.RIGHT);
     height_tf = new JTextField();
     height_tf.setDocument(new NumbersOnlyDocument(false));
+    height_l.setLabelFor(height_tf);
     
     card_step1.add(height_l);
-    height_l.setBounds(5,265,75,25);
+    height_l.setBounds(5,265,80,25);
     card_step1.add(height_tf);
-    height_tf.setBounds(80,265,150,25);
+    height_tf.setBounds(90,265,50,25);
+    
+    JLabel margin_l_l = new JLabel("Left margin:", margin_l_i, JLabel.RIGHT);
+    margin_l_tf = new JTextField();
+    margin_l_tf.setDocument(new NumbersOnlyDocument(false));
+    margin_l_l.setLabelFor(margin_l_tf);
+    JLabel margin_r_l = new JLabel("Right margin:", margin_r_i, JLabel.RIGHT);
+    margin_r_tf = new JTextField();
+    margin_r_tf.setDocument(new NumbersOnlyDocument(false));
+    margin_r_l.setLabelFor(margin_r_tf);
+    JLabel margin_t_l = new JLabel("Top margin:", margin_t_i, JLabel.RIGHT);
+    margin_t_tf = new JTextField();
+    margin_t_tf.setDocument(new NumbersOnlyDocument(false));
+    margin_t_l.setLabelFor(margin_t_tf);
+    JLabel margin_b_l = new JLabel("Bottom margin:", margin_b_i, JLabel.RIGHT);
+    margin_b_tf = new JTextField();
+    margin_b_tf.setDocument(new NumbersOnlyDocument(false));
+    margin_b_l.setLabelFor(margin_b_tf);
+    
+    card_step1.add(margin_l_l);
+    card_step1.add(margin_l_tf);
+    margin_l_l.setBounds(150,230,115,25);
+    margin_l_tf.setBounds(270,230,50,25);
+    card_step1.add(margin_r_l);
+    card_step1.add(margin_r_tf);
+    margin_r_l.setBounds(150,265,115,25);
+    margin_r_tf.setBounds(270,265,50,25);
+    card_step1.add(margin_t_l);
+    card_step1.add(margin_t_tf);
+    margin_t_l.setBounds(325,230,115,25);
+    margin_t_tf.setBounds(445,230,50,25);
+    card_step1.add(margin_b_l);
+    card_step1.add(margin_b_tf);
+    margin_b_l.setBounds(325,265,115,25);
+    margin_b_tf.setBounds(445,265,50,25);
     
     step1_horz_s = new JSeparator(JSeparator.HORIZONTAL);   
     step1_next_btn = new JButton("Next >");
@@ -244,6 +287,6 @@ public class SliderBGGen extends JFrame implements ActionListener{
     }
     SliderBGGen sbgg = new SliderBGGen(null,null);
     sbgg.setVisible(true);
-    sbgg.setDefaultCloseOperation(sbgg.EXIT_ON_CLOSE);
+    sbgg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 }
