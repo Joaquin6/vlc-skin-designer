@@ -178,7 +178,7 @@ public class SliderBGBuilder {
       JOptionPane.showMessageDialog(sbgg,"Could not save image!\n"+e.toString());
       return;
     }
-    JOptionPane.showMessageDialog(sbgg,"Image saved!\nnbhoriz: 1\nnbvert: "+nbframes+"\npadhorz:0\npadvert:0");
+    //JOptionPane.showMessageDialog(sbgg,"Image saved!\nnbhoriz: 1\nnbvert: "+nbframes+"\npadhorz:0\npadvert:0");
   }
   
 }
