@@ -47,6 +47,12 @@ public class ProgressWindow extends JDialog{
     pbar.setStringPainted(true);
     pbar.setIndeterminate(true);
   }  
+  public void setProgress(int i) {
+      pbar.setIndeterminate(false);
+      pbar.setMaximum(1000);
+      pbar.setMinimum(0);
+      pbar.setValue(i);
+  }
   /** Sets the text displayed on the progress bar */
   public void setText(String s) {
     pbar.setString(s);

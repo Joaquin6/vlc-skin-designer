@@ -49,7 +49,7 @@ public class SliderBackground extends Item implements ActionListener{
   public int padvert = PADVERT_DEFAULT;
   
   JFrame frame;
-  JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
+  public JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
   JButton gen_btn, ok_btn, cancel_btn, help_btn;
   BufferedImage bi = null;
   String bitmap_str = "";
@@ -85,7 +85,7 @@ public class SliderBackground extends Item implements ActionListener{
       nbvert = Integer.parseInt(nbvert_tf.getText());
       padhoriz = Integer.parseInt(padhoriz_tf.getText());
       padvert = Integer.parseInt(padvert_tf.getText());
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
       
       ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id),this);
@@ -218,6 +218,8 @@ public class SliderBackground extends Item implements ActionListener{
         return;
       }
       update();
+      s.updateItems();
+      s.expandItem(id);
       frame.setVisible(false);
       frame.dispose();
       frame = null;
@@ -238,15 +240,17 @@ public class SliderBackground extends Item implements ActionListener{
       }
     }
     else if(e.getSource().equals(gen_btn)) {
-      //TODO
+      SliderBGGen sbgg = new SliderBGGen(this, s);
+      sbgg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      sbgg.setVisible(true);      
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
       frame.dispose();
       frame = null;
       if(!created) sl.removeBG();      
-    }
-  }
+    }    
+  }  
   public String returnCode() {
     String code = "<SliderBackground";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
