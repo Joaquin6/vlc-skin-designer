@@ -128,4 +128,16 @@ public abstract class Item {
   public boolean uses(String id_) {
     return false;
   }
+  /** Renames the item after the copy process **/
+  public void renameForCopy(String p) {    
+    p = p.replaceAll("%oldid%", id);     
+    String newid_base = p;     
+    String newid = newid_base;
+    int i = 1;
+    while(s.idExists(newid)) {
+      i++;
+      newid = newid_base+"_"+String.valueOf(i);
+    }
+    id = newid;
+  }
 }

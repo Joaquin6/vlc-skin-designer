@@ -760,4 +760,10 @@ public class Playtree extends Item implements ActionListener{
   public boolean uses(String id_) {    
     return (((slider!=null)?slider.uses(id_):false)||bgimage.equals(id_)||openimage.equals(id_)||closedimage.equals(id_)||itemimage.equals(id_)||font.equals(id_));
   }
+  @Override  
+  public void renameForCopy(String p) {    
+    String p_ = p;
+    super.renameForCopy(p);
+    slider.renameForCopy(p_);
+  }
 }

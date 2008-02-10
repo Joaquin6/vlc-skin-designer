@@ -27,12 +27,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.filechooser.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 import java.util.zip.*;
-import javax.imageio.*; 
 import vlcskineditor.items.*;
 import com.ice.tar.*;
 import com.ice.jni.registry.*;
@@ -65,8 +63,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
   JPopupMenu res_add_bitmap_pu;
   JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
-  JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_edit, win_del;  
-  JButton items_add, items_up, items_down, items_edit, items_del;
+  JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_duplicate, win_edit, win_del;  
+  JButton items_add, items_up, items_down, items_duplicate, items_edit, items_del;
   JPopupMenu items_add_pu;  
   JMenu items_add_pu_tp;
   JMenuItem items_add_pu_tp_anchor, items_add_pu_tp_button, items_add_pu_tp_checkbox;
@@ -244,7 +242,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
     resources = new JInternalFrame("Resources",true,false);    
     resources.setFrameIcon(resources_icon);
-    resources.setMinimumSize(new Dimension(150,200));    
+    resources.setMinimumSize(new Dimension(190,200));    
     SpringLayout res_layout = new SpringLayout();
     resources.setLayout(res_layout);     
     res_tree_model = new DefaultTreeModel(s.getResourcesTree());
@@ -270,7 +268,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_add_font.setPreferredSize(new Dimension(24,24));
     res_add_font.addActionListener(this);
     res_duplicate = new JButton("",copy_icon);
-    res_duplicate.setToolTipText("Create copy of the selected item");
+    res_duplicate.setToolTipText("Create a copy of the selected resource");
     res_duplicate.setPreferredSize(new Dimension(24,24));
     res_duplicate.addActionListener(this);
     res_edit = new JButton("",edit_icon);
@@ -310,12 +308,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_layout.putConstraint(SpringLayout.EAST, resources.getContentPane(),5,SpringLayout.EAST, res_tree_sp);
     
     resources.pack();
-    resources.setSize(200,200);
+    resources.setSize(190,200);
     resources.setVisible(true);    
     
     windows = new JInternalFrame("Windows",true,false); 
     windows.setFrameIcon(windows_icon);
-    windows.setMinimumSize(new Dimension(150,150));   
+    windows.setMinimumSize(new Dimension(190,150));   
     SpringLayout win_layout = new SpringLayout();
     windows.setLayout(win_layout);     
     win_tree_model = new DefaultTreeModel(s.getWindowsTree());
@@ -350,6 +348,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_layout_down.setMaximumSize(new Dimension(24,12));
     win_layout_down.setPreferredSize(new Dimension(24,12));
     win_layout_down.addActionListener(this);
+    win_duplicate = new JButton("",copy_icon);
+    win_duplicate.setToolTipText("Create a copy of the selected window or layout");
+    win_duplicate.setMaximumSize(new Dimension(24,24));
+    win_duplicate.setPreferredSize(new Dimension(24,24));
+    win_duplicate.addActionListener(this);
     win_edit = new JButton("",edit_icon);
     win_edit.setToolTipText("Edit the selected resource");
     win_edit.setMaximumSize(new Dimension(24,24));
@@ -362,6 +365,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_del.addActionListener(this);
     windows.add(win_add_window);
     windows.add(win_add_layout);
+    windows.add(win_duplicate);
     windows.add(win_edit);
     windows.add(win_layout_up);
     windows.add(win_layout_down);
@@ -372,31 +376,28 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_layout.putConstraint(SpringLayout.NORTH, win_add_window,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_add_layout,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_layout_up,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_del,5,SpringLayout.SOUTH, win_tree_sp);    
-    win_layout.putConstraint(SpringLayout.NORTH, win_add_window,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_add_layout,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_layout_up,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_layout_down,0,SpringLayout.SOUTH, win_layout_up);
+    win_layout.putConstraint(SpringLayout.NORTH, win_layout_down,0,SpringLayout.SOUTH, win_layout_up);    
+    win_layout.putConstraint(SpringLayout.NORTH, win_duplicate,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);    
     win_layout.putConstraint(SpringLayout.NORTH, win_del,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.WEST, win_add_window,5,SpringLayout.WEST, windows.getContentPane());
     win_layout.putConstraint(SpringLayout.WEST, win_add_layout,5,SpringLayout.EAST, win_add_window);
     win_layout.putConstraint(SpringLayout.WEST, win_layout_up,5,SpringLayout.EAST, win_add_layout);
     win_layout.putConstraint(SpringLayout.WEST, win_layout_down,5,SpringLayout.EAST, win_add_layout);
-    win_layout.putConstraint(SpringLayout.WEST, win_edit,5,SpringLayout.EAST, win_layout_up);
+    win_layout.putConstraint(SpringLayout.WEST, win_duplicate,5,SpringLayout.EAST, win_layout_up);
+    win_layout.putConstraint(SpringLayout.WEST, win_edit,5,SpringLayout.EAST, win_duplicate);
     win_layout.putConstraint(SpringLayout.WEST, win_del,5,SpringLayout.EAST, win_edit);    
     win_layout.putConstraint(SpringLayout.SOUTH, windows.getContentPane(),24+5+5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, windows.getContentPane(),5,SpringLayout.NORTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.EAST, windows.getContentPane(),5,SpringLayout.EAST, win_tree_sp);
     
     windows.pack();
-    windows.setSize(200,150);
+    windows.setSize(190,150);
     windows.setVisible(true);   
     
     items = new JInternalFrame("Items",true,false);   
     items.setFrameIcon(items_icon);
-    items.setMinimumSize(new Dimension(150,150));   
+    items.setMinimumSize(new Dimension(190,150));   
     SpringLayout items_layout = new SpringLayout();
     items.setLayout(items_layout);     
     items_tree_model = new DefaultTreeModel(s.getItemsTree());
@@ -426,37 +427,41 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_down.setMaximumSize(new Dimension(24,12));
     items_down.setPreferredSize(new Dimension(24,12));
     items_down.addActionListener(this);
+    items_duplicate = new JButton("",copy_icon);
+    items_duplicate.setToolTipText("Create a copy of the selected resource");
+    items_duplicate.setMaximumSize(new Dimension(24,24));
+    items_duplicate.setPreferredSize(new Dimension(24,24));
+    items_duplicate.addActionListener(this);
     items_edit = new JButton("",edit_icon);
-    items_edit.setToolTipText("Edit the selected resource");
+    items_edit.setToolTipText("Edit the selected item");
     items_edit.setMaximumSize(new Dimension(24,24));
     items_edit.setPreferredSize(new Dimension(24,24));
     items_edit.addActionListener(this);
     items_del = new JButton("",delete_icon);
-    items_del.setToolTipText("Delete the selected resource");
+    items_del.setToolTipText("Delete the selected item");
     items_del.setMaximumSize(new Dimension(24,24));
     items_del.setPreferredSize(new Dimension(24,24));
     items_del.addActionListener(this);
     items.add(items_add);
     items.add(items_up);
     items.add(items_down);
+    items.add(items_duplicate);
     items.add(items_edit);
     items.add(items_del);        
     
     items_layout.putConstraint(SpringLayout.WEST, items_tree_sp,5,SpringLayout.WEST, items.getContentPane());   
-    items_layout.putConstraint(SpringLayout.NORTH, items_tree_sp,5,SpringLayout.NORTH, items.getContentPane());        
-    items_layout.putConstraint(SpringLayout.NORTH, items_add,5,SpringLayout.SOUTH, items_tree_sp);
-    items_layout.putConstraint(SpringLayout.NORTH, items_up,5,SpringLayout.SOUTH, items_tree_sp);
-    items_layout.putConstraint(SpringLayout.NORTH, items_edit,5,SpringLayout.SOUTH, items_tree_sp);
-    items_layout.putConstraint(SpringLayout.NORTH, items_del,5,SpringLayout.SOUTH, items_tree_sp);    
+    items_layout.putConstraint(SpringLayout.NORTH, items_tree_sp,5,SpringLayout.NORTH, items.getContentPane());           
     items_layout.putConstraint(SpringLayout.NORTH, items_add,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_up,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_down,0,SpringLayout.SOUTH, items_up);
+    items_layout.putConstraint(SpringLayout.NORTH, items_duplicate,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_edit,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_del,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.WEST, items_add,5,SpringLayout.WEST, items.getContentPane());
     items_layout.putConstraint(SpringLayout.WEST, items_up,5,SpringLayout.EAST, items_add);
     items_layout.putConstraint(SpringLayout.WEST, items_down,5,SpringLayout.EAST, items_add);
-    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_up);
+    items_layout.putConstraint(SpringLayout.WEST, items_duplicate,5,SpringLayout.EAST, items_up);
+    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_duplicate);
     items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_down);
     items_layout.putConstraint(SpringLayout.WEST, items_del,5,SpringLayout.EAST, items_edit);    
     items_layout.putConstraint(SpringLayout.SOUTH, items.getContentPane(),24+5+5,SpringLayout.SOUTH, items_tree_sp);
@@ -464,7 +469,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_layout.putConstraint(SpringLayout.EAST, items.getContentPane(),5,SpringLayout.EAST, items_tree_sp);
     
     items.pack();
-    items.setSize(200,200);
+    items.setSize(190,200);
     items.setVisible(true); 
     
     pvwin = new PreviewWindow(this);
@@ -1026,10 +1031,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_resource==null) return;
       Resource r = s.getResource(selected_resource);
       if(r==null) return;
+      String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
+                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
         Bitmap b = (Bitmap)r;        
-        Bitmap b2 = new Bitmap(b.returnCode(),s);
-        b2.renameForCopy();
+        Bitmap b2 = new Bitmap(b.returnCode(),s);        
+        b2.renameForCopy(p);
         s.resources.add(b2);
         s.updateResources();
         s.expandResource(b.id);
@@ -1037,7 +1044,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       else if(r.getClass()==SubBitmap.class) {
         SubBitmap sb = (SubBitmap)r;        
         SubBitmap sb2 = new SubBitmap(sb.returnCode(),s,sb.getParentBitmap());
-        sb2.renameForCopy();
+        sb2.renameForCopy(p);
         sb.getParentBitmap().SubBitmaps.add(sb2);
         s.updateResources();
         s.expandResource(sb.id);
@@ -1045,11 +1052,134 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       else {
         vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;        
         vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font(f.returnCode(),s);
-        f2.renameForCopy();
+        f2.renameForCopy(p);
         s.resources.add(f2);
         s.updateResources();
         s.expandResource(f.id);
       }
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Duplicate window/layout">
+    else if(e.getSource().equals(win_duplicate)) {
+        if(selected_window==null) return;
+        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
+                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
+        if(selected_layout==null) {
+            Window w = s.getWindow(selected_window);
+            if(w==null) return;
+            Window w_ = new Window(w.returnCode(), s);
+            w_.renameForCopy(p);
+            s.windows.add(w_);
+            s.updateWindows();
+        }
+        else {
+            Window w = s.getWindow(selected_window);
+            Layout l = w.getLayout(selected_layout);
+            Layout l_ = new Layout(l.returnCode(), w, s);
+            l_.renameForCopy(p);
+            w.layouts.add(l_);
+            s.updateWindows();
+            s.expandLayout(l_.id);
+        }
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Duplicate item">
+    else if(e.getSource().equals(items_duplicate)) {
+        if(selected_item==null) return;
+        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
+                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
+        Item i = s.getItem(selected_item);
+        if(i==null) return;        
+        if(i.getClass()==Anchor.class) {
+            Anchor a = new Anchor(i.returnCode(), s);
+            //Because IDs of Anchors are not stored in the XML and can thus not be copied via returnCode()
+            a.id = i.id;
+            a.renameForCopy(p);
+            s.getParentListOf(i.id).add(a);
+            s.updateItems();
+            s.expandItem(a.id);
+        }
+        else if(i.getClass()==vlcskineditor.items.Button.class) {
+            vlcskineditor.items.Button b = new vlcskineditor.items.Button(i.returnCode(), s);
+            b.renameForCopy(p);
+            s.getParentListOf(i.id).add(b);
+            s.updateItems();
+            s.expandItem(b.id);
+        }
+        else if(i.getClass()==vlcskineditor.items.Checkbox.class) {
+            vlcskineditor.items.Checkbox c = new vlcskineditor.items.Checkbox(i.returnCode(), s);
+            c.renameForCopy(p);
+            s.getParentListOf(i.id).add(c);
+            s.updateItems();
+            s.expandItem(c.id);
+        }
+        else if(i.getClass()==Group.class) {
+            Group g = new Group(i.returnCode(), s);
+            g.renameForCopy(p);
+            s.getParentListOf(i.id).add(g);
+            s.updateItems();
+            s.expandItem(g.id);
+        }        
+        else if(i.getClass()==vlcskineditor.items.Image.class) {
+            vlcskineditor.items.Image im = new vlcskineditor.items.Image(i.returnCode(), s);
+            im.renameForCopy(p);
+            s.getParentListOf(i.id).add(im);
+            s.updateItems();
+            s.expandItem(im.id);
+        }
+        else if(i.getClass()==vlcskineditor.items.Panel.class) {
+            vlcskineditor.items.Panel pa = new vlcskineditor.items.Panel(i.returnCode(), s);
+            pa.renameForCopy(p);
+            s.getParentListOf(i.id).add(pa);
+            s.updateItems();
+            s.expandItem(pa.id);
+        }
+        else if(i.getClass()==Playtree.class) {
+            Playtree pl = new Playtree(i.returnCode(), s);
+            pl.renameForCopy(p);
+            s.getParentListOf(i.id).add(pl);
+            s.updateItems();
+            s.expandItem(pl.id);
+        }
+        else if(i.getClass()==RadialSlider.class) {
+            RadialSlider r = new RadialSlider(i.returnCode(), s);
+            r.renameForCopy(p);
+            s.getParentListOf(i.id).add(r);
+            s.updateItems();
+            s.expandItem(r.id);
+        }
+        else if(i.getClass()==Slider.class) {
+            Slider sl = new Slider(i.returnCode(), s);
+            sl.renameForCopy(p);
+            java.util.List<Item> l = s.getParentListOf(i.id);
+            if(l!=null) {
+                l.add(sl);
+                s.updateItems();
+                s.expandItem(sl.id);
+            }
+            else {
+                //The selected slider seems to be in a playtree
+                JOptionPane.showMessageDialog(this,"A PlayTree cannot contain more than one slider!","Slider could not be duplicated",JOptionPane.INFORMATION_MESSAGE); 
+            }            
+        }
+        else if(i.getClass()==SliderBackground.class) {
+           //A slider can only have one slider background!
+           JOptionPane.showMessageDialog(this,"A slider cannot contain more than one background!","SliderBackgrounds cannot be duplicated",JOptionPane.INFORMATION_MESSAGE); 
+        }
+        else if(i.getClass()==Text.class) {
+            Text t = new Text(i.returnCode(), s);
+            t.renameForCopy(p);
+            s.getParentListOf(i.id).add(t);
+            s.updateItems();
+            s.expandItem(t.id);
+        }
+        else if(i.getClass()==Video.class) {
+            Video v = new Video(i.returnCode(), s);
+            v.renameForCopy(p);
+            s.getParentListOf(i.id).add(v);
+            s.updateItems();
+            s.expandItem(v.id);
+        }        
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Resource edit">

@@ -50,11 +50,9 @@ public abstract class Resource {
     return null;
   }
   /** Renames the Resource after the copy process **/
-  public void renameForCopy() {
-    if(id.indexOf("_copy")!=-1) {
-      id = id.substring(0,id.indexOf("_copy"));
-    } 
-    String newid_base = id+="_copy";     
+  public void renameForCopy(String p) {    
+    p = p.replaceAll("%oldid%", id);     
+    String newid_base = p;     
     String newid = newid_base;
     int i = 1;
     while(s.idExists(newid)) {

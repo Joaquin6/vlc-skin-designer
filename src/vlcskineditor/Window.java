@@ -287,4 +287,20 @@ public class Window implements ActionListener{
     }
     return node;
   }
+  /** Renames the Layout and all its content after the copy process **/
+  public void renameForCopy(String p) { 
+    String p_ = p;
+    p = p.replaceAll("%oldid%", id);     
+    String newid_base = p;     
+    String newid = newid_base;
+    int i = 1;
+    while(s.idExists(newid)) {
+      i++;
+      newid = newid_base+"_"+String.valueOf(i);
+    }
+    id = newid;
+    for(Layout l:layouts) {
+        l.renameForCopy(p_);
+    }
+  }
 }

@@ -316,4 +316,12 @@ public class Group extends Item implements ActionListener{
     }
     return false;
   }
+  @Override  
+  public void renameForCopy(String p) {    
+    String p_ = p;
+    super.renameForCopy(p);
+    for(Item i:items) {
+        i.renameForCopy(p_);
+    }
+  }
 }

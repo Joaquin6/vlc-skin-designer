@@ -600,4 +600,10 @@ public class Slider extends Item implements ActionListener{
   public boolean uses(String id_) {
     return(((sbg!=null)?sbg.uses(id_):false)||up.equals(id_)||over.equals(id_)||down.equals(id_));
   }
+  @Override  
+  public void renameForCopy(String p) {    
+    String p_ = p;
+    super.renameForCopy(p);
+    sbg.renameForCopy(p_);
+  }
 }
