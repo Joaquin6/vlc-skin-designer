@@ -1031,8 +1031,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_resource==null) return;
       Resource r = s.getResource(selected_resource);
       if(r==null) return;
-      String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
-                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
+      String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated objects.\n" +
+                "%oldid% will be replaced by the old ID of the object.", "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
         Bitmap b = (Bitmap)r;        
         Bitmap b2 = new Bitmap(b.returnCode(),s);        
@@ -1062,8 +1062,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Duplicate window/layout">
     else if(e.getSource().equals(win_duplicate)) {
         if(selected_window==null) return;
-        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
-                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
+        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated objects.\n" +
+                "%oldid% will be replaced by the old ID of the object.", "%oldid%_copy");
         if(selected_layout==null) {
             Window w = s.getWindow(selected_window);
             if(w==null) return;
@@ -1086,8 +1086,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Duplicate item">
     else if(e.getSource().equals(items_duplicate)) {
         if(selected_item==null) return;
-        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated object.\n" +
-                "%oldid% will be replaced by the old ID of the resource.", "%oldid%_copy");
+        String p = JOptionPane.showInputDialog(this, "Please enter the rename pattern for the duplicated objects.\n" +
+                "%oldid% will be replaced by the old ID of the object.", "%oldid%_copy");
         Item i = s.getItem(selected_item);
         if(i==null) return;        
         if(i.getClass()==Anchor.class) {
