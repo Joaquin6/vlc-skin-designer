@@ -144,12 +144,15 @@ public class Bitmap extends Resource implements ActionListener{
             int green = (argb >> 8) & 0xff;
             int blue = argb & 0xff;
             int alpha = (argb >> 24) & 0xff;            
-            if(image.getRGB(x,y)!=alphargb && alpha>=255) {
-              g2d.setColor(new Color(image.getRGB(x,y)));
+            if(image.getRGB(x,y)!=alphargb && alpha>=255) {              
+              g2d.setColor(new Color(red, green, blue, alpha));
               g2d.drawRect(x,y,0,0);
             } 
             else if(image.getRGB(x,y)!=alphargb && alpha>0) {
-              g2d.setColor(new Color(red,green,blue));
+              float amount = alpha;
+              amount = amount/255;
+              System.out.println(alpha +" --> "+amount);
+              g2d.setColor(new Color((int)(red*amount), (int)(green*amount), (int)(blue*amount)));              
               g2d.drawRect(x,y,0,0);
             }
           }        
@@ -333,14 +336,14 @@ public class Bitmap extends Resource implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Bitmap"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/res-bitmap.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhelp/res-bitmap.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
     else if(e.getSource().equals(cancel_btn)) {

@@ -557,7 +557,7 @@ public class Skin implements ActionListener{
     code+=" email=\""+themeinfo_email+"\"";
     code+=" webpage=\""+themeinfo_webpage+"\"";
     code+="/>\n";    
-    code+="<!-- This skin was created using the VLC Skin Editor by Daniel Dreibrodt (http://forum.videolan.org/viewtopic.php?f=15&t=38973)-->\n";
+    code+="<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.php)-->\n";
     for (int i=0;i<resources.size();i++) {
       code+=resources.get(i).returnCode();
     }
