@@ -79,6 +79,9 @@ public class Skin implements ActionListener{
   //Central window handle for all editing dialogs of res/win/layout/items
   public JFrame edit_frame; 
   
+  //Default indentation of generated XML code
+  public static String indentation = "  ";
+  
   public Skin(Main m_) {
     m=m_;    
   }
@@ -551,19 +554,19 @@ public class Skin implements ActionListener{
     if(theme_alpha!=THEME_ALPHA_DEFAULT) code+=" alpha=\""+String.valueOf(theme_alpha)+"\"";
     if(theme_movealpha!=THEME_MOVEALPHA_DEFAULT) code+=" movealpha=\""+String.valueOf(theme_movealpha)+"\"";
     code+=">\n";
-    code+="<ThemeInfo";
+    code+=Skin.indentation+"<ThemeInfo";
     code+=" name=\""+themeinfo_name+"\"";
     code+=" author=\""+themeinfo_author+"\"";
     code+=" email=\""+themeinfo_email+"\"";
     code+=" webpage=\""+themeinfo_webpage+"\"";
-    code+="/>\n";    
-    code+="<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.php)-->\n";
+    code+="/>\n\n";    
+    code+=Skin.indentation+"<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.php)-->\n\n";
     for (int i=0;i<resources.size();i++) {
-      code+=resources.get(i).returnCode();
+      code+=resources.get(i).returnCode(Skin.indentation);
     }
     code+="\n";
     for (int i=0;i<windows.size();i++) {
-      code+=windows.get(i).returnCode();      
+      code+=windows.get(i).returnCode(Skin.indentation);      
     }
     code += "\n</Theme>";
     return code;

@@ -256,19 +256,19 @@ public class Window implements ActionListener{
   public void addLayout() {
     layouts.add(new Layout(this,s));
   }
-  public String returnCode() {
-    String code = "<Window";
-    if(id!=ID_DEFAULT) code+=" id=\""+id+"\"";
-    if(visible!=VISIBLE_DEFAULT) code+=" visible=\""+String.valueOf(visible)+"\"";
+  public String returnCode(String indent) {
+    String code = indent+"<Window";
+    if(!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
+    if(!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+String.valueOf(visible)+"\"";
     if(x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if(y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     if(dragdrop!=DRAGDROP_DEFAULT) code+=" dragdrop=\""+String.valueOf(dragdrop)+"\"";
     if(playondrop!=PLAYONDROP_DEFAULT) code+=" playondrop=\""+String.valueOf(playondrop)+"\"";
     code+=">";
     for (int i=0;i<layouts.size();i++) {
-      code+="\n"+layouts.get(i).returnCode();
+      code+="\n"+layouts.get(i).returnCode(indent+Skin.indentation);
     }
-    code+="\n</Window>\n";    
+    code+="\n"+indent+"</Window>\n";    
     return code;
   }
   public Layout getLayout(String id_) {

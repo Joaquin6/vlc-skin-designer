@@ -245,16 +245,16 @@ public class Group extends Item implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Group";    
+  public String returnCode(String indent) {
+    String code = indent+"<Group";    
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";    
     code+=">";
     //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     for (int i=0;i<items.size();i++) {
-      code+="\n"+items.get(i).returnCode();
+      code+="\n"+items.get(i).returnCode(indent+Skin.indentation);
     }
-    code+="\n</Group>";
+    code+="\n"+indent+"</Group>";
     return code;
   }
   public void draw(Graphics2D g) {     

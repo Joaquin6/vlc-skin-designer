@@ -326,8 +326,8 @@ public class Video extends Item implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Video";
+  public String returnCode(String indent) {
+    String code = indent+"<Video";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";

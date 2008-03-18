@@ -515,8 +515,8 @@ public class Slider extends Item implements ActionListener{
     sbg_chb.setSelected(false);
     sbg_btn.setEnabled(false);
   }
-  public String returnCode() {
-    String code = "<Slider";
+  public String returnCode(String indent) {
+    String code = indent+"<Slider";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
@@ -537,8 +537,8 @@ public class Slider extends Item implements ActionListener{
       code+="/>";
     }
     else {
-      code+=">\n"+sbg.returnCode();
-      code+="\n</Slider>";
+      code+=">\n"+sbg.returnCode(indent+Skin.indentation);
+      code+="\n"+indent+"</Slider>";
     }
     return code;
   }

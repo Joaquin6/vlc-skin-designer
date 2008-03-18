@@ -371,8 +371,8 @@ public class Button extends Item implements ActionListener{
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action_ae) action_tf.setText(ae.getCode());
   }
-  public String returnCode() {
-    String code = "<Button";
+  public String returnCode(String indent) {
+    String code = indent+"<Button";
     code+=" up=\""+up+"\"";
     if (!down.equals(DOWN_DEFAULT)) code+=" down=\""+down+"\"";
     if (!over.equals(OVER_DEFAULT)) code+=" over=\""+over+"\"";

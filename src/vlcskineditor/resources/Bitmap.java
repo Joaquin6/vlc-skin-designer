@@ -150,8 +150,7 @@ public class Bitmap extends Resource implements ActionListener{
             } 
             else if(image.getRGB(x,y)!=alphargb && alpha>0) {
               float amount = alpha;
-              amount = amount/255;
-              System.out.println(alpha +" --> "+amount);
+              amount = amount/255;              
               g2d.setColor(new Color((int)(red*amount), (int)(green*amount), (int)(blue*amount)));              
               g2d.drawRect(x,y,0,0);
             }
@@ -352,17 +351,17 @@ public class Bitmap extends Resource implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Bitmap id=\""+id+"\" file=\""+file+"\"";
+  public String returnCode(String indent) {
+    String code = indent+"<Bitmap id=\""+id+"\" file=\""+file+"\"";
     code+=" alphacolor=\""+alphacolor+"\"";
     if (nbframes!=NBFRAMES_DEFAULT) code+=" nbframes=\""+String.valueOf(nbframes)+"\"";
     if (fps!=FPS_DEFAULT) code+=" fps=\""+String.valueOf(fps)+"\"";    
     if(SubBitmaps.size()>0) {
       code+=">\n";
       for (int i=0;i<SubBitmaps.size();i++) {
-        code+=SubBitmaps.get(i).returnCode();
+        code+=SubBitmaps.get(i).returnCode(indent+Skin.indentation);
       }
-      code+="</Bitmap>\n";
+      code+=indent+"</Bitmap>\n";
     }
     else {
       code+="/>\n";  

@@ -24,11 +24,9 @@ package vlcskineditor.resources;
 
 import vlcskineditor.*;
 import vlcskineditor.history.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
-import javax.imageio.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -250,14 +248,14 @@ public class Font extends Resource implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Font"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/res-font.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/res-font.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
     else if(e.getSource().equals(cancel_btn)) {
@@ -266,8 +264,8 @@ public class Font extends Resource implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code="<Font id=\""+id+"\" file=\""+file+"\"";
+  public String returnCode(String indent) {
+    String code=indent+"<Font id=\""+id+"\" file=\""+file+"\"";
     if (size!=SIZE_DEFAULT) code+=" size=\""+String.valueOf(size)+"\"";
     code+="/>\n";
     return code;

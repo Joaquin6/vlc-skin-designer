@@ -42,7 +42,7 @@ public abstract class Resource {
   /** Update the Resource's attributes according to user input */
   public abstract void update();
   /** Creates the XML code representing the resource */  
-  public abstract String returnCode();
+  public abstract String returnCode(String indent);
   /** Creates a DefaultMutableTreeNode to be displayed in the resources tree */
   public abstract DefaultMutableTreeNode getTreeNode();  
   /** If a Resource does contain another Resource of the given id (e.g. a SubBitmap) the containing Resource is returned **/

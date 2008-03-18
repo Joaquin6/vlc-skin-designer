@@ -251,8 +251,8 @@ public class SliderBackground extends Item implements ActionListener{
       if(!created) sl.removeBG();      
     }    
   }  
-  public String returnCode() {
-    String code = "<SliderBackground";
+  public String returnCode(String indent) {
+    String code = indent+"<SliderBackground";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     code+=" image=\""+image+"\"";
     if (nbhoriz!=NBHORIZ_DEFAULT) code+=" nbhoriz=\""+String.valueOf(nbhoriz)+"\"";

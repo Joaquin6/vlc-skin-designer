@@ -23,15 +23,12 @@
 package vlcskineditor.resources;
 
 import vlcskineditor.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
-import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
-import java.io.*;
 import vlcskineditor.history.SubBitmapAddEvent;
 /**
  * Handles SubBitmap resources
@@ -283,14 +280,14 @@ public class SubBitmap extends Resource implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Bitmap"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/res-subbitmap.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/res-subbitmap.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
     else if(e.getSource().equals(cancel_btn)) {
@@ -312,8 +309,8 @@ public class SubBitmap extends Resource implements ActionListener{
     sbew.frame = null;
     sbew = null;
   }
-  public String returnCode() {
-    String code="<SubBitmap id=\""+id+"\" x=\""+String.valueOf(x)+"\" y=\""+String.valueOf(y)+"\"";
+  public String returnCode(String indent) {
+    String code=indent+"<SubBitmap id=\""+id+"\" x=\""+String.valueOf(x)+"\" y=\""+String.valueOf(y)+"\"";
     code+=" width=\""+String.valueOf(width)+"\"  height=\""+String.valueOf(height)+"\"";
     if (nbframes!=NBFRAMES_DEFAULT) code+=" nbframes=\""+String.valueOf(nbframes)+"\"";
     if (fps!=FPS_DEFAULT) code+=" fps=\""+String.valueOf(fps)+"\"";  

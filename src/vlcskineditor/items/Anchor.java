@@ -269,8 +269,8 @@ public class Anchor extends Item implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Anchor";
+  public String returnCode(String indent) {
+    String code = indent+"<Anchor";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" priority=\""+String.valueOf(priority)+"\"";

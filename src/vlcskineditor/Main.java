@@ -46,7 +46,7 @@ import vlcskineditor.resources.SubBitmap;
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
   
   //The version identification of the current build.   
-  public final String VERSION = "0.7.0.a";
+  public final String VERSION = "0.7.0.b";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -1035,7 +1035,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                 "%oldid% will be replaced by the old ID of the object.", "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
         Bitmap b = (Bitmap)r;        
-        Bitmap b2 = new Bitmap(b.returnCode(),s);        
+        Bitmap b2 = new Bitmap(b.returnCode(""),s);        
         b2.renameForCopy(p);
         s.resources.add(b2);
         s.updateResources();
@@ -1043,7 +1043,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
       else if(r.getClass()==SubBitmap.class) {
         SubBitmap sb = (SubBitmap)r;        
-        SubBitmap sb2 = new SubBitmap(sb.returnCode(),s,sb.getParentBitmap());
+        SubBitmap sb2 = new SubBitmap(sb.returnCode(""),s,sb.getParentBitmap());
         sb2.renameForCopy(p);
         sb.getParentBitmap().SubBitmaps.add(sb2);
         s.updateResources();
@@ -1051,7 +1051,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
       else {
         vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;        
-        vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font(f.returnCode(),s);
+        vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font(f.returnCode(""),s);
         f2.renameForCopy(p);
         s.resources.add(f2);
         s.updateResources();
@@ -1067,7 +1067,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         if(selected_layout==null) {
             Window w = s.getWindow(selected_window);
             if(w==null) return;
-            Window w_ = new Window(w.returnCode(), s);
+            Window w_ = new Window(w.returnCode(""), s);
             w_.renameForCopy(p);
             s.windows.add(w_);
             s.updateWindows();
@@ -1075,7 +1075,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         else {
             Window w = s.getWindow(selected_window);
             Layout l = w.getLayout(selected_layout);
-            Layout l_ = new Layout(l.returnCode(), w, s);
+            Layout l_ = new Layout(l.returnCode(""), w, s);
             l_.renameForCopy(p);
             w.layouts.add(l_);
             s.updateWindows();
@@ -1091,7 +1091,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         Item i = s.getItem(selected_item);
         if(i==null) return;        
         if(i.getClass()==Anchor.class) {
-            Anchor a = new Anchor(i.returnCode(), s);
+            Anchor a = new Anchor(i.returnCode(""), s);
             //Because IDs of Anchors are not stored in the XML and can thus not be copied via returnCode()
             a.id = i.id;
             a.renameForCopy(p);
@@ -1100,56 +1100,56 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             s.expandItem(a.id);
         }
         else if(i.getClass()==vlcskineditor.items.Button.class) {
-            vlcskineditor.items.Button b = new vlcskineditor.items.Button(i.returnCode(), s);
+            vlcskineditor.items.Button b = new vlcskineditor.items.Button(i.returnCode(""), s);
             b.renameForCopy(p);
             s.getParentListOf(i.id).add(b);
             s.updateItems();
             s.expandItem(b.id);
         }
         else if(i.getClass()==vlcskineditor.items.Checkbox.class) {
-            vlcskineditor.items.Checkbox c = new vlcskineditor.items.Checkbox(i.returnCode(), s);
+            vlcskineditor.items.Checkbox c = new vlcskineditor.items.Checkbox(i.returnCode(""), s);
             c.renameForCopy(p);
             s.getParentListOf(i.id).add(c);
             s.updateItems();
             s.expandItem(c.id);
         }
         else if(i.getClass()==Group.class) {
-            Group g = new Group(i.returnCode(), s);
+            Group g = new Group(i.returnCode(""), s);
             g.renameForCopy(p);
             s.getParentListOf(i.id).add(g);
             s.updateItems();
             s.expandItem(g.id);
         }        
         else if(i.getClass()==vlcskineditor.items.Image.class) {
-            vlcskineditor.items.Image im = new vlcskineditor.items.Image(i.returnCode(), s);
+            vlcskineditor.items.Image im = new vlcskineditor.items.Image(i.returnCode(""), s);
             im.renameForCopy(p);
             s.getParentListOf(i.id).add(im);
             s.updateItems();
             s.expandItem(im.id);
         }
         else if(i.getClass()==vlcskineditor.items.Panel.class) {
-            vlcskineditor.items.Panel pa = new vlcskineditor.items.Panel(i.returnCode(), s);
+            vlcskineditor.items.Panel pa = new vlcskineditor.items.Panel(i.returnCode(""), s);
             pa.renameForCopy(p);
             s.getParentListOf(i.id).add(pa);
             s.updateItems();
             s.expandItem(pa.id);
         }
         else if(i.getClass()==Playtree.class) {
-            Playtree pl = new Playtree(i.returnCode(), s);
+            Playtree pl = new Playtree(i.returnCode(""), s);
             pl.renameForCopy(p);
             s.getParentListOf(i.id).add(pl);
             s.updateItems();
             s.expandItem(pl.id);
         }
         else if(i.getClass()==RadialSlider.class) {
-            RadialSlider r = new RadialSlider(i.returnCode(), s);
+            RadialSlider r = new RadialSlider(i.returnCode(""), s);
             r.renameForCopy(p);
             s.getParentListOf(i.id).add(r);
             s.updateItems();
             s.expandItem(r.id);
         }
         else if(i.getClass()==Slider.class) {
-            Slider sl = new Slider(i.returnCode(), s);
+            Slider sl = new Slider(i.returnCode(""), s);
             sl.renameForCopy(p);
             java.util.List<Item> l = s.getParentListOf(i.id);
             if(l!=null) {
@@ -1167,14 +1167,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
            JOptionPane.showMessageDialog(this,"A slider cannot contain more than one background!","SliderBackgrounds cannot be duplicated",JOptionPane.INFORMATION_MESSAGE); 
         }
         else if(i.getClass()==Text.class) {
-            Text t = new Text(i.returnCode(), s);
+            Text t = new Text(i.returnCode(""), s);
             t.renameForCopy(p);
             s.getParentListOf(i.id).add(t);
             s.updateItems();
             s.expandItem(t.id);
         }
         else if(i.getClass()==Video.class) {
-            Video v = new Video(i.returnCode(), s);
+            Video v = new Video(i.returnCode(""), s);
             v.renameForCopy(p);
             s.getParentListOf(i.id).add(v);
             s.updateItems();

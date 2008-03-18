@@ -383,8 +383,8 @@ public class Text extends Item implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Text";
+  public String returnCode(String indent) {
+    String code = indent+"<Text";
     code+=" text=\""+text+"\"";
     code+=" font=\""+font+"\"";
     if (!alignment.equals(ALIGNMENT_DEFAULT)) code+=" alignment=\""+alignment+"\"";

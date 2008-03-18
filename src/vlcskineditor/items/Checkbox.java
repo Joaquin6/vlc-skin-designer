@@ -507,8 +507,8 @@ public class Checkbox extends Item implements ActionListener{
     if(ae==action1_ae) action1_tf.setText(action1_ae.getCode());
     else if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
-  public String returnCode() {
-    String code = "<Checkbox";
+  public String returnCode(String indent) {
+    String code = indent+"<Checkbox";
     code+=" state=\""+state+"\" up1=\""+up1+"\" up2=\""+up2+"\"";
     if (!down1.equals(ID_DEFAULT)) code+=" down1=\""+down1+"\"";
     if (!down2.equals(ID_DEFAULT)) code+=" down2=\""+down2+"\"";

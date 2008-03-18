@@ -24,7 +24,6 @@ package vlcskineditor.items;
 
 import vlcskineditor.*;
 import java.awt.*;
-import javax.swing.*;
 import javax.swing.tree.*;
 
 /**
@@ -76,22 +75,22 @@ public class RadialSlider extends Item{
   public void showOptions() {
     
   }
-  public String returnCode() {
-    String code = "<RadialSlider";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+  public String returnCode(String indent) {
+    String code = indent+"<RadialSlider";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" sequence=\""+sequence+"\" nbimages=\""+String.valueOf(nbimages)+"\"";
     if (minangle!=MINANGLE_DEFAULT) code+=" minangle=\""+String.valueOf(minangle)+"\"";
     if (maxangle!=MAXANGLE_DEFAULT) code+=" maxangle=\""+String.valueOf(maxangle)+"\"";
-    if (value!=VALUE_DEFAULT) code+=" value=\""+value+"\"";
-    if (tooltiptext!=TOOLTIPTEXT_DEFAULT) code+=" tooltiptext=\""+tooltiptext+"\"";
-    if (lefttop!=LEFTTOP_DEFAULT) code+=" lefttop=\""+lefttop+"\"";
-    if (rightbottom!=RIGHTBOTTOM_DEFAULT) code+=" rightbottom=\""+rightbottom+"\"";
+    if (!value.equals(VALUE_DEFAULT)) code+=" value=\""+value+"\"";
+    if (!tooltiptext.equals(TOOLTIPTEXT_DEFAULT)) code+=" tooltiptext=\""+tooltiptext+"\"";
+    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
+    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (help!=HELP_DEFAULT) code+=" help=\""+help+"\"";
-    if (visible!=VISIBLE_DEFAULT) code+=" visible=\""+visible+"\"";
+    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
+    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";
     code+="/>";
     return code;
   }

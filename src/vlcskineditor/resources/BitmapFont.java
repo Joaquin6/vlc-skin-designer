@@ -52,8 +52,8 @@ public class BitmapFont extends Resource{
   public void showOptions() {
     
   }
-  public String returnCode() {
-    String code="<BitmapFont id=\""+id+"\" file=\""+file+"\"";
+  public String returnCode(String indent) {
+    String code=indent+"<BitmapFont id=\""+id+"\" file=\""+file+"\"";
     if (type!=TYPE_DEFAULT) code+=" type=\""+type+"\"";
     code+="/>\n";
     return code;

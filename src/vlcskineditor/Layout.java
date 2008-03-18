@@ -363,11 +363,12 @@ public class Layout implements ActionListener{
   }
   /**
    * Generates the XML code represented by this Layout.
+   * @param ident Indentation
    * @return The XML code.
    */
-  public String returnCode() {
-    String code ="<Layout";
-    if (id!=ID_DEFAULT) code+=" id=\""+id+"\"";
+  public String returnCode(String indent) {
+    String code =indent+"<Layout";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     code+=" width=\""+String.valueOf(width)+"\" height=\""+String.valueOf(height)+"\"";
     if (minwidth!=MINWIDTH_DEFAULT) code+=" minwidth=\""+String.valueOf(minwidth)+"\"";
     if (maxwidth!=MAXWIDTH_DEFAULT) code+=" maxwidth=\""+String.valueOf(maxwidth)+"\"";
@@ -375,9 +376,9 @@ public class Layout implements ActionListener{
     if (maxheight!=MAXHEIGHT_DEFAULT) code+=" maxheight=\""+String.valueOf(maxheight)+"\"";
     code+=">";
     for (int i=0;i<items.size();i++) {
-      code+="\n"+items.get(i).returnCode();
+      code+="\n"+items.get(i).returnCode(indent+Skin.indentation);
     }
-    code+="\n</Layout>";
+    code+="\n"+indent+"</Layout>";
     return code;
   }
   /**

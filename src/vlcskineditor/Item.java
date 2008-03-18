@@ -76,7 +76,7 @@ public abstract class Item {
   /** Update the Item's attributes according to the user input */
   public abstract void update();
   /** Creates the XML code representing the item */
-  public abstract String returnCode();
+  public abstract String returnCode(String indent);
   /** Draws the item to a graphics context */
   public abstract void draw(Graphics2D g);
    /** Draws the item to a graphics context with the offset x,y */

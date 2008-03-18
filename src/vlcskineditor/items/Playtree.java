@@ -601,8 +601,8 @@ public class Playtree extends Item implements ActionListener{
       frame = null;
     }
   }
-  public String returnCode() {
-    String code = "<Playtree";
+  public String returnCode(String indent) {
+    String code = indent+"<Playtree";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     code+=" font=\""+font+"\"";
     if(!bgcolor1.equals(BGCOLOR1_DEFAULT)) code+=" bgcolor1=\""+bgcolor1+"\"";
@@ -625,8 +625,8 @@ public class Playtree extends Item implements ActionListener{
     if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
     if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";    
     code+=">\n";    
-    code+=slider.returnCode();
-    code+="\n</Playtree>";
+    code+=slider.returnCode(indent+Skin.indentation);
+    code+="\n"+indent+"</Playtree>";
     return code;
   }
   public void draw(Graphics2D g) {
