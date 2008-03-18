@@ -262,10 +262,10 @@ public class SliderBackground extends Item implements ActionListener{
     code+="/>";
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,0,0);
+  public void draw(Graphics2D g, int z) {
+    draw(g,0,0,z);
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;
     bi = (BufferedImage)s.getBitmapImage(image);  
     if(bi==null) return;
@@ -279,10 +279,10 @@ public class SliderBackground extends Item implements ActionListener{
     int fxpos = n%nbhoriz;    
     if (fxpos<0) fxpos=0;
     bi = bi.getSubimage(fxpos*fwidth+fxpos*padhoriz, fypos*fheight+fypos*padvert ,fwidth,fheight);
-    g.drawImage(bi,x+x_,y+y_,null);
+    g.drawImage(bi,(x+x_)*z,(y+y_)*z, bi.getWidth()*z, bi.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
-      g.drawRect(x+x_,y+y_,bi.getWidth()-1,bi.getHeight()-1);
+      g.drawRect((x+x_)*z,(y+y_)*z,bi.getWidth()*z-1,bi.getHeight()*z-1);
     }
   }
   @Override

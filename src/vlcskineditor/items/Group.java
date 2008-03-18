@@ -257,12 +257,12 @@ public class Group extends Item implements ActionListener{
     code+="\n"+indent+"</Group>";
     return code;
   }
-  public void draw(Graphics2D g) {     
-     draw(g,offsetx,offsety);
+  public void draw(Graphics2D g, int z) {     
+     draw(g,offsetx,offsety,z);
   }
-  public void draw(Graphics2D g,int x_,int y_) {    
+  public void draw(Graphics2D g,int x_,int y_, int z) {    
     for(Item i:items) {
-      i.draw(g,x+x,y+y_);
+      i.draw(g,x+x,y+y_,z);
       i.setOffset(x+offsetx,y+offsety);
     }    
   }

@@ -78,9 +78,9 @@ public abstract class Item {
   /** Creates the XML code representing the item */
   public abstract String returnCode(String indent);
   /** Draws the item to a graphics context */
-  public abstract void draw(Graphics2D g);
+  public abstract void draw(Graphics2D g, int z);
    /** Draws the item to a graphics context with the offset x,y */
-  public abstract void draw(Graphics2D g, int x, int y);
+  public abstract void draw(Graphics2D g, int x, int y, int z);
   /** Creates a DefaultMutableTreeNode to be displayed in the items tree */
   public abstract DefaultMutableTreeNode getTreeNode(); 
   /** If the given id is that of this item or one of the item's contained items the fitting item will be returned, else null **/

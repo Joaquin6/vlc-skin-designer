@@ -94,10 +94,10 @@ public class RadialSlider extends Item{
     code+="/>";
     return code;
   }
-  public void draw(Graphics2D g) {
+  public void draw(Graphics2D g, int z) {
     
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g, int x_, int y_, int z) {
     
   }
   public DefaultMutableTreeNode getTreeNode() {

@@ -35,12 +35,17 @@ import vlcskineditor.history.*;
  * Handles the preview window and user interaction with it.
  * @author Daniel Dreibrodt
  */
-public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener {
+public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
   
   /**
    * The JFrame in which a Layout of a Skin will be shown.
    */
   public JInternalFrame frame;
+  JScrollPane scroll_pane;
+  JPanel zoom_panel;
+  JButton zoom_more, zoom_less;
+  JLabel zoom_label;
+  int z = 1;  
   Layout l;
   FrameUpdater fu;  
   Item selected_item;
@@ -53,13 +58,30 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   
   /**
    * Creates a new PreviewWindow that is initially hidden.
+   * @param m_ the Main instance of the running Skin Editor
    */
   public PreviewWindow(Main m_) {   
     m = m_;
     frame = new JInternalFrame("No Layout selected");
-    frame.add(this);
+    frame.setLayout(new BorderLayout());
+    zoom_panel = new JPanel();
+    zoom_panel.setLayout(new FlowLayout());
+    zoom_less = new JButton("-");   
+    zoom_less.addActionListener(this);
+    zoom_panel.add(zoom_less);
+    zoom_label = new JLabel("Zoom factor: 1x");
+    zoom_panel.add(zoom_label);
+    zoom_more = new JButton("+");
+    zoom_more.addActionListener(this);
+    zoom_panel.add(zoom_more);
+    zoom_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);    
+    frame.add(zoom_panel, BorderLayout.PAGE_START);
+    scroll_pane = new JScrollPane(this);   
+    frame.add(scroll_pane,BorderLayout.CENTER);     
+    frame.pack();
+    frame.setMinimumSize(zoom_panel.getPreferredSize());
     frame.setVisible(false);
-    frame.setResizable(false);        
+    frame.setResizable(true);        
     frame.setFrameIcon(createIcon("icons/preview.png"));
     addMouseListener(this);
     addMouseMotionListener(this);    
@@ -88,12 +110,11 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       return;
     }
     l=l_;    
-    //Somehow there are always added 4 pixels to the actual height of the layout
-    setPreferredSize(new Dimension(l.width,l.height-4));
-    setMinimumSize(new Dimension(l.width,l.height-4));
-    setMaximumSize(new Dimension(l.width,l.height-4));
-    setSize(l.width,l.height-4);
-    frame.setTitle("Window: "+w_.id + " - Layout: " + l.id);
+    setPreferredSize(new Dimension(l.width,l.height));
+    int spane_w = l.width+scroll_pane.getBorder().getBorderInsets(scroll_pane).left+scroll_pane.getBorder().getBorderInsets(scroll_pane).right;
+    int spane_h = l.height+scroll_pane.getBorder().getBorderInsets(scroll_pane).top+scroll_pane.getBorder().getBorderInsets(scroll_pane).bottom;
+    scroll_pane.setPreferredSize(new Dimension(spane_w, spane_h));    
+    frame.setTitle("Window: "+w_.id + " - Layout: " + l.id);    
     frame.pack();
     frame.setVisible(true);        
     if(fu==null) {
@@ -115,6 +136,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
    * Paints the selected layout into the window.
    * @param g The Graphics context into which is drawn.
    */
+  @Override
   public void paint(Graphics g) {  
     if(l==null) return;   
     BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
@@ -129,27 +151,49 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
         g2d.fillRect(x+10,y+10,10,10);
       }
     }
-    l.draw(g2d);
+    try {
+      l.draw(g2d, z);
+    }
+    //In case any exception occurs while trying to draw the layout (e.g. missing bitmap/negative or zero width of items)
+    catch(Exception e) {
+      e.printStackTrace();
+    }
     g.drawImage(bi, 0, 0, this);
   }
+  @Override
   public void update(Graphics g) {
+    //Needs to be overriden so that repainting is smooth
     paint(g);
   }  
+  public void actionPerformed(ActionEvent e) {
+    if(e.getSource().equals(zoom_less)) {
+      if(z>1) z--;
+      zoom_label.setText("Zoom factor: "+z+"x");
+      setSize(l.width*z, l.height*z);
+      setPreferredSize(new Dimension(l.width*z, l.height*z));
+    }
+    else if(e.getSource().equals(zoom_more)) {
+      if(z<16) z++;
+      zoom_label.setText("Zoom factor: "+z+"x");
+      setSize(l.width*z, l.height*z);
+      setPreferredSize(new Dimension(l.width*z, l.height*z));
+    }
+  }
   public void mouseClicked(MouseEvent e) {    
   }
   public void mouseDragged(MouseEvent e) {
     if(selected_item==null) return;
-    if(!starteddragging && selected_item.contains(e.getX(),e.getY())) {
-      dragstartx=e.getX();
-      dragstarty=e.getY();
+    if(!starteddragging && selected_item.contains(e.getX()/z,e.getY()/z)) {
+      dragstartx=e.getX()/z;
+      dragstarty=e.getY()/z;
       ime = new ItemMoveEvent(selected_item);
       dragstartitemx=selected_item.x;
       dragstartitemy=selected_item.y;
       starteddragging=true;
     }
     else if(starteddragging) {
-      selected_item.x=dragstartitemx+e.getX()-dragstartx;
-      selected_item.y=dragstartitemy+e.getY()-dragstarty;
+      selected_item.x=dragstartitemx+e.getX()/z-dragstartx;
+      selected_item.y=dragstartitemy+e.getY()/z-dragstarty;
     }
   }  
   public void mouseEntered(MouseEvent e) {
@@ -160,7 +204,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   }
   public void mouseMoved(MouseEvent e) {
     if(selected_item==null) return;
-    if(selected_item.contains(e.getX(),e.getY())) {
+    if(selected_item.contains(e.getX()/z,e.getY()/z)) {
       selected_item.setHover(true);
       setCursor(new Cursor(Cursor.MOVE_CURSOR));
     }
@@ -229,7 +273,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   public void savePNG(File f) {
     BufferedImage bi = new BufferedImage(l.width, l.height, BufferedImage.TYPE_INT_ARGB);
     if(selected_item!=null) selected_item.setSelected(false);
-    l.draw(bi.createGraphics());
+    l.draw(bi.createGraphics(), 1);
     if(selected_item!=null) selected_item.setSelected(true);
     try {
       ImageIO.write(bi, "png", f);
@@ -238,5 +282,5 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       JOptionPane.showMessageDialog(m,"Could not save image!\n"+e.toString(),"Exception caught!",JOptionPane.ERROR_MESSAGE);
       return;
     }
-  }
+  }  
 }

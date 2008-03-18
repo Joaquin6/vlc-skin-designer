@@ -402,10 +402,10 @@ public class Text extends Item implements ActionListener{
     code+="/>";
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,0,0);
+  public void draw(Graphics2D g, int z) {
+    draw(g,0,0,z);
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created || font==null) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
@@ -440,10 +440,10 @@ public class Text extends Item implements ActionListener{
     else {
       g2d.drawString(ptext,0,0+g2d.getFontMetrics().getAscent());  
     }   
-    g.drawImage(bi,x+x_,y+y_,null);  
+    g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z, bi.getHeight()*z,null);  
     if(selected) {
       g.setColor(Color.RED);
-      g.drawRect(x+x_,y+y_,width,f.getSize());
+      g.drawRect((x+x_)*z,(y+y_)*z,width*z,f.getSize()*z);
     }
   }
   @Override

@@ -542,31 +542,32 @@ public class Slider extends Item implements ActionListener{
     }
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,0,0);
+  public void draw(Graphics2D g, int z) {
+    draw(g,0,0,z);
   }
-  public void draw(Graphics2D g, int x_, int y_) {    
+  public void draw(Graphics2D g, int x_, int y_, int z) {    
     if(!created) return;
     offsetx=x_;
     offsety=y_;
     if(s.gvars.parseBoolean(visible)==false) return;        
     if(sbg!=null) {
-      sbg.draw(g,x+x_,y+y_);
+      sbg.draw(g,x+x_,y+y_,z);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
     java.awt.image.BufferedImage si = s.getBitmapImage(up);
     if(si==null) return;
     Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
-    g.drawImage(si,(int)p.getX()+x+x_-si.getWidth()/2,(int)p.getY()+y+y_-si.getHeight()/2,null);
+    g.drawImage(si,(int)(p.getX()+x+x_-si.getWidth()/2)*z,(int)(p.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
       for(float f=0f;f<=1f;f=f+0.1f) {
         Point2D.Float p1 = b.getPoint(f);
         Point2D.Float p2 = b.getPoint(f+0.1f);        
-        g.drawLine((int)p1.getX()+x+x_,(int)p1.getY()+y+y_,(int)p2.getX()+x+x_,(int)p2.getY()+y+y_);
+        g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
       }
+      g.setColor(Color.YELLOW);
       for(int i=0;i<xpos.length;i++) {
-        g.fillOval(xpos[i]+x+x_-1,ypos[i]+y+y_-1,3,3);
+        g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,3,3);
       }
     }
   }

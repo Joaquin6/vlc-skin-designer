@@ -947,15 +947,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="About"> 
     else if(e.getSource().equals(m_help_about)) {
-      JOptionPane.showMessageDialog(this,"Copyright 2007 Daniel Dreibrodt\n" +
-            "daniel.dreibrodt@gmx.de\n" +
-            "http://www.d-gfx.net.tc\n" +
-            "http://www.videolan.org\n" +
+      JOptionPane.showMessageDialog(this,"Copyright 2007-2008 The VideoLAN Team\n" +
+            "Lead programmer: Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)\n" +            
+            "http://www.videolan.org/vlc/skineditor.php\n" +
             "Released under terms of the GPL 2+\n\n" +
             "Credits:\n" +
-            "Timothy Gerard Endres (time@gjt.org) for registry access and tar support (Public Domain)\n" +
+            "Timothy Gerard Endres for registry access and TAR support (Public Domain)\n" +
             "The Tango! Desktop Project (http://tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\n" +
-            "The VideoLAN Team for the Boolean Expression Evaluator and Bezier code (GPL 2+)",
+            "Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuliere (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)",
             "About VLC Skin Editor", JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    

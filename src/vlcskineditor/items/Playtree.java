@@ -629,27 +629,31 @@ public class Playtree extends Item implements ActionListener{
     code+="\n"+indent+"</Playtree>";
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,0,0);
+  public void draw(Graphics2D g, int z) {
+    draw(g,0,0,z);
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g_, int x_, int y_, int z) {
+    if(width<=0||height<=0) return;
+    BufferedImage buffi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = (Graphics2D)(buffi.getGraphics());
+    g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
     if(!created) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     Font f = s.getFont(font);
     g.setFont(f);
     FontMetrics fm = g.getFontMetrics();
     if(!bgimage.equals("none")) {
-      g.drawImage(s.getBitmapImage(bgimage).getSubimage(0, 0, width, height),x+x_,y+y_,null);
+      g.drawImage(s.getBitmapImage(bgimage).getSubimage(0, 0, width, height),0,0,null);
     }
     else {      
       g.setColor(Color.decode(bgcolor1));
-      g.fillRect(x+x_,y+y_,width,height);
+      g.fillRect(0,0,width,height);
       for(int i=fm.getHeight();i<height;i=i+fm.getHeight()*2) {
         g.setColor(Color.decode(bgcolor2));
-        g.fillRect(x,y+y_+i,width,fm.getHeight());
+        g.fillRect(x,0+i,width,fm.getHeight());
       }
     }
-    int liney = y+y_;    
+    int liney = 0;    
     BufferedImage cfi = s.getBitmapImage(closedimage);
     BufferedImage ofi = s.getBitmapImage(openimage);
     BufferedImage iti = s.getBitmapImage(itemimage);
@@ -671,67 +675,69 @@ public class Playtree extends Item implements ActionListener{
     
     g.setColor(Color.decode(fgcolor));
     if(cfi!=null && !flat) {        
-      g.drawImage(cfi,x+x_,liney+cfi_offset,null);
+      g.drawImage(cfi,0,liney+cfi_offset,null);
       liney+=lineheight;
-      g.drawString("Closed folder",x+x_+cfi.getWidth()+2,liney-text_offset);          
+      g.drawString("Closed folder",0+cfi.getWidth()+2,liney-text_offset);          
     }
     if(ofi!=null && !flat) {
-      g.drawImage(ofi,x+x_,liney+ofi_offset,null);
+      g.drawImage(ofi,0,liney+ofi_offset,null);
       liney+=lineheight;
-      g.drawString("Open folder",x+x_+ofi.getWidth()+2,liney-text_offset);          
+      g.drawString("Open folder",0+ofi.getWidth()+2,liney-text_offset);          
     }
     if(ofi!=null && iti!=null && !flat) {
-      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
       liney+=lineheight;
-      g.drawString("Normal item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+      g.drawString("Normal item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
     }
     else if(iti!=null) {
-      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      g.drawImage(iti,0,liney+iti_offset,null);
       liney+=fm.getHeight();
-      g.drawString("Normal item",x+x_+iti.getWidth()+4,liney-text_offset);
+      g.drawString("Normal item",0+iti.getWidth()+4,liney-text_offset);
     }
     else {
       liney+=fm.getHeight();
-      g.drawString("Normal item",x+x_,liney-text_offset);
+      g.drawString("Normal item",0,liney-text_offset);
     }
     g.setColor(Color.decode(playcolor));
     if(ofi!=null && iti!=null && !flat) {
-      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
       liney+=lineheight;
-      g.drawString("Playing item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+      g.drawString("Playing item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
     }
     else if(iti!=null) {
-      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      g.drawImage(iti,0,liney+iti_offset,null);
       liney+=lineheight;
-      g.drawString("Playing item",x+x_+iti.getWidth()+2,liney-text_offset);
+      g.drawString("Playing item",0+iti.getWidth()+2,liney-text_offset);
     }
     else {
       liney+=lineheight;
-      g.drawString("Playing item",x+x_,liney-text_offset);
+      g.drawString("Playing item",0,liney-text_offset);
     }
     g.setColor(Color.decode(selcolor));
-    g.fillRect(x+x_,liney,width,lineheight);
+    g.fillRect(0,liney,width,lineheight);
     g.setColor(Color.decode(fgcolor));
     if(ofi!=null && iti!=null && !flat) {
-      g.drawImage(iti,x+x_+ofi.getWidth()+2,liney+iti_offset,null);
+      g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
       liney+=lineheight;
-      g.drawString("Selected item",x+x_+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
+      g.drawString("Selected item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
     }
     else if(iti!=null) {
-      g.drawImage(iti,x+x_,liney+iti_offset,null);
+      g.drawImage(iti,0,liney+iti_offset,null);
       liney+=lineheight;
-      g.drawString("Selected item",x+x_+iti.getWidth()+2,liney-text_offset);
+      g.drawString("Selected item",0+iti.getWidth()+2,liney-text_offset);
     }
     else {
       liney+=lineheight;
-      g.drawString("Selected item",x+x_,liney-text_offset);
+      g.drawString("Selected item",0,liney-text_offset);
     }
     
-    slider.draw(g);
+    slider.draw(g,1);
+    
+    g_.drawImage(buffi, (x+x_)*z, (y+y_)*z, width*z, height*z, null);
     
     if(selected) {
-      g.setColor(Color.RED);
-      g.drawRect(x+x_,y+y_,width,height);
+      g_.setColor(Color.RED);
+      g_.drawRect((x+x_)*z,(y+y_)*z,width*z-1,height*z-1);
     }
   }
   @Override

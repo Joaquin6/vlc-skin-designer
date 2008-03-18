@@ -343,17 +343,17 @@ public class Video extends Item implements ActionListener{
     code+="/>";
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,offsetx,offsety);
+  public void draw(Graphics2D g, int z) {
+    draw(g,offsetx,offsety, z);
   }
-  public void draw(Graphics2D g, int x_, int y_) {
+  public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;
     if(s.gvars.parseBoolean(visible)==false) return;
     g.setColor(Color.BLACK);
-    g.fillRect(x+x_,y+y_,width,height);   
+    g.fillRect((x+x_)*z,(y+y_)*z,width*z,height*z);   
     if(selected) {
       g.setColor(Color.RED);
-      g.drawRect(x+x_,y+y_,width-1,height-1);
+      g.drawRect((x+x_)*z,(y+y_)*z,width*z-1,height*z-1);
     }
   }
   @Override

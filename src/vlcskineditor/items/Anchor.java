@@ -279,20 +279,21 @@ public class Anchor extends Item implements ActionListener{
     //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
   }
-  public void draw(Graphics2D g) {
-    draw(g,offsetx,offsety);
+  public void draw(Graphics2D g, int z) {
+    draw(g,offsetx,offsety,z);
   }
-  public void draw(Graphics2D g,int x_,int y_) {
+  public void draw(Graphics2D g,int x_,int y_, int z) {
     if(!created) return;
     if(selected) {        
       g.setColor(Color.RED);
       for(float f=0f;f<=1f;f=f+0.1f) {
         Point2D.Float p1 = b.getPoint(f);
         Point2D.Float p2 = b.getPoint(f+0.1f);        
-        g.drawLine((int)p1.getX()+x+x_,(int)p1.getY()+y+y_,(int)p2.getX()+x+x_,(int)p2.getY()+y+y_);
+        g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
       }
+      g.setColor(Color.YELLOW);
       for(int i=0;i<xpos.length;i++) {
-        g.fillOval(xpos[i]+x+x_-1,ypos[i]+y+y_-1,3,3);
+        g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,3,3);
       }
     }
   }

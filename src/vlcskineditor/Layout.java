@@ -355,10 +355,11 @@ public class Layout implements ActionListener{
   /**
    * Draws the Layout.
    * @param g The Graphics2D context onto which the Layout will be drawn.
+   * @param z The zoom factor
    */
-  public void draw(Graphics2D g) {
+  public void draw(Graphics2D g, int z) {
     for(Item i:items) {
-      i.draw(g);
+      i.draw(g, z);
     }
   }
   /**

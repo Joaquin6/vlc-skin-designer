@@ -7,6 +7,7 @@ Changelog:
        - Resources/windows/layouts can be duplicated easily
        - XML output is now indented
        - Slider backgrounds can be generated in a wizard
+       - Improved preview of skin (can be zoomed now)
 0.6.1b - Critical bufix for the Preview Window 
        - Bugfix for slider points parsing and XML parsing
 0.6.0b - Resources/windows/layouts/items can be edited by
