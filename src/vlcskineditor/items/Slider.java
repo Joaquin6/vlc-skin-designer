@@ -88,6 +88,7 @@ public class Slider extends Item implements ActionListener{
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     if(code.length>1) {
       for(int i=0;i<code.length;i++) {
+        code[i] = code[i].trim();
         if (code[i].startsWith("<!--")) {
           while(code[i].indexOf("-->")==-1) {
             i++;
@@ -605,6 +606,6 @@ public class Slider extends Item implements ActionListener{
   public void renameForCopy(String p) {    
     String p_ = p;
     super.renameForCopy(p);
-    sbg.renameForCopy(p_);
+    if(sbg!=null) sbg.renameForCopy(p_);
   }
 }

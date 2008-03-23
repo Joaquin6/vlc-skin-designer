@@ -378,6 +378,7 @@ public class Image extends Item implements ActionListener{
   }
   public void draw(Graphics2D g,int x_, int y_, int z) {
     if(!created) return;
+    if(s.gvars.parseBoolean(visible)==false) return;
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
     g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {

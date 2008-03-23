@@ -461,8 +461,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_layout.putConstraint(SpringLayout.WEST, items_up,5,SpringLayout.EAST, items_add);
     items_layout.putConstraint(SpringLayout.WEST, items_down,5,SpringLayout.EAST, items_add);
     items_layout.putConstraint(SpringLayout.WEST, items_duplicate,5,SpringLayout.EAST, items_up);
-    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_duplicate);
-    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_down);
+    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_duplicate);    
     items_layout.putConstraint(SpringLayout.WEST, items_del,5,SpringLayout.EAST, items_edit);    
     items_layout.putConstraint(SpringLayout.SOUTH, items.getContentPane(),24+5+5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items.getContentPane(),5,SpringLayout.NORTH, items_tree_sp);

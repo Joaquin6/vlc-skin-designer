@@ -69,7 +69,7 @@ public class Layout implements ActionListener{
   public Layout(String xmlcode, Window w_, Skin s_) {
     s=s_;
     parent=w_;
-    String[] code = xmlcode.split("\n");   
+    String[] code = xmlcode.split("\n");
     width = XML.getIntValue(code[0],"width");
     height = XML.getIntValue(code[0],"height");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
@@ -79,7 +79,8 @@ public class Layout implements ActionListener{
     if(code[0].indexOf("minheight=\"")!=-1) minheight = XML.getIntValue(code[0],"minheight");
     if(code[0].indexOf("maxheight=\"")!=-1) maxheight = XML.getIntValue(code[0],"maxheight");
     
-    for(int i=1;i<code.length;i++) {
+    for(int i=0;i<code.length;i++) code[i] = code[i].trim();    
+    for(int i=1;i<code.length;i++) {      
       if (code[i].startsWith("<!--")) {
         while(code[i].indexOf("-->")==-1) {
           i++;

@@ -108,24 +108,24 @@ public class Playtree extends Item implements ActionListener{
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     
     int i=1;
-    if(xmllines.length>1) {
-      if (xmllines[i].startsWith("<!--")) {
-        while(xmllines[i].indexOf("-->")==-1) {
-          i++;
+    if(xmllines.length>1) {      
+      if (xmllines[i].trim().startsWith("<!--")) {
+        while(xmllines[i].trim().indexOf("-->")==-1) {
+          i++;          
         }
       }
-      else if(xmllines[i].startsWith("<Slider")) {
-        if(xmllines[i].indexOf("/>")!=-1) {
-          slider = new Slider(xmllines[i],s,true);
+      else if(xmllines[i].trim().startsWith("<Slider")) {
+        if(xmllines[i].trim().indexOf("/>")!=-1) {
+          slider = new Slider(xmllines[i].trim(),s,true);
         }
         else {
-          String itemcode = xmllines[i];
+          String itemcode = xmllines[i].trim();
           i++;
-          while(!xmllines[i].startsWith("</Slider>")) {          
+          while(!xmllines[i].trim().startsWith("</Slider>")) {          
             itemcode += "\n"+xmllines[i];
             i++;
           }
-          itemcode += "\n"+xmllines[i];
+          itemcode += "\n"+xmllines[i].trim();
           slider = new Slider(itemcode,s,true);
         }                
       }
@@ -618,6 +618,8 @@ public class Playtree extends Item implements ActionListener{
     if(flat!=FLAT_DEFAULT) code+=" flat=\""+String.valueOf(flat)+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
+    if (width!=WIDTH_DEFAULT) code+=" width=\""+String.valueOf(width)+"\"";
+    if (height!=HEIGHT_DEFAULT) code+=" height=\""+String.valueOf(height)+"\"";
     if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
     if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
@@ -731,9 +733,8 @@ public class Playtree extends Item implements ActionListener{
       g.drawString("Selected item",0,liney-text_offset);
     }
     
-    slider.draw(g,1);
-    
     g_.drawImage(buffi, (x+x_)*z, (y+y_)*z, width*z, height*z, null);
+    slider.draw(g_,1);
     
     if(selected) {
       g_.setColor(Color.RED);

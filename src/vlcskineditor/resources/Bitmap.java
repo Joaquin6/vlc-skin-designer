@@ -41,7 +41,7 @@ import java.io.*;
 public class Bitmap extends Resource implements ActionListener{
   
   public String file;
-  public final String ALPHACOLOR_DEFAULT = "#000000";
+  public final String ALPHACOLOR_DEFAULT = "#FF00FF";
   public String alphacolor = ALPHACOLOR_DEFAULT;
   final int NBFRAMES_DEFAULT = 1;
   public int nbframes = NBFRAMES_DEFAULT;

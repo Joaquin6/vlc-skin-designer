@@ -63,7 +63,8 @@ public class Panel extends Item implements ActionListener{
     if(code[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
     if(code[0].indexOf("ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(code[0],"ykeepratio");
     
-    for(int i=1;i<code.length;i++) {
+    for(int i=0;i<code.length;i++) code[i] = code[i].trim();
+    for(int i=1;i<code.length;i++) {      
       if (code[i].startsWith("<!--")) {
         while(code[i].indexOf("-->")==-1) {
           i++;

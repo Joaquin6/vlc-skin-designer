@@ -52,7 +52,8 @@ public class Group extends Item implements ActionListener{
     if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
     else id = "Unnamed group #"+s.getNewId();
-    for(int i=1;i<code.length;i++) {
+    for(int i=0;i<code.length;i++) code[i] = code[i].trim();
+    for(int i=1;i<code.length;i++) {      
       if (code[i].startsWith("<!--")) {
         while(code[i].indexOf("-->")==-1) {
           i++;
