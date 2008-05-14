@@ -22,18 +22,40 @@
 
 package vlcskineditor;
 
-import vlcskineditor.history.*;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.LinkedList;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.border.EtchedBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import vlcskineditor.history.ThemeEditEvent;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.BitmapFont;
+import vlcskineditor.resources.Font;
 import vlcskineditor.resources.SubBitmap;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.io.*;
-import javax.swing.*;
-import javax.swing.tree.*;
-import java.util.*;
-import javax.swing.border.EtchedBorder;
 
 /**
  * Represents a skin file. Stores all Resources and Windows, which in turn store the Layouts that contain the items.
@@ -103,7 +125,27 @@ public class Skin implements ActionListener{
     skinfile=f;
     skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
     try {
-      //System.out.println("Creating Buffered Reader...");
+      parse(f);
+      //parseXML(f);
+    } 
+    catch (Exception ex) {
+      ex.printStackTrace();
+      String stackTrace ="";
+      for (int i=0;i<ex.getStackTrace().length;i++) {
+        stackTrace+=ex.getStackTrace()[i].toString()+"\n";
+      }
+      JOptionPane.showMessageDialog(null,ex.toString()+"\n\n"+stackTrace,ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+      update();
+    }    
+    update();           
+  }
+  /**
+   * Parses the given file line by line, expecting each xml-tag to be in his own single line
+   * @param f The file that should be parsed
+   * @throws java.lang.Exception
+   */
+  private void parse(File f) throws Exception {
+  //System.out.println("Creating Buffered Reader...");
       BufferedReader br = new BufferedReader(new FileReader(f));
       //System.out.println("Ready...");
       //System.out.println("Reading Header...");
@@ -181,7 +223,7 @@ public class Skin implements ActionListener{
           }
         }
         //</editor-fold>
-        else if(line.startsWith("<Font")) resources.add(new vlcskineditor.resources.Font(line,this));
+        else if(line.startsWith("<Font")) resources.add(new Font(line,this));
         else if(line.startsWith("<BitmapFont")) resources.add(new BitmapFont(line,this));        
         //<editor-fold defaultstate="collapsed" desc=" Window tag "> 
         else if(line.startsWith("<Window")) {
@@ -208,19 +250,55 @@ public class Skin implements ActionListener{
         //</editor-fold>
       }
       br.close();
-      //System.out.println("Buffered Reader was closed");
-    } 
-    catch (Exception ex) {
-      String stackTrace ="";
-      for (int i=0;i<ex.getStackTrace().length;i++) {
-        stackTrace+=ex.getStackTrace()[i].toString()+"\n";
-      }
-      JOptionPane.showMessageDialog(null,ex.toString()+"\n\n"+stackTrace,ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-      update();
-    }    
-    update();           
+      //System.out.println("Buffered Reader was closed");  
+  
   }
-  /** Parses the XML Code into the skinfile **/
+  /**
+   * Parses the skin file via Java's XMLReader
+   * @param f The file that should be parsed
+   * @throws java.lang.Exception
+   */
+  private void parseXML(File f) throws Exception{
+    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+    Document doc = docBuilder.parse(f);
+    
+    if(!doc.getDoctype().getName().equals("Theme"))
+      throw new Exception("Selected file is not a valid VLC skin file!");
+    
+    NodeList nodes = doc.getElementsByTagName("*");
+    for(int i=0;i<nodes.getLength();i++) {
+     Element e = (Element)nodes.item(i);     
+     parseElement(e);
+    }
+  }
+  private void parseElement(Element e) throws Exception{
+    String tag = e.getTagName();    
+    if(tag.equals("Theme")) {
+      if(e.hasAttribute("version"))  theme_version = e.getAttribute("version");
+      if(Double.parseDouble(theme_version)!=2.0) 
+        throw new Exception("The version of the theme used in the selected skin is not yet supported!");
+    }
+    else if(tag.equals("ThemeInfo")) {
+      if(e.hasAttribute("author")) themeinfo_author = e.getAttribute("author");
+      if(e.hasAttribute("name")) themeinfo_name = e.getAttribute("name");
+      if(e.hasAttribute("email")) themeinfo_email = e.getAttribute("email");
+      if(e.hasAttribute("webpage")) themeinfo_webpage = e.getAttribute("webpage");
+    }
+    else if(tag.equals("Bitmap")) {
+      resources.add(new Bitmap(e,this));
+    }
+    else if(tag.equals("SubBitmap")) {
+      Node p = e.getParentNode();
+      String id = p.getAttributes().getNamedItem("id").getNodeValue();
+      Bitmap b = (Bitmap)getResource(id);
+      b.SubBitmaps.add(new SubBitmap(e,this,b));
+    }
+    else if(tag.equals("Font")) {
+      resources.add(new Font(e,this));
+    }
+  }
+  /** Saves the XML Code into the skinfile **/
   public void save() {   
     try {
       FileWriter writer = new FileWriter(skinfile);

@@ -30,6 +30,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import org.w3c.dom.Element;
 /**
  * Handles font resources
  * @author Daniel Dreibrodt
@@ -48,6 +49,14 @@ public class Font extends Resource implements ActionListener{
    * The font represented by this Font object as a Java AWT Font.
    */
   public java.awt.Font f;
+  
+  public Font(Element e, Skin s_) {
+    type = "Font";
+    s = s_;
+    if(e.hasAttribute("id")) id = e.getAttribute("id");
+    if(e.hasAttribute("file")) file = e.getAttribute("file");
+    if(e.hasAttribute("size")) size = Integer.parseInt(e.getAttribute("size"));
+  }
   
   /**
    * Creates a Font from XML.
@@ -109,29 +118,32 @@ public class Font extends Resource implements ActionListener{
     s.expandResource(id);
     showOptions();
   }
-  public void updateFont() {
+  public Integer updateFont() {
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
-      f = f.deriveFont((float)size);
+      f = f.deriveFont((float)size);      
     }
     catch(Exception e) {      
       if(file.indexOf(".otf")==-1) {
-        JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+        //JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
         f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        showOptions();
+        //showOptions();
+        return 0;
       }
       else {
-        JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font instead.","Notice",JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font instead.","Notice",JOptionPane.INFORMATION_MESSAGE);        
         try {      
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
           f = f.deriveFont(12);
         }
-        catch(Exception ex) {
+        catch(Exception ex) {          
           ex.printStackTrace();
-          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
+          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);          
         }
+        return 2;
       }      
     }
+    return 1;
   }
   public void update() {
     FontEditEvent fe = new FontEditEvent(this);
@@ -140,8 +152,7 @@ public class Font extends Resource implements ActionListener{
     size=Integer.parseInt(size_tf.getText());        
     id=id_tf.getText();
     s.updateResources();
-    s.expandResource(id);
-    updateFont();
+    s.expandResource(id);    
     fe.setNew();
     s.m.hist.addEvent(fe);
   }
@@ -149,7 +160,6 @@ public class Font extends Resource implements ActionListener{
     if(frame==null) {
       frame = new JFrame("Font settings");
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());      
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the font that will be used with controls.");
@@ -162,47 +172,88 @@ public class Font extends Resource implements ActionListener{
       size_tf = new JTextField();
       size_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton("OK");
-      ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
+      ok_btn.addActionListener(this);      
       cancel_btn = new JButton("Cancel");
-      cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
+      cancel_btn.addActionListener(this);      
       help_btn = new JButton("Help");
-      help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+      help_btn.addActionListener(this);      
+      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
       
-      JPanel general = new JPanel(null);
+      JPanel general = new JPanel(null);      
       general.add(id_l);
-      general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      general.add(id_tf);     
       general.add(file_l);
       general.add(file_tf);
       general.add(file_btn);
-      file_l.setBounds(5,45,75,24);
-      file_tf.setBounds(85,45,150,24);
-      file_btn.setBounds(240,45,100,24);
       general.add(size_l);
       general.add(size_tf);
-      size_l.setBounds(5,75,75,24);
-      size_tf.setBounds(85,75,150,24);
       
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
-      general.setMinimumSize(new Dimension(345,110));
-      general.setPreferredSize(new Dimension(345,110));
-      general.setMaximumSize(new Dimension(345,110));
-      frame.add(general);         
-     
+      
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+      
+      //Textfield distance to WEST border of container
+      Component[] labels = { id_l, file_l, size_l };
+      int tf_dx = Helper.maxWidth(labels)+10;               
+      //Maximal textfield width
+      int tf_wd = 200;
+      //Button width
+      int btn_wd = file_btn.getPreferredSize().width;
+      
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);
+      general_layout.putConstraint(SpringLayout.EAST, id_tf, 0, SpringLayout.EAST, file_btn);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, file_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, file_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, file_tf, 0, SpringLayout.NORTH, file_l);      
+      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
+      general_layout.putConstraint(SpringLayout.WEST, file_btn, 5, SpringLayout.EAST, file_tf);
+      general_layout.putConstraint(SpringLayout.NORTH, file_btn, 0, SpringLayout.NORTH, file_l);
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, file_btn);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, size_l, 10, SpringLayout.SOUTH, file_l);
+      general_layout.putConstraint(SpringLayout.WEST, size_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, size_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, size_tf, 0, SpringLayout.NORTH, size_l);
+      general_layout.putConstraint(SpringLayout.EAST, size_tf, 0, SpringLayout.EAST, file_btn);
+      
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, size_l);
+      
+      frame.add(general);     
+      frame.add(attr_l);    
       frame.add(ok_btn); 
       frame.add(cancel_btn);
-      frame.add(help_btn);
-      frame.add(new JLabel("Attributes marked with a star must be specified."));
+      frame.add(help_btn);    
       
-      frame.setMinimumSize(new Dimension(355,175));     
-      frame.setPreferredSize(new Dimension(355,175));
-      frame.setMaximumSize(new Dimension(355,175));
+      SpringLayout layout = new SpringLayout();
+      frame.setLayout(layout);
       
-      frame.pack();      
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      //layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 5, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, attr_l, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 5, SpringLayout.SOUTH, attr_l);
+      
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+      
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 5, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+      
+      frame.pack();
     }
     id_tf.setText(id);
     file_tf.setText(file);
@@ -238,10 +289,15 @@ public class Font extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Please choose a file!","File not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      update(); 
-      frame.setVisible(false);
-      frame.dispose();
-      frame = null;           
+      update();
+      int i = updateFont();
+      if(i==0) JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+      else if(i==2) JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
+      else if(i==1) {
+        frame.setVisible(false);
+        frame.dispose();
+        frame = null;  
+      }
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

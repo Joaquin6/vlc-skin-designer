@@ -33,6 +33,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import java.io.*;
+import org.w3c.dom.Element;
 
 /**
  * Handles Bitmap resources
@@ -58,10 +59,25 @@ public class Bitmap extends Resource implements ActionListener{
   private JFileChooser fc;
   
   /**
+   * Creates a new Bitmap from a W3C DOM element
+   * @param e The W3C DOM element
+   * @param s_ The skin in which the Bitmap is used
+   */  
+  public Bitmap(Element e, Skin s_) {
+    type = "Bitmap";
+    s = s_;
+    if(e.hasAttribute("id")) id = e.getAttribute("id");
+    if(e.hasAttribute("file")) file = e.getAttribute("file");
+    if(e.hasAttribute("alphacolor")) alphacolor = e.getAttribute("alphacolor");
+    if(e.hasAttribute("nbframes")) nbframes = Integer.valueOf(e.getAttribute("nbframes"));
+    if(e.hasAttribute("fps")) fps = Integer.valueOf(e.getAttribute("fps"));
+    updateImage();    
+  }
+  
+  /**
    * Creates a new Bitmap from xml code
    * @param xmlcode The XML code from which the Bitmap should be created. One line per tag.
-   * @param s_ The skin in which the Bitmap is used.
-   * This is necessary in order that the image file can be located relatively to the skin file.
+   * @param s_ The skin in which the Bitmap is used. This is necessary in order that the image file can be located relatively to the skin file.
    */  
   public Bitmap(String xmlcode, Skin s_) {    
     type = "Bitmap";
@@ -129,7 +145,7 @@ public class Bitmap extends Resource implements ActionListener{
   /**
    * Regenerates the image represented by the Bitmap object.
    */
-  public void updateImage() {
+  public boolean updateImage() {
     try {
       image = ImageIO.read(new File(s.skinfolder+file));       
       image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);         
@@ -164,10 +180,15 @@ public class Bitmap extends Resource implements ActionListener{
     }
     catch(Exception ex) {      
       ex.printStackTrace();
-      JOptionPane.showMessageDialog(null,ex.getMessage()+"\n"+s.skinfolder+file,"Bitmap \""+id+"\" caused an error",JOptionPane.ERROR_MESSAGE); 
-      showOptions();
-      return;
-    }    
+      //JOptionPane.showMessageDialog(null,ex.getMessage()+"\n"+s.skinfolder+file,"Bitmap \""+id+"\" caused an error",JOptionPane.ERROR_MESSAGE); 
+      //showOptions();
+      image = new BufferedImage(32,32,BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g = (Graphics2D)image.getGraphics();
+      g.setColor(new Color(255,0,0,128));
+      g.fillRect(0, 0, 32, 32);
+      return false;
+    }
+    return true;
   }
   public void update() {
     BitmapEditEvent be = new BitmapEditEvent(this);
@@ -179,8 +200,7 @@ public class Bitmap extends Resource implements ActionListener{
       id=id_tf.getText();
       s.updateResources();
       s.expandResource(id);
-    }
-    updateImage();
+    }    
     be.setNew();
     s.m.hist.addEvent(be);
   }
@@ -211,62 +231,124 @@ public class Bitmap extends Resource implements ActionListener{
       fps_tf.setDocument(new NumbersOnlyDocument());
       fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
       ok_btn = new JButton("OK");
-      ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
+      ok_btn.addActionListener(this);      
       cancel_btn = new JButton("Cancel");
-      cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
+      cancel_btn.addActionListener(this);      
       help_btn = new JButton("Help");
-      help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
-      
+      help_btn.addActionListener(this);      
+      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
       
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
       general.add(file_l);
       general.add(file_tf);
       general.add(file_btn);
-      file_l.setBounds(5,45,75,24);
-      file_tf.setBounds(85,45,150,24);
-      file_btn.setBounds(240,45,100,24);
       general.add(alphacolor_l);
       general.add(alphacolor_tf);
       general.add(alphacolor_btn);
-      alphacolor_l.setBounds(5,75,75,24);
-      alphacolor_tf.setBounds(85,75,150,24);
-      alphacolor_btn.setBounds(240,75,100,24);
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
-      general.setMinimumSize(new Dimension(345,110));
-      general.setPreferredSize(new Dimension(345,110));
-      general.setMaximumSize(new Dimension(345,110));
       frame.add(general);
+      
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, file_l, alphacolor_l, nbframes_l, fps_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = 200;
+      //Width of buttons
+      Component[] btns = { file_btn, alphacolor_btn };
+      int btn_wd = Helper.maxWidth(btns);
+      
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);      
+      
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);
+      general_layout.putConstraint(SpringLayout.EAST, id_tf, 0, SpringLayout.EAST, file_btn);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, file_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, file_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, file_tf, 0, SpringLayout.NORTH, file_l);      
+      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
+      file_btn.setPreferredSize(new Dimension(btn_wd,file_btn.getPreferredSize().height));
+      general_layout.putConstraint(SpringLayout.WEST, file_btn, 5, SpringLayout.EAST, file_tf);
+      general_layout.putConstraint(SpringLayout.NORTH, file_btn, 0, SpringLayout.NORTH, file_l);
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, file_btn);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, alphacolor_l, 10, SpringLayout.SOUTH, file_l);
+      general_layout.putConstraint(SpringLayout.WEST, alphacolor_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, alphacolor_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, alphacolor_tf, 0, SpringLayout.NORTH, alphacolor_l);
+      alphacolor_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,alphacolor_tf.getPreferredSize().height));
+      alphacolor_btn.setPreferredSize(new Dimension(btn_wd,alphacolor_btn.getPreferredSize().height));
+      general_layout.putConstraint(SpringLayout.WEST, alphacolor_btn, 5, SpringLayout.EAST, alphacolor_tf);
+      general_layout.putConstraint(SpringLayout.NORTH, alphacolor_btn, 0, SpringLayout.NORTH, alphacolor_l);
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, alphacolor_btn);
+      
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, alphacolor_l);
       
       JPanel animation = new JPanel(null);
       animation.add(nbframes_l);
       animation.add(nbframes_tf);
       animation.add(fps_l);
-      animation.add(fps_tf);
-      nbframes_l.setBounds(5,15,150,24);
-      nbframes_tf.setBounds(160,15,150,24);
-      fps_l.setBounds(5,45,150,24);
-      fps_tf.setBounds(160,45,150,24);
-      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animation Attributes"));       
-      animation.setMinimumSize(new Dimension(345,80));
-      animation.setPreferredSize(new Dimension(345,80));
-      animation.setMaximumSize(new Dimension(345,80));      
+      animation.add(fps_tf);      
+      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animation Attributes"));             
+      
+      SpringLayout ani_layout = new SpringLayout();
+      animation.setLayout(ani_layout);
+      
+      nbframes_tf.setPreferredSize(new Dimension(tf_wd,nbframes_tf.getPreferredSize().height));      
+      
+      ani_layout.putConstraint(SpringLayout.NORTH, nbframes_l, 5, SpringLayout.NORTH, animation);
+      ani_layout.putConstraint(SpringLayout.WEST, nbframes_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, nbframes_tf, tf_dx, SpringLayout.WEST, animation);
+      ani_layout.putConstraint(SpringLayout.NORTH, nbframes_tf, 0, SpringLayout.NORTH, nbframes_l);
+      ani_layout.putConstraint(SpringLayout.EAST, animation, 5, SpringLayout.EAST, nbframes_tf);
+      
+      ani_layout.putConstraint(SpringLayout.NORTH, fps_l, 10, SpringLayout.SOUTH, nbframes_l);
+      ani_layout.putConstraint(SpringLayout.WEST, fps_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, fps_tf, tf_dx, SpringLayout.WEST, animation);
+      ani_layout.putConstraint(SpringLayout.NORTH, fps_tf, 0, SpringLayout.NORTH, fps_l);
+      ani_layout.putConstraint(SpringLayout.EAST, fps_tf, 0, SpringLayout.EAST, nbframes_tf);
+      
+      ani_layout.putConstraint(SpringLayout.SOUTH, animation, 10, SpringLayout.SOUTH, fps_l);
+      
+      
       frame.add(animation);
      
       frame.add(ok_btn); 
       frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel("Attributes marked with a star must be specified."));
+      frame.add(attr_l);
       
-      frame.setMinimumSize(new Dimension(355,260));     
-      frame.setPreferredSize(new Dimension(355,260));
-      frame.setMaximumSize(new Dimension(355,260));
+      SpringLayout layout = new SpringLayout();
+      frame.setLayout(layout);
+      
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, animation, 5, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, animation, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 5, SpringLayout.SOUTH, animation);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, attr_l, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 5, SpringLayout.SOUTH, attr_l);
+      
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+      
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 5, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
       
       frame.pack();
       
@@ -325,10 +407,15 @@ public class Bitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"The number of frames cannot be smaller than 1","Nbframes not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }      
-      update();    
-      frame.setVisible(false);
-      frame.dispose();
-      frame = null;        
+      update();
+      if(updateImage()) {
+        frame.setVisible(false);
+        frame.dispose();
+        frame = null;
+      }
+      else {        
+        JOptionPane.showMessageDialog(frame,"The given bitmap file could not be loaded!","File not valid",JOptionPane.ERROR_MESSAGE);
+      }
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;

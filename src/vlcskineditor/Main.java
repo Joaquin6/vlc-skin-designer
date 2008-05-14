@@ -46,7 +46,7 @@ import vlcskineditor.resources.SubBitmap;
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
   
   //The version identification of the current build.   
-  public final String VERSION = "0.7.0.b";
+  public final String VERSION = "0.7.0 dev";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -786,7 +786,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         Runtime.getRuntime().exec(command);
       }
       catch (IOException ex) {
-        
+         JOptionPane.showMessageDialog(this,"VLC Media Player could not be launched","Error",JOptionPane.ERROR_MESSAGE);
       }
     }
     // </editor-fold>

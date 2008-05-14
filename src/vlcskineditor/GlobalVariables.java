@@ -377,6 +377,8 @@ public class GlobalVariables implements ActionListener{
     if(e.getSource().equals(ok_btn)) {
       update();
       frame.setVisible(false);
+      frame.dispose();
+      frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
       Desktop desktop;
