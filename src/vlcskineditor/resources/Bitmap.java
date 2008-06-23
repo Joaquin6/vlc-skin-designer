@@ -352,6 +352,7 @@ public class Bitmap extends Resource implements ActionListener{
       
       frame.pack();
       
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     file_tf.setText(file);

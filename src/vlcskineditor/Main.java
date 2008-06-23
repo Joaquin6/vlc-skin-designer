@@ -124,40 +124,45 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));    
     mbar = new JMenuBar();
     
+    //For cross-platform feel (CTRL on Win & Linux, APPLE/COMMAND on Mac OS)
+    int mask = java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    
     m_file = new JMenu("File");
     m_file.setMnemonic("F".charAt(0));
     m_file_new = new JMenuItem("New");
     m_file_new.setIcon(new_icon);
     m_file_new.setMnemonic("N".charAt(0));
-    m_file_new.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
+    m_file_new.setAccelerator(KeyStroke.getKeyStroke('N',mask));
     m_file_new.addActionListener(this);
     m_file_open = new JMenuItem("Open");
     m_file_open.setIcon(open_icon);
     m_file_open.setMnemonic('O');
-    m_file_open.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
+    m_file_open.setAccelerator(KeyStroke.getKeyStroke('O',mask));
     m_file_open.addActionListener(this);    
     m_file_save = new JMenuItem("Save");
     m_file_save.setIcon(save_icon);
     m_file_save.setMnemonic('S');
-    m_file_save.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));   
+    m_file_save.setAccelerator(KeyStroke.getKeyStroke('S',mask));   
     m_file_save.addActionListener(this);
     m_file_test = new JMenuItem("Test skin in VLC...");
     m_file_test.setMnemonic('T');
-    m_file_test.setAccelerator(KeyStroke.getKeyStroke("ctrl shift t"));
+    m_file_test.setAccelerator(KeyStroke.getKeyStroke('T',mask+InputEvent.SHIFT_DOWN_MASK));
     m_file_test.addActionListener(this);    
     m_file_vlt = new JMenuItem("Export as VLT...");
     m_file_vlt.setMnemonic('V');
-    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke("ctrl shift v"));   
+    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke('V',mask+InputEvent.SHIFT_DOWN_MASK));   
     m_file_vlt.addActionListener(this);
     m_file_png = new JMenuItem("Save current preview as image");
     m_file_png.setMnemonic('p');
     m_file_png.addActionListener(this);
     m_file_png.setEnabled(false);
-    m_file_quit = new JMenuItem("Quit");
-    m_file_quit.setIcon(exit_icon);
-    m_file_quit.setMnemonic('Q');
-    m_file_quit.setAccelerator(KeyStroke.getKeyStroke("ctrl Q"));
-    m_file_quit.addActionListener(this);
+    if(System.getProperty("os.name").indexOf("Mac")==-1) {
+      m_file_quit = new JMenuItem("Exit");
+      m_file_quit.setIcon(exit_icon);
+      m_file_quit.setMnemonic('x');
+      m_file_quit.setAccelerator(KeyStroke.getKeyStroke("alt F4"));
+      m_file_quit.addActionListener(this);
+    }
     
     m_file.add(m_file_new);
     m_file.addSeparator();
@@ -175,33 +180,33 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit_undo = new JMenuItem("Undo");
     m_edit_undo.setIcon(edit_undo_icon);
     m_edit_undo.setMnemonic('U');
-    m_edit_undo.setAccelerator(KeyStroke.getKeyStroke("ctrl Z"));
+    m_edit_undo.setAccelerator(KeyStroke.getKeyStroke('Z',mask));
     m_edit_undo.addActionListener(this);
     m_edit_redo = new JMenuItem("Redo");
     m_edit_redo.setIcon(edit_redo_icon);
     m_edit_redo.setMnemonic('R');    
-    m_edit_redo.setAccelerator(KeyStroke.getKeyStroke("ctrl Y"));
+    m_edit_redo.setAccelerator(KeyStroke.getKeyStroke('Y',mask));
     m_edit_redo.addActionListener(this);
     m_edit_theme = new JMenuItem("Theme settings");
     m_edit_theme.setIcon(edit_icon);
     m_edit_theme.setMnemonic('I');
-    m_edit_theme.setAccelerator(KeyStroke.getKeyStroke("ctrl I"));
+    m_edit_theme.setAccelerator(KeyStroke.getKeyStroke('I',mask));
     m_edit_theme.addActionListener(this);
     m_edit_global = new JMenuItem("Global variables");
     m_edit_global.setMnemonic('G');
-    m_edit_global.setAccelerator(KeyStroke.getKeyStroke("ctrl G"));
+    m_edit_global.setAccelerator(KeyStroke.getKeyStroke('G',mask));
     m_edit_global.addActionListener(this);
     m_edit_up = new JMenuItem("Move selected item up");
-    m_edit_up.setAccelerator(KeyStroke.getKeyStroke("ctrl UP"));
+    m_edit_up.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UP,mask));
     m_edit_up.addActionListener(this);
     m_edit_down = new JMenuItem("Move selected item down");
-    m_edit_down.setAccelerator(KeyStroke.getKeyStroke("ctrl DOWN"));    
+    m_edit_down.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,mask));    
     m_edit_down.addActionListener(this);
     m_edit_left = new JMenuItem("Move selected item left");
-    m_edit_left.setAccelerator(KeyStroke.getKeyStroke("ctrl LEFT"));
+    m_edit_left.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,mask));
     m_edit_left.addActionListener(this);
     m_edit_right = new JMenuItem("Move selected item right");
-    m_edit_right.setAccelerator(KeyStroke.getKeyStroke("ctrl RIGHT"));
+    m_edit_right.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,mask));
     m_edit_right.addActionListener(this);
     
     m_edit.add(m_edit_undo);
@@ -563,6 +568,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         vlc_skins_dir = vlc_dir+"skins";
       }
       catch (Exception e) {
+        System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
         e.printStackTrace();
       }  
     }   
@@ -609,15 +615,37 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void openFile() {
     opening = true;
     String[] exts = { "xml","vlt" };
-    base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
-    int returnVal = base_fc.showOpenDialog(this);
-    if(returnVal == JFileChooser.APPROVE_OPTION) {      
-      openFile(base_fc.getSelectedFile());
-      opening = false;
+    if(System.getProperty("os.name").indexOf("Mac")==-1) {
+      base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
+      int returnVal = base_fc.showOpenDialog(this);
+      if(returnVal == JFileChooser.APPROVE_OPTION) {      
+        openFile(base_fc.getSelectedFile());
+        opening = false;
+      }
+      else {
+        opening = false;
+        if(!opened) showWelcomeDialog();
+      }
     }
     else {
-      opening = false;
-      if(!opened) showWelcomeDialog();
+      FileDialog fd = new FileDialog(this);
+      fd.setMode(FileDialog.LOAD);
+      fd.setFilenameFilter(new FilenameFilter() {
+        public boolean accept(File f, String s) { 
+          return f.getName().toUpperCase().matches("*.XML"); 
+        }
+      });
+      fd.setVisible(true);
+      String f = fd.getFile();
+      if(f!=null) {
+        openFile(new File(fd.getDirectory(),fd.getFile()));
+        opening = false;
+      }
+      else {
+        opening = false;
+        if(!opened) showWelcomeDialog();
+      }
+      
     }
   }
   /**
@@ -1498,9 +1526,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       selected_item = selection.substring(selection.indexOf(": ")+2);
       pvwin.selectItem(s.getItem(selected_item));
     }
-  }
-  public void windowActivated(WindowEvent e) {}
-  public void windowClosed(WindowEvent e) {}
+  }  
   public void windowClosing(WindowEvent e) {
     if(!saved) {
       Object[] options= { "Yes", "No", "Don't quit" };
@@ -1529,9 +1555,25 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       System.exit(0);
     }
   }
-  public void windowDeactivated(WindowEvent e) {}
-  public void windowDeiconified(WindowEvent e) {}
-  public void windowIconified(WindowEvent e) {}
+  public void windowClosed(WindowEvent e) {}
+  public void windowActivated(WindowEvent e) {
+    if(pvwin.fu==null) {
+      pvwin.fu = new FrameUpdater(pvwin,5);
+      pvwin.fu.start();      
+    }
+  }
+  public void windowDeactivated(WindowEvent e) {
+    pvwin.fu = null;
+  }
+  public void windowDeiconified(WindowEvent e) {
+    if(pvwin.fu==null) {
+      pvwin.fu = new FrameUpdater(pvwin,5);
+      pvwin.fu.start();      
+    }
+  }
+  public void windowIconified(WindowEvent e) {
+    pvwin.fu = null;
+  }
   public void windowOpened(WindowEvent e) {}  
   public void mouseClicked(MouseEvent e) {
     if(e.getClickCount()>1) {
@@ -1597,7 +1639,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         System.out.println(e);
         return null;
       }
-  }
+  }  
   /**
    * Creates a new instance of Main and thus launches the editor
    * @param args the command line arguments
@@ -1610,6 +1652,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       
     }
     JFrame.setDefaultLookAndFeelDecorated(true);
+    System.setProperty("apple.laf.useScreenMenuBar", "true");
+    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "VLC Skin Editor");
     new Main(args);      
   }
 }

@@ -152,63 +152,126 @@ public class Window implements ActionListener{
       playondrop_tf = new JTextField();
       playondrop_tf.setToolTipText("Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to \"false\".");
       ok_btn = new JButton("OK");
-      ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
+      ok_btn.addActionListener(this);      
       cancel_btn = new JButton("Cancel");
-      cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
+      cancel_btn.addActionListener(this);      
       help_btn = new JButton("Help");
-      help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+      help_btn.addActionListener(this);      
+      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, x_l, y_l, visible_l, dragdrop_l, playondrop_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = 200;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
+      x_tf.setPreferredSize(new Dimension(tf_wd,x_tf.getPreferredSize().height));
       general.add(y_l);
       general.add(y_tf);
-      y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,150,24);
+      y_tf.setPreferredSize(new Dimension(tf_wd,y_tf.getPreferredSize().height));
       general.add(visible_l);
       general.add(visible_tf);
-      visible_l.setBounds(5,105,75,24);
-      visible_tf.setBounds(85,105,75,24);
+      visible_tf.setPreferredSize(new Dimension(tf_wd,visible_tf.getPreferredSize().height));
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
-      general.setMinimumSize(new Dimension(240,140));
-      general.setPreferredSize(new Dimension(240,140));
-      general.setMaximumSize(new Dimension(240,140));
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);  
+      
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);      
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf); 
+      
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, x_tf, 0, SpringLayout.NORTH, x_l);
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, y_tf, 0, SpringLayout.NORTH, y_l);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, visible_l, 10, SpringLayout.SOUTH, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, visible_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.NORTH, visible_tf, 0, SpringLayout.NORTH, visible_l);
+      general_layout.putConstraint(SpringLayout.EAST, visible_tf, 0, SpringLayout.EAST, id_tf);
+      
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, visible_l);      
       frame.add(general);
       
       JPanel options = new JPanel(null);
       options.add(dragdrop_l);
       options.add(dragdrop_tf);
-      dragdrop_l.setBounds(5,15,75,24);
-      dragdrop_tf.setBounds(85,15,150,24);
+      dragdrop_tf.setPreferredSize(new Dimension(tf_wd,dragdrop_tf.getPreferredSize().height));
       options.add(playondrop_l);
       options.add(playondrop_tf);
-      playondrop_l.setBounds(5,45,75,24);
-      playondrop_tf.setBounds(85,45,150,24);
+      playondrop_tf.setPreferredSize(new Dimension(tf_wd,playondrop_tf.getPreferredSize().height));
       options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Drag and drop options"));
-      options.setMinimumSize(new Dimension(240,85));
-      options.setPreferredSize(new Dimension(240,85));
-      options.setMaximumSize(new Dimension(240,85));
+      SpringLayout options_layout = new SpringLayout();
+      options.setLayout(options_layout);
+      options_layout.putConstraint(SpringLayout.NORTH, dragdrop_l, 5, SpringLayout.NORTH, options);
+      options_layout.putConstraint(SpringLayout.WEST, dragdrop_l, 5, SpringLayout.WEST, options);
+      
+      options_layout.putConstraint(SpringLayout.WEST, dragdrop_tf, tf_dx, SpringLayout.WEST, options);
+      options_layout.putConstraint(SpringLayout.NORTH, dragdrop_tf, 0, SpringLayout.NORTH, dragdrop_l);
+      options_layout.putConstraint(SpringLayout.EAST, options, 5, SpringLayout.EAST, dragdrop_tf);
+      
+      options_layout.putConstraint(SpringLayout.NORTH, playondrop_l, 10, SpringLayout.SOUTH, dragdrop_l);
+      options_layout.putConstraint(SpringLayout.WEST, playondrop_l, 5, SpringLayout.WEST, options);
+      
+      options_layout.putConstraint(SpringLayout.WEST, playondrop_tf, tf_dx, SpringLayout.NORTH, options);
+      options_layout.putConstraint(SpringLayout.NORTH, playondrop_tf, 0, SpringLayout.NORTH, playondrop_l);
+      options_layout.putConstraint(SpringLayout.EAST, playondrop_tf, 0, SpringLayout.EAST, dragdrop_tf);
+      
+      options_layout.putConstraint(SpringLayout.SOUTH, options, 10, SpringLayout.SOUTH, playondrop_l);
       frame.add(options);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel("* required attribute"));
+      frame.add(attr_l);
       
-      frame.setMinimumSize(new Dimension(250,310));
-      frame.setPreferredSize(new Dimension(250,310));
-      frame.setMaximumSize(new Dimension(250,310));
+      SpringLayout layout = new SpringLayout();
+      frame.setLayout(layout);
+      
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, options, 5, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, options, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 5, SpringLayout.SOUTH, options);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, attr_l, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 5, SpringLayout.SOUTH, attr_l);
+      
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+      
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 5, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
       
       frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     x_tf.setText(String.valueOf(x));

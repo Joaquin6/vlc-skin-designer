@@ -220,25 +220,33 @@ public class SubBitmap extends Resource implements ActionListener{
       SpringLayout bounds_layout = new SpringLayout();
       bounds.setLayout(bounds_layout);
       bounds_layout.putConstraint(SpringLayout.NORTH, x_l, 5, SpringLayout.NORTH, bounds);
-      bounds_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, bounds);      
+      bounds_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, bounds);
+      
       bounds_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.NORTH, x_tf, 0, SpringLayout.NORTH, x_l);
-      bounds_layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, x_tf);      
+      bounds_layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, x_tf);
+      
       bounds_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
-      bounds_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, bounds);      
+      bounds_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, bounds);
+      
       bounds_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.NORTH, y_tf, 0, SpringLayout.NORTH, y_l);
       bounds_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, x_tf);
+      
       bounds_layout.putConstraint(SpringLayout.NORTH, width_l, 10, SpringLayout.SOUTH, y_l);
-      bounds_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, bounds);      
+      bounds_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, bounds);
+      
       bounds_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.NORTH, width_tf, 0, SpringLayout.NORTH, width_l);
       bounds_layout.putConstraint(SpringLayout.EAST, width_tf, 0, SpringLayout.EAST, x_tf);
+      
       bounds_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_l);
-      bounds_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, bounds);      
+      bounds_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, bounds);
+      
       bounds_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.NORTH, height_tf, 0, SpringLayout.NORTH, height_l);
-      bounds_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, x_tf);      
+      bounds_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, x_tf);
+      
       bounds_layout.putConstraint(SpringLayout.SOUTH, bounds, 10, SpringLayout.SOUTH, height_l);
       frame.add(bounds);
       
@@ -298,6 +306,8 @@ public class SubBitmap extends Resource implements ActionListener{
       layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
       
       frame.pack();      
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);    
     x_tf.setText(String.valueOf(x));
@@ -334,7 +344,7 @@ public class SubBitmap extends Resource implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Height must be greater 0!","Height not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      if(Integer.parseInt(x_tf.getText())+Integer.parseInt(height_tf.getText())>parent.image.getHeight()) {
+      if(Integer.parseInt(x_tf.getText())+Integer.parseInt(width_tf.getText())>parent.image.getWidth()) {
         JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }

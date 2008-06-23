@@ -254,6 +254,8 @@ public class Font extends Resource implements ActionListener{
       layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
       
       frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     file_tf.setText(file);
