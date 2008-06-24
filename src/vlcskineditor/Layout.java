@@ -235,64 +235,134 @@ public class Layout implements ActionListener{
       maxheight_tf.setToolTipText("Maximum height of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as maximum width.");
       ok_btn = new JButton("OK");
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton("Cancel");
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton("Help");
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, width_l, height_l, minwidth_l, minheight_l, maxwidth_l, maxheight_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = 200;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
-      general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      general.add(id_tf);      
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
-      general.setMinimumSize(new Dimension(240,45));
-      general.setPreferredSize(new Dimension(240,45));
-      general.setMaximumSize(new Dimension(240,45));
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_l);
       frame.add(general);
       
       JPanel dim = new JPanel(null);
       dim.add(width_l);
-      dim.add(width_tf);
-      width_l.setBounds(5,15,75,24);
-      width_tf.setBounds(85,15,150,24);
+      dim.add(width_tf);     
+      width_tf.setPreferredSize(new Dimension(tf_wd,width_tf.getPreferredSize().height));
       dim.add(height_l);
       dim.add(height_tf);
-      height_l.setBounds(5,45,75,24);
-      height_tf.setBounds(85,45,150,24);
-      dim.add(minwidth_l);
+      height_tf.setPreferredSize(new Dimension(tf_wd,height_tf.getPreferredSize().height));
+      dim.add(minwidth_l);      
       dim.add(minwidth_tf);
-      minwidth_l.setBounds(5,75,75,24);
-      minwidth_tf.setBounds(85,75,150,24);
+      minwidth_tf.setPreferredSize(new Dimension(tf_wd,minwidth_tf.getPreferredSize().height));
       dim.add(minheight_l);
       dim.add(minheight_tf);
-      minheight_l.setBounds(5,105,75,24);
-      minheight_tf.setBounds(85,105,150,24);
+      minheight_tf.setPreferredSize(new Dimension(tf_wd,minheight_tf.getPreferredSize().height));
       dim.add(maxwidth_l);
       dim.add(maxwidth_tf);
-      maxwidth_l.setBounds(5,135,75,24);
-      maxwidth_tf.setBounds(85,135,150,24);
+      maxwidth_tf.setPreferredSize(new Dimension(tf_wd,maxwidth_tf.getPreferredSize().height));
       dim.add(maxheight_l);
       dim.add(maxheight_tf);
-      maxheight_l.setBounds(5,165,75,24);
-      maxheight_tf.setBounds(85,165,150,24);
+      maxheight_tf.setPreferredSize(new Dimension(tf_wd,maxheight_tf.getPreferredSize().height));
       dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
-      dim.setMinimumSize(new Dimension(240,195));
-      dim.setPreferredSize(new Dimension(240,195));
-      dim.setMaximumSize(new Dimension(240,195));
+      SpringLayout dim_layout = new SpringLayout();
+      dim.setLayout(dim_layout);
+      dim_layout.putConstraint(SpringLayout.NORTH, width_l, 5, SpringLayout.NORTH, dim);
+      dim_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, width_tf, 0, SpringLayout.VERTICAL_CENTER, width_l);
+      dim_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, dim, 5, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_l);
+      dim_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, height_tf, 0, SpringLayout.VERTICAL_CENTER, height_l);
+      dim_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.NORTH, minwidth_l, 10, SpringLayout.SOUTH, height_l);
+      dim_layout.putConstraint(SpringLayout.WEST, minwidth_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, minwidth_tf, 0, SpringLayout.VERTICAL_CENTER, minwidth_l);
+      dim_layout.putConstraint(SpringLayout.WEST, minwidth_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, minwidth_tf, 0, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.NORTH, minheight_l, 10, SpringLayout.SOUTH, minwidth_l);
+      dim_layout.putConstraint(SpringLayout.WEST, minheight_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, minheight_tf, 0, SpringLayout.VERTICAL_CENTER, minheight_l);
+      dim_layout.putConstraint(SpringLayout.WEST, minheight_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, minheight_tf, 0, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.NORTH, maxwidth_l, 10, SpringLayout.SOUTH, minheight_l);
+      dim_layout.putConstraint(SpringLayout.WEST, maxwidth_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, maxwidth_tf, 0, SpringLayout.VERTICAL_CENTER, maxwidth_l);
+      dim_layout.putConstraint(SpringLayout.WEST, maxwidth_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, maxwidth_tf, 0, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.NORTH, maxheight_l, 10, SpringLayout.SOUTH, maxwidth_l);
+      dim_layout.putConstraint(SpringLayout.WEST, maxheight_l, 5, SpringLayout.WEST, dim);
+      
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, maxheight_tf, 0, SpringLayout.VERTICAL_CENTER, maxheight_l);
+      dim_layout.putConstraint(SpringLayout.WEST, maxheight_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, maxheight_tf, 0, SpringLayout.EAST, width_tf);
+      
+      dim_layout.putConstraint(SpringLayout.SOUTH, dim, 10, SpringLayout.SOUTH, maxheight_l);
+      
       frame.add(dim);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel("* required attribute"));
+      frame.add(attr_l);      
       
-      frame.setMinimumSize(new Dimension(250,350));
-      frame.setPreferredSize(new Dimension(250,350));
-      frame.setMaximumSize(new Dimension(250,350));      
+      SpringLayout layout = new SpringLayout();
+      frame.setLayout(layout);
+      
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, dim, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 5, SpringLayout.SOUTH, dim);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, attr_l, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 5, SpringLayout.SOUTH, attr_l);
+      
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+      
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 5, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+      
+      frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     width_tf.setText(String.valueOf(width));
@@ -334,14 +404,14 @@ public class Layout implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Layout"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/layout.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/layout.html",JOptionPane.WARNING_MESSAGE);    
       }
     }
     else if(e.getSource().equals(cancel_btn)) {

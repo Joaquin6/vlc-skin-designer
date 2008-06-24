@@ -179,11 +179,20 @@ public class Font extends Resource implements ActionListener{
       help_btn.addActionListener(this);      
       JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
       
+      //Textfield distance to WEST border of container
+      Component[] labels = { id_l, file_l, size_l };
+      int tf_dx = Helper.maxWidth(labels)+10;               
+      //Maximal textfield width
+      int tf_wd = 200;
+      //Button width
+      int btn_wd = file_btn.getPreferredSize().width;
+      
       JPanel general = new JPanel(null);      
       general.add(id_l);
       general.add(id_tf);     
       general.add(file_l);
       general.add(file_tf);
+      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
       general.add(file_btn);
       general.add(size_l);
       general.add(size_tf);
@@ -193,33 +202,28 @@ public class Font extends Resource implements ActionListener{
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);
       
-      //Textfield distance to WEST border of container
-      Component[] labels = { id_l, file_l, size_l };
-      int tf_dx = Helper.maxWidth(labels)+10;               
-      //Maximal textfield width
-      int tf_wd = 200;
-      //Button width
-      int btn_wd = file_btn.getPreferredSize().width;
-      
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
-      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);     
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
       general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);
       general_layout.putConstraint(SpringLayout.EAST, id_tf, 0, SpringLayout.EAST, file_btn);
       
       general_layout.putConstraint(SpringLayout.NORTH, file_l, 10, SpringLayout.SOUTH, id_l);
-      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);     
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, file_tf, 0, SpringLayout.VERTICAL_CENTER, file_l);      
       general_layout.putConstraint(SpringLayout.WEST, file_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, file_tf, 0, SpringLayout.NORTH, file_l);      
-      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, file_btn, 0, SpringLayout.VERTICAL_CENTER, file_l);
       general_layout.putConstraint(SpringLayout.WEST, file_btn, 5, SpringLayout.EAST, file_tf);
-      general_layout.putConstraint(SpringLayout.NORTH, file_btn, 0, SpringLayout.NORTH, file_l);
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, file_btn);
       
       general_layout.putConstraint(SpringLayout.NORTH, size_l, 10, SpringLayout.SOUTH, file_l);
-      general_layout.putConstraint(SpringLayout.WEST, size_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, size_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, size_tf, 0, SpringLayout.VERTICAL_CENTER, size_l);
       general_layout.putConstraint(SpringLayout.WEST, size_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, size_tf, 0, SpringLayout.NORTH, size_l);
       general_layout.putConstraint(SpringLayout.EAST, size_tf, 0, SpringLayout.EAST, file_btn);
       
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, size_l);

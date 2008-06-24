@@ -184,29 +184,29 @@ public class Window implements ActionListener{
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
       general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);  
       
-      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);      
-      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf); 
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
       
       general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_l);
       general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
       
-      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, x_tf, 0, SpringLayout.NORTH, x_l);
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);      
       general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
       
       general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
       general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
       
-      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, y_tf, 0, SpringLayout.NORTH, y_l);
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);      
       general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
       
       general_layout.putConstraint(SpringLayout.NORTH, visible_l, 10, SpringLayout.SOUTH, y_l);
       general_layout.putConstraint(SpringLayout.WEST, visible_l, 5, SpringLayout.WEST, general);
       
-      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, visible_tf, 0, SpringLayout.NORTH, visible_l);
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_tf, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);      
       general_layout.putConstraint(SpringLayout.EAST, visible_tf, 0, SpringLayout.EAST, id_tf);
       
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, visible_l);      
@@ -225,15 +225,15 @@ public class Window implements ActionListener{
       options_layout.putConstraint(SpringLayout.NORTH, dragdrop_l, 5, SpringLayout.NORTH, options);
       options_layout.putConstraint(SpringLayout.WEST, dragdrop_l, 5, SpringLayout.WEST, options);
       
-      options_layout.putConstraint(SpringLayout.WEST, dragdrop_tf, tf_dx, SpringLayout.WEST, options);
-      options_layout.putConstraint(SpringLayout.NORTH, dragdrop_tf, 0, SpringLayout.NORTH, dragdrop_l);
+      options_layout.putConstraint(SpringLayout.VERTICAL_CENTER, dragdrop_tf, 0, SpringLayout.VERTICAL_CENTER, dragdrop_l);
+      options_layout.putConstraint(SpringLayout.WEST, dragdrop_tf, tf_dx, SpringLayout.WEST, options);      
       options_layout.putConstraint(SpringLayout.EAST, options, 5, SpringLayout.EAST, dragdrop_tf);
       
       options_layout.putConstraint(SpringLayout.NORTH, playondrop_l, 10, SpringLayout.SOUTH, dragdrop_l);
       options_layout.putConstraint(SpringLayout.WEST, playondrop_l, 5, SpringLayout.WEST, options);
       
-      options_layout.putConstraint(SpringLayout.WEST, playondrop_tf, tf_dx, SpringLayout.NORTH, options);
-      options_layout.putConstraint(SpringLayout.NORTH, playondrop_tf, 0, SpringLayout.NORTH, playondrop_l);
+      options_layout.putConstraint(SpringLayout.VERTICAL_CENTER, playondrop_tf, 0, SpringLayout.VERTICAL_CENTER, playondrop_l);
+      options_layout.putConstraint(SpringLayout.WEST, playondrop_tf, tf_dx, SpringLayout.NORTH, options);      
       options_layout.putConstraint(SpringLayout.EAST, playondrop_tf, 0, SpringLayout.EAST, dragdrop_tf);
       
       options_layout.putConstraint(SpringLayout.SOUTH, options, 10, SpringLayout.SOUTH, playondrop_l);

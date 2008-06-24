@@ -154,10 +154,10 @@ public class SubBitmap extends Resource implements ActionListener{
       JLabel id_l = new JLabel("ID*:");
       id_tf = new JTextField();
       id_tf.setToolTipText("Identifiant of the font that will be used with controls..");
-      JLabel x_l = new JLabel("x:");
+      JLabel x_l = new JLabel("X:");
       x_tf = new JTextField();
       x_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel y_l = new JLabel("y:");
+      JLabel y_l = new JLabel("Y:");
       y_tf = new JTextField();
       y_tf.setDocument(new NumbersOnlyDocument(false));
       JLabel width_l = new JLabel("Width:");
@@ -197,8 +197,8 @@ public class SubBitmap extends Resource implements ActionListener{
       general.setLayout(general_layout);
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
       general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
-      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);      
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_l);
       frame.add(general);
@@ -222,29 +222,29 @@ public class SubBitmap extends Resource implements ActionListener{
       bounds_layout.putConstraint(SpringLayout.NORTH, x_l, 5, SpringLayout.NORTH, bounds);
       bounds_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, bounds);
       
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
       bounds_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, bounds);
-      bounds_layout.putConstraint(SpringLayout.NORTH, x_tf, 0, SpringLayout.NORTH, x_l);
       bounds_layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, x_tf);
       
       bounds_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
       bounds_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, bounds);
       
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
       bounds_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, bounds);
-      bounds_layout.putConstraint(SpringLayout.NORTH, y_tf, 0, SpringLayout.NORTH, y_l);
       bounds_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, x_tf);
       
       bounds_layout.putConstraint(SpringLayout.NORTH, width_l, 10, SpringLayout.SOUTH, y_l);
       bounds_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, bounds);
       
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, width_tf, 0, SpringLayout.VERTICAL_CENTER, width_l);
       bounds_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, bounds);
-      bounds_layout.putConstraint(SpringLayout.NORTH, width_tf, 0, SpringLayout.NORTH, width_l);
       bounds_layout.putConstraint(SpringLayout.EAST, width_tf, 0, SpringLayout.EAST, x_tf);
       
       bounds_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_l);
       bounds_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, bounds);
       
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, height_tf, 0, SpringLayout.VERTICAL_CENTER, height_l);
       bounds_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, bounds);
-      bounds_layout.putConstraint(SpringLayout.NORTH, height_tf, 0, SpringLayout.NORTH, height_l);
       bounds_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, x_tf);
       
       bounds_layout.putConstraint(SpringLayout.SOUTH, bounds, 10, SpringLayout.SOUTH, height_l);
@@ -260,15 +260,19 @@ public class SubBitmap extends Resource implements ActionListener{
       animation.setLayout(ani_layout);      
       nbframes_tf.setPreferredSize(new Dimension(tf_wd,nbframes_tf.getPreferredSize().height));
       ani_layout.putConstraint(SpringLayout.NORTH, nbframes_l, 5, SpringLayout.NORTH, animation);
-      ani_layout.putConstraint(SpringLayout.WEST, nbframes_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, nbframes_l, 5, SpringLayout.WEST, animation);
+      
+      ani_layout.putConstraint(SpringLayout.VERTICAL_CENTER, nbframes_tf, 0, SpringLayout.VERTICAL_CENTER, nbframes_l);
       ani_layout.putConstraint(SpringLayout.WEST, nbframes_tf, tf_dx, SpringLayout.WEST, animation);
-      ani_layout.putConstraint(SpringLayout.NORTH, nbframes_tf, 0, SpringLayout.NORTH, nbframes_l);
       ani_layout.putConstraint(SpringLayout.EAST, animation, 5, SpringLayout.EAST, nbframes_tf);
+      
       ani_layout.putConstraint(SpringLayout.NORTH, fps_l, 10, SpringLayout.SOUTH, nbframes_l);
-      ani_layout.putConstraint(SpringLayout.WEST, fps_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, fps_l, 5, SpringLayout.WEST, animation);
+      
+      ani_layout.putConstraint(SpringLayout.VERTICAL_CENTER, fps_tf, 0, SpringLayout.VERTICAL_CENTER, fps_l);
       ani_layout.putConstraint(SpringLayout.WEST, fps_tf, tf_dx, SpringLayout.WEST, animation);
-      ani_layout.putConstraint(SpringLayout.NORTH, fps_tf, 0, SpringLayout.NORTH, fps_l);
       ani_layout.putConstraint(SpringLayout.EAST, fps_tf, 0, SpringLayout.EAST, nbframes_tf);
+      
       ani_layout.putConstraint(SpringLayout.SOUTH, animation, 10, SpringLayout.SOUTH, fps_l);     
       frame.add(animation);
      

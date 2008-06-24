@@ -238,6 +238,15 @@ public class Bitmap extends Resource implements ActionListener{
       help_btn.addActionListener(this);      
       JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
       
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, file_l, alphacolor_l, nbframes_l, fps_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = 200;
+      //Width of buttons
+      Component[] btns = { file_btn, alphacolor_btn };
+      int btn_wd = Helper.maxWidth(btns);      
+      
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
@@ -247,48 +256,43 @@ public class Bitmap extends Resource implements ActionListener{
       general.add(alphacolor_l);
       general.add(alphacolor_tf);
       general.add(alphacolor_btn);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
-      frame.add(general);
-      
-      //Distance of textfields to WEST edge of container
-      Component[] labels = { id_l, file_l, alphacolor_l, nbframes_l, fps_l};
-      int tf_dx = Helper.maxWidth(labels)+10;
-      //Max. textfield width
-      int tf_wd = 200;
-      //Width of buttons
-      Component[] btns = { file_btn, alphacolor_btn };
-      int btn_wd = Helper.maxWidth(btns);
-      
+      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
+      file_btn.setPreferredSize(new Dimension(btn_wd,file_btn.getPreferredSize().height));
+      alphacolor_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,alphacolor_tf.getPreferredSize().height));
+      alphacolor_btn.setPreferredSize(new Dimension(btn_wd,alphacolor_btn.getPreferredSize().height));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));   
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);      
       
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
-      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
       general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, id_tf, 0, SpringLayout.NORTH, id_l);
       general_layout.putConstraint(SpringLayout.EAST, id_tf, 0, SpringLayout.EAST, file_btn);
       
       general_layout.putConstraint(SpringLayout.NORTH, file_l, 10, SpringLayout.SOUTH, id_l);
-      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, file_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, file_tf, 0, SpringLayout.VERTICAL_CENTER, file_l);
       general_layout.putConstraint(SpringLayout.WEST, file_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, file_tf, 0, SpringLayout.NORTH, file_l);      
-      file_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,file_tf.getPreferredSize().height));
-      file_btn.setPreferredSize(new Dimension(btn_wd,file_btn.getPreferredSize().height));
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, file_btn, 0, SpringLayout.VERTICAL_CENTER, file_l);
       general_layout.putConstraint(SpringLayout.WEST, file_btn, 5, SpringLayout.EAST, file_tf);
-      general_layout.putConstraint(SpringLayout.NORTH, file_btn, 0, SpringLayout.NORTH, file_l);
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, file_btn);
       
       general_layout.putConstraint(SpringLayout.NORTH, alphacolor_l, 10, SpringLayout.SOUTH, file_l);
-      general_layout.putConstraint(SpringLayout.WEST, alphacolor_l, 5, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.WEST, alphacolor_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, alphacolor_tf, 0, SpringLayout.VERTICAL_CENTER, alphacolor_l);
       general_layout.putConstraint(SpringLayout.WEST, alphacolor_tf, tf_dx, SpringLayout.WEST, general);
-      general_layout.putConstraint(SpringLayout.NORTH, alphacolor_tf, 0, SpringLayout.NORTH, alphacolor_l);
-      alphacolor_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,alphacolor_tf.getPreferredSize().height));
-      alphacolor_btn.setPreferredSize(new Dimension(btn_wd,alphacolor_btn.getPreferredSize().height));
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, alphacolor_btn, 0, SpringLayout.VERTICAL_CENTER, alphacolor_l);
       general_layout.putConstraint(SpringLayout.WEST, alphacolor_btn, 5, SpringLayout.EAST, alphacolor_tf);
-      general_layout.putConstraint(SpringLayout.NORTH, alphacolor_btn, 0, SpringLayout.NORTH, alphacolor_l);
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, alphacolor_btn);
       
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, alphacolor_l);
+      frame.add(general);
       
       JPanel animation = new JPanel(null);
       animation.add(nbframes_l);
@@ -303,15 +307,17 @@ public class Bitmap extends Resource implements ActionListener{
       nbframes_tf.setPreferredSize(new Dimension(tf_wd,nbframes_tf.getPreferredSize().height));      
       
       ani_layout.putConstraint(SpringLayout.NORTH, nbframes_l, 5, SpringLayout.NORTH, animation);
-      ani_layout.putConstraint(SpringLayout.WEST, nbframes_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, nbframes_l, 5, SpringLayout.WEST, animation);     
+      
+      ani_layout.putConstraint(SpringLayout.VERTICAL_CENTER, nbframes_tf, 0, SpringLayout.VERTICAL_CENTER, nbframes_l);
       ani_layout.putConstraint(SpringLayout.WEST, nbframes_tf, tf_dx, SpringLayout.WEST, animation);
-      ani_layout.putConstraint(SpringLayout.NORTH, nbframes_tf, 0, SpringLayout.NORTH, nbframes_l);
       ani_layout.putConstraint(SpringLayout.EAST, animation, 5, SpringLayout.EAST, nbframes_tf);
       
       ani_layout.putConstraint(SpringLayout.NORTH, fps_l, 10, SpringLayout.SOUTH, nbframes_l);
-      ani_layout.putConstraint(SpringLayout.WEST, fps_l, 5, SpringLayout.WEST, animation);      
+      ani_layout.putConstraint(SpringLayout.WEST, fps_l, 5, SpringLayout.WEST, animation);
+      
+      ani_layout.putConstraint(SpringLayout.VERTICAL_CENTER, fps_tf, 0, SpringLayout.VERTICAL_CENTER, fps_l);
       ani_layout.putConstraint(SpringLayout.WEST, fps_tf, tf_dx, SpringLayout.WEST, animation);
-      ani_layout.putConstraint(SpringLayout.NORTH, fps_tf, 0, SpringLayout.NORTH, fps_l);
       ani_layout.putConstraint(SpringLayout.EAST, fps_tf, 0, SpringLayout.EAST, nbframes_tf);
       
       ani_layout.putConstraint(SpringLayout.SOUTH, animation, 10, SpringLayout.SOUTH, fps_l);
