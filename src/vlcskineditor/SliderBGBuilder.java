@@ -80,13 +80,12 @@ public class SliderBGBuilder {
       usee2 = false;
     }
     useoverlay = true;
-    /**try {
-       overlay = ImageIO.read(null);       
+    try {
+       overlay = ImageIO.read(new File(sbgg.ol_tf.getText()));
     }
     catch (Exception e) {
       useoverlay = false;
-    }**/
-    useoverlay = false; //Not implemented in GUI, most probably will be left out
+    }    
     if(usee1=false) {
       e1 = middle;      
     }

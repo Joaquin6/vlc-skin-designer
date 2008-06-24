@@ -252,6 +252,8 @@ public class Video extends Item implements ActionListener{
       frame.setMaximumSize(new Dimension(250,460));
       
       frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);    
     x_tf.setText(String.valueOf(x));

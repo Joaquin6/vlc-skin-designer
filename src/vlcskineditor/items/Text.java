@@ -289,6 +289,8 @@ public class Text extends Item implements ActionListener{
       frame.setMaximumSize(new Dimension(250,550));
       
       frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);    
     x_tf.setText(String.valueOf(x));

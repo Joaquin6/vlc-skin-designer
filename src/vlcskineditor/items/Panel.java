@@ -295,6 +295,8 @@ public class Panel extends Item implements ActionListener{
       frame.setMaximumSize(new Dimension(250,440));
       
       frame.pack();
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);    
     x_tf.setText(String.valueOf(x));

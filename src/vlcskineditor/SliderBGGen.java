@@ -62,6 +62,8 @@ public class SliderBGGen extends JFrame implements ActionListener{
   JTextField md_tf;
   /** Contains the path to the image file for the right or bottom edge of the bar */
   JTextField e2_tf;
+  /** Contains the path to the image file for the overlay image */
+  JTextField ol_tf;
   /** Sets whether the background image should be tiled to fill the slider background size */
   JRadioButton bgt_rb;
   /** Sets whether the background image should be stretched to fill the slider background size */
@@ -70,11 +72,10 @@ public class SliderBGGen extends JFrame implements ActionListener{
   JRadioButton mdt_rb;
   /** Sets whether the middle image should be stretched to fill the slider background size */
   JRadioButton mds_rb;  
-  JButton bg_btn, e1_btn, md_btn, e2_btn;
-  JFileChooser bg_fc, e1_fc, md_fc, e2_fc;
+  JButton bg_btn, e1_btn, md_btn, e2_btn, ol_btn;  
   
-  JLabel bg_l, e1_l, md_l, e2_l;
-  JPanel bg_p, e1_p, md_p, e2_p;
+  JLabel bg_l, e1_l, md_l, e2_l, ol_l;
+  JPanel bg_p, e1_p, md_p, e2_p, ol_p;
   
   JButton step2_prev_btn, step2_finish_btn, step2_cancel_btn;  
   
@@ -243,9 +244,9 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(step1_next_btn);
     card_step1.add(step1_cancel_btn);
     
-    step1_horz_s.setBounds(5,395,525,5);    
-    step1_next_btn.setBounds(370, 400,75,20);
-    step1_cancel_btn.setBounds(450,400,75,20);    
+    step1_horz_s.setBounds(5,390,525,5);    
+    step1_next_btn.setBounds(370, 395,75,25);
+    step1_cancel_btn.setBounds(450,395,75,25);    
     
     card_step1.setSize(540,400);   
     
@@ -256,12 +257,12 @@ public class SliderBGGen extends JFrame implements ActionListener{
     header2_l.setBounds(0,0,540,50);
     card_step2.add(header2_l); 
     
-   bg_p = new JPanel(null);
+    bg_p = new JPanel(null);
     bg_l = new JLabel("Image file:",bg_h,JLabel.TRAILING);
     bg_tf = new JTextField("");
     bg_btn = new JButton("Open...");
     bg_btn.addActionListener(this);
-    JLabel bg_rs_l = new JLabel("Resize behaviour:");
+    JLabel bg_rs_l = new JLabel("Resize behaviour:",JLabel.TRAILING);
     ButtonGroup bg_rs_g = new ButtonGroup();
     bgt_rb = new JRadioButton("",true);
     JLabel bgt_l = new JLabel("Tile",tile,JLabel.TRAILING);
@@ -279,17 +280,17 @@ public class SliderBGGen extends JFrame implements ActionListener{
     bg_p.add(bgt_l);
     bg_p.add(bgs_rb);
     bg_p.add(bgs_l);    
-    bg_l.setBounds(10,20,100,25);
-    bg_tf.setBounds(115,20,300,25);
-    bg_btn.setBounds(420,20,100,25);
-    bg_rs_l.setBounds(10,60,100,25);
-    bgt_rb.setBounds(115,60,25,25);
-    bgt_l.setBounds(140,60,100,25);
-    bgs_rb.setBounds(220,60,25,25);
-    bgs_l.setBounds(250,60,100,25);    
+    bg_l.setBounds(10,20,90,25);
+    bg_tf.setBounds(105,20,300,25);
+    bg_btn.setBounds(410,20,100,25);
+    bg_rs_l.setBounds(0,50,100,25);
+    bgt_rb.setBounds(105,50,25,25);
+    bgt_l.setBounds(130,50,100,25);
+    bgs_rb.setBounds(210,50,25,25);
+    bgs_l.setBounds(240,50,100,25);    
     bg_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Background"));    
     card_step2.add(bg_p);
-    bg_p.setBounds(5,60,530,95);    
+    bg_p.setBounds(5,50,520,85);    
     
     e1_p = new JPanel(null);
     e1_l = new JLabel("Image file:",left,JLabel.TRAILING);
@@ -299,19 +300,19 @@ public class SliderBGGen extends JFrame implements ActionListener{
     e1_p.add(e1_l);
     e1_p.add(e1_tf);
     e1_p.add(e1_btn);
-    e1_l.setBounds(10,20,100,25);
-    e1_tf.setBounds(115,20,300,25);
-    e1_btn.setBounds(420,20,100,25);
+    e1_l.setBounds(0,20,90,25);
+    e1_tf.setBounds(105,20,300,25);
+    e1_btn.setBounds(410,20,100,25);
     e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Left edge"));    
     card_step2.add(e1_p);
-    e1_p.setBounds(5,160,530,55);
+    e1_p.setBounds(5,135,520,55);
     
     md_p = new JPanel(null);
     md_l = new JLabel("Image file:",middle_h,JLabel.TRAILING);
     md_tf = new JTextField("");
     md_btn = new JButton("Open...");
     md_btn.addActionListener(this);
-    JLabel md_rs_l = new JLabel("Resize behaviour:");
+    JLabel md_rs_l = new JLabel("Resize behaviour:",JLabel.TRAILING);
     ButtonGroup md_rs_g = new ButtonGroup();
     mdt_rb = new JRadioButton("",true);
     JLabel mdt_l = new JLabel("Tile",tile,JLabel.TRAILING);
@@ -329,17 +330,17 @@ public class SliderBGGen extends JFrame implements ActionListener{
     md_p.add(mdt_l);
     md_p.add(mds_rb);
     md_p.add(mds_l);    
-    md_l.setBounds(10,20,100,25);
-    md_tf.setBounds(115,20,300,25);
-    md_btn.setBounds(420,20,100,25);
-    md_rs_l.setBounds(10,60,100,25);
-    mdt_rb.setBounds(115,60,25,25);
-    mdt_l.setBounds(140,60,100,25);
-    mds_rb.setBounds(220,60,25,25);
-    mds_l.setBounds(250,60,100,25);    
+    md_l.setBounds(0,20,90,25);
+    md_tf.setBounds(105,20,300,25);
+    md_btn.setBounds(410,20,100,25);
+    md_rs_l.setBounds(0,50,100,25);
+    mdt_rb.setBounds(105,50,25,25);
+    mdt_l.setBounds(130,50,100,25);
+    mds_rb.setBounds(210,50,25,25);
+    mds_l.setBounds(240,50,100,25);    
     md_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Middle part"));    
     card_step2.add(md_p);
-    md_p.setBounds(5,220,530,95);    
+    md_p.setBounds(5,190,520,85);    
     
     e2_p = new JPanel(null);
     e2_l = new JLabel("Image file:",right,JLabel.TRAILING);
@@ -349,12 +350,27 @@ public class SliderBGGen extends JFrame implements ActionListener{
     e2_p.add(e2_l);
     e2_p.add(e2_tf);
     e2_p.add(e2_btn);
-    e2_l.setBounds(10,20,100,25);
-    e2_tf.setBounds(115,20,300,25);
-    e2_btn.setBounds(420,20,100,25);
+    e2_l.setBounds(0,20,90,25);
+    e2_tf.setBounds(105,20,300,25);
+    e2_btn.setBounds(410,20,100,25);
     e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Right edge"));    
     card_step2.add(e2_p);
-    e2_p.setBounds(5,320,530,55);
+    e2_p.setBounds(5,275,520,55);
+    
+    ol_p = new JPanel(null);
+    ol_l = new JLabel("Image file:",JLabel.TRAILING);
+    ol_tf = new JTextField();
+    ol_btn = new JButton("Open...");
+    ol_btn.addActionListener(this);
+    ol_p.add(ol_l);
+    ol_p.add(ol_tf);
+    ol_p.add(ol_btn);
+    ol_l.setBounds(0,20,90,25);
+    ol_tf.setBounds(105,20,300,25);
+    ol_btn.setBounds(410,20,100,25);
+    ol_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Overlay image"));    
+    card_step2.add(ol_p);
+    ol_p.setBounds(5,330,520,55);    
     
     JSeparator step2_horz_s = new JSeparator(JSeparator.HORIZONTAL);
     step2_prev_btn = new JButton("< Previous");
@@ -369,10 +385,10 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step2.add(step2_finish_btn);
     card_step2.add(step2_cancel_btn);
     
-    step2_horz_s.setBounds(5,395,525,5);    
-    step2_prev_btn.setBounds(275,400,90,20);
-    step2_finish_btn.setBounds(370,400,75,20);
-    step2_cancel_btn.setBounds(450,400,75,20);    
+    step2_horz_s.setBounds(5,390,525,5);    
+    step2_prev_btn.setBounds(275, 395,90,25);
+    step2_finish_btn.setBounds(370,395,75,25);
+    step2_cancel_btn.setBounds(450,395,75,25);    
   
     add(card_step2,STEP2);    
     
@@ -391,10 +407,10 @@ public class SliderBGGen extends JFrame implements ActionListener{
       layout.show(getContentPane(),STEP1);
     }
     else if (e.getSource().equals(step2_finish_btn)) {
-      File f = new File(s.skinfolder+sbg.id+".png");
+      File f = new File(s.skinfolder+sbg.id_tf.getText()+".png");
       int i = 1;
       while(f.exists()) {
-          f = new File(s.skinfolder+sbg.id+"_"+String.valueOf(i)+".png");
+          f = new File(s.skinfolder+sbg.id_tf.getText()+"_"+String.valueOf(i)+".png");
           i++;
       }
       SliderBGBuilder sbgb = new SliderBGBuilder(this);
@@ -454,6 +470,13 @@ public class SliderBGGen extends JFrame implements ActionListener{
         int i = fc.showOpenDialog(this);
         if(i==JFileChooser.APPROVE_OPTION && fc.getSelectedFile().exists()) {
             e2_tf.setText(fc.getSelectedFile().getPath());
+        }        
+    }
+    else if(e.getSource().equals(ol_btn)) {
+        JFileChooser fc = new JFileChooser(new File(s.skinfolder));
+        int i = fc.showOpenDialog(this);
+        if(i==JFileChooser.APPROVE_OPTION && fc.getSelectedFile().exists()) {
+            ol_tf.setText(fc.getSelectedFile().getPath());
         }        
     }
   }

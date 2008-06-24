@@ -192,6 +192,7 @@ public class SliderBackground extends Item implements ActionListener{
       
       frame.pack();
       
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     image_tf.setText(image);

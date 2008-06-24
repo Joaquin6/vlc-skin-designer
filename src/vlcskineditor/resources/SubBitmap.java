@@ -398,7 +398,7 @@ public class SubBitmap extends Resource implements ActionListener{
   }
   public String returnCode(String indent) {
     String code=indent+"<SubBitmap id=\""+id+"\" x=\""+String.valueOf(x)+"\" y=\""+String.valueOf(y)+"\"";
-    code+=" height=\""+String.valueOf(height)+"\"  height=\""+String.valueOf(height)+"\"";
+    code+=" height=\""+String.valueOf(height)+"\" width=\""+String.valueOf(width)+"\"";    
     if (nbframes!=NBFRAMES_DEFAULT) code+=" nbframes=\""+String.valueOf(nbframes)+"\"";
     if (fps!=FPS_DEFAULT) code+=" fps=\""+String.valueOf(fps)+"\"";  
     code+="/>\n";

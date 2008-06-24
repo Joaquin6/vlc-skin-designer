@@ -217,6 +217,8 @@ public class Anchor extends Item implements ActionListener{
       frame.setMinimumSize(new Dimension(250,345));
       frame.setPreferredSize(new Dimension(250,345));
       frame.setMaximumSize(new Dimension(250,345));
+      
+      frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
     priority_tf.setText(String.valueOf(priority));
