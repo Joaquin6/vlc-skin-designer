@@ -409,7 +409,7 @@ public class Text extends Item implements ActionListener{
   }
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created || font==null) return;
-    if(s.gvars.parseBoolean(visible)==false) return;
+    
     Font f = s.getFont(font);
     if(f==null) {
       Resource fr = s.getResource(font);
@@ -421,28 +421,28 @@ public class Text extends Item implements ActionListener{
         f = new Font(Font.SANS_SERIF,Font.PLAIN,12);
       }      
     }    
-    g.setFont(f);
-    g.setColor(Color.decode(color));
-    BufferedImage bi;
-    String ptext = s.gvars.parseString(text);
-    if(width==0) {
-      bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(ptext,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+    if(s.gvars.parseBoolean(visible)==true) {
+      BufferedImage bi;
+      String ptext = s.gvars.parseString(text);
+      if(width==0) {
+        bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(ptext,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+      }
+      else bi = new BufferedImage(width,g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = bi.createGraphics();
+      g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+      g2d.setFont(f);
+      g2d.setColor(Color.decode(color));
+      if(width!=0 && alignment.equals("right")) {
+        g2d.drawString(ptext,(int)(width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth()),0+g2d.getFontMetrics().getAscent());
+      }
+      else if(width!=0 && alignment.equals("center")) {
+        g2d.drawString(ptext,(int)((width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth())/2),0+g2d.getFontMetrics().getAscent());
+      }
+      else {
+        g2d.drawString(ptext,0,0+g2d.getFontMetrics().getAscent());
+      }
+      g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z, bi.getHeight()*z,null);
     }
-    else bi = new BufferedImage(width,g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
-    Graphics2D g2d = bi.createGraphics();    
-    g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-    g2d.setFont(f);
-    g2d.setColor(Color.decode(color));
-    if(width!=0 && alignment.equals("right")) {
-      g2d.drawString(ptext,(int)(width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth()),0+g2d.getFontMetrics().getAscent());
-    }    
-    else if(width!=0 && alignment.equals("center")) {
-      g2d.drawString(ptext,(int)((width-g2d.getFontMetrics().getStringBounds(ptext,g).getWidth())/2),0+g2d.getFontMetrics().getAscent());
-    }
-    else {
-      g2d.drawString(ptext,0,0+g2d.getFontMetrics().getAscent());  
-    }   
-    g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z, bi.getHeight()*z,null);  
     if(selected) {
       g.setColor(Color.RED);
       g.drawRect((x+x_)*z,(y+y_)*z,width*z,f.getSize()*z);

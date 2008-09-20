@@ -379,10 +379,9 @@ public class Image extends Item implements ActionListener{
     draw(g,offsetx,offsety, z);
   }
   public void draw(Graphics2D g,int x_, int y_, int z) {
-    if(!created) return;
-    if(s.gvars.parseBoolean(visible)==false) return;
+    if(!created) return;    
     java.awt.image.BufferedImage bi = s.getBitmapImage(image);
-    g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
+    if(s.gvars.parseBoolean(visible)==true) g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
       g.drawRect((x+x_)*z,(y+y_)*z,bi.getWidth()*z-1,bi.getHeight()*z-1);

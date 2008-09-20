@@ -552,15 +552,14 @@ public class Slider extends Item implements ActionListener{
     if(!created) return;
     offsetx=x_;
     offsety=y_;
-    if(s.gvars.parseBoolean(visible)==false) return;        
-    if(sbg!=null) {
+    boolean vis = s.gvars.parseBoolean(visible);
+    if(sbg!=null && vis) {
       sbg.draw(g,x+x_,y+y_,z);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
-    java.awt.image.BufferedImage si = s.getBitmapImage(up);
-    if(si==null) return;
+    java.awt.image.BufferedImage si = s.getBitmapImage(up);    
     Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
-    g.drawImage(si,(int)(p.getX()+x+x_-si.getWidth()/2)*z,(int)(p.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
+    if(vis && si!=null) g.drawImage(si,(int)(p.getX()+x+x_-si.getWidth()/2)*z,(int)(p.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
       for(float f=0f;f<=1f;f=f+0.1f) {

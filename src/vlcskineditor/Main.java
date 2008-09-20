@@ -762,7 +762,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         return;
       }      
       setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));      
-    }     
+    }
     pwin.setText("Parsing XML...");
     pwin.setVisible(true);
     setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      

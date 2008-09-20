@@ -77,9 +77,17 @@ public abstract class Item {
   public abstract void update();
   /** Creates the XML code representing the item */
   public abstract String returnCode(String indent);
-  /** Draws the item to a graphics context */
+  /** Draws the item to a graphics context
+   * @param g graphics context
+   * @param z zoom factor
+   */
   public abstract void draw(Graphics2D g, int z);
-   /** Draws the item to a graphics context with the offset x,y */
+  /** Draws the item to a graphics context with the offset x,y
+   * @param g Graphics context
+   * @param x X offset
+   * @param y Y offset
+   * @param z Zoom factor
+   */
   public abstract void draw(Graphics2D g, int x, int y, int z);
   /** Creates a DefaultMutableTreeNode to be displayed in the items tree */
   public abstract DefaultMutableTreeNode getTreeNode(); 
