@@ -251,7 +251,7 @@ public class Anchor extends Item implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Anchor"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/i-anchor.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    

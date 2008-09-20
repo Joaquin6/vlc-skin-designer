@@ -36,7 +36,7 @@ import vlcskineditor.history.*;
  * @author Daniel Dreibrodt
  */
 public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
-  
+
   /**
    * The JFrame in which a Layout of a Skin will be shown.
    */

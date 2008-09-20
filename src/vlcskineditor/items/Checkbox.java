@@ -323,7 +323,7 @@ public class Checkbox extends Item implements ActionListener{
       state1.add(tooltiptext1_tf);
       tooltiptext1_l.setBounds(5,135,75,24);
       tooltiptext1_tf.setBounds(85,135,150,24);
-      state1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "If state is false:"));
+      state1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "State One (Condition is not fulfilled:"));
       state1.setMinimumSize(new Dimension(240,165));
       state1.setPreferredSize(new Dimension(240,165));
       state1.setMaximumSize(new Dimension(240,165));
@@ -352,7 +352,7 @@ public class Checkbox extends Item implements ActionListener{
       state2.add(tooltiptext2_tf);
       tooltiptext2_l.setBounds(5,135,75,24);
       tooltiptext2_tf.setBounds(85,135,150,24);
-      state2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "If state is true:"));
+      state2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "State Two (Condition is fulfilled):"));
       state2.setMinimumSize(new Dimension(240,165));
       state2.setPreferredSize(new Dimension(240,165));
       state2.setMaximumSize(new Dimension(240,165));
@@ -446,14 +446,14 @@ public class Checkbox extends Item implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#Checkbox"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/i-checkbox.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/i-checkbox.html",JOptionPane.WARNING_MESSAGE);
       }
     }
     else if(e.getSource().equals(state_btn)) {
@@ -461,14 +461,14 @@ public class Checkbox extends Item implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/boolexpr.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/boolexpr.html",JOptionPane.WARNING_MESSAGE);
       }
     }
     else if(e.getSource().equals(action1_btn)) {
@@ -484,14 +484,14 @@ public class Checkbox extends Item implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/boolexpr.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/boolexpr.html",JOptionPane.WARNING_MESSAGE);
       }
     }
     else if(e.getSource().equals(cancel_btn)) {

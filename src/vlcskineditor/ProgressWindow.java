@@ -32,26 +32,30 @@ import java.awt.*;
 public class ProgressWindow extends JDialog{
   
   float position = 0;
-  String title = "...";
   JProgressBar pbar;
   
-  /** Creates a new instance of ProgressWindow */
+  /** Creates a new instance of ProgressWindow
+   * @param p_ parent frame
+   * @param t_ window title
+   */
   public ProgressWindow(JFrame p_, String t_) {
-    super(p_,"",false);
+    super(p_,t_,false);
     setLayout(new BorderLayout());
     pbar = new JProgressBar();
     add(pbar,BorderLayout.CENTER);
-    setBounds(p_.getX()+p_.getWidth()/2,p_.getY()+p_.getHeight()/2,300,50);
-    setResizable(false);    
-    pbar.setString(t_);
+    if(p_ != null && p_.isVisible()) setBounds(p_.getX()+p_.getWidth()/2,p_.getY()+p_.getHeight()/2,300,50);
+    else setSize(300,50);
+    setResizable(false);
+    pbar.setString("...");
     pbar.setStringPainted(true);
     pbar.setIndeterminate(true);
   }  
-  public void setProgress(int i) {
-      pbar.setIndeterminate(false);
-      pbar.setMaximum(1000);
-      pbar.setMinimum(0);
-      pbar.setValue(i);
+  public void setProgress(double d) {
+    pbar.setIndeterminate(false);
+    pbar.setMaximum(100);
+    pbar.setMinimum(0);
+    pbar.setValue((int)(100*d));
+    pbar.setString(pbar.getValue()+"%");
   }
   /** Sets the text displayed on the progress bar */
   public void setText(String s) {

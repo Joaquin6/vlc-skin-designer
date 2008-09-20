@@ -26,6 +26,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
@@ -44,9 +45,13 @@ import vlcskineditor.resources.SubBitmap;
  * @author Daniel
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
-  
+
+  private static final long serialVersionUID = 70L; //For completions sake
+
+  private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
+
   //The version identification of the current build.   
-  public final String VERSION = "0.7.0 dev";
+  public final String VERSION = "0.7";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -223,7 +228,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         
     m_help = new JMenu("Help");
     m_help.setMnemonic('H');    
-    m_help_doc = new JMenuItem("Skins2 documentation");    
+    m_help_doc = new JMenuItem("Online Help");
     m_help_doc.setIcon(help_icon);
     m_help_doc.setMnemonic('D');
     m_help_doc.addActionListener(this);
@@ -558,31 +563,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     jdesk.add(items_add_pu);     
     
     jdesk.setMinimumSize(new Dimension(800,600));
-    add(jdesk);    
-    
-    if(System.getProperty("os.name").indexOf("Windows")!=-1) {
-      try {
-        RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);        
-        String installDir = vlc_key.getStringValue("InstallDir");      
-        vlc_dir = installDir+File.separator;
-        vlc_skins_dir = vlc_dir+"skins";
-      }
-      catch (Exception e) {
-        System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
-        e.printStackTrace();
-      }  
-    }   
-    else if(System.getProperty("os.name").indexOf("Linux")!=-1){            
-      vlc_skins_dir = "~/.vlc/skins2/";
-    }
-    
-    
-    base_fc = new JFileChooser();    
-    base_fc.setCurrentDirectory(new File(vlc_skins_dir));
+    add(jdesk);       
     
     setVisible(true);       
     setSize(800,600);
-    
+
+    update();
+
+    getVLCdirectory();
+
     if(args.length>0) {
       File f = new File(args[0]);
       if (f.exists()) openFile(f);
@@ -593,9 +582,35 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else showWelcomeDialog();
   }
   /**
+   * On Windows it reads the VLC skins directory from registry
+   * When on Linux it is set to ~/.vlc/skins2/
+   */
+  private void getVLCdirectory() {
+    if(System.getProperty("os.name").indexOf("Windows")!=-1) {
+      try {
+        RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);
+        String installDir = vlc_key.getStringValue("InstallDir");
+        vlc_dir = installDir+File.separator;
+        vlc_skins_dir = vlc_dir+"skins";
+      }
+      catch (Exception e) {
+        System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
+        e.printStackTrace();
+      }
+    }
+    else if(System.getProperty("os.name").indexOf("Linux")!=-1){
+      vlc_skins_dir = "~/.vlc/skins2/";
+    }
+
+
+    if(base_fc==null) base_fc = new JFileChooser();
+    base_fc.setCurrentDirectory(new File(vlc_skins_dir));
+  }
+
+  /**
    * Shows a dialog from which the user can choose to either create a new skin, open an existing skin or quit the skin editor.
    */
-  public void showWelcomeDialog() {
+  private void showWelcomeDialog() {
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
     int n = JOptionPane.showOptionDialog(this,"What would you like to do?","Welcome to the VLC Skin Editor",
                                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -612,7 +627,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   /**
    * Shows the "Open File" dialog.
    */
-  public void openFile() {
+  private void openFile() {
     opening = true;
     String[] exts = { "xml","vlt" };
     if(System.getProperty("os.name").indexOf("Mac")==-1) {
@@ -652,7 +667,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * Opens the given file as a skin.
    * @param f The skin file.
    */
-  public void openFile(File f) {
+  private void openFile(File f) {
     if(!f.exists()) {
       JOptionPane.showMessageDialog(this,"The file \""+f.getPath()+"\" does not exist and thus could not be opened!","Error while opening file",JOptionPane.ERROR_MESSAGE);
       if(!opened) showWelcomeDialog();
@@ -665,7 +680,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       Object[] options= {"Yes, unpack", "No, cancel"};
       int n = JOptionPane.showOptionDialog(this,"The VLT file will be unpacked to a subfolder called \""+vltname+"_unpacked\".\nDo you want to continue?","Importing a VLT file",
                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-      if(n!=0) return;
+      if(n!=0) {
+        showWelcomeDialog();
+      }
       File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
       unpackfolder.mkdirs();
       boolean unpacked=false;
@@ -765,7 +782,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   /**
    * Shows a dialog to specify the new skin's location and creates an empty skin.
    */
-  public void createNew() {
+  private void createNew() {
       base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
       int returnVal=base_fc.showSaveDialog(this);        
       if(returnVal != JFileChooser.APPROVE_OPTION) {
@@ -787,6 +804,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   }
   /**
    * Reacts to GUI actions
+   * @param e The performed action
    */
   public void actionPerformed(ActionEvent e) {
     // <editor-fold defaultstate="collapsed" desc="New File"> 
@@ -1606,20 +1624,28 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public void mouseReleased(MouseEvent e) {}
   public void mouseEntered(MouseEvent e) {}
   public void mouseExited(MouseEvent e) {}
-  /** Sets the activity state of the undo menu item to the given argument */
+  /** Sets the activity state of the undo menu item to the given argument
+   * @param enabled Activity state
+   */
   public void setUndoEnabled(boolean enabled) {
     m_edit_undo.setEnabled(enabled);
   }
-  /** Sets the activity state of the redo menu item to the given argument */
+  /** Sets the activity state of the redo menu item to the given argument
+   * @param enabled Activity state
+   */
   public void setRedoEnabled(boolean enabled) {
     m_edit_redo.setEnabled(enabled);
   }
-  /** Sets the action description that can be undone */
+  /** Sets the action description that can be undone
+   * @param s Action description
+   */
   public void setUndoString(String s) {
     if(s.isEmpty()) m_edit_undo.setText("Undo");
     else m_edit_undo.setText("Undo: "+s);
   }
-  /** Sets the action description that can be redone */
+  /** Sets the action description that can be redone
+   * @param s Action description
+   */
   public void setRedoString(String s) {
     if(s.isEmpty()) m_edit_redo.setText("Redo");
     else m_edit_redo.setText("Redo: "+s);
@@ -1639,7 +1665,125 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         System.out.println(e);
         return null;
       }
-  }  
+  }
+
+  /**
+   * Checks for updates and downloads and installs them if chosen by user
+   */
+  private void update() {
+    if(VERSION.contains("dev")) return; //Development build won't be updated
+    try {
+      URL updateURL = new URL(updateURL_s);
+      InputStream uis = updateURL.openStream();
+      InputStreamReader uisr = new InputStreamReader(uis);
+      BufferedReader ubr = new BufferedReader(uisr);
+      String header = ubr.readLine();
+      if(header.equals("SKINEDITORUPDATEPAGE")) {
+        String cver = ubr.readLine();
+        String cdl = ubr.readLine();
+        if(!cver.equals(VERSION)) {
+          System.out.println("Update available!");
+          int i = JOptionPane.showConfirmDialog(this, "There is an update available for the Skin Editor.\nYour version: "+VERSION+"\nLatest version: "+cver+"\n"+
+                  "Do you want to update the Skin Editor now?", "VLC Skin Editor", JOptionPane.YES_NO_OPTION);
+          if(i==0) {
+            URL url = new URL(cdl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            // Connect to server.
+            connection.connect();
+            // Make sure response code is in the 200 range.
+            if (connection.getResponseCode() / 100 != 2) {
+              throw new Exception("Server error! Response code: "+connection.getResponseCode());
+            }
+            // Check for valid content length.
+            int contentLength = connection.getContentLength();
+            if (contentLength < 1) {
+              throw new Exception("Invalid content length!");
+            }
+
+            int size = contentLength;
+
+            File tempfile = File.createTempFile("vlcse_update", ".zip");
+            tempfile.deleteOnExit();
+            RandomAccessFile file = new RandomAccessFile(tempfile,"rw");
+            
+
+            InputStream stream = connection.getInputStream();
+            boolean downloading = true;
+            int downloaded = 0;
+            ProgressWindow pwin = new ProgressWindow(this,"Downloading");
+            pwin.setVisible(true);
+            pwin.setProgress(0);
+            pwin.setText("Connecting...");
+            while (downloaded<size) {
+              /* Size buffer according to how much of the
+                 file is left to download. */
+              byte buffer[];
+              if (size - downloaded > 1024) {
+                buffer = new byte[1024];
+              } else {
+                buffer = new byte[size - downloaded];
+              }
+              
+              int read = stream.read(buffer);
+              if (read == -1)
+                break;
+
+              // Write buffer to file.
+              file.write(buffer, 0, read);
+              downloaded += read;
+              pwin.setProgress(downloaded/size);
+            }
+
+            file.close();
+            System.out.println("Downloaded file to "+tempfile.getAbsolutePath());
+            pwin.setVisible(false);
+            pwin.dispose();
+            pwin = null;
+
+            ZipInputStream zin = new ZipInputStream(new FileInputStream(tempfile));
+            ZipEntry entry;
+            while( (entry=zin.getNextEntry()) !=null ) {              
+              File outf = new File(entry.getName());
+              System.out.println(outf.getAbsoluteFile());
+              if(outf.exists()) outf.delete();
+              OutputStream out = new FileOutputStream(outf);
+              byte[] buf = new byte[1024];
+              int len;
+              while ((len = zin.read(buf)) > 0) {
+                out.write(buf, 0, len);
+              }
+              out.close();
+            }
+
+            JOptionPane.showMessageDialog(this, "Update was sucessfully downloaded and installed.\nVLC Skin Editor will restart now",
+                    "VLC Skin Editor update", JOptionPane.INFORMATION_MESSAGE);
+
+            setVisible(false);
+            if(System.getProperty("os.name").indexOf("Windows")!=-1) {
+              Runtime.getRuntime().exec("VLCSkinEditor.exe");
+            } else {
+              Runtime.getRuntime().exec("java -jar VLCSkinEditor.jar");
+            }
+            System.exit(0);
+
+          } else {
+            //DO NOTHING!
+          }
+        }
+        ubr.close();
+        uisr.close();
+        uis.close();
+      } else {
+        ubr.close();
+        uisr.close();
+        uis.close();
+        throw new Exception("Update page had invalid header: "+header);
+      }
+    } catch(Exception ex) {
+      JOptionPane.showMessageDialog(this, ex.toString(), "Error while updating...", JOptionPane.ERROR_MESSAGE);
+      ex.printStackTrace();
+    }
+  }
   /**
    * Creates a new instance of Main and thus launches the editor
    * @param args the command line arguments

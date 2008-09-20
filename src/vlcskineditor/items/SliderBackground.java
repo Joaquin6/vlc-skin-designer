@@ -230,14 +230,14 @@ public class SliderBackground extends Item implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#SliderBackground"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/i-sliderbg.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/i-sliderbg.html",JOptionPane.WARNING_MESSAGE);
       }
     }
     else if(e.getSource().equals(gen_btn)) {
@@ -268,7 +268,7 @@ public class SliderBackground extends Item implements ActionListener{
   }
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;
-    bi = (BufferedImage)s.getBitmapImage(image);  
+    bi = s.getBitmapImage(image);  
     if(bi==null) return;
     int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
     int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;

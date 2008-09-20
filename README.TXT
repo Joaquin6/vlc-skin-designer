@@ -10,8 +10,8 @@ Changelog:
        - Improved preview of skin (can be zoomed now)
        - Improved cross platform behaviour
        - Improved online help
-       - Some (critical) bugs were fixed
-       
+       - Automatic update
+       - Some (critical) bugs were fixed       
 0.6.1b - Critical bufix for the Preview Window 
        - Bugfix for slider points parsing and XML parsing
        

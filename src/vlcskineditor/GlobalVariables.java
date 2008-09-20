@@ -372,6 +372,7 @@ public class GlobalVariables implements ActionListener{
   }
   /**
    * Handles actions triggered by components listened to
+   * @param e ActionEvent
    */
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
@@ -385,19 +386,20 @@ public class GlobalVariables implements ActionListener{
       if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
             try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skins2-create.html#boolexpr"));
+              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/boolexpr.html"));
             }
             catch (Exception ex) {
               JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
             }
       }
       else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skins2-create.html",JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/boolexpr.html",JOptionPane.WARNING_MESSAGE);
       }
     }
   }
   /**
    * Gets the slider value
+   * @return Slider Value
    */
   public float getSliderValue() {
     return slider_value;
