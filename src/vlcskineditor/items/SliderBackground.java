@@ -30,6 +30,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * SliderBackground item
@@ -51,16 +52,21 @@ public class SliderBackground extends Item implements ActionListener{
   JFrame frame;
   public JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
   JButton gen_btn, ok_btn, cancel_btn, help_btn;
+  ImageResource image_res;
   BufferedImage bi = null;
   String bitmap_str = "";
   Slider sl;
   
     
-  /** Creates a new instance of SliderBackground */
+  /** Creates a new instance of SliderBackground
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public SliderBackground(String xmlcode, Skin s_) {
     type = "SliderBackground";
     s = s_;
     image = XML.getValue(xmlcode,"image");
+    image_res = s.getImageResource(image);
     if(xmlcode.indexOf("nbhoriz=\"")!=-1) nbhoriz = XML.getIntValue(xmlcode,"nbhoriz");
     if(xmlcode.indexOf("nbvert=\"")!=-1) nbvert = XML.getIntValue(xmlcode,"nbvert");
     if(xmlcode.indexOf("padhoriz=\"")!=-1) padhoriz = XML.getIntValue(xmlcode,"padhoriz");
@@ -214,8 +220,10 @@ public class SliderBackground extends Item implements ActionListener{
           return;
         }
       }
-      if(s.getResource(image_tf.getText())==null) {
+      image_res = s.getImageResource(image_tf.getText());
+      if(image_res == null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+image_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        image_res = s.getImageResource(image);
         return;
       }
       update();
@@ -268,7 +276,7 @@ public class SliderBackground extends Item implements ActionListener{
   }
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;
-    bi = s.getBitmapImage(image);  
+    bi = image_res.image;
     if(bi==null) return;
     int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
     int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;

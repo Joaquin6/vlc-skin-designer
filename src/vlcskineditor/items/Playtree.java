@@ -30,6 +30,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * Playtree item
@@ -76,8 +77,13 @@ public class Playtree extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, flat_cb;
   JButton visible_btn, bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
   JButton cancel_btn;
+
+  ImageResource bgimage_res, itemimage_res, openimage_res, closedimage_res;
   
-  /** Creates a new instance of Playtree */
+  /** Creates a new instance of Playtree
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public Playtree(String xmlcode, Skin s_) {
     type = "Playtree";
     s = s_;
@@ -87,10 +93,22 @@ public class Playtree extends Item implements ActionListener{
     if(xmllines[0].indexOf("width=\"")!=-1) width = XML.getIntValue(xmllines[0],"width");
     if(xmllines[0].indexOf("height=\"")!=-1) height = XML.getIntValue(xmllines[0],"height");
     if(xmllines[0].indexOf("var=\"")!=-1) var = XML.getValue(xmllines[0],"var");
-    if(xmllines[0].indexOf("bgimage=\"")!=-1) bgimage = XML.getValue(xmllines[0],"bgimage");
-    if(xmllines[0].indexOf("openimage=\"")!=-1) openimage = XML.getValue(xmllines[0],"openimage");
-    if(xmllines[0].indexOf("closedimage=\"")!=-1) closedimage = XML.getValue(xmllines[0],"closedimage");
-    if(xmllines[0].indexOf("itemimage=\"")!=-1) itemimage = XML.getValue(xmllines[0],"itemimage");
+    if(xmllines[0].indexOf("bgimage=\"")!=-1) {
+      bgimage = XML.getValue(xmllines[0],"bgimage");
+      bgimage_res = s.getImageResource(bgimage);
+    }
+    if(xmllines[0].indexOf("openimage=\"")!=-1) {
+      openimage = XML.getValue(xmllines[0],"openimage");
+      openimage_res = s.getImageResource(openimage);
+    }
+    if(xmllines[0].indexOf("closedimage=\"")!=-1) {
+      closedimage = XML.getValue(xmllines[0],"closedimage");
+      closedimage_res = s.getImageResource(closedimage);
+    }
+    if(xmllines[0].indexOf("itemimage=\"")!=-1) {
+      itemimage = XML.getValue(xmllines[0],"itemimage");
+      itemimage_res = s.getImageResource(itemimage);
+    }
     if(xmllines[0].indexOf("fgcolor=\"")!=-1) fgcolor = XML.getValue(xmllines[0],"fgcolor");
     if(xmllines[0].indexOf("playcolor=\"")!=-1) playcolor = XML.getValue(xmllines[0],"playcolor");
     if(xmllines[0].indexOf("selcolor=\"")!=-1) selcolor = XML.getValue(xmllines[0],"selcolor");
@@ -471,20 +489,28 @@ public class Playtree extends Item implements ActionListener{
           return;
         }
       }
-      if(!bgimage_tf.getText().equals("none")&&s.getResource(bgimage_tf.getText())==null) {        
+      bgimage_res = s.getImageResource(bgimage_tf.getText());
+      if(!bgimage_tf.getText().equals("none")&&bgimage_res==null) {
         JOptionPane.showMessageDialog(frame,"Please choose an existing background image!","Bgimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        bgimage_res = s.getImageResource(bgimage);
         return;
       }
-      if(!itemimage_tf.getText().equals("none")&&s.getResource(itemimage_tf.getText())==null) {        
+      itemimage_res = s.getImageResource(itemimage_tf.getText());
+      if(!itemimage_tf.getText().equals("none")&&itemimage_res==null) {
         JOptionPane.showMessageDialog(frame,"Please choose an existing item icon!","Itemimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        itemimage_res = s.getImageResource(itemimage);
         return;
       }
-      if(!openimage_tf.getText().equals("none")&&s.getResource(openimage_tf.getText())==null) {        
+      openimage_res = s.getImageResource(openimage_tf.getText());
+      if(!openimage_tf.getText().equals("none")&&openimage_res==null) {
         JOptionPane.showMessageDialog(frame,"Please choose an existing open folder icon!","Openimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        openimage_res = s.getImageResource(openimage);
         return;
       }
-      if(!closedimage_tf.getText().equals("none")&&s.getResource(closedimage_tf.getText())==null) {        
+      closedimage_res = s.getImageResource(closedimage_tf.getText());
+      if(!closedimage_tf.getText().equals("none")&&closedimage_res==null) {
         JOptionPane.showMessageDialog(frame,"Please choose an existing closed folder icon!","Closedimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        closedimage_res = s.getImageResource(closedimage);
         return;
       }
       if(!font_tf.getText().equals("defaultfont")&&s.getResource(font_tf.getText())==null) {        
@@ -647,7 +673,7 @@ public class Playtree extends Item implements ActionListener{
       g.setFont(f);
       FontMetrics fm = g.getFontMetrics();
       if(!bgimage.equals("none")) {
-        g.drawImage(s.getBitmapImage(bgimage).getSubimage(0, 0, width, height),0,0,null);
+        g.drawImage(bgimage_res.image.getSubimage(0, 0, width, height),0,0,null);
       }
       else {
         g.setColor(Color.decode(bgcolor1));
@@ -658,9 +684,9 @@ public class Playtree extends Item implements ActionListener{
         }
       }
       int liney = 0;
-      BufferedImage cfi = s.getBitmapImage(closedimage);
-      BufferedImage ofi = s.getBitmapImage(openimage);
-      BufferedImage iti = s.getBitmapImage(itemimage);
+      BufferedImage cfi = closedimage_res.image;
+      BufferedImage ofi = openimage_res.image;
+      BufferedImage iti = itemimage_res.image;
       int lineheight = fm.getHeight();
       int cfi_offset=0,ofi_offset=0,iti_offset=0;
       if(cfi!=null) {

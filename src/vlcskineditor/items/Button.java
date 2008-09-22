@@ -29,6 +29,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * Button item
@@ -52,8 +53,13 @@ public class Button extends Item implements ActionListener{
   JButton visible_btn, action_btn, ok_btn, cancel_btn, help_btn;
   
   ActionEditor action_ae;
+
+  ImageResource up_res, over_res, down_res;
   
-  /** Creates a new instance of Button */
+  /** Creates a new instance of Button
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public Button(String xmlcode, Skin s_) {
     type = "Button";
     s = s_;
@@ -72,6 +78,10 @@ public class Button extends Item implements ActionListener{
     if(xmlcode.indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(xmlcode,"tooltiptext");
     if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     created = true;
+
+    up_res = s.getImageResource(up);
+    over_res = s.getImageResource(over);
+    down_res = s.getImageResource(down);
   }
   public Button(Skin s_) {
     type = "Button";
@@ -308,16 +318,22 @@ public class Button extends Item implements ActionListener{
           return;
         }
       }
-      if(s.getResource(up_tf.getText())==null) {
+      up_res = s.getImageResource(up_tf.getText());
+      if(up_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+up_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        up_res = s.getImageResource(up);
         return;
       }
-      if(!over_tf.getText().equals("none") && s.getResource(over_tf.getText())==null) {
+      over_res = s.getImageResource(over_tf.getText());
+      if(!over_tf.getText().equals("none") && over_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+over_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        over_res = s.getImageResource(over);
         return;
       }
-      if(!down_tf.getText().equals("none") && s.getResource(down_tf.getText())==null) {
+      down_res = s.getImageResource(down_tf.getText());
+      if(!down_tf.getText().equals("none") && down_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+down_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        down_res = s.getImageResource(down);
         return;
       }
       update();
@@ -399,13 +415,13 @@ public class Button extends Item implements ActionListener{
     if(!created) return;    
     java.awt.image.BufferedImage bi;
     if(!hovered || ( (over.equals("none") && !clicked)||(clicked && down.equals("none")) ) ) {
-      bi = s.getBitmapImage(up);
+      bi = up_res.image;
     } 
     else if(!clicked || down.equals("none")) {
-      bi = s.getBitmapImage(over);
+      bi = over_res.image;
     }
     else {
-      bi = s.getBitmapImage(down);
+      bi = down_res.image;
     }
     if(s.gvars.parseBoolean(visible)==true) g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
@@ -415,7 +431,7 @@ public class Button extends Item implements ActionListener{
   }
   @Override
   public boolean contains(int x_, int y_) {
-    java.awt.image.BufferedImage bi = s.getBitmapImage(up);
+    java.awt.image.BufferedImage bi = up_res.image;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {

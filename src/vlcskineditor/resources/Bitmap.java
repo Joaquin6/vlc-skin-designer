@@ -39,7 +39,7 @@ import org.w3c.dom.Element;
  * Handles Bitmap resources
  * @author Daniel
  */
-public class Bitmap extends Resource implements ActionListener{
+public class Bitmap extends ImageResource implements ActionListener{
   
   public String file;
   public final String ALPHACOLOR_DEFAULT = "#FF00FF";
@@ -49,9 +49,7 @@ public class Bitmap extends Resource implements ActionListener{
   public final int FPS_DEFAULT = 0;
   public int fps = FPS_DEFAULT;
   //The list containing the bitmap's SubBitmaps  
-  public java.util.List<SubBitmap> SubBitmaps = new LinkedList<SubBitmap>();
-  //The image represented by the Bitmap item
-  public BufferedImage image;
+  public java.util.List<SubBitmap> SubBitmaps = new LinkedList<SubBitmap>();  
   
   private JFrame frame = null;
   private JTextField id_tf, file_tf, alphacolor_tf, nbframes_tf, fps_tf;

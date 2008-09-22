@@ -30,6 +30,7 @@ import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * Slider item
@@ -60,18 +61,30 @@ public class Slider extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb, value_cb;
   JCheckBox sbg_chb;
   JButton visible_btn, ok_btn, cancel_btn, help_btn, sbg_btn;
+
+  ImageResource up_res, over_res, down_res;
   
   Bezier b;
   int[] xpos,ypos;
   
-  /** Creates a new instance of Slider */
+  /** Creates a new instance of Slider
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public Slider(String xmlcode, Skin s_) {
     type = "Slider";
     s = s_;
     String[] code = xmlcode.split("\n");
     up = XML.getValue(code[0],"up");
-    if(code[0].indexOf(" down=\"")!=-1) down = XML.getValue(code[0],"down");
-    if(code[0].indexOf(" over=\"")!=-1) over = XML.getValue(code[0],"over");
+    up_res = s.getImageResource(up);
+    if(code[0].indexOf(" down=\"")!=-1) {
+      down = XML.getValue(code[0],"down");
+      down_res = s.getImageResource(down);
+    }
+    if(code[0].indexOf(" over=\"")!=-1) {
+      over = XML.getValue(code[0],"over");
+      over_res = s.getImageResource(over);
+    }
     points = XML.getValue(code[0],"points");  
     updateBezier();
     if(code[0].indexOf(" thickness=\"")!=-1) thickness = XML.getIntValue(code[0],"thickness");
@@ -108,6 +121,7 @@ public class Slider extends Item implements ActionListener{
     String[] code = xmlcode.split("\n");
     inPlaytree = ipt;
     up = XML.getValue(code[0],"up");
+    up_res = s.getImageResource(up);
     if(code[0].indexOf("down=\"")!=-1) down = XML.getValue(code[0],"down");
     if(code[0].indexOf("over=\"")!=-1) over = XML.getValue(code[0],"over");
     points = XML.getValue(code[0],"points");
@@ -438,16 +452,22 @@ public class Slider extends Item implements ActionListener{
           return;
         }
       }
-      if(s.getResource(up_tf.getText())==null) {
+      up_res = s.getImageResource(up_tf.getText());
+      if(up_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+up_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        up_res = s.getImageResource(up);
         return;
       }
-      if(!over_tf.getText().equals("none") && s.getResource(over_tf.getText())==null) {
+      over_res = s.getImageResource(over_tf.getText());
+      if(!over_tf.getText().equals("none") && over_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+over_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        over_res = s.getImageResource(over);
         return;
       }
-      if(!down_tf.getText().equals("none") && s.getResource(down_tf.getText())==null) {
+      down_res = s.getImageResource(down_tf.getText());
+      if(!down_tf.getText().equals("none") && down_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+down_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        down_res = s.getImageResource(down);
         return;
       }
       if(points_tf.getText().equals("")) {
@@ -557,7 +577,7 @@ public class Slider extends Item implements ActionListener{
       sbg.draw(g,x+x_,y+y_,z);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
-    java.awt.image.BufferedImage si = s.getBitmapImage(up);    
+    java.awt.image.BufferedImage si = up_res.image;
     Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
     if(vis && si!=null) g.drawImage(si,(int)(p.getX()+x+x_-si.getWidth()/2)*z,(int)(p.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
     if(selected) {

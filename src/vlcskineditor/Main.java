@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final String VERSION = "0.7";
+  public final String VERSION = "0.7.x.dev";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -1575,12 +1575,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   }
   public void windowClosed(WindowEvent e) {}
   public void windowActivated(WindowEvent e) {
+    if(pvwin==null) return;
     if(pvwin.fu==null) {
       pvwin.fu = new FrameUpdater(pvwin,5);
       pvwin.fu.start();      
     }
   }
   public void windowDeactivated(WindowEvent e) {
+    if(pvwin==null || pvwin.fu==null) return;
+    pvwin.fu.run = false;
     pvwin.fu = null;
   }
   public void windowDeiconified(WindowEvent e) {
@@ -1590,6 +1593,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
   }
   public void windowIconified(WindowEvent e) {
+    if(pvwin==null || pvwin.fu==null) return;
+    pvwin.fu.run = false;
     pvwin.fu = null;
   }
   public void windowOpened(WindowEvent e) {}  

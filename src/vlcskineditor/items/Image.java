@@ -26,9 +26,11 @@ import vlcskineditor.*;
 import vlcskineditor.history.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * Image item
@@ -50,12 +52,18 @@ public class Image extends Item implements ActionListener{
   JButton visible_btn, action2_btn, ok_btn, cancel_btn, help_btn;
   
   ActionEditor action2_ae;
+
+  ImageResource image_res;
   
-  /** Creates a new instance of Image */
+  /** Creates a new instance of Image
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public Image(String xmlcode, Skin s_) {
     type = "Image";
     s=s_;
     image = XML.getValue(xmlcode,"image");
+    image_res = s.getImageResource(image);
     if(xmlcode.indexOf("resize=\"")!=-1) resize = XML.getValue(xmlcode,"resize");
     if(xmlcode.indexOf("action=\"")!=-1) action = XML.getValue(xmlcode,"action");
     if(xmlcode.indexOf("action2=\"")!=-1) action2 = XML.getValue(xmlcode,"action2");
@@ -302,8 +310,10 @@ public class Image extends Item implements ActionListener{
           return;
         }
       }
-      if(s.getResource(image_tf.getText())==null) {
+      image_res = s.getImageResource(image_tf.getText());
+      if(image_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+image_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        image_res = s.getImageResource(image);
         return;
       }
       update();
@@ -380,7 +390,7 @@ public class Image extends Item implements ActionListener{
   }
   public void draw(Graphics2D g,int x_, int y_, int z) {
     if(!created) return;    
-    java.awt.image.BufferedImage bi = s.getBitmapImage(image);
+    BufferedImage bi = image_res.image;
     if(s.gvars.parseBoolean(visible)==true) g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
@@ -389,7 +399,7 @@ public class Image extends Item implements ActionListener{
   }
   @Override
   public boolean contains(int x_, int y_) {
-    java.awt.image.BufferedImage bi = s.getBitmapImage(image);
+    BufferedImage bi = image_res.image;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {

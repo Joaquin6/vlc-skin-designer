@@ -55,6 +55,7 @@ import vlcskineditor.history.ThemeEditEvent;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.BitmapFont;
 import vlcskineditor.resources.Font;
+import vlcskineditor.resources.ImageResource;
 import vlcskineditor.resources.SubBitmap;
 
 /**
@@ -472,6 +473,19 @@ public class Skin implements ActionListener{
     }
     return false;
   }
+
+  public ImageResource getImageResource(String id) {
+    for (Resource r:resources) {
+      if(r.getClass()==Bitmap.class) {
+        if(r.id.equals(id)) return (ImageResource)r;
+        Bitmap bmp = (Bitmap)r;
+        for(SubBitmap s:bmp.SubBitmaps) {
+          if(s.id.equals(id)) return (ImageResource)s;
+        }
+      }
+    }
+    return null;
+  }
   /** Returns the resource represented by the given id **/
   public Resource getResource(String id) {    
     for (Resource r:resources) {
@@ -485,7 +499,12 @@ public class Skin implements ActionListener{
     }
     return null;
   }
-  /** Returns the image object of a bitmap **/
+  /**
+   * Returns the image object of a bitmap
+   * @deprecated Use getImageResource instead
+   * @param id The id of the Bitmap resource
+   * @return the BufferedImage represented by the resource looked for
+   */
   public BufferedImage getBitmapImage(String id) {
     Resource r = getResource(id);
     if(r==null) {

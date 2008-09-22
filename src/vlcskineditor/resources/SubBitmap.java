@@ -36,15 +36,13 @@ import vlcskineditor.history.SubBitmapAddEvent;
  * @see Bitmap
  * @author Daniel
  */
-public class SubBitmap extends Resource implements ActionListener{
+public class SubBitmap extends ImageResource implements ActionListener{
   
   public int x, y, width, height;
   final int NBFRAMES_DEFAULT = 1;
   public int nbframes = NBFRAMES_DEFAULT;
   final int FPS_DEFAULT = 0;
-  public int fps = FPS_DEFAULT;
-  //The image represented by the SubBitmap
-  public BufferedImage image; 
+  public int fps = FPS_DEFAULT;  
   //The parent bitmap
   private Bitmap parent;
   

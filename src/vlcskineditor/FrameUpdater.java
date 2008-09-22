@@ -32,17 +32,23 @@ public class FrameUpdater extends Thread{
   
   JPanel c;
   int fps = 1;
+  /** causes the thread to stop when set to true */
   boolean run = false;
   
-  /** Creates a new instance of FrameUpdater */
+  /** Creates a new instance of FrameUpdater
+   * @param c_ The panel to redraw
+   * @param fps_ Frames per second
+   */
   public FrameUpdater(JPanel c_, int fps_) {
+    setName("FrameUpdater");
     c=c_;
     fps=fps_;
   }
   /** Starts the repainting loop **/
+  @Override
   public void run () {
     run = true;
-    while(true) {     
+    while(run) {
       try {        
         c.repaint();
         sleep(1000/fps);        
@@ -51,5 +57,6 @@ public class FrameUpdater extends Thread{
         e.printStackTrace();
       }           
     }
+    return;
   }
 }

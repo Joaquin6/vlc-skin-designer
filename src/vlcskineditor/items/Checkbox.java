@@ -29,6 +29,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import vlcskineditor.resources.ImageResource;
 
 /**
  * Checkbox item
@@ -61,22 +62,39 @@ public class Checkbox extends Item implements ActionListener{
   JTextField up2_tf, down2_tf, over2_tf, action2_tf, tooltiptext2_tf, state_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
   JButton visible_btn, action1_btn, action2_btn, state_btn, ok_btn, cancel_btn, help_btn;
-  
+
+  ImageResource up1_res, over1_res, down1_res, up2_res, over2_res, down2_res;
+
   ActionEditor action1_ae, action2_ae;
   
-  /** Creates a new instance of Checkbox */
+  /** Creates a new instance of Checkbox
+   * @param xmlcode The XML code
+   * @param s_ The parent skin
+   */
   public Checkbox(String xmlcode, Skin s_) {
     type = "Checkbox";
     s = s_;
     up1 = XML.getValue(xmlcode,"up1");
+    up1_res = s.getImageResource(up1);
     up2 = XML.getValue(xmlcode,"up2");
+    up2_res = s.getImageResource(up2);
     state = XML.getValue(xmlcode,"state");
-    if(xmlcode.indexOf(" over1=\"")!=-1) over1 = XML.getValue(xmlcode,"over1");
-    if(xmlcode.indexOf(" over2=\"")!=-1) over2 = XML.getValue(xmlcode,"over2");
-    if(xmlcode.indexOf(" down1=\"")!=-1) down1 = XML.getValue(xmlcode,"down1");
-    if(xmlcode.indexOf(" down2=\"")!=-1) down2 = XML.getValue(xmlcode,"down2");
-    if(xmlcode.indexOf(" up1=\"")!=-1) up1 = XML.getValue(xmlcode,"up1");
-    if(xmlcode.indexOf(" up2=\"")!=-1) up2 = XML.getValue(xmlcode,"up2");
+    if(xmlcode.indexOf(" over1=\"")!=-1) {
+      over1 = XML.getValue(xmlcode,"over1");
+      over1_res = s.getImageResource(over1);
+    }
+    if(xmlcode.indexOf(" over2=\"")!=-1) {
+      over2 = XML.getValue(xmlcode,"over2");
+      over2_res = s.getImageResource(over2);
+    }
+    if(xmlcode.indexOf(" down1=\"")!=-1) {
+      down1 = XML.getValue(xmlcode,"down1");
+      down1_res = s.getImageResource(down1);
+    }
+    if(xmlcode.indexOf(" down2=\"")!=-1) {
+      down2 = XML.getValue(xmlcode,"down2");
+      down2_res = s.getImageResource(down2);
+    }
     if(xmlcode.indexOf(" action1=\"")!=-1) action1 = XML.getValue(xmlcode,"action1");
     if(xmlcode.indexOf(" action2=\"")!=-1) action2 = XML.getValue(xmlcode,"action2");
     if(xmlcode.indexOf(" tooltiptext1=\"")!=-1) tooltiptext1 = XML.getValue(xmlcode,"tooltiptext1");
@@ -412,28 +430,40 @@ public class Checkbox extends Item implements ActionListener{
         JOptionPane.showMessageDialog(frame,"Please provide the state condition!","State not valid",JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      if(s.getResource(up1_tf.getText())==null) {
+      up1_res = s.getImageResource(up1_tf.getText());
+      if(up1_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+up1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        up1_res = s.getImageResource(up1);
         return;
       }
-      if(!over1_tf.getText().equals("none") && s.getResource(over1_tf.getText())==null) {
+      over1_res = s.getImageResource(over1_tf.getText());
+      if(!over1_tf.getText().equals("none") && over1_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+over1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        over1_res = s.getImageResource(over1);
         return;
       }
-      if(!down1_tf.getText().equals("none") && s.getResource(down1_tf.getText())==null) {
+      down1_res = s.getImageResource(down1_tf.getText());
+      if(!down1_tf.getText().equals("none") && down1_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+down1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        down1_res = s.getImageResource(down1);
         return;
       }
-      if(s.getResource(up2_tf.getText())==null) {
+      up2_res = s.getImageResource(up2_tf.getText());
+      if(up2_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+up2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        up2_res = s.getImageResource(up2);
         return;
       }
+      over2_res = s.getImageResource(over2_tf.getText());
       if(!over2_tf.getText().equals("none") && s.getResource(over2_tf.getText())==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+over2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        over2_res = s.getImageResource(over2);
         return;
       }
-      if(!down2_tf.getText().equals("none") && s.getResource(down2_tf.getText())==null) {
+      down2_res = s.getImageResource(down2_tf.getText());
+      if(!down2_tf.getText().equals("none") && down2_res==null) {
         JOptionPane.showMessageDialog(frame,"The bitmap \""+down2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        down2_res = s.getImageResource(down2);
         return;
       }
       update();
@@ -539,14 +569,14 @@ public class Checkbox extends Item implements ActionListener{
     if(!created) return;    
     java.awt.image.BufferedImage bi = null; 
     if(s.gvars.parseBoolean(state)) {      
-      if(!hovered || ( (over2.equals("none") && !clicked)||(clicked && down2.equals("none")) )) bi = s.getBitmapImage(up2);
-      else if(!clicked || down2.equals("none")) bi = s.getBitmapImage(over2);
-      else bi = s.getBitmapImage(down2);
+      if(!hovered || ( (over2.equals("none") && !clicked)||(clicked && down2.equals("none")) )) bi = up2_res.image;
+      else if(!clicked || down2.equals("none")) bi = over2_res.image;
+      else bi = down2_res.image;
     }
     else {
-      if(!hovered || ( (over1.equals("none") && !clicked)||(clicked && down1.equals("none")) )) bi = s.getBitmapImage(up1);
-      else if(!clicked || down1.equals("none")) bi = s.getBitmapImage(over2);
-      else bi = s.getBitmapImage(down2);
+      if(!hovered || ( (over1.equals("none") && !clicked)||(clicked && down1.equals("none")) )) bi = up1_res.image;
+      else if(!clicked || down1.equals("none")) bi = over1_res.image;
+      else bi = down1_res.image;
     }
     if(s.gvars.parseBoolean(visible)==true )g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
@@ -556,7 +586,7 @@ public class Checkbox extends Item implements ActionListener{
   }
   @Override
   public boolean contains(int x_, int y_) {
-    java.awt.image.BufferedImage bi = s.getBitmapImage(up1);
+    java.awt.image.BufferedImage bi = up1_res.image;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
   public DefaultMutableTreeNode getTreeNode() {

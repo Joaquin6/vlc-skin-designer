@@ -96,6 +96,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     if(selected_item!=null) selected_item.setSelected(false);
     selected_item=null;
     frame.setVisible(false);
+    if(fu!=null) fu.run = false;
     fu=null;
   }
   /**
@@ -163,7 +164,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   @Override
   public void update(Graphics g) {
     //Needs to be overriden so that repainting is smooth
-    paint(g);
+    //paint(g);
   }  
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(zoom_less)) {
