@@ -37,6 +37,8 @@ import vlcskineditor.history.*;
  */
 public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 
+  public static final long serialVersionUID = 071;
+
   /**
    * The JFrame in which a Layout of a Skin will be shown.
    */

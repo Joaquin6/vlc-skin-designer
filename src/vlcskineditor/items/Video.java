@@ -352,7 +352,7 @@ public class Video extends Item implements ActionListener{
     if(!created) return;
     
     g.setColor(Color.BLACK);
-    if(s.gvars.parseBoolean(visible)==true) g.fillRect((x+x_)*z,(y+y_)*z,width*z,height*z);
+    if(vis) g.fillRect((x+x_)*z,(y+y_)*z,width*z,height*z);
     if(selected) {
       g.setColor(Color.RED);
       g.drawRect((x+x_)*z,(y+y_)*z,width*z-1,height*z-1);

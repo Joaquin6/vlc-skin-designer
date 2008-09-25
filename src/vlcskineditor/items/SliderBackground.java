@@ -56,8 +56,10 @@ public class SliderBackground extends Item implements ActionListener{
   BufferedImage bi = null;
   String bitmap_str = "";
   Slider sl;
-  
-    
+
+  private float sliderVal = 0.5f;
+
+
   /** Creates a new instance of SliderBackground
    * @param xmlcode The XML code
    * @param s_ The parent skin
@@ -279,10 +281,9 @@ public class SliderBackground extends Item implements ActionListener{
     bi = image_res.image;
     if(bi==null) return;
     int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
-    int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;
-    float f = s.gvars.getSliderValue();
+    int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;    
     int fields = nbhoriz*nbvert;
-    int n = (int)(fields*f);
+    int n = (int)(fields*sliderVal);
     int fypos = n/nbhoriz-1;
     if (fypos<0) fypos=0;
     int fxpos = n%nbhoriz;    
@@ -306,5 +307,9 @@ public class SliderBackground extends Item implements ActionListener{
   @Override
   public boolean uses(String id_) {
     return (image.equals(id_));
+  }
+  @Override
+  public void updateToGlobalVariables() {
+   sliderVal = s.gvars.getSliderValue();
   }
 }

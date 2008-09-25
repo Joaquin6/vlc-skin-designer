@@ -1,7 +1,7 @@
 rd /S /Q build
 md build
 cd src
-javac -d ../build vlcskineditor/Main.java
+javac -O -d ../build vlcskineditor/Main.java
 cd ..
 md build\vlcskineditor\icons
 copy src\vlcskineditor\icons build\vlcskineditor\icons\

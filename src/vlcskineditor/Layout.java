@@ -435,7 +435,7 @@ public class Layout implements ActionListener{
   }
   /**
    * Generates the XML code represented by this Layout.
-   * @param ident Indentation
+   * @param indent Indentation
    * @return The XML code.
    */
   public String returnCode(String indent) {

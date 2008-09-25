@@ -79,10 +79,14 @@ public class GlobalVariables implements ActionListener{
             paused_cb,seekable_cb,mute_cb,ontop_cb,random_cb,loop_cb,repeat_cb,dvd_cb;
   JSlider slider_s;
   JButton ok_btn,help_btn;
+
+  private Skin s;
   
-  /** Creates a new instance of GlobalVariables */
-  public GlobalVariables() {
-    
+  /** Creates a new instance of GlobalVariables
+   * @param s_ The parent skin
+   */
+  public GlobalVariables(Skin s_) {
+    s = s_;
   }
   /**
    * Parses text variables in a string
@@ -369,6 +373,15 @@ public class GlobalVariables implements ActionListener{
     playlist_isRepeat = Boolean.parseBoolean(repeat_cb.getSelectedItem().toString());
     dvd_isActive = Boolean.parseBoolean(dvd_cb.getSelectedItem().toString());
     slider_value = (float)(slider_s.getValue())/100;
+
+    for(Window w:s.windows) {
+      for(Layout l:w.layouts) {
+        for(Item i:l.items) {
+          i.updateToGlobalVariables();
+        }
+      }
+    }
+
   }
   /**
    * Handles actions triggered by components listened to

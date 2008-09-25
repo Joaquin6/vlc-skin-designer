@@ -46,12 +46,12 @@ import vlcskineditor.resources.SubBitmap;
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
 
-  private static final long serialVersionUID = 70L; //For completions sake
+  private static final long serialVersionUID = 071;
 
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final String VERSION = "0.7.x.dev";
+  public final String VERSION = "0.7.1.dev";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -610,7 +610,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   /**
    * Shows a dialog from which the user can choose to either create a new skin, open an existing skin or quit the skin editor.
    */
-  private void showWelcomeDialog() {
+  public void showWelcomeDialog() {
     Object[] options= {"Create a new skin", "Open an exisiting skin","Quit"};
     int n = JOptionPane.showOptionDialog(this,"What would you like to do?","Welcome to the VLC Skin Editor",
                                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -673,7 +673,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(!opened) showWelcomeDialog();
       return;
     }
-    opening = true;    
+    opening = true;
+    if(pvwin!=null) {
+      pvwin.clearLayout();
+    }
     ProgressWindow pwin = new ProgressWindow(this,"");  
     if(f.toString().toLowerCase().endsWith(".vlt")) {
       String vltname = f.getName().replaceAll(".vlt","");
@@ -765,8 +768,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     pwin.setText("Parsing XML...");
     pwin.setVisible(true);
-    setTitle(f.toString()+" - VLC Skin Editor "+VERSION);      
-    pvwin.clearLayout();
+    setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
     m_file_png.setEnabled(false);
     s.open(f);                  
     selected_resource = null;

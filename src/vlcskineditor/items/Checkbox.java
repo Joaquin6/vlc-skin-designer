@@ -66,6 +66,8 @@ public class Checkbox extends Item implements ActionListener{
   ImageResource up1_res, over1_res, down1_res, up2_res, over2_res, down2_res;
 
   ActionEditor action1_ae, action2_ae;
+
+  private boolean state_bool = true;
   
   /** Creates a new instance of Checkbox
    * @param xmlcode The XML code
@@ -568,7 +570,7 @@ public class Checkbox extends Item implements ActionListener{
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;    
     java.awt.image.BufferedImage bi = null; 
-    if(s.gvars.parseBoolean(state)) {      
+    if(state_bool) {
       if(!hovered || ( (over2.equals("none") && !clicked)||(clicked && down2.equals("none")) )) bi = up2_res.image;
       else if(!clicked || down2.equals("none")) bi = over2_res.image;
       else bi = down2_res.image;
@@ -578,7 +580,7 @@ public class Checkbox extends Item implements ActionListener{
       else if(!clicked || down1.equals("none")) bi = over1_res.image;
       else bi = down1_res.image;
     }
-    if(s.gvars.parseBoolean(visible)==true )g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
+    if(vis)g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
       g.drawRect((x+x_)*z,(y+y_)*z,bi.getWidth()*z-1,bi.getHeight()*z-1);
@@ -596,5 +598,10 @@ public class Checkbox extends Item implements ActionListener{
   @Override
   public boolean uses(String id_) {
     return (up1.equals(id_)||up2.equals(id_)||over1.equals(id_)||over2.equals(id_)||down1.equals(id_)||down2.equals(id_));
+  }
+  @Override
+  public void updateToGlobalVariables() {
+    vis = s.gvars.parseBoolean(visible);
+    state_bool = s.gvars.parseBoolean(state);
   }
 }

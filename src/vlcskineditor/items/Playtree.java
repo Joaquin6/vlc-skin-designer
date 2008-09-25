@@ -668,7 +668,7 @@ public class Playtree extends Item implements ActionListener{
     Graphics2D g = (Graphics2D)(buffi.getGraphics());
     g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
     if(!created) return;
-    if(s.gvars.parseBoolean(visible)==true) {
+    if(vis) {
       Font f = s.getFont(font);
       g.setFont(f);
       FontMetrics fm = g.getFontMetrics();

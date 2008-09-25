@@ -421,7 +421,7 @@ public class Text extends Item implements ActionListener{
         f = new Font(Font.SANS_SERIF,Font.PLAIN,12);
       }      
     }    
-    if(s.gvars.parseBoolean(visible)==true) {
+    if(vis) {
       BufferedImage bi;
       String ptext = s.gvars.parseString(text);
       if(width==0) {

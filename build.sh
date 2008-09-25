@@ -2,7 +2,7 @@
 
 mkdir -p build/vlcskineditor/icons
 cd src/
-`javac -d ../build vlcskineditor/Main.java`
+`javac -O -d ../build vlcskineditor/Main.java`
 cd ..
 cp src/vlcskineditor/icons/* build/vlcskineditor/icons
 echo "Main-Class: vlcskineditor.Main" > manifest_no_nb

@@ -97,7 +97,7 @@ public class Skin implements ActionListener{
   JTextField theme_magnet_tf, theme_alpha_tf, theme_movealpha_tf;
   JButton theme_ok_btn, theme_cancel_btn, theme_help_btn;
   
-  public GlobalVariables gvars = new GlobalVariables();
+  public GlobalVariables gvars = new GlobalVariables(this);
   
   //Central window handle for all editing dialogs of res/win/layout/items
   public JFrame edit_frame; 
@@ -132,13 +132,21 @@ public class Skin implements ActionListener{
     catch (Exception ex) {
       ex.printStackTrace();
       String stackTrace ="";
-      for (int i=0;i<ex.getStackTrace().length;i++) {
+      /*for (int i=0;i<ex.getStackTrace().length;i++) {
         stackTrace+=ex.getStackTrace()[i].toString()+"\n";
-      }
+      }*/
       JOptionPane.showMessageDialog(null,ex.toString()+"\n\n"+stackTrace,ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
       update();
+      m.showWelcomeDialog();
     }    
-    update();           
+    update();
+    for(Window w:windows) {
+      for(Layout l:w.layouts) {
+        for(Item i:l.items) {
+          i.updateToGlobalVariables();
+        }
+      }
+    }
   }
   /**
    * Parses the given file line by line, expecting each xml-tag to be in his own single line

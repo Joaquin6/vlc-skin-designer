@@ -64,6 +64,8 @@ public abstract class Item {
   
   public int offsetx = 0;
   public int offsety = 0;
+
+  protected boolean vis = true;
   
   /** Determines whether the process of creating the object has finished **/
   public boolean created = false;
@@ -147,5 +149,11 @@ public abstract class Item {
       newid = newid_base+"_"+String.valueOf(i);
     }
     id = newid;
+  }
+  /**
+   * Invokes the item to update its variables that depend on the global variables
+   */
+  public void updateToGlobalVariables() {
+    vis = s.gvars.parseBoolean(visible);
   }
 }

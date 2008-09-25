@@ -66,6 +66,9 @@ public class Slider extends Item implements ActionListener{
   
   Bezier b;
   int[] xpos,ypos;
+
+  private Point2D.Float sliderPos;
+  private Point2D.Float[] bezierPoints;
   
   /** Creates a new instance of Slider
    * @param xmlcode The XML code
@@ -176,6 +179,11 @@ public class Slider extends Item implements ActionListener{
       ypos[i] = Integer.parseInt(coords[1].replaceAll("\\)","").trim());
     }          
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
+    sliderPos = b.getPoint(s.gvars.getSliderValue());
+    bezierPoints = new Point2D.Float[11];
+    for(float f=0;f<=100;f+=10) {
+      bezierPoints[(int)(f/10)] = b.getPoint(f/100);
+    }
   }
   public void update() {
     if(!created) {
@@ -572,22 +580,26 @@ public class Slider extends Item implements ActionListener{
     if(!created) return;
     offsetx=x_;
     offsety=y_;
-    boolean vis = s.gvars.parseBoolean(visible);
+    //boolean vis = s.gvars.parseBoolean(visible);
     if(sbg!=null && vis) {
       sbg.draw(g,x+x_,y+y_,z);
       sbg.setOffset(x+offsetx,y+offsety);
     }    
     java.awt.image.BufferedImage si = up_res.image;
-    Point2D.Float p = b.getPoint(s.gvars.getSliderValue());
-    if(vis && si!=null) g.drawImage(si,(int)(p.getX()+x+x_-si.getWidth()/2)*z,(int)(p.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
+    if(vis && si!=null) g.drawImage(si,(int)(sliderPos.getX()+x+x_-si.getWidth()/2)*z,(int)(sliderPos.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
-      for(float f=0f;f<=1f;f=f+0.1f) {
+      /*for(float f=0f;f<=1f;f=f+0.1f) {
         Point2D.Float p1 = b.getPoint(f);
         Point2D.Float p2 = b.getPoint(f+0.1f);        
         g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
+      }*/
+      for(int i=0;i<=10;i++) {
+        Point2D.Float p1 = bezierPoints[i];
+        Point2D.Float p2 = bezierPoints[i+1];
+        g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
       }
-      g.setColor(Color.YELLOW);
+      g.setColor(Color.ORANGE);
       for(int i=0;i<xpos.length;i++) {
         g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,3,3);
       }
