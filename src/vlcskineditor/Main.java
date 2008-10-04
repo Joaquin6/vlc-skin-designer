@@ -1750,16 +1750,18 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             ZipInputStream zin = new ZipInputStream(new FileInputStream(tempfile));
             ZipEntry entry;
             while( (entry=zin.getNextEntry()) !=null ) {              
-              File outf = new File(entry.getName());
-              System.out.println(outf.getAbsoluteFile());
-              if(outf.exists()) outf.delete();
-              OutputStream out = new FileOutputStream(outf);
-              byte[] buf = new byte[1024];
-              int len;
-              while ((len = zin.read(buf)) > 0) {
-                out.write(buf, 0, len);
+              if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll"))  )){
+                File outf = new File(entry.getName());
+                System.out.println(outf.getAbsoluteFile());
+                if(outf.exists()) outf.delete();
+                OutputStream out = new FileOutputStream(outf);
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = zin.read(buf)) > 0) {
+                  out.write(buf, 0, len);
+                }
+                out.close();
               }
-              out.close();
             }
 
             JOptionPane.showMessageDialog(this, "Update was sucessfully downloaded and installed.\nVLC Skin Editor will restart now",
