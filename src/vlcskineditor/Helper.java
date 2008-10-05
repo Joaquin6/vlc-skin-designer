@@ -23,12 +23,21 @@
 package vlcskineditor;
 
 import java.awt.Component;
+import java.awt.Desktop;
+import javax.swing.JOptionPane;
 
 /**
  * Provides helper method
  * @author Daniel Dreibrodt
  */
 public class Helper {
+  
+  private static Desktop desktop;
+  
+  static {
+    if(Desktop.isDesktopSupported())
+            desktop = Desktop.getDesktop();
+  }
 
   /**
    * Gets the greatest width of the given components
@@ -42,5 +51,23 @@ public class Helper {
           if(cw>w) w = cw;
         }
         return w;
+  }
+  
+  /**
+   * Opens the given webpage in the systems default browser
+   * @param url The URL to the webpage
+   */
+  public static void browse(String url) {
+     if(desktop!=null) {
+        try {
+          desktop.browse(new java.net.URI(url));
+        }
+        catch (Exception ex) {
+          JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+        }
+      }
+      else {
+        JOptionPane.showMessageDialog(null,Language.getString("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.getString("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);    
+      }
   }
 }

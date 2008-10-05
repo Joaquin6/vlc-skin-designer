@@ -224,19 +224,7 @@ public class Group extends Item implements ActionListener{
       frame = null;      
     }
     else if(e.getSource().equals(help_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/i-group.html"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/i-group.html",JOptionPane.WARNING_MESSAGE);
-      }
+      Helper.browse("http://www.videolan.org/vlc/skinedhlp/i-group.html");
     }
     else if(e.getSource().equals(cancel_btn)) {
       if(!created) {

@@ -1,0 +1,129 @@
+#English language file for VLC Skin Editor
+#Author/s: Daniel Dreibrodt
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN value
+MENU_FILE|File
+MENU_FILE_MN|F
+MENU_FILE_NEW|New
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Open
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Save
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Test skin in VLC...
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Export as VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Save current preview as image
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Exit
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|Edit
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Undo
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|Redo
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Theme settings
+MENU_EDIT_THEME_MN|T
+MENU_EDIT_VARS|Global variables
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_UP|Move selected item up
+MENU_EDIT_DOWN|Move selected item down
+MENU_EDIT_LEFT|Move selected item left
+MENU_EDIT_RIGHT|Move selected item right
+MENU_HELP|Help
+MENU_HELP_MN|H
+MENU_HELP_DOC|Online help
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|About
+MENU_HELP_ABOUT_MN|A
+
+#Resource Window
+WIN_RES_TITLE|Resources
+WIN_RES_ADD_BMP|Add a new Bitmap or SubBitmap
+WIN_RES_ADD_FONT|Add a new Font
+WIN_RES_COPY|Create a copy of the selected resource
+WIN_RES_EDIT|Edit the selected resource
+WIN_RES_DELETE|Delete the selected resource
+WIN_RES_PU_ADD_BMP|Add Bitmap/s
+WIN_RES_PU_ADD_SBMP|Add SubBitmap
+
+#Windows window
+WIN_WIN_TITLE|Windows
+WIN_WIN_ADD|Add a new window
+WIN_WIN_ADD_LAY|Add a new layout to the selected window
+WIN_WIN_MOVE_UP|Move selected layout up in hierarchy (last layout is the default layout for the window)
+WIN_WIN_MOVE_DOWN|Move selected layout down in hierarchy (last layout is the default layout for the window)
+WIN_WIN_COPY|Create a copy of the selected window or layout
+WIN_WIN_EDIT|Edit the selecte window or layout
+WIN_WIN_DELETE|Delete the selected window or layout
+
+#Items window
+WIN_ITEMS_TITLE|Items
+WIN_ITEMS_ADD|Add a new item
+WIN_ITEMS_MOVE_UP|Move selected item up in hierarchy
+WIN_ITEMS_MOVE_DOWN|Move selected item down in hierarchy
+WIN_ITEMS_COPY|Create a copy of the selected item
+WIN_ITEMS_EDIT|Edit the selected item
+WIN_ITEMS_DELETE|Delete the selecte item
+WIN_ITEMS_PU_PANEL_ADD|Add to selected Panel
+
+#Welcome dialog
+WELCOME_TITLE|Welcome to the VLC Skin Editor
+WELCOME_MSG|What would you like to do?
+WELCOME_NEW|Create a new skin
+WELCOME_OPEN|Open an existing skin
+WELCOME_QUIT|Quit
+
+#Messages
+ABOUT_TITLE|About VLC Skin Editor
+ABOUT_MSG|Copyright 2007-%y The VideoLAN Team\nLead programmer: Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)\nWebsite: %w\nReleased under terms of the GPL 2+\n\nCredits:\nTimothy Gerard Endres for registry access and TAR support (Public Domain)\nThe Tango! Desktop Project (http://tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\nCyril Deguet (asmax@via.ecp.fr) and Olivier Teulière (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)
+VLT_EX_TITLE|Importing a VLT file
+VLT_EX_MSG|The VLT file will be unpacked to a subfolder called "%f".\nDo you want to continue?
+VLT_EX_YES|Yes, unpack
+VLT_EX_NO|No, cancel
+VLT_EX_PROGRESS|Unpacking VLT file...
+XML_PARSING_PROGRESS|Parsing XML...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) inside the XML file's directory
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (Open and true type fonts) inside the XML file's directory
+DUPLICATE_MSG|Please enter the rename pattern for the duplicated objects.\n%oldid% will be replaced by the old ID of the object.
+DEL_CONFIRM_TITLE|Deletion confirmation
+DEL_CONFIRM_MSG|Do you really want to delete "%n"?
+EXIT_CONFIRM_TITLE|Your modifications were not saved
+EXIT_CONFIRM_MSG|Would you like to save your skin before exiting?
+UPDATE_TITLE|Update found
+UPDATE_MSG|There is an update available for the Skin Editor.\nYour version: %v\nLatest version: %c\nDo you want to update the Skin Editor now?
+DOWNLOAD_PROGRESS|Downloading...
+CONNECT_PROGRESS|Connecting...
+UPDATE_SUCCESS_TITLE|Finished updating
+UPDATE_SUCCESS_MSG|Update was sucessfully downloaded and installed.\nVLC Skin Editor will restart now
+
+#General strings
+CHOICE_YES|Yes
+CHOICE_NO|No
+CHOICE_CANCEL|Cancel
+BUTTON_OK|OK
+BUTTON_CANCEL|Cancel
+BUTTON_HELP|Help
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Error while opening file
+ERROR_FILENEXIST_MSG|The file "%f" does not exist and thus could not be opened!
+ERROR_VLT_UNPACK_TITLE|Could not unpack VLT file
+ERROR_VLT_UNPACK_MSG|VLT file could not be unpacked!
+ERROR_VLT_NOTHEME_TITLE|Could not find theme.xml
+ERROR_VLT_NOTHEME_MSG|Could not find "theme.xml" inside the unpacked contents of the VLT file.\nTry opening it manually.
+ERROR_VLC_LAUNCH_TITLE|Error
+ERROR_VLC_LAUNCH_MSG|VLC media player could not be launched
+ERROR_BROWSE_TITLE|Could not launch Browser
+ERROR_BROWSE_MSG|Go to the following URL manually:\n%u
+ERROR_ADD_SBMP_TITLE|Could not add SubBitmap
+ERROR_ADD_SBMP_NOBMP|No parent Bitmap has been selected!
+ERROR_ADD_SBMP_NOTBMP|The selected resource is not a Bitmap!
+ERROR_RES_DEL_TITLE|Could not delete resource
+ERROR_RES_DEL_INUSE|Resource is still used in the skin, thus it cannot be deleted.
+ERROR_ADD_LAYOUT_TITLE|Could not add layout
+ERROR_ADD_LAYOUT_MSG|No parent window selected!
+ERROR_UPDATE_TITLE|Error while updating!

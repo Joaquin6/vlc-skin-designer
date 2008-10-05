@@ -342,34 +342,10 @@ public class Button extends Item implements ActionListener{
       frame = null;
     }
     else if(e.getSource().equals(help_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/i-button.html"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/i-button.html",JOptionPane.WARNING_MESSAGE);
-      }
+      Helper.browse("http://www.videolan.org/vlc/skinedhlp/i-button.html");
     }
     else if(e.getSource().equals(visible_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/boolexpr.html"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/boolexpr.html",JOptionPane.WARNING_MESSAGE);
-      }
+      Helper.browse("http://www.videolan.org/vlc/skinedhlp/boolexpr.html");
     }
     else if(e.getSource().equals(action_btn)) {
       if (action_ae==null) action_ae = new ActionEditor(this);

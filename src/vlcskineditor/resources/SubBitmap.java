@@ -361,19 +361,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       frame = null;      
     }
     else if(e.getSource().equals(help_btn)) {
-      Desktop desktop;
-      if (Desktop.isDesktopSupported()) {
-            desktop = Desktop.getDesktop();
-            try {
-              desktop.browse(new java.net.URI("http://www.videolan.org/vlc/skinedhlp/res-subbitmap.html"));
-            }
-            catch (Exception ex) {
-              JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
-            }
-      }
-      else {
-        JOptionPane.showMessageDialog(null,"Could not launch Browser","Go to the following URL manually:\nhttp://www.videolan.org/vlc/skinedhlp/res-subbitmap.html",JOptionPane.WARNING_MESSAGE);    
-      }
+      Helper.browse("http://www.videolan.org/vlc/skinedhlp/res-subbitmap.html");
     }
     else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);      
