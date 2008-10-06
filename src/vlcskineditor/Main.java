@@ -410,7 +410,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     windows.setSize(190,150);
     windows.setVisible(true);   
     
-    items = new JInternalFrame(Language.getString("WIN_EDIT_TITLE"),true,false);   
+    items = new JInternalFrame(Language.getString("WIN_ITEMS_TITLE"),true,false);   
     items.setFrameIcon(items_icon);
     items.setMinimumSize(new Dimension(190,150));   
     SpringLayout items_layout = new SpringLayout();
@@ -780,6 +780,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     opening = false;
     opened = true;
     pwin.setVisible(false);    
+    pwin.dispose();
     hist = new History(this);
   }
   /**
