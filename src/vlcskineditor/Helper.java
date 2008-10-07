@@ -67,7 +67,7 @@ public class Helper {
         }
       }
       else {
-        JOptionPane.showMessageDialog(null,Language.getString("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.getString("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);    
+        JOptionPane.showMessageDialog(null,Language.get("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.get("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);    
       }
   }
 }

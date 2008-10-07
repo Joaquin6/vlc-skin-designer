@@ -59,7 +59,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JMenuBar mbar;
   JMenu m_file, m_edit, m_help;
   JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
-  JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
+  JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
   JMenuItem m_help_doc, m_help_about;  
   JDesktopPane jdesk;
   JInternalFrame resources,windows,items,current_window;  
@@ -123,8 +123,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   public Main(String[] args) {    
     
-    Config.loadConfig();
-    Language.loadLanguage(new File("lang"+File.separator+Config.getValue("language")+".txt"));
+    Config.load();
+    Language.load(new File("lang"+File.separator+Config.get("language")+".txt"));
     
     
     setTitle("VLC Skin Editor "+VERSION);
@@ -137,39 +137,39 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     //For cross-platform feel (CTRL on Win & Linux, APPLE/COMMAND on Mac OS)
     int mask = java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
     
-    m_file = new JMenu(Language.getString("MENU_FILE"));
-    m_file.setMnemonic(Language.getString("MENU_FILE_MN").charAt(0));
-    m_file_new = new JMenuItem(Language.getString("MENU_FILE_NEW"));
+    m_file = new JMenu(Language.get("MENU_FILE"));
+    m_file.setMnemonic(Language.get("MENU_FILE_MN").charAt(0));
+    m_file_new = new JMenuItem(Language.get("MENU_FILE_NEW"));
     m_file_new.setIcon(new_icon);
-    m_file_new.setMnemonic(Language.getString("MENU_FILE_NEW_MN").charAt(0));
+    m_file_new.setMnemonic(Language.get("MENU_FILE_NEW_MN").charAt(0));
     m_file_new.setAccelerator(KeyStroke.getKeyStroke('N',mask));
     m_file_new.addActionListener(this);
-    m_file_open = new JMenuItem(Language.getString("MENU_FILE_OPEN"));
+    m_file_open = new JMenuItem(Language.get("MENU_FILE_OPEN"));
     m_file_open.setIcon(open_icon);
-    m_file_open.setMnemonic(Language.getString("MENU_FILE_OPEN_MN").charAt(0));
+    m_file_open.setMnemonic(Language.get("MENU_FILE_OPEN_MN").charAt(0));
     m_file_open.setAccelerator(KeyStroke.getKeyStroke('O',mask));
     m_file_open.addActionListener(this);    
-    m_file_save = new JMenuItem(Language.getString("MENU_FILE_SAVE"));
+    m_file_save = new JMenuItem(Language.get("MENU_FILE_SAVE"));
     m_file_save.setIcon(save_icon);
-    m_file_save.setMnemonic(Language.getString("MENU_FILE_SAVE_MN").charAt(0));
+    m_file_save.setMnemonic(Language.get("MENU_FILE_SAVE_MN").charAt(0));
     m_file_save.setAccelerator(KeyStroke.getKeyStroke('S',mask));   
     m_file_save.addActionListener(this);
-    m_file_test = new JMenuItem(Language.getString("MENU_FILE_TEST"));
-    m_file_test.setMnemonic(Language.getString("MENU_FILE_TEST_MN").charAt(0));
+    m_file_test = new JMenuItem(Language.get("MENU_FILE_TEST"));
+    m_file_test.setMnemonic(Language.get("MENU_FILE_TEST_MN").charAt(0));
     m_file_test.setAccelerator(KeyStroke.getKeyStroke('T',mask+InputEvent.SHIFT_DOWN_MASK));
     m_file_test.addActionListener(this);    
-    m_file_vlt = new JMenuItem(Language.getString("MENU_FILE_VLT"));
-    m_file_vlt.setMnemonic(Language.getString("MENU_FILE_VLT_MN").charAt(0));
+    m_file_vlt = new JMenuItem(Language.get("MENU_FILE_VLT"));
+    m_file_vlt.setMnemonic(Language.get("MENU_FILE_VLT_MN").charAt(0));
     m_file_vlt.setAccelerator(KeyStroke.getKeyStroke('V',mask+InputEvent.SHIFT_DOWN_MASK));   
     m_file_vlt.addActionListener(this);
-    m_file_png = new JMenuItem(Language.getString("MENU_FILE_PNG"));
-    m_file_png.setMnemonic(Language.getString("MENU_FILE_PNG_MN").charAt(0));
+    m_file_png = new JMenuItem(Language.get("MENU_FILE_PNG"));
+    m_file_png.setMnemonic(Language.get("MENU_FILE_PNG_MN").charAt(0));
     m_file_png.addActionListener(this);
     m_file_png.setEnabled(false);
     if(System.getProperty("os.name").indexOf("Mac")==-1) {
-      m_file_quit = new JMenuItem(Language.getString("MENU_FILE_EXIT"));
+      m_file_quit = new JMenuItem(Language.get("MENU_FILE_EXIT"));
       m_file_quit.setIcon(exit_icon);
-      m_file_quit.setMnemonic(Language.getString("MENU_FILE_EXIT_MN").charAt(0));
+      m_file_quit.setMnemonic(Language.get("MENU_FILE_EXIT_MN").charAt(0));
       m_file_quit.setAccelerator(KeyStroke.getKeyStroke("alt F4"));
       m_file_quit.addActionListener(this);
     }
@@ -185,37 +185,41 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file.addSeparator();
     m_file.add(m_file_quit);
     
-    m_edit = new JMenu(Language.getString("MENU_EDIT"));
-    m_edit.setMnemonic(Language.getString("MENU_EDIT_MN").charAt(0));
-    m_edit_undo = new JMenuItem(Language.getString("MENU_EDIT_UNDO"));
+    m_edit = new JMenu(Language.get("MENU_EDIT"));
+    m_edit.setMnemonic(Language.get("MENU_EDIT_MN").charAt(0));
+    m_edit_undo = new JMenuItem(Language.get("MENU_EDIT_UNDO"));
     m_edit_undo.setIcon(edit_undo_icon);
-    m_edit_undo.setMnemonic(Language.getString("MENU_EDIT_UNDO_MN").charAt(0));
+    m_edit_undo.setMnemonic(Language.get("MENU_EDIT_UNDO_MN").charAt(0));
     m_edit_undo.setAccelerator(KeyStroke.getKeyStroke('Z',mask));
     m_edit_undo.addActionListener(this);
-    m_edit_redo = new JMenuItem(Language.getString("MENU_EDIT_REDO"));
+    m_edit_redo = new JMenuItem(Language.get("MENU_EDIT_REDO"));
     m_edit_redo.setIcon(edit_redo_icon);
-    m_edit_redo.setMnemonic(Language.getString("MENU_EDIT_REDO_MN").charAt(0));    
+    m_edit_redo.setMnemonic(Language.get("MENU_EDIT_REDO_MN").charAt(0));    
     m_edit_redo.setAccelerator(KeyStroke.getKeyStroke('Y',mask));
     m_edit_redo.addActionListener(this);
-    m_edit_theme = new JMenuItem(Language.getString("MENU_EDIT_THEME"));
+    m_edit_theme = new JMenuItem(Language.get("MENU_EDIT_THEME"));
     m_edit_theme.setIcon(edit_icon);
-    m_edit_theme.setMnemonic(Language.getString("MENU_EDIT_THEME_MN").charAt(0));
+    m_edit_theme.setMnemonic(Language.get("MENU_EDIT_THEME_MN").charAt(0));
     m_edit_theme.setAccelerator(KeyStroke.getKeyStroke('I',mask));
     m_edit_theme.addActionListener(this);
-    m_edit_vars = new JMenuItem(Language.getString("MENU_EDIT_VARS"));
-    m_edit_vars.setMnemonic(Language.getString("MENU_EDIT_VARS_MN").charAt(0));
+    m_edit_vars = new JMenuItem(Language.get("MENU_EDIT_VARS"));
+    m_edit_vars.setMnemonic(Language.get("MENU_EDIT_VARS_MN").charAt(0));
     m_edit_vars.setAccelerator(KeyStroke.getKeyStroke('G',mask));
     m_edit_vars.addActionListener(this);
-    m_edit_up = new JMenuItem(Language.getString("MENU_EDIT_UP"));
+    m_edit_prefs = new JMenuItem(Language.get("MENU_EDIT_PREFS"));
+    m_edit_prefs.setIcon(editor_icon);
+    m_edit_prefs.setMnemonic(Language.get("MENU_EDIT_PREFS_MN").charAt(0));    
+    m_edit_prefs.addActionListener(this);
+    m_edit_up = new JMenuItem(Language.get("MENU_EDIT_UP"));
     m_edit_up.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UP,mask));
     m_edit_up.addActionListener(this);
-    m_edit_down = new JMenuItem(Language.getString("MENU_EDIT_DOWN"));
+    m_edit_down = new JMenuItem(Language.get("MENU_EDIT_DOWN"));
     m_edit_down.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,mask));    
     m_edit_down.addActionListener(this);
-    m_edit_left = new JMenuItem(Language.getString("MENU_EDIT_LEFT"));
+    m_edit_left = new JMenuItem(Language.get("MENU_EDIT_LEFT"));
     m_edit_left.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,mask));
     m_edit_left.addActionListener(this);
-    m_edit_right = new JMenuItem(Language.getString("MENU_EDIT_RIGHT"));
+    m_edit_right = new JMenuItem(Language.get("MENU_EDIT_RIGHT"));
     m_edit_right.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,mask));
     m_edit_right.addActionListener(this);
     
@@ -225,21 +229,22 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit.add(m_edit_theme);
     m_edit.addSeparator();
     m_edit.add(m_edit_vars);
+    m_edit.add(m_edit_prefs);
     m_edit.addSeparator();
     m_edit.add(m_edit_up);
     m_edit.add(m_edit_down);
     m_edit.add(m_edit_left);
     m_edit.add(m_edit_right);
         
-    m_help = new JMenu(Language.getString("MENU_HELP"));
-    m_help.setMnemonic(Language.getString("MENU_HELP_MN").charAt(0));    
-    m_help_doc = new JMenuItem(Language.getString("MENU_HELP_DOC"));
+    m_help = new JMenu(Language.get("MENU_HELP"));
+    m_help.setMnemonic(Language.get("MENU_HELP_MN").charAt(0));    
+    m_help_doc = new JMenuItem(Language.get("MENU_HELP_DOC"));
     m_help_doc.setIcon(help_icon);
-    m_help_doc.setMnemonic(Language.getString("MENU_HELP_DOC_MN").charAt(0));
+    m_help_doc.setMnemonic(Language.get("MENU_HELP_DOC_MN").charAt(0));
     m_help_doc.addActionListener(this);
     m_help_doc.setAccelerator(KeyStroke.getKeyStroke("F1"));    
-    m_help_about = new JMenuItem(Language.getString("MENU_HELP_ABOUT"));
-    m_help_about.setMnemonic(Language.getString("MENU_HELP_ABOUT_MN").charAt(0));
+    m_help_about = new JMenuItem(Language.get("MENU_HELP_ABOUT"));
+    m_help_about.setMnemonic(Language.get("MENU_HELP_ABOUT_MN").charAt(0));
     m_help_about.addActionListener(this);
     
     m_help.add(m_help_doc);
@@ -255,7 +260,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
     s = new Skin(this);
     
-    resources = new JInternalFrame(Language.getString("WIN_RES_TITLE"),true,false);    
+    resources = new JInternalFrame(Language.get("WIN_RES_TITLE"),true,false);    
     resources.setFrameIcon(resources_icon);
     resources.setMinimumSize(new Dimension(190,200));    
     SpringLayout res_layout = new SpringLayout();
@@ -273,26 +278,26 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     resources.add(res_tree_sp);       
     res_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
     res_add_bitmap = new JButton("",add_bitmap_icon);
-    res_add_bitmap.setToolTipText(Language.getString("WIN_RES_ADD_BMP"));
+    res_add_bitmap.setToolTipText(Language.get("WIN_RES_ADD_BMP"));
     res_add_bitmap.setMaximumSize(new Dimension(24,24));
     res_add_bitmap.setPreferredSize(new Dimension(24,24));
     res_add_bitmap.addActionListener(this);    
     res_add_font = new JButton("",add_font_icon);
-    res_add_font.setToolTipText(Language.getString("WIN_RES_ADD_FONT"));
+    res_add_font.setToolTipText(Language.get("WIN_RES_ADD_FONT"));
     res_add_font.setMaximumSize(new Dimension(24,24));
     res_add_font.setPreferredSize(new Dimension(24,24));
     res_add_font.addActionListener(this);
     res_duplicate = new JButton("",copy_icon);
-    res_duplicate.setToolTipText(Language.getString("WIN_RES_COPY"));
+    res_duplicate.setToolTipText(Language.get("WIN_RES_COPY"));
     res_duplicate.setPreferredSize(new Dimension(24,24));
     res_duplicate.addActionListener(this);
     res_edit = new JButton("",edit_icon);
-    res_edit.setToolTipText(Language.getString("WIN_RES_EDIT"));
+    res_edit.setToolTipText(Language.get("WIN_RES_EDIT"));
     res_edit.setMaximumSize(new Dimension(24,24));
     res_edit.setPreferredSize(new Dimension(24,24));
     res_edit.addActionListener(this);
     res_del = new JButton("",delete_icon);
-    res_del.setToolTipText(Language.getString("WIN_RES_DELETE"));
+    res_del.setToolTipText(Language.get("WIN_RES_DELETE"));
     res_del.setMaximumSize(new Dimension(24,24));
     res_del.setPreferredSize(new Dimension(24,24));
     res_del.addActionListener(this);
@@ -323,10 +328,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     res_layout.putConstraint(SpringLayout.EAST, resources.getContentPane(),5,SpringLayout.EAST, res_tree_sp);
     
     resources.pack();
-    resources.setSize(190,200);
+    resources.setSize(Config.getInt("win.res.width"),Config.getInt("win.res.height"));
     resources.setVisible(true);    
     
-    windows = new JInternalFrame(Language.getString("WIN_WIN_TITLE"),true,false); 
+    windows = new JInternalFrame(Language.get("WIN_WIN_TITLE"),true,false); 
     windows.setFrameIcon(windows_icon);
     windows.setMinimumSize(new Dimension(190,150));   
     SpringLayout win_layout = new SpringLayout();
@@ -344,37 +349,37 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     windows.add(win_tree_sp);       
     win_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
     win_add_window = new JButton("",add_window_icon);
-    win_add_window.setToolTipText(Language.getString("WIN_WIN_ADD"));
+    win_add_window.setToolTipText(Language.get("WIN_WIN_ADD"));
     win_add_window.setMaximumSize(new Dimension(24,24));
     win_add_window.setPreferredSize(new Dimension(24,24));
     win_add_window.addActionListener(this);
     win_add_layout = new JButton("",add_layout_icon);
-    win_add_layout.setToolTipText(Language.getString("WIN_WIN_ADD_LAY"));
+    win_add_layout.setToolTipText(Language.get("WIN_WIN_ADD_LAY"));
     win_add_layout.setMaximumSize(new Dimension(24,24));
     win_add_layout.setPreferredSize(new Dimension(24,24));
     win_add_layout.addActionListener(this);
     win_layout_up = new JButton("",up_icon);
-    win_layout_up.setToolTipText(Language.getString("WIN_WIN_MOVE_UP"));
+    win_layout_up.setToolTipText(Language.get("WIN_WIN_MOVE_UP"));
     win_layout_up.setMaximumSize(new Dimension(24,12));
     win_layout_up.setPreferredSize(new Dimension(24,12));
     win_layout_up.addActionListener(this);
     win_layout_down = new JButton("",down_icon);
-    win_layout_down.setToolTipText(Language.getString("WIN_WIN_MOVE_DOWN"));
+    win_layout_down.setToolTipText(Language.get("WIN_WIN_MOVE_DOWN"));
     win_layout_down.setMaximumSize(new Dimension(24,12));
     win_layout_down.setPreferredSize(new Dimension(24,12));
     win_layout_down.addActionListener(this);
     win_duplicate = new JButton("",copy_icon);
-    win_duplicate.setToolTipText(Language.getString("WIN_WIN_COPY"));
+    win_duplicate.setToolTipText(Language.get("WIN_WIN_COPY"));
     win_duplicate.setMaximumSize(new Dimension(24,24));
     win_duplicate.setPreferredSize(new Dimension(24,24));
     win_duplicate.addActionListener(this);
     win_edit = new JButton("",edit_icon);
-    win_edit.setToolTipText(Language.getString("WIN_WIN_EDIT"));
+    win_edit.setToolTipText(Language.get("WIN_WIN_EDIT"));
     win_edit.setMaximumSize(new Dimension(24,24));
     win_edit.setPreferredSize(new Dimension(24,24));
     win_edit.addActionListener(this);
     win_del = new JButton("",delete_icon);
-    win_del.setToolTipText(Language.getString("WIN_WIN_DELETE"));
+    win_del.setToolTipText(Language.get("WIN_WIN_DELETE"));
     win_del.setMaximumSize(new Dimension(24,24));
     win_del.setPreferredSize(new Dimension(24,24));
     win_del.addActionListener(this);
@@ -407,10 +412,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_layout.putConstraint(SpringLayout.EAST, windows.getContentPane(),5,SpringLayout.EAST, win_tree_sp);
     
     windows.pack();
-    windows.setSize(190,150);
+    windows.setSize(Config.getInt("win.win.width"),Config.getInt("win.win.height"));
     windows.setVisible(true);   
     
-    items = new JInternalFrame(Language.getString("WIN_ITEMS_TITLE"),true,false);   
+    items = new JInternalFrame(Language.get("WIN_ITEMS_TITLE"),true,false);   
     items.setFrameIcon(items_icon);
     items.setMinimumSize(new Dimension(190,150));   
     SpringLayout items_layout = new SpringLayout();
@@ -428,32 +433,32 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items.add(items_tree_sp);       
     items_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
     items_add = new JButton("",add_icon);
-    items_add.setToolTipText(Language.getString("WIN_ITEMS_ADD"));
+    items_add.setToolTipText(Language.get("WIN_ITEMS_ADD"));
     items_add.setMaximumSize(new Dimension(24,24));
     items_add.setPreferredSize(new Dimension(24,24));
     items_add.addActionListener(this);
     items_up = new JButton("",up_icon);
-    items_up.setToolTipText(Language.getString("WIN_ITEMS_MOVE_UP"));
+    items_up.setToolTipText(Language.get("WIN_ITEMS_MOVE_UP"));
     items_up.setMaximumSize(new Dimension(24,12));
     items_up.setPreferredSize(new Dimension(24,12));
     items_up.addActionListener(this);
     items_down = new JButton("",down_icon);
-    items_down.setToolTipText(Language.getString("WIN_ITEMS_MOVE_DOWN"));
+    items_down.setToolTipText(Language.get("WIN_ITEMS_MOVE_DOWN"));
     items_down.setMaximumSize(new Dimension(24,12));
     items_down.setPreferredSize(new Dimension(24,12));
     items_down.addActionListener(this);
     items_duplicate = new JButton("",copy_icon);
-    items_duplicate.setToolTipText(Language.getString("WIN_ITEMS_COPY"));
+    items_duplicate.setToolTipText(Language.get("WIN_ITEMS_COPY"));
     items_duplicate.setMaximumSize(new Dimension(24,24));
     items_duplicate.setPreferredSize(new Dimension(24,24));
     items_duplicate.addActionListener(this);
     items_edit = new JButton("",edit_icon);
-    items_edit.setToolTipText(Language.getString("WIN_ITEMS_EDIT"));
+    items_edit.setToolTipText(Language.get("WIN_ITEMS_EDIT"));
     items_edit.setMaximumSize(new Dimension(24,24));
     items_edit.setPreferredSize(new Dimension(24,24));
     items_edit.addActionListener(this);
     items_del = new JButton("",delete_icon);
-    items_del.setToolTipText(Language.getString("WIN_ITEMS_DELETE"));
+    items_del.setToolTipText(Language.get("WIN_ITEMS_DELETE"));
     items_del.setMaximumSize(new Dimension(24,24));
     items_del.setPreferredSize(new Dimension(24,24));
     items_del.addActionListener(this);
@@ -483,7 +488,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_layout.putConstraint(SpringLayout.EAST, items.getContentPane(),5,SpringLayout.EAST, items_tree_sp);
     
     items.pack();
-    items.setSize(190,200);
+    items.setSize(Config.getInt("win.items.width"),Config.getInt("win.items.height"));
     items.setVisible(true); 
     
     pvwin = new PreviewWindow(this);
@@ -493,22 +498,22 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     jdesk.add(items);    
     jdesk.add(pvwin.frame);
     
-    resources.setLocation(0,0);
-    windows.setLocation(0,200);
-    items.setLocation(0,350);
+    resources.setLocation(Config.getInt("win.res.x"),Config.getInt("win.res.y"));
+    windows.setLocation(Config.getInt("win.win.x"),Config.getInt("win.win.y"));
+    items.setLocation(Config.getInt("win.items.x"),Config.getInt("win.items.y"));
     pvwin.frame.setLocation(250,0);
     
     res_add_bitmap_pu = new JPopupMenu();
-    res_add_bitmap_pu_b = new JMenuItem(Language.getString("WIN_RES_PU_ADD_BMP"));
+    res_add_bitmap_pu_b = new JMenuItem(Language.get("WIN_RES_PU_ADD_BMP"));
     res_add_bitmap_pu_b.addActionListener(this);
     res_add_bitmap_pu.add(res_add_bitmap_pu_b);
-    res_add_bitmap_pu_s = new JMenuItem(Language.getString("WIN_RES_PU_ADD_SBMP"));
+    res_add_bitmap_pu_s = new JMenuItem(Language.get("WIN_RES_PU_ADD_SBMP"));
     res_add_bitmap_pu_s.addActionListener(this);
     res_add_bitmap_pu.add(res_add_bitmap_pu_s);
     jdesk.add(res_add_bitmap_pu);
     
     items_add_pu = new JPopupMenu();
-    items_add_pu_tp = new JMenu(Language.getString("WIN_ITEMS_PU_PANEL_ADD"));    
+    items_add_pu_tp = new JMenu(Language.get("WIN_ITEMS_PU_PANEL_ADD"));    
     items_add_pu_tp_anchor = new JMenuItem("Anchor");
     items_add_pu_tp_anchor.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_anchor);
@@ -571,7 +576,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     add(jdesk);       
     
     setVisible(true);       
-    setSize(800,600);
+    setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));    
 
     update();
 
@@ -613,8 +618,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * Shows a dialog from which the user can choose to either create a new skin, open an existing skin or quit the skin editor.
    */
   public void showWelcomeDialog() {
-    Object[] options= {Language.getString("WELCOME_NEW"), Language.getString("WELCOME_OPEN"),Language.getString("WELCOME_QUIT")};
-    int n = JOptionPane.showOptionDialog(this,Language.getString("WELCOME_MSG"),Language.getString("WELCOME_TITLE"),
+    Object[] options= {Language.get("WELCOME_NEW"), Language.get("WELCOME_OPEN"),Language.get("WELCOME_QUIT")};
+    int n = JOptionPane.showOptionDialog(this,Language.get("WELCOME_MSG"),Language.get("WELCOME_TITLE"),
                                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
     if(n==0) {
       createNew();
@@ -671,7 +676,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   private void openFile(File f) {
     if(!f.exists()) {
-      JOptionPane.showMessageDialog(this,Language.getString("ERROR_FILENEXIST_MSG").replaceAll("%f", f.getName()),Language.getString("ERROR_FILENEXIST_TITLE"),JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this,Language.get("ERROR_FILENEXIST_MSG").replaceAll("%f", f.getName()),Language.get("ERROR_FILENEXIST_TITLE"),JOptionPane.ERROR_MESSAGE);
       if(!opened) showWelcomeDialog();
       return;
     }
@@ -682,8 +687,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     ProgressWindow pwin = new ProgressWindow(this,"");  
     if(f.toString().toLowerCase().endsWith(".vlt")) {
       String vltname = f.getName().replaceAll(".vlt","");
-      Object[] options= {Language.getString("VLT_EX_YES"), Language.getString("VLT_EX_NO")};
-      int n = JOptionPane.showOptionDialog(this,Language.getString("VLT_EX_MSG").replaceAll("%f", vltname+"_unpacked"),Language.getString("VLT_EX_TITLE"),
+      Object[] options= {Language.get("VLT_EX_YES"), Language.get("VLT_EX_NO")};
+      int n = JOptionPane.showOptionDialog(this,Language.get("VLT_EX_MSG").replaceAll("%f", vltname+"_unpacked"),Language.get("VLT_EX_TITLE"),
                          JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
       if(n!=0) {
         showWelcomeDialog();
@@ -691,7 +696,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
       unpackfolder.mkdirs();
       boolean unpacked=false;
-      pwin.setText(Language.getString("VLT_EX_PROGRESS"));      
+      pwin.setText(Language.get("VLT_EX_PROGRESS"));      
       pwin.setVisible(true);        
       // <editor-fold defaultstate="collapsed" desc="zip">
       try {          
@@ -755,19 +760,19 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       //</editor-fold>
       if(!unpacked) {
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,Language.getString("ERROR_VLT_UNPACK_MSG"),Language.getString("ERROR_VLT_UNPACK_TITLE"),JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_UNPACK_MSG"),Language.get("ERROR_VLT_UNPACK_TITLE"),JOptionPane.ERROR_MESSAGE);
         opening=false;
         return;
       }
       if(f==base_fc.getSelectedFile()) {
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,Language.getString("ERROR_VLT_NOTHEME_MSG"),Language.getString("ERROR_VLT_NOTHEME_TITLE"),JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_NOTHEME_MSG"),Language.get("ERROR_VLT_NOTHEME_TITLE"),JOptionPane.ERROR_MESSAGE);
         opening=false;
         return;
       }      
       setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));      
     }
-    pwin.setText(Language.getString("XML_PARSING_PROGRESS"));
+    pwin.setText(Language.get("XML_PARSING_PROGRESS"));
     pwin.setVisible(true);
     setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
     m_file_png.setEnabled(false);
@@ -836,7 +841,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         Runtime.getRuntime().exec(command);
       }
       catch (IOException ex) {
-         JOptionPane.showMessageDialog(this,Language.getString("ERROR_VLC_LAUNCH_MSG"),Language.getString("ERROR_VLC_LAUNCH_ERROR"),JOptionPane.ERROR_MESSAGE);
+         JOptionPane.showMessageDialog(this,Language.get("ERROR_VLC_LAUNCH_MSG"),Language.get("ERROR_VLC_LAUNCH_ERROR"),JOptionPane.ERROR_MESSAGE);
       }
     }
     // </editor-fold>
@@ -955,6 +960,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     else if(e.getSource().equals(m_edit_theme)) s.showThemeOptions();
     else if(e.getSource().equals(m_edit_vars)) s.gvars.showOptions();
+    else if(e.getSource().equals(m_edit_prefs)) Config.showOptions();
     // <editor-fold defaultstate="collapsed" desc="Open Help"> 
     else if(e.getSource().equals(m_help_doc)) {
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/");
@@ -962,8 +968,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="About"> 
     else if(e.getSource().equals(m_help_about)) {
-      JOptionPane.showMessageDialog(this,Language.getString("ABOUT_MSG").replaceAll("%w", "http://www.videolan.org/vlc/skineditor.html").replaceAll("%y", String.valueOf(Calendar.getInstance().get(Calendar.YEAR))),
-            Language.getString("ABOUT_TITLE"), JOptionPane.INFORMATION_MESSAGE,icon);
+      JOptionPane.showMessageDialog(this,Language.get("ABOUT_MSG").replaceAll("%w", "http://www.videolan.org/vlc/skineditor.html").replaceAll("%y", String.valueOf(Calendar.getInstance().get(Calendar.YEAR))),
+            Language.get("ABOUT_TITLE"), JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    
     else if(e.getSource().equals(res_add_bitmap)) res_add_bitmap_pu.show(res_add_bitmap,0,0);
@@ -971,7 +977,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(res_add_bitmap_pu_b)) {
       if(bitmap_adder==null) {
         bitmap_adder = new JFileChooser();
-        bitmap_adder.setFileFilter(new CustomFileFilter(bitmap_adder,"png",Language.getString("ADD_BMP_FILE_FILTER_DESC"),true,s.skinfolder));
+        bitmap_adder.setFileFilter(new CustomFileFilter(bitmap_adder,"png",Language.get("ADD_BMP_FILE_FILTER_DESC"),true,s.skinfolder));
         bitmap_adder.setCurrentDirectory(new File(s.skinfolder));   
         bitmap_adder.setAcceptAllFileFilterUsed(false);
         bitmap_adder.setMultiSelectionEnabled(true);
@@ -1001,15 +1007,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
           }
           else {
-            JOptionPane.showMessageDialog(this,Language.getString("ERROR_ADD_SBMP_NOTBMP"),Language.getString("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,Language.get("ERROR_ADD_SBMP_NOTBMP"),Language.get("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           }
         }
         else {
-          JOptionPane.showMessageDialog(this,Language.getString("ERROR_ADD_SBMP_NOBMP"),Language.getString("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(this,Language.get("ERROR_ADD_SBMP_NOBMP"),Language.get("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         }
       }
       else {
-        JOptionPane.showMessageDialog(this,Language.getString("ERROR_ADD_SBMP_NOBMP"),Language.getString("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_ADD_SBMP_NOBMP"),Language.get("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
       }
     }
     // </editor-fold>
@@ -1018,7 +1024,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(font_adder==null) {
         font_adder = new JFileChooser();
         String[] ext = { "ttf" , "otf" };
-        font_adder.setFileFilter(new CustomFileFilter(font_adder,ext,Language.getString("ADD_FONT_FILE_FILTER_DESC"),true,s.skinfolder));
+        font_adder.setFileFilter(new CustomFileFilter(font_adder,ext,Language.get("ADD_FONT_FILE_FILTER_DESC"),true,s.skinfolder));
         font_adder.setCurrentDirectory(new File(s.skinfolder));   
         font_adder.setAcceptAllFileFilterUsed(false);
         font_adder.setMultiSelectionEnabled(true);
@@ -1038,7 +1044,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_resource==null) return;
       Resource r = s.getResource(selected_resource);
       if(r==null) return;
-      String p = JOptionPane.showInputDialog(this, Language.getString("DUPLICATE_MSG"), "%oldid%_copy");
+      String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
         Bitmap b = (Bitmap)r;        
         Bitmap b2 = new Bitmap(b.returnCode(""),s);        
@@ -1068,7 +1074,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Duplicate window/layout">
     else if(e.getSource().equals(win_duplicate)) {
         if(selected_window==null) return;
-        String p = JOptionPane.showInputDialog(this, Language.getString("DUPLICATE_MSG"), "%oldid%_copy");
+        String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
         if(selected_layout==null) {
             Window w = s.getWindow(selected_window);
             if(w==null) return;
@@ -1091,7 +1097,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Duplicate item">
     else if(e.getSource().equals(items_duplicate)) {
         if(selected_item==null) return;
-        String p = JOptionPane.showInputDialog(this, Language.getString("DUPLICATE_MSG"), "%oldid%_copy");
+        String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
         Item i = s.getItem(selected_item);
         if(i==null) return;        
         if(i.getClass()==Anchor.class) {
@@ -1197,11 +1203,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // <editor-fold defaultstate="collapsed" desc="Delete Resource">
     else if(e.getSource().equals(res_del)) {
       if(s.isUsed(selected_resource)) {
-        JOptionPane.showMessageDialog(this,Language.getString("ERROR_RES_DEL_INUSE"),Language.getString("ERROR_RES_DEL_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_RES_DEL_INUSE"),Language.get("ERROR_RES_DEL_TITLE"),JOptionPane.INFORMATION_MESSAGE);
       }
       else {
-        Object[] options= {Language.getString("CHOICE_YES"),Language.getString("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.getString("DEL_CONFIRM_MSG").replaceAll("%n", selected_resource),Language.getString("DEL_CONFIRM_TITLE"),
+        Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", selected_resource),Language.get("DEL_CONFIRM_TITLE"),
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
         if(n==0) {
           Resource r = s.getResource(selected_resource);
@@ -1225,7 +1231,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         if(w!=null) w.addLayout();
       }
       else {
-        JOptionPane.showMessageDialog(this,Language.getString("ERROR_ADD_LAYOUT_MSG"),Language.getString("ERROR_ADD_LAYOUT_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_ADD_LAYOUT_MSG"),Language.get("ERROR_ADD_LAYOUT_TITLE"),JOptionPane.INFORMATION_MESSAGE);
       }
     }
     // </editor-fold>
@@ -1269,8 +1275,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         Window w = s.getWindow(selected_window);
         Layout l = w.getLayout(selected_layout);
         if(l!=null) {
-          Object[] options= {Language.getString("CHOICE_YES"),Language.getString("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.getString("DEL_CONFIRM_MSG").replaceAll("%n", l.id),Language.getString("DEL_CONFIRM_TITLE"),
+          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", l.id),Language.get("DEL_CONFIRM_TITLE"),
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
             LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
@@ -1286,8 +1292,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       else if(selected_window!=null) {        
         Window w= s.getWindow(selected_window);
         if(w!=null) {
-          Object[] options= {Language.getString("CHOICE_YES"),Language.getString("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.getString("DEL_CONFIRM_MSG").replaceAll("%n", w.id),Language.getString("DEL_CONFIRM_TITLE"),
+          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", w.id),Language.get("DEL_CONFIRM_TITLE"),
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
             WindowDeletionEvent wde = new WindowDeletionEvent(w, s, s.windows.indexOf(w));
@@ -1442,8 +1448,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_item!=null) {
         java.util.List<Item> p = s.getParentListOf(selected_item);
         if(p!=null) {
-          Object[] options= {Language.getString("CHOICE_YES"),Language.getString("CHOICE_NO")};
-          int n = JOptionPane.showOptionDialog(this,Language.getString("DEL_CONFIRM_MSG").replaceAll("%n", selected_item),Language.getString("DEL_CONFIRM_TITLE"),
+          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+          int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", selected_item),Language.get("DEL_CONFIRM_TITLE"),
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
             Item i = s.getItem(selected_item);
@@ -1580,15 +1586,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param s Action description
    */
   public void setUndoString(String s) {
-    if(s.isEmpty()) m_edit_undo.setText(Language.getString("MENU_EDIT_UNDO"));
-    else m_edit_undo.setText(Language.getString("MENU_EDIT_UNDO")+": "+s);
+    if(s.isEmpty()) m_edit_undo.setText(Language.get("MENU_EDIT_UNDO"));
+    else m_edit_undo.setText(Language.get("MENU_EDIT_UNDO")+": "+s);
   }
   /** Sets the action description that can be redone
    * @param s Action description
    */
   public void setRedoString(String s) {
-    if(s.isEmpty()) m_edit_redo.setText(Language.getString("MENU_EDIT_REDO"));
-    else m_edit_redo.setText(Language.getString("MENU_EDIT_REDO")+": "+s);
+    if(s.isEmpty()) m_edit_redo.setText(Language.get("MENU_EDIT_REDO"));
+    else m_edit_redo.setText(Language.get("MENU_EDIT_REDO")+": "+s);
   }
   /**
    * Creates an ImageIcon of an image included in the JAR
@@ -1623,7 +1629,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         String cdl = ubr.readLine();
         if(!cver.equals(VERSION)) {
           System.out.println("Update available!");
-          int i = JOptionPane.showConfirmDialog(this, Language.getString("UPDATE_MSG").replaceAll("%v",VERSION).replaceAll("%c", cver), Language.getString("UPDATE_TITLE"), JOptionPane.YES_NO_OPTION);
+          int i = JOptionPane.showConfirmDialog(this, Language.get("UPDATE_MSG").replaceAll("%v",VERSION).replaceAll("%c", cver), Language.get("UPDATE_TITLE"), JOptionPane.YES_NO_OPTION);
           if(i==0) {
             URL url = new URL(cdl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -1649,10 +1655,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             InputStream stream = connection.getInputStream();
             boolean downloading = true;
             int downloaded = 0;
-            ProgressWindow pwin = new ProgressWindow(this,Language.getString("DOWNLOAD_PROGRESS"));
+            ProgressWindow pwin = new ProgressWindow(this,Language.get("DOWNLOAD_PROGRESS"));
             pwin.setVisible(true);
             pwin.setProgress(0);
-            pwin.setText(Language.getString("CONNECT_PROGRESS"));
+            pwin.setText(Language.get("CONNECT_PROGRESS"));
             while (downloaded<size) {
               /* Size buffer according to how much of the
                  file is left to download. */
@@ -1696,7 +1702,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
               }
             }
 
-            JOptionPane.showMessageDialog(this, Language.getString("UPDATE_SUCCESS_MSG"),Language.getString("UPDATE_SUCCESS_TITLE"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Language.get("UPDATE_SUCCESS_MSG"),Language.get("UPDATE_SUCCESS_TITLE"), JOptionPane.INFORMATION_MESSAGE);
 
             setVisible(false);
             if(System.getProperty("os.name").indexOf("Windows")!=-1) {
@@ -1720,18 +1726,18 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         throw new Exception("Update page had invalid header: "+header);
       }
     } catch(Exception ex) {
-      JOptionPane.showMessageDialog(this, ex.toString(), Language.getString("ERROR_UPDATE_TITLE"), JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, ex.toString(), Language.get("ERROR_UPDATE_TITLE"), JOptionPane.ERROR_MESSAGE);
       ex.printStackTrace();
     }
   }
   
   private void exit() {
     if(!saved) {
-      Object[] options= { Language.getString("CHOICE_YES"), Language.getString("CHOICE_NO"), Language.getString("CHOICE_CANCEL") };
+      Object[] options= { Language.get("CHOICE_YES"), Language.get("CHOICE_NO"), Language.get("CHOICE_CANCEL") };
       int n = JOptionPane.showOptionDialog(
             this,
-            Language.getString("CONFIRM_EXIT_MSG"),
-            Language.getString("CONFIRM_EXIT_TITLE"),
+            Language.get("CONFIRM_EXIT_MSG"),
+            Language.get("CONFIRM_EXIT_TITLE"),
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE,
             null,
@@ -1740,22 +1746,39 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             );
       if(n==0) {
         s.save();
-        Config.saveConfig();
-        System.exit(0);
+        doExit();
       }
       else if(n==1) {
-        Config.saveConfig();
-        System.exit(0);
+        doExit();
       }     
       else {
         return;
       }
     }
     else {
-      Config.saveConfig();
-      System.exit(0);
+      doExit();
     }
   }
+  
+  private void doExit() {
+    Config.set("win.main.width", getWidth());
+    Config.set("win.main.height", getHeight());
+    Config.set("win.res.x",resources.getX());
+    Config.set("win.res.y",resources.getY());
+    Config.set("win.res.width",resources.getWidth());
+    Config.set("win.res.height",resources.getHeight());
+    Config.set("win.win.x",windows.getX());
+    Config.set("win.win.y",windows.getY());
+    Config.set("win.win.width",windows.getWidth());
+    Config.set("win.win.height",windows.getHeight());
+    Config.set("win.items.x",items.getX());
+    Config.set("win.items.y",items.getY());
+    Config.set("win.items.width",items.getWidth());
+    Config.set("win.items.height",items.getHeight());
+    Config.save();
+    System.exit(0);
+  }
+  
   /**
    * Creates a new instance of Main and thus launches the editor
    * @param args the command line arguments

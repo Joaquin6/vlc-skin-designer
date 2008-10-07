@@ -33,7 +33,11 @@ public class Language {
   
   private static Hashtable<String, String> strings = new Hashtable<String, String>();
   
-  public static void loadLanguage(File f) {
+  /**
+   * Loads the current language from a file
+   * @param f The language file, e.g. lang/English.txt
+   */
+  public static void load(File f) {
     try {
       FileReader fr = new FileReader(f);
       BufferedReader br = new BufferedReader(fr);
@@ -60,7 +64,12 @@ public class Language {
     }
   }
   
-  public static String getString(String key) {
+  /**
+   * Gets the string in the current language for the given key 
+   * @param key the string key
+   * @return the translated string
+   */
+  public static String get(String key) {
     String s = strings.get(key);    
     return (s!=null)?s:key;
   }

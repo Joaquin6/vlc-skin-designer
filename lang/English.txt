@@ -29,6 +29,8 @@ MENU_EDIT_THEME|Theme settings
 MENU_EDIT_THEME_MN|T
 MENU_EDIT_VARS|Global variables
 MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Preferences
+MENU_EDIT_PREFS_MN|P
 MENU_EDIT_UP|Move selected item up
 MENU_EDIT_DOWN|Move selected item down
 MENU_EDIT_LEFT|Move selected item left
@@ -77,9 +79,14 @@ WELCOME_NEW|Create a new skin
 WELCOME_OPEN|Open an existing skin
 WELCOME_QUIT|Quit
 
+#Preferences window
+WIN_PREFS_TITLE|Preferences
+WIN_PREFS_UPDATE_L|Enable auto-update:
+WIN_PREFS_LANG_L|Language (takes effect on next start):
+
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
-ABOUT_MSG|Copyright 2007-%y The VideoLAN Team\nLead programmer: Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)\nWebsite: %w\nReleased under terms of the GPL 2+\n\nCredits:\nTimothy Gerard Endres for registry access and TAR support (Public Domain)\nThe Tango! Desktop Project (http://tango.freedesktop.org/) for some icons (Creative Commons BY-SA 2.5)\nCyril Deguet (asmax@via.ecp.fr) and Olivier Teulière (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)
+ABOUT_MSG|<html><h3>Copyright 2007-%y The VideoLAN Team</h3>Released under terms of the GPL 2+<br><br><b>Lead programmer:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Website:</b> %w<br><br><b>Credits:</b><br>Timothy Gerard Endres for registry access and TAR support (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) for some icons (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)</html>
 VLT_EX_TITLE|Importing a VLT file
 VLT_EX_MSG|The VLT file will be unpacked to a subfolder called "%f".\nDo you want to continue?
 VLT_EX_YES|Yes, unpack
