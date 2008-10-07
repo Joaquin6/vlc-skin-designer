@@ -123,8 +123,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   public Main(String[] args) {    
     
-    //TODO: Load configuration
-    Language.loadLanguage(new File("lang/English.txt"));
+    Config.loadConfig();
+    Language.loadLanguage(new File("lang"+File.separator+Config.getValue("language")+".txt"));
     
     
     setTitle("VLC Skin Editor "+VERSION);
@@ -950,29 +950,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Quit"> 
     else if(e.getSource().equals(m_file_quit)) {
-      if(!saved) {
-        Object[] options= { "Yes", "No", "Don't quit" };
-        int n = JOptionPane.showOptionDialog(
-              this,
-              "Would you like to save your skin before exiting?",
-              "Your changes were not saved",
-              JOptionPane.YES_NO_CANCEL_OPTION,
-              JOptionPane.QUESTION_MESSAGE,
-              null,
-              options,
-              options[1]
-              );
-        if(n==0) {
-          s.save();
-          System.exit(0);
-        }
-        else if(n==1) {
-          System.exit(0);
-        }       
-      }
-      else {
-        System.exit(0);
-      }
+      exit();
     }
     // </editor-fold>
     else if(e.getSource().equals(m_edit_theme)) s.showThemeOptions();
@@ -1528,32 +1506,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
   }  
   public void windowClosing(WindowEvent e) {
-    if(!saved) {
-      Object[] options= { Language.getString("CHOICE_YES"), Language.getString("CHOICE_NO"), Language.getString("CHOICE_CANCEL") };
-      int n = JOptionPane.showOptionDialog(
-            this,
-            Language.getString("CONFIRM_EXIT_MSG"),
-            Language.getString("CONFIRM_EXIT_TITLE"),
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[1]
-            );
-      if(n==0) {
-        s.save();
-        System.exit(0);
-      }
-      else if(n==1) {
-        System.exit(0);
-      }     
-      else {
-        return;
-      }
-    }
-    else {
-      System.exit(0);
-    }
+    exit();
   }
   public void windowClosed(WindowEvent e) {}
   public void windowActivated(WindowEvent e) {
@@ -1769,6 +1722,38 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     } catch(Exception ex) {
       JOptionPane.showMessageDialog(this, ex.toString(), Language.getString("ERROR_UPDATE_TITLE"), JOptionPane.ERROR_MESSAGE);
       ex.printStackTrace();
+    }
+  }
+  
+  private void exit() {
+    if(!saved) {
+      Object[] options= { Language.getString("CHOICE_YES"), Language.getString("CHOICE_NO"), Language.getString("CHOICE_CANCEL") };
+      int n = JOptionPane.showOptionDialog(
+            this,
+            Language.getString("CONFIRM_EXIT_MSG"),
+            Language.getString("CONFIRM_EXIT_TITLE"),
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[1]
+            );
+      if(n==0) {
+        s.save();
+        Config.saveConfig();
+        System.exit(0);
+      }
+      else if(n==1) {
+        Config.saveConfig();
+        System.exit(0);
+      }     
+      else {
+        return;
+      }
+    }
+    else {
+      Config.saveConfig();
+      System.exit(0);
     }
   }
   /**

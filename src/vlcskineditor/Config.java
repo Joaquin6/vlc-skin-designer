@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Language.java
+ * Config.java
  *****************************************************************************
  * Copyright (C) 2007 Daniel Dreibrodt
  *
@@ -23,23 +23,27 @@
 package vlcskineditor;
 
 import java.io.*;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
- * Class to manage the multi-language interface
+ * Class to manage the configuration
  * @author Daniel Dreibrodt
  */
-public class Language {
+public class Config {
   
   private static Hashtable<String, String> strings = new Hashtable<String, String>();
+  private static File configFile = new File("VLCSkinEditor.cfg");
   
-  public static void loadLanguage(File f) {
+  static {
+    strings.put("autoupdate", "true");
+    strings.put("language", "English");
+  }
+  
+  public static void loadConfig() {
     try {
-      FileReader fr = new FileReader(f);
-      BufferedReader br = new BufferedReader(fr);
-      
-      //Readers have been initiated successfully, thus the file exists and the former table can be cleared
-      strings.clear();      
+      FileReader fr = new FileReader(configFile);
+      BufferedReader br = new BufferedReader(fr);         
       
       String line = "";
       while( (line = br.readLine()) != null) {
@@ -52,17 +56,43 @@ public class Language {
       }
       
       br.close();
-      fr.close();            
+      fr.close();      
     } catch(FileNotFoundException ex) {
-      ex.printStackTrace();
+      System.out.println("Configuration does not yet exist. Creating it...");
+      saveConfig();
     } catch(IOException ex) {
       ex.printStackTrace();
     }
   }
   
-  public static String getString(String key) {
+  public static String getValue(String key) {
     String s = strings.get(key);    
     return (s!=null)?s:key;
   }
   
+  public static void setValue(String key, String value) {
+    strings.put(key, value);
+  }
+  
+  public static void saveConfig() {
+    try {
+      FileWriter fw = new FileWriter(configFile);
+      BufferedWriter bw = new BufferedWriter(fw);
+      Enumeration<String> keys = strings.keys();
+      while(keys.hasMoreElements()) {
+        String key = keys.nextElement();
+        String value = strings.get(key);
+        bw.write(key+"|"+value);
+        bw.newLine();
+      }
+      bw.close();
+      fw.close();
+    } catch(IOException ex) {
+      ex.printStackTrace();
+    }
+    
+  }
+  
 }
+
+
