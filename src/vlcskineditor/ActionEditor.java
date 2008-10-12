@@ -48,70 +48,70 @@ public class ActionEditor extends JFrame implements ActionListener{
   JPanel actions_p = new JPanel();
   //Opens a PopupMenu from which the user can add an action to the end of the chain
   JButton add_btn = new JButton(add_icon);  
-  JButton ok_btn = new JButton("OK");
+  JButton ok_btn = new JButton(Language.get("BUTTON_OK"));
   
-  JPopupMenu actions_pu = new JPopupMenu("Actions");
-  JMenu actions_dialogs = new JMenu("Show a dialog");
-  JMenu actions_playlist = new JMenu("Playlist");
-  JMenu actions_dvd = new JMenu("DVD");
-  JMenu actions_windows = new JMenu("Skin");  
-  JMenuItem actions_vlc_play = new JMenuItem("Play");
-  JMenuItem actions_vlc_pause = new JMenuItem("Pause");
-  JMenuItem actions_vlc_stop = new JMenuItem("Stop");
-  JMenuItem actions_vlc_faster = new JMenuItem("Play faster");
-  JMenuItem actions_vlc_slower = new JMenuItem("Play slower");
-  JMenuItem actions_vlc_mute = new JMenuItem("Mute the volume");
-  JMenuItem actions_vlc_volumeUp = new JMenuItem("Increase the volume");
-  JMenuItem actions_vlc_volumeDown = new JMenuItem("Reduce the volume");
-  JMenuItem actions_vlc_fullscreen = new JMenuItem("Toggle fullscreen mode");
-  JMenuItem actions_vlc_snapshot = new JMenuItem("Take a snapshot");
-  JMenuItem actions_vlc_onTop = new JMenuItem("Toggle always on top");
-  JMenuItem actions_vlc_minimize = new JMenuItem("Minimize VLC");
-  JMenuItem actions_vlc_quit = new JMenuItem("Quit VLC");  
-  JMenuItem actions_eq_enable = new JMenuItem("Enable the equalizer");
-  JMenuItem actions_eq_disable = new JMenuItem("Disable the equalizer");
-  JMenuItem actions_dialogs_changeSkin = new JMenuItem("Change skin");
-  JMenuItem actions_dialogs_fileSimple = new JMenuItem("Open file (simple)");
-  JMenuItem actions_dialogs_file = new JMenuItem("Open file (extended)");
-  JMenuItem actions_dialogs_directory = new JMenuItem("Open directory");
-  JMenuItem actions_dialogs_disc = new JMenuItem("Open disc");
-  JMenuItem actions_dialogs_net = new JMenuItem("Open network stream");
-  JMenuItem actions_dialogs_messages = new JMenuItem("Message log");
-  JMenuItem actions_dialogs_prefs = new JMenuItem("Preferences");
-  JMenuItem actions_dialogs_fileInfo = new JMenuItem("File information");
-  JMenuItem actions_dialogs_playlist = new JMenuItem("Unskinned playlist");
-  JMenuItem actions_dialogs_streamingWizard = new JMenuItem("Streaming Wizard");
-  JMenuItem actions_dialogs_popup = new JMenuItem("Full popup menu");
-  JMenuItem actions_dialogs_audioPopup = new JMenuItem("Audio settings popup menu");
-  JMenuItem actions_dialogs_videoPopup = new JMenuItem("Video settings popup menu");
-  JMenuItem actions_dialogs_miscPopup = new JMenuItem("Miscellaneous settings popup menu");
-  JMenuItem actions_playlist_add = new JMenuItem("Add a new item");
-  JMenuItem actions_playlist_del = new JMenuItem("Remove selected items");
-  JMenuItem actions_playlist_next = new JMenuItem("Play next item");
-  JMenuItem actions_playlist_previous = new JMenuItem("Play previous item");
-  JMenuItem actions_playlist_setRandom = new JMenuItem("Play in random/normal order");
-  JMenuItem actions_playlist_setLoop = new JMenuItem("Loop playlist/play it once");
-  JMenuItem actions_playlist_setRepeat = new JMenuItem("Repeat current item/play it once");
-  JMenuItem actions_playlist_sort = new JMenuItem("Sort alphabetically");
-  JMenuItem actions_playlist_load = new JMenuItem("Load from file");
-  JMenuItem actions_playlist_save = new JMenuItem("Save to file");
-  JMenuItem actions_dvd_nextTitle = new JMenuItem("Next title");
-  JMenuItem actions_dvd_previousTitle = new JMenuItem("Previous title");
-  JMenuItem actions_dvd_nextChapter = new JMenuItem("Next chapter");
-  JMenuItem actions_dvd_previousChapter = new JMenuItem("Previous Chapter");
-  JMenuItem actions_dvd_rootMenu = new JMenuItem("Main menu");
-  JMenuItem actions_windows_show = new JMenuItem("Show a window");
-  JMenuItem actions_windows_hide = new JMenuItem("Hide a window");
-  JMenuItem actions_windows_maximize = new JMenuItem("Maximize a window");
-  JMenuItem actions_windows_unmaximize = new JMenuItem("Unmaximize a window");
-  JMenuItem actions_windows_setLayout = new JMenuItem("Change the layout of a window");
+  JPopupMenu actions_pu = new JPopupMenu(Language.get("ACTIONS_PU"));
+  JMenu actions_dialogs = new JMenu(Language.get("ACTIONS_DIALOGS"));
+  JMenu actions_playlist = new JMenu(Language.get("ACTIONS_PLAYLIST"));
+  JMenu actions_dvd = new JMenu(Language.get("ACTIONS_DVD"));
+  JMenu actions_windows = new JMenu(Language.get("ACTIONS_WINDOWS"));  
+  JMenuItem actions_vlc_play = new JMenuItem(Language.get("ACTIONS_VLC_PLAY"));
+  JMenuItem actions_vlc_pause = new JMenuItem(Language.get("ACTIONS_VLC_PAUSE"));
+  JMenuItem actions_vlc_stop = new JMenuItem(Language.get("ACTIONS_VLC_STOP"));
+  JMenuItem actions_vlc_faster = new JMenuItem(Language.get("ACTIONS_VLC_FASTER"));
+  JMenuItem actions_vlc_slower = new JMenuItem(Language.get("ACTIONS_VLC_SLOWER"));
+  JMenuItem actions_vlc_mute = new JMenuItem(Language.get("ACTIONS_VLC_MUTE"));
+  JMenuItem actions_vlc_volumeUp = new JMenuItem(Language.get("ACTIONS_VLC_VOLUMEUP"));
+  JMenuItem actions_vlc_volumeDown = new JMenuItem(Language.get("ACTIONS_VLC_VOLUMEDOWN"));
+  JMenuItem actions_vlc_fullscreen = new JMenuItem(Language.get("ACTIONS_VLC_FULLSCREEN"));
+  JMenuItem actions_vlc_snapshot = new JMenuItem(Language.get("ACTIONS_VLC_SNAPSHOT"));
+  JMenuItem actions_vlc_onTop = new JMenuItem(Language.get("ACTIONS_VLC_ONTOP"));
+  JMenuItem actions_vlc_minimize = new JMenuItem(Language.get("ACTIONS_VLC_MINIMIZE"));
+  JMenuItem actions_vlc_quit = new JMenuItem(Language.get("ACTIONS_VLC_QUIT"));  
+  JMenuItem actions_eq_enable = new JMenuItem(Language.get("ACTIONS_EQ_ENABLE"));
+  JMenuItem actions_eq_disable = new JMenuItem(Language.get("ACTIONS_EQ_DISABLE"));
+  JMenuItem actions_dialogs_changeSkin = new JMenuItem(Language.get("ACTIONS_DIALOGS_CHANGESKIN"));
+  JMenuItem actions_dialogs_fileSimple = new JMenuItem(Language.get("ACTIONS_DIALOGS_FILESIMPLE"));
+  JMenuItem actions_dialogs_file = new JMenuItem(Language.get("ACTIONS_DIALOGS_FILE"));
+  JMenuItem actions_dialogs_directory = new JMenuItem(Language.get("ACTIONS_DIALOGS_DIRECTORY"));
+  JMenuItem actions_dialogs_disc = new JMenuItem(Language.get("ACTIONS_DIALOGS_DISC"));
+  JMenuItem actions_dialogs_net = new JMenuItem(Language.get("ACTIONS_DIALOGS_NET"));
+  JMenuItem actions_dialogs_messages = new JMenuItem(Language.get("ACTIONS_DIALOGS_MESSAGES"));
+  JMenuItem actions_dialogs_prefs = new JMenuItem(Language.get("ACTIONS_DIALOGS_PREFS"));
+  JMenuItem actions_dialogs_fileInfo = new JMenuItem(Language.get("ACTIONS_DIALOGS_FILEINFO"));
+  JMenuItem actions_dialogs_playlist = new JMenuItem(Language.get("ACTIONS_DIALOGS_PLAYLIST"));
+  JMenuItem actions_dialogs_streamingWizard = new JMenuItem(Language.get("ACTIONS_DIALOGS_STREAMINGWIZARD"));
+  JMenuItem actions_dialogs_popup = new JMenuItem(Language.get("ACTIONS_DIALOGS_POPUP"));
+  JMenuItem actions_dialogs_audioPopup = new JMenuItem(Language.get("ACTIONS_DIALOGS_AUDIOPOPUP"));
+  JMenuItem actions_dialogs_videoPopup = new JMenuItem(Language.get("ACTIONS_DIALOGS_VIDEOPOPUP"));
+  JMenuItem actions_dialogs_miscPopup = new JMenuItem(Language.get("ACTIONS_DIALOGS_MISCPOPUP"));
+  JMenuItem actions_playlist_add = new JMenuItem(Language.get("ACTIONS_PLAYLIST_ADD"));
+  JMenuItem actions_playlist_del = new JMenuItem(Language.get("ACTIONS_PLAYLIST_DEL"));
+  JMenuItem actions_playlist_next = new JMenuItem(Language.get("ACTIONS_PLAYLIST_NEXT"));
+  JMenuItem actions_playlist_previous = new JMenuItem(Language.get("ACTIONS_PLAYLIST_PREVIOUS"));
+  JMenuItem actions_playlist_setRandom = new JMenuItem(Language.get("ACTIONS_PLAYLIST_SETRANDOM"));
+  JMenuItem actions_playlist_setLoop = new JMenuItem(Language.get("ACTIONS_PLAYLIST_SETLOOP"));
+  JMenuItem actions_playlist_setRepeat = new JMenuItem(Language.get("ACTIONS_PLAYLIST_SETREPEAT"));
+  JMenuItem actions_playlist_sort = new JMenuItem(Language.get("ACTIONS_PLAYLIST_SORT"));
+  JMenuItem actions_playlist_load = new JMenuItem(Language.get("ACTIONS_PLAYLIST_LOAD"));
+  JMenuItem actions_playlist_save = new JMenuItem(Language.get("ACTIONS_PLAYLIST_SAVE"));
+  JMenuItem actions_dvd_nextTitle = new JMenuItem(Language.get("ACTIONS_DVD_NEXTTITLE"));
+  JMenuItem actions_dvd_previousTitle = new JMenuItem(Language.get("ACTIONS_DVD_PREVIOUSTITLE"));
+  JMenuItem actions_dvd_nextChapter = new JMenuItem(Language.get("ACTIONS_DVD_NEXTCHAPTER"));
+  JMenuItem actions_dvd_previousChapter = new JMenuItem(Language.get("ACTIONS_DVD_PREVIOUSCHAPTER"));
+  JMenuItem actions_dvd_rootMenu = new JMenuItem(Language.get("ACTIONS_DVD_ROOTMENU"));
+  JMenuItem actions_windows_show = new JMenuItem(Language.get("ACTIONS_WINDOWS_SHOW"));
+  JMenuItem actions_windows_hide = new JMenuItem(Language.get("ACTIONS_WINDOWS_HIDE"));
+  JMenuItem actions_windows_maximize = new JMenuItem(Language.get("ACTIONS_WINDOWS_MAXIMIZE"));
+  JMenuItem actions_windows_unmaximize = new JMenuItem(Language.get("ACTIONS_WINDOWS_UNMAXIMIZE"));
+  JMenuItem actions_windows_setLayout = new JMenuItem(Language.get("ACTIONS_WINDOWS_SETLAYOUT"));
   
   //The skin item to which the represented action chain belongs
   Item parent;
   
   /** Creates a new instance of ActionEditor */
   public ActionEditor(Item p) {
-    super("Edit action sequence");  
+    super(Language.get("WIN_ACTIONS_TITLE"));  
         
     setLayout(null);    
     setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/editor.png")));
@@ -304,6 +304,7 @@ public class ActionEditor extends JFrame implements ActionListener{
   public String getCode() {     
     String code = "";
     for(ActionPanel act:aPanels) code+=act.getActionCode()+";";
+    if(code.equals("")) code = "none";
     return code;
   }
   /**
@@ -322,6 +323,8 @@ public class ActionEditor extends JFrame implements ActionListener{
    * @param act The action string
    */
   public void addAction(String act) {
+    //If the first action is to do nothing, it is removed
+    if(aPanels.size()>0 && aPanels.get(0).action.equals("none")) actions_p.remove(aPanels.remove(0));
     act=act.trim();
     act=act.replaceAll(";","");
     aPanels.add(new ActionPanel(act,this));
@@ -377,15 +380,18 @@ public class ActionEditor extends JFrame implements ActionListener{
    * For testing purposes
    */
   public static void main (String[] args) {
+    Config.load();
+    Language.load(new java.io.File("lang"+java.io.File.separator+Config.get("language")+".txt"));
+    
     try {	
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } 
+    }
     catch (Exception e) {
       
     }
     JFrame.setDefaultLookAndFeelDecorated(true);
     ActionEditor ae = new ActionEditor(null);
-    ae.setDefaultCloseOperation(ae.EXIT_ON_CLOSE);
+    ae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     /*ae.editAction("none;dialogs.changeSkin();dialogs.fileSimple();dialogs.file();dialogs.directory();dialogs.disc();dialogs.net();dialogs.messages();dialogs.prefs();dialogs.fileInfo();dialogs.playlist();dialogs.streamingWizard();dialogs.popup();dialogs.audioPopup();dialogs.videoPopup();dialogs.miscPopup();equalizer.enable();equalizer.disable();vlc.play();vlc.pause();vlc.stop();vlc.faster();vlc.slower();vlc.mute();" +
                                        "vlc.volumeUp();vlc.volumeDown();vlc.fullscreen();vlc.snapshot();vlc.onTop();vlc.minimize();vlc.quit();playlist.add();playlist.del();playlist.next();playlist.previous();playlist.sort();playlist.setRandom(true);playlist.setLoop(true);playlist.setRepeat(true);playlist.load();playlist.save();dvd.nextTitle();dvd.previousTitle();dvd.nextChapter();dvd.previousChapter();dvd.rootMenu();WindowID.show();WindowID.hide();" +
                                        "WindowID.maximize();WindowID.unmaximize();WindowID.setLayout(LayoutID)");

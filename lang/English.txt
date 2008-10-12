@@ -82,7 +82,71 @@ WELCOME_QUIT|Quit
 #Preferences window
 WIN_PREFS_TITLE|Preferences
 WIN_PREFS_UPDATE_L|Enable auto-update:
-WIN_PREFS_LANG_L|Language (takes effect on next start):
+WIN_PREFS_LANG_L|Language:
+WIN_PREFS_LAF_L|Program look-and-feel:
+WIN_PREFS_RESTART_L|<html><i>Some settings only take effect when the program is restarted.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Edit SubBitmap
+ZOOM_FACTOR|Zoom factor:
+
+#Action Editor
+WIN_ACTIONS_TITLE|Edit action sequence
+ACTIONS_PU|Actions
+ACTIONS_DIALOGS|Show a dialog
+ACTIONS_PLAYLIST|Playlist
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Skin
+ACTIONS_VLC_PLAY|Play
+ACTIONS_VLC_PAUSE|Pause
+ACTIONS_VLC_STOP|Stop
+ACTIONS_VLC_FASTER|Play faster
+ACTIONS_VLC_SLOWER|Play slower
+ACTIONS_VLC_MUTE|Mute the volume
+ACTIONS_VLC_VOLUMEUP|Increase the volume
+ACTIONS_VLC_VOLUMEDOWN|Reduce the volume
+ACTIONS_VLC_FULLSCREEN|Toggle fullscreen mode
+ACTIONS_VLC_SNAPSHOT|Take a snapshot
+ACTIONS_VLC_ONTOP|Toggle always on top
+ACTIONS_VLC_MINIMIZE|Minimize VLC
+ACTIONS_VLC_QUIT|Quit VLC
+ACTIONS_EQ_ENABLE|Enable Equalizer
+ACTIONS_EQ_DISABLE|Disable Equalizer
+ACTIONS_DIALOGS_CHANGESKIN|Change skin
+ACTIONS_DIALOGS_FILESIMPLE|Open file (simple)
+ACTIONS_DIALOGS_FILE|Open file (extended)
+ACTIONS_DIALOGS_DIRECTORY|Open directory
+ACTIONS_DIALOGS_DISC|Open disc
+ACTIONS_DIALOGS_NET|Open network stream
+ACTIONS_DIALOGS_MESSAGES|Message log
+ACTIONS_DIALOGS_PREFS|Preferences
+ACTIONS_DIALOGS_FILEINFO|File information
+ACTIONS_DIALOGS_PLAYLIST|Unskinned playlist
+ACTIONS_DIALOGS_STREAMINGWIZARD|Streaming Wizard
+ACTIONS_DIALOGS_POPUP|Full popup menu
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio settings popup menu
+ACTIONS_DIALOGS_VIDEOPOPUP|Video settings popup menu
+ACTIONS_DIALOGS_MISCPOPUP|Miscellaneous settings popup menu
+ACTIONS_PLAYLIST_ADD|Add a new item
+ACTIONS_PLAYLIST_DEL|Remove selected item
+ACTIONS_PLAYLIST_NEXT|Play next item
+ACTIONS_PLAYLIST_PREVIOUS|Play previous item
+ACTIONS_PLAYLIST_SETRANDOM|Play in random/normal order
+ACTIONS_PLAYLIST_SETLOOP|Loop playlist/play it once
+ACTIONS_PLAYLIST_SETREPEAT|Enable/disable repetition of current item
+ACTIONS_PLAYLIST_SORT|Sort alphabetically
+ACTIONS_PLAYLIST_LOAD|Load from file
+ACTIONS_PLAYLIST_SAVE|Save to file
+ACTIONS_DVD_NEXTTITLE|Next title
+ACTIONS_DVD_PREVIOUSTITLE|Previous title
+ACTIONS_DVD_NEXTCHAPTER|Next chapter
+ACTIONS_DVD_PREVIOUSCHAPTER|Previous chapter
+ACTIONS_DVD_ROOTMENU|Main menu
+ACTIONS_WINDOWS_SHOW|Show a window
+ACTIONS_WINDOWS_HIDE|Hide a window
+ACTIONS_WINDOWS_MAXIMIZE|Maximize a window
+ACTIONS_WINDOWS_UNMAXIMIZE|Unmaximize a window
+ACTIONS_WINDOWS_SETLAYOUT|Change the layout of a window
 
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
@@ -134,3 +198,5 @@ ERROR_RES_DEL_INUSE|Resource is still used in the skin, thus it cannot be delete
 ERROR_ADD_LAYOUT_TITLE|Could not add layout
 ERROR_ADD_LAYOUT_MSG|No parent window selected!
 ERROR_UPDATE_TITLE|Error while updating!
+ERROR_SAVEPNG_TITLE|Error while saving preview image
+ERROR_SAVEPNG_MSG|Could not save preview image.

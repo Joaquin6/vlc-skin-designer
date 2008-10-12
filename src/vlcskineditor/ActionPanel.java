@@ -47,11 +47,14 @@ public class ActionPanel extends JPanel {
     windowid_tf = new JTextField();
     layoutid_tf = new JTextField();    
     setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
+    
+    //A dynamic action is an action whose parameters can be changed
     if(act.indexOf(".set")!=-1) action_type="dynamic"; // all playlist.setXXXX(boolean)
     else if (act.indexOf(".show()")!=-1) action_type="dynamic"; // show a window    
     else if (act.indexOf(".hide()")!=-1) action_type="dynamic"; // hide a window   
     else if (act.indexOf("maximize()")!=-1) action_type="dynamic"; // un-/maximize a window
-    else if (act.indexOf(".setLayout")!=-1) action_type="dynamic"; //change window layout    
+    else if (act.indexOf(".setLayout")!=-1) action_type="dynamic"; //change window layout   
+    
     if(action_type.equals("static")) { //static => the action has no parameters     
       JLabel desc = new JLabel(action);
       if (action.equals("none")) desc.setText("Do nothing");

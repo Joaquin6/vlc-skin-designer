@@ -64,14 +64,14 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
    */
   public PreviewWindow(Main m_) {   
     m = m_;
-    frame = new JInternalFrame("No Layout selected");
+    frame = new JInternalFrame();
     frame.setLayout(new BorderLayout());
     zoom_panel = new JPanel();
     zoom_panel.setLayout(new FlowLayout());
     zoom_less = new JButton("-");   
     zoom_less.addActionListener(this);
     zoom_panel.add(zoom_less);
-    zoom_label = new JLabel("Zoom factor: 1x");
+    zoom_label = new JLabel(Language.get("ZOOM_FACTOR")+" 1x");
     zoom_panel.add(zoom_label);
     zoom_more = new JButton("+");
     zoom_more.addActionListener(this);
@@ -171,13 +171,13 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(zoom_less)) {
       if(z>1) z--;
-      zoom_label.setText("Zoom factor: "+z+"x");
+      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z+"x");
       setSize(l.width*z, l.height*z);
       setPreferredSize(new Dimension(l.width*z, l.height*z));
     }
     else if(e.getSource().equals(zoom_more)) {
       if(z<16) z++;
-      zoom_label.setText("Zoom factor: "+z+"x");
+      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z+"x");
       setSize(l.width*z, l.height*z);
       setPreferredSize(new Dimension(l.width*z, l.height*z));
     }
@@ -282,7 +282,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       ImageIO.write(bi, "png", f);
     }
     catch (Exception e) {
-      JOptionPane.showMessageDialog(m,"Could not save image!\n"+e.toString(),"Exception caught!",JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(m,Language.get("ERROR_SAVEPNG_MSG")+"\n"+e.toString(),Language.get("ERROR_SAVEPNG_TITLE"),JOptionPane.ERROR_MESSAGE);
       return;
     }
   }  

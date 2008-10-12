@@ -54,6 +54,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
   public TreeRenderer() {
   }
   /** Returns how a given leaf should be rendered */
+  @Override
   public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,int row,boolean hasFocus) {    
     String name = value.toString();
     value = value.toString().substring(value.toString().indexOf(": ")+2);
@@ -86,7 +87,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     else if(name.startsWith("SliderBackground:")) return sliderbackground_icon;
     else if(name.startsWith("Video:")) return video_icon;
     else if(name.startsWith("Text:")) return text_icon;
-    else return (ImageIcon)getDefaultLeafIcon();
+    else return null;
     
   }
   /**

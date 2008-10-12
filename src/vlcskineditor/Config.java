@@ -46,6 +46,7 @@ public class Config {
     strings.put("language", "English");
     strings.put("win.main.width","800");
     strings.put("win.main.height","600");
+    strings.put("win.main.maximized","false");
     strings.put("win.res.x","0");
     strings.put("win.res.y","0");
     strings.put("win.res.width","190");
@@ -58,6 +59,7 @@ public class Config {
     strings.put("win.items.y","350");
     strings.put("win.items.width","190");
     strings.put("win.items.height","200");
+    strings.put("swing.laf","System");
   }
   
   /**
@@ -94,8 +96,7 @@ public class Config {
    * @return The key's value
    */
   public static String get(String key) {
-    String s = strings.get(key);    
-    return (s!=null)?s:key;
+    return strings.get(key);    
   }
   /**
    * Gets the configured value of a certain key as an integer
@@ -165,11 +166,19 @@ public class Config {
     final JComboBox lang_cb = new JComboBox(lang_choices);
     lang_cb.setSelectedIndex(sel);
     
+    JLabel laf_l = new JLabel(Language.get("WIN_PREFS_LAF_L"));
+    String[] lafs = { "System" , "Metal: Steel", "Metal: Ocean" };
+    final JComboBox laf_cb = new JComboBox(lafs);
+    laf_cb.setSelectedItem(Config.get("swing.laf"));    
+    
+    JLabel restart_l = new JLabel(Language.get("WIN_PREFS_RESTART_L"));
+    
     JButton ok_btn = new JButton(Language.get("BUTTON_OK"));
     ok_btn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
-        strings.put("language", (String)lang_cb.getSelectedItem());
+        strings.put("language", (String)lang_cb.getSelectedItem());        
+        strings.put("swing.laf", (String)laf_cb.getSelectedItem());                
         frame.setVisible(false);
         frame.dispose();
       }
@@ -187,13 +196,19 @@ public class Config {
     frame.add(lang_cb);
     frame.add(update_l);
     frame.add(update_cb);
+    frame.add(laf_l);
+    frame.add(laf_cb);
+    frame.add(restart_l);
     frame.add(ok_btn);
     frame.add(cancel_btn);
     
-    Component[] labels = { lang_l, update_l};
-    int tf_dx = Helper.maxWidth(labels)+10;
+    Component[] labels = { lang_l, update_l, laf_l};
+    int tf_dx = Helper.maxWidth(labels)+10;   
     
-    lang_cb.setPreferredSize(new Dimension(200,lang_cb.getPreferredSize().height));
+    int tf_wd = restart_l.getPreferredSize().width+5 - tf_dx;
+    if(tf_wd < lang_cb.getPreferredSize().width) tf_wd = lang_cb.getPreferredSize().width;
+    
+    lang_cb.setPreferredSize(new Dimension(tf_wd,lang_cb.getPreferredSize().height));
     
     SpringLayout layout = new SpringLayout();
     layout.putConstraint(SpringLayout.NORTH, lang_l, 5, SpringLayout.NORTH, frame.getContentPane());
@@ -208,7 +223,16 @@ public class Config {
     layout.putConstraint(SpringLayout.WEST, update_cb, tf_dx, SpringLayout.WEST, frame.getContentPane());
     layout.putConstraint(SpringLayout.EAST, update_cb, 0, SpringLayout.EAST, lang_cb);
     
-    layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, update_l);
+    layout.putConstraint(SpringLayout.NORTH, laf_l, 10, SpringLayout.SOUTH, update_l);
+    layout.putConstraint(SpringLayout.WEST, laf_l, 5, SpringLayout.WEST, frame.getContentPane());
+    layout.putConstraint(SpringLayout.VERTICAL_CENTER, laf_cb, 0, SpringLayout.VERTICAL_CENTER, laf_l);
+    layout.putConstraint(SpringLayout.WEST, laf_cb, tf_dx, SpringLayout.WEST, frame.getContentPane());
+    layout.putConstraint(SpringLayout.EAST, laf_cb, 0, SpringLayout.EAST, lang_cb);
+
+    layout.putConstraint(SpringLayout.NORTH, restart_l, 10, SpringLayout.SOUTH, laf_l);
+    layout.putConstraint(SpringLayout.WEST, restart_l, 5, SpringLayout.WEST, frame.getContentPane());
+    
+    layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, restart_l);
     layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
     layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
     layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
@@ -219,7 +243,7 @@ public class Config {
     
     frame.setLayout(layout);
     frame.pack();
-    //frame.setResizable(false);
+    frame.setResizable(false);
     frame.setVisible(true);
   }
   

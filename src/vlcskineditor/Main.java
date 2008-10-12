@@ -35,6 +35,7 @@ import java.util.zip.*;
 import vlcskineditor.items.*;
 import com.ice.tar.*;
 import com.ice.jni.registry.*;
+import javax.swing.plaf.metal.*;
 import vlcskineditor.history.*;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.SubBitmap;
@@ -121,12 +122,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args Command line arguments passed by the console.
    * If there exist one or more arguments, the first argument is intepreted as a file locator for a skin to be loaded.
    */
-  public Main(String[] args) {    
-    
-    Config.load();
-    Language.load(new File("lang"+File.separator+Config.get("language")+".txt"));
-    
-    
+  public Main(String[] args) {   
     setTitle("VLC Skin Editor "+VERSION);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
     addWindowListener(this);
@@ -574,9 +570,17 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
     jdesk.setMinimumSize(new Dimension(800,600));
     add(jdesk);       
+        
+    setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));
+    if(Config.get("win.main.x")==null) setLocationRelativeTo(null);
+    else {
+      setLocation(Config.getInt("win.main.x"),Config.getInt("win.main.y"));
+    }
+    if(Boolean.parseBoolean(Config.get("win.main.maximized"))) {
+      setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
     
     setVisible(true);       
-    setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));    
 
     update();
 
@@ -606,12 +610,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
     }
     else if(System.getProperty("os.name").indexOf("Linux")!=-1){
-      vlc_skins_dir = "~/.vlc/skins2/";
-    }
-
+      vlc_skins_dir = "~/.local/share/vlc/skins2/";
+    }  
 
     if(base_fc==null) base_fc = new JFileChooser();
-    base_fc.setCurrentDirectory(new File(vlc_skins_dir));
+    if(Config.get("open.folder")==null) base_fc.setCurrentDirectory(new File(vlc_skins_dir));
+    else base_fc.setCurrentDirectory(new File(Config.get("open.folder")));
   }
 
   /**
@@ -1736,8 +1740,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       Object[] options= { Language.get("CHOICE_YES"), Language.get("CHOICE_NO"), Language.get("CHOICE_CANCEL") };
       int n = JOptionPane.showOptionDialog(
             this,
-            Language.get("CONFIRM_EXIT_MSG"),
-            Language.get("CONFIRM_EXIT_TITLE"),
+            Language.get("EXIT_CONFIRM_MSG"),
+            Language.get("EXIT_CONFIRM_TITLE"),
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE,
             null,
@@ -1761,8 +1765,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   }
   
   private void doExit() {
-    Config.set("win.main.width", getWidth());
-    Config.set("win.main.height", getHeight());
+    if(getExtendedState()!=JFrame.MAXIMIZED_BOTH) {
+      Config.set("win.main.x",getX());
+      Config.set("win.main.y",getY());
+      Config.set("win.main.width", getWidth());
+      Config.set("win.main.height", getHeight());
+      Config.set("win.main.maximized","false");
+    } else {
+      Config.set("win.main.maximized","true");
+    }
     Config.set("win.res.x",resources.getX());
     Config.set("win.res.y",resources.getY());
     Config.set("win.res.width",resources.getWidth());
@@ -1775,6 +1786,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     Config.set("win.items.y",items.getY());
     Config.set("win.items.width",items.getWidth());
     Config.set("win.items.height",items.getHeight());
+    if(base_fc!=null) Config.set("open.folder",base_fc.getCurrentDirectory().getAbsolutePath());
     Config.save();
     System.exit(0);
   }
@@ -1784,12 +1796,30 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+    Config.load();
+    Language.load(new File("lang"+File.separator+Config.get("language")+".txt"));
+    
     try {	
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      String laf = Config.get("swing.laf");
+      String lafClass = laf;
+      if(laf!=null) {
+        if(laf.equals("System")) {
+          lafClass = UIManager.getSystemLookAndFeelClassName();          
+        }
+        if(laf.equals("Metal: Steel")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
+        } else if(laf.equals("Metal: Ocean")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+        }
+      }      
+      UIManager.setLookAndFeel(lafClass);
     } 
-    catch (Exception e) {
-      
+    catch (Exception ex) {
+      ex.printStackTrace();
     }
+    
     JFrame.setDefaultLookAndFeelDecorated(true);
     System.setProperty("apple.laf.useScreenMenuBar", "true");
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "VLC Skin Editor");

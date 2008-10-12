@@ -26,6 +26,7 @@ import java.awt.*;
 import java.awt.event.*;
 import vlcskineditor.FrameUpdater;
 import javax.swing.*;
+import vlcskineditor.Language;
 
 /**
  * Gives the user the possibilty to edit a SubBitmap visually
@@ -58,14 +59,14 @@ public class SubBitmapEditWindow extends JPanel implements ActionListener, Mouse
     y1_org = y1 = sb.y;
     x2_org = x2 = sb.x+sb.width;
     y2_org = y2 = sb.y+sb.height;
-    frame = new JFrame("Edit SubBitmap");
+    frame = new JFrame(Language.get("WIN_SBMP_EDIT_TITLE"));
     frame.setLayout(new BorderLayout());
     zoom_panel = new JPanel();
     zoom_panel.setLayout(new FlowLayout());
     zoom_less = new JButton("-");   
     zoom_less.addActionListener(this);
     zoom_panel.add(zoom_less);
-    zoom_label = new JLabel("Zoom factor: 1x");
+    zoom_label = new JLabel(Language.get("ZOOM_FACTOR")+" 1x");
     zoom_panel.add(zoom_label);
     zoom_more = new JButton("+");
     zoom_more.addActionListener(this);
@@ -202,13 +203,13 @@ public class SubBitmapEditWindow extends JPanel implements ActionListener, Mouse
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(zoom_less)) {
       if(z_fact>1) z_fact--;
-      zoom_label.setText("Zoom factor: "+z_fact+"x");
+      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z_fact+"x");
       setSize(p_width*z_fact, p_height*z_fact);
       setPreferredSize(new Dimension(p_width*z_fact, p_height*z_fact));
     }
     else if(e.getSource().equals(zoom_more)) {
       if(z_fact<16) z_fact++;
-      zoom_label.setText("Zoom factor: "+z_fact+"x");
+      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z_fact+"x");
       setSize(p_width*z_fact, p_height*z_fact);
       setPreferredSize(new Dimension(p_width*z_fact, p_height*z_fact));
     }
