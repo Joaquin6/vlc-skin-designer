@@ -175,7 +175,7 @@ public class ActionPanel extends JPanel {
     add(del_btn);        
     setBackground(Color.decode("#fce94f"));
     setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));   
-    setMaximumSize(new Dimension(445,30));
+    setMaximumSize(new Dimension(Integer.MAX_VALUE,30));
   }
   /** 
    * Generates the action string from the type of the represented action and from user modifications.

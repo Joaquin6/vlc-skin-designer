@@ -290,11 +290,23 @@ public class ActionEditor extends JFrame implements ActionListener{
     add(add_btn);
     add(ok_btn);   
     
-    sPane.setBounds(5,5,445,320);
-    add_btn.setBounds(5,330,50,25);
-    ok_btn.setBounds(400,330,50,25);
-    setSize(460,385);    
-    setResizable(false);    
+    SpringLayout layout = new SpringLayout();
+    setLayout(layout);
+    
+    layout.putConstraint(SpringLayout.NORTH, sPane, 5 ,SpringLayout.NORTH, getContentPane());
+    layout.putConstraint(SpringLayout.WEST, sPane, 5 ,SpringLayout.WEST, getContentPane());
+    layout.putConstraint(SpringLayout.EAST, getContentPane(), 5 ,SpringLayout.EAST, sPane);
+    
+    layout.putConstraint(SpringLayout.NORTH, add_btn, 5 ,SpringLayout.SOUTH, sPane);
+    layout.putConstraint(SpringLayout.WEST, add_btn, 5 ,SpringLayout.WEST, getContentPane());
+    layout.putConstraint(SpringLayout.SOUTH, getContentPane(), 5 ,SpringLayout.SOUTH, add_btn);
+    
+    layout.putConstraint(SpringLayout.NORTH, ok_btn, 5 ,SpringLayout.SOUTH, sPane);
+    layout.putConstraint(SpringLayout.EAST, ok_btn, 0 ,SpringLayout.EAST, sPane);
+    layout.putConstraint(SpringLayout.SOUTH, ok_btn, 0 ,SpringLayout.SOUTH, add_btn);
+    
+    setMinimumSize(new Dimension(300,150));     
+    setSize(460,385);
   }
   /**
    * Generates the code by calling the getActionCode() function of each ActionPanel
@@ -384,10 +396,24 @@ public class ActionEditor extends JFrame implements ActionListener{
     Language.load(new java.io.File("lang"+java.io.File.separator+Config.get("language")+".txt"));
     
     try {	
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    }
-    catch (Exception e) {
-      
+      String laf = Config.get("swing.laf");
+      String lafClass = laf;
+      if(laf!=null) {
+        if(laf.equals("System")) {
+          lafClass = UIManager.getSystemLookAndFeelClassName();          
+        }
+        if(laf.equals("Metal: Steel")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.DefaultMetalTheme());
+        } else if(laf.equals("Metal: Ocean")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.OceanTheme());
+        }
+      }      
+      UIManager.setLookAndFeel(lafClass);
+    } 
+    catch (Exception ex) {
+      ex.printStackTrace();
     }
     JFrame.setDefaultLookAndFeelDecorated(true);
     ActionEditor ae = new ActionEditor(null);
