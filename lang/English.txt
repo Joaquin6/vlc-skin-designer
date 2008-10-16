@@ -147,6 +147,60 @@ ACTIONS_WINDOWS_HIDE|Hide a window
 ACTIONS_WINDOWS_MAXIMIZE|Maximize a window
 ACTIONS_WINDOWS_UNMAXIMIZE|Unmaximize a window
 ACTIONS_WINDOWS_SETLAYOUT|Change the layout of a window
+ACTION_DESC_NONE|Do nothing.
+ACTION_DESC_CHANGESKIN|Show a dialog box to load a new skin.
+ACTION_DESC_FILESIMPLE|Show the simple "Open File" dialog box.
+ACTION_DESC_FILE|Show the extended "Open File" dialog box.
+ACTION_DESC_DIRECTORY|Show the "Open Directory" dialog box.
+ACTION_DESC_DISC|Show the "Open Disc" dialog box.
+ACTION_DESC_NET|Show the "Open Network Stream" dialog box.
+ACTION_DESC_MSG|Show the message log dialog box.
+ACTION_DESC_PREFS|Show the preferences dialog box.
+ACTION_DESC_FILEINFO|Show the file information dialog box.
+ACTION_DESC_PLAYLIST|Show the default (unskinned) playlist window.
+ACTION_DESC_WIZARD|Show the "Streaming Wizard" dialog box.
+ACTION_DESC_POPUP|Show the full popup menu.
+ACTION_DESC_AUDIOPU|Show the audio settings popup menu.
+ACTION_DESC_VIDEOPU|Show the video settings popup menu.
+ACTION_DESC_MISCPU|Show a popup menu containing playback control and general options.
+ACTION_DESC_EQENABLE|Enable the equalizer audio filter.
+ACTION_DESC_EQDISABLE|Disable the equalizer audio filter.
+ACTION_DESC_PLAY|Play the current playlist item.
+ACTION_DESC_PAUSE|Pause the playback.
+ACTION_DESC_STOP|Stop the playback.
+ACTION_DESC_FASTER|Play faster.
+ACTION_DESC_SLOWER|Play slower.
+ACTION_DESC_MUTE|Toggle audio muting.
+ACTION_DESC_VOLUP|Increase the volume.
+ACTION_DESC_VOLDOWN|Reduce the volume.
+ACTION_DESC_FULLSCREEN|Toggle the fullscreen mode.
+ACTION_DESC_SNAPSHOT|Take a snapshot of the video.
+ACTION_DESC_ONTOP|Toggle the "always on top" status.
+ACTION_DESC_MIN|Minimize VLC.
+ACTION_DESC_QUIT|Quit VLC.
+ACTION_PL_ADD|Add a new item to the playlist.
+ACTION_PL_DEL|Remove the selected items from the playlist.
+ACTION_PL_NEXT|Play the next item in the playlist.
+ACTION_PL_PREV|Play the previous item in the playlist.
+ACTION_PL_SORT|Sort the playlist alphabetically.
+ACTION_PL_LOAD|Load an external playlist file.
+ACTION_PL_SAVE|Save the current playlist to a file.
+ACTION_DVD_NEXTT|Go to the next title on the DVD.
+ACTION_DVD_PREVT|Go to the previous title on the DVD.
+ACTION_DVD_NEXTC|Go to the next chapter of the DVD.
+ACTION_DVD_PREVC|Go to the previous chapter of the DVD.
+ACTION_DVD_MENU|Go to the root menu of the DVD.
+ACTION_ACTIVATE|Activate
+ACTION_DEACTIVATE|Deactivate
+ACTION_RANDOM| that the items in the playlist are played in random order.
+ACTION_LOOP| that the playlist is repeated when its end is reached.
+ACTION_REPEAT| that the current item is repeated after its end is reached
+ACTION_SHOW|Show the window with the ID 
+ACTION_HIDE|Hide the window with the ID 
+ACTION_MAXIMIZE|Maximize the window with the ID 
+ACTION_UNMAXIMIZE|Unmaximize the window with the ID 
+ACTION_LAYOUT_OF|Set the Layout of the window with the ID 
+ACTION_TO| to 
 
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
