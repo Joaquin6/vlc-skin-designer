@@ -69,9 +69,9 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
    */
   public ImageIcon getIcon(String name) {
     if(name.startsWith("Bitmap:")) return bitmap_icon; 
-    if(name.startsWith("Root: Bitmaps")) return bitmap_icon; 
+    if(name.startsWith("Root: "+Language.get("WIN_RES_BITMAPS"))) return bitmap_icon; 
     else if(name.startsWith("Font:")) return font_icon;
-    else if(name.startsWith("Root: Fonts")) return font_icon;
+    else if(name.startsWith("Root: "+Language.get("WIN_RES_FONTS"))) return font_icon;
     else if(name.startsWith("Bitmapfont:")) return bitmapfont_icon;
     else if(name.startsWith("Window:")) return window_icon;    
     else if(name.startsWith("Layout:")) return layout_icon;

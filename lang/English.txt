@@ -51,6 +51,8 @@ WIN_RES_EDIT|Edit the selected resource
 WIN_RES_DELETE|Delete the selected resource
 WIN_RES_PU_ADD_BMP|Add Bitmap/s
 WIN_RES_PU_ADD_SBMP|Add SubBitmap
+WIN_RES_BITMAPS|Bitmaps
+WIN_RES_FONTS|Fonts
 
 #Windows window
 WIN_WIN_TITLE|Windows
@@ -202,6 +204,26 @@ ACTION_UNMAXIMIZE|Unmaximize the window with the ID
 ACTION_LAYOUT_OF|Set the Layout of the window with the ID 
 ACTION_TO| to 
 
+#Global variables
+WIN_VARS_TITLE|Global variables
+WIN_VARS_NOTE|<html>These variables only affect the preview.<br>They simulate the state of VLC.</html>
+WIN_VARS_SLIDER|Slider position
+
+#Theme options
+WIN_THEME_TITLE|Theme settings
+WIN_THEME_NAME|Name:
+WIN_THEME_AUTHOR|Author:
+WIN_THEME_EMAIL|Author's E-Mail:
+WIN_THEME_WEB|Author's webpage:
+WIN_THEME_MAGNET|Magnet:
+WIN_THEME_MAGNET_TIP|When the distance between the border of the screen and an anchor of a window is less than this value, the window will stick to the border
+WIN_THEME_ALPHA|Opacity:
+WIN_THEME_ALPHA_TIP|Sets the alpha transparency of the windows. The value must be between 1 (nearly total transparency) and 255 (total opacity). Low values should be avoided.
+WIN_THEME_MOVEALPHA|Opacity when moving:
+WIN_THEME_MOVEALPHA_TIP|Sets the alpha transparency of the windows when they are moved.
+WIN_THEME_INFO_TITLE|Theme information
+WIN_THEME_ATTR_TITLE|Theme attributes
+
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
 ABOUT_MSG|<html><h3>Copyright 2007-%y The VideoLAN Team</h3>Released under terms of the GPL 2+<br><br><b>Lead programmer:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Website:</b> %w<br><br><b>Credits:</b><br>Timothy Gerard Endres for registry access and TAR support (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) for some icons (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)</html>
@@ -233,6 +255,11 @@ BUTTON_OK|OK
 BUTTON_CANCEL|Cancel
 BUTTON_HELP|Help
 
+#Other strings
+THEMEINFO_NAME_DEFAULT|Unnamed Theme
+THEMEINFO_AUTHOR_DEFAULT|Unknown Author
+THEMEINFO_EMAIL_DEFAULT|Unknown
+
 #Error messages
 ERROR_FILENEXIST_TITLE|Error while opening file
 ERROR_FILENEXIST_MSG|The file "%f" does not exist and thus could not be opened!
@@ -254,3 +281,14 @@ ERROR_ADD_LAYOUT_MSG|No parent window selected!
 ERROR_UPDATE_TITLE|Error while updating!
 ERROR_SAVEPNG_TITLE|Error while saving preview image
 ERROR_SAVEPNG_MSG|Could not save preview image.
+ERROR_NEWSKIN_TITLE|Error while creating new skin file!
+ERROR_NEWSKIN_MSG|The new skin file could not be created.
+ERROR_INVALID_HEADER|File appears not to be a valid VLC Theme!\n Invalid header:
+ERROR_INVALID_FILE|Selected file is not a valid VLC skin file!
+ERROR_VERSION_UNSUPPORTED|The version of the theme used in the selected skin is not yet supported!
+ERROR_SAVE_TITLE|Error while saving the skin file!
+ERROR_SAVE_MSG|Skin file could not be saved.
+ERROR_ALPHA_TITLE|Opacity value not valid
+ERROR_ALPHA_MSG|Please enter a valid opacity! (0-255)
+ERROR_MALPHA_TITLE|Opacity when moving not valid
+ERROR_MALPHA_MSG|Please enter a valid opacity when moving! (0-255)

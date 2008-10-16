@@ -218,11 +218,11 @@ public class GlobalVariables implements ActionListener{
   /** Creates and shows the dialog to modify the global variables */
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Global variables");
+      frame = new JFrame(Language.get("WIN_VARS_TITLE"));
       frame.setResizable(false);
       frame.setLayout(null);
       
-      JLabel desc_l = new JLabel("<html>These variables only affect the preview.<br>They simulate the state of VLC.</html>");     
+      JLabel desc_l = new JLabel(Language.get("WIN_VARS_NOTE"));     
       Object[] bool_values = { true, false };
       JLabel eq_l = new JLabel("equalizer.isEnabled");
       eq_cb = new JComboBox(bool_values);
@@ -252,7 +252,7 @@ public class GlobalVariables implements ActionListener{
       repeat_cb = new JComboBox(bool_values);
       JLabel dvd_l = new JLabel("dvd.isActive");
       dvd_cb = new JComboBox(bool_values);
-      JLabel slider_l = new JLabel("Slider position");
+      JLabel slider_l = new JLabel(Language.get("WIN_VARS_SLIDER"));
       slider_s = new JSlider(JSlider.HORIZONTAL,0,100,0);
       slider_s.setMajorTickSpacing(10);
       slider_s.setMinorTickSpacing(5);
@@ -260,9 +260,9 @@ public class GlobalVariables implements ActionListener{
       slider_s.setSize(100,20);
 
       
-      ok_btn = new JButton("OK");
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
       
       frame.add(desc_l);

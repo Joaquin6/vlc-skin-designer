@@ -77,9 +77,9 @@ public class Skin implements ActionListener{
   public int theme_magnet = THEME_MAGNET_DEFAULT;
   public int theme_alpha = THEME_ALPHA_DEFAULT;
   public int theme_movealpha = THEME_MOVEALPHA_DEFAULT;
-  final String THEMEINFO_NAME_DEFAULT = "Unnamed Theme";
-  final String THEMEINFO_AUTHOR_DEFAULT = "Unknown Author";
-  final String THEMEINFO_EMAIL_DEFAULT = "Unknown";
+  final String THEMEINFO_NAME_DEFAULT = Language.get("THEMEINFO_NAME_DEFAULT");
+  final String THEMEINFO_AUTHOR_DEFAULT = Language.get("THEMEINFO_AUTHOR_DEFAULT");
+  final String THEMEINFO_EMAIL_DEFAULT = Language.get("THEMEINFO_EMAIL_DEFAULT");
   final String THEMEINFO_WEBPAGE_DEFAULT = "http://www.videolan.org/vlc/";
   public String themeinfo_name = THEMEINFO_NAME_DEFAULT;
   public String themeinfo_author = THEMEINFO_AUTHOR_DEFAULT;
@@ -116,7 +116,7 @@ public class Skin implements ActionListener{
       skinfile.createNewFile();
     }
     catch(Exception ex) {
-      JOptionPane.showMessageDialog(null,ex.toString(),"Error while creating new skin file!",JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null,Language.get("ERROR_NEWSKIN_TITLE")+"\n\n"+ex.toString(),Language.get("ERROR_NEWSKIN_TITLE"),JOptionPane.ERROR_MESSAGE);
     }
   }
   /** Parses an XML file **/
@@ -162,8 +162,9 @@ public class Skin implements ActionListener{
       //System.out.println("Header read");
       if (header.indexOf("//VideoLAN//DTD VLC Skins")==-1) {
         br.close();        
-        //System.out.println("Invalid header");
-        throw new Exception("File appears not to be a valid VLC Theme!\nInvalid Header:\n"+header);        
+        System.err.println("Invalid header:\n"+header);
+        throw new Exception(Language.get("ERROR_INVALID_FILE"));        
+        
       }
       //System.out.println("Valid header");
       boolean eof = false;
@@ -273,7 +274,7 @@ public class Skin implements ActionListener{
     Document doc = docBuilder.parse(f);
     
     if(!doc.getDoctype().getName().equals("Theme"))
-      throw new Exception("Selected file is not a valid VLC skin file!");
+      throw new Exception(Language.get("ERROR_INVALID_FILE"));
     
     NodeList nodes = doc.getElementsByTagName("*");
     for(int i=0;i<nodes.getLength();i++) {
@@ -286,7 +287,7 @@ public class Skin implements ActionListener{
     if(tag.equals("Theme")) {
       if(e.hasAttribute("version"))  theme_version = e.getAttribute("version");
       if(Double.parseDouble(theme_version)!=2.0) 
-        throw new Exception("The version of the theme used in the selected skin is not yet supported!");
+        throw new Exception(Language.get("ERROR_VERSION_UNSUPPORTED"));
     }
     else if(tag.equals("ThemeInfo")) {
       if(e.hasAttribute("author")) themeinfo_author = e.getAttribute("author");
@@ -316,45 +317,45 @@ public class Skin implements ActionListener{
       writer.close();
     }
     catch(Exception ex) {
-      JOptionPane.showMessageDialog(null,ex.toString(),"Error while saving skin file!",JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null,Language.get("ERROR_SAVE_MSG")+"\n\n"+ex.toString(),Language.get("ERROR_SAVE_TITLE"),JOptionPane.ERROR_MESSAGE);
     }
    
   }
   /** Show the theme setting editing dialog **/
   public void showThemeOptions() {
     if(theme_frame==null) {
-      theme_frame = new JFrame("Theme settings");
+      theme_frame = new JFrame(Language.get("WIN_THEME_TITLE"));
       theme_frame.setResizable(false);
       theme_frame.setLayout(new FlowLayout());
       theme_frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       
-      JLabel themeinfo_name_l = new JLabel("Name:");
+      JLabel themeinfo_name_l = new JLabel(Language.get("WIN_THEME_NAME"));
       themeinfo_name_tf = new JTextField();
-      JLabel themeinfo_author_l = new JLabel("Author:");
+      JLabel themeinfo_author_l = new JLabel(Language.get("WIN_THEME_AUTHOR"));
       themeinfo_author_tf = new JTextField();
-      JLabel themeinfo_email_l = new JLabel("Author's E-Mail:");
+      JLabel themeinfo_email_l = new JLabel(Language.get("WIN_THEME_EMAIL"));
       themeinfo_email_tf = new JTextField();
-      JLabel themeinfo_webpage_l = new JLabel("Author's webpage:");
+      JLabel themeinfo_webpage_l = new JLabel(Language.get("WIN_THEME_WEB"));
       themeinfo_webpage_tf = new JTextField();
-      JLabel theme_magnet_l = new JLabel("Magnet:");
+      JLabel theme_magnet_l = new JLabel(Language.get("WIN_THEME_MAGNET"));
       theme_magnet_tf = new JTextField();
       theme_magnet_tf.setDocument(new NumbersOnlyDocument(false));
-      theme_magnet_tf.setToolTipText("When the distance between the border of the screen and an anchor of a window is less than this value, the window will stick to the border");
-      JLabel theme_alpha_l = new JLabel("Opacity:");
+      theme_magnet_tf.setToolTipText(Language.get("WIN_THEME_MAGNET_TIP"));
+      JLabel theme_alpha_l = new JLabel(Language.get("WIN_THEME_ALPHA"));
       theme_alpha_tf = new JTextField();
       theme_alpha_tf.setDocument(new NumbersOnlyDocument(false));
-      theme_alpha_tf.setToolTipText("Sets the alpha transparency of the windows. The value must be between 1 (nearly total transparency) and 255 (total opacity). Low values should be avoided.");
-      JLabel theme_movealpha_l = new JLabel("Opacity when moving:");
+      theme_alpha_tf.setToolTipText(Language.get("WIN_THEME_ALPHA_TIP"));
+      JLabel theme_movealpha_l = new JLabel(Language.get("WIN_THEME_MOVEALPHA"));
       theme_movealpha_tf = new JTextField();
       theme_alpha_tf.setDocument(new NumbersOnlyDocument(false));
-      theme_alpha_tf.setToolTipText("Sets the alpha transparency of the windows when they are moved.");
-      theme_ok_btn = new JButton("OK");
+      theme_alpha_tf.setToolTipText(Language.get("WIN_THEME_MOVEALPHA_TIP"));
+      theme_ok_btn = new JButton(Language.get("BUTTON_OK"));
       theme_ok_btn.addActionListener(this);
       theme_ok_btn.setPreferredSize(new Dimension(70,25));
-      theme_cancel_btn = new JButton("Cancel");
+      theme_cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       theme_cancel_btn.addActionListener(this);
       theme_cancel_btn.setPreferredSize(new Dimension(70,25));
-      theme_help_btn = new JButton("Help");
+      theme_help_btn = new JButton(Language.get("BUTTON_HELP"));
       theme_help_btn.addActionListener(this);
       theme_help_btn.setPreferredSize(new Dimension(70,25));
       
@@ -375,7 +376,7 @@ public class Skin implements ActionListener{
       themeinfo_p.add(themeinfo_webpage_tf);      
       themeinfo_webpage_l.setBounds(5,105,150,24);
       themeinfo_webpage_tf.setBounds(160,105,150,24);      
-      themeinfo_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Theme Information"));
+      themeinfo_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_INFO_TITLE")));
       themeinfo_p.setMinimumSize(new Dimension(315,135));
       themeinfo_p.setMaximumSize(new Dimension(315,135));
       themeinfo_p.setPreferredSize(new Dimension(315,135));
@@ -394,7 +395,7 @@ public class Skin implements ActionListener{
       theme_p.add(theme_movealpha_tf);
       theme_movealpha_l.setBounds(5,75,150,24);
       theme_movealpha_tf.setBounds(160,75,150,24);
-      theme_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Theme Attributes"));
+      theme_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_ATTR_TITLE")));
       theme_p.setMinimumSize(new Dimension(315,105));
       theme_p.setMaximumSize(new Dimension(315,105));
       theme_p.setPreferredSize(new Dimension(315,105));
@@ -422,11 +423,11 @@ public class Skin implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(theme_ok_btn)) {      
       if(Integer.parseInt(theme_alpha_tf.getText())>255 || Integer.parseInt(theme_alpha_tf.getText())<1) {
-        JOptionPane.showMessageDialog(theme_frame,"Please enter a valid alpha value!","Alpha value not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(theme_frame,Language.get("ERROR_ALPHA_MSG"),Language.get("ERROR_ALPHA_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       if(Integer.parseInt(theme_movealpha_tf.getText())>255 || Integer.parseInt(theme_movealpha_tf.getText())<1) {
-        JOptionPane.showMessageDialog(theme_frame,"Please enter a valid movealpha value!","Movealpha value not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(theme_frame,Language.get("ERROR_MALPHA_MSG"),Language.get("ERROR_MALPHA_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       ThemeEditEvent tee = new ThemeEditEvent(this);
@@ -596,8 +597,8 @@ public class Skin implements ActionListener{
   /** Creates the resources hierarchy **/
   public DefaultMutableTreeNode getResourcesTree() {
     DefaultMutableTreeNode top = new DefaultMutableTreeNode("Root: Resources");     
-    DefaultMutableTreeNode bitmaps_node = new DefaultMutableTreeNode("Root: Bitmaps");
-    DefaultMutableTreeNode fonts_node = new DefaultMutableTreeNode("Root: Fonts");
+    DefaultMutableTreeNode bitmaps_node = new DefaultMutableTreeNode("Root: "+Language.get("WIN_RES_BITMAPS"));
+    DefaultMutableTreeNode fonts_node = new DefaultMutableTreeNode("Root: "+Language.get("WIN_RES_FONTS"));
     for(Resource r:resources) {
       if(r.getClass()==Bitmap.class) {
         bitmaps_node.add(r.getTreeNode());
@@ -653,7 +654,7 @@ public class Skin implements ActionListener{
     code+=" email=\""+themeinfo_email+"\"";
     code+=" webpage=\""+themeinfo_webpage+"\"";
     code+="/>\n\n";    
-    code+=Skin.indentation+"<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.php)-->\n\n";
+    code+=Skin.indentation+"<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.html)-->\n\n";
     for (int i=0;i<resources.size();i++) {
       code+=resources.get(i).returnCode(Skin.indentation);
     }
@@ -674,15 +675,16 @@ public class Skin implements ActionListener{
     Resource r = getResource(id);
     if(r==null) return;
     if(r.type.equals("Bitmap")) {
-      TreePath tp = findInTree(m.res_tree,"Root: Bitmaps");
+      TreePath tp = findInTree(m.res_tree,"Root: "+Language.get("WIN_RES_BITMAPS"));
       m.res_tree.expandPath(tp);
     }
     else if(r.type.equals("Font")) {
-      TreePath tp = findInTree(m.res_tree,"Root: Fonts");
+      TreePath tp = findInTree(m.res_tree,"Root: "+Language.get("WIN_RES_FONTS"));
       m.res_tree.expandPath(tp);
     }
     else {
-      System.err.println("Resource of the given id is neither a Font nor a Bitmap its a "+r.type);
+      System.err.println("Error encountered while trying to expand a resource:");
+      System.err.println("  Resource of the given id is neither a Font nor a Bitmap its a "+r.type);
       return;
     }     
     
