@@ -156,7 +156,11 @@ public class Config {
     update_cb.setSelected(Boolean.parseBoolean(Config.get("autoupdate")));
     
     JLabel lang_l = new JLabel(Language.get("WIN_PREFS_LANG_L"));    
-    File[] lang_files = new File("lang").listFiles();
+    File[] lang_files = new File("lang").listFiles(new FileFilter() {
+      public boolean accept(File f) {
+        return f.getName().toLowerCase().endsWith(".txt");
+      }
+    });
     String[] lang_choices = new String[lang_files.length];
     int sel = 0;
     for(int i=0;i<lang_files.length;i++) {

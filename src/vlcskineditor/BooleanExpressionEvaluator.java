@@ -134,15 +134,5 @@ public class BooleanExpressionEvaluator {
         return (op2.equals("not"));
     }
     return false;
-  }
-  public static void main (String[] args) {
-    BooleanExpressionEvaluator bee = new BooleanExpressionEvaluator();
-    bee.parse("( bool1 and bool2 ) or not ( bool3 and bool4 )");
-    String token = bee.getToken();
-    while(!token.isEmpty()) {
-      System.out.println(token);
-      token = bee.getToken();
-    }
-  }
-  
+  }  
 }

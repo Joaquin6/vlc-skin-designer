@@ -418,10 +418,8 @@ public class ActionEditor extends JFrame implements ActionListener{
     JFrame.setDefaultLookAndFeelDecorated(true);
     ActionEditor ae = new ActionEditor(null);
     ae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    /*ae.editAction("none;dialogs.changeSkin();dialogs.fileSimple();dialogs.file();dialogs.directory();dialogs.disc();dialogs.net();dialogs.messages();dialogs.prefs();dialogs.fileInfo();dialogs.playlist();dialogs.streamingWizard();dialogs.popup();dialogs.audioPopup();dialogs.videoPopup();dialogs.miscPopup();equalizer.enable();equalizer.disable();vlc.play();vlc.pause();vlc.stop();vlc.faster();vlc.slower();vlc.mute();" +
+    ae.editAction("none;dialogs.changeSkin();dialogs.fileSimple();dialogs.file();dialogs.directory();dialogs.disc();dialogs.net();dialogs.messages();dialogs.prefs();dialogs.fileInfo();dialogs.playlist();dialogs.streamingWizard();dialogs.popup();dialogs.audioPopup();dialogs.videoPopup();dialogs.miscPopup();equalizer.enable();equalizer.disable();vlc.play();vlc.pause();vlc.stop();vlc.faster();vlc.slower();vlc.mute();" +
                                        "vlc.volumeUp();vlc.volumeDown();vlc.fullscreen();vlc.snapshot();vlc.onTop();vlc.minimize();vlc.quit();playlist.add();playlist.del();playlist.next();playlist.previous();playlist.sort();playlist.setRandom(true);playlist.setLoop(true);playlist.setRepeat(true);playlist.load();playlist.save();dvd.nextTitle();dvd.previousTitle();dvd.nextChapter();dvd.previousChapter();dvd.rootMenu();WindowID.show();WindowID.hide();" +
-                                       "WindowID.maximize();WindowID.unmaximize();WindowID.setLayout(LayoutID)");
-    */
-    ae.editAction("none");
+                                       "WindowID.maximize();WindowID.unmaximize();WindowID.setLayout(LayoutID)");        
   }
 }
