@@ -42,12 +42,13 @@ public class Language {
       FileReader fr = new FileReader(f);
       BufferedReader br = new BufferedReader(fr);
       
-      //Readers have been initiated successfully, thus the file exists and the former table can be cleared
-      strings.clear();      
-      
       String line = "";
       while( (line = br.readLine()) != null) {
-        if(!line.startsWith("#")) {
+        if(line.startsWith("@include")) {
+          String file = line.substring(9);
+          load(new File(f.getParent()+File.separator+file));
+        }        
+        else if(!line.startsWith("#")) {
           String[] fields = line.split("\\|");
           if(fields.length==2) {
             strings.put(fields[0], fields[1].replaceAll("\\\\n", "\n"));

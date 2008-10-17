@@ -1,0 +1,42 @@
+#Author/s: Daniel Dreibrodt
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN value
+MENU_FILE|File
+MENU_FILE_MN|F
+MENU_FILE_NEW|New
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Open
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Save
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Test skin in VLC...
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Export as VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Save current preview as image
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Exit
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|Edit
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Undo
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|Redo
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Theme settings
+MENU_EDIT_THEME_MN|T
+MENU_EDIT_VARS|Global variables
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Preferences
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|Move selected item up
+MENU_EDIT_DOWN|Move selected item down
+MENU_EDIT_LEFT|Move selected item left
+MENU_EDIT_RIGHT|Move selected item right
+MENU_HELP|Help
+MENU_HELP_MN|H
+MENU_HELP_DOC|Online help
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|About
+MENU_HELP_ABOUT_MN|A

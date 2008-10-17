@@ -1,228 +1,17 @@
 #English language file for VLC Skin Editor
 #Author/s: Daniel Dreibrodt
 
-#The Menu bar and its entries
-#The access key for a menu entry is defined by the MN value
-MENU_FILE|File
-MENU_FILE_MN|F
-MENU_FILE_NEW|New
-MENU_FILE_NEW_MN|N
-MENU_FILE_OPEN|Open
-MENU_FILE_OPEN_MN|O
-MENU_FILE_SAVE|Save
-MENU_FILE_SAVE_MN|S
-MENU_FILE_TEST|Test skin in VLC...
-MENU_FILE_TEST_MN|T
-MENU_FILE_VLT|Export as VLT...
-MENU_FILE_VLT_MN|V
-MENU_FILE_PNG|Save current preview as image
-MENU_FILE_PNG_MN|p
-MENU_FILE_EXIT|Exit
-MENU_FILE_EXIT_MN|x
-MENU_EDIT|Edit
-MENU_EDIT_MN|E
-MENU_EDIT_UNDO|Undo
-MENU_EDIT_UNDO_MN|U
-MENU_EDIT_REDO|Redo
-MENU_EDIT_REDO_MN|R
-MENU_EDIT_THEME|Theme settings
-MENU_EDIT_THEME_MN|T
-MENU_EDIT_VARS|Global variables
-MENU_EDIT_VARS_MN|G
-MENU_EDIT_PREFS|Preferences
-MENU_EDIT_PREFS_MN|P
-MENU_EDIT_UP|Move selected item up
-MENU_EDIT_DOWN|Move selected item down
-MENU_EDIT_LEFT|Move selected item left
-MENU_EDIT_RIGHT|Move selected item right
-MENU_HELP|Help
-MENU_HELP_MN|H
-MENU_HELP_DOC|Online help
-MENU_HELP_DOC_MN|O
-MENU_HELP_ABOUT|About
-MENU_HELP_ABOUT_MN|A
+@include english/menu.txt
+@include english/main_windows.txt
+@include english/action_editor.txt
 
-#Resource Window
-WIN_RES_TITLE|Resources
-WIN_RES_ADD_BMP|Add a new Bitmap or SubBitmap
-WIN_RES_ADD_FONT|Add a new Font
-WIN_RES_COPY|Create a copy of the selected resource
-WIN_RES_EDIT|Edit the selected resource
-WIN_RES_DELETE|Delete the selected resource
-WIN_RES_PU_ADD_BMP|Add Bitmap/s
-WIN_RES_PU_ADD_SBMP|Add SubBitmap
-WIN_RES_BITMAPS|Bitmaps
-WIN_RES_FONTS|Fonts
-
-#Windows window
-WIN_WIN_TITLE|Windows
-WIN_WIN_ADD|Add a new window
-WIN_WIN_ADD_LAY|Add a new layout to the selected window
-WIN_WIN_MOVE_UP|Move selected layout up in hierarchy (last layout is the default layout for the window)
-WIN_WIN_MOVE_DOWN|Move selected layout down in hierarchy (last layout is the default layout for the window)
-WIN_WIN_COPY|Create a copy of the selected window or layout
-WIN_WIN_EDIT|Edit the selecte window or layout
-WIN_WIN_DELETE|Delete the selected window or layout
-
-#Items window
-WIN_ITEMS_TITLE|Items
-WIN_ITEMS_ADD|Add a new item
-WIN_ITEMS_MOVE_UP|Move selected item up in hierarchy
-WIN_ITEMS_MOVE_DOWN|Move selected item down in hierarchy
-WIN_ITEMS_COPY|Create a copy of the selected item
-WIN_ITEMS_EDIT|Edit the selected item
-WIN_ITEMS_DELETE|Delete the selecte item
-WIN_ITEMS_PU_PANEL_ADD|Add to selected Panel
-
-#Welcome dialog
-WELCOME_TITLE|Welcome to the VLC Skin Editor
-WELCOME_MSG|What would you like to do?
-WELCOME_NEW|Create a new skin
-WELCOME_OPEN|Open an existing skin
-WELCOME_QUIT|Quit
-
-#Preferences window
-WIN_PREFS_TITLE|Preferences
-WIN_PREFS_UPDATE_L|Enable auto-update:
-WIN_PREFS_LANG_L|Language:
-WIN_PREFS_LAF_L|Program look-and-feel:
-WIN_PREFS_RESTART_L|<html><i>Some settings only take effect when the program is restarted.</i></html>
-
-#SubBitmap Edit and Skin Preview window
-WIN_SBMP_EDIT_TITLE|Edit SubBitmap
-ZOOM_FACTOR|Zoom factor:
-
-#Action Editor
-WIN_ACTIONS_TITLE|Edit action sequence
-ACTIONS_PU|Actions
-ACTIONS_DIALOGS|Show a dialog
-ACTIONS_PLAYLIST|Playlist
-ACTIONS_DVD|DVD
-ACTIONS_WINDOWS|Skin
-ACTIONS_VLC_PLAY|Play
-ACTIONS_VLC_PAUSE|Pause
-ACTIONS_VLC_STOP|Stop
-ACTIONS_VLC_FASTER|Play faster
-ACTIONS_VLC_SLOWER|Play slower
-ACTIONS_VLC_MUTE|Mute the volume
-ACTIONS_VLC_VOLUMEUP|Increase the volume
-ACTIONS_VLC_VOLUMEDOWN|Reduce the volume
-ACTIONS_VLC_FULLSCREEN|Toggle fullscreen mode
-ACTIONS_VLC_SNAPSHOT|Take a snapshot
-ACTIONS_VLC_ONTOP|Toggle always on top
-ACTIONS_VLC_MINIMIZE|Minimize VLC
-ACTIONS_VLC_QUIT|Quit VLC
-ACTIONS_EQ_ENABLE|Enable Equalizer
-ACTIONS_EQ_DISABLE|Disable Equalizer
-ACTIONS_DIALOGS_CHANGESKIN|Change skin
-ACTIONS_DIALOGS_FILESIMPLE|Open file (simple)
-ACTIONS_DIALOGS_FILE|Open file (extended)
-ACTIONS_DIALOGS_DIRECTORY|Open directory
-ACTIONS_DIALOGS_DISC|Open disc
-ACTIONS_DIALOGS_NET|Open network stream
-ACTIONS_DIALOGS_MESSAGES|Message log
-ACTIONS_DIALOGS_PREFS|Preferences
-ACTIONS_DIALOGS_FILEINFO|File information
-ACTIONS_DIALOGS_PLAYLIST|Unskinned playlist
-ACTIONS_DIALOGS_STREAMINGWIZARD|Streaming Wizard
-ACTIONS_DIALOGS_POPUP|Full popup menu
-ACTIONS_DIALOGS_AUDIOPOPUP|Audio settings popup menu
-ACTIONS_DIALOGS_VIDEOPOPUP|Video settings popup menu
-ACTIONS_DIALOGS_MISCPOPUP|Miscellaneous settings popup menu
-ACTIONS_PLAYLIST_ADD|Add a new item
-ACTIONS_PLAYLIST_DEL|Remove selected item
-ACTIONS_PLAYLIST_NEXT|Play next item
-ACTIONS_PLAYLIST_PREVIOUS|Play previous item
-ACTIONS_PLAYLIST_SETRANDOM|Play in random/normal order
-ACTIONS_PLAYLIST_SETLOOP|Loop playlist/play it once
-ACTIONS_PLAYLIST_SETREPEAT|Enable/disable repetition of current item
-ACTIONS_PLAYLIST_SORT|Sort alphabetically
-ACTIONS_PLAYLIST_LOAD|Load from file
-ACTIONS_PLAYLIST_SAVE|Save to file
-ACTIONS_DVD_NEXTTITLE|Next title
-ACTIONS_DVD_PREVIOUSTITLE|Previous title
-ACTIONS_DVD_NEXTCHAPTER|Next chapter
-ACTIONS_DVD_PREVIOUSCHAPTER|Previous chapter
-ACTIONS_DVD_ROOTMENU|Main menu
-ACTIONS_WINDOWS_SHOW|Show a window
-ACTIONS_WINDOWS_HIDE|Hide a window
-ACTIONS_WINDOWS_MAXIMIZE|Maximize a window
-ACTIONS_WINDOWS_UNMAXIMIZE|Unmaximize a window
-ACTIONS_WINDOWS_SETLAYOUT|Change the layout of a window
-ACTION_DESC_NONE|Do nothing.
-ACTION_DESC_CHANGESKIN|Show a dialog box to load a new skin.
-ACTION_DESC_FILESIMPLE|Show the simple "Open File" dialog box.
-ACTION_DESC_FILE|Show the extended "Open File" dialog box.
-ACTION_DESC_DIRECTORY|Show the "Open Directory" dialog box.
-ACTION_DESC_DISC|Show the "Open Disc" dialog box.
-ACTION_DESC_NET|Show the "Open Network Stream" dialog box.
-ACTION_DESC_MSG|Show the message log dialog box.
-ACTION_DESC_PREFS|Show the preferences dialog box.
-ACTION_DESC_FILEINFO|Show the file information dialog box.
-ACTION_DESC_PLAYLIST|Show the default (unskinned) playlist window.
-ACTION_DESC_WIZARD|Show the "Streaming Wizard" dialog box.
-ACTION_DESC_POPUP|Show the full popup menu.
-ACTION_DESC_AUDIOPU|Show the audio settings popup menu.
-ACTION_DESC_VIDEOPU|Show the video settings popup menu.
-ACTION_DESC_MISCPU|Show a popup menu containing playback control and general options.
-ACTION_DESC_EQENABLE|Enable the equalizer audio filter.
-ACTION_DESC_EQDISABLE|Disable the equalizer audio filter.
-ACTION_DESC_PLAY|Play the current playlist item.
-ACTION_DESC_PAUSE|Pause the playback.
-ACTION_DESC_STOP|Stop the playback.
-ACTION_DESC_FASTER|Play faster.
-ACTION_DESC_SLOWER|Play slower.
-ACTION_DESC_MUTE|Toggle audio muting.
-ACTION_DESC_VOLUP|Increase the volume.
-ACTION_DESC_VOLDOWN|Reduce the volume.
-ACTION_DESC_FULLSCREEN|Toggle the fullscreen mode.
-ACTION_DESC_SNAPSHOT|Take a snapshot of the video.
-ACTION_DESC_ONTOP|Toggle the "always on top" status.
-ACTION_DESC_MIN|Minimize VLC.
-ACTION_DESC_QUIT|Quit VLC.
-ACTION_PL_ADD|Add a new item to the playlist.
-ACTION_PL_DEL|Remove the selected items from the playlist.
-ACTION_PL_NEXT|Play the next item in the playlist.
-ACTION_PL_PREV|Play the previous item in the playlist.
-ACTION_PL_SORT|Sort the playlist alphabetically.
-ACTION_PL_LOAD|Load an external playlist file.
-ACTION_PL_SAVE|Save the current playlist to a file.
-ACTION_DVD_NEXTT|Go to the next title on the DVD.
-ACTION_DVD_PREVT|Go to the previous title on the DVD.
-ACTION_DVD_NEXTC|Go to the next chapter of the DVD.
-ACTION_DVD_PREVC|Go to the previous chapter of the DVD.
-ACTION_DVD_MENU|Go to the root menu of the DVD.
-ACTION_ACTIVATE|Activate
-ACTION_DEACTIVATE|Deactivate
-ACTION_RANDOM| that the items in the playlist are played in random order.
-ACTION_LOOP| that the playlist is repeated when its end is reached.
-ACTION_REPEAT| that the current item is repeated after its end is reached
-ACTION_SHOW|Show the window with the ID 
-ACTION_HIDE|Hide the window with the ID 
-ACTION_MAXIMIZE|Maximize the window with the ID 
-ACTION_UNMAXIMIZE|Unmaximize the window with the ID 
-ACTION_LAYOUT_OF|Set the Layout of the window with the ID 
-ACTION_TO| to 
-
-#Global variables
-WIN_VARS_TITLE|Global variables
-WIN_VARS_NOTE|<html>These variables only affect the preview.<br>They simulate the state of VLC.</html>
-WIN_VARS_SLIDER|Slider position
-
-#Theme options
-WIN_THEME_TITLE|Theme settings
-WIN_THEME_NAME|Name:
-WIN_THEME_AUTHOR|Author:
-WIN_THEME_EMAIL|Author's E-Mail:
-WIN_THEME_WEB|Author's webpage:
-WIN_THEME_MAGNET|Magnet:
-WIN_THEME_MAGNET_TIP|When the distance between the border of the screen and an anchor of a window is less than this value, the window will stick to the border
-WIN_THEME_ALPHA|Opacity:
-WIN_THEME_ALPHA_TIP|Sets the alpha transparency of the windows. The value must be between 1 (nearly total transparency) and 255 (total opacity). Low values should be avoided.
-WIN_THEME_MOVEALPHA|Opacity when moving:
-WIN_THEME_MOVEALPHA_TIP|Sets the alpha transparency of the windows when they are moved.
-WIN_THEME_INFO_TITLE|Theme information
-WIN_THEME_ATTR_TITLE|Theme attributes
+#General strings
+CHOICE_YES|Yes
+CHOICE_NO|No
+CHOICE_CANCEL|Cancel
+BUTTON_OK|OK
+BUTTON_CANCEL|Cancel
+BUTTON_HELP|Help
 
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
@@ -246,19 +35,6 @@ DOWNLOAD_PROGRESS|Downloading...
 CONNECT_PROGRESS|Connecting...
 UPDATE_SUCCESS_TITLE|Finished updating
 UPDATE_SUCCESS_MSG|Update was sucessfully downloaded and installed.\nVLC Skin Editor will restart now
-
-#General strings
-CHOICE_YES|Yes
-CHOICE_NO|No
-CHOICE_CANCEL|Cancel
-BUTTON_OK|OK
-BUTTON_CANCEL|Cancel
-BUTTON_HELP|Help
-
-#Other strings
-THEMEINFO_NAME_DEFAULT|Unnamed Theme
-THEMEINFO_AUTHOR_DEFAULT|Unknown Author
-THEMEINFO_EMAIL_DEFAULT|Unknown
 
 #Error messages
 ERROR_FILENEXIST_TITLE|Error while opening file
@@ -292,3 +68,8 @@ ERROR_ALPHA_TITLE|Opacity value not valid
 ERROR_ALPHA_MSG|Please enter a valid opacity! (0-255)
 ERROR_MALPHA_TITLE|Opacity when moving not valid
 ERROR_MALPHA_MSG|Please enter a valid opacity when moving! (0-255)
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Unnamed Theme
+THEMEINFO_AUTHOR_DEFAULT|Unknown Author
+THEMEINFO_EMAIL_DEFAULT|Unknown
