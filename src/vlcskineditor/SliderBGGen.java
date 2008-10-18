@@ -108,7 +108,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     sbg=sbg_;
     s=s_;
     setIconImage(editor_icon.getImage());
-    setTitle("Slider background generator");    
+    setTitle(Language.get("SBGGEN_TITLE"));    
     layout = new CardLayout();
     setLayout(layout);
     
@@ -121,15 +121,15 @@ public class SliderBGGen extends JFrame implements ActionListener{
     if(header_bgc.getBlue()<16) header_bgh+="0";
     header_bgh+=Integer.toHexString(header_bgc.getBlue()).toUpperCase();   
     
-    String header_str = "<html><body style=\"background:"+header_bgh+";color:#FFFFFF;width:540px;\"><h1>&nbsp;Slider Background Generator</h1></body></html>";
+    String header_str = "<html><body style=\"background:"+header_bgh+";color:#FFFFFF;width:540px;\"><h1>&nbsp;"+Language.get("SBGGEN_TITLE")+"</h1></body></html>";
     
     card_step1 = new JPanel(null);    
     JLabel header1_l = new JLabel(header_str);     
     header1_l.setBounds(0,0,540,50);
     card_step1.add(header1_l); 
     
-    JLabel welcome_l = new JLabel("<html><div style=\"width:400px;margin-top:2px\">Welcome to the slider background generator. It will help you to create a neat slider from your images, in just a few steps.<br>" +
-                                  "As a first step, please choose whether the slider is going from left to right or from the bottom to the top and what size the background should have.</div></html>");    
+    JLabel welcome_l = new JLabel("<html><div style=\"width:400px;margin-top:2px\">"+Language.get("SBGGEN_DESCR")+"<br>"
+                                  + Language.get("SBGGEN_FIRST")+"</div></html>");
     card_step1.add(welcome_l);    
     welcome_l.setBounds(5,30,630,100);
     ltr_rb = new JRadioButton("");    
@@ -162,7 +162,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(horz2_s);
     horz2_s.setBounds(5,215,525,215);    
     
-    JLabel width_l = new JLabel("Width:",width_i,JLabel.TRAILING);
+    JLabel width_l = new JLabel(Language.get("SBGGEN_WIDTH"),width_i,JLabel.TRAILING);
     width_l.setHorizontalAlignment(JLabel.LEFT);
     width_tf = new JTextField();    
     width_tf.setDocument(new NumbersOnlyDocument(false));
@@ -173,7 +173,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(width_tf);
     width_tf.setBounds(90,230,50,25);    
     
-    JLabel height_l = new JLabel("Height:",height_i,JLabel.TRAILING);
+    JLabel height_l = new JLabel(Language.get("SBGGEN_HEIGHT"),height_i,JLabel.TRAILING);
     height_l.setHorizontalAlignment(JLabel.LEFT);
     height_tf = new JTextField();
     height_tf.setDocument(new NumbersOnlyDocument(false));
@@ -184,22 +184,22 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(height_tf);
     height_tf.setBounds(90,265,50,25);
     
-    JLabel margin_l_l = new JLabel("Left margin:", margin_l_i, JLabel.TRAILING);
+    JLabel margin_l_l = new JLabel(Language.get("SBGGEN_LEFT_M"), margin_l_i, JLabel.TRAILING);
     margin_l_l.setHorizontalAlignment(JLabel.LEFT);
     margin_l_tf = new JTextField();
     margin_l_tf.setDocument(new NumbersOnlyDocument(false));
     margin_l_l.setLabelFor(margin_l_tf);
-    JLabel margin_r_l = new JLabel("Right margin:", margin_r_i, JLabel.TRAILING);
+    JLabel margin_r_l = new JLabel(Language.get("SBGGEN_RIGHT_M"), margin_r_i, JLabel.TRAILING);
     margin_r_l.setHorizontalAlignment(JLabel.LEFT);
     margin_r_tf = new JTextField();
     margin_r_tf.setDocument(new NumbersOnlyDocument(false));
     margin_r_l.setLabelFor(margin_r_tf);
-    JLabel margin_t_l = new JLabel("Top margin:", margin_t_i, JLabel.TRAILING);
+    JLabel margin_t_l = new JLabel(Language.get("SBGGEN_TOP_M"), margin_t_i, JLabel.TRAILING);
     margin_t_l.setHorizontalAlignment(JLabel.LEFT);
     margin_t_tf = new JTextField();
     margin_t_tf.setDocument(new NumbersOnlyDocument(false));
     margin_t_l.setLabelFor(margin_t_tf);
-    JLabel margin_b_l = new JLabel("Bottom margin:", margin_b_i, JLabel.TRAILING);
+    JLabel margin_b_l = new JLabel(Language.get("SBGGEN_BTM_M"), margin_b_i, JLabel.TRAILING);
     margin_b_l.setHorizontalAlignment(JLabel.LEFT);
     margin_b_tf = new JTextField();
     margin_b_tf.setDocument(new NumbersOnlyDocument(false));
@@ -223,10 +223,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     margin_b_tf.setBounds(445,265,50,25);
     
     JSeparator separator2 = new JSeparator(JSeparator.HORIZONTAL);
-    JLabel info_l = new JLabel("<html>In the following step you have to choose the correct image files associated" +
-            " to the different parts of your slider.<br>Note that the icons are just examples to illustrate" +
-            " what the different parts represent. They are not a preview of the images that will be used in" +
-            " the background generation.</html>");
+    JLabel info_l = new JLabel("<html>"+Language.get("SBGGEN_SECOND")+"<br>"+Language.get("SBGGEN_NOTE")+"</html>");
     
     card_step1.add(separator2);
     card_step1.add(info_l);
@@ -235,9 +232,10 @@ public class SliderBGGen extends JFrame implements ActionListener{
     info_l.setBounds(5,310,525,80);
     
     step1_horz_s = new JSeparator(JSeparator.HORIZONTAL);   
-    step1_next_btn = new JButton("Next >");
+    step1_next_btn = new JButton(Language.get("SBGGEN_NEXT"));
     step1_next_btn.addActionListener(this);
-    step1_cancel_btn = new JButton("Cancel");
+    step1_cancel_btn = new JButton(Language.get("SBGGEN_CANCEL"));
+    step1_cancel_btn.setActionCommand("cancel");
     step1_cancel_btn.addActionListener(this);
     
     card_step1.add(step1_horz_s);
@@ -258,18 +256,18 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step2.add(header2_l); 
     
     bg_p = new JPanel(null);
-    bg_l = new JLabel("Image file:",bg_h,JLabel.TRAILING);
+    bg_l = new JLabel(Language.get("SBGGEN_IMAGE"),bg_h,JLabel.TRAILING);
     bg_tf = new JTextField("");
-    bg_btn = new JButton("Open...");
+    bg_btn = new JButton(Language.get("SBGGEN_OPEN"));
     bg_btn.addActionListener(this);
-    JLabel bg_rs_l = new JLabel("Resize behaviour:",JLabel.TRAILING);
+    JLabel bg_rs_l = new JLabel(Language.get("SBGGEN_RESIZE"),JLabel.TRAILING);
     ButtonGroup bg_rs_g = new ButtonGroup();
     bgt_rb = new JRadioButton("",true);
-    JLabel bgt_l = new JLabel("Tile",tile,JLabel.TRAILING);
+    JLabel bgt_l = new JLabel(Language.get("SBGGEN_TILE"),tile,JLabel.TRAILING);
     bgt_l.setHorizontalAlignment(JLabel.LEFT);
     bg_rs_g.add(bgt_rb);
     bgs_rb = new JRadioButton("",false);
-    JLabel bgs_l = new JLabel("Stretch",stretch,JLabel.TRAILING);
+    JLabel bgs_l = new JLabel(Language.get("SBGGEN_STRETCH"),stretch,JLabel.TRAILING);
     bgs_l.setHorizontalAlignment(JLabel.LEFT);
     bg_rs_g.add(bgs_rb);
     bg_p.add(bg_l);
@@ -288,14 +286,14 @@ public class SliderBGGen extends JFrame implements ActionListener{
     bgt_l.setBounds(130,50,100,25);
     bgs_rb.setBounds(210,50,25,25);
     bgs_l.setBounds(240,50,100,25);    
-    bg_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Background"));    
+    bg_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_BG")));    
     card_step2.add(bg_p);
     bg_p.setBounds(5,50,520,85);    
     
     e1_p = new JPanel(null);
-    e1_l = new JLabel("Image file:",left,JLabel.TRAILING);
+    e1_l = new JLabel(Language.get("SBGGEN_IMAGE"),left,JLabel.TRAILING);
     e1_tf = new JTextField();
-    e1_btn = new JButton("Open...");
+    e1_btn = new JButton(Language.get("SBGGEN_OPEN"));
     e1_btn.addActionListener(this);
     e1_p.add(e1_l);
     e1_p.add(e1_tf);
@@ -303,23 +301,23 @@ public class SliderBGGen extends JFrame implements ActionListener{
     e1_l.setBounds(0,20,90,25);
     e1_tf.setBounds(105,20,300,25);
     e1_btn.setBounds(410,20,100,25);
-    e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Left edge"));    
+    e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_LEFT_E")));    
     card_step2.add(e1_p);
     e1_p.setBounds(5,135,520,55);
     
     md_p = new JPanel(null);
-    md_l = new JLabel("Image file:",middle_h,JLabel.TRAILING);
+    md_l = new JLabel(Language.get("SBGGEN_IMAGE"),middle_h,JLabel.TRAILING);
     md_tf = new JTextField("");
-    md_btn = new JButton("Open...");
+    md_btn = new JButton(Language.get("SBGGEN_OPEN"));
     md_btn.addActionListener(this);
-    JLabel md_rs_l = new JLabel("Resize behaviour:",JLabel.TRAILING);
+    JLabel md_rs_l = new JLabel(Language.get("SBGGEN_RESIZE"),JLabel.TRAILING);
     ButtonGroup md_rs_g = new ButtonGroup();
     mdt_rb = new JRadioButton("",true);
-    JLabel mdt_l = new JLabel("Tile",tile,JLabel.TRAILING);
+    JLabel mdt_l = new JLabel(Language.get("SBGGEN_TILE"),tile,JLabel.TRAILING);
     mdt_l.setHorizontalAlignment(JLabel.LEFT);
     md_rs_g.add(mdt_rb);
     mds_rb = new JRadioButton("",false);
-    JLabel mds_l = new JLabel("Stretch",stretch,JLabel.TRAILING);
+    JLabel mds_l = new JLabel(Language.get("SBGGEN_STRETCH"),stretch,JLabel.TRAILING);
     mds_l.setHorizontalAlignment(JLabel.LEFT);
     md_rs_g.add(mds_rb);
     md_p.add(md_l);
@@ -338,14 +336,14 @@ public class SliderBGGen extends JFrame implements ActionListener{
     mdt_l.setBounds(130,50,100,25);
     mds_rb.setBounds(210,50,25,25);
     mds_l.setBounds(240,50,100,25);    
-    md_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Middle part"));    
+    md_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_MIDDLE")));    
     card_step2.add(md_p);
     md_p.setBounds(5,190,520,85);    
     
     e2_p = new JPanel(null);
-    e2_l = new JLabel("Image file:",right,JLabel.TRAILING);
+    e2_l = new JLabel(Language.get("SBGGEN_IMAGE"),right,JLabel.TRAILING);
     e2_tf = new JTextField();
-    e2_btn = new JButton("Open...");
+    e2_btn = new JButton(Language.get("SBGGEN_OPEN"));
     e2_btn.addActionListener(this);
     e2_p.add(e2_l);
     e2_p.add(e2_tf);
@@ -353,14 +351,14 @@ public class SliderBGGen extends JFrame implements ActionListener{
     e2_l.setBounds(0,20,90,25);
     e2_tf.setBounds(105,20,300,25);
     e2_btn.setBounds(410,20,100,25);
-    e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Right edge"));    
+    e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_RIGHT_E")));    
     card_step2.add(e2_p);
     e2_p.setBounds(5,275,520,55);
     
     ol_p = new JPanel(null);
-    ol_l = new JLabel("Image file:",JLabel.TRAILING);
+    ol_l = new JLabel(Language.get("SBGGEN_IMAGE"),JLabel.TRAILING);
     ol_tf = new JTextField();
-    ol_btn = new JButton("Open...");
+    ol_btn = new JButton(Language.get("SBGGEN_OPEN"));
     ol_btn.addActionListener(this);
     ol_p.add(ol_l);
     ol_p.add(ol_tf);
@@ -368,16 +366,17 @@ public class SliderBGGen extends JFrame implements ActionListener{
     ol_l.setBounds(0,20,90,25);
     ol_tf.setBounds(105,20,300,25);
     ol_btn.setBounds(410,20,100,25);
-    ol_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Overlay image"));    
+    ol_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_OVERLAY")));    
     card_step2.add(ol_p);
     ol_p.setBounds(5,330,520,55);    
     
     JSeparator step2_horz_s = new JSeparator(JSeparator.HORIZONTAL);
-    step2_prev_btn = new JButton("< Previous");
+    step2_prev_btn = new JButton(Language.get("SBGGEN_PREV"));
     step2_prev_btn.addActionListener(this);
-    step2_finish_btn = new JButton("Finish");
+    step2_finish_btn = new JButton(Language.get("SBGGEN_FINISH"));
     step2_finish_btn.addActionListener(this);
-    step2_cancel_btn = new JButton("Cancel");
+    step2_cancel_btn = new JButton(Language.get("SBGGEN_CANCEL"));
+    step2_cancel_btn.setActionCommand("cancel");
     step2_cancel_btn.addActionListener(this);    
     
     card_step2.add(step2_horz_s);
@@ -396,7 +395,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     setResizable(false);
   }
   public void actionPerformed(ActionEvent e) {
-    if(e.getActionCommand().equals("Cancel")) {
+    if(e.getActionCommand().equals("cancel")) {
       setVisible(false);
       dispose();
     }
@@ -430,18 +429,18 @@ public class SliderBGGen extends JFrame implements ActionListener{
     }
     else if(e.getSource().equals(ltr_rb)) {
         bg_l.setIcon(bg_h);
-        e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Left edge"));
+        e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_LEFT_E")));
         e1_l.setIcon(left);
         md_l.setIcon(middle_h);
-        e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Right edge"));
+        e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_RIGHT_E")));
         e2_l.setIcon(right);
     }
     else if(e.getSource().equals(btt_rb)) {
         bg_l.setIcon(bg_v);
-        e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Top edge"));
+        e1_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_TOP_E")));
         e1_l.setIcon(top);
         md_l.setIcon(middle_v);
-        e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Bottom edge"));
+        e2_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("SBGGEN_BTM_E")));
         e2_l.setIcon(bottom);
     }
     else if(e.getSource().equals(bg_btn)) {
@@ -500,12 +499,30 @@ public class SliderBGGen extends JFrame implements ActionListener{
    * For testing purposes
    */
   public static void main(String[] args) {
+    Config.load();
+    Language.load(new java.io.File("lang"+java.io.File.separator+Config.get("language")+".txt"));
+    
     try {	
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      String laf = Config.get("swing.laf");
+      String lafClass = laf;
+      if(laf!=null) {
+        if(laf.equals("System")) {
+          lafClass = UIManager.getSystemLookAndFeelClassName();          
+        }
+        if(laf.equals("Metal: Steel")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.DefaultMetalTheme());
+        } else if(laf.equals("Metal: Ocean")) {
+          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
+          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.OceanTheme());
+        }
+      }      
+      UIManager.setLookAndFeel(lafClass);
     } 
-    catch (Exception e) {
-      
+    catch (Exception ex) {
+      ex.printStackTrace();
     }
+    JFrame.setDefaultLookAndFeelDecorated(true);
     SliderBGGen sbgg = new SliderBGGen(null,null);
     sbgg.setVisible(true);
     sbgg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

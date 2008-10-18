@@ -1,0 +1,35 @@
+#Author/s: Daniel Dreibrodt
+
+#Slider background generator
+SBGGEN_TITLE|Slider Background Generator
+SBGGEN_PREV|< Previous
+SBGGEN_NEXT|Next >
+SBGGEN_CANCEL|Cancel
+SBGGEN_FINISH|Finish
+
+SBGGEN_DESCR|Welcome to the slider background generator. It will help you to create a neat slider from your images, in just a few steps.
+SBGGEN_FIRST|As a first step, please choose whether the slider is going from left to right or from the bottom to the top and what size the background should have.
+SBGGEN_WIDTH|Width:
+SBGGEN_HEIGHT|Height:
+SBGGEN_LEFT_M|Left margin:
+SBGGEN_RIGHT_M|Right margin:
+SBGGEN_TOP_M|Top margin:
+SBGGEN_BTM_M|Bottom margin:
+SBGGEN_SECOND|In the following step you have to choose the correct image files associated to the different parts of your slider.
+SBGGEN_NOTE|Note that the icons are just examples to illustrate what the different parts represent. They are not a preview of the images that will be used in the background generation.
+
+SBGGEN_IMAGE|Image file:
+SBGGEN_OPEN|Open...
+SBGGEN_RESIZE|Resize behaviour:
+SBGGEN_TILE|Tile
+SBGGEN_STRETCH|Stretch
+
+SBGGEN_BG|Background
+SBGGEN_OVERLAY|Overlay image
+SBGGEN_LEFT_E|Left edge
+SBGGEN_RIGHT_E|Right edge
+SBGGEN_TOP_E|Top edge
+SBGGEN_BTM_E|Bottom edge
+SBGGEN_MIDDLE|Middle part
+
+SBGGEN_PROGRESS|Generating the background...

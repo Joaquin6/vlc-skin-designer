@@ -4,6 +4,7 @@
 @include english/menu.txt
 @include english/main_windows.txt
 @include english/action_editor.txt
+@include english/sliderbg_gen.txt
 
 #General strings
 CHOICE_YES|Yes
@@ -55,8 +56,8 @@ ERROR_RES_DEL_INUSE|Resource is still used in the skin, thus it cannot be delete
 ERROR_ADD_LAYOUT_TITLE|Could not add layout
 ERROR_ADD_LAYOUT_MSG|No parent window selected!
 ERROR_UPDATE_TITLE|Error while updating!
-ERROR_SAVEPNG_TITLE|Error while saving preview image
-ERROR_SAVEPNG_MSG|Could not save preview image.
+ERROR_SAVEPNG_TITLE|Error while saving image
+ERROR_SAVEPNG_MSG|Could not save image.
 ERROR_NEWSKIN_TITLE|Error while creating new skin file!
 ERROR_NEWSKIN_MSG|The new skin file could not be created.
 ERROR_INVALID_HEADER|File appears not to be a valid VLC Theme!\n Invalid header:
@@ -68,6 +69,7 @@ ERROR_ALPHA_TITLE|Opacity value not valid
 ERROR_ALPHA_MSG|Please enter a valid opacity! (0-255)
 ERROR_MALPHA_TITLE|Opacity when moving not valid
 ERROR_MALPHA_MSG|Please enter a valid opacity when moving! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Could not load middle image!\nAt least the middle part of the slider is needed to generate a slider background.
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

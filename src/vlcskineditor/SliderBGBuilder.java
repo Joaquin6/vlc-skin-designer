@@ -67,7 +67,7 @@ public class SliderBGBuilder {
       middle_height = middle.getHeight(null);
     }
     catch (Exception e) {
-      JOptionPane.showMessageDialog(sbgg,"Could not load middle image!\nAt least the middle part of the slider is needed to generate a slider background.",e.getLocalizedMessage(),JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(sbgg,Language.get("ERROR_SBGGEN_MIDDLE_MSG"),e.getLocalizedMessage(),JOptionPane.ERROR_MESSAGE);
       cancontinue=false;
     }
     usee2 = true;
@@ -110,7 +110,7 @@ public class SliderBGBuilder {
       total_height = nbframes*height;   
       output = new BufferedImage(width,total_height,BufferedImage.TYPE_INT_ARGB);
       Graphics2D g = output.createGraphics();
-      pg_win = new ProgressWindow(sbgg, "Generating the background...");
+      pg_win = new ProgressWindow(sbgg, Language.get("SBGGEN_PROGRESS"));
       for (int i=0;i<=nbframes;i++) {
         System.out.println("Processing frame "+i+" of "+nbframes+"...");
         pg_win.setProgress(nbframes/100*i);
@@ -174,10 +174,9 @@ public class SliderBGBuilder {
       ImageIO.write(output, "png", f);
     }
     catch (Exception e) {
-      JOptionPane.showMessageDialog(sbgg,"Could not save image!\n"+e.toString());
+      JOptionPane.showMessageDialog(sbgg,Language.get("ERROR_SAVEPNG_MSG")+"\n"+e.toString(),Language.get("ERROR_SAVEPNG_TITLE"),JOptionPane.ERROR_MESSAGE);
       return;
     }
-    //JOptionPane.showMessageDialog(sbgg,"Image saved!\nnbhoriz: 1\nnbvert: "+nbframes+"\npadhorz:0\npadvert:0");
   }
   
 }
