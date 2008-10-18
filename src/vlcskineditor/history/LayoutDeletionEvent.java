@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.Layout;
 import vlcskineditor.Skin;
 import vlcskineditor.Window;
@@ -56,6 +57,6 @@ public class LayoutDeletionEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Delete Layout";
+    return Language.get("HIST_ITEM_DEL").replaceAll("%t",Language.get("LAYOUT"));
   }
 }

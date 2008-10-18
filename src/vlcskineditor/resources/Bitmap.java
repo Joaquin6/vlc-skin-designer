@@ -56,13 +56,16 @@ public class Bitmap extends ImageResource implements ActionListener{
   private JButton file_btn, alphacolor_btn, ok_btn, cancel_btn, help_btn;
   private JFileChooser fc;
   
+  {
+    type = Language.get("BITMAP");
+  }
+  
   /**
    * Creates a new Bitmap from a W3C DOM element
    * @param e The W3C DOM element
    * @param s_ The skin in which the Bitmap is used
    */  
   public Bitmap(Element e, Skin s_) {
-    type = "Bitmap";
     s = s_;
     if(e.hasAttribute("id")) id = e.getAttribute("id");
     if(e.hasAttribute("file")) file = e.getAttribute("file");
@@ -77,8 +80,7 @@ public class Bitmap extends ImageResource implements ActionListener{
    * @param xmlcode The XML code from which the Bitmap should be created. One line per tag.
    * @param s_ The skin in which the Bitmap is used. This is necessary in order that the image file can be located relatively to the skin file.
    */  
-  public Bitmap(String xmlcode, Skin s_) {    
-    type = "Bitmap";
+  public Bitmap(String xmlcode, Skin s_) { 
     s = s_;
     id = XML.getValue(xmlcode,"id"); 
     file = XML.getValue(xmlcode,"file");         
@@ -113,7 +115,6 @@ public class Bitmap extends ImageResource implements ActionListener{
    * This is necessary in order that the image file can be located relatively to the skin file.
    */
   public Bitmap(String id_, String file_, String alphacolor_, int nbframes_, int fps_, Skin s_) {
-    type="Bitmap";
     s=s_;
     id=id_;
     file=file_;
@@ -130,7 +131,6 @@ public class Bitmap extends ImageResource implements ActionListener{
    */
   public Bitmap(Skin s_, File f_) {
     s = s_;
-    type = "Bitmap";    
     //Gets the relative path to the bitmap file
     file = f_.getPath().replace(s.skinfolder,"");
     //Sets the bitmap's id according to the pattern subfolder_filename

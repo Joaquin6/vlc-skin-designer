@@ -55,12 +55,15 @@ public class Image extends Item implements ActionListener{
 
   ImageResource image_res;
   
+  {
+    type = Language.get("IMAGE");
+  }
+  
   /** Creates a new instance of Image
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public Image(String xmlcode, Skin s_) {
-    type = "Image";
     s=s_;
     image = XML.getValue(xmlcode,"image");
     image_res = s.getImageResource(image);
@@ -72,7 +75,7 @@ public class Image extends Item implements ActionListener{
     if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
     if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id"); 
-    else id = "Unnamed image #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
     if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
@@ -81,10 +84,9 @@ public class Image extends Item implements ActionListener{
     created = true;
   }
   public Image(Skin s_) {
-    type = "Image";
     s = s_;
     image = "";
-    id = "Unnamed image #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

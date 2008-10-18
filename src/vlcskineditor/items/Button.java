@@ -56,12 +56,15 @@ public class Button extends Item implements ActionListener{
 
   ImageResource up_res, over_res, down_res;
   
+  {
+    type = Language.get("BUTTON");
+  }
+  
   /** Creates a new instance of Button
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public Button(String xmlcode, Skin s_) {
-    type = "Button";
     s = s_;
     up = XML.getValue(xmlcode,"up");
     if(xmlcode.indexOf("down=\"")!=-1) down = XML.getValue(xmlcode,"down");
@@ -70,7 +73,7 @@ public class Button extends Item implements ActionListener{
     if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
     if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id"); 
-    else id = "Unnamed button #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
     if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
@@ -84,10 +87,9 @@ public class Button extends Item implements ActionListener{
     down_res = s.getImageResource(down);
   }
   public Button(Skin s_) {
-    type = "Button";
     s=s_;
     up = "";
-    id = "Unnamed button #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

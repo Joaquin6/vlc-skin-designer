@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.resources.Bitmap;
 
 /**
@@ -66,6 +67,6 @@ public class BitmapEditEvent extends HistoryEvent{
     b.updateImage();
   }
   public String getDescription() {
-    return "Edit Bitmap";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",b.type);
   }
 }

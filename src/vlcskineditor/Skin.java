@@ -22,7 +22,6 @@
 
 package vlcskineditor;
 
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -48,7 +47,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import vlcskineditor.history.ThemeEditEvent;
@@ -674,11 +672,11 @@ public class Skin implements ActionListener{
   public void expandResource(String id) {   
     Resource r = getResource(id);
     if(r==null) return;
-    if(r.type.equals("Bitmap")) {
+    if(ImageResource.class.isAssignableFrom(r.getClass())) {
       TreePath tp = findInTree(m.res_tree,"Root: "+Language.get("WIN_RES_BITMAPS"));
       m.res_tree.expandPath(tp);
     }
-    else if(r.type.equals("Font")) {
+    else if(r.getClass().equals(Font.class)) {
       TreePath tp = findInTree(m.res_tree,"Root: "+Language.get("WIN_RES_FONTS"));
       m.res_tree.expandPath(tp);
     }

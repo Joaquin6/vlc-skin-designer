@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.SliderBackground;
 
 /**
@@ -74,6 +75,6 @@ public class SliderBackgroundEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit SliderBackground";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",s.type);
   }
 }

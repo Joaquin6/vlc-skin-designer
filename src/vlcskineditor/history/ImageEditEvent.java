@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Image;
 
 /**
@@ -110,6 +111,6 @@ public class ImageEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Image";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",i.type);
   }
 }

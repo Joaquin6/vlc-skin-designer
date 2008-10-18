@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.Skin;
 import vlcskineditor.Window;
 
@@ -48,6 +49,6 @@ public class WindowAddEvent extends HistoryEvent{
     s.updateWindows();    
   }
   public String getDescription() {
-    return "Add Window";
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t",Language.get("WINDOW"));
   }
 }

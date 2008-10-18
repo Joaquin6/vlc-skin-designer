@@ -23,6 +23,7 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
+import vlcskineditor.Language;
 
 /**
  * Represents the action of moving an Item
@@ -52,6 +53,6 @@ public class ItemMoveEvent extends HistoryEvent{
     i.y = y_new;
   }
   public String getDescription() {
-    return "Move Item";
+    return Language.get("HIST_ITEM_MOVE").replaceAll("%t",i.type);
   }
 }

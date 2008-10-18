@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Slider;
 
 /**
@@ -126,6 +127,6 @@ public class SliderEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Slider";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",s.type);
   }
 }

@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Playtree;
 
 /**
@@ -152,6 +153,6 @@ public class PlaytreeEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Playtree";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",p.type);
   }
 }

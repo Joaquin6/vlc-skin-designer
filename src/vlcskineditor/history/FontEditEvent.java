@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.resources.Font;
 
 /**
@@ -56,6 +57,6 @@ public class FontEditEvent extends HistoryEvent{
     f.updateFont();
   }
   public String getDescription() {
-    return "Edit Font";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",f.type);
   }
 }

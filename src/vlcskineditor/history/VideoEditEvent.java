@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Video;
 
 /**
@@ -106,6 +107,6 @@ public class VideoEditEvent extends HistoryEvent {
   }
   @Override
   public String getDescription() {
-    return "Edit Video";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",v.type);
   }
 }

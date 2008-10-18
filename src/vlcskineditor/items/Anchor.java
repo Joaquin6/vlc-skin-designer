@@ -52,13 +52,16 @@ public class Anchor extends Item implements ActionListener{
   Bezier b;
   int[] xpos,ypos;
   
+  {
+    type = Language.get("ANCHOR");
+  }
+  
   /**
    * Creates a new Anchor from XML.
    * @param xmlcode The XML code from which the Anchor should be created. One line per tag.
    * @param s_ The skin in which the Anchor is used.
    */
   public Anchor(String xmlcode, Skin s_) {
-    type = "Anchor";
     s=s_;
     if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
     updateBezier();
@@ -67,7 +70,7 @@ public class Anchor extends Item implements ActionListener{
     if (xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
     if (xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = "Anchor #"+s.getNewId();
+    else id = type+" #"+s.getNewId();
     if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");  
     created = true;
   }
@@ -76,10 +79,9 @@ public class Anchor extends Item implements ActionListener{
    * @param s_ The Skin in which the Anchor is used.
    */
   public Anchor(Skin s_) {
-    type = "Anchor";
     s = s_;
     priority = 0;
-    id = "Anchor #"+s.getNewId();
+    id = type+" #"+s.getNewId();
     updateBezier();
     showOptions();
   }

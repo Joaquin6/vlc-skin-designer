@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Button;
 
 /**
@@ -112,6 +113,6 @@ public class ButtonEditEvent extends HistoryEvent{
     b.tooltiptext = tooltiptext_new;
   }
   public String getDescription() {
-    return "Edit Button";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",b.type);
   }
 }

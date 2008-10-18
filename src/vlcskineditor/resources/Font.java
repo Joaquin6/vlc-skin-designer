@@ -50,8 +50,11 @@ public class Font extends Resource implements ActionListener{
    */
   public java.awt.Font f;
   
+  {
+    type = Language.get("FONT");
+  }
+  
   public Font(Element e, Skin s_) {
-    type = "Font";
     s = s_;
     if(e.hasAttribute("id")) id = e.getAttribute("id");
     if(e.hasAttribute("file")) file = e.getAttribute("file");
@@ -64,7 +67,6 @@ public class Font extends Resource implements ActionListener{
    * @param s_ The Skin in which the Font is used.
    */
   public Font(String xmlcode, Skin s_) {
-    type = "Font";
     s = s_;
     id = XML.getValue(xmlcode,"id");
     file = XML.getValue(xmlcode,"file");
@@ -81,7 +83,6 @@ public class Font extends Resource implements ActionListener{
    * @param s_ The Skin in which the Font is used.
    */
   public Font(String id_,String file_,int size_, Skin s_) {
-    type="Font";
     s=s_;
     id=id_;
     file=file_;
@@ -96,7 +97,6 @@ public class Font extends Resource implements ActionListener{
    */
   public Font(Skin s_, File f_) {
     s = s_;
-    type = "Font";
     String id_t = f_.getName().substring(0,f_.getName().lastIndexOf("."));
     if(s.idExists(id_t)) id_t += "_"+s.getNewId();
     id = id_t;
@@ -110,10 +110,9 @@ public class Font extends Resource implements ActionListener{
    * @param s_ The skin in which the Font is used.
    */
   public Font(Skin s_) {
-    s=s_;
-    type="Font";
-    id = "Unnamed font #"+s.getNewId();
-    file="";
+    s = s_;
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
+    file = "";
     s.updateResources();
     s.expandResource(id);
     showOptions();
@@ -147,7 +146,6 @@ public class Font extends Resource implements ActionListener{
   }
   public void update() {
     FontEditEvent fe = new FontEditEvent(this);
-    type="Font";    
     file=file_tf.getText();
     size=Integer.parseInt(size_tf.getText());        
     id=id_tf.getText();

@@ -47,9 +47,12 @@ public class Panel extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb;
   JButton ok_btn, cancel_btn, help_btn;
   
+  {
+    type = Language.get("PANEL");
+  }
+  
   /** Creates a new instance of Panel */
   public Panel(String xmlcode, Skin s_) {
-    type = "Panel";
     s = s_;
     String[] code = xmlcode.split("\n");
     width = Integer.parseInt(XML.getValue(code[0],"width"));
@@ -57,7 +60,7 @@ public class Panel extends Item implements ActionListener{
     if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
     if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed panel #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(code[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
     if(code[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
     if(code[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
@@ -119,11 +122,10 @@ public class Panel extends Item implements ActionListener{
     created = true;
   }
   public Panel(Skin s_) {
-    type = "Panel";
     s=s_;
     width = 0;
     height = 0;
-    id = "Unnamed panel #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
     s.updateItems();    
   }

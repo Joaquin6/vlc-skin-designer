@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Anchor;
 
 /**
@@ -58,6 +59,6 @@ public class AnchorEditEvent extends HistoryEvent{
     a.range = range_new;
   }
   public String getDescription() {
-    return "Edit Anchor";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",a.type);
   }
 }

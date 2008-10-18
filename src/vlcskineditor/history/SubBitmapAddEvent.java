@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.SubBitmap;
 
@@ -50,6 +51,6 @@ public class SubBitmapAddEvent extends HistoryEvent{
     b.s.expandItem(sb.id);
   }
   public String getDescription() {
-    return "Add SubBitmap";
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t",b.type);
   }
 }

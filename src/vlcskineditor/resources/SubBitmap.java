@@ -27,10 +27,10 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.awt.image.*;
 import java.awt.event.*;
 import org.w3c.dom.Element;
 import vlcskineditor.history.SubBitmapAddEvent;
+
 /**
  * Handles SubBitmap resources
  * @see Bitmap
@@ -54,17 +54,20 @@ public class SubBitmap extends ImageResource implements ActionListener{
   boolean created = false;
   
   SubBitmapEditWindow sbew = null;
+  
+  {
+    type = Language.get("SUBBITMAP");
+  }
+  
   /**
    * Creates a new SubBitmap from a DOM Element
    * @param e The DOM Element
    * @param s_ The skin in which the SubBitmap is used
    * @param parent_ The parent Bitmap. This is necessary to create the image represented by the SubBitmap.
-   */
-  
+   */  
   public SubBitmap(Element e, Skin s_, Bitmap parent_) {
     s = s_;
     parent = parent_;
-    type = "Bitmap";
     if(e.hasAttribute("id")) id = e.getAttribute("id");
     if(e.hasAttribute("x")) x = Integer.parseInt(e.getAttribute("x"));
     if(e.hasAttribute("y")) y = Integer.parseInt(e.getAttribute("y"));
@@ -80,7 +83,6 @@ public class SubBitmap extends ImageResource implements ActionListener{
    * @param parent_ The parent Bitmap. This is necessary to create the image represented by the SubBitmap.
    */
   public SubBitmap(String xmlcode, Skin s_, Bitmap parent_) {
-    type="Bitmap";
     parent=parent_;
     s=s_;
     id = XML.getValue(xmlcode,"id");
@@ -98,8 +100,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
   public SubBitmap(Skin s_,Bitmap parent_) {
     s=s_;
     parent=parent_;
-    type="Bitmap";
-    id = "Unnamed subbitmap #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     x = 0;
     y = 0;
     width = 1;

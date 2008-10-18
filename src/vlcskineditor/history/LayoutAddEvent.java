@@ -23,6 +23,7 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Window;
+import vlcskineditor.Language;
 import vlcskineditor.Layout;
 
 /**
@@ -49,6 +50,6 @@ public class LayoutAddEvent extends HistoryEvent{
     w.s.expandLayout(l.id);
   }
   public String getDescription() {
-    return "Add Layout";
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t",Language.get("LAYOUT"));
   }
 }

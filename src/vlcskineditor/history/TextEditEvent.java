@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Text;
 
 /**
@@ -119,6 +120,6 @@ public class TextEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Text";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",t.type);
   }  
 }

@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.resources.SubBitmap;
 
 /**
@@ -68,6 +69,6 @@ public class SubBitmapEditEvent extends HistoryEvent{
     sb.fps = fps_new;
   }
   public String getDescription() {
-    return "Edit SubBitmap";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",sb.type);
   }
 }

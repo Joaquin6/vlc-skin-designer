@@ -14,6 +14,26 @@ BUTTON_OK|OK
 BUTTON_CANCEL|Cancel
 BUTTON_HELP|Help
 
+#Item names
+THEME|Theme
+FONT|Font
+BITMAP|Bitmap
+SUBBITMAP|SubBitmap
+WINDOW|Window
+LAYOUT|Layout
+ANCHOR|Anchor
+BUTTON|Button
+CHECKBOX|Checkbox
+GROUP|Group
+IMAGE|Image
+PANEL|Panel
+PLAYTREE|Playtree
+SLIDER|Slider
+SLIDERBG|SliderBackground
+TEXT|Text
+VIDEO|Video
+UNNAMED|Unnamed %t #%i
+
 #Messages
 ABOUT_TITLE|About VLC Skin Editor
 ABOUT_MSG|<html><h3>Copyright 2007-%y The VideoLAN Team</h3>Released under terms of the GPL 2+<br><br><b>Lead programmer:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Website:</b> %w<br><br><b>Credits:</b><br>Timothy Gerard Endres for registry access and TAR support (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) for some icons (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)</html>
@@ -32,6 +52,7 @@ EXIT_CONFIRM_TITLE|Your modifications were not saved
 EXIT_CONFIRM_MSG|Would you like to save your skin before exiting?
 UPDATE_TITLE|Update found
 UPDATE_MSG|There is an update available for the Skin Editor.\nYour version: %v\nLatest version: %c\nDo you want to update the Skin Editor now?
+VLT_PROGRESS|Creating VLT archive...
 DOWNLOAD_PROGRESS|Downloading...
 CONNECT_PROGRESS|Connecting...
 UPDATE_SUCCESS_TITLE|Finished updating
@@ -70,8 +91,17 @@ ERROR_ALPHA_MSG|Please enter a valid opacity! (0-255)
 ERROR_MALPHA_TITLE|Opacity when moving not valid
 ERROR_MALPHA_MSG|Please enter a valid opacity when moving! (0-255)
 ERROR_SBGGEN_MIDDLE_MSG|Could not load middle image!\nAt least the middle part of the slider is needed to generate a slider background.
+ERROR_VLT_TITLE|Could not create VLT file
+ERROR_VLT_MSG|VLT file could not be created!
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme
 THEMEINFO_AUTHOR_DEFAULT|Unknown Author
 THEMEINFO_EMAIL_DEFAULT|Unknown
+
+#History
+HIST_ITEM_ADD|Add %t
+HIST_ITEM_DEL|Delete %t
+HIST_ITEM_EDIT|Edit %t
+HIST_ITEM_MOVE|Move %t
+HIST_RES_DEL|Delete %t "%i"

@@ -23,6 +23,7 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
+import vlcskineditor.Language;
 import vlcskineditor.items.Group;
 
 /**
@@ -67,6 +68,6 @@ public class GroupEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Group";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",g.type);
   }
 }

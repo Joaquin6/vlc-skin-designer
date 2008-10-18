@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.items.Checkbox;
 
 /**
@@ -140,6 +141,6 @@ public class CheckboxEditEvent extends HistoryEvent{
     c.state = state_new;
   }
   public String getDescription() {
-    return "Edit Checkbox";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",c.type);
   }
 }

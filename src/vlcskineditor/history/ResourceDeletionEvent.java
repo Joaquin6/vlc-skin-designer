@@ -52,6 +52,6 @@ public class ResourceDeletionEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Delete Resource \""+r.id+"\"";
+    return Language.get("HIST_RES_DEL").replaceAll("%t", r.type).replaceAll("%i", r.id);
   }
 }

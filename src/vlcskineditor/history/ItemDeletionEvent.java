@@ -23,6 +23,7 @@
 package vlcskineditor.history;
 
 import vlcskineditor.Item;
+import vlcskineditor.Language;
 import vlcskineditor.Skin;
 import java.util.List;
 
@@ -56,6 +57,6 @@ public class ItemDeletionEvent extends HistoryEvent {
   }
   @Override
   public String getDescription() {
-    return "Delete "+i.type;
+    return Language.get("HIST_ITEM_DEL").replaceAll("%t", i.type);
   }
 }

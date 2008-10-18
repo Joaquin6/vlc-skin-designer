@@ -50,9 +50,12 @@ public class Video extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, autoresize_cb;
   JButton visible_btn, ok_btn, cancel_btn, help_btn;
   
+  {
+    type = Language.get("VIDEO");
+  }
+  
   /** Creates a new instance of Video */
   public Video(String xmlcode, Skin s_) {
-    type = "Video";
     s = s_;
     if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");
     if(xmlcode.indexOf(" height=\"")!=-1) height = XML.getIntValue(xmlcode,"height");
@@ -60,7 +63,7 @@ public class Video extends Item implements ActionListener{
     if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
     if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = "Unnamed video #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
     if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
@@ -69,9 +72,8 @@ public class Video extends Item implements ActionListener{
     created = true;
   }
   public Video(Skin s_) {
-    type = "Video";
     s = s_;    
-    id = "Unnamed video #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

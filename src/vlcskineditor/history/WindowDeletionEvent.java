@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.Window;
 import vlcskineditor.Skin;
 
@@ -51,6 +52,6 @@ public class WindowDeletionEvent extends HistoryEvent {
   }
   @Override
   public String getDescription() {
-    return "Delete Window";
+    return Language.get("HIST_ITEM_DEL").replaceAll("%t",Language.get("WINDOW"));
   }
 }

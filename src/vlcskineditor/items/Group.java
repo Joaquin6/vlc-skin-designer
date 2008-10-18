@@ -43,15 +43,18 @@ public class Group extends Item implements ActionListener{
   JTextField id_tf, x_tf, y_tf;
   JButton ok_btn, cancel_btn, help_btn;  
   
+  {
+    type = Language.get("GROUP");
+  }
+  
   /** Creates a new instance of Group */
   public Group(String xmlcode, Skin s_) {
-    type = "Group";
     s = s_;
     String[] code = xmlcode.split("\n");
     if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
     if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed group #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     for(int i=0;i<code.length;i++) code[i] = code[i].trim();
     for(int i=1;i<code.length;i++) {      
       if (code[i].startsWith("<!--")) {
@@ -108,9 +111,8 @@ public class Group extends Item implements ActionListener{
     created = true;
   }
   public Group(Skin s_) {
-    type="Group";
     s=s_;
-    id = "Unnamed group #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();    
     s.updateItems();        
   }

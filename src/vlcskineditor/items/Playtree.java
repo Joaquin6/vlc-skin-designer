@@ -80,12 +80,15 @@ public class Playtree extends Item implements ActionListener{
 
   ImageResource bgimage_res, itemimage_res, openimage_res, closedimage_res;
   
+  {
+    type = Language.get("PLAYTREE");
+  }
+  
   /** Creates a new instance of Playtree
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public Playtree(String xmlcode, Skin s_) {
-    type = "Playtree";
     s = s_;
     String[] xmllines = xmlcode.split("\n");
     if(xmllines[0].startsWith("<Playlist")) flat=true;
@@ -118,7 +121,7 @@ public class Playtree extends Item implements ActionListener{
     if(xmllines[0].indexOf("x=\"")!=-1) x = XML.getIntValue(xmllines[0],"x");
     if(xmllines[0].indexOf("y=\"")!=-1) y = XML.getIntValue(xmllines[0],"y");
     if(xmllines[0].indexOf("id=\"")!=-1) id = XML.getValue(xmllines[0],"id");
-    else id = "Unnamed playtree #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmllines[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmllines[0],"lefttop");
     if(xmllines[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmllines[0],"rightbottom");
     if(xmllines[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"xkeepratio");
@@ -151,10 +154,9 @@ public class Playtree extends Item implements ActionListener{
     created=true;
   }
   public Playtree(Skin s_) {
-    type = "Playtree";
     s = s_;
     font = "defaultfont";
-    id = "Unnamed playtree #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     slider = new Slider(s,true);
     showOptions();
     s.updateItems();    

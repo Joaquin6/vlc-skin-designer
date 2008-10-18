@@ -35,15 +35,19 @@ import javax.swing.tree.*;
 public class BitmapFont extends Resource{
   String file;
   final String TYPE_DEFAULT = "digits";
-  String type = TYPE_DEFAULT;
+  String ftype = TYPE_DEFAULT;
+  
+  {
+    type = "BitmapFont";
+  }
+  
   /** Creates a new instance of BitmapFont */
   public BitmapFont(String xmlcode, Skin s_) {
-    type = "Font";
     s = s_;
     id = XML.getValue(xmlcode,"id");
     file = XML.getValue(xmlcode,"file");
     if(xmlcode.indexOf("type=\"")!=-1) {
-      type = XML.getValue(xmlcode,"type");
+      ftype = XML.getValue(xmlcode,"type");
     }
   }
   public void update() {
@@ -54,7 +58,7 @@ public class BitmapFont extends Resource{
   }
   public String returnCode(String indent) {
     String code=indent+"<BitmapFont id=\""+id+"\" file=\""+file+"\"";
-    if (type!=TYPE_DEFAULT) code+=" type=\""+type+"\"";
+    if (!ftype.equals(TYPE_DEFAULT)) code+=" type=\""+ftype+"\"";
     code+="/>\n";
     return code;
   }

@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.Skin;
 
 /**
@@ -78,6 +79,6 @@ public class ThemeEditEvent extends HistoryEvent{
     s.themeinfo_webpage = web_new;
   }
   public String getDescription() {
-    return "Edit Theme attributes";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",Language.get("THEME"));
   }
 }

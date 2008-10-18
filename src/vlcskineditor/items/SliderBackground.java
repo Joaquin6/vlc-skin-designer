@@ -58,14 +58,16 @@ public class SliderBackground extends Item implements ActionListener{
   Slider sl;
 
   private float sliderVal = 0.5f;
-
+  
+  {
+    type = Language.get("SLIDERBG");
+  }
 
   /** Creates a new instance of SliderBackground
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public SliderBackground(String xmlcode, Skin s_) {
-    type = "SliderBackground";
     s = s_;
     image = XML.getValue(xmlcode,"image");
     image_res = s.getImageResource(image);
@@ -74,15 +76,14 @@ public class SliderBackground extends Item implements ActionListener{
     if(xmlcode.indexOf("padhoriz=\"")!=-1) padhoriz = XML.getIntValue(xmlcode,"padhoriz");
     if(xmlcode.indexOf("padvert=\"")!=-1) padvert = XML.getIntValue(xmlcode,"padvert");   
     if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");  
-    else id = "Unnamed slider background #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     created = true;
   }
   public SliderBackground(Skin s_, Slider sl_) {
-    type = "SliderBackground";
     s = s_;
     sl = sl_;
     image = "none";
-    id = "Unnamed slider background #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

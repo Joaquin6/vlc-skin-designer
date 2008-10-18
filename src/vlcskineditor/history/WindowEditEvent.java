@@ -22,6 +22,7 @@
 
 package vlcskineditor.history;
 
+import vlcskineditor.Language;
 import vlcskineditor.Window;
 
 /**
@@ -68,6 +69,6 @@ public class WindowEditEvent extends HistoryEvent{
     w.playondrop = playondrop_new;
   }
   public String getDescription() {
-    return "Edit Window";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",Language.get("WINDOW"));
   }
 }

@@ -24,6 +24,7 @@ package vlcskineditor.history;
 
 import vlcskineditor.Item;
 import vlcskineditor.items.Panel;
+import vlcskineditor.Language;
 
 /**
  * Represents the action of editing a Panel
@@ -108,6 +109,6 @@ public class PanelEditEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Edit Panel";
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",p.type);
   }
 }

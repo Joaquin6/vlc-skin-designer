@@ -69,12 +69,15 @@ public class Checkbox extends Item implements ActionListener{
 
   private boolean state_bool = true;
   
+  {
+    type = Language.get("CHECKBOX");
+  }
+  
   /** Creates a new instance of Checkbox
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public Checkbox(String xmlcode, Skin s_) {
-    type = "Checkbox";
     s = s_;
     up1 = XML.getValue(xmlcode,"up1");
     up1_res = s.getImageResource(up1);
@@ -104,7 +107,7 @@ public class Checkbox extends Item implements ActionListener{
     if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
     if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = "Unnamed checkbox #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
     if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
@@ -113,12 +116,11 @@ public class Checkbox extends Item implements ActionListener{
     created = true;
   }
   public Checkbox(Skin s_) {
-    type = "Checkbox";
     s = s_;
     up1="none";
     up2="none";
     state="false";
-    id = "Unnamed checkbox #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

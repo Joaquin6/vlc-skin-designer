@@ -24,6 +24,7 @@ package vlcskineditor.history;
 
 import vlcskineditor.Item;
 import java.util.List;
+import vlcskineditor.Language;
 
 /**
  * Represents the action of adding an Item
@@ -50,6 +51,6 @@ public class ItemAddEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return "Add "+i.type;
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t", i.type);
   }
 }

@@ -70,12 +70,15 @@ public class Slider extends Item implements ActionListener{
   private Point2D.Float sliderPos;
   private Point2D.Float[] bezierPoints;
   
+  {
+    type = Language.get("SLIDER");
+  }
+  
   /** Creates a new instance of Slider
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */
   public Slider(String xmlcode, Skin s_) {
-    type = "Slider";
     s = s_;
     String[] code = xmlcode.split("\n");
     up = XML.getValue(code[0],"up");
@@ -96,7 +99,7 @@ public class Slider extends Item implements ActionListener{
     if(code[0].indexOf(" x=\"")!=-1) x = XML.getIntValue(code[0],"x");
     if(code[0].indexOf(" y=\"")!=-1) y = XML.getIntValue(code[0],"y");
     if(code[0].indexOf(" id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed slider #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(code[0].indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
     if(code[0].indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
     if(code[0].indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
@@ -119,7 +122,6 @@ public class Slider extends Item implements ActionListener{
     created=true;
   }
   public Slider(String xmlcode, Skin s_, boolean ipt) {
-    type = "Slider";
     s = s_;
     String[] code = xmlcode.split("\n");
     inPlaytree = ipt;
@@ -135,7 +137,7 @@ public class Slider extends Item implements ActionListener{
     if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
     if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed slider #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(code[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
     if(code[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
     if(code[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
@@ -151,20 +153,18 @@ public class Slider extends Item implements ActionListener{
     created=true;
   }
   public Slider(Skin s_) {
-    type = "Slider";
     s = s_;
     up = "none";
-    id = "Unnamed slider #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     updateBezier();
     showOptions();    
     s.updateItems();
     s.expandItem(id);
   }
   public Slider(Skin s_, boolean ipt) {
-    type = "Slider";
     s = s_;
     up = "none";
-    id = "Unnamed slider #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     inPlaytree = ipt;
     created=true;
   }

@@ -55,9 +55,12 @@ public class Text extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, alignment_cb, scrolling_cb;
   JButton visible_btn, color_btn, ok_btn, cancel_btn, help_btn;
   
+  {
+    type = Language.get("TEXT");
+  }
+  
   /** Creates a new instance of Text */
   public Text(String xmlcode, Skin s_) {
-    type = "Text";
     s = s_;
     font = XML.getValue(xmlcode,"font");
     if(xmlcode.indexOf(" text=\"")!=-1) text = XML.getValue(xmlcode,"text");
@@ -68,7 +71,7 @@ public class Text extends Item implements ActionListener{
     if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
     if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");    
     if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = "Unnamed text #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
     if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
     if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
@@ -77,10 +80,9 @@ public class Text extends Item implements ActionListener{
     created = true;
   }
   public Text(Skin s_) {
-    type = "Text";
     s = s_;
     font = "defaultfont";
-    id = "Unnamed text #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   public void update() {

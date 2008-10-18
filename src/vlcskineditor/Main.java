@@ -865,7 +865,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }      
       else return;
       ProgressWindow pwin = new ProgressWindow(this,"");  
-      pwin.setText("Creating VLT archive...");
+      pwin.setText(Language.get("VLT_PROGRESS"));
       pwin.setVisible(true);
       try {        
         TarGzOutputStream tgz = new TarGzOutputStream(new FileOutputStream(f));
@@ -882,7 +882,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         tgz.closeEntry();
         java.util.List<String> files = new LinkedList<String>();
         for(int i=0;i<s.resources.size();i++) {
-          if(s.resources.get(i).type.equals("Bitmap")) {
+          if(s.resources.get(i).getClass().equals(Bitmap.class)) {
             try {
               Bitmap b = (Bitmap)s.resources.get(i);              
               String fn = s.skinfolder+b.file;
@@ -902,11 +902,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             catch (IOException ex) {
               ex.printStackTrace();
               pwin.setVisible(false);
-              JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);
             }       
             catch (Exception ex){}
           }
-          else if(s.resources.get(i).type.equals("Font")) {
+          else if(s.resources.get(i).getClass().equals(vlcskineditor.resources.Font.class)) {
             try {
               vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)s.resources.get(i);              
               String fn = s.skinfolder+fnt.file;              
@@ -926,19 +926,19 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             catch (IOException ex) {              
               ex.printStackTrace();
               pwin.setVisible(false);
-              JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);
             }
           }
         }   
         
         tgz.close();
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,"VLT file created successfully!","VLT file created",JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.INFORMATION_MESSAGE);        
       }
       catch (Exception ex) {        
         ex.printStackTrace();
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,"VLT file could not be created!","Could not create VLT file",JOptionPane.ERROR_MESSAGE);        
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);        
         return;
       }   
     }
@@ -1657,7 +1657,6 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             
 
             InputStream stream = connection.getInputStream();
-            boolean downloading = true;
             int downloaded = 0;
             ProgressWindow pwin = new ProgressWindow(this,Language.get("DOWNLOAD_PROGRESS"));
             pwin.setVisible(true);
