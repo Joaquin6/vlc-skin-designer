@@ -5,6 +5,7 @@
 @include english/main_windows.txt
 @include english/action_editor.txt
 @include english/sliderbg_gen.txt
+@include english/edit_windows.txt
 
 #General strings
 CHOICE_YES|Yes
@@ -93,6 +94,13 @@ ERROR_MALPHA_MSG|Please enter a valid opacity when moving! (0-255)
 ERROR_SBGGEN_MIDDLE_MSG|Could not load middle image!\nAt least the middle part of the slider is needed to generate a slider background.
 ERROR_VLT_TITLE|Could not create VLT file
 ERROR_VLT_MSG|VLT file could not be created!
+ERROR_ID_INVALID_TITLE|ID not valid
+ERROR_ID_INVALID_MSG|Please enter a valid ID!
+ERROR_ID_EXISTS_MSG|The ID "%i" already exists.\nPlease choose another one.
+ERROR_WIDTH_INVALID_TITLE|Width not valid
+ERROR_WIDTH_INVALID_MSG|Please enter a valid width!
+ERROR_HEIGHT_INVALID_TITLE|Height not valid
+ERROR_HEIGHT_INVALID_MSG|Please enter a valid height!
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

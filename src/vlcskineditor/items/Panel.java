@@ -402,7 +402,7 @@ public class Panel extends Item implements ActionListener{
       if(i.id.equals(id_)) {        
         return items;        
       }
-      if (i.type.equals("Group")||i.type.equals("Panel")) {
+      if (i.getClass().equals(Group.class)||i.getClass().equals(vlcskineditor.items.Panel.class)) {
         java.util.List<Item> p = i.getParentListOf(id_);
         if (p!=null) return p;
       }

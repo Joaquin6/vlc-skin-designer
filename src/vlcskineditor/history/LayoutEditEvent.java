@@ -79,6 +79,6 @@ public class LayoutEditEvent extends HistoryEvent {
     l.maxheight = maxheight_new;
   }
   public String getDescription() {
-    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",Language.get("LAYOUT"));
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",l.type);
   }
 }

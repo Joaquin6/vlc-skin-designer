@@ -52,6 +52,6 @@ public class WindowDeletionEvent extends HistoryEvent {
   }
   @Override
   public String getDescription() {
-    return Language.get("HIST_ITEM_DEL").replaceAll("%t",Language.get("WINDOW"));
+    return Language.get("HIST_ITEM_DEL").replaceAll("%t",w.type);
   }
 }

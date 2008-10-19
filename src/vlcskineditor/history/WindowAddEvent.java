@@ -49,6 +49,6 @@ public class WindowAddEvent extends HistoryEvent{
     s.updateWindows();    
   }
   public String getDescription() {
-    return Language.get("HIST_ITEM_ADD").replaceAll("%t",Language.get("WINDOW"));
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t",w.type);
   }
 }

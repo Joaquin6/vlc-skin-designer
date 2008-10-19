@@ -50,6 +50,6 @@ public class LayoutAddEvent extends HistoryEvent{
     w.s.expandLayout(l.id);
   }
   public String getDescription() {
-    return Language.get("HIST_ITEM_ADD").replaceAll("%t",Language.get("LAYOUT"));
+    return Language.get("HIST_ITEM_ADD").replaceAll("%t",l.type);
   }
 }

@@ -57,7 +57,7 @@ public class Layout implements ActionListener{
   
   java.util.List<Item> items = new LinkedList<Item>();
   
-  String type = "List";
+  public String type = Language.get("LAYOUT");
   
   boolean created = false;
   
@@ -73,7 +73,7 @@ public class Layout implements ActionListener{
     width = XML.getIntValue(code[0],"width");
     height = XML.getIntValue(code[0],"height");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed layout #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(code[0].indexOf("minwidth=\"")!=-1) minwidth = XML.getIntValue(code[0],"minwidth");
     if(code[0].indexOf("maxwidth=\"")!=-1) maxwidth = XML.getIntValue(code[0],"maxwidth");
     if(code[0].indexOf("minheight=\"")!=-1) minheight = XML.getIntValue(code[0],"minheight");
@@ -158,7 +158,7 @@ public class Layout implements ActionListener{
   public Layout(Window w_, Skin s_) {
     s=s_;
     parent=w_;
-    id = "Unnamed layout #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     width=0;
     height=0;
     showOptions();
@@ -202,44 +202,44 @@ public class Layout implements ActionListener{
    */
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Layout settings");
+      frame = new JFrame(Language.get("WIN_LAYOUT_TITLE"));
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      id_tf.setToolTipText("Name of the layout (it may be used for actions). Two layouts cannot have the same id.");
-      JLabel width_l = new JLabel("Initial width*:");
+      id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP").replaceAll("%t",type));
+      JLabel width_l = new JLabel(Language.get("WIN_LAYOUT_WIDTH"));
       width_tf = new JTextField();
       width_tf.setDocument(new NumbersOnlyDocument());
-      width_tf.setToolTipText("Initial width of the layout. This value is required since VLC is not (yet?) able to calculate it using the sizes and positions of the controls.");
-      JLabel height_l = new JLabel("Initial height*:");
+      width_tf.setToolTipText(Language.get("WIN_LAYOUT_WIDTH_TIP"));
+      JLabel height_l = new JLabel(Language.get("WIN_LAYOUT_HEIGHT"));
       height_tf = new JTextField();
       height_tf.setDocument(new NumbersOnlyDocument());
-      height_tf.setToolTipText("Initial height of the layout. This value is required since VLC is not (yet?) able to calculate it using the sizes and positions of the controls.");
-      JLabel minwidth_l = new JLabel("Min. width:");
+      height_tf.setToolTipText(Language.get("WIN_LAYOUT_HEIGHT_TIP"));
+      JLabel minwidth_l = new JLabel(Language.get("WIN_LAYOUT_MINWIDTH"));
       minwidth_tf = new JTextField();
       minwidth_tf.setDocument(new NumbersOnlyDocument());
-      minwidth_tf.setToolTipText("Minimum width of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as minimum width.");
-      JLabel minheight_l = new JLabel("Min. height:");
+      minwidth_tf.setToolTipText(Language.get("WIN_LAYOUT_MINWIDTH_TIP"));
+      JLabel minheight_l = new JLabel(Language.get("WIN_LAYOUT_MINHEIGHT"));
       minheight_tf = new JTextField();
       minheight_tf.setDocument(new NumbersOnlyDocument());
-      minheight_tf.setToolTipText("Minimum height of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as minimum width.");
-      JLabel maxwidth_l = new JLabel("Max. width:");
+      minheight_tf.setToolTipText(Language.get("WIN_LAYOUT_MINHEIGHT_TIP"));
+      JLabel maxwidth_l = new JLabel(Language.get("WIN_LAYOUT_MAXWIDTH"));
       maxwidth_tf = new JTextField();
       maxwidth_tf.setDocument(new NumbersOnlyDocument());
-      maxwidth_tf.setToolTipText("Maximum width of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as maximum width.");
-      JLabel maxheight_l = new JLabel("Max. height:");
+      maxwidth_tf.setToolTipText(Language.get("WIN_LAYOUT_MAXWIDTH_TIP"));
+      JLabel maxheight_l = new JLabel(Language.get("WIN_LAYOUT_MAXHEIGHT"));
       maxheight_tf = new JTextField();
       maxheight_tf.setDocument(new NumbersOnlyDocument());
-      maxheight_tf.setToolTipText("Maximum height of the layout. This value is only used when resizing the layout. If this value is set to \"-1\", the initial width (as specified by the width attribute) will be used as maximum width.");
-      ok_btn = new JButton("OK");
+      maxheight_tf.setToolTipText(Language.get("WIN_LAYOUT_MAXHEIGHT_TIP"));
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Distance of textfields to WEST edge of container
       Component[] labels = { id_l, width_l, height_l, minwidth_l, minheight_l, maxwidth_l, maxheight_l};
@@ -251,7 +251,7 @@ public class Layout implements ActionListener{
       general.add(id_l);
       general.add(id_tf);      
       id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
@@ -281,7 +281,7 @@ public class Layout implements ActionListener{
       dim.add(maxheight_l);
       dim.add(maxheight_tf);
       maxheight_tf.setPreferredSize(new Dimension(tf_wd,maxheight_tf.getPreferredSize().height));
-      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
+      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_LAYOUT_DIMENSIONS")));
       SpringLayout dim_layout = new SpringLayout();
       dim.setLayout(dim_layout);
       dim_layout.putConstraint(SpringLayout.NORTH, width_l, 5, SpringLayout.NORTH, dim);
@@ -379,21 +379,21 @@ public class Layout implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i",id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
-      if(Integer.parseInt(width_tf.getText())<=0) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid width!","Width not valid",JOptionPane.INFORMATION_MESSAGE);
+      if(width_tf.getText().length()>0 && Integer.parseInt(width_tf.getText())<=0) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_WIDTH_INVALID_MSG"),Language.get("ERROR_WIDTH_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      if(Integer.parseInt(height_tf.getText())<=0) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid height!","Height not valid",JOptionPane.INFORMATION_MESSAGE);
+      if(height_tf.getText().length()>0 && Integer.parseInt(height_tf.getText())<=0) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_HEIGHT_INVALID_MSG"),Language.get("ERROR_HEIGHT_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       frame.setVisible(false);
@@ -473,7 +473,7 @@ public class Layout implements ActionListener{
       if(i.id.equals(id_)) {        
         return items;        
       }
-      if (i.type.equals("Group")||i.type.equals("Panel")) {
+      if (i.getClass().equals(Group.class)||i.getClass().equals(vlcskineditor.items.Panel.class)) {
         java.util.List<Item> p = i.getParentListOf(id_);
         if (p!=null) return p;
       }

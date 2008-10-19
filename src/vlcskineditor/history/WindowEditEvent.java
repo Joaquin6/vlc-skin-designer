@@ -69,6 +69,6 @@ public class WindowEditEvent extends HistoryEvent{
     w.playondrop = playondrop_new;
   }
   public String getDescription() {
-    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",Language.get("WINDOW"));
+    return Language.get("HIST_ITEM_EDIT").replaceAll("%t",w.type);
   }
 }

@@ -36,12 +36,12 @@ import javax.swing.border.*;
  */
 public class Window implements ActionListener{
   
-  final String ID_DEFAULT="none";  
+  final String ID_DEFAULT = "none";  
   final String VISIBLE_DEFAULT = "true";
   final int X_DEFAULT = 0;
   final int Y_DEFAULT = 0;
-  final boolean DRAGDROP_DEFAULT=true;
-  final boolean PLAYONDROP_DEFAULT=true;
+  final boolean DRAGDROP_DEFAULT = true;
+  final boolean PLAYONDROP_DEFAULT = true;
   
   public String id=ID_DEFAULT;
   public String visible = VISIBLE_DEFAULT;
@@ -59,12 +59,14 @@ public class Window implements ActionListener{
   JButton ok_btn, cancel_btn, help_btn;
   boolean created = false;
   
+  public String type = Language.get("WINDOW");
+  
   /** Creates a new instance of Window */
   public Window(String xmlcode, Skin s_) {
     s = s_;
     String[] code = xmlcode.split("\n");
     if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = "Unnamed window #"+s.getNewId();
+    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     if(code[0].indexOf("visible=\"")!=-1) visible = XML.getValue(code[0],"visible");
     if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
     if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
@@ -94,7 +96,7 @@ public class Window implements ActionListener{
   }
   public Window(Skin s_) {
     s=s_;
-    id = "Unnamed window #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     s.updateWindows();
     showOptions();
   }
@@ -109,7 +111,7 @@ public class Window implements ActionListener{
       playondrop=Boolean.parseBoolean(playondrop_tf.getText());
       s.updateWindows();    
       created = true;
-      frame.setDefaultCloseOperation(frame.HIDE_ON_CLOSE);      
+      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);      
       s.m.hist.addEvent(wae);
     }
     else {
@@ -127,37 +129,37 @@ public class Window implements ActionListener{
   }
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Window settings");
+      frame = new JFrame(Language.get("WIN_WINDOW_TITLE"));
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
-      if(!created) frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID*:");
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      id_tf.setToolTipText("Name of the window (it may be used for actions). Two windows cannot have the same id.");
-      JLabel x_l = new JLabel("X:");
+      id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP").replaceAll("%t",type));
+      JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
       x_tf = new JTextField();
-      x_tf.setToolTipText("Initial left position of the window.");
+      x_tf.setToolTipText(Language.get("WIN_WINDOW_X_TIP"));
       x_tf.setDocument(new NumbersOnlyDocument());
-      JLabel y_l = new JLabel("Y:");
+      JLabel y_l = new JLabel(Language.get("WIN_ITEM_Y"));
       y_tf = new JTextField();
-      y_tf.setToolTipText("Initial top position of the window.");
+      y_tf.setToolTipText(Language.get("WIN_WINDOW_Y_TIP"));
       y_tf.setDocument(new NumbersOnlyDocument());
-      JLabel visible_l = new JLabel("Visible:");
+      JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_tf.setToolTipText("Indicates whether the window should appear when VLC is started. Since VLC remembers the skin windows position and visibility, this attribute will only be used the first time the skin is started.");
-      JLabel dragdrop_l = new JLabel("Drag and drop:");
+      visible_tf.setToolTipText(Language.get("WIN_WINDOW_VISIBLE_TIP"));
+      JLabel dragdrop_l = new JLabel(Language.get("WIN_WINDOW_DD"));
       dragdrop_tf = new JTextField();
-      dragdrop_tf.setToolTipText("Indicates whether drag and drop of media files is allowed on this window.");
-      JLabel playondrop_l = new JLabel("Play on drop:");
+      dragdrop_tf.setToolTipText(Language.get("WIN_WINDOW_DD_TIP"));
+      JLabel playondrop_l = new JLabel(Language.get("WIN_WINDOW_PD"));
       playondrop_tf = new JTextField();
-      playondrop_tf.setToolTipText("Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to \"false\".");
-      ok_btn = new JButton("OK");
+      playondrop_tf.setToolTipText(Language.get("WIN_WINDOW_PD_TIP"));
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);      
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);      
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);      
-      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Distance of textfields to WEST edge of container
       Component[] labels = { id_l, x_l, y_l, visible_l, dragdrop_l, playondrop_l};
@@ -178,7 +180,7 @@ public class Window implements ActionListener{
       general.add(visible_l);
       general.add(visible_tf);
       visible_tf.setPreferredSize(new Dimension(tf_wd,visible_tf.getPreferredSize().height));
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
@@ -219,7 +221,7 @@ public class Window implements ActionListener{
       options.add(playondrop_l);
       options.add(playondrop_tf);
       playondrop_tf.setPreferredSize(new Dimension(tf_wd,playondrop_tf.getPreferredSize().height));
-      options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Drag and drop options"));
+      options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_WINDOW_DD_PANEL")));
       SpringLayout options_layout = new SpringLayout();
       options.setLayout(options_layout);
       options_layout.putConstraint(SpringLayout.NORTH, dragdrop_l, 5, SpringLayout.NORTH, options);
@@ -285,12 +287,12 @@ public class Window implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i",id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }

@@ -57,6 +57,6 @@ public class LayoutDeletionEvent extends HistoryEvent{
   }
   @Override
   public String getDescription() {
-    return Language.get("HIST_ITEM_DEL").replaceAll("%t",Language.get("LAYOUT"));
+    return Language.get("HIST_ITEM_DEL").replaceAll("%t",l.type);
   }
 }

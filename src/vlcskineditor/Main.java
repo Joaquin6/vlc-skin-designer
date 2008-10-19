@@ -1316,8 +1316,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(selected_item!=null) {
         Item i = s.getItem(selected_item);        
         if(i!=null) {
-          if(i.type.equals("Group")) items_add_pu_tp.setEnabled(true);                            
-          if(i.type.equals("Panel")) items_add_pu_tp.setEnabled(true);                            
+          if(i.getClass().equals(Group.class)) items_add_pu_tp.setEnabled(true);                            
+          if(i.getClass().equals(vlcskineditor.items.Panel.class)) items_add_pu_tp.setEnabled(true);                            
         }         
       }
       items_add_pu.setSelected(null);

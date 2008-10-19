@@ -1,0 +1,40 @@
+#Author/s: Daniel Dreibrodt
+
+#General strings
+NOTE_STARRED|* Attributes marked with a star must be specified.
+
+#Common strings
+WIN_ITEM_GENERAL|General attributes
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|Name of the %t (it may be used for actions). Must be unique.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_VISIBLE|Visibility:
+
+#Layout
+WIN_LAYOUT_TITLE|Layout settings
+WIN_LAYOUT_GENERAL|General attributes
+WIN_LAYOUT_DIMENSIONS|Dimensions
+WIN_LAYOUT_WIDTH|Initial width*:
+WIN_LAYOUT_WIDTH_TIP|Initial width of the layout.
+WIN_LAYOUT_HEIGHT|Initial height*:
+WIN_LAYOUT_HEIGHT_TIP|Initial height of the layout.
+WIN_LAYOUT_MINWIDTH|Minimum width:
+WIN_LAYOUT_MINWIDTH_TIP|Minimum width of the layout. Only used when resizing the layout. If this value is set to "-1", the initial width will be used as minimum width.
+WIN_LAYOUT_MINHEIGHT|Minimum height:
+WIN_LAYOUT_MINHEIGHT_TIP|Minimum height of the layout. Only used when resizing the layout. If this value is set to "-1", the initial height will be used as minimum height.
+WIN_LAYOUT_MAXWIDTH|Maximum width:
+WIN_LAYOUT_MAXWIDTH_TIP|Maximum width of the layout. Only used when resizing the layout. If this value is set to "-1", the initial width will be used as maximum width.
+WIN_LAYOUT_MAXHEIGHT|Maximum height:
+WIN_LAYOUT_MAXHEIGHT_TIP|Maximum height of the layout. Only used when resizing the layout. If this value is set to "-1", the initial height will be used as maximum height.
+
+#Window
+WIN_WINDOW_TITLE|Window settings
+WIN_WINDOW_X_TIP|Initial distance of the window to the left edge of the screen.
+WIN_WINDOW_Y_TIP|Initial distance of the window to the top edge of the screen.
+WIN_WINDOW_VISIBLE_TIP|Indicates whether the window should appear when VLC is started. Since VLC remembers the skin windows position and visibility, this attribute will only be used the first time the skin is started.
+WIN_WINDOW_DD|Drag an drop:
+WIN_WINDOW_DD_TIP|Indicates whether drag and drop of media files is allowed on this window.
+WIN_WINDOW_PD|Play on drop:
+WIN_WINDOW_PD_TIP|Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to "false".
+WIN_WINDOW_DD_PANEL|Drag and drop options

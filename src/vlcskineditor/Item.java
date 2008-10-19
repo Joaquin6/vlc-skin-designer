@@ -22,10 +22,8 @@
 
 package vlcskineditor;
 
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.tree.*;
+import java.awt.Graphics2D;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * Abstract superclass representing layout elements
