@@ -520,7 +520,7 @@ public class Skin implements ActionListener{
   public java.awt.Font getFont(String id) {
     if(id.equals("defaultfont")) {
       return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
-    }
+      }
     Resource r = getResource(id);
     if(r==null) return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
     try {

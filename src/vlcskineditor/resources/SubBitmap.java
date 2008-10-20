@@ -112,7 +112,8 @@ public class SubBitmap extends ImageResource implements ActionListener{
    */
   public void updateImage() {
     if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);
-  }  
+  }
+  @Override
   public void update() {    
     if(!created) {      
       id=id_tf.getText();
@@ -144,42 +145,43 @@ public class SubBitmap extends ImageResource implements ActionListener{
       s.expandResource(id);
     }    
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Subbitmap settings");
+      frame = new JFrame(Language.get("WIN_SBMP_TITLE"));
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      id_tf.setToolTipText("Identifiant of the font that will be used with controls..");
-      JLabel x_l = new JLabel("X:");
+      id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP").replaceAll("%t",type));
+      JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
       x_tf = new JTextField();
       x_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel y_l = new JLabel("Y:");
+      JLabel y_l = new JLabel(Language.get("WIN_ITEM_Y"));
       y_tf = new JTextField();
       y_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel width_l = new JLabel("Width:");
+      JLabel width_l = new JLabel(Language.get("WIN_ITEM_WIDTH"));
       width_tf = new JTextField();
       width_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel height_l = new JLabel("Height:");
+      JLabel height_l = new JLabel(Language.get("WIN_ITEM_HEIGHT"));
       height_tf = new JTextField();
       height_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel nbframes_l = new JLabel("Number of frames:");
+      JLabel nbframes_l = new JLabel(Language.get("WIN_BITMAP_NBFRAMES"));
       nbframes_tf = new JTextField();
       nbframes_tf.setDocument(new NumbersOnlyDocument(false));
-      nbframes_tf.setToolTipText("This attribute is needed to define animated bitmaps; it is the number of frames (images) contained in your animation. All the different frames are just images laid vertically in the bitmap.");
-      JLabel fps_l = new JLabel("Frames per second:");
+      nbframes_tf.setToolTipText(Language.get("WIN_BITMAP_NBFRAMES_TIP"));
+      JLabel fps_l = new JLabel(Language.get("WIN_BITMAP_FPS"));
       fps_tf = new JTextField();
       fps_tf.setDocument(new NumbersOnlyDocument(false));
-      fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
-      ok_btn = new JButton("OK");
+      fps_tf.setToolTipText(Language.get("WIN_BITMAP_FPS_TIP"));
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);      
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);      
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Distance of textfields to WEST edge of container
       Component[] labels = { id_l, x_l, y_l, width_l, height_l, nbframes_l, fps_l};
@@ -191,7 +193,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       general.add(id_l);
       general.add(id_tf);
       id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);
       general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
@@ -215,7 +217,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       bounds.add(height_l);
       bounds.add(height_tf);
       height_tf.setPreferredSize(new Dimension(tf_wd,height_tf.getPreferredSize().height));
-      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Position and Dimension Attributes"));       
+      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SBMP_BOUNDS")));       
       SpringLayout bounds_layout = new SpringLayout();
       bounds.setLayout(bounds_layout);
       bounds_layout.putConstraint(SpringLayout.NORTH, x_l, 5, SpringLayout.NORTH, bounds);
@@ -254,7 +256,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       animation.add(nbframes_tf);
       animation.add(fps_l);
       animation.add(fps_tf);     
-      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animation Attributes"));
+      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_BITMAP_ANIMATION")));
       SpringLayout ani_layout = new SpringLayout();
       animation.setLayout(ani_layout);      
       nbframes_tf.setPreferredSize(new Dimension(tf_wd,nbframes_tf.getPreferredSize().height));
@@ -327,32 +329,33 @@ public class SubBitmap extends ImageResource implements ActionListener{
     height_tf.addKeyListener(sbew);
     frame.addWindowListener(sbew);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
-      if(Integer.parseInt(height_tf.getText())<1) {
-        JOptionPane.showMessageDialog(frame,"height must be greater 0!","height not valid",JOptionPane.INFORMATION_MESSAGE);
+      if(width_tf.getText().length()<1 || Integer.parseInt(width_tf.getText())<1) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_WIDTH_INVALID_MSG"),Language.get("ERROR_WIDTH_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      if(Integer.parseInt(height_tf.getText())<1) {
-        JOptionPane.showMessageDialog(frame,"Height must be greater 0!","Height not valid",JOptionPane.INFORMATION_MESSAGE);
+      if(height_tf.getText().length()<1 || Integer.parseInt(height_tf.getText())<1) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_HEIGHT_INVALID_MSG"),Language.get("ERROR_HEIGHT_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       if(Integer.parseInt(x_tf.getText())+Integer.parseInt(width_tf.getText())>parent.image.getWidth()) {
-        JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_OUTSIDE_MSG"),Language.get("ERROR_OUTSIDE_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       if(Integer.parseInt(y_tf.getText())+Integer.parseInt(height_tf.getText())>parent.image.getHeight()) {
-        JOptionPane.showMessageDialog(frame,"Specified dimensions are outside the parent bitmap!","Dimension not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_OUTSIDE_MSG"),Language.get("ERROR_OUTSIDE_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();      
@@ -383,6 +386,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
     sbew.frame = null;
     sbew = null;
   }
+  @Override
   public String returnCode(String indent) {
     String code=indent+"<SubBitmap id=\""+id+"\" x=\""+String.valueOf(x)+"\" y=\""+String.valueOf(y)+"\"";
     code+=" height=\""+String.valueOf(height)+"\" width=\""+String.valueOf(width)+"\"";    
@@ -391,6 +395,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
     code+="/>\n";
     return code;
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode top = new DefaultMutableTreeNode("Bitmap: "+id);   
     return top;

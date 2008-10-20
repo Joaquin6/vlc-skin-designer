@@ -71,7 +71,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     if(e.hasAttribute("file")) file = e.getAttribute("file");
     if(e.hasAttribute("alphacolor")) alphacolor = e.getAttribute("alphacolor");
     if(e.hasAttribute("nbframes")) nbframes = Integer.valueOf(e.getAttribute("nbframes"));
-    if(e.hasAttribute("fps")) fps = Integer.valueOf(e.getAttribute("fps"));
+    if(e.hasAttribute("fps")) fps = Integer.valueOf(e.getAttribute("fps"));    
     updateImage();    
   }
   
@@ -188,6 +188,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     }
     return true;
   }
+  @Override
   public void update() {
     BitmapEditEvent be = new BitmapEditEvent(this);
     file=file_tf.getText();
@@ -202,6 +203,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     be.setNew();
     s.m.hist.addEvent(be);
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_BITMAP_TITLE"));
@@ -366,6 +368,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     frame.setVisible(true);
     
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(file_btn)) {
       if(fc==null) {
@@ -431,6 +434,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Bitmap id=\""+id+"\" file=\""+file+"\"";
     code+=" alphacolor=\""+alphacolor+"\"";
@@ -448,6 +452,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     }    
     return code;
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Bitmap: "+id);    
     for(int i=0;i<SubBitmaps.size();i++) {

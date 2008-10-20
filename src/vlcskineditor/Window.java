@@ -284,6 +284,7 @@ public class Window implements ActionListener{
     frame.setVisible(true);
     
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {

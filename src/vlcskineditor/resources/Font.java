@@ -119,28 +119,28 @@ public class Font extends Resource implements ActionListener{
   }
   public boolean updateFont() {
     try {      
-      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
+      f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));      
       f = f.deriveFont((float)size);      
     }
-    catch(Exception e) {      
+    catch(Exception e) {
+      e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
-        //JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-        //showOptions();
+        //Font file corrupt
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);        
         return false;
       }
-      else {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_OTF_MSG"),Language.get("ERROR_OTF_TITLE"),JOptionPane.INFORMATION_MESSAGE);        
-        try {      
-          f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
-          f = f.deriveFont(12);
+      else {        
+        try {
+          f = java.awt.Font.createFont(java.awt.Font.TYPE1_FONT,new File(s.skinfolder+file));
+          f = f.deriveFont((float)size);
         }
-        catch(Exception ex) {          
+        catch(Exception ex) {
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_OTF_MSG"),Language.get("ERROR_OTF_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           ex.printStackTrace();
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);          
         }
         return true;
-      }      
+      }
     }
     return true;
   }
@@ -294,6 +294,10 @@ public class Font extends Resource implements ActionListener{
       }
       if(file_tf.getText().equals("")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_FILE_INVALID_MSG"),Language.get("ERROR_FILE_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        return;
+      }
+      if(size_tf.getText().length()<1) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_SIZE_INVALID_MSG"),Language.get("ERROR_SIZE_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();      

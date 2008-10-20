@@ -376,6 +376,7 @@ public class Layout implements ActionListener{
   /**
    * Handles the user interaction with the editing dialog.
    */
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -388,11 +389,11 @@ public class Layout implements ActionListener{
           return;
         }
       }
-      if(width_tf.getText().length()>0 && Integer.parseInt(width_tf.getText())<=0) {
+      if(width_tf.getText().length()<1 || Integer.parseInt(width_tf.getText())<=0) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_WIDTH_INVALID_MSG"),Language.get("ERROR_WIDTH_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      if(height_tf.getText().length()>0 && Integer.parseInt(height_tf.getText())<=0) {
+      if(height_tf.getText().length()<1 || Integer.parseInt(height_tf.getText())<=0) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_HEIGHT_INVALID_MSG"),Language.get("ERROR_HEIGHT_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

@@ -9,6 +9,8 @@ WIN_ITEM_ID|ID*:
 WIN_ITEM_ID_TIP|Name and identificator of the %t. Must be unique.
 WIN_ITEM_X|X:
 WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Width:
+WIN_ITEM_HEIGHT|Height:
 WIN_ITEM_VISIBLE|Visibility:
 FILE_INDIR|in the same folder as the XML file
 
@@ -26,6 +28,10 @@ WIN_BITMAP_FPS|Frames per second:
 WIN_BITMAP_FPS_TIP|Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.
 WIN_BITMAP_ANIMATION|Animation attributes
 WIN_BITMAP_CHOOSER_TITLE|Choose alphacolor
+
+#SubBitmap
+WIN_SBMP_TITLE|SubBitmap settings
+WIN_SBMP_BOUNDS|Position and dimension attributes
 
 #Font
 WIN_FONT_TITLE|Font settings

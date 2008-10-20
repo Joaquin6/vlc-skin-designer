@@ -109,6 +109,14 @@ ERROR_NBFRAMES_TITLE|Invalid number of frames
 ERROR_NBFRAMES_MSG|The number of frames cannot be smaller than 1
 ERROR_OTF_TITLE|OTF not supported
 ERROR_OTF_MSG|You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font in the preview.
+ERROR_SIZE_INVALID_TITLE|Invalid size
+ERROR_SIZE_INVALID_MSG|Please enter a valid size.
+ERROR_WIDTH_INVALID_TITLE|Invalid width
+ERROR_WIDTH_INVALID_MSG|Please enter a valid width.
+ERROR_HEIGHT_INVALID_TITLE|Invalid heiht
+ERROR_HEIGHT_INVALID_MSG|Please enter a valid height.
+ERROR_OUTSIDE_TITLE|Dimensions not valid
+ERROR_OUTSIDE_MSG|Specified dimensions are outside the parent bitmap!
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme
