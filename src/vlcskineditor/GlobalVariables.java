@@ -22,8 +22,6 @@
 
 package vlcskineditor;
 
-import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
@@ -372,21 +370,27 @@ public class GlobalVariables implements ActionListener{
     playlist_isLoop = Boolean.parseBoolean(loop_cb.getSelectedItem().toString());
     playlist_isRepeat = Boolean.parseBoolean(repeat_cb.getSelectedItem().toString());
     dvd_isActive = Boolean.parseBoolean(dvd_cb.getSelectedItem().toString());
-    slider_value = (float)(slider_s.getValue())/100;
-
+    slider_value = (float)(slider_s.getValue())/100;   
+    sendUpdate();
+  }
+  
+  /**
+   * Update all items according to the set variables
+   */
+  public void sendUpdate() {
     for(Window w:s.windows) {
-      for(Layout l:w.layouts) {
+      for(Layout l:w.layouts) {        
         for(Item i:l.items) {
           i.updateToGlobalVariables();
         }
       }
     }
-
   }
   /**
    * Handles actions triggered by components listened to
    * @param e ActionEvent
    */
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       update();

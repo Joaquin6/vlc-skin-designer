@@ -161,7 +161,7 @@ public class Skin implements ActionListener{
       if (header.indexOf("//VideoLAN//DTD VLC Skins")==-1) {
         br.close();        
         System.err.println("Invalid header:\n"+header);
-        throw new Exception(Language.get("ERROR_INVALID_FILE"));        
+        throw new Exception(Language.get("ERROR_SKIN_INVALID"));        
         
       }
       //System.out.println("Valid header");
@@ -272,7 +272,7 @@ public class Skin implements ActionListener{
     Document doc = docBuilder.parse(f);
     
     if(!doc.getDoctype().getName().equals("Theme"))
-      throw new Exception(Language.get("ERROR_INVALID_FILE"));
+      throw new Exception(Language.get("ERROR_SKIN_INVALID"));
     
     NodeList nodes = doc.getElementsByTagName("*");
     for(int i=0;i<nodes.getLength();i++) {

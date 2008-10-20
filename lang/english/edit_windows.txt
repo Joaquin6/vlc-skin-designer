@@ -6,10 +6,33 @@ NOTE_STARRED|* Attributes marked with a star must be specified.
 #Common strings
 WIN_ITEM_GENERAL|General attributes
 WIN_ITEM_ID|ID*:
-WIN_ITEM_ID_TIP|Name of the %t (it may be used for actions). Must be unique.
+WIN_ITEM_ID_TIP|Name and identificator of the %t. Must be unique.
 WIN_ITEM_X|X:
 WIN_ITEM_Y|Y:
 WIN_ITEM_VISIBLE|Visibility:
+FILE_INDIR|in the same folder as the XML file
+
+#Bitmap
+WIN_BITMAP_TITLE|Bitmap settings
+WIN_BITMAP_FILE|File*:
+WIN_BITMAP_FILE_TIP|"Indicates the path and name of the used image file.
+WIN_BITMAP_OPEN|Open...
+WIN_BITMAP_ALPHACOLOR|Alphacolor:
+WIN_BITMAP_ALPHACOLOR_TIP|Transparency color of the bitmap in hexadecimal format. If your PNG file specifies a transparency mask, it will be taken into account too.
+WIN_BITMAP_CHOOSE|Choose...
+WIN_BITMAP_NBFRAMES|Number of frames:
+WIN_BITMAP_NBFRAMES_TIP|This attribute is needed to define animated bitmaps; it is the number of frames (images) contained in your animation. All the different frames are just images laid vertically in the bitmap.
+WIN_BITMAP_FPS|Frames per second:
+WIN_BITMAP_FPS_TIP|Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.
+WIN_BITMAP_ANIMATION|Animation attributes
+WIN_BITMAP_CHOOSER_TITLE|Choose alphacolor
+
+#Font
+WIN_FONT_TITLE|Font settings
+WIN_FONT_FILE|File*:
+WIN_FONT_FILE_TIP|The file containing the used TrueType or OpenType font.
+WIN_FONT_OPEN|Open...
+WIN_FONT_SIZE|Size:
 
 #Layout
 WIN_LAYOUT_TITLE|Layout settings

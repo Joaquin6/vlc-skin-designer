@@ -185,6 +185,7 @@ public class Slider extends Item implements ActionListener{
       bezierPoints[(int)(f/10)] = b.getPoint(f/100);
     }
   }
+  @Override
   public void update() {
     if(!created) {
       id = id_tf.getText();
@@ -244,7 +245,9 @@ public class Slider extends Item implements ActionListener{
       see.setNew();
       s.m.hist.addEvent(see);      
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Slider settings");
@@ -448,6 +451,7 @@ public class Slider extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -522,6 +526,7 @@ public class Slider extends Item implements ActionListener{
     sbg_chb.setSelected(false);
     sbg_btn.setEnabled(false);
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Slider";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
@@ -549,9 +554,11 @@ public class Slider extends Item implements ActionListener{
     }
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,0,0,z);
   }
+  @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {    
     if(!created) return;
     offsetx=x_;
@@ -570,7 +577,7 @@ public class Slider extends Item implements ActionListener{
         Point2D.Float p2 = b.getPoint(f+0.1f);        
         g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
       }*/
-      for(int i=0;i<=10;i++) {
+      for(int i=0;i<10;i++) {
         Point2D.Float p1 = bezierPoints[i];
         Point2D.Float p2 = bezierPoints[i+1];
         g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
@@ -587,6 +594,7 @@ public class Slider extends Item implements ActionListener{
     int w = b.getWidth();
     return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);   
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Slider: "+id);
     if(sbg!=null) node.add(sbg.getTreeNode());

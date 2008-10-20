@@ -37,7 +37,7 @@ OutputDir=.
 [Registry]
 Root: HKCR; Subkey: .vlt; ValueType: string; ValueData: VLCSkinFile; Flags: uninsdeletevalue
 Root: HKCR; Subkey: VLCSkinFile; ValueType: string; ValueData: Compressed VLC Skin; Flags: uninsdeletevalue
-Root: HKCR; Subkey: VLCSkinFile\DefaultIcon; ValueType: string; ValueData: """{app}\VLCSkineditor.exe"""
+Root: HKCR; Subkey: VLCSkinFile\DefaultIcon; ValueType: string; ValueData: """{app}\VLCSkinEditor.exe,2"""
 Root: HKCR; Subkey: VLCSkinFile\shell\open\command; ValueType: string; ValueName: ; ValueData: """{app}\VLCSkinEditor.exe"" ""%1"""
 Root: HKCR; Subkey: VLCSkinFile\shell\open; ValueType: string; ValueData: Edit with VLC Skin Editor
 [_ISToolPreCompile]

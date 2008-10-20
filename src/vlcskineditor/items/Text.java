@@ -85,6 +85,7 @@ public class Text extends Item implements ActionListener{
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+  @Override
   public void update() {
     if(!created) {
       id = id_tf.getText();
@@ -138,7 +139,9 @@ public class Text extends Item implements ActionListener{
       tee.setNew();
       s.m.hist.addEvent(tee);      
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Text settings");
@@ -313,6 +316,7 @@ public class Text extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {    
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -363,6 +367,7 @@ public class Text extends Item implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Text";
     code+=" text=\""+text+"\"";
@@ -382,9 +387,11 @@ public class Text extends Item implements ActionListener{
     code+="/>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,0,0,z);
   }
+  @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created || font==null) return;
     

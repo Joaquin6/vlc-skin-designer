@@ -204,37 +204,37 @@ public class Bitmap extends ImageResource implements ActionListener{
   }
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Bitmap settings");
+      frame = new JFrame(Language.get("WIN_BITMAP_TITLE"));
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());      
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      id_tf.setToolTipText("Identifiant of the bitmap that will be used with controls. Two bitmaps cannot have the same id.");
-      JLabel file_l = new JLabel("File*:");
+      id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP".replaceAll("%t", type)));
+      JLabel file_l = new JLabel(Language.get("WIN_BITMAP_FILE"));
       file_tf = new JTextField();
-      file_tf.setToolTipText("Indicates the path and name of the bitmap file used.");
-      file_btn = new JButton("Open...");
+      file_tf.setToolTipText(Language.get("WIN_BITMAP_FILE_TIP"));
+      file_btn = new JButton(Language.get("WIN_BITMAP_OPEN"));
       file_btn.addActionListener(this);
-      JLabel alphacolor_l = new JLabel("Alphacolor:");
+      JLabel alphacolor_l = new JLabel(Language.get("WIN_BITMAP_ALPHACOLOR"));
       alphacolor_tf = new JTextField();
-      alphacolor_tf.setToolTipText("Transparency color of the bitmap in hexadecimal format. If your PNG file specifies a transparency mask, it will be taken into account too.");
-      alphacolor_btn = new JButton("Choose...");
+      alphacolor_tf.setToolTipText(Language.get("WIN_BITMAP_ALPHACOLOR_TIP"));
+      alphacolor_btn = new JButton(Language.get("WIN_BITMAP_CHOOSE"));
       alphacolor_btn.addActionListener(this);
-      JLabel nbframes_l = new JLabel("Number of frames:");
+      JLabel nbframes_l = new JLabel(Language.get("WIN_BITMAP_NBFRAMES"));
       nbframes_tf = new JTextField();
       nbframes_tf.setDocument(new NumbersOnlyDocument());
-      nbframes_tf.setToolTipText("This attribute is needed to define animated bitmaps; it is the number of frames (images) contained in your animation. All the different frames are just images laid vertically in the bitmap.");
-      JLabel fps_l = new JLabel("Frames per second:");
+      nbframes_tf.setToolTipText(Language.get("WIN_BITMAP_NBFRAMES_TIP"));
+      JLabel fps_l = new JLabel(Language.get("WIN_BITMAP_FPS"));
       fps_tf = new JTextField();
       fps_tf.setDocument(new NumbersOnlyDocument());
-      fps_tf.setToolTipText("Only used in animated bitmaps; it is the number of frames (images) per seconds of the animation.");
-      ok_btn = new JButton("OK");
-      ok_btn.addActionListener(this);      
-      cancel_btn = new JButton("Cancel");
-      cancel_btn.addActionListener(this);      
-      help_btn = new JButton("Help");
-      help_btn.addActionListener(this);      
-      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      fps_tf.setToolTipText(Language.get("WIN_BITMAP_FPS_TIP"));
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
+      ok_btn.addActionListener(this);
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
+      cancel_btn.addActionListener(this); 
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
+      help_btn.addActionListener(this);
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Distance of textfields to WEST edge of container
       Component[] labels = { id_l, file_l, alphacolor_l, nbframes_l, fps_l};
@@ -258,7 +258,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       file_btn.setPreferredSize(new Dimension(btn_wd,file_btn.getPreferredSize().height));
       alphacolor_tf.setPreferredSize(new Dimension(tf_wd-btn_wd,alphacolor_tf.getPreferredSize().height));
       alphacolor_btn.setPreferredSize(new Dimension(btn_wd,alphacolor_btn.getPreferredSize().height));
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));   
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));   
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);      
       
@@ -297,7 +297,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       animation.add(nbframes_tf);
       animation.add(fps_l);
       animation.add(fps_tf);      
-      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animation Attributes"));             
+      animation.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_BITMAP_ANIMATION")));             
       
       SpringLayout ani_layout = new SpringLayout();
       animation.setLayout(ani_layout);
@@ -370,7 +370,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     if (e.getSource().equals(file_btn)) {
       if(fc==null) {
         fc = new JFileChooser();        
-        fc.setFileFilter(new CustomFileFilter(fc,"png","*.png (Portable Network Graphic) inside the XML file's directory",true,s.skinfolder));
+        fc.setFileFilter(new CustomFileFilter(fc,"png","*.png (Portable Network Graphics) "+Language.get("FILE_INDIR"),true,s.skinfolder));
         fc.setCurrentDirectory(new File(s.skinfolder));   
         fc.setAcceptAllFileFilterUsed(false);
         
@@ -381,7 +381,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       }
     }
     else if (e.getSource().equals(alphacolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose alphacolor",Color.decode(alphacolor_tf.getText()));
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_BITMAP_CHOOSER_TITLE"),Color.decode(alphacolor_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -395,21 +395,21 @@ public class Bitmap extends ImageResource implements ActionListener{
     }    
     else if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
       if(file_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please choose a file!","File not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_FILE_INVALID_MSG"),Language.get("ERROR_FILE_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       if(Integer.parseInt(nbframes_tf.getText())<1) {
-        JOptionPane.showMessageDialog(frame,"The number of frames cannot be smaller than 1","Nbframes not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_NBFRAMES_MSG"),Language.get("ERROR_NBFRAMES_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }      
       update();
@@ -419,7 +419,7 @@ public class Bitmap extends ImageResource implements ActionListener{
         frame = null;
       }
       else {        
-        JOptionPane.showMessageDialog(frame,"The given bitmap file could not be loaded!","File not valid",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_INVALID_MSG"),Language.get("ERROR_FILE_INVALID_TITLE"),JOptionPane.ERROR_MESSAGE);
       }
     }
     else if(e.getSource().equals(help_btn)) {

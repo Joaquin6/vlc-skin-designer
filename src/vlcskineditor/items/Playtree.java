@@ -161,6 +161,7 @@ public class Playtree extends Item implements ActionListener{
     showOptions();
     s.updateItems();    
   }
+  @Override
   public void update()  {
     if(!created) {
       id = id_tf.getText();
@@ -228,7 +229,9 @@ public class Playtree extends Item implements ActionListener{
       pee.setNew();
       s.m.hist.addEvent(pee);
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Playtree settings");
@@ -479,6 +482,7 @@ public class Playtree extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -609,6 +613,7 @@ public class Playtree extends Item implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Playtree";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
@@ -639,9 +644,11 @@ public class Playtree extends Item implements ActionListener{
     code+="\n"+indent+"</Playtree>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,0,0,z);
   }
+  @Override
   public void draw(Graphics2D g_, int x_, int y_, int z) {
     if(width<=0||height<=0) return;
     BufferedImage buffi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -753,6 +760,7 @@ public class Playtree extends Item implements ActionListener{
   public boolean contains (int x_, int y_) {
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Playtree: "+id); 
     node.add(slider.getTreeNode());

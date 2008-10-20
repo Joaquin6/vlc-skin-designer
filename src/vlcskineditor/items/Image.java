@@ -135,7 +135,9 @@ public class Image extends Item implements ActionListener{
       iee.setNew();
       s.m.hist.addEvent(iee);
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Image settings");
@@ -300,6 +302,7 @@ public class Image extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -347,6 +350,7 @@ public class Image extends Item implements ActionListener{
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action2_ae) action2_tf.setText(action2_ae.getCode());
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Image";    
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
@@ -366,9 +370,11 @@ public class Image extends Item implements ActionListener{
     code+="/>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,offsetx,offsety, z);
   }
+  @Override
   public void draw(Graphics2D g,int x_, int y_, int z) {
     if(!created) return;    
     BufferedImage bi = image_res.image;
@@ -383,6 +389,7 @@ public class Image extends Item implements ActionListener{
     BufferedImage bi = image_res.image;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Image: "+id);         
     return node;

@@ -47,12 +47,12 @@ import vlcskineditor.resources.SubBitmap;
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
 
-  private static final long serialVersionUID = 071;
+  private static final long serialVersionUID = 075;
 
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final String VERSION = "0.7.1.dev";
+  public final static String VERSION = "0.7.5.dev";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -98,6 +98,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public ImageIcon icon = createIcon("icons/icon.png");  
   public ImageIcon open_icon = createIcon("icons/open.png");
   public ImageIcon save_icon = createIcon("icons/save.png");
+  public ImageIcon vlc_icon = createIcon("icons/vlc16x16.png");
+  public ImageIcon vlt_icon = createIcon("icons/vlt.png");
   public ImageIcon new_icon = createIcon("icons/new.png");
   public ImageIcon exit_icon = createIcon("icons/exit.png");
   public ImageIcon resources_icon = createIcon("icons/resources.png");
@@ -151,10 +153,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file_save.setAccelerator(KeyStroke.getKeyStroke('S',mask));   
     m_file_save.addActionListener(this);
     m_file_test = new JMenuItem(Language.get("MENU_FILE_TEST"));
+    m_file_test.setIcon(vlc_icon);
     m_file_test.setMnemonic(Language.get("MENU_FILE_TEST_MN").charAt(0));
     m_file_test.setAccelerator(KeyStroke.getKeyStroke('T',mask+InputEvent.SHIFT_DOWN_MASK));
     m_file_test.addActionListener(this);    
     m_file_vlt = new JMenuItem(Language.get("MENU_FILE_VLT"));
+    m_file_vlt.setIcon(vlt_icon);
     m_file_vlt.setMnemonic(Language.get("MENU_FILE_VLT_MN").charAt(0));
     m_file_vlt.setAccelerator(KeyStroke.getKeyStroke('V',mask+InputEvent.SHIFT_DOWN_MASK));   
     m_file_vlt.addActionListener(this);
@@ -359,11 +363,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     win_layout_up.setMaximumSize(new Dimension(24,12));
     win_layout_up.setPreferredSize(new Dimension(24,12));
     win_layout_up.addActionListener(this);
+    win_layout_up.setEnabled(false);
     win_layout_down = new JButton("",down_icon);
     win_layout_down.setToolTipText(Language.get("WIN_WIN_MOVE_DOWN"));
     win_layout_down.setMaximumSize(new Dimension(24,12));
     win_layout_down.setPreferredSize(new Dimension(24,12));
     win_layout_down.addActionListener(this);
+    win_layout_down.setEnabled(false);
     win_duplicate = new JButton("",copy_icon);
     win_duplicate.setToolTipText(Language.get("WIN_WIN_COPY"));
     win_duplicate.setMaximumSize(new Dimension(24,24));
@@ -657,8 +663,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       FileDialog fd = new FileDialog(this);
       fd.setMode(FileDialog.LOAD);
       fd.setFilenameFilter(new FilenameFilter() {
+        @Override
         public boolean accept(File f, String s) { 
-          return f.getName().toUpperCase().matches("*.XML"); 
+          return f.getName().toUpperCase().endsWith(".XML"); 
         }
       });
       fd.setVisible(true);
@@ -791,6 +798,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     pwin.setVisible(false);    
     pwin.dispose();
     hist = new History(this);
+    s.gvars.sendUpdate();
   }
   /**
    * Shows a dialog to specify the new skin's location and creates an empty skin.
@@ -819,6 +827,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * Reacts to GUI actions
    * @param e The performed action
    */
+  @Override
   public void actionPerformed(ActionEvent e) {
     // <editor-fold defaultstate="collapsed" desc="New File"> 
     if(e.getSource().equals(m_file_new)) {
@@ -947,7 +956,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(m_file_png)) {
       JFileChooser png_fc = new JFileChooser();
       png_fc.setAcceptAllFileFilterUsed(false);
-      png_fc.setFileFilter(new CustomFileFilter(png_fc, "png", "*.PNG (Portable Network Graphic)", false, ""));
+      png_fc.setFileFilter(new CustomFileFilter(png_fc, "png", "*.PNG (Portable Network Graphics)", false, ""));
       int i = png_fc.showSaveDialog(this);
       if(i==JFileChooser.APPROVE_OPTION) {
         File f = png_fc.getSelectedFile();
@@ -1483,29 +1492,34 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   /**
    * Reacts to tree selections
    */
+  @Override
   public void valueChanged(TreeSelectionEvent e) {    
     if(opening) return;
     if(e.getSource().equals(res_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
-      selected_resource = selection.substring(selection.indexOf(": ")+2);      
+      selected_resource = selection.substring(selection.indexOf(": ")+2);
     }
-    else if(e.getSource().equals(win_tree)) {      
+    else if(e.getSource().equals(win_tree)) {
       selected_in_windows = e.getPath().getLastPathComponent().toString();
       Object[] path = e.getPath().getPath();
       for (int i=0;i<path.length;i++) {
         String type = path[i].toString().substring(0,path[i].toString().indexOf(": "));
-        if(type.equals("Window")) {          
+        if(type.equals("Window")) {
           selected_window = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           selected_layout = null;
           pvwin.clearLayout();
+          items_tree_model.setRoot(new DefaultMutableTreeNode("Root: Items"));
           m_file_png.setEnabled(false);
-          items_tree_model.setRoot(new DefaultMutableTreeNode("Root: Items"));                   
+          win_layout_up.setEnabled(false);
+          win_layout_down.setEnabled(false);
         }
         else if(type.equals("Layout")) {
           selected_layout = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
           pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
-          m_file_png.setEnabled(true);
           s.updateItems();
+          m_file_png.setEnabled(true);
+          win_layout_up.setEnabled(true);
+          win_layout_down.setEnabled(true);
         }        
       }      
     }
@@ -1514,11 +1528,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       selected_item = selection.substring(selection.indexOf(": ")+2);
       pvwin.selectItem(s.getItem(selected_item));
     }
-  }  
+  }
+  @Override
   public void windowClosing(WindowEvent e) {
     exit();
   }
+  @Override
   public void windowClosed(WindowEvent e) {}
+  @Override
   public void windowActivated(WindowEvent e) {
     if(pvwin==null) return;
     if(pvwin.fu==null) {
@@ -1526,23 +1543,28 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       pvwin.fu.start();      
     }
   }
+  @Override
   public void windowDeactivated(WindowEvent e) {
     if(pvwin==null || pvwin.fu==null) return;
     pvwin.fu.run = false;
     pvwin.fu = null;
   }
+  @Override
   public void windowDeiconified(WindowEvent e) {
     if(pvwin.fu==null) {
       pvwin.fu = new FrameUpdater(pvwin,5);
       pvwin.fu.start();      
     }
   }
+  @Override
   public void windowIconified(WindowEvent e) {
     if(pvwin==null || pvwin.fu==null) return;
     pvwin.fu.run = false;
     pvwin.fu = null;
   }
-  public void windowOpened(WindowEvent e) {}  
+  @Override
+  public void windowOpened(WindowEvent e) {}
+  @Override
   public void mouseClicked(MouseEvent e) {
     if(e.getClickCount()>1) {
       if(e.getSource().equals(res_tree)) actionPerformed(new ActionEvent(res_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
@@ -1570,9 +1592,13 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       }
     }
   }
+  @Override
   public void mousePressed(MouseEvent e) {}
+  @Override
   public void mouseReleased(MouseEvent e) {}
+  @Override
   public void mouseEntered(MouseEvent e) {}
+  @Override
   public void mouseExited(MouseEvent e) {}
   /** Sets the activity state of the undo menu item to the given argument
    * @param enabled Activity state
@@ -1691,7 +1717,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             ZipInputStream zin = new ZipInputStream(new FileInputStream(tempfile));
             ZipEntry entry;
             while( (entry=zin.getNextEntry()) !=null ) {              
-              if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll"))  )){
+              if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll")))){
                 File outf = new File(entry.getName());
                 System.out.println(outf.getAbsoluteFile());
                 if(outf.exists()) outf.delete();
@@ -1795,6 +1821,34 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+    if(new File(".updated").exists()) {
+      //Post update steps for 0.7.5
+      System.out.println("Performing post-update steps to "+VERSION);
+      
+      //Update system did not yet include exclusion for windows files on non-windows systems, so delete them
+      if(System.getProperty("os.name").indexOf("Windows")==-1) {
+        new File("VLCSkinEditor.exe").delete();
+        new File("ICE_JNIRegistry.dll").delete();
+      }
+      //VLT icon changed on windows
+      else {
+        try {
+          RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_CLASSES_ROOT,"VLCSkinFile\\DefaultIcon",RegistryKey.ACCESS_ALL);
+          if(vlc_key.hasDefaultValue()) {
+            RegistryValue icon = vlc_key.getValue("");
+            String s = new String(icon.getByteData())+",2";            
+            icon.setByteData(s.getBytes());
+            vlc_key.setValue(icon);
+          }          
+        }
+        catch (Exception e) {
+          System.err.println("Could not change VLT icon");
+          e.printStackTrace();
+        }
+      }
+      new File(".updated").delete();
+    }
+    
     Config.load();
     Language.load(new File("lang"+File.separator+Config.get("language")+".txt"));
     

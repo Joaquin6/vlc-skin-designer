@@ -29,6 +29,7 @@ GROUP|Group
 IMAGE|Image
 PANEL|Panel
 PLAYTREE|Playtree
+RADIALSLIDER|Radial slider
 SLIDER|Slider
 SLIDERBG|SliderBackground
 TEXT|Text
@@ -82,8 +83,8 @@ ERROR_SAVEPNG_TITLE|Error while saving image
 ERROR_SAVEPNG_MSG|Could not save image.
 ERROR_NEWSKIN_TITLE|Error while creating new skin file!
 ERROR_NEWSKIN_MSG|The new skin file could not be created.
-ERROR_INVALID_HEADER|File appears not to be a valid VLC Theme!\n Invalid header:
-ERROR_INVALID_FILE|Selected file is not a valid VLC skin file!
+ERROR_HEADER_INVALID|File appears not to be a valid VLC Theme!\n Invalid header:
+ERROR_SKIN_INVALID|Selected file is not a valid VLC skin file!
 ERROR_VERSION_UNSUPPORTED|The version of the theme used in the selected skin is not yet supported!
 ERROR_SAVE_TITLE|Error while saving the skin file!
 ERROR_SAVE_MSG|Skin file could not be saved.
@@ -101,6 +102,13 @@ ERROR_WIDTH_INVALID_TITLE|Width not valid
 ERROR_WIDTH_INVALID_MSG|Please enter a valid width!
 ERROR_HEIGHT_INVALID_TITLE|Height not valid
 ERROR_HEIGHT_INVALID_MSG|Please enter a valid height!
+ERROR_FILE_INVALID_TITLE|File not valid
+ERROR_FILE_INVALID_MSG|Please choose a valid file!
+ERROR_BITMAP_INVALID_MSG|The given bitmap file could not be loaded!\nPlease choose another one.
+ERROR_NBFRAMES_TITLE|Invalid number of frames
+ERROR_NBFRAMES_MSG|The number of frames cannot be smaller than 1
+ERROR_OTF_TITLE|OTF not supported
+ERROR_OTF_MSG|You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font in the preview.
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

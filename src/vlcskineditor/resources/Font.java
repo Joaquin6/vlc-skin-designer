@@ -117,7 +117,7 @@ public class Font extends Resource implements ActionListener{
     s.expandResource(id);
     showOptions();
   }
-  public Integer updateFont() {
+  public boolean updateFont() {
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));
       f = f.deriveFont((float)size);      
@@ -127,10 +127,10 @@ public class Font extends Resource implements ActionListener{
         //JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
         f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
         //showOptions();
-        return 0;
+        return false;
       }
       else {
-        //JOptionPane.showMessageDialog(frame,"You have chosen an OpenType font, VLC will display it correctly but the Skin Editor can not display it.\nYou will see another font instead.","Notice",JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_OTF_MSG"),Language.get("ERROR_OTF_TITLE"),JOptionPane.INFORMATION_MESSAGE);        
         try {      
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);
           f = f.deriveFont(12);
@@ -139,11 +139,12 @@ public class Font extends Resource implements ActionListener{
           ex.printStackTrace();
           f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);          
         }
-        return 2;
+        return true;
       }      
     }
-    return 1;
+    return true;
   }
+  @Override
   public void update() {
     FontEditEvent fe = new FontEditEvent(this);
     file=file_tf.getText();
@@ -154,34 +155,35 @@ public class Font extends Resource implements ActionListener{
     fe.setNew();
     s.m.hist.addEvent(fe);
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Font settings");
+      frame = new JFrame(Language.get("WIN_FONT_TITLE"));
       frame.setResizable(false);
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      id_tf.setToolTipText("Identifiant of the font that will be used with controls.");
-      JLabel file_l = new JLabel("File*:");
+      id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP").replaceAll("%t",type));
+      JLabel file_l = new JLabel(Language.get("WIN_FONT_FILE"));
       file_tf = new JTextField();
-      file_tf.setToolTipText("This is the file containing a TrueType or OpenType font..");
-      file_btn = new JButton("Open...");
+      file_tf.setToolTipText(Language.get("WIN_FONT_FILE_TIP"));
+      file_btn = new JButton(Language.get("WIN_FONT_OPEN"));
       file_btn.addActionListener(this);
-      JLabel size_l = new JLabel("Size:");
+      JLabel size_l = new JLabel(Language.get("WIN_FONT_SIZE"));
       size_tf = new JTextField();
       size_tf.setDocument(new NumbersOnlyDocument());
-      ok_btn = new JButton("OK");
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);      
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);      
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);      
-      JLabel attr_l = new JLabel("* Attributes marked with a star must be specified.");
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Textfield distance to WEST border of container
       Component[] labels = { id_l, file_l, size_l };
       int tf_dx = Helper.maxWidth(labels)+10;               
       //Maximal textfield width
-      int tf_wd = 200;
+      int tf_wd = 250;
       //Button width
       int btn_wd = file_btn.getPreferredSize().width;
       
@@ -195,7 +197,7 @@ public class Font extends Resource implements ActionListener{
       general.add(size_l);
       general.add(size_tf);
       
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));       
       
       SpringLayout general_layout = new SpringLayout();
       general.setLayout(general_layout);
@@ -264,12 +266,13 @@ public class Font extends Resource implements ActionListener{
     size_tf.setText(String.valueOf(size));
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(file_btn)) {
       if(fc==null) {
         fc = new JFileChooser();
         String[] ext = { "ttf" , "otf" };
-        fc.setFileFilter(new CustomFileFilter(fc,ext,"*.otf/*.ttf (Open and true type fonts) inside the XML file's directory",true,s.skinfolder));
+        fc.setFileFilter(new CustomFileFilter(fc,ext,"*.otf/*.ttf (OpenType/TrueType Font) "+Language.get("FILE_INDIR"),true,s.skinfolder));
         fc.setCurrentDirectory(new File(s.skinfolder));   
         fc.setAcceptAllFileFilterUsed(false);        
       }
@@ -280,24 +283,22 @@ public class Font extends Resource implements ActionListener{
     }    
     else if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i",id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
       if(file_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please choose a file!","File not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_FILE_INVALID_MSG"),Language.get("ERROR_FILE_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      update();
-      int i = updateFont();
-      if(i==0) JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-      else if(i==2) JOptionPane.showMessageDialog(frame,"Error while loading font file!\n Please choose another file\n","Font file not valid",JOptionPane.ERROR_MESSAGE);
-      else if(i==1) {
+      update();      
+      if(!updateFont()) JOptionPane.showMessageDialog(frame,Language.get("ERROR_FILE_INVALID_MSG"),Language.get("ERROR_FILE_INVALID_TITLE"),JOptionPane.ERROR_MESSAGE);      
+      else {
         frame.setVisible(false);
         frame.dispose();
         frame = null;  
@@ -312,12 +313,14 @@ public class Font extends Resource implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code=indent+"<Font id=\""+id+"\" file=\""+file+"\"";
     if (size!=SIZE_DEFAULT) code+=" size=\""+String.valueOf(size)+"\"";
     code+="/>\n";
     return code;
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Font: "+id);    
     return node;

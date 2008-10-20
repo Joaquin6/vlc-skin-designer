@@ -116,6 +116,7 @@ public class Group extends Item implements ActionListener{
     showOptions();    
     s.updateItems();        
   }
+  @Override
   public void update() {
     if(!created) {
       id=id_tf.getText();
@@ -145,8 +146,9 @@ public class Group extends Item implements ActionListener{
       
       gee.setNew();
       s.m.hist.addEvent(gee);
-    }
+    }    
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Group settings");
@@ -208,6 +210,7 @@ public class Group extends Item implements ActionListener{
     y_tf.setText(String.valueOf(y));    
     frame.setVisible(true);
   }  
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -238,6 +241,7 @@ public class Group extends Item implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Group";    
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
@@ -250,9 +254,11 @@ public class Group extends Item implements ActionListener{
     code+="\n"+indent+"</Group>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {     
      draw(g,offsetx,offsety,z);
   }
+  @Override
   public void draw(Graphics2D g,int x_,int y_, int z) {    
     for(Item i:items) {
       i.draw(g,x+x,y+y_,z);
@@ -263,6 +269,7 @@ public class Group extends Item implements ActionListener{
   public boolean contains(int x_, int y_) {    
     return (x_>=x+offsetx && y_>=y+offsety);
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Group: "+id);      
     for(int i=0;i<items.size();i++) {
@@ -316,5 +323,9 @@ public class Group extends Item implements ActionListener{
     for(Item i:items) {
         i.renameForCopy(p_);
     }
+  }
+  @Override
+  public void updateToGlobalVariables() {
+    for(Item i:items) i.updateToGlobalVariables();
   }
 }

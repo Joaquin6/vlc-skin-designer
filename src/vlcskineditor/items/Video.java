@@ -76,6 +76,7 @@ public class Video extends Item implements ActionListener{
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+  @Override
   public void update() {
     if(!created) {
       id = id_tf.getText();
@@ -123,7 +124,9 @@ public class Video extends Item implements ActionListener{
       vee.setNew();
       s.m.hist.addEvent(vee);
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Video settings");
@@ -273,6 +276,7 @@ public class Video extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -306,6 +310,7 @@ public class Video extends Item implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Video";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
@@ -323,9 +328,11 @@ public class Video extends Item implements ActionListener{
     code+="/>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,offsetx,offsety, z);
   }
+  @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;
     
@@ -340,6 +347,7 @@ public class Video extends Item implements ActionListener{
   public boolean contains(int x_, int y_) {
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Video: "+id);      
     return node;

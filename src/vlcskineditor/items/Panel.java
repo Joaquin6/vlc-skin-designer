@@ -435,4 +435,8 @@ public class Panel extends Item implements ActionListener{
         i.renameForCopy(p_);
     }
   }
+  @Override
+  public void updateToGlobalVariables() {
+    for(Item i:items) i.updateToGlobalVariables();
+  }
 }

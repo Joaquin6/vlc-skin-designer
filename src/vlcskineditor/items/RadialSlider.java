@@ -46,12 +46,16 @@ public class RadialSlider extends Item{
   public String value = VALUE_DEFAULT;
   public String tooltiptext = TOOLTIPTEXT_DEFAULT;
   
+  {
+    type = Language.get("RADIALSLIDER");
+  }
+  
   /** Creates a new instance of RadialSlider */
   public RadialSlider(String xmlcode, Skin s_) {
     s = s_;
     sequence = XML.getValue(xmlcode,"sequence");
     nbimages = XML.getIntValue(xmlcode,"nbimages");
-    if(xmlcode.indexOf("miangle=\"")!=-1) minangle = XML.getIntValue(xmlcode,"minangle");
+    if(xmlcode.indexOf("minangle=\"")!=-1) minangle = XML.getIntValue(xmlcode,"minangle");
     if(xmlcode.indexOf("maxangle=\"")!=-1) maxangle = XML.getIntValue(xmlcode,"maxangle");
     if(xmlcode.indexOf("value=\"")!=-1) value = XML.getValue(xmlcode,"value");
     if(xmlcode.indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(xmlcode,"tooltiptext");
@@ -69,12 +73,15 @@ public class RadialSlider extends Item{
     id = "Unnamed radial slider #"+s.getNewId();
     showOptions();
   }
+  @Override
   public void update() {
-    
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<RadialSlider";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
@@ -94,12 +101,15 @@ public class RadialSlider extends Item{
     code+="/>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
-    
+    draw(g,offsetx,offsety,z);
   }
+  @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {
     
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("RadialSlider: "+id);       
     return node;

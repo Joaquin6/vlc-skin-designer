@@ -54,7 +54,7 @@ public class BitmapFont extends Resource{
     
   }
   public void showOptions() {
-    
+    JOptionPane.showMessageDialog(s.m, "BitmapFonts are not yet supported.");
   }
   public String returnCode(String indent) {
     String code=indent+"<BitmapFont id=\""+id+"\" file=\""+file+"\"";

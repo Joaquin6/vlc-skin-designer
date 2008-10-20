@@ -92,6 +92,7 @@ public class Button extends Item implements ActionListener{
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+  @Override
   public void update() {
     if(!created) {      
       id = id_tf.getText();
@@ -142,7 +143,9 @@ public class Button extends Item implements ActionListener{
       s.updateItems();    
       s.expandItem(id);
     }
+    updateToGlobalVariables();
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame("Button settings");
@@ -308,6 +311,7 @@ public class Button extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
@@ -367,6 +371,7 @@ public class Button extends Item implements ActionListener{
   public void actionWasEdited(ActionEditor ae) {
     if(ae==action_ae) action_tf.setText(ae.getCode());
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Button";
     code+=" up=\""+up+"\"";
@@ -386,9 +391,11 @@ public class Button extends Item implements ActionListener{
     code+="/>";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,offsetx,offsety,z);
   }
+  @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created) return;    
     java.awt.image.BufferedImage bi;
@@ -412,6 +419,7 @@ public class Button extends Item implements ActionListener{
     java.awt.image.BufferedImage bi = up_res.image;
     return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Button: "+id);     
     return node;
