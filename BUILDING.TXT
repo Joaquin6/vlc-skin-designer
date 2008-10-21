@@ -3,6 +3,7 @@ HOW TO BUILD THE VLC SKIN EDITOR
 Requirements:
   Sun Java Development Kit 6 SE or newer
   Apache Ant
+  Inno Setup (optional)
 ====================================================================
 1. How to setup the JDK and Ant
 ====================================================================
@@ -15,8 +16,11 @@ your favourite package manager. (e.g. apt-get)
 --------------------------------------------------------------------
 Download and install the latest JDK from
   http://java.sun.com
-Then follow the instructions about "Installing Ant "at 
+Then follow the instructions about "Installing Ant" at 
   http://ant.apache.org/manual/index.html
+If you want to create the setup for the Skin Editor also, you need
+to download and install InnoSetup
+  http://www.innosetup.com/isdl.php
 ====================================================================
 2. How to build the VLC Skin Editor
 ====================================================================
@@ -31,7 +35,7 @@ following targets as argument:
   package-update
     ZIP update package for the update system
   installer-win32
-    Installer for Windows (can only be built under Windows)
+    Installer for Windows (requires Inno Setup and Windows)
   package-all
     All of the above
 ====================================================================
