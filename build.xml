@@ -2,33 +2,42 @@
 
 <project name="skin-designer" default="dist" basedir=".">
 
-  <property name="srcdir" value="src" />
-  <property name="builddir" value="build" />
-
+  <property name="src"   value="src"   />
+  <property name="build" value="build" />
+  <property name="dist"  value="dist"  />
+  <property name="lang"  value="lang"  />
+  <property name="share" value="share" />
+  <property file="build.properties" />  
+  
+  <condition property="isWindows">
+    <os family="windows"/>
+  </condition>
+    
   <target name="bootstrap">
-    <mkdir dir="${builddir}" />
+    <mkdir dir="${build}" />
+    <mkdir dir="${dist}" />
   </target>
 
   <target name="compile" depends="bootstrap">
-    <mkdir dir="${builddir}/classes" />
-    <javac srcdir="${srcdir}"
-           destdir="${builddir}/classes"
+    <mkdir dir="${build}/classes" />
+    <javac srcdir="${src}"
+           destdir="${build}/classes"
            target="1.6"
            source="1.6"
            fork="true" />
   </target>
 
   <target name="copy-resources" depends="bootstrap">
-    <mkdir dir="${builddir}/resources/vlcskineditor/icons" />
-    <copy todir="${builddir}/resources/vlcskineditor/icons">
-      <fileset dir="${srcdir}/vlcskineditor/icons" />
+    <mkdir dir="${build}/resources/vlcskineditor/icons" />
+    <copy todir="${build}/resources/vlcskineditor/icons">
+      <fileset dir="${src}/vlcskineditor/icons" />
     </copy>
   </target>
 
   <target name="jar" depends="compile, copy-resources">
-    <jar destfile="${builddir}/${ant.project.name}.jar">
-      <fileset dir="${builddir}/classes" />
-     <fileset dir="${builddir}/resources" />
+    <jar destfile="${build}/VLCSkinEditor.jar">
+     <fileset dir="${build}/classes" />
+     <fileset dir="${build}/resources" />
       <manifest>
         <attribute name="Main-Class"
                    value="vlcskineditor.Main" />
@@ -39,7 +48,72 @@
   <target name="dist" depends="jar" />
 
   <target name="clean">
-    <delete dir="${builddir}" />
+    <delete dir="${build}" />
+    <delete dir="${dist}" />
   </target>
-
+  
+  <target name="package-update" depends="jar">
+    <echo file=".updated" />
+    <zip destfile="${dist}/VLCSkinEditor_update.zip">      
+      <fileset dir="${build}/" includes="VLCSkinEditor.jar" />
+      <fileset dir="${share}/" includes="VLCSkinEditor.exe
+                                         ICE_JNIRegistry.dll" />
+      <fileset dir="." includes=".updated
+                                 README.TXT
+                                 LICENSE.TXT
+                                 ${lang}/*.txt
+                                 ${lang}/*/*.txt" />
+    </zip>
+    <delete file=".updated" />
+  </target>
+  
+  <target name="package-win32" depends="jar">
+    <zip destfile="${dist}/VLCSkinEditor_w32.zip">      
+      <fileset dir="${build}/" includes="VLCSkinEditor.jar"/>
+      <fileset dir="${share}/" includes="VLCSkinEditor.exe
+                                         ICE_JNIRegistry.dll" />
+      <fileset dir="." includes="README.TXT
+                                 LICENSE.TXT
+                                 ${lang}/*.txt
+                                 ${lang}/*/*.txt"/>
+    </zip>
+  </target> 
+  
+  <target name="get-is-dir" unless="is.dir">
+    <input
+      message="Please enter the directory where InnoSetup is installed:"
+      addproperty="is.dir.read"
+    />
+    <available property="is.exists" file="${is.dir.read}/iscc.exe"/>
+    <fail unless="is.exists"/>
+    <propertyfile
+      file="build.properties"
+      comment="Build configuration">
+      <entry key="is.dir" value="${is.dir.read}"/>
+    </propertyfile>
+  </target>
+  
+  <target name="installer-win32" depends="jar,get-is-dir" if="isWindows">
+    <exec executable="${is.dir}/iscc.exe">
+      <arg line="SkinEditorInstaller.iss"/>
+    </exec>
+  </target>
+  
+  <target name="package-unix" depends="jar">
+    <tar destfile="${dist}/VLCSkinEditor_unix.tar">      
+      <fileset dir="${build}/" includes="VLCSkinEditor.jar" />
+      <fileset dir="${share}/" includes="VLCSkinEditor" />
+      <fileset dir="." includes="README.TXT 
+                                 LICENSE.TXT                                 
+                                 ${lang}/*.txt
+                                 ${lang}/*/*.txt" />
+    </tar>
+    <gzip destfile="${dist}/VLCSkinEditor_unix.tar.gz" src="${dist}/VLCSkinEditor_unix.tar" />
+    <delete file="${dist}/VLCSkinEditor_unix.tar" />
+  </target>  
+  
+  <target name="package-all" depends="package-update,
+                                      package-win32,
+                                      package-unix,
+                                      installer-win32" />
 </project>
