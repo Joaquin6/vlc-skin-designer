@@ -1,0 +1,48 @@
+HOW TO BUILD THE VLC SKIN EDITOR
+====================================================================
+Requirements:
+  Sun Java Development Kit 6 SE or newer
+  Apache Ant
+====================================================================
+1. How to setup the JDK and Ant
+====================================================================
+1.1 On Linux/Unix
+--------------------------------------------------------------------
+On Linux/Unix you can just get and install the both with
+your favourite package manager. (e.g. apt-get)
+--------------------------------------------------------------------
+1.2 On Windows
+--------------------------------------------------------------------
+Download and install the latest JDK from
+  http://java.sun.com
+Then follow the instructions about "Installing Ant "at 
+  http://ant.apache.org/manual/index.html
+====================================================================
+2. How to build the VLC Skin Editor
+====================================================================
+If you just want to compile the sources, simply run ant inside the
+directory where build.xml is located. (The root of the trunk)
+If you want to build packaged versions, use ant with one of the
+following targets as argument:
+  package-win32
+    ZIP package for Windows
+  package-unix
+    TAR-GZIP package for Linux/Unix
+  package-update
+    ZIP update package for the update system
+  installer-win32
+    Installer for Windows (can only be built under Windows)
+  package-all
+    All of the above
+====================================================================
+3. How to run the VLC Skin Editor
+====================================================================
+You have to run VLCSkinEditor.jar (via java or VLCSkinEditor.exe)
+inside the same directory as the lang directory is. On Windows you
+also have to make sure that ICE_JNIRegistry.dll is in the same
+directory, otherwise detection of where VLC is installed does not 
+work.
+
+When run for the first time the program will create a config file
+named "VLCSkinEditor.cfg". It is located in the same directory
+in which the program is run.
