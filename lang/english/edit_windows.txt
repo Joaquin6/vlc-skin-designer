@@ -1,7 +1,7 @@
 #Author/s: Daniel Dreibrodt
 
 #General strings
-NOTE_STARRED|* Attributes marked with a star must be specified.
+NOTE_STARRED|* Attribute must be specified.
 
 #Common strings
 WIN_ITEM_GENERAL|General attributes
@@ -12,6 +12,10 @@ WIN_ITEM_Y|Y:
 WIN_ITEM_WIDTH|Width:
 WIN_ITEM_HEIGHT|Height:
 WIN_ITEM_VISIBLE|Visibility:
+WIN_ITEM_LEFTTOP|Lefttop:
+WIN_ITEM_LEFTTOP_TIP|Indicate to which corner of the Layout the top-left-hand corner of this iten is attached to, in case of resizing.
+WIN_ITEM_RIGHTBOTTOM|Rightbottom:
+WIN_ITEM_RIGHTBOTTOM_TIP|Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached to, in case of resizing.
 FILE_INDIR|in the same folder as the XML file
 
 #Bitmap
@@ -67,3 +71,13 @@ WIN_WINDOW_DD_TIP|Indicates whether drag and drop of media files is allowed on t
 WIN_WINDOW_PD|Play on drop:
 WIN_WINDOW_PD_TIP|Indicates whether a dropped file is played directly (true) or only enqueued (false). This attribute has no effect if dragdrop is set to "false".
 WIN_WINDOW_DD_PANEL|Drag and drop options
+
+#Anchor
+WIN_ANCHOR_TITLE|Anchor settings
+WIN_ANCHOR_POINTS|Points:
+WIN_ANCHOR_POINTS_TIP|Points defining the Bezier curve followed by the anchor. You don't need to change this parameter if all you want is a punctual anchor.
+WIN_ANCHOR_RANGE|Range:
+WIN_ANCHOR_RANGE_TIP|Range of the anchor's area of effect, in pixels.
+WIN_ANCHOR_PRIORITY|Priority*:
+WIN_ANCHOR_PRIORITY_TIP|Each anchor has a priority (priority attribute), and the anchor with the highest priority is the winner, which means that when moving its window all the other anchored windows will move too. To break the effect of 2 anchored windows, you need to move the window whose anchor has the lower priority.
+WIN_ANCHOR_BOUNDARIES|Boundaries

@@ -157,6 +157,7 @@ public class Config {
     
     JLabel lang_l = new JLabel(Language.get("WIN_PREFS_LANG_L"));    
     File[] lang_files = new File("lang").listFiles(new FileFilter() {
+      @Override
       public boolean accept(File f) {
         return f.getName().toLowerCase().endsWith(".txt");
       }
@@ -179,6 +180,7 @@ public class Config {
     
     JButton ok_btn = new JButton(Language.get("BUTTON_OK"));
     ok_btn.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
         strings.put("language", (String)lang_cb.getSelectedItem());        
@@ -190,6 +192,7 @@ public class Config {
     
     JButton cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
     cancel_btn.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
         frame.setVisible(false);
         frame.dispose();

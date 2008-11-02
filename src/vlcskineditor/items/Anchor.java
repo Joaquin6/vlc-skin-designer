@@ -97,6 +97,7 @@ public class Anchor extends Item implements ActionListener{
     }          
     b = new Bezier(xpos,ypos,Bezier.kCoordsBoth);
   }
+  @Override
   public void update() {
     if(!created) {
       id=id_tf.getText();
@@ -130,96 +131,167 @@ public class Anchor extends Item implements ActionListener{
       s.m.hist.addEvent(aee);
     }   
   }
+  @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Anchor settings");
+      frame = new JFrame(Language.get("WIN_ANCHOR_TITLE"));
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
-      JLabel x_l = new JLabel("X:");
+      JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
       x_tf = new JTextField();
       x_tf.setDocument(new NumbersOnlyDocument());
-      JLabel y_l = new JLabel("Y:");
+      JLabel y_l = new JLabel(Language.get("WIN_ITEM_Y"));
       y_tf = new JTextField();
       y_tf.setDocument(new NumbersOnlyDocument());
-      JLabel points_l = new JLabel("Points:");
+      JLabel points_l = new JLabel(Language.get("WIN_ANCHOR_POINTS"));
       points_tf = new JTextField();
-      points_tf.setToolTipText("Points defining the Bezier curve followed by the anchor. You don't need to change this parameter if all you want is a punctual anchor.");
-      JLabel range_l = new JLabel("Range:");
+      points_tf.setToolTipText(Language.get("WIN_ANCHOR_POINTS_TIP"));
+      JLabel range_l = new JLabel(Language.get("WIN_ANCHOR_RANGE"));
       range_tf = new JTextField();
-      range_tf.setToolTipText("Range of action of the anchor, in pixels.");
+      range_tf.setToolTipText(Language.get("WIN_ANCHOR_RANGE_TIP"));
       range_tf.setDocument(new NumbersOnlyDocument());
-      JLabel priority_l = new JLabel("Priority*:");
+      JLabel priority_l = new JLabel(Language.get("WIN_ANCHOR_PRIORITY"));
       priority_tf = new JTextField();
-      priority_tf.setToolTipText("Each anchor has a priority (priority attribute), and the anchor with the highest priority is the winner, which means that when moving its window all the other anchored windows will move too. To break the effect of 2 anchored windows, you need to move the window whose anchor has the lower priority.");
+      priority_tf.setToolTipText(Language.get("WIN_ANCHOR_PRIORITY_TIP"));
       priority_tf.setDocument(new NumbersOnlyDocument());
-      JLabel lefttop_l = new JLabel("Lefttop:");
+      JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       String[] lefttop_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       lefttop_cb = new JComboBox(lefttop_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this anchor is attached, in case of resizing.");
-      ok_btn = new JButton("OK");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
-      help_btn = new JButton("Help");
-      help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
+      help_btn.addActionListener(this);      
+      JLabel star_l = new JLabel(Language.get("NOTE_STARRED"));
       
-      JPanel general = new JPanel(null);
-      general.add(id_l);
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, priority_l, lefttop_l, x_l, y_l, range_l, points_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = 200;
+      
+      JPanel general = new JPanel();
+      general.add(id_l);      
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
       general.add(priority_l);
       general.add(priority_tf);
-      priority_l.setBounds(5,45,75,24);
-      priority_tf.setBounds(85,45,150,24);
       general.add(lefttop_l);
       general.add(lefttop_cb);
-      lefttop_l.setBounds(5,75,75,24);
-      lefttop_cb.setBounds(85,75,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));       
-      general.setMinimumSize(new Dimension(240,110));
-      general.setPreferredSize(new Dimension(240,110));
-      general.setMaximumSize(new Dimension(240,110));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
+      
+      SpringLayout general_layout = new SpringLayout();
+      
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, priority_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, priority_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, priority_tf, 0, SpringLayout.VERTICAL_CENTER, priority_l);
+      general_layout.putConstraint(SpringLayout.WEST, priority_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, priority_tf, 0, SpringLayout.EAST, id_tf);
+      
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, priority_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
+      
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
+      
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, lefttop_l);
+      
+      general.setLayout(general_layout);
+      
       frame.add(general);
       
-      JPanel bounds = new JPanel(null);
+      JPanel bounds = new JPanel();
       bounds.add(x_l);
+      x_tf.setPreferredSize(new Dimension(tf_wd,x_tf.getPreferredSize().height));
       bounds.add(x_tf);
-      x_l.setBounds(5,15,75,24);
-      x_tf.setBounds(85,15,150,24);
       bounds.add(y_l);
       bounds.add(y_tf);
-      y_l.setBounds(5,45,75,24);
-      y_tf.setBounds(85,45,150,24);
       bounds.add(points_l);
       bounds.add(points_tf);
-      points_l.setBounds(5,75,75,24);
-      points_tf.setBounds(85,75,150,24);
       bounds.add(range_l);
       bounds.add(range_tf);
-      range_l.setBounds(5,105,75,24);
-      range_tf.setBounds(85,105,150,24);
-      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Boundaries"));       
-      bounds.setMinimumSize(new Dimension(240,140));
-      bounds.setPreferredSize(new Dimension(240,140));
-      bounds.setMaximumSize(new Dimension(240,140));
-      frame.add(bounds);
+      bounds.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ANCHOR_BOUNDARIES")));       
       
+      SpringLayout bounds_layout = new SpringLayout();
+      
+      bounds_layout.putConstraint(SpringLayout.NORTH, x_l, 5, SpringLayout.NORTH, bounds);
+      bounds_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, bounds);
+      
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, bounds);
+      
+      bounds_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, bounds);
+      
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, bounds);
+      bounds_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, x_tf);
+      
+      bounds_layout.putConstraint(SpringLayout.NORTH, points_l, 10, SpringLayout.SOUTH, y_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, points_l, 5, SpringLayout.WEST, bounds);
+      
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, points_tf, 0, SpringLayout.VERTICAL_CENTER, points_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, points_tf, tf_dx, SpringLayout.WEST, bounds);
+      bounds_layout.putConstraint(SpringLayout.EAST, points_tf, 0, SpringLayout.EAST, x_tf);
+      
+      bounds_layout.putConstraint(SpringLayout.NORTH, range_l, 10, SpringLayout.SOUTH, points_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, range_l, 5, SpringLayout.WEST, bounds);
+      
+      bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, range_tf, 0, SpringLayout.VERTICAL_CENTER, range_l);
+      bounds_layout.putConstraint(SpringLayout.WEST, range_tf, tf_dx, SpringLayout.WEST, bounds);
+      bounds_layout.putConstraint(SpringLayout.EAST, range_tf, 0, SpringLayout.EAST, x_tf);
+      
+      bounds_layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, x_tf);
+      bounds_layout.putConstraint(SpringLayout.SOUTH, bounds, 10, SpringLayout.SOUTH, range_l);
+      
+      bounds.setLayout(bounds_layout);
+      
+      frame.add(bounds);
+      frame.add(star_l);
       frame.add(ok_btn);
       frame.add(cancel_btn);
-      frame.add(help_btn);
-      frame.add(new JLabel("* required attribute"));
+      frame.add(help_btn);      
       
-      frame.setMinimumSize(new Dimension(250,345));
-      frame.setPreferredSize(new Dimension(250,345));
-      frame.setMaximumSize(new Dimension(250,345));
+      SpringLayout layout = new SpringLayout();
       
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      //layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, bounds, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, bounds, 5, SpringLayout.WEST, frame.getContentPane());
+      //layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, star_l, 10, SpringLayout.SOUTH, bounds);
+      layout.putConstraint(SpringLayout.WEST, star_l, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, star_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+      
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);      
+      
+      frame.setLayout(layout);
+      frame.pack();
       frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
@@ -231,15 +303,16 @@ public class Anchor extends Item implements ActionListener{
     range_tf.setText(String.valueOf(range));
     frame.setVisible(true);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
@@ -261,6 +334,7 @@ public class Anchor extends Item implements ActionListener{
       frame = null;
     }
   }
+  @Override
   public String returnCode(String indent) {
     String code = indent+"<Anchor";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
@@ -271,9 +345,11 @@ public class Anchor extends Item implements ActionListener{
     //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
   }
+  @Override
   public void draw(Graphics2D g, int z) {
     draw(g,offsetx,offsety,z);
   }
+  @Override
   public void draw(Graphics2D g,int x_,int y_, int z) {
     if(!created) return;
     if(selected) {        
@@ -296,6 +372,7 @@ public class Anchor extends Item implements ActionListener{
     int w = b.getWidth();
     return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);*/
   }
+  @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Anchor: "+id);  
     return node;

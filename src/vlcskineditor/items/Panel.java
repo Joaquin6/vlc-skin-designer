@@ -187,19 +187,19 @@ public class Panel extends Item implements ActionListener{
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
-      JLabel x_l = new JLabel("X:");
+      JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
       x_tf = new JTextField();      
       x_tf.setDocument(new NumbersOnlyDocument());
-      JLabel y_l = new JLabel("Y:");
+      JLabel y_l = new JLabel(Language.get("WIN_ITEM_Y"));
       y_tf = new JTextField();      
       y_tf.setDocument(new NumbersOnlyDocument());
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
-      JLabel lefttop_l = new JLabel("Lefttop:");
+      JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
       lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
-      JLabel rightbottom_l = new JLabel("Rightbottom:");
+      JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
       rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
       Object[] bool_values = { true, false };
@@ -209,7 +209,7 @@ public class Panel extends Item implements ActionListener{
       JLabel ykeepratio_l = new JLabel("Keep Y Ratio:");
       ykeepratio_cb = new JComboBox(bool_values);
       ykeepratio_cb.setToolTipText("When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.");
-      JLabel visible_l = new JLabel("Visibility:");
+      JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
       JLabel help_l = new JLabel("Help Text:");
       help_tf = new JTextField();
@@ -219,13 +219,13 @@ public class Panel extends Item implements ActionListener{
       JLabel height_l = new JLabel("Height*:");
       height_tf = new JTextField();
       
-      ok_btn = new JButton("OK");
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
       cancel_btn.setPreferredSize(new Dimension(70,25));
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
       help_btn.setPreferredSize(new Dimension(70,25));
       
@@ -266,7 +266,7 @@ public class Panel extends Item implements ActionListener{
       general.add(help_tf);
       help_l.setBounds(5,255,75,24);
       help_tf.setBounds(85,255,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
       general.setMinimumSize(new Dimension(240,285));
       general.setPreferredSize(new Dimension(240,285));
       general.setMaximumSize(new Dimension(240,285));
@@ -290,7 +290,7 @@ public class Panel extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel("* required attribute"));
+      frame.add(new JLabel(Language.get("NOTE_STARRED")));
       
       frame.setMinimumSize(new Dimension(250,440));
       frame.setPreferredSize(new Dimension(250,440));
@@ -318,12 +318,12 @@ public class Panel extends Item implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.",Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }

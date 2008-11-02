@@ -120,7 +120,7 @@ public class SliderBackground extends Item implements ActionListener{
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      JLabel id_l = new JLabel("ID*:");
+      JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
       gen_btn = new JButton("Open slider background wizard...");
       gen_btn.addActionListener(this);
@@ -139,13 +139,13 @@ public class SliderBackground extends Item implements ActionListener{
       padvert_tf = new JTextField();
       padvert_tf.setDocument(new NumbersOnlyDocument());
       
-      ok_btn = new JButton("OK");
+      ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
-      cancel_btn = new JButton("Cancel");
+      cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
       cancel_btn.setPreferredSize(new Dimension(70,25));
-      help_btn = new JButton("Help");
+      help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
       help_btn.setPreferredSize(new Dimension(70,25));
       
@@ -155,7 +155,7 @@ public class SliderBackground extends Item implements ActionListener{
       general.add(id_tf);
       id_l.setBounds(5,15,75,24);
       id_tf.setBounds(85,15,150,24);
-      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "General Attributes"));
+      general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
       general.setMinimumSize(new Dimension(240,45));
       general.setPreferredSize(new Dimension(240,45));
       general.setMaximumSize(new Dimension(240,45));
@@ -193,7 +193,7 @@ public class SliderBackground extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel("* required attribute"));
+      frame.add(new JLabel(Language.get("NOTE_STARRED")));
       
       frame.setMinimumSize(new Dimension(250,320));
       frame.setPreferredSize(new Dimension(250,320));
@@ -214,12 +214,12 @@ public class SliderBackground extends Item implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter a valid ID!","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.","ID not valid",JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.",Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }

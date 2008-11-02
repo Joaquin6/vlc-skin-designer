@@ -183,7 +183,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file.add(m_file_vlt);
     m_file.add(m_file_png);
     m_file.addSeparator();
-    m_file.add(m_file_quit);
+    if(System.getProperty("os.name").indexOf("Mac")==-1) m_file.add(m_file_quit);
     
     m_edit = new JMenu(Language.get("MENU_EDIT"));
     m_edit.setMnemonic(Language.get("MENU_EDIT_MN").charAt(0));
@@ -515,61 +515,61 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     jdesk.add(res_add_bitmap_pu);
     
     items_add_pu = new JPopupMenu();
-    items_add_pu_tp = new JMenu(Language.get("WIN_ITEMS_PU_PANEL_ADD"));    
-    items_add_pu_tp_anchor = new JMenuItem("Anchor");
+    items_add_pu_tp = new JMenu(Language.get("WIN_ITEMS_PU_PANEL_ADD"));
+    items_add_pu_tp_anchor = new JMenuItem(Language.get("ANCHOR"));
     items_add_pu_tp_anchor.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_anchor);
-    items_add_pu_tp_button = new JMenuItem("Button");
+    items_add_pu_tp_button = new JMenuItem(Language.get("BUTTON"));
     items_add_pu_tp_button.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_button);
-    items_add_pu_tp_checkbox = new JMenuItem("Checkbox");
-    items_add_pu_tp_checkbox.addActionListener(this);    
+    items_add_pu_tp_checkbox = new JMenuItem(Language.get("CHECKBOX"));
+    items_add_pu_tp_checkbox.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_checkbox);
-    items_add_pu_tp_image = new JMenuItem("Image");    
+    items_add_pu_tp_image = new JMenuItem(Language.get("IMAGE"));
     items_add_pu_tp_image.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_image);
-    items_add_pu_tp_panel = new JMenuItem("Panel");    
+    items_add_pu_tp_panel = new JMenuItem(Language.get("PANEL"));
     items_add_pu_tp_panel.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_panel);
-    items_add_pu_tp_playtree = new JMenuItem("Playtree");
+    items_add_pu_tp_playtree = new JMenuItem(Language.get("PLAYTREE"));
     items_add_pu_tp_playtree.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_playtree);
-    items_add_pu_tp_slider = new JMenuItem("Slider");
+    items_add_pu_tp_slider = new JMenuItem(Language.get("SLIDER"));
     items_add_pu_tp_slider.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_slider);
-    items_add_pu_tp_text = new JMenuItem("Text");
+    items_add_pu_tp_text = new JMenuItem(Language.get("TEXT"));
     items_add_pu_tp_text.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_text);
-    items_add_pu_tp_video = new JMenuItem("Video");
+    items_add_pu_tp_video = new JMenuItem(Language.get("VIDEO"));
     items_add_pu_tp_video.addActionListener(this);
     items_add_pu_tp.add(items_add_pu_tp_video);
     items_add_pu.add(items_add_pu_tp);
     items_add_pu.addSeparator();
-    items_add_pu_anchor = new JMenuItem("Anchor");
+    items_add_pu_anchor = new JMenuItem(Language.get("ANCHOR"));
     items_add_pu_anchor.addActionListener(this);
     items_add_pu.add(items_add_pu_anchor);
-    items_add_pu_button = new JMenuItem("Button");
+    items_add_pu_button = new JMenuItem(Language.get("BUTTON"));
     items_add_pu_button.addActionListener(this);
     items_add_pu.add(items_add_pu_button);
-    items_add_pu_checkbox = new JMenuItem("Checkbox");
+    items_add_pu_checkbox = new JMenuItem(Language.get("CHECKBOX"));
     items_add_pu_checkbox.addActionListener(this);    
     items_add_pu.add(items_add_pu_checkbox);
-    items_add_pu_image = new JMenuItem("Image");    
+    items_add_pu_image = new JMenuItem(Language.get("IMAGE"));
     items_add_pu_image.addActionListener(this);
     items_add_pu.add(items_add_pu_image);
-    items_add_pu_panel = new JMenuItem("Panel");    
+    items_add_pu_panel = new JMenuItem(Language.get("PANEL"));
     items_add_pu_panel.addActionListener(this);
     items_add_pu.add(items_add_pu_panel);
-    items_add_pu_playtree = new JMenuItem("Playtree");
+    items_add_pu_playtree = new JMenuItem(Language.get("PLAYTREE"));
     items_add_pu_playtree.addActionListener(this);
     items_add_pu.add(items_add_pu_playtree);
-    items_add_pu_slider = new JMenuItem("Slider");
+    items_add_pu_slider = new JMenuItem(Language.get("SLIDER"));
     items_add_pu_slider.addActionListener(this);
     items_add_pu.add(items_add_pu_slider);
-    items_add_pu_text = new JMenuItem("Text");
+    items_add_pu_text = new JMenuItem(Language.get("TEXT"));
     items_add_pu_text.addActionListener(this);
     items_add_pu.add(items_add_pu_text);
-    items_add_pu_video = new JMenuItem("Video");
+    items_add_pu_video = new JMenuItem(Language.get("VIDEO"));
     items_add_pu_video.addActionListener(this);
     items_add_pu.add(items_add_pu_video);
     jdesk.add(items_add_pu);     
@@ -648,7 +648,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     opening = true;
     String[] exts = { "xml","vlt" };
     if(System.getProperty("os.name").indexOf("Mac")==-1) {
-      base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin Files), *.vlt (Packed XML-Skins)",false,vlc_dir));      
+      base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin), *.vlt (VLC Theme)",false,vlc_dir));      
       int returnVal = base_fc.showOpenDialog(this);
       if(returnVal == JFileChooser.APPROVE_OPTION) {      
         openFile(base_fc.getSelectedFile());
@@ -664,8 +664,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       fd.setMode(FileDialog.LOAD);
       fd.setFilenameFilter(new FilenameFilter() {
         @Override
-        public boolean accept(File f, String s) { 
-          return f.getName().toUpperCase().endsWith(".XML"); 
+        public boolean accept(File dir, String name) { 
+          return name.toUpperCase().endsWith(".XML"); 
         }
       });
       fd.setVisible(true);
@@ -863,7 +863,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       if(vlt_saver==null) {
         vlt_saver = new JFileChooser();
         vlt_saver.setCurrentDirectory(new File(vlc_skins_dir));
-        vlt_saver.setFileFilter(new CustomFileFilter(vlt_saver,"vlt",".vlt  (VideoLAN Theme)",false,""));
+        vlt_saver.setFileFilter(new CustomFileFilter(vlt_saver,"vlt",".vlt  (VLC Theme)",false,""));
         vlt_saver.setAcceptAllFileFilterUsed(false);
       }
       int returnVal = vlt_saver.showSaveDialog(this);
@@ -1224,9 +1224,21 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
         if(n==0) {
           Resource r = s.getResource(selected_resource);
-          ResourceDeletionEvent rde = new ResourceDeletionEvent(s,r,s.resources.indexOf(r));
-          hist.addEvent(rde);
-          s.resources.remove(r);
+          Bitmap parent = null;
+          if(r.getClass().equals(SubBitmap.class)) {
+            for(Resource i:s.resources) {
+              if(i.getClass().equals(Bitmap.class)) {
+                if(((Bitmap)i).SubBitmaps.contains(r)) parent = (Bitmap)i;
+              }
+            }
+            SubBitmapDeletionEvent sde = new SubBitmapDeletionEvent(s,parent,(SubBitmap)r,parent.SubBitmaps.indexOf(r));
+            hist.addEvent(sde);
+            parent.SubBitmaps.remove(r);
+          } else {
+            ResourceDeletionEvent rde = new ResourceDeletionEvent(s,r,s.resources.indexOf(r));
+            hist.addEvent(rde);
+            s.resources.remove(r);
+          }
           s.updateResources();          
         }
       }

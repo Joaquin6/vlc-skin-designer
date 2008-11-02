@@ -235,7 +235,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     step1_next_btn = new JButton(Language.get("SBGGEN_NEXT"));
     step1_next_btn.addActionListener(this);
     step1_cancel_btn = new JButton(Language.get("SBGGEN_CANCEL"));
-    step1_cancel_btn.setActionCommand("cancel");
+    step1_cancel_btn.setActionCommand(Language.get("SBGGEN_CANCEL"));
     step1_cancel_btn.addActionListener(this);
     
     card_step1.add(step1_horz_s);
@@ -376,7 +376,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
     step2_finish_btn = new JButton(Language.get("SBGGEN_FINISH"));
     step2_finish_btn.addActionListener(this);
     step2_cancel_btn = new JButton(Language.get("SBGGEN_CANCEL"));
-    step2_cancel_btn.setActionCommand("cancel");
+    step2_cancel_btn.setActionCommand(Language.get("BUTTON_CANCEL"));
     step2_cancel_btn.addActionListener(this);    
     
     card_step2.add(step2_horz_s);
@@ -394,8 +394,9 @@ public class SliderBGGen extends JFrame implements ActionListener{
     setSize(540,450);
     setResizable(false);
   }
+  @Override
   public void actionPerformed(ActionEvent e) {
-    if(e.getActionCommand().equals("cancel")) {
+    if(e.getActionCommand().equals(Language.get("SBGGEN_CANCEL"))) {
       setVisible(false);
       dispose();
     }
