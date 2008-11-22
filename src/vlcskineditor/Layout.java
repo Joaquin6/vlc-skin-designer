@@ -259,7 +259,7 @@ public class Layout implements ActionListener{
       general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
       general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);      
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
-      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_tf);
       frame.add(general);
       
       JPanel dim = new JPanel(null);
@@ -291,42 +291,42 @@ public class Layout implements ActionListener{
       dim_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, dim, 5, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_l);
+      dim_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_tf);
       dim_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, dim);
       
       dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, height_tf, 0, SpringLayout.VERTICAL_CENTER, height_l);
       dim_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.NORTH, minwidth_l, 10, SpringLayout.SOUTH, height_l);
+      dim_layout.putConstraint(SpringLayout.NORTH, minwidth_l, 10, SpringLayout.SOUTH, height_tf);
       dim_layout.putConstraint(SpringLayout.WEST, minwidth_l, 5, SpringLayout.WEST, dim);
       
       dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, minwidth_tf, 0, SpringLayout.VERTICAL_CENTER, minwidth_l);
       dim_layout.putConstraint(SpringLayout.WEST, minwidth_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, minwidth_tf, 0, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.NORTH, minheight_l, 10, SpringLayout.SOUTH, minwidth_l);
+      dim_layout.putConstraint(SpringLayout.NORTH, minheight_l, 10, SpringLayout.SOUTH, minwidth_tf);
       dim_layout.putConstraint(SpringLayout.WEST, minheight_l, 5, SpringLayout.WEST, dim);
       
       dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, minheight_tf, 0, SpringLayout.VERTICAL_CENTER, minheight_l);
       dim_layout.putConstraint(SpringLayout.WEST, minheight_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, minheight_tf, 0, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.NORTH, maxwidth_l, 10, SpringLayout.SOUTH, minheight_l);
+      dim_layout.putConstraint(SpringLayout.NORTH, maxwidth_l, 10, SpringLayout.SOUTH, minheight_tf);
       dim_layout.putConstraint(SpringLayout.WEST, maxwidth_l, 5, SpringLayout.WEST, dim);
       
       dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, maxwidth_tf, 0, SpringLayout.VERTICAL_CENTER, maxwidth_l);
       dim_layout.putConstraint(SpringLayout.WEST, maxwidth_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, maxwidth_tf, 0, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.NORTH, maxheight_l, 10, SpringLayout.SOUTH, maxwidth_l);
+      dim_layout.putConstraint(SpringLayout.NORTH, maxheight_l, 10, SpringLayout.SOUTH, maxwidth_tf);
       dim_layout.putConstraint(SpringLayout.WEST, maxheight_l, 5, SpringLayout.WEST, dim);
       
       dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, maxheight_tf, 0, SpringLayout.VERTICAL_CENTER, maxheight_l);
       dim_layout.putConstraint(SpringLayout.WEST, maxheight_tf, tf_dx, SpringLayout.WEST, dim);
       dim_layout.putConstraint(SpringLayout.EAST, maxheight_tf, 0, SpringLayout.EAST, width_tf);
       
-      dim_layout.putConstraint(SpringLayout.SOUTH, dim, 10, SpringLayout.SOUTH, maxheight_l);
+      dim_layout.putConstraint(SpringLayout.SOUTH, dim, 10, SpringLayout.SOUTH, maxheight_tf);
       
       frame.add(dim);
       

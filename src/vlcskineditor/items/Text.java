@@ -164,19 +164,19 @@ public class Text extends Item implements ActionListener{
       rightbottom_cb = new JComboBox(align_values);
       rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
       Object[] bool_values = { true, false };
-      JLabel xkeepratio_l = new JLabel("Keep X Ratio:");
+      JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
-      xkeepratio_cb.setToolTipText("When set to true, the behaviour of the horizontal resizing is changed. For example, if initially the space to the left of the control is twice as big as the one to its right, this will stay the same during any horizontal resizing. The width of the control stays constant.");
-      JLabel ykeepratio_l = new JLabel("Keep Y Ratio:");
+      xkeepratio_cb.setToolTipText(Language.get("WIN_ITEM_XKEEPRATIO_TIP"));
+      JLabel ykeepratio_l = new JLabel(Language.get("WIN_ITEM_YKEEPRATIO"));
       ykeepratio_cb = new JComboBox(bool_values);
-      ykeepratio_cb.setToolTipText("When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.");
+      ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
       visible_btn = new JButton("",s.m.help_icon);
       visible_btn.addActionListener(this);      
-      JLabel help_l = new JLabel("Help Text:");
+      JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
-      help_tf.setToolTipText("Help text for the current control. The variable '$H' will be expanded to this value when the mouse hovers the current control.");
+      help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
       
       JLabel text_l = new JLabel("Text:");
       text_tf = new JTextField();
@@ -325,7 +325,7 @@ public class Text extends Item implements ActionListener{
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.",Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }      

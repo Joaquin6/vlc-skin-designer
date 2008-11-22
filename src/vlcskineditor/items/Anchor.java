@@ -192,14 +192,14 @@ public class Anchor extends Item implements ActionListener{
       general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
       general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
       
-      general_layout.putConstraint(SpringLayout.NORTH, priority_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.NORTH, priority_l, 10, SpringLayout.SOUTH, id_tf);
       general_layout.putConstraint(SpringLayout.WEST, priority_l, 5, SpringLayout.WEST, general);
       
       general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, priority_tf, 0, SpringLayout.VERTICAL_CENTER, priority_l);
       general_layout.putConstraint(SpringLayout.WEST, priority_tf, tf_dx, SpringLayout.WEST, general);
       general_layout.putConstraint(SpringLayout.EAST, priority_tf, 0, SpringLayout.EAST, id_tf);
       
-      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, priority_l);
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, priority_tf);
       general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
       
       general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
@@ -207,7 +207,7 @@ public class Anchor extends Item implements ActionListener{
       general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
       
       general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
-      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, lefttop_l);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, lefttop_cb);
       
       general.setLayout(general_layout);
       
@@ -233,21 +233,21 @@ public class Anchor extends Item implements ActionListener{
       bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
       bounds_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, bounds);
       
-      bounds_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
+      bounds_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_tf);
       bounds_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, bounds);
       
       bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
       bounds_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, x_tf);
       
-      bounds_layout.putConstraint(SpringLayout.NORTH, points_l, 10, SpringLayout.SOUTH, y_l);
+      bounds_layout.putConstraint(SpringLayout.NORTH, points_l, 10, SpringLayout.SOUTH, y_tf);
       bounds_layout.putConstraint(SpringLayout.WEST, points_l, 5, SpringLayout.WEST, bounds);
       
       bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, points_tf, 0, SpringLayout.VERTICAL_CENTER, points_l);
       bounds_layout.putConstraint(SpringLayout.WEST, points_tf, tf_dx, SpringLayout.WEST, bounds);
       bounds_layout.putConstraint(SpringLayout.EAST, points_tf, 0, SpringLayout.EAST, x_tf);
       
-      bounds_layout.putConstraint(SpringLayout.NORTH, range_l, 10, SpringLayout.SOUTH, points_l);
+      bounds_layout.putConstraint(SpringLayout.NORTH, range_l, 10, SpringLayout.SOUTH, points_tf);
       bounds_layout.putConstraint(SpringLayout.WEST, range_l, 5, SpringLayout.WEST, bounds);
       
       bounds_layout.putConstraint(SpringLayout.VERTICAL_CENTER, range_tf, 0, SpringLayout.VERTICAL_CENTER, range_l);
@@ -255,7 +255,7 @@ public class Anchor extends Item implements ActionListener{
       bounds_layout.putConstraint(SpringLayout.EAST, range_tf, 0, SpringLayout.EAST, x_tf);
       
       bounds_layout.putConstraint(SpringLayout.EAST, bounds, 5, SpringLayout.EAST, x_tf);
-      bounds_layout.putConstraint(SpringLayout.SOUTH, bounds, 10, SpringLayout.SOUTH, range_l);
+      bounds_layout.putConstraint(SpringLayout.SOUTH, bounds, 10, SpringLayout.SOUTH, range_tf);
       
       bounds.setLayout(bounds_layout);
       

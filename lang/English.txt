@@ -54,11 +54,13 @@ EXIT_CONFIRM_TITLE|Your modifications were not saved
 EXIT_CONFIRM_MSG|Would you like to save your skin before exiting?
 UPDATE_TITLE|Update found
 UPDATE_MSG|There is an update available for the Skin Editor.\nYour version: %v\nLatest version: %c\nDo you want to update the Skin Editor now?
-VLT_PROGRESS|Creating VLT archive...
+VLT_PROGRESS|Creating VLT file...
+VLT_SUCCESS_MSG|VideoLAN Theme created
+VLT_SUCCESS_TITLE|VLT file has been successfully created.
 DOWNLOAD_PROGRESS|Downloading...
 CONNECT_PROGRESS|Connecting...
 UPDATE_SUCCESS_TITLE|Finished updating
-UPDATE_SUCCESS_MSG|Update was sucessfully downloaded and installed.\nVLC Skin Editor will restart now
+UPDATE_SUCCESS_MSG|Update was successfully downloaded and installed.\nVLC Skin Editor will restart now
 
 #Error messages
 ERROR_FILENEXIST_TITLE|Error while opening file
@@ -117,6 +119,8 @@ ERROR_HEIGHT_INVALID_TITLE|Invalid heiht
 ERROR_HEIGHT_INVALID_MSG|Please enter a valid height.
 ERROR_OUTSIDE_TITLE|Dimensions not valid
 ERROR_OUTSIDE_MSG|Specified dimensions are outside the parent bitmap!
+ERROR_BITMAP_NEXIST|The bitmap %i does not exist.
+ERROR_BITMAP_NEXIST_TITLE|Image not valid!
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

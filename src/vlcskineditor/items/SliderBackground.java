@@ -219,7 +219,7 @@ public class SliderBackground extends Item implements ActionListener{
       }
       else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,"The ID \""+id_tf.getText()+"\" already exists, please choose another one.",Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }

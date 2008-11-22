@@ -942,7 +942,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         
         tgz.close();
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(this,Language.get("VLT_SUCCESS_MSG"),Language.get("VLT_SUCCESS_TITLE"),JOptionPane.INFORMATION_MESSAGE);        
       }
       catch (Exception ex) {        
         ex.printStackTrace();

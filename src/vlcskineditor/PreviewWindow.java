@@ -113,9 +113,9 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       return;
     }
     l=l_;    
-    setPreferredSize(new Dimension(l.width,l.height));
-    int spane_w = l.width+scroll_pane.getBorder().getBorderInsets(scroll_pane).left+scroll_pane.getBorder().getBorderInsets(scroll_pane).right;
-    int spane_h = l.height;//+scroll_pane.getBorder().getBorderInsets(scroll_pane).top+scroll_pane.getBorder().getBorderInsets(scroll_pane).bottom;
+    setPreferredSize(new Dimension(l.width*z,l.height*z));
+    int spane_w = l.width*z+scroll_pane.getBorder().getBorderInsets(scroll_pane).left+scroll_pane.getBorder().getBorderInsets(scroll_pane).right;
+    int spane_h = l.height*z;//+scroll_pane.getBorder().getBorderInsets(scroll_pane).top+scroll_pane.getBorder().getBorderInsets(scroll_pane).bottom;
     scroll_pane.setPreferredSize(new Dimension(spane_w, spane_h));    
     frame.setTitle("Window: "+w_.id + " - Layout: " + l.id);    
     frame.pack();

@@ -16,6 +16,13 @@ WIN_ITEM_LEFTTOP|Lefttop:
 WIN_ITEM_LEFTTOP_TIP|Indicate to which corner of the Layout the top-left-hand corner of this iten is attached to, in case of resizing.
 WIN_ITEM_RIGHTBOTTOM|Rightbottom:
 WIN_ITEM_RIGHTBOTTOM_TIP|Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached to, in case of resizing.
+WIN_ITEM_XKEEPRATIO|Keep X Ratio:
+WIN_ITEM_XKEEPRATIO_TIP|When set to true, the behaviour of the horizontal resizing is changed. For example, if initially the space to the left of the control is twice as big as the one to its right, this will stay the same during any horizontal resizing. The width of the control stays constant.
+WIN_ITEM_YKEEPRATIO|Keep Y Ratio:
+WIN_ITEM_YKEEPRATIO_TIP|When set to true, the behaviour of the vertical resizing is changed. For example, if initially the space to the top of the control is twice as big as the one to its bottom, this will stay the same during any vertical resizing. The height of the control stays constant.
+WIN_ITEM_HELP|Help text:
+WIN_ITEM_HELP_TIP|The variable '$H' will be expanded to this value when the mouse hovers the current control.
+WIN_ITEM_TOOLTIPTEXT|Tooltiptext:
 FILE_INDIR|in the same folder as the XML file
 
 #Bitmap
@@ -81,3 +88,11 @@ WIN_ANCHOR_RANGE_TIP|Range of the anchor's area of effect, in pixels.
 WIN_ANCHOR_PRIORITY|Priority*:
 WIN_ANCHOR_PRIORITY_TIP|Each anchor has a priority (priority attribute), and the anchor with the highest priority is the winner, which means that when moving its window all the other anchored windows will move too. To break the effect of 2 anchored windows, you need to move the window whose anchor has the lower priority.
 WIN_ANCHOR_BOUNDARIES|Boundaries
+
+#Button
+WIN_BUTTON_TITLE|Button settings
+WIN_BUTTON_UP|Normal image*:
+WIN_BUTTON_OVER|Mouse-over image:
+WIN_BUTTON_DOWN|Mouse-click image:
+WIN_BUTTON_ACTION|Action:
+WIN_BUTTON_ATTR|Button Attributes
