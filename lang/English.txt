@@ -121,6 +121,8 @@ ERROR_OUTSIDE_TITLE|Dimensions not valid
 ERROR_OUTSIDE_MSG|Specified dimensions are outside the parent bitmap!
 ERROR_BITMAP_NEXIST|The bitmap %i does not exist.
 ERROR_BITMAP_NEXIST_TITLE|Image not valid!
+ERROR_BITMAP_LOAD|The image file for the bitmap %i could not be loaded.
+ERROR_BITMAP_LOAD_TITLE|Error while loading images
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

@@ -35,7 +35,7 @@
   </target>
 
   <target name="jar" depends="compile, copy-resources">
-    <jar destfile="${build}/VLCSkinEditor.jar">
+    <jar destfile="VLCSkinEditor.jar">
      <fileset dir="${build}/classes" />
      <fileset dir="${build}/resources" />
       <manifest>
@@ -52,11 +52,11 @@
   
   <target name="package-update" depends="jar">
     <echo file=".updated" />
-    <zip destfile="${dist}/VLCSkinEditor_update.zip">      
-      <fileset dir="${build}/" includes="VLCSkinEditor.jar" />
+    <zip destfile="${dist}/VLCSkinEditor_update.zip">            
       <fileset dir="${share}/" includes="VLCSkinEditor.exe
                                          ICE_JNIRegistry.dll" />
       <fileset dir="." includes=".updated
+                                 VLCSkinEditor.jar
                                  README.TXT
                                  LICENSE.TXT
                                  ${lang}/*.txt
@@ -66,12 +66,12 @@
   </target>
   
   <target name="package-win32" depends="jar">
-    <zip destfile="${dist}/VLCSkinEditor_w32.zip">      
-      <fileset dir="${build}/" includes="VLCSkinEditor.jar"/>
+    <zip destfile="${dist}/VLCSkinEditor_w32.zip">            
       <fileset dir="${share}/" includes="VLCSkinEditor.exe
                                          ICE_JNIRegistry.dll" />
       <fileset dir="." includes="README.TXT
                                  LICENSE.TXT
+                                 VLCSkinEditor.jar
                                  ${lang}/*.txt
                                  ${lang}/*/*.txt"/>
     </zip>
@@ -98,11 +98,11 @@
   </target>
   
   <target name="package-unix" depends="jar">
-    <tar destfile="${dist}/VLCSkinEditor_unix.tar">      
-      <fileset dir="${build}/" includes="VLCSkinEditor.jar" />
+    <tar destfile="${dist}/VLCSkinEditor_unix.tar">            
       <fileset dir="${share}/" includes="VLCSkinEditor" />
       <fileset dir="." includes="README.TXT 
-                                 LICENSE.TXT                                 
+                                 LICENSE.TXT
+                                 VLCSkinEditor.jar
                                  ${lang}/*.txt
                                  ${lang}/*/*.txt" />
     </tar>

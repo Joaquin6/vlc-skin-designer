@@ -178,7 +178,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     }
     catch(Exception ex) {      
       ex.printStackTrace();
-      //JOptionPane.showMessageDialog(null,ex.getMessage()+"\n"+s.skinfolder+file,"Bitmap \""+id+"\" caused an error",JOptionPane.ERROR_MESSAGE); 
+      JOptionPane.showMessageDialog(null,Language.get("ERROR_BITMAP_LOAD").replaceAll("%i",id),Language.get("ERROR_BITMAP_LOAD_TITLE"),JOptionPane.ERROR_MESSAGE); 
       //showOptions();
       image = new BufferedImage(32,32,BufferedImage.TYPE_INT_ARGB);
       Graphics2D g = (Graphics2D)image.getGraphics();
