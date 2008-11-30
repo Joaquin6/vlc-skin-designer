@@ -30,6 +30,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Handles a windows' layout and it's content
@@ -60,6 +62,28 @@ public class Layout implements ActionListener{
   public String type = Language.get("LAYOUT");
   
   boolean created = false;
+  
+  /**
+   * Parses a layout's structure from a given XML node
+   * @param n The XML node
+   * @param w_ The parent window
+   * @param s_ The parent skin manager
+   */
+  public Layout(Node n, Window w_, Skin s_) {
+    s = s_;
+    parent = w_;
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    width = XML.getIntAttributeValue(n, "width", width);
+    height = XML.getIntAttributeValue(n, "height", height);
+    minwidth = XML.getIntAttributeValue(n, "minwidth", minwidth);
+    maxwidth = XML.getIntAttributeValue(n, "maxwidth", maxwidth);
+    minheight = XML.getIntAttributeValue(n, "minheight", minheight);
+    maxheight = XML.getIntAttributeValue(n, "maxheight", maxheight);
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {     
+      
+    }
+  }
   
   /**
    * Creates a new Layout from XML.

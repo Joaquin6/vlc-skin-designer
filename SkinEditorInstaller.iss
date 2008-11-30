@@ -2,8 +2,9 @@
 Source: share/ICE_JNIRegistry.dll; DestDir: {app}
 Source: LICENSE.TXT; DestDir: {app}
 Source: README.TXT; DestDir: {app}; Flags: isreadme
+Source: skin.dtd; DestDir: {app}
 Source: share/VLCSkinEditor.exe; DestDir: {app}
-Source: build/VLCSkinEditor.jar; DestDir: {app}
+Source: VLCSkinEditor.jar; DestDir: {app}
 Source: lang/English.txt; DestDir: {app}/lang
 Source: lang/english/*.txt; DestDir: {app}/lang/english/
 [Icons]
@@ -12,7 +13,7 @@ Name: {group}\Uninstall VLC Skin Editor; Filename: {uninstallexe}
 Name: {group}\Online Help; Filename: http://www.videolan.org/vlc/skinedhlp/
 [Setup]
 OutputBaseFilename=VLCSkinEditor_setup
-VersionInfoVersion=0.7.5
+VersionInfoVersion=0.8
 VersionInfoCompany=VideoLAN
 VersionInfoDescription=Setup for the VLC Skin Editor
 VersionInfoCopyright=©2008 VideoLAN
@@ -30,7 +31,7 @@ AppPublisherURL=http://www.videolan.org
 AppSupportURL=http://www.videolan.org/vlc/skineditor.html
 AppUpdatesURL=http://www.videolan.org/vlc/skineditor.html
 AppVersion=0.7
-AppID={{977C5080-EA08-435D-8901-233A506E1651}
+AppID={{977C5080-EA08-435D-8901-233A506E1651}}
 AppReadmeFile={app}\README.TXT
 UninstallDisplayIcon={app}\VLCSkinEditor.exe
 UninstallDisplayName=VLC Skin Editor

@@ -59,6 +59,7 @@
                                  VLCSkinEditor.jar
                                  README.TXT
                                  LICENSE.TXT
+                                 skin.dtd
                                  ${lang}/*.txt
                                  ${lang}/*/*.txt" />
     </zip>
@@ -72,6 +73,7 @@
       <fileset dir="." includes="README.TXT
                                  LICENSE.TXT
                                  VLCSkinEditor.jar
+                                 skin.dtd
                                  ${lang}/*.txt
                                  ${lang}/*/*.txt"/>
     </zip>
@@ -103,6 +105,7 @@
       <fileset dir="." includes="README.TXT 
                                  LICENSE.TXT
                                  VLCSkinEditor.jar
+                                 skin.dtd
                                  ${lang}/*.txt
                                  ${lang}/*/*.txt" />
     </tar>

@@ -33,7 +33,8 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import java.io.*;
-import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Handles Bitmap resources
@@ -61,18 +62,26 @@ public class Bitmap extends ImageResource implements ActionListener{
   }
   
   /**
-   * Creates a new Bitmap from a W3C DOM element
-   * @param e The W3C DOM element
+   * Creates a new Bitmap from a XML node
+   * @param n The XML node
    * @param s_ The skin in which the Bitmap is used
    */  
-  public Bitmap(Element e, Skin s_) {
+  public Bitmap(Node n, Skin s_) {
     s = s_;
-    if(e.hasAttribute("id")) id = e.getAttribute("id");
-    if(e.hasAttribute("file")) file = e.getAttribute("file");
-    if(e.hasAttribute("alphacolor")) alphacolor = e.getAttribute("alphacolor");
-    if(e.hasAttribute("nbframes")) nbframes = Integer.valueOf(e.getAttribute("nbframes"));
-    if(e.hasAttribute("fps")) fps = Integer.valueOf(e.getAttribute("fps"));    
-    updateImage();    
+    id = XML.getStringAttributeValue(n, "id", id);
+    file = XML.getStringAttributeValue(n, "file", file);
+    alphacolor = XML.getStringAttributeValue(n, "alphacolor", alphacolor);
+    nbframes = XML.getIntAttributeValue(n, "nbframes", nbframes);
+    fps = XML.getIntAttributeValue(n, "fps", fps);
+    updateImage();
+    NodeList children = n.getChildNodes();
+    for(int i=0;i<children.getLength();i++) {
+      Node child = children.item(i);     
+      if(child.getNodeType()==Node.ELEMENT_NODE) {        
+        if(child.getNodeName().equals("SubBitmap"))
+          SubBitmaps.add(new SubBitmap(child, s, this));
+      }
+    }
   }
   
   /**

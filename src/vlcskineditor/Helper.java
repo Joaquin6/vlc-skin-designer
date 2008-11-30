@@ -24,6 +24,11 @@ package vlcskineditor;
 
 import java.awt.Component;
 import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import javax.swing.JOptionPane;
 
 /**
@@ -69,5 +74,26 @@ public class Helper {
       else {
         JOptionPane.showMessageDialog(null,Language.get("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.get("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);    
       }
+  }
+  
+  /**
+   * Taken from http://www.rgagnon.com/javadetails/java-0064.html
+   * @param in Source File
+   * @param out Destination File
+   * @throws java.io.IOException
+   */  
+  public static void copyFile(File in, File out) throws IOException {
+    FileChannel inChannel = new FileInputStream(in).getChannel();
+    FileChannel outChannel = new FileOutputStream(out).getChannel();
+    try {
+      inChannel.transferTo(0, inChannel.size(), outChannel);
+    } 
+    catch (IOException e) {
+      throw e;
+    }
+    finally {
+      if (inChannel != null) inChannel.close();
+      if (outChannel != null) outChannel.close();
+    }
   }
 }

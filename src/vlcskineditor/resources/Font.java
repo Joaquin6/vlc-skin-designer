@@ -30,7 +30,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 /**
  * Handles font resources
  * @author Daniel Dreibrodt
@@ -54,11 +54,16 @@ public class Font extends Resource implements ActionListener{
     type = Language.get("FONT");
   }
   
-  public Font(Element e, Skin s_) {
+  /**
+   * Creates a Font from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin manager
+   */
+  public Font(Node n, Skin s_) {
     s = s_;
-    if(e.hasAttribute("id")) id = e.getAttribute("id");
-    if(e.hasAttribute("file")) file = e.getAttribute("file");
-    if(e.hasAttribute("size")) size = Integer.parseInt(e.getAttribute("size"));
+    id = XML.getStringAttributeValue(n, "id", id);
+    file = XML.getStringAttributeValue(n, "file", file);
+    size = XML.getIntAttributeValue(n, "size", size);
   }
   
   /**

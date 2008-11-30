@@ -29,6 +29,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Handles windows and their layouts
@@ -60,6 +63,26 @@ public class Window implements ActionListener{
   boolean created = false;
   
   public String type = Language.get("WINDOW");
+  
+  /**
+   * Parses a window's structure from a given XML node
+   * @param n The window node
+   * @param s_ The parent skin manager
+   */
+  public Window(Node n, Skin s_) {
+    s = s_;
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    dragdrop = XML.getBoolAttributeValue(n, "dragdrop", dragdrop);
+    playondrop = XML.getBoolAttributeValue(n, "playondrop", playondrop);
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {     
+      if(nodes.item(i).getNodeName().equals("Layout"))
+        layouts.add(new Layout(n, this, s_));
+    }
+  }
   
   /** Creates a new instance of Window */
   public Window(String xmlcode, Skin s_) {

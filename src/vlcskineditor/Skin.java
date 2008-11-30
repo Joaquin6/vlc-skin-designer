@@ -95,18 +95,24 @@ public class Skin implements ActionListener{
   JTextField theme_magnet_tf, theme_alpha_tf, theme_movealpha_tf;
   JButton theme_ok_btn, theme_cancel_btn, theme_help_btn;
   
+  //Manager of the global variables
   public GlobalVariables gvars = new GlobalVariables(this);
   
-  //Central window handle for all editing dialogs of res/win/layout/items
-  public JFrame edit_frame; 
-  
-  //Default indentation of generated XML code
+  //Default indentation of generated XML code (2 spaces)
   public static String indentation = "  ";
   
+  /**
+   * Constructs a new skin manager
+   * @param m_ The current instance of the main interface, needed for GUI interaction
+   */
   public Skin(Main m_) {
     m=m_;    
   }
-  /** Creates the file in which to save the new skin **/
+  
+  /** 
+   * Creates a new empty skins in the given file
+   * @param f The target file
+   **/
   public void createNew(File f) {
     skinfile=f;
     skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
@@ -117,15 +123,19 @@ public class Skin implements ActionListener{
       JOptionPane.showMessageDialog(null,Language.get("ERROR_NEWSKIN_TITLE")+"\n\n"+ex.toString(),Language.get("ERROR_NEWSKIN_TITLE"),JOptionPane.ERROR_MESSAGE);
     }
   }
-  /** Parses an XML file **/
+  
+  /**
+   * Handles the parsing of a given file into the skin structure
+   * @param f
+   */
   public void open(File f) {    
     resources.clear();
     windows.clear();
     skinfile=f;
     skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
     try {
-      parse(f);
-      //parseXML(f);
+      //parse(f);
+      parseXML(f);
     } 
     catch (Exception ex) {
       ex.printStackTrace();
@@ -146,106 +156,81 @@ public class Skin implements ActionListener{
       }
     }
   }
+  
   /**
    * Parses the given file line by line, expecting each xml-tag to be in his own single line
+   * @deprecated parseXML(File f) should now be used, as it is more flexible
    * @param f The file that should be parsed
    * @throws java.lang.Exception
    */
   private void parse(File f) throws Exception {
-  //System.out.println("Creating Buffered Reader...");
-      BufferedReader br = new BufferedReader(new FileReader(f));
-      //System.out.println("Ready...");
-      //System.out.println("Reading Header...");
-      String header = br.readLine();
-      //System.out.println("Header read");
-      if (header.indexOf("//VideoLAN//DTD VLC Skins")==-1) {
-        br.close();        
-        System.err.println("Invalid header:\n"+header);
-        throw new Exception(Language.get("ERROR_SKIN_INVALID"));        
-        
+    //System.out.println("Creating Buffered Reader...");
+    BufferedReader br = new BufferedReader(new FileReader(f));
+    //System.out.println("Ready...");
+    //System.out.println("Reading Header...");
+    String header = br.readLine();
+    //System.out.println("Header read");
+    if (header.indexOf("//VideoLAN//DTD VLC Skins")==-1) {
+      br.close();        
+      System.err.println("Invalid header:\n"+header);
+      throw new Exception(Language.get("ERROR_SKIN_INVALID"));        
+
+    }
+    //System.out.println("Valid header");
+    boolean eof = false;
+    String line = "";  
+    while(!eof) {              
+      try {
+        //System.out.println("Reading line");
+        line = br.readLine();          
+        if (line==null) break;
+        line = line.trim();
+      }        
+      catch(Exception e) {
+        eof = true;
+        break;
+      }    
+      if (line.startsWith("<!--")) {
+        while(line.indexOf("-->")==-1) {
+          line = br.readLine();
+        }
       }
-      //System.out.println("Valid header");
-      boolean eof = false;
-      String line = "";  
-      while(!eof) {              
-        try {
-          //System.out.println("Reading line");
-          line = br.readLine();          
-          if (line==null) break;
-          line = line.trim();
-        }        
-        catch(Exception e) {
-          eof = true;
-          break;
-        }    
-        if (line.startsWith("<!--")) {
-          while(line.indexOf("-->")==-1) {
-            line = br.readLine();
-          }
+      //<editor-fold defaultstate="collapsed" desc=" ThemeInfo tag "> 
+      else if(line.startsWith("<ThemeInfo")) {         
+        if(line.indexOf("name")!=-1) themeinfo_name = XML.getValue(line,"name");
+        if(line.indexOf("author")!=-1) themeinfo_author = XML.getValue(line,"author");
+        if(line.indexOf("email")!=-1) themeinfo_email = XML.getValue(line,"email");
+        if(line.indexOf("webpage")!=-1) themeinfo_webpage = XML.getValue(line,"webpage");
+      }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc=" Theme tag "> 
+      else if(line.startsWith("<Theme")) {
+        if(line.indexOf("version")!=-1) theme_version = XML.getValue(line,"version");          
+        if(line.indexOf("tooltipfont")!=-1) theme_tooltipfont = XML.getValue(line,"tooltipfont");
+        if(line.indexOf("magnet")!=-1) theme_magnet = Integer.parseInt(XML.getValue(line,"magnet"));
+        if(line.indexOf(" alpha")!=-1) theme_alpha = Integer.parseInt(XML.getValue(line,"alpha"));
+        if(line.indexOf("movealpha")!=-1) theme_movealpha = Integer.parseInt(XML.getValue(line,"movealpha"));
+      }
+      //</editor-fold>                
+      //<editor-fold defaultstate="collapsed" desc=" Bitmap tag "> 
+      else if(line.startsWith("<Bitmap")) {          
+        if(line.indexOf("/>")!=-1) {
+          resources.add(new Bitmap(line,this));
+          //System.out.println("Bitmap identified: "+line);
         }
-        //<editor-fold defaultstate="collapsed" desc=" ThemeInfo tag "> 
-        else if(line.startsWith("<ThemeInfo")) {         
-          if(line.indexOf("name")!=-1) themeinfo_name = XML.getValue(line,"name");
-          if(line.indexOf("author")!=-1) themeinfo_author = XML.getValue(line,"author");
-          if(line.indexOf("email")!=-1) themeinfo_email = XML.getValue(line,"email");
-          if(line.indexOf("webpage")!=-1) themeinfo_webpage = XML.getValue(line,"webpage");
-        }
-        //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc=" Theme tag "> 
-        else if(line.startsWith("<Theme")) {
-          if(line.indexOf("version")!=-1) theme_version = XML.getValue(line,"version");          
-          if(line.indexOf("tooltipfont")!=-1) theme_tooltipfont = XML.getValue(line,"tooltipfont");
-          if(line.indexOf("magnet")!=-1) theme_magnet = Integer.parseInt(XML.getValue(line,"magnet"));
-          if(line.indexOf(" alpha")!=-1) theme_alpha = Integer.parseInt(XML.getValue(line,"alpha"));
-          if(line.indexOf("movealpha")!=-1) theme_movealpha = Integer.parseInt(XML.getValue(line,"movealpha"));
-        }
-        //</editor-fold>                
-        //<editor-fold defaultstate="collapsed" desc=" Bitmap tag "> 
-        else if(line.startsWith("<Bitmap")) {          
-          if(line.indexOf("/>")!=-1) {
-            resources.add(new Bitmap(line,this));
-            //System.out.println("Bitmap identified: "+line);
-          }
-          else {
-            //System.out.println("Bitmap with Subbitmaps identified: "+line);
-            boolean tagclosed=false;
-            String curline = "";
-            while(!tagclosed) {
-              try {
-                curline = br.readLine();
-                curline = curline.trim();           
-              }
-              catch (Exception e) {
-                tagclosed=true;
-              }
-              if(curline.startsWith("</Bitmap>"))  {
-                line +="\n"+curline;
-                tagclosed = true;
-              }
-              else {
-                line+="\n"+curline;
-              }
-            }
-            resources.add(new Bitmap(line,this));
-            //System.out.println("Bitmap with Subbmitmaps completely identified");
-          }
-        }
-        //</editor-fold>
-        else if(line.startsWith("<Font")) resources.add(new Font(line,this));
-        else if(line.startsWith("<BitmapFont")) resources.add(new BitmapFont(line,this));        
-        //<editor-fold defaultstate="collapsed" desc=" Window tag "> 
-        else if(line.startsWith("<Window")) {
+        else {
+          //System.out.println("Bitmap with Subbitmaps identified: "+line);
           boolean tagclosed=false;
-          String curline="";
+          String curline = "";
           while(!tagclosed) {
             try {
               curline = br.readLine();
-              curline = curline.trim();               
+              curline = curline.trim();           
             }
             catch (Exception e) {
               tagclosed=true;
             }
-            if(curline.startsWith("</Window>"))  {
+            if(curline.startsWith("</Bitmap>"))  {
               line +="\n"+curline;
               tagclosed = true;
             }
@@ -253,59 +238,117 @@ public class Skin implements ActionListener{
               line+="\n"+curline;
             }
           }
-          windows.add(new Window(line,this));
+          resources.add(new Bitmap(line,this));
+          //System.out.println("Bitmap with Subbmitmaps completely identified");
         }
-        //</editor-fold>
       }
-      br.close();
-      //System.out.println("Buffered Reader was closed");  
-  
+      //</editor-fold>
+      else if(line.startsWith("<Font")) resources.add(new Font(line,this));
+      else if(line.startsWith("<BitmapFont")) resources.add(new BitmapFont(line,this));        
+      //<editor-fold defaultstate="collapsed" desc=" Window tag "> 
+      else if(line.startsWith("<Window")) {
+        boolean tagclosed=false;
+        String curline="";
+        while(!tagclosed) {
+          try {
+            curline = br.readLine();
+            curline = curline.trim();               
+          }
+          catch (Exception e) {
+            tagclosed=true;
+          }
+          if(curline.startsWith("</Window>"))  {
+            line +="\n"+curline;
+            tagclosed = true;
+          }
+          else {
+            line+="\n"+curline;
+          }
+        }
+        windows.add(new Window(line,this));
+      }
+      //</editor-fold>
+    }
+    br.close();
+    //System.out.println("Buffered Reader was closed");
   }
+  
   /**
-   * Parses the skin file via Java's XMLReader
+   * Parses the skin file using Java's built-in XML support
    * @param f The file that should be parsed
    * @throws java.lang.Exception
    */
-  private void parseXML(File f) throws Exception{
+  private void parseXML(File f) throws Exception{    
+    //Workaround for DTD loading
+    File dtd = new File(f.getParent(),"skin.dtd");
+    if(!dtd.exists()) {
+      File included_dtd = new File("skin.dtd");
+      if(included_dtd.exists()) {
+        Helper.copyFile(included_dtd,dtd);
+        dtd.deleteOnExit();
+      }
+    }
+    //Now that the DTD is in the right place parse the XML
     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+    docBuilderFactory.setIgnoringComments(true);
     DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
     Document doc = docBuilder.parse(f);
-    
-    if(!doc.getDoctype().getName().equals("Theme"))
-      throw new Exception(Language.get("ERROR_SKIN_INVALID"));
-    
-    NodeList nodes = doc.getElementsByTagName("*");
+    //Parse all the nodes
+    NodeList nodes = doc.getChildNodes();
     for(int i=0;i<nodes.getLength();i++) {
-     Element e = (Element)nodes.item(i);     
-     parseElement(e);
+      parseNode(nodes.item(i));
     }
   }
-  private void parseElement(Element e) throws Exception{
-    String tag = e.getTagName();    
-    if(tag.equals("Theme")) {
-      if(e.hasAttribute("version"))  theme_version = e.getAttribute("version");
-      if(Double.parseDouble(theme_version)!=2.0) 
-        throw new Exception(Language.get("ERROR_VERSION_UNSUPPORTED"));
-    }
-    else if(tag.equals("ThemeInfo")) {
-      if(e.hasAttribute("author")) themeinfo_author = e.getAttribute("author");
-      if(e.hasAttribute("name")) themeinfo_name = e.getAttribute("name");
-      if(e.hasAttribute("email")) themeinfo_email = e.getAttribute("email");
-      if(e.hasAttribute("webpage")) themeinfo_webpage = e.getAttribute("webpage");
-    }
-    else if(tag.equals("Bitmap")) {
-      resources.add(new Bitmap(e,this));
-    }
-    else if(tag.equals("SubBitmap")) {
-      Node p = e.getParentNode();
-      String id = p.getAttributes().getNamedItem("id").getNodeValue();
-      Bitmap b = (Bitmap)getResource(id);
-      b.SubBitmaps.add(new SubBitmap(e,this,b));
-    }
-    else if(tag.equals("Font")) {
-      resources.add(new Font(e,this));
+  
+  /**
+   * Parses all the children of a DOM node
+   * @param n The node to parse
+   * @throws java.lang.Exception
+   */
+  private void parseNodeChildren(Node n) throws Exception{
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {     
+      parseNode(nodes.item(i));
     }
   }
+  
+  /**
+   * Parses a DOM node
+   * @param n The node to parse
+   * @throws java.lang.Exception
+   */
+  private void parseNode(Node n) throws Exception{
+    if(n.getNodeType()==Node.DOCUMENT_TYPE_NODE) {
+      if(!n.getNodeName().equals("Theme")) {
+        throw new Exception(Language.get("ERROR_SKIN_INVALID"));
+      }
+    } else if(n.getNodeType()==Node.ELEMENT_NODE) {
+      if(n.getNodeName().equals("Theme")) {
+        if(n.getAttributes().getNamedItem("version")!=null) {
+          theme_version = n.getAttributes().getNamedItem("version").getNodeValue();
+          if(Double.parseDouble(theme_version)!=2.0)
+            throw new Exception(Language.get("ERROR_VERSION_UNSUPPORTED"));
+          parseNodeChildren(n);
+        }
+      } else if(n.getNodeName().equals("ThemeInfo")) {
+        if(n.getAttributes().getNamedItem("author")!=null) 
+          themeinfo_author = n.getAttributes().getNamedItem("author").getNodeValue();
+        if(n.getAttributes().getNamedItem("name")!=null) 
+          themeinfo_name = n.getAttributes().getNamedItem("name").getNodeValue();
+        if(n.getAttributes().getNamedItem("email")!=null) 
+          themeinfo_email = n.getAttributes().getNamedItem("email").getNodeValue();
+        if(n.getAttributes().getNamedItem("webpage")!=null) 
+          themeinfo_webpage = n.getAttributes().getNamedItem("webpage").getNodeValue();
+      } else if(n.getNodeName().equals("Bitmap")) {
+        resources.add(new Bitmap(n,this));
+      } else if(n.getNodeName().equals("Font")) {
+        resources.add(new Font((Element)n,this));
+      } else if(n.getNodeName().equals("Window")) {
+        windows.add(new Window(n, this));
+      }
+    }    
+  }  
+
   /** Saves the XML Code into the skinfile **/
   public void save() {   
     try {
@@ -481,6 +524,7 @@ public class Skin implements ActionListener{
     }
     return null;
   }
+  
   /** Returns the resource represented by the given id **/
   public Resource getResource(String id) {    
     for (Resource r:resources) {
@@ -494,6 +538,7 @@ public class Skin implements ActionListener{
     }
     return null;
   }
+  
   /**
    * Returns the image object of a bitmap
    * @deprecated Use getImageResource instead
@@ -652,7 +697,7 @@ public class Skin implements ActionListener{
     code+=" email=\""+themeinfo_email+"\"";
     code+=" webpage=\""+themeinfo_webpage+"\"";
     code+="/>\n\n";    
-    code+=Skin.indentation+"<!-- Created using the VLC Skin Editor "+m.VERSION+" (http://www.videolan.org/vlc/skineditor.html)-->\n\n";
+    code+=Skin.indentation+"<!-- Created using the VLC Skin Editor "+Main.VERSION+" (http://www.videolan.org/vlc/skineditor.html)-->\n\n";
     for (int i=0;i<resources.size();i++) {
       code+=resources.get(i).returnCode(Skin.indentation);
     }

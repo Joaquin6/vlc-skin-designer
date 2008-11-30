@@ -47,12 +47,12 @@ import vlcskineditor.resources.SubBitmap;
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
 
-  private static final long serialVersionUID = 075;
+  private static final long serialVersionUID = 80;
 
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final static String VERSION = "0.7.5.dev";
+  public final static String VERSION = "0.8.0.dev";
   //The directory in which the VLC executable is found
   String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -608,7 +608,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);
         String installDir = vlc_key.getStringValue("InstallDir");
         vlc_dir = installDir+File.separator;
-        vlc_skins_dir = vlc_dir+"skins";
+        vlc_skins_dir = vlc_dir+"skins\\";
       }
       catch (Exception e) {
         System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
@@ -638,7 +638,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       openFile();
     }
     else {
-      System.exit(0);
+      saved = true;
+      exit();
     } 
   }
   /**

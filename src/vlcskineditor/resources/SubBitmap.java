@@ -28,7 +28,7 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
-import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import vlcskineditor.history.SubBitmapAddEvent;
 
 /**
@@ -60,19 +60,19 @@ public class SubBitmap extends ImageResource implements ActionListener{
   }
   
   /**
-   * Creates a new SubBitmap from a DOM Element
-   * @param e The DOM Element
+   * Creates a new SubBitmap from a XML node
+   * @param n The XML node
    * @param s_ The skin in which the SubBitmap is used
    * @param parent_ The parent Bitmap. This is necessary to create the image represented by the SubBitmap.
    */  
-  public SubBitmap(Element e, Skin s_, Bitmap parent_) {
+  public SubBitmap(Node n, Skin s_, Bitmap parent_) {
     s = s_;
     parent = parent_;
-    if(e.hasAttribute("id")) id = e.getAttribute("id");
-    if(e.hasAttribute("x")) x = Integer.parseInt(e.getAttribute("x"));
-    if(e.hasAttribute("y")) y = Integer.parseInt(e.getAttribute("y"));
-    if(e.hasAttribute("width")) width = Integer.parseInt(e.getAttribute("width"));
-    if(e.hasAttribute("height")) height = Integer.parseInt(e.getAttribute("height"));
+    id = XML.getStringAttributeValue(n, "id", id);
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    width = XML.getIntAttributeValue(n, "width", width);
+    height = XML.getIntAttributeValue(n, "height", height);    
     created = true;
   }
   
