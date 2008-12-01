@@ -29,6 +29,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
 
 /**
@@ -58,6 +59,35 @@ public class Button extends Item implements ActionListener{
   
   {
     type = Language.get("BUTTON");
+  }
+  
+  /**
+   * Creates a new button item from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin manager
+   */
+  public Button(Node n, Skin s_) {
+    s = s_;
+    
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    up = XML.getStringAttributeValue(n, "up", up);
+    down = XML.getStringAttributeValue(n, "down", down);
+    over = XML.getStringAttributeValue(n, "over", over);
+    action = XML.getStringAttributeValue(n, "action", action);
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    
+    created = true;
+    
+    up_res = s.getImageResource(up);
+    over_res = s.getImageResource(over);
+    down_res = s.getImageResource(down);
   }
   
   /** Creates a new instance of Button
@@ -403,7 +433,7 @@ public class Button extends Item implements ActionListener{
       
       frame.getRootPane().setDefaultButton(ok_btn);
     }
-    up_tf.setText(id);    
+    id_tf.setText(id);    
     x_tf.setText(String.valueOf(x));
     y_tf.setText(String.valueOf(y));
     lefttop_cb.setSelectedItem(lefttop);
@@ -424,13 +454,13 @@ public class Button extends Item implements ActionListener{
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(up_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
-      else if(!up_tf.getText().equals(id)) {
-        if(s.idExists(up_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", up_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      else if(!id_tf.getText().equals(id)) {
+        if(s.idExists(id_tf.getText())) {
+          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }

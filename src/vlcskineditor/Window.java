@@ -80,7 +80,7 @@ public class Window implements ActionListener{
     NodeList nodes = n.getChildNodes();
     for(int i=0;i<nodes.getLength();i++) {     
       if(nodes.item(i).getNodeName().equals("Layout"))
-        layouts.add(new Layout(n, this, s_));
+        layouts.add(new Layout(nodes.item(i), this, s));
     }
   }
   

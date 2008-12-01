@@ -22,16 +22,28 @@
 
 package vlcskineditor;
 
-import vlcskineditor.items.*;
-import vlcskineditor.history.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.tree.*;
-import javax.swing.border.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.border.EtchedBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import vlcskineditor.history.LayoutAddEvent;
+import vlcskineditor.history.LayoutEditEvent;
+import vlcskineditor.items.*;
 
 /**
  * Handles a windows' layout and it's content
@@ -80,8 +92,11 @@ public class Layout implements ActionListener{
     minheight = XML.getIntAttributeValue(n, "minheight", minheight);
     maxheight = XML.getIntAttributeValue(n, "maxheight", maxheight);
     NodeList nodes = n.getChildNodes();
-    for(int i=0;i<nodes.getLength();i++) {     
-      
+    for(int i=0;i<nodes.getLength();i++) {      
+      if(nodes.item(i).getNodeName().equals("Anchor"))
+        items.add(new Anchor(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Button"))
+        items.add(new Button(nodes.item(i), s));
     }
   }
   

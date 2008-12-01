@@ -30,6 +30,7 @@ import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 
 /**
  * Anchor item
@@ -54,6 +55,24 @@ public class Anchor extends Item implements ActionListener{
   
   {
     type = Language.get("ANCHOR");
+  }
+  
+  /**
+   * Creates an anchor item from a given XML node
+   * @param n The XML node
+   * @param s_ The parent skin manager
+   */
+  public Anchor(Node n, Skin s_) {
+    s = s_;
+    id = type+" #"+s.getNewId();
+    points = XML.getStringAttributeValue(n, "points", points);
+    priority = XML.getIntAttributeValue(n, "priority", priority);
+    range = XML.getIntAttributeValue(n, "range", range);
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    updateBezier();
+    created = true;
   }
   
   /**
