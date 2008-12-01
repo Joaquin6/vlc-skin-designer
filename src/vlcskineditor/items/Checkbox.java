@@ -29,6 +29,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
 
 /**
@@ -71,6 +72,39 @@ public class Checkbox extends Item implements ActionListener{
   
   {
     type = Language.get("CHECKBOX");
+  }
+  
+  public Checkbox(Node n, Skin s_) {
+    s = s_;
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    state = XML.getStringAttributeValue(n, "state", state);
+    up1 = XML.getStringAttributeValue(n, "up1", up1);
+    over1 = XML.getStringAttributeValue(n, "over1", over1);
+    down1 = XML.getStringAttributeValue(n, "down1", down1);
+    action1 = XML.getStringAttributeValue(n, "action1", action1);
+    tooltiptext1 = XML.getStringAttributeValue(n, "tooltiptext1", tooltiptext1);    
+    up2 = XML.getStringAttributeValue(n, "up2", up2);
+    over2 = XML.getStringAttributeValue(n, "over2", over2);
+    down2 = XML.getStringAttributeValue(n, "down2", down2);    
+    action2 = XML.getStringAttributeValue(n, "action2", action2);
+    tooltiptext2 = XML.getStringAttributeValue(n, "tooltiptext2", tooltiptext2);
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+    
+    created = true;
+    
+    up1_res = s.getImageResource(up1);
+    over1_res = s.getImageResource(over1);
+    down1_res = s.getImageResource(down1);
+    up2_res = s.getImageResource(up2);
+    over2_res = s.getImageResource(over2);
+    down2_res = s.getImageResource(down2);
   }
   
   /** Creates a new instance of Checkbox

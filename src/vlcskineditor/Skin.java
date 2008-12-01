@@ -513,6 +513,7 @@ public class Skin implements ActionListener{
   }
 
   public ImageResource getImageResource(String id) {
+    if(id==null) return null;
     for (Resource r:resources) {
       if(r.getClass()==Bitmap.class) {
         if(r.id.equals(id)) return (ImageResource)r;

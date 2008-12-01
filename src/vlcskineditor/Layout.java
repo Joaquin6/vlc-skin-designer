@@ -97,6 +97,8 @@ public class Layout implements ActionListener{
         items.add(new Anchor(nodes.item(i), s));
       else if(nodes.item(i).getNodeName().equals("Button"))
         items.add(new Button(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Checkbox"))
+        items.add(new Checkbox(nodes.item(i), s));
     }
   }
   

@@ -82,6 +82,7 @@ public class Button extends Item implements ActionListener{
     ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
     tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
     visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
     
     created = true;
     
