@@ -363,7 +363,8 @@ public class Image extends Item implements ActionListener{
     code+=" image=\""+image+"\"";
     if (!action.equals(ACTION_DEFAULT)) code+=" action=\""+action+"\"";
     if (!action2.equals(ACTION2_DEFAULT)) code+=" action2=\""+action2+"\"";
-    
+
+    if (!resize.equals(RESIZE_DEFAULT)) code+=" resize=\""+resize+"\"";
     if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
     if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
