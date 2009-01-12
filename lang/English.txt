@@ -72,7 +72,7 @@ ERROR_VLT_NOTHEME_MSG|Could not find "theme.xml" inside the unpacked contents of
 ERROR_VLC_LAUNCH_TITLE|Error
 ERROR_VLC_LAUNCH_MSG|VLC media player could not be launched
 ERROR_BROWSE_TITLE|Could not launch Browser
-ERROR_BROWSE_MSG|Go to the following URL manually:\n%u
+ERROR_BROWSE_MSG|The browser could not be launched.\n Please go to the following URL manually:\n%u
 ERROR_ADD_SBMP_TITLE|Could not add SubBitmap
 ERROR_ADD_SBMP_NOBMP|No parent Bitmap has been selected!
 ERROR_ADD_SBMP_NOTBMP|The selected resource is not a Bitmap!

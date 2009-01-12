@@ -29,6 +29,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 import vlcskineditor.history.ItemAddEvent;
 
 /**
@@ -52,6 +53,32 @@ public class Video extends Item implements ActionListener{
   
   {
     type = Language.get("VIDEO");
+  }
+
+  /**
+   * Parses a video from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public Video(Node n, Skin s_) {
+    s = s_;
+
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+
+    width = XML.getIntAttributeValue(n, "width", width);
+    height = XML.getIntAttributeValue(n, "height", height);
+    autoresize = XML.getBoolAttributeValue(n, "autoresize", autoresize);
+
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+
+    created = true;
   }
   
   /** Creates a new instance of Video */

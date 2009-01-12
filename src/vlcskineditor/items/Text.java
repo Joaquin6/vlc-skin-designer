@@ -30,6 +30,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 
 /**
  * Text item
@@ -57,6 +58,35 @@ public class Text extends Item implements ActionListener{
   
   {
     type = Language.get("TEXT");
+  }
+
+  /**
+   * Parses a text item from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public Text(Node n, Skin s_) {
+    s = s_;
+    
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+
+    font = XML.getStringAttributeValue(n, "font", font);
+    text = XML.getStringAttributeValue(n, "text", text);
+    alignment = XML.getStringAttributeValue(n, "alignment", alignment);
+    scrolling = XML.getStringAttributeValue(n, "scrolling", scrolling);
+    color = XML.getStringAttributeValue(n, "color", color);
+    width = XML.getIntAttributeValue(n, "width", width);
+
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+
+    created = true;
   }
   
   /** Creates a new instance of Text */

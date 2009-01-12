@@ -72,23 +72,24 @@ public class Button extends Item implements ActionListener{
     id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
     up = XML.getStringAttributeValue(n, "up", up);
     down = XML.getStringAttributeValue(n, "down", down);
-    over = XML.getStringAttributeValue(n, "over", over);
+    over = XML.getStringAttributeValue(n, "over", over);    
     action = XML.getStringAttributeValue(n, "action", action);
+    tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
+
     x = XML.getIntAttributeValue(n, "x", x);
     y = XML.getIntAttributeValue(n, "y", y);
     lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
     rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
     xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
     ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
-    tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
     visible = XML.getStringAttributeValue(n, "visible", visible);
     help = XML.getStringAttributeValue(n, "help", help);
-    
-    created = true;
-    
+
     up_res = s.getImageResource(up);
     over_res = s.getImageResource(over);
     down_res = s.getImageResource(down);
+    
+    created = true;   
   }
   
   /** Creates a new instance of Button

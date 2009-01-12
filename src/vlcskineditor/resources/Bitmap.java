@@ -73,7 +73,9 @@ public class Bitmap extends ImageResource implements ActionListener{
     alphacolor = XML.getStringAttributeValue(n, "alphacolor", alphacolor);
     nbframes = XML.getIntAttributeValue(n, "nbframes", nbframes);
     fps = XML.getIntAttributeValue(n, "fps", fps);
+
     updateImage();
+    
     NodeList children = n.getChildNodes();
     for(int i=0;i<children.getLength();i++) {
       Node child = children.item(i);     

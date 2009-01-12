@@ -30,6 +30,8 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import vlcskineditor.resources.ImageResource;
 
 /**
@@ -82,6 +84,56 @@ public class Playtree extends Item implements ActionListener{
   
   {
     type = Language.get("PLAYTREE");
+  }
+
+  /**
+   * Parses a playtree from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public Playtree(Node n, Skin s_) {
+    s = s_;
+
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+
+    width = XML.getIntAttributeValue(n, "width", width);
+    height = XML.getIntAttributeValue(n, "height", height);
+
+    font = XML.getStringAttributeValue(n, "font", font);
+    bgimage = XML.getStringAttributeValue(n, "bgimage", bgimage);
+    itemimage = XML.getStringAttributeValue(n, "itemimage", itemimage);
+    openimage = XML.getStringAttributeValue(n, "openimage", openimage);
+    closedimage = XML.getStringAttributeValue(n, "closedimage", closedimage);
+    fgcolor = XML.getStringAttributeValue(n, "fgcolor", fgcolor);
+    playcolor = XML.getStringAttributeValue(n, "playcolor", playcolor);
+    bgcolor1 = XML.getStringAttributeValue(n, "bgcolor1", bgcolor1);
+    bgcolor2 = XML.getStringAttributeValue(n, "bgcolor2", bgcolor2);
+    selcolor = XML.getStringAttributeValue(n, "selcolor", selcolor);
+    flat = XML.getBoolAttributeValue(n, "flat", flat);
+
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {
+      if(nodes.item(i).getNodeName().equals("Slider")) {
+        slider = new Slider(nodes.item(i), s);
+      }
+    }
+
+    bgimage_res = s.getImageResource(bgimage);
+    openimage_res = s.getImageResource(openimage);
+    closedimage_res = s.getImageResource(closedimage);
+    itemimage_res = s.getImageResource(itemimage);
+    
+    created = true;
   }
   
   /** Creates a new instance of Playtree

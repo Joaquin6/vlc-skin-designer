@@ -72,7 +72,10 @@ public class SubBitmap extends ImageResource implements ActionListener{
     x = XML.getIntAttributeValue(n, "x", x);
     y = XML.getIntAttributeValue(n, "y", y);
     width = XML.getIntAttributeValue(n, "width", width);
-    height = XML.getIntAttributeValue(n, "height", height);    
+    height = XML.getIntAttributeValue(n, "height", height);
+
+    updateImage();
+    
     created = true;
   }
   

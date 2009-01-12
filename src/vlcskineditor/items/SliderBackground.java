@@ -30,6 +30,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
 
 /**
@@ -61,6 +62,27 @@ public class SliderBackground extends Item implements ActionListener{
   
   {
     type = Language.get("SLIDERBG");
+  }
+
+  /**
+   * Parses a SliderBackground from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public SliderBackground(Node n, Skin s_) {
+    s = s_;
+
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    
+    image = XML.getStringAttributeValue(n, "image", image);
+    nbhoriz = XML.getIntAttributeValue(n, "nbhoriz", nbhoriz);
+    nbvert = XML.getIntAttributeValue(n, "nbvert", nbvert);
+    padhoriz = XML.getIntAttributeValue(n, "padhoriz", padhoriz);
+    padvert = XML.getIntAttributeValue(n, "padvert", padvert);
+
+    image_res = s.getImageResource(image);
+
+    created = true;
   }
 
   /** Creates a new instance of SliderBackground

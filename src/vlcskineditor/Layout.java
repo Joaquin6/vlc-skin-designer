@@ -91,15 +91,7 @@ public class Layout implements ActionListener{
     maxwidth = XML.getIntAttributeValue(n, "maxwidth", maxwidth);
     minheight = XML.getIntAttributeValue(n, "minheight", minheight);
     maxheight = XML.getIntAttributeValue(n, "maxheight", maxheight);
-    NodeList nodes = n.getChildNodes();
-    for(int i=0;i<nodes.getLength();i++) {      
-      if(nodes.item(i).getNodeName().equals("Anchor"))
-        items.add(new Anchor(nodes.item(i), s));
-      else if(nodes.item(i).getNodeName().equals("Button"))
-        items.add(new Button(nodes.item(i), s));
-      else if(nodes.item(i).getNodeName().equals("Checkbox"))
-        items.add(new Checkbox(nodes.item(i), s));
-    }
+    XML.parseChildItems(n, items, s);
   }
   
   /**

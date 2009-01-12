@@ -22,7 +22,11 @@
 
 package vlcskineditor;
 
+import java.util.List;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import vlcskineditor.items.*;
 
 /**
  * XML Handler
@@ -88,7 +92,12 @@ public class XML {
    * @return If the attribute is set, the attribute's value is returned. Otherwise the given old value.
    */
   public static String getStringAttributeValue(Node n, String name, String oldvalue) {
-    if(n.getAttributes().getNamedItem(name)!=null) return n.getAttributes().getNamedItem(name).getNodeValue();
+    if(n.getAttributes().getNamedItem(name)!=null) {
+      String value = n.getAttributes().getNamedItem(name).getNodeValue();
+      //The DTD turns all unset id-attributes to "none", but the skin editor needs unique ids
+      if(name.equals("id") && value.equals("none")) return oldvalue;
+      else return value;
+    }
     else return oldvalue;
   }
   
@@ -118,5 +127,42 @@ public class XML {
   public static boolean getBoolAttributeValue(Node n, String name, boolean oldvalue) {
     if(n.getAttributes().getNamedItem(name)!=null) return Boolean.parseBoolean(n.getAttributes().getNamedItem(name).getNodeValue());    
     else return oldvalue;
+  }
+
+  /**
+   * Parses all child items of a XML node (used by Layouts/Groups/Panels)
+   * @param n The XML node
+   * @param children The list to which the children will be added
+   * @param s The parent Skin
+   */
+  public static void parseChildItems(Node n, List<Item> children, Skin s) {
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {
+      if(nodes.item(i).getNodeName().equals("Anchor"))
+        children.add(new Anchor(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Button"))
+        children.add(new Button(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Checkbox"))
+        children.add(new Checkbox(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Group"))
+        children.add(new Group(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Image"))
+        children.add(new Image(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Panel"))
+        children.add(new Panel(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Playtree"))
+        children.add(new Playtree(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Playlist")) {
+        ((Element)nodes.item(i)).setAttribute("flat", "true");
+        children.add(new Playtree(nodes.item(i), s));
+      }
+      else if(nodes.item(i).getNodeName().equals("Slider"))
+        children.add(new Slider(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Text"))
+        children.add(new Text(nodes.item(i), s));
+      else if(nodes.item(i).getNodeName().equals("Video"))
+        children.add(new Video(nodes.item(i), s));
+
+    }
   }
 }

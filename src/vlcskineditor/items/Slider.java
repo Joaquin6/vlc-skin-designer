@@ -30,6 +30,8 @@ import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import vlcskineditor.resources.ImageResource;
 
 /**
@@ -73,8 +75,50 @@ public class Slider extends Item implements ActionListener{
   {
     type = Language.get("SLIDER");
   }
-  
-  /** Creates a new instance of Slider
+
+  /**
+   * Parses a slider from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public Slider(Node n, Skin s_) {
+    s = s_;
+
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    up = XML.getStringAttributeValue(n, "up", up);
+    down = XML.getStringAttributeValue(n, "down", down);
+    over = XML.getStringAttributeValue(n, "over", over);
+
+    points = XML.getStringAttributeValue(n, "points", points);
+    thickness = XML.getIntAttributeValue(n, "thickness", thickness);
+    value = XML.getStringAttributeValue(n, "value", value);
+
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+
+    NodeList nodes = n.getChildNodes();
+    for(int i=0;i<nodes.getLength();i++) {
+      if(nodes.item(i).getNodeName().equals("SliderBackground"))
+        sbg = new SliderBackground(nodes.item(i),s);
+    }
+
+    up_res = s.getImageResource(up);
+    over_res = s.getImageResource(over);
+    down_res = s.getImageResource(down);
+
+    updateBezier();
+
+    created = true;
+  }
+
+   /** Creates a new instance of Slider
    * @param xmlcode The XML code
    * @param s_ The parent skin
    */

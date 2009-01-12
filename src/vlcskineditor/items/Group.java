@@ -30,6 +30,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
+import org.w3c.dom.Node;
 
 /**
  * Represents a Group item
@@ -45,6 +46,20 @@ public class Group extends Item implements ActionListener{
   
   {
     type = Language.get("GROUP");
+  }
+
+  /**
+   * Parses a Group from a givn XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public Group(Node n, Skin s_) {
+    s = s_;
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    XML.parseChildItems(n, items, s);
+    created=true;
   }
   
   /** Creates a new instance of Group */
