@@ -82,6 +82,7 @@ public class Window implements ActionListener{
       if(nodes.item(i).getNodeName().equals("Layout"))
         layouts.add(new Layout(nodes.item(i), this, s));
     }
+    created = true;
   }
   
   /** Creates a new instance of Window */
@@ -188,7 +189,7 @@ public class Window implements ActionListener{
       Component[] labels = { id_l, x_l, y_l, visible_l, dragdrop_l, playondrop_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);

@@ -66,18 +66,25 @@ public class Helper {
    * Opens the given webpage in the systems default browser
    * @param url The URL to the webpage
    */
-  public static void browse(String url) {
-     if(desktop!=null) {
-        try {
-          desktop.browse(new java.net.URI(url));
+  public static void browse(final String url) {
+    //Put in in a new thread so that the interface does not hang needlessly while launching the browser
+    new Thread() {
+      @Override
+      public void run() {
+        if(desktop!=null) {
+          try {
+            desktop.browse(new java.net.URI(url));
+          }
+          catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);
+          }
         }
-        catch (Exception ex) {
-          JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+        else {
+          JOptionPane.showMessageDialog(null,Language.get("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.get("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);
         }
       }
-      else {
-        JOptionPane.showMessageDialog(null,Language.get("ERROR_BROWSE_MSG").replaceAll("%u", url),Language.get("ERROR_BROWSE_TITLE"),JOptionPane.WARNING_MESSAGE);    
-      }
+
+    }.start();
   }
   
   /**

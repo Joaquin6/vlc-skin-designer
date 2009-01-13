@@ -226,10 +226,9 @@ public class Checkbox extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Checkbox settings");
+      frame = new JFrame(Language.get("WIN_CHECKBOX_TITLE"));
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
-      frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
       JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
@@ -241,10 +240,10 @@ public class Checkbox extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -260,173 +259,335 @@ public class Checkbox extends Item implements ActionListener{
       help_tf = new JTextField();
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
       
-      JLabel up1_l = new JLabel("Normal image*:");
+      JLabel up1_l = new JLabel(Language.get("WIN_CHECKBOX_UP"));
       up1_tf = new JTextField();
-      JLabel over1_l = new JLabel("Mouse-over image:");
+      JLabel over1_l = new JLabel(Language.get("WIN_CHECKBOX_OVER"));
       over1_tf = new JTextField();
-      JLabel down1_l = new JLabel("Mouse-click image:");
+      JLabel down1_l = new JLabel(Language.get("WIN_CHECKBOX_DOWN"));
       down1_tf = new JTextField();
-      JLabel action1_l = new JLabel("Action:");
+      JLabel action1_l = new JLabel(Language.get("WIN_CHECKBOX_ACTION"));
       action1_tf = new JTextField();
       action1_btn = new JButton("",s.m.editor_icon);
       action1_btn.addActionListener(this);
       JLabel tooltiptext1_l = new JLabel(Language.get("WIN_ITEM_TOOLTIPTEXT"));
       tooltiptext1_tf = new JTextField();
-      JLabel up2_l = new JLabel("Normal image*:");
+      JLabel up2_l = new JLabel(Language.get("WIN_CHECKBOX_UP"));
       up2_tf = new JTextField();
-      JLabel over2_l = new JLabel("Mouse-over image:");
+      JLabel over2_l = new JLabel(Language.get("WIN_CHECKBOX_OVER"));
       over2_tf = new JTextField();
-      JLabel down2_l = new JLabel("Mouse-click image:");
+      JLabel down2_l = new JLabel(Language.get("WIN_CHECKBOX_DOWN"));
       down2_tf = new JTextField();
-      JLabel action2_l = new JLabel("Action:");
+      JLabel action2_l = new JLabel(Language.get("WIN_CHECKBOX_OVER"));
       action2_tf = new JTextField();
       action2_btn = new JButton("",s.m.editor_icon);
       action2_btn.addActionListener(this);
       JLabel tooltiptext2_l = new JLabel(Language.get("WIN_ITEM_TOOLTIPTEXT"));
       tooltiptext2_tf = new JTextField();
       
-      JLabel state_l = new JLabel("Condition:");
+      JLabel state_l = new JLabel(Language.get("WIN_CHECKBOX_CONDITION"));
       state_tf = new JTextField();
-      state_tf.setToolTipText("Boolean expression specifying the state of the checkbox: if the expression resolves to 'false', the first state will be used, and if it resolves to 'true' the second state will be used. Example for a checkbox showing/hiding a window whose id is \"playlist_window\": state=\"playlist_window.isVisible\" (or state=\"not playlist_window.isVisible\", depending on the states you chose).");
+      state_tf.setToolTipText(Language.get("WIN_CHECKBOX_CONDITION_TIP"));
       state_btn = new JButton("",s.m.help_icon);
       state_btn.addActionListener(this);
       
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
+
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, state_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
       general.add(y_l);
-      general.add(y_tf);
-      y_l.setBounds(240,45,75,24);
-      y_tf.setBounds(325,45,150,24);      
+      general.add(y_tf);  
       general.add(lefttop_l);
       general.add(lefttop_cb);
-      lefttop_l.setBounds(5,75,75,24);
-      lefttop_cb.setBounds(85,75,150,24);
       general.add(rightbottom_l);
       general.add(rightbottom_cb);
-      rightbottom_l.setBounds(240,75,75,24);
-      rightbottom_cb.setBounds(325,75,150,24);
       general.add(xkeepratio_l);
       general.add(xkeepratio_cb);
-      xkeepratio_l.setBounds(5,105,75,24);
-      xkeepratio_cb.setBounds(85,105,150,24);
       general.add(ykeepratio_l);
       general.add(ykeepratio_cb);
-      ykeepratio_l.setBounds(240,105,75,24);
-      ykeepratio_cb.setBounds(325,105,150,24);
       general.add(visible_l);
       general.add(visible_tf);
       general.add(visible_btn);
-      visible_l.setBounds(5,135,75,24);
-      visible_tf.setBounds(85,135,120,24);
-      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
       general.add(help_tf);
-      help_l.setBounds(240,135,75,24);
-      help_tf.setBounds(325,135,150,24);
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(495,165));
-      general.setPreferredSize(new Dimension(495,165));
-      general.setMaximumSize(new Dimension(495,165));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_tf);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_tf);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, y_tf);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, rightbottom_l, 10, SpringLayout.SOUTH, lefttop_cb);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, rightbottom_cb, 0, SpringLayout.VERTICAL_CENTER, rightbottom_l);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, rightbottom_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, xkeepratio_l, 10, SpringLayout.SOUTH, rightbottom_cb);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, xkeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, xkeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, xkeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, ykeepratio_l, 10, SpringLayout.SOUTH, xkeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, ykeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, ykeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, ykeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, visible_l, 10, SpringLayout.SOUTH, ykeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, visible_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_tf, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, visible_tf, -5, SpringLayout.WEST, visible_btn);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_btn, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.EAST, visible_btn, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, help_l, 10, SpringLayout.SOUTH, visible_btn);
+      general_layout.putConstraint(SpringLayout.WEST, help_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, help_tf, 0, SpringLayout.VERTICAL_CENTER, help_l);
+      general_layout.putConstraint(SpringLayout.WEST, help_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, help_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, help_tf);
+
       frame.add(general);
       
       JPanel state_panel = new JPanel(null);
       state_panel.add(state_l);
       state_panel.add(state_tf);
+      //state_tf.setPreferredSize(new Dimension(tf_wd,state_tf.getPreferredSize().height));
       state_panel.add(state_btn);
-      state_l.setBounds(5,15,75,24);
-      state_tf.setBounds(85,15,120,24);
-      state_btn.setBounds(210,15,24,24);
-      state_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Checkbox state"));
-      state_panel.setMinimumSize(new Dimension(495,45));
-      state_panel.setPreferredSize(new Dimension(495,45));
-      state_panel.setMaximumSize(new Dimension(495,45));
+      state_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_CHECKBOX_STATE")));
+
+      SpringLayout state_layout = new SpringLayout();
+      state_panel.setLayout(state_layout);
+
+      state_layout.putConstraint(SpringLayout.NORTH, state_l, 5, SpringLayout.NORTH, state_panel);
+      state_layout.putConstraint(SpringLayout.WEST, state_l, 5, SpringLayout.WEST, state_panel);
+
+      state_layout.putConstraint(SpringLayout.VERTICAL_CENTER, state_tf, 0, SpringLayout.VERTICAL_CENTER, state_l);
+      state_layout.putConstraint(SpringLayout.WEST, state_tf, tf_dx, SpringLayout.WEST, state_panel);
+
+      state_layout.putConstraint(SpringLayout.VERTICAL_CENTER, state_btn, 0, SpringLayout.VERTICAL_CENTER, state_l);
+      state_layout.putConstraint(SpringLayout.WEST, state_btn, 5, SpringLayout.EAST, state_tf);
+
+      state_layout.putConstraint(SpringLayout.EAST, state_panel, 5, SpringLayout.EAST, state_btn);
+      state_layout.putConstraint(SpringLayout.SOUTH, state_panel, 10, SpringLayout.SOUTH, state_tf);
+
       frame.add(state_panel);
+
+      Component[] labels_states = { up1_l, over1_l, down1_l, action1_l, tooltiptext1_l};
+      tf_dx = Helper.maxWidth(labels_states)+10;
       
-      JPanel state1 = new JPanel(null);
-      state1.add(up1_l);
-      state1.add(up1_tf);
-      up1_l.setBounds(5,15,75,24);
-      up1_tf.setBounds(85,15,150,24);
-      state1.add(over1_l);
-      state1.add(over1_tf);
-      over1_l.setBounds(5,45,75,24);
-      over1_tf.setBounds(85,45,150,24);
-      state1.add(down1_l);
-      state1.add(down1_tf);
-      down1_l.setBounds(5,75,75,24);
-      down1_tf.setBounds(85,75,150,24);
-      state1.add(action1_l);
-      state1.add(action1_tf);
-      state1.add(action1_btn);
-      action1_l.setBounds(5,105,75,24);
-      action1_tf.setBounds(85,105,120,24);
-      action1_btn.setBounds(210,105,24,24);
-      state1.add(tooltiptext1_l);
-      state1.add(tooltiptext1_tf);
-      tooltiptext1_l.setBounds(5,135,75,24);
-      tooltiptext1_tf.setBounds(85,135,150,24);
-      state1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "State One (Condition is not fulfilled:"));
-      state1.setMinimumSize(new Dimension(240,165));
-      state1.setPreferredSize(new Dimension(240,165));
-      state1.setMaximumSize(new Dimension(240,165));
-      frame.add(state1);
+      JPanel state1_panel = new JPanel(null);
+      state1_panel.add(up1_l);
+      state1_panel.add(up1_tf);
+      up1_tf.setPreferredSize(new Dimension(tf_wd, up1_tf.getPreferredSize().height));
+      state1_panel.add(over1_l);
+      state1_panel.add(over1_tf);
+      state1_panel.add(down1_l);
+      state1_panel.add(down1_tf);
+      state1_panel.add(action1_l);
+      state1_panel.add(action1_tf);
+      state1_panel.add(action1_btn);
+      state1_panel.add(tooltiptext1_l);
+      state1_panel.add(tooltiptext1_tf);
+      state1_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_CHECKBOX_STATE1")));
+
+      SpringLayout state1_layout = new SpringLayout();
+
+      state1_layout.putConstraint(SpringLayout.NORTH, up1_l, 5, SpringLayout.NORTH, state1_panel);
+      state1_layout.putConstraint(SpringLayout.WEST, up1_l, 5, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, up1_tf, 0, SpringLayout.VERTICAL_CENTER, up1_l);
+      state1_layout.putConstraint(SpringLayout.WEST, up1_tf, tf_dx, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.NORTH, over1_l, 10, SpringLayout.SOUTH, up1_tf);
+      state1_layout.putConstraint(SpringLayout.WEST, over1_l, 5, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, over1_tf, 0, SpringLayout.VERTICAL_CENTER, over1_l);
+      state1_layout.putConstraint(SpringLayout.WEST, over1_tf, tf_dx, SpringLayout.WEST, state1_panel);
+      state1_layout.putConstraint(SpringLayout.EAST, over1_tf, 0, SpringLayout.EAST, up1_tf);
+
+      state1_layout.putConstraint(SpringLayout.NORTH, down1_l, 10, SpringLayout.SOUTH, over1_tf);
+      state1_layout.putConstraint(SpringLayout.WEST, down1_l, 5, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, down1_tf, 0, SpringLayout.VERTICAL_CENTER, down1_l);
+      state1_layout.putConstraint(SpringLayout.WEST, down1_tf, tf_dx, SpringLayout.WEST, state1_panel);
+      state1_layout.putConstraint(SpringLayout.EAST, down1_tf, 0, SpringLayout.EAST, up1_tf);
+
+      state1_layout.putConstraint(SpringLayout.NORTH, action1_l, 10, SpringLayout.SOUTH, down1_tf);
+      state1_layout.putConstraint(SpringLayout.WEST, action1_l, 5, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, action1_tf, 0, SpringLayout.VERTICAL_CENTER, action1_l);
+      state1_layout.putConstraint(SpringLayout.WEST, action1_tf, tf_dx, SpringLayout.WEST, state1_panel);
+      state1_layout.putConstraint(SpringLayout.EAST, action1_tf, -5, SpringLayout.WEST, action1_btn);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, action1_btn, 0, SpringLayout.VERTICAL_CENTER, action1_l);
+      state1_layout.putConstraint(SpringLayout.EAST, action1_btn, 0, SpringLayout.EAST, up1_tf);
+
+      state1_layout.putConstraint(SpringLayout.NORTH, tooltiptext1_l, 10, SpringLayout.SOUTH, action1_btn);
+      state1_layout.putConstraint(SpringLayout.WEST, tooltiptext1_l, 5, SpringLayout.WEST, state1_panel);
+
+      state1_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tooltiptext1_tf, 0, SpringLayout.VERTICAL_CENTER, tooltiptext1_l);
+      state1_layout.putConstraint(SpringLayout.WEST, tooltiptext1_tf, tf_dx, SpringLayout.WEST, state1_panel);
+      state1_layout.putConstraint(SpringLayout.EAST, tooltiptext1_tf, 0, SpringLayout.EAST, up1_tf);
+
+      state1_layout.putConstraint(SpringLayout.EAST, state1_panel, 5, SpringLayout.EAST, up1_tf);
+      state1_layout.putConstraint(SpringLayout.SOUTH, state1_panel, 10, SpringLayout.SOUTH, tooltiptext1_tf);
+
+      state1_panel.setLayout(state1_layout);
+
+      frame.add(state1_panel);
       
-      JPanel state2 = new JPanel(null);
-      state2.add(up2_l);
-      state2.add(up2_tf);
-      up2_l.setBounds(5,15,75,24);
-      up2_tf.setBounds(85,15,150,24);
-      state2.add(over2_l);
-      state2.add(over2_tf);
-      over2_l.setBounds(5,45,75,24);
-      over2_tf.setBounds(85,45,150,24);
-      state2.add(down2_l);
-      state2.add(down2_tf);
-      down2_l.setBounds(5,75,75,24);
-      down2_tf.setBounds(85,75,150,24);
-      state2.add(action2_l);
-      state2.add(action2_tf);
-      state2.add(action2_btn);
-      action2_l.setBounds(5,105,75,24);
-      action2_tf.setBounds(85,105,120,24);
-      action2_btn.setBounds(210,105,24,24);
-      state2.add(tooltiptext2_l);
-      state2.add(tooltiptext2_tf);
-      tooltiptext2_l.setBounds(5,135,75,24);
-      tooltiptext2_tf.setBounds(85,135,150,24);
-      state2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "State Two (Condition is fulfilled):"));
-      state2.setMinimumSize(new Dimension(240,165));
-      state2.setPreferredSize(new Dimension(240,165));
-      state2.setMaximumSize(new Dimension(240,165));
-      frame.add(state2);
-      
+      JPanel state2_panel = new JPanel(null);
+      state2_panel.add(up2_l);
+      state2_panel.add(up2_tf);
+      up2_tf.setPreferredSize(new Dimension(tf_wd, up2_tf.getPreferredSize().height));
+      state2_panel.add(over2_l);
+      state2_panel.add(over2_tf);
+      state2_panel.add(down2_l);
+      state2_panel.add(down2_tf);
+      state2_panel.add(action2_l);
+      state2_panel.add(action2_tf);
+      state2_panel.add(action2_btn);
+      state2_panel.add(tooltiptext2_l);
+      state2_panel.add(tooltiptext2_tf);
+      state2_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_CHECKBOX_STATE2")));
+
+      SpringLayout state2_layout = new SpringLayout();
+
+      state2_layout.putConstraint(SpringLayout.NORTH, up2_l, 5, SpringLayout.NORTH, state2_panel);
+      state2_layout.putConstraint(SpringLayout.WEST, up2_l, 5, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, up2_tf, 0, SpringLayout.VERTICAL_CENTER, up2_l);
+      state2_layout.putConstraint(SpringLayout.WEST, up2_tf, tf_dx, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.NORTH, over2_l, 10, SpringLayout.SOUTH, up2_tf);
+      state2_layout.putConstraint(SpringLayout.WEST, over2_l, 5, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, over2_tf, 0, SpringLayout.VERTICAL_CENTER, over2_l);
+      state2_layout.putConstraint(SpringLayout.WEST, over2_tf, tf_dx, SpringLayout.WEST, state2_panel);
+      state2_layout.putConstraint(SpringLayout.EAST, over2_tf, 0, SpringLayout.EAST, up2_tf);
+
+      state2_layout.putConstraint(SpringLayout.NORTH, down2_l, 10, SpringLayout.SOUTH, over2_tf);
+      state2_layout.putConstraint(SpringLayout.WEST, down2_l, 5, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, down2_tf, 0, SpringLayout.VERTICAL_CENTER, down2_l);
+      state2_layout.putConstraint(SpringLayout.WEST, down2_tf, tf_dx, SpringLayout.WEST, state2_panel);
+      state2_layout.putConstraint(SpringLayout.EAST, down2_tf, 0, SpringLayout.EAST, up2_tf);
+
+      state2_layout.putConstraint(SpringLayout.NORTH, action2_l, 10, SpringLayout.SOUTH, down2_tf);
+      state2_layout.putConstraint(SpringLayout.WEST, action2_l, 5, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, action2_tf, 0, SpringLayout.VERTICAL_CENTER, action2_l);
+      state2_layout.putConstraint(SpringLayout.WEST, action2_tf, tf_dx, SpringLayout.WEST, state2_panel);
+      state2_layout.putConstraint(SpringLayout.EAST, action2_tf, -5, SpringLayout.WEST, action2_btn);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, action2_btn, 0, SpringLayout.VERTICAL_CENTER, action2_l);
+      state2_layout.putConstraint(SpringLayout.EAST, action2_btn, 0, SpringLayout.EAST, up2_tf);
+
+      state2_layout.putConstraint(SpringLayout.NORTH, tooltiptext2_l, 10, SpringLayout.SOUTH, action2_btn);
+      state2_layout.putConstraint(SpringLayout.WEST, tooltiptext2_l, 5, SpringLayout.WEST, state2_panel);
+
+      state2_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tooltiptext2_tf, 0, SpringLayout.VERTICAL_CENTER, tooltiptext2_l);
+      state2_layout.putConstraint(SpringLayout.WEST, tooltiptext2_tf, tf_dx, SpringLayout.WEST, state2_panel);
+      state2_layout.putConstraint(SpringLayout.EAST, tooltiptext2_tf, 0, SpringLayout.EAST, up2_tf);
+
+      state2_layout.putConstraint(SpringLayout.EAST, state2_panel, 5, SpringLayout.EAST, up2_tf);
+      state2_layout.putConstraint(SpringLayout.SOUTH, state2_panel, 10, SpringLayout.SOUTH, tooltiptext2_tf);
+
+      state2_panel.setLayout(state2_layout);
+
+      frame.add(state2_panel);      
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
+
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, general, 0, SpringLayout.EAST, state2_panel);
+
+      layout.putConstraint(SpringLayout.NORTH, state_panel, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, state_panel, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, state_panel, 0, SpringLayout.EAST, state2_panel);
+
+      layout.putConstraint(SpringLayout.NORTH, state1_panel, 10, SpringLayout.SOUTH, state_panel);
+      layout.putConstraint(SpringLayout.WEST, state1_panel, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, state2_panel, 10, SpringLayout.SOUTH, state_panel);
+      layout.putConstraint(SpringLayout.WEST, state2_panel, 5, SpringLayout.EAST, state1_panel);
       
-      frame.setMinimumSize(new Dimension(505,450));
-      frame.setPreferredSize(new Dimension(505,450));
-      frame.setMaximumSize(new Dimension(505,450));
-      
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, state2_panel);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, state2_panel);
+
+      frame.setLayout(layout);
+            
       frame.pack();
       
       frame.getRootPane().setDefaultButton(ok_btn);
@@ -469,42 +630,42 @@ public class Checkbox extends Item implements ActionListener{
         }
       }
       if(state_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please provide the state condition!","State not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_NOSTATE"),Language.get("ERROR_NOSTATE_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       up1_res = s.getImageResource(up1_tf.getText());
       if(up1_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+up1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", up1_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         up1_res = s.getImageResource(up1);
         return;
       }
       over1_res = s.getImageResource(over1_tf.getText());
       if(!over1_tf.getText().equals("none") && over1_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+over1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", over1_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         over1_res = s.getImageResource(over1);
         return;
       }
       down1_res = s.getImageResource(down1_tf.getText());
       if(!down1_tf.getText().equals("none") && down1_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+down1_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", down1_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         down1_res = s.getImageResource(down1);
         return;
       }
       up2_res = s.getImageResource(up2_tf.getText());
       if(up2_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+up2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", up2_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         up2_res = s.getImageResource(up2);
         return;
       }
       over2_res = s.getImageResource(over2_tf.getText());
       if(!over2_tf.getText().equals("none") && s.getResource(over2_tf.getText())==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+over2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", over2_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         over2_res = s.getImageResource(over2);
         return;
       }
       down2_res = s.getImageResource(down2_tf.getText());
       if(!down2_tf.getText().equals("none") && down2_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+down2_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", down2_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         down2_res = s.getImageResource(down2);
         return;
       }

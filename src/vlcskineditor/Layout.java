@@ -92,6 +92,7 @@ public class Layout implements ActionListener{
     minheight = XML.getIntAttributeValue(n, "minheight", minheight);
     maxheight = XML.getIntAttributeValue(n, "maxheight", maxheight);
     XML.parseChildItems(n, items, s);
+    created = true;
   }
   
   /**
@@ -278,7 +279,7 @@ public class Layout implements ActionListener{
       Component[] labels = { id_l, width_l, height_l, minwidth_l, minheight_l, maxwidth_l, maxheight_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);

@@ -96,3 +96,18 @@ WIN_BUTTON_OVER|Mouse-over image:
 WIN_BUTTON_DOWN|Mouse-click image:
 WIN_BUTTON_ACTION|Action:
 WIN_BUTTON_ATTR|Button Attributes
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Checkbox settings
+WIN_CHECKBOX_UP|Normal image*:
+WIN_CHECKBOX_OVER|Mouse-over image:
+WIN_CHECKBOX_DOWN|Mouse-click image:
+WIN_CHECKBOX_ACTION|Action:
+WIN_CHECKBOX_CONDITION|Condition:
+WIN_CHECKBOX_CONDITION_TIP|Boolean expression specifying the checkbox's state: false -> state #1, true -> state #2
+WIN_CHECKBOX_STATE|Checkbox state
+WIN_CHECKBOX_STATE1|State #1 (Condition is not fulfilled):
+WIN_CHECKBOX_STATE2|State #2 (Condition is fulfilled):
+
+#Group
+WIN_GROUP_TITLE|Group settings

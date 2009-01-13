@@ -190,7 +190,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       Component[] labels = { id_l, x_l, y_l, width_l, height_l, nbframes_l, fps_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);

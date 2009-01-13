@@ -191,7 +191,7 @@ public class Anchor extends Item implements ActionListener{
       Component[] labels = { id_l, priority_l, lefttop_l, x_l, y_l, range_l, points_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel();
       general.add(id_l);      

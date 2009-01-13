@@ -166,7 +166,7 @@ public class Group extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Group settings");
+      frame = new JFrame(Language.get("WIN_GROUP_TITLE"));
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -180,44 +180,88 @@ public class Group extends Item implements ActionListener{
       y_tf.setDocument(new NumbersOnlyDocument());
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
+
+      //Textfield distance to WEST border of container
+      Component[] labels = { id_l, x_l, y_l };
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Maximal textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
       general.add(y_l);
       general.add(y_tf);
-      y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,75,24);      
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(240,110));
-      general.setPreferredSize(new Dimension(240,110));
-      general.setMaximumSize(new Dimension(240,110));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);      
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, y_l);
+
+      
       frame.add(general);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
-      frame.setMinimumSize(new Dimension(250,180));
-      frame.setPreferredSize(new Dimension(250,180));
-      frame.setMaximumSize(new Dimension(250,180));
-      
+
+      SpringLayout layout = new SpringLayout();
+      frame.setLayout(layout);
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+      //layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 5, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, attr_l, 5, SpringLayout.EAST, frame.getContentPane());
+
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 5, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 5, SpringLayout.SOUTH, attr_l);
+
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 5, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+
       frame.pack();
-      
+
       frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);

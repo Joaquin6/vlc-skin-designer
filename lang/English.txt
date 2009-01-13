@@ -123,6 +123,8 @@ ERROR_BITMAP_NEXIST|The bitmap %i does not exist.
 ERROR_BITMAP_NEXIST_TITLE|Image not valid!
 ERROR_BITMAP_LOAD|The image file for the bitmap %i could not be loaded.
 ERROR_BITMAP_LOAD_TITLE|Error while loading images
+ERROR_NOSTATE|Please provide the state condition!
+ERROR_NOSTATE_TITLE|State not valid
 
 #Other strings
 THEMEINFO_NAME_DEFAULT|Unnamed Theme

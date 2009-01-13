@@ -253,7 +253,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       Component[] labels = { id_l, file_l, alphacolor_l, nbframes_l, fps_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       //Width of buttons
       Component[] btns = { file_btn, alphacolor_btn };
       int btn_wd = Helper.maxWidth(btns);      

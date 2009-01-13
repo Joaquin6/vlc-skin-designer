@@ -118,6 +118,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   boolean opened = false;
   //Handles undoing and redoing of actions
   public History hist;
+
+  public static final int TEXTFIELD_WIDTH = 200;
   
    /**
    * Launches the skin editor and initializes the GUI.

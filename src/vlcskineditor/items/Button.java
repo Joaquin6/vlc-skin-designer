@@ -234,13 +234,13 @@ public class Button extends Item implements ActionListener{
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
       
-      JLabel star_l = new JLabel(Language.get("NOTE_STARRED"));
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       
       //Distance of textfields to WEST edge of container
       Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, up_l, over_l, down_l, action_l, tooltiptext_l};
       int tf_dx = Helper.maxWidth(labels)+10;
       //Max. textfield width
-      int tf_wd = 200;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
@@ -404,7 +404,7 @@ public class Button extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(star_l);
+      frame.add(attr_l);
       
       SpringLayout layout = new SpringLayout();
       
@@ -414,10 +414,10 @@ public class Button extends Item implements ActionListener{
       layout.putConstraint(SpringLayout.NORTH, button_p, 10, SpringLayout.SOUTH, general);
       layout.putConstraint(SpringLayout.WEST, button_p, 5, SpringLayout.WEST, frame.getContentPane());
       
-      layout.putConstraint(SpringLayout.NORTH, star_l, 10, SpringLayout.SOUTH, button_p);
-      layout.putConstraint(SpringLayout.WEST, star_l, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, button_p);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
       
-      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, star_l);
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
       layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
       
       layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);

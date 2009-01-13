@@ -188,7 +188,7 @@ public class Font extends Resource implements ActionListener{
       Component[] labels = { id_l, file_l, size_l };
       int tf_dx = Helper.maxWidth(labels)+10;               
       //Maximal textfield width
-      int tf_wd = 250;
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       //Button width
       int btn_wd = file_btn.getPreferredSize().width;
       
