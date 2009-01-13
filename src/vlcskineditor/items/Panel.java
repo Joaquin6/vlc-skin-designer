@@ -203,9 +203,8 @@ public class Panel extends Item implements ActionListener{
   }
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Panel settings");
+      frame = new JFrame(Language.get("WIN_PANEL_TITLE"));
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
@@ -218,10 +217,10 @@ public class Panel extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -234,87 +233,157 @@ public class Panel extends Item implements ActionListener{
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
-      JLabel width_l = new JLabel("Width*:");
+      JLabel width_l = new JLabel(Language.get("WIN_PANEL_WIDTH"));
       width_tf = new JTextField();
-      JLabel height_l = new JLabel("Height*:");
+      JLabel height_l = new JLabel(Language.get("WIN_PANEL_HEIGHT"));
       height_tf = new JTextField();
-      
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, width_l, height_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
       general.add(y_l);
       general.add(y_tf);
-      y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,150,24);      
       general.add(lefttop_l);
       general.add(lefttop_cb);
-      lefttop_l.setBounds(5,105,75,24);
-      lefttop_cb.setBounds(85,105,150,24);
       general.add(rightbottom_l);
       general.add(rightbottom_cb);
-      rightbottom_l.setBounds(5,135,75,24);
-      rightbottom_cb.setBounds(85,135,150,24);
       general.add(xkeepratio_l);
       general.add(xkeepratio_cb);
-      xkeepratio_l.setBounds(5,165,75,24);
-      xkeepratio_cb.setBounds(85,165,150,24);
       general.add(ykeepratio_l);
       general.add(ykeepratio_cb);
-      ykeepratio_l.setBounds(5,195,75,24);
-      ykeepratio_cb.setBounds(85,195,150,24);
-      general.add(visible_l);
-      general.add(visible_tf);
-      visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,150,24);
-      general.add(help_l);
-      general.add(help_tf);
-      help_l.setBounds(5,255,75,24);
-      help_tf.setBounds(85,255,150,24);
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(240,285));
-      general.setPreferredSize(new Dimension(240,285));
-      general.setMaximumSize(new Dimension(240,285));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_tf);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_tf);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, y_tf);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, rightbottom_l, 10, SpringLayout.SOUTH, lefttop_cb);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, rightbottom_cb, 0, SpringLayout.VERTICAL_CENTER, rightbottom_l);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, rightbottom_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, xkeepratio_l, 10, SpringLayout.SOUTH, rightbottom_cb);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, xkeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, xkeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, xkeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, ykeepratio_l, 10, SpringLayout.SOUTH, xkeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, ykeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, ykeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, ykeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, ykeepratio_cb);
+
       frame.add(general);
       
       JPanel dim = new JPanel(null);
       dim.add(width_l);
       dim.add(width_tf);
-      width_l.setBounds(5,15,75,24);
-      width_tf.setBounds(85,15,150,24);
+      width_tf.setPreferredSize(new Dimension(tf_wd,width_tf.getPreferredSize().height));
       dim.add(height_l);
       dim.add(height_tf);
-      height_l.setBounds(5,45,75,24);
-      height_tf.setBounds(85,45,150,24);
       dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
-      dim.setMinimumSize(new Dimension(240,75));
-      dim.setPreferredSize(new Dimension(240,75));
-      dim.setMaximumSize(new Dimension(240,75));
+
+      SpringLayout dim_layout = new SpringLayout();
+
+      dim_layout.putConstraint(SpringLayout.NORTH, width_l, 5, SpringLayout.NORTH, dim);
+      dim_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, dim);
+
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, width_tf, 0, SpringLayout.VERTICAL_CENTER, width_l);
+      dim_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, dim);
+
+      dim_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_tf);
+      dim_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, dim);
+
+      dim_layout.putConstraint(SpringLayout.VERTICAL_CENTER, height_tf, 0, SpringLayout.VERTICAL_CENTER, height_l);
+      dim_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, dim);
+      dim_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, width_tf);
+
+      dim_layout.putConstraint(SpringLayout.EAST, dim, 5, SpringLayout.EAST, width_tf);
+      dim_layout.putConstraint(SpringLayout.SOUTH, dim, 10, SpringLayout.SOUTH, height_tf);
+
+      dim.setLayout(dim_layout);
+
       frame.add(dim);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
-      
-      frame.setMinimumSize(new Dimension(250,440));
-      frame.setPreferredSize(new Dimension(250,440));
-      frame.setMaximumSize(new Dimension(250,440));
+      frame.add(attr_l);
+
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, dim, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, dim, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, dim);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+
+      frame.setLayout(layout);
       
       frame.pack();
       

@@ -315,7 +315,10 @@ public class ActionEditor extends JFrame implements ActionListener{
    */
   public String getCode() {     
     String code = "";
-    for(ActionPanel act:aPanels) code+=act.getActionCode()+";";
+    for(ActionPanel act:aPanels) {
+      if(code.length()>0) code+=";";
+      code+=act.getActionCode();
+    }
     if(code.equals("")) code = "none";
     return code;
   }

@@ -109,5 +109,22 @@ WIN_CHECKBOX_STATE|Checkbox state
 WIN_CHECKBOX_STATE1|State #1 (Condition is not fulfilled):
 WIN_CHECKBOX_STATE2|State #2 (Condition is fulfilled):
 
+#Image
+WIN_IMAGE_TITLE|Image settings
+WIN_IMAGE_IMAGE|Image*:
+WIN_IMAGE_IMAGE_TIP|ID of a Bitmap
+WIN_IMAGE_RESIZE|Resize mode:
+WIN_IMAGE_RESIZE_TIP|Specify the behaviour of the image when it is resized.
+WIN_IMAGE_ACTION|Action:
+WIN_IMAGE_ACTION_TIP|Action triggered by a click on the image.
+WIN_IMAGE_ACTION2|Double-click action:
+WIN_IMAGE_ACTION2_TIP|Action triggered by a double-click on the image.
+WIN_IMAGE_ATTR|Image attributes
+
 #Group
 WIN_GROUP_TITLE|Group settings
+
+#Panel
+WIN_PANEL_TITLE|Panel settings
+WIN_PANEL_WIDTH|Width*:
+WIN_PANEL_HEIGHT|Height*:
