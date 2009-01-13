@@ -1727,22 +1727,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             pwin.dispose();
             pwin = null;
 
-            ZipInputStream zin = new ZipInputStream(new FileInputStream(tempfile));
-            ZipEntry entry;
-            while( (entry=zin.getNextEntry()) !=null ) {              
-              if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll")))){
-                File outf = new File(entry.getName());
-                System.out.println(outf.getAbsoluteFile());
-                if(outf.exists()) outf.delete();
-                OutputStream out = new FileOutputStream(outf);
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = zin.read(buf)) > 0) {
-                  out.write(buf, 0, len);
-                }
-                out.close();
-              }
-            }
+            Helper.unzip(tempfile);
 
             JOptionPane.showMessageDialog(this, Language.get("UPDATE_SUCCESS_MSG"),Language.get("UPDATE_SUCCESS_TITLE"), JOptionPane.INFORMATION_MESSAGE);
 
@@ -1859,6 +1844,17 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           e.printStackTrace();
         }
       }
+      //Unpack languages
+      File lang_zip = new File("lang.zip");
+      if(lang_zip.exists()) {
+        try {
+          Helper.unzip(lang_zip);
+          lang_zip.delete();
+        } catch(Exception ex) {
+          ex.printStackTrace();
+        }
+      }
+
       new File(".updated").delete();
     }
     

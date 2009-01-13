@@ -26,9 +26,13 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -96,4 +100,33 @@ public class Helper {
       if (outChannel != null) outChannel.close();
     }
   }
+
+  /**
+   * Unzips a ZIP file in the current working directory
+   * @param zip The ZIP file
+   * @throws java.io.FileNotFoundException
+   * @throws java.io.IOException
+   */
+  public static void unzip(File zip) throws FileNotFoundException, IOException {
+    ZipInputStream zin = new ZipInputStream(new FileInputStream(zip));
+    ZipEntry entry;
+    while( (entry=zin.getNextEntry()) !=null ) {
+      if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll")))){
+        File outf = new File(entry.getName());
+        System.out.println(outf.getAbsoluteFile());
+        if(entry.isDirectory()) outf.mkdirs();
+        else {
+          outf.createNewFile();
+          OutputStream out = new FileOutputStream(outf);
+          byte[] buf = new byte[1024];
+          int len;
+          while ((len = zin.read(buf)) > 0) {
+            out.write(buf, 0, len);
+          }
+          out.close();
+        }
+      }
+    }
+  }
+
 }
