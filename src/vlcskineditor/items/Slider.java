@@ -297,7 +297,6 @@ public class Slider extends Item implements ActionListener{
       frame = new JFrame(Language.get("WIN_SLIDER_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
@@ -358,113 +357,240 @@ public class Slider extends Item implements ActionListener{
       JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, up_l, over_l, down_l, points_l, thickness_l, tooltiptext_l, value_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
-      JPanel general = new JPanel(null);
+      JPanel general = new JPanel();
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
       general.add(y_l);
-      general.add(y_tf);
-      y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,150,24);      
+      general.add(y_tf);   
       general.add(lefttop_l);
       general.add(lefttop_cb);
-      lefttop_l.setBounds(5,105,75,24);
-      lefttop_cb.setBounds(85,105,150,24);
       general.add(rightbottom_l);
       general.add(rightbottom_cb);
-      rightbottom_l.setBounds(5,135,75,24);
-      rightbottom_cb.setBounds(85,135,150,24);
       general.add(xkeepratio_l);
       general.add(xkeepratio_cb);
-      xkeepratio_l.setBounds(5,165,75,24);
-      xkeepratio_cb.setBounds(85,165,150,24);
       general.add(ykeepratio_l);
       general.add(ykeepratio_cb);
-      ykeepratio_l.setBounds(5,195,75,24);
-      ykeepratio_cb.setBounds(85,195,150,24);
       general.add(visible_l);
       general.add(visible_tf);
       general.add(visible_btn);
-      visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,120,24);
-      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
       general.add(help_tf);
-      help_l.setBounds(5,255,75,24);
-      help_tf.setBounds(85,255,150,24);
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(240,285));
-      general.setPreferredSize(new Dimension(240,285));
-      general.setMaximumSize(new Dimension(240,285));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_tf);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_tf);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, y_tf);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, rightbottom_l, 10, SpringLayout.SOUTH, lefttop_cb);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, rightbottom_cb, 0, SpringLayout.VERTICAL_CENTER, rightbottom_l);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, rightbottom_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, xkeepratio_l, 10, SpringLayout.SOUTH, rightbottom_cb);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, xkeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, xkeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, xkeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, ykeepratio_l, 10, SpringLayout.SOUTH, xkeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, ykeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, ykeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, ykeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, visible_l, 10, SpringLayout.SOUTH, ykeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, visible_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_tf, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, visible_tf, -5, SpringLayout.WEST, visible_btn);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_btn, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.EAST, visible_btn, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, help_l, 10, SpringLayout.SOUTH, visible_btn);
+      general_layout.putConstraint(SpringLayout.WEST, help_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, help_tf, 0, SpringLayout.VERTICAL_CENTER, help_l);
+      general_layout.putConstraint(SpringLayout.WEST, help_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, help_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, help_tf);
+
       frame.add(general);
       
-      JPanel button = new JPanel(null);
+      JPanel button = new JPanel();
       button.add(up_l);
       button.add(up_tf);
-      up_l.setBounds(5,15,75,24);
-      up_tf.setBounds(85,15,150,24);
+      up_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       button.add(over_l);
       button.add(over_tf);
-      over_l.setBounds(5,45,75,24);
-      over_tf.setBounds(85,45,150,24);
       button.add(down_l);
       button.add(down_tf);
-      down_l.setBounds(5,75,75,24);
-      down_tf.setBounds(85,75,150,24);
       button.add(points_l);
       button.add(points_tf);
-      points_l.setBounds(5,105,75,24);
-      points_tf.setBounds(85,105,150,24);
       button.add(thickness_l);
       button.add(thickness_tf);
-      thickness_l.setBounds(5,135,75,24);
-      thickness_tf.setBounds(85,135,150,24);
       button.add(value_l);
       button.add(value_cb);
-      value_l.setBounds(5,165,75,24);
-      value_cb.setBounds(85,165,150,24);
       button.add(tooltiptext_l);
       button.add(tooltiptext_tf);
-      tooltiptext_l.setBounds(5,195,75,24);
-      tooltiptext_tf.setBounds(85,195,150,24);
       button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SLIDER_ATTR")));
-      button.setMinimumSize(new Dimension(240,225));
-      button.setPreferredSize(new Dimension(240,225));
-      button.setMaximumSize(new Dimension(240,225));
+
+      SpringLayout button_layout = new SpringLayout();
+      button.setLayout(button_layout);
+
+      button_layout.putConstraint(SpringLayout.NORTH, up_l, 5, SpringLayout.NORTH, button);
+      button_layout.putConstraint(SpringLayout.WEST, up_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, up_tf, 0, SpringLayout.VERTICAL_CENTER, up_l);
+      button_layout.putConstraint(SpringLayout.WEST, up_tf, tf_dx, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.NORTH, over_l, 10, SpringLayout.SOUTH, up_tf);
+      button_layout.putConstraint(SpringLayout.WEST, over_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, over_tf, 0, SpringLayout.VERTICAL_CENTER, over_l);
+      button_layout.putConstraint(SpringLayout.WEST, over_tf, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, over_tf, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.NORTH, down_l, 10, SpringLayout.SOUTH, over_tf);
+      button_layout.putConstraint(SpringLayout.WEST, down_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, down_tf, 0, SpringLayout.VERTICAL_CENTER, down_l);
+      button_layout.putConstraint(SpringLayout.WEST, down_tf, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, down_tf, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.NORTH, points_l, 10, SpringLayout.SOUTH, down_tf);
+      button_layout.putConstraint(SpringLayout.WEST, points_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, points_tf, 0, SpringLayout.VERTICAL_CENTER, points_l);
+      button_layout.putConstraint(SpringLayout.WEST, points_tf, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, points_tf, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.NORTH, thickness_l, 10, SpringLayout.SOUTH, points_tf);
+      button_layout.putConstraint(SpringLayout.WEST, thickness_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, thickness_tf, 0, SpringLayout.VERTICAL_CENTER, thickness_l);
+      button_layout.putConstraint(SpringLayout.WEST, thickness_tf, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, thickness_tf, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.NORTH, value_l, 10, SpringLayout.SOUTH, thickness_tf);
+      button_layout.putConstraint(SpringLayout.WEST, value_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, value_cb, 0, SpringLayout.VERTICAL_CENTER, value_l);
+      button_layout.putConstraint(SpringLayout.WEST, value_cb, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, value_cb, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.NORTH, tooltiptext_l, 10, SpringLayout.SOUTH, value_cb);
+      button_layout.putConstraint(SpringLayout.WEST, tooltiptext_l, 5, SpringLayout.WEST, button);
+
+      button_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tooltiptext_tf, 0, SpringLayout.VERTICAL_CENTER, tooltiptext_l);
+      button_layout.putConstraint(SpringLayout.WEST, tooltiptext_tf, tf_dx, SpringLayout.WEST, button);
+      button_layout.putConstraint(SpringLayout.EAST, tooltiptext_tf, 0, SpringLayout.EAST, up_tf);
+
+      button_layout.putConstraint(SpringLayout.EAST, button, 5, SpringLayout.EAST, up_tf);
+      button_layout.putConstraint(SpringLayout.SOUTH, button, 10, SpringLayout.SOUTH, tooltiptext_tf);
+
       frame.add(button);
       
       JPanel back = new JPanel(null);
       back.add(sbg_chb);
       back.add(sbg_btn);
-      sbg_chb.setBounds(5,15,150,24);
-      sbg_btn.setBounds(160,15,75,24);
       back.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SLIDER_BG")));
-      back.setMinimumSize(new Dimension(240,45));
-      back.setPreferredSize(new Dimension(240,45));
-      back.setMaximumSize(new Dimension(240,45));
+
+      SpringLayout back_layout = new SpringLayout();
+      back.setLayout(back_layout);
+
+      back_layout.putConstraint(SpringLayout.NORTH, sbg_chb, 5, SpringLayout.NORTH, back);
+      back_layout.putConstraint(SpringLayout.WEST, sbg_chb, 5, SpringLayout.WEST, back);
+
+      back_layout.putConstraint(SpringLayout.NORTH, sbg_btn, 5, SpringLayout.NORTH, back);
+      back_layout.putConstraint(SpringLayout.WEST, sbg_btn, 5, SpringLayout.EAST, sbg_chb);
+
+      back_layout.putConstraint(SpringLayout.EAST, back, 5, SpringLayout.EAST, sbg_btn);
+      back_layout.putConstraint(SpringLayout.SOUTH, back, 10, SpringLayout.SOUTH, sbg_btn);
+
       frame.add(back);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
       frame.add(attr_l);
-      
-      frame.setMinimumSize(new Dimension(250,630));
-      frame.setPreferredSize(new Dimension(250,630));
-      frame.setMaximumSize(new Dimension(250,630));
+
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, button, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, button, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, back, 10, SpringLayout.SOUTH, button);
+      layout.putConstraint(SpringLayout.WEST, back, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, back, 0, SpringLayout.EAST, general);
+
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, back);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+
+      frame.setLayout(layout);
+
       
       frame.pack();
       
