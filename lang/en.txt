@@ -589,3 +589,4 @@ WIN_TEXT_ATTR|Text attributes
 WIN_VIDEO_TITLE|Video settings
 WIN_VIDEO_AUTORESIZE|Autoresize:
 WIN_VIDEO_AUTORESIZE_TIP|Indicate whether the layout should be automatically resized to fit the dimensions of the played video.
+WIN_VIDEO_ATTR|Video attributes

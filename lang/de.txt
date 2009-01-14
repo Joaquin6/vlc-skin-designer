@@ -589,3 +589,4 @@ WIN_TEXT_ATTR|Text Attribute
 WIN_VIDEO_TITLE|Video Einstellungen
 WIN_VIDEO_AUTORESIZE|Größe anpassen:
 WIN_VIDEO_AUTORESIZE_TIP|Gibt an ob das Fenster der Videogröße entsprechend angepasst wird.
+WIN_VIDEO_ATTR|Video Attribute

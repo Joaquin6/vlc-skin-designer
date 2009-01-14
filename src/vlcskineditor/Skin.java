@@ -22,6 +22,7 @@
 
 package vlcskineditor;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -40,6 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.SpringLayout;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
@@ -398,57 +400,121 @@ public class Skin implements ActionListener{
       theme_help_btn = new JButton(Language.get("BUTTON_HELP"));
       theme_help_btn.addActionListener(this);
 
-      //TODO new layout!!!
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { themeinfo_name_l, themeinfo_author_l, themeinfo_email_l, themeinfo_webpage_l, theme_magnet_l, theme_alpha_l, theme_movealpha_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
-      JPanel themeinfo_p = new JPanel(null);
-      themeinfo_p.add(themeinfo_name_l);
-      themeinfo_p.add(themeinfo_name_tf);      
-      themeinfo_name_l.setBounds(5,15,150,24);
-      themeinfo_name_tf.setBounds(160,15,150,24);
-      themeinfo_p.add(themeinfo_author_l);
-      themeinfo_p.add(themeinfo_author_tf);      
-      themeinfo_author_l.setBounds(5,45,150,24);
-      themeinfo_author_tf.setBounds(160,45,150,24);
-      themeinfo_p.add(themeinfo_email_l);
-      themeinfo_p.add(themeinfo_email_tf);      
-      themeinfo_email_l.setBounds(5,75,150,24);
-      themeinfo_email_tf.setBounds(160,75,150,24);
-      themeinfo_p.add(themeinfo_webpage_l);
-      themeinfo_p.add(themeinfo_webpage_tf);      
-      themeinfo_webpage_l.setBounds(5,105,150,24);
-      themeinfo_webpage_tf.setBounds(160,105,150,24);      
-      themeinfo_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_INFO_TITLE")));
-      themeinfo_p.setMinimumSize(new Dimension(315,135));
-      themeinfo_p.setMaximumSize(new Dimension(315,135));
-      themeinfo_p.setPreferredSize(new Dimension(315,135));
-      theme_frame.add(themeinfo_p);
+      JPanel themeinfo_panel = new JPanel(null);
+      themeinfo_panel.add(themeinfo_name_l);
+      themeinfo_panel.add(themeinfo_name_tf);
+      themeinfo_name_tf.setPreferredSize(new Dimension(tf_wd, themeinfo_name_tf.getPreferredSize().height));
+      themeinfo_panel.add(themeinfo_author_l);
+      themeinfo_panel.add(themeinfo_author_tf);
+      themeinfo_panel.add(themeinfo_email_l);
+      themeinfo_panel.add(themeinfo_email_tf);
+      themeinfo_panel.add(themeinfo_webpage_l);
+      themeinfo_panel.add(themeinfo_webpage_tf);
+      themeinfo_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_INFO_TITLE")));
+
+      SpringLayout themeinfo_layout = new SpringLayout();
+      themeinfo_panel.setLayout(themeinfo_layout);
+
+      themeinfo_layout.putConstraint(SpringLayout.NORTH, themeinfo_name_l, 5, SpringLayout.NORTH, themeinfo_panel);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_name_l, 5, SpringLayout.WEST, themeinfo_panel);
+
+      themeinfo_layout.putConstraint(SpringLayout.VERTICAL_CENTER, themeinfo_name_tf, 0, SpringLayout.VERTICAL_CENTER, themeinfo_name_l);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_name_tf, tf_dx, SpringLayout.WEST, themeinfo_panel);
+
+      themeinfo_layout.putConstraint(SpringLayout.NORTH, themeinfo_author_l, 10, SpringLayout.SOUTH, themeinfo_name_tf);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_author_l, 5, SpringLayout.WEST, themeinfo_panel);
+
+      themeinfo_layout.putConstraint(SpringLayout.VERTICAL_CENTER, themeinfo_author_tf, 0, SpringLayout.VERTICAL_CENTER, themeinfo_author_l);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_author_tf, tf_dx, SpringLayout.WEST, themeinfo_panel);
+      themeinfo_layout.putConstraint(SpringLayout.EAST, themeinfo_author_tf, 0, SpringLayout.EAST, themeinfo_name_tf);
+
+      themeinfo_layout.putConstraint(SpringLayout.NORTH, themeinfo_email_l, 10, SpringLayout.SOUTH, themeinfo_author_tf);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_email_l, 5, SpringLayout.WEST, themeinfo_panel);
+
+      themeinfo_layout.putConstraint(SpringLayout.VERTICAL_CENTER, themeinfo_email_tf, 0, SpringLayout.VERTICAL_CENTER, themeinfo_email_l);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_email_tf, tf_dx, SpringLayout.WEST, themeinfo_panel);
+      themeinfo_layout.putConstraint(SpringLayout.EAST, themeinfo_email_tf, 0, SpringLayout.EAST, themeinfo_name_tf);
+
+      themeinfo_layout.putConstraint(SpringLayout.NORTH, themeinfo_webpage_l, 10, SpringLayout.SOUTH, themeinfo_email_tf);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_webpage_l, 5, SpringLayout.WEST, themeinfo_panel);
+
+      themeinfo_layout.putConstraint(SpringLayout.VERTICAL_CENTER, themeinfo_webpage_tf, 0, SpringLayout.VERTICAL_CENTER, themeinfo_webpage_l);
+      themeinfo_layout.putConstraint(SpringLayout.WEST, themeinfo_webpage_tf, tf_dx, SpringLayout.WEST, themeinfo_panel);
+      themeinfo_layout.putConstraint(SpringLayout.EAST, themeinfo_webpage_tf, 0, SpringLayout.EAST, themeinfo_name_tf);
+
+      themeinfo_layout.putConstraint(SpringLayout.EAST, themeinfo_panel, 5, SpringLayout.EAST, themeinfo_name_tf);
+      themeinfo_layout.putConstraint(SpringLayout.SOUTH, themeinfo_panel, 10, SpringLayout.SOUTH, themeinfo_webpage_tf);
+
+      theme_frame.add(themeinfo_panel);
       
-      JPanel theme_p = new JPanel(null);
-      theme_p.add(theme_magnet_l);
-      theme_p.add(theme_magnet_tf);
-      theme_magnet_l.setBounds(5,15,150,24);
-      theme_magnet_tf.setBounds(160,15,150,24);
-      theme_p.add(theme_alpha_l);
-      theme_p.add(theme_alpha_tf);
-      theme_alpha_l.setBounds(5,45,150,24);
-      theme_alpha_tf.setBounds(160,45,150,24);
-      theme_p.add(theme_movealpha_l);
-      theme_p.add(theme_movealpha_tf);
-      theme_movealpha_l.setBounds(5,75,150,24);
-      theme_movealpha_tf.setBounds(160,75,150,24);
-      theme_p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_ATTR_TITLE")));
-      theme_p.setMinimumSize(new Dimension(315,105));
-      theme_p.setMaximumSize(new Dimension(315,105));
-      theme_p.setPreferredSize(new Dimension(315,105));
+      JPanel theme_panel = new JPanel(null);
+      theme_panel.add(theme_magnet_l);
+      theme_panel.add(theme_magnet_tf);
+      theme_magnet_tf.setPreferredSize(new Dimension(tf_wd, theme_magnet_tf.getPreferredSize().height));
+      theme_panel.add(theme_alpha_l);
+      theme_panel.add(theme_alpha_tf);
+      theme_panel.add(theme_movealpha_l);
+      theme_panel.add(theme_movealpha_tf);
+      theme_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_THEME_ATTR_TITLE")));
+
+      SpringLayout theme_layout = new SpringLayout();
+      theme_panel.setLayout(theme_layout);
+
+      theme_layout.putConstraint(SpringLayout.NORTH, theme_magnet_l, 5, SpringLayout.NORTH, theme_panel);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_magnet_l, 5, SpringLayout.WEST, theme_panel);
+
+      theme_layout.putConstraint(SpringLayout.VERTICAL_CENTER, theme_magnet_tf, 0, SpringLayout.VERTICAL_CENTER, theme_magnet_l);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_magnet_tf, tf_dx, SpringLayout.WEST, theme_panel);
+
+      theme_layout.putConstraint(SpringLayout.NORTH, theme_alpha_l, 10, SpringLayout.SOUTH, theme_magnet_tf);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_alpha_l, 5, SpringLayout.WEST, theme_panel);
+
+      theme_layout.putConstraint(SpringLayout.VERTICAL_CENTER, theme_alpha_tf, 0, SpringLayout.VERTICAL_CENTER, theme_alpha_l);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_alpha_tf, tf_dx, SpringLayout.WEST, theme_panel);
+      theme_layout.putConstraint(SpringLayout.EAST, theme_alpha_tf, 0, SpringLayout.EAST, theme_magnet_tf);
+
+      theme_layout.putConstraint(SpringLayout.NORTH, theme_movealpha_l, 10, SpringLayout.SOUTH, theme_alpha_tf);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_movealpha_l, 5, SpringLayout.WEST, theme_panel);
+
+      theme_layout.putConstraint(SpringLayout.VERTICAL_CENTER, theme_movealpha_tf, 0, SpringLayout.VERTICAL_CENTER, theme_movealpha_l);
+      theme_layout.putConstraint(SpringLayout.WEST, theme_movealpha_tf, tf_dx, SpringLayout.WEST, theme_panel);
+      theme_layout.putConstraint(SpringLayout.EAST, theme_movealpha_tf, 0, SpringLayout.EAST, theme_magnet_tf);
+
+      theme_layout.putConstraint(SpringLayout.EAST, theme_panel, 5, SpringLayout.EAST, theme_magnet_tf);
+      theme_layout.putConstraint(SpringLayout.SOUTH, theme_panel, 10, SpringLayout.SOUTH, theme_movealpha_tf);
       
-      theme_frame.add(theme_p);
+      theme_frame.add(theme_panel);
       theme_frame.add(theme_ok_btn);
       theme_frame.add(theme_cancel_btn);
       theme_frame.add(theme_help_btn);
       
-      theme_frame.setMinimumSize(new Dimension(325,330));
-      theme_frame.setPreferredSize(new Dimension(325,330));
-      theme_frame.setMaximumSize(new Dimension(325,330));
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, themeinfo_panel, 5, SpringLayout.NORTH, theme_frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, themeinfo_panel, 5, SpringLayout.WEST, theme_frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, theme_panel, 10, SpringLayout.SOUTH, themeinfo_panel);
+      layout.putConstraint(SpringLayout.WEST, theme_panel, 5, SpringLayout.WEST, theme_frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, theme_ok_btn, 10, SpringLayout.SOUTH, theme_panel);
+      layout.putConstraint(SpringLayout.WEST, theme_ok_btn, 5, SpringLayout.WEST, theme_frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, theme_cancel_btn, 0, SpringLayout.NORTH, theme_ok_btn);
+      layout.putConstraint(SpringLayout.WEST, theme_cancel_btn, 5, SpringLayout.EAST, theme_ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, theme_help_btn, 0, SpringLayout.NORTH, theme_cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, theme_help_btn, 5, SpringLayout.EAST, theme_cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, theme_frame.getContentPane(), 10, SpringLayout.SOUTH, theme_ok_btn);
+      layout.putConstraint(SpringLayout.EAST, theme_frame.getContentPane(), 5, SpringLayout.EAST, themeinfo_panel);
+
+      theme_frame.setLayout(layout);
       
       theme_frame.pack();      
     }
