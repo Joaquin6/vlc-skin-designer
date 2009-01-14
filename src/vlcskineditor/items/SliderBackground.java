@@ -141,7 +141,6 @@ public class SliderBackground extends Item implements ActionListener{
       frame = new JFrame(Language.get("WIN_SBG_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
@@ -169,55 +168,124 @@ public class SliderBackground extends Item implements ActionListener{
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
       
-      
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, image_l, nbhoriz_l, nbvert_l, padhoriz_l, padvert_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
+
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(240,45));
-      general.setPreferredSize(new Dimension(240,45));
-      general.setMaximumSize(new Dimension(240,45));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_tf);
+
       frame.add(general);
       
       frame.add(gen_btn);
       
-      JPanel specific = new JPanel(null);
-      specific.add(image_l);
-      specific.add(image_tf);
-      image_l.setBounds(5,15,75,24);
-      image_tf.setBounds(85,15,150,24);
-      specific.add(nbhoriz_l);
-      specific.add(nbhoriz_tf);
-      nbhoriz_l.setBounds(5,45,75,24);
-      nbhoriz_tf.setBounds(85,45,150,24);
-      specific.add(nbvert_l);
-      specific.add(nbvert_tf);
-      nbvert_l.setBounds(5,75,75,24);
-      nbvert_tf.setBounds(85,75,150,24);      
-      specific.add(padhoriz_l);
-      specific.add(padhoriz_tf);
-      padhoriz_l.setBounds(5,105,75,24);
-      padhoriz_tf.setBounds(85,105,150,24);
-      specific.add(padvert_l);
-      specific.add(padvert_tf);
-      padvert_l.setBounds(5,135,75,24);
-      padvert_tf.setBounds(85,135,150,24);
-      specific.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SBG_ATTR")));
-      specific.setMinimumSize(new Dimension(240,165));
-      specific.setPreferredSize(new Dimension(240,165));
-      specific.setMaximumSize(new Dimension(240,165));
-      frame.add(specific);
+      JPanel bg_panel = new JPanel(null);
+      bg_panel.add(image_l);
+      bg_panel.add(image_tf);
+      image_tf.setPreferredSize(new Dimension(tf_wd,image_tf.getPreferredSize().height));
+      bg_panel.add(nbhoriz_l);
+      bg_panel.add(nbhoriz_tf);
+      bg_panel.add(nbvert_l);
+      bg_panel.add(nbvert_tf);
+      bg_panel.add(padhoriz_l);
+      bg_panel.add(padhoriz_tf);
+      bg_panel.add(padvert_l);
+      bg_panel.add(padvert_tf);
+      bg_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SBG_ATTR")));
+
+      SpringLayout bg_layout = new SpringLayout();
+
+      bg_layout.putConstraint(SpringLayout.NORTH, image_l, 5, SpringLayout.NORTH, bg_panel);
+      bg_layout.putConstraint(SpringLayout.WEST, image_l, 5, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.VERTICAL_CENTER, image_tf, 0, SpringLayout.VERTICAL_CENTER, image_l);
+      bg_layout.putConstraint(SpringLayout.WEST, image_tf, tf_dx, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.NORTH, nbhoriz_l, 10, SpringLayout.SOUTH, image_tf);
+      bg_layout.putConstraint(SpringLayout.WEST, nbhoriz_l, 5, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.VERTICAL_CENTER, nbhoriz_tf, 0, SpringLayout.VERTICAL_CENTER, nbhoriz_l);
+      bg_layout.putConstraint(SpringLayout.WEST, nbhoriz_tf, tf_dx, SpringLayout.WEST, bg_panel);
+      bg_layout.putConstraint(SpringLayout.EAST, nbhoriz_tf, 0, SpringLayout.EAST, image_tf);
+
+      bg_layout.putConstraint(SpringLayout.NORTH, nbvert_l, 10, SpringLayout.SOUTH, nbhoriz_tf);
+      bg_layout.putConstraint(SpringLayout.WEST, nbvert_l, 5, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.VERTICAL_CENTER, nbvert_tf, 0, SpringLayout.VERTICAL_CENTER, nbvert_l);
+      bg_layout.putConstraint(SpringLayout.WEST, nbvert_tf, tf_dx, SpringLayout.WEST, bg_panel);
+      bg_layout.putConstraint(SpringLayout.EAST, nbvert_tf, 0, SpringLayout.EAST, image_tf);
+
+      bg_layout.putConstraint(SpringLayout.NORTH, padhoriz_l, 10, SpringLayout.SOUTH, nbvert_tf);
+      bg_layout.putConstraint(SpringLayout.WEST, padhoriz_l, 5, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.VERTICAL_CENTER, padhoriz_tf, 0, SpringLayout.VERTICAL_CENTER, padhoriz_l);
+      bg_layout.putConstraint(SpringLayout.WEST, padhoriz_tf, tf_dx, SpringLayout.WEST, bg_panel);
+      bg_layout.putConstraint(SpringLayout.EAST, padhoriz_tf, 0, SpringLayout.EAST, image_tf);
+
+      bg_layout.putConstraint(SpringLayout.NORTH, padvert_l, 10, SpringLayout.SOUTH, padhoriz_tf);
+      bg_layout.putConstraint(SpringLayout.WEST, padvert_l, 5, SpringLayout.WEST, bg_panel);
+
+      bg_layout.putConstraint(SpringLayout.VERTICAL_CENTER, padvert_tf, 0, SpringLayout.VERTICAL_CENTER, padvert_l);
+      bg_layout.putConstraint(SpringLayout.WEST, padvert_tf, tf_dx, SpringLayout.WEST, bg_panel);
+      bg_layout.putConstraint(SpringLayout.EAST, padvert_tf, 0, SpringLayout.EAST, image_tf);
+
+      bg_layout.putConstraint(SpringLayout.EAST, bg_panel, 5, SpringLayout.EAST, image_tf);
+      bg_layout.putConstraint(SpringLayout.SOUTH, bg_panel, 10, SpringLayout.SOUTH, padvert_tf);
+
+      bg_panel.setLayout(bg_layout);
+
+      frame.add(bg_panel);
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(attr_l);
       
-      frame.setMinimumSize(new Dimension(250,320));
-      frame.setPreferredSize(new Dimension(250,320));
-      frame.setMaximumSize(new Dimension(250,320));
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, gen_btn, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, gen_btn, 0, SpringLayout.HORIZONTAL_CENTER, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, bg_panel, 10, SpringLayout.SOUTH, gen_btn);
+      layout.putConstraint(SpringLayout.WEST, bg_panel, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, bg_panel, 0, SpringLayout.EAST, general);
+
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, bg_panel);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+
+      frame.setLayout(layout);
       
       frame.pack();
       

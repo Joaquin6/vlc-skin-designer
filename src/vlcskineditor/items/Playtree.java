@@ -642,8 +642,7 @@ public class Playtree extends Item implements ActionListener{
       layout.putConstraint(SpringLayout.WEST, ptp, 5, SpringLayout.WEST, frame.getContentPane());
 
       layout.putConstraint(SpringLayout.NORTH, slider_btn, 10, SpringLayout.SOUTH, ptp);
-      layout.putConstraint(SpringLayout.WEST, slider_btn, 5, SpringLayout.WEST, frame.getContentPane());
-      layout.putConstraint(SpringLayout.EAST, slider_btn, 0, SpringLayout.EAST, general);
+      layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, slider_btn, 0, SpringLayout.HORIZONTAL_CENTER, frame.getContentPane());
 
       layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, slider_btn);
       layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());

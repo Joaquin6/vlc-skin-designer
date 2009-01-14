@@ -60,6 +60,7 @@ public class SubBitmapEditWindow extends JPanel implements ActionListener, Mouse
     x2_org = x2 = sb.x+sb.width;
     y2_org = y2 = sb.y+sb.height;
     frame = new JFrame(Language.get("WIN_SBMP_EDIT_TITLE"));
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setLayout(new BorderLayout());
     zoom_panel = new JPanel();
     zoom_panel.setLayout(new FlowLayout());

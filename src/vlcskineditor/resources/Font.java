@@ -164,6 +164,7 @@ public class Font extends Resource implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_FONT_TITLE"));
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));

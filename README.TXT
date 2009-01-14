@@ -1,10 +1,12 @@
-VLC Skin Editor release 0.7.1
+VLC Skin Editor release 0.8.0
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
-0.7.5  - Slight performance improvements
+0.8.0  - Performance improvements
        - Multi-language support
-       - Remembering of windows' last positions&sizes       
+       - Remembering of windows' last positions&sizes
+       - New parsing system for all valid skin files
+       - Bug-fixes
 0.7.0  - Preview can be saved as image
        - Improved SubBitmap editing
        - Resources/windows/layouts can be duplicated easily
