@@ -80,31 +80,31 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   JMenuItem items_add_pu_image, items_add_pu_panel;
   JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;  
   Skin s;
-  public ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");  
-  public ImageIcon add_font_icon = createIcon("icons/add_font.png");
-  public ImageIcon copy_icon = createIcon("icons/copy.png");
-  public ImageIcon edit_icon = createIcon("icons/edit.png");
-  public ImageIcon edit_undo_icon = createIcon("icons/edit-undo.png");
-  public ImageIcon edit_redo_icon = createIcon("icons/edit-redo.png");
-  public ImageIcon editor_icon = createIcon("icons/editor.png");
-  public ImageIcon delete_icon = createIcon("icons/delete.png");
-  public ImageIcon add_window_icon = createIcon("icons/add_window.png");
-  public ImageIcon add_layout_icon = createIcon("icons/add_layout.png");  
-  public ImageIcon add_icon = createIcon("icons/add.png");
-  public ImageIcon up_icon = createIcon("icons/move_up.png");
-  public ImageIcon down_icon = createIcon("icons/move_down.png");
-  public ImageIcon help_icon = createIcon("icons/help.png");
+  public static ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");
+  public static ImageIcon add_font_icon = createIcon("icons/add_font.png");
+  public static ImageIcon copy_icon = createIcon("icons/copy.png");
+  public static ImageIcon edit_icon = createIcon("icons/edit.png");
+  public static ImageIcon edit_undo_icon = createIcon("icons/edit-undo.png");
+  public static ImageIcon edit_redo_icon = createIcon("icons/edit-redo.png");
+  public static ImageIcon editor_icon = createIcon("icons/editor.png");
+  public static ImageIcon delete_icon = createIcon("icons/delete.png");
+  public static ImageIcon add_window_icon = createIcon("icons/add_window.png");
+  public static ImageIcon add_layout_icon = createIcon("icons/add_layout.png");
+  public static ImageIcon add_icon = createIcon("icons/add.png");
+  public static ImageIcon up_icon = createIcon("icons/move_up.png");
+  public static ImageIcon down_icon = createIcon("icons/move_down.png");
+  public static ImageIcon help_icon = createIcon("icons/help.png");
   //The VLC Skin Editor icon.
-  public ImageIcon icon = createIcon("icons/icon.png");  
-  public ImageIcon open_icon = createIcon("icons/open.png");
-  public ImageIcon save_icon = createIcon("icons/save.png");
-  public ImageIcon vlc_icon = createIcon("icons/vlc16x16.png");
-  public ImageIcon vlt_icon = createIcon("icons/vlt.png");
-  public ImageIcon new_icon = createIcon("icons/new.png");
-  public ImageIcon exit_icon = createIcon("icons/exit.png");
-  public ImageIcon resources_icon = createIcon("icons/resources.png");
-  public ImageIcon windows_icon = createIcon("icons/windows.png");
-  public ImageIcon items_icon = createIcon("icons/items.png");
+  public static ImageIcon icon = createIcon("icons/icon.png");
+  public static ImageIcon open_icon = createIcon("icons/open.png");
+  public static ImageIcon save_icon = createIcon("icons/save.png");
+  public static ImageIcon vlc_icon = createIcon("icons/vlc16x16.png");
+  public static ImageIcon vlt_icon = createIcon("icons/vlt.png");
+  public static ImageIcon new_icon = createIcon("icons/new.png");
+  public static ImageIcon exit_icon = createIcon("icons/exit.png");
+  public static ImageIcon resources_icon = createIcon("icons/resources.png");
+  public static ImageIcon windows_icon = createIcon("icons/windows.png");
+  public static ImageIcon items_icon = createIcon("icons/items.png");
     
   DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
   String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
@@ -984,8 +984,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="About"> 
     else if(e.getSource().equals(m_help_about)) {
-      JOptionPane.showMessageDialog(this,Language.get("ABOUT_MSG").replaceAll("%w", "http://www.videolan.org/vlc/skineditor.html").replaceAll("%y", String.valueOf(Calendar.getInstance().get(Calendar.YEAR))),
-            Language.get("ABOUT_TITLE"), JOptionPane.INFORMATION_MESSAGE,icon);
+      JOptionPane.showMessageDialog(this,Language.get("ABOUT_MSG").replaceAll("%w", "http://www.videolan.org/vlc/skineditor.html").replaceAll("%y", String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).replaceAll("%v", VERSION)),
+            Language.get("ABOUT_TITLE").replaceAll("%v", VERSION), JOptionPane.INFORMATION_MESSAGE,icon);
     }
     // </editor-fold>    
     else if(e.getSource().equals(res_add_bitmap)) res_add_bitmap_pu.show(res_add_bitmap,0,0);
@@ -1646,10 +1646,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param filename The path to the image file inside the JAR
    * @return An ImageIcon representing the given file
    */
-  public ImageIcon createIcon(String filename) {
+  public static ImageIcon createIcon(String filename) {
       java.awt.Image img = null;
       try {
-        img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));
+        img = Toolkit.getDefaultToolkit().createImage(Main.class.getResource(filename));
         //img = ImageIO.read(file);
         return new ImageIcon(img);  
       } catch (Exception e) {
@@ -1835,10 +1835,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         try {
           RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_CLASSES_ROOT,"VLCSkinFile\\DefaultIcon",RegistryKey.ACCESS_ALL);
           if(vlc_key.hasDefaultValue()) {
-            RegistryValue icon = vlc_key.getValue("");
-            String s = new String(icon.getByteData())+",2";            
-            icon.setByteData(s.getBytes());
-            vlc_key.setValue(icon);
+            RegistryValue reg_icon = vlc_key.getValue("");
+            String s = new String(reg_icon.getByteData())+",2";
+            reg_icon.setByteData(s.getBytes());
+            vlc_key.setValue(reg_icon);
           }          
         }
         catch (Exception e) {
@@ -1861,7 +1861,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     
     Config.load();
-    Language.load(new File("lang"+File.separator+Config.get("language")+".txt"));
+    Language.loadLanguageByCode(Config.get("language"));
     
     try {	
       String laf = Config.get("swing.laf");

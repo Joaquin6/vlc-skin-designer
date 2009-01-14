@@ -156,6 +156,8 @@ public class XML {
         ((Element)nodes.item(i)).setAttribute("flat", "true");
         children.add(new Playtree(nodes.item(i), s));
       }
+      else if(nodes.item(i).getNodeName().equals("RadialSlider"))
+        children.add(new RadialSlider(nodes.item(i), s));
       else if(nodes.item(i).getNodeName().equals("Slider"))
         children.add(new Slider(nodes.item(i), s));
       else if(nodes.item(i).getNodeName().equals("Text"))

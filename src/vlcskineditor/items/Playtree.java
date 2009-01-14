@@ -286,9 +286,9 @@ public class Playtree extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Playtree settings");
+      frame = new JFrame(Language.get("WIN_PLAYTREE_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
@@ -301,10 +301,10 @@ public class Playtree extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -314,7 +314,7 @@ public class Playtree extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);      
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
@@ -323,186 +323,344 @@ public class Playtree extends Item implements ActionListener{
       JLabel width_l = new JLabel(Language.get("WIN_ITEM_WIDTH"));
       width_tf = new JTextField();
       width_tf.setDocument(new NumbersOnlyDocument(false));
-      width_tf.setToolTipText("Width of the playlist, in pixels. If playlist items are wider, the end of the name will be replaced with '...'");
       JLabel height_l = new JLabel(Language.get("WIN_ITEM_HEIGHT"));
       height_tf = new JTextField();
       height_tf.setDocument(new NumbersOnlyDocument(false));
-      JLabel font_l = new JLabel("Font*:");
+      JLabel font_l = new JLabel(Language.get("WIN_PLAYTREE_FONT"));
       font_tf = new JTextField();
-      JLabel bgimage_l = new JLabel("BG Image:");
+      JLabel bgimage_l = new JLabel(Language.get("WIN_PLAYTREE_BGIMAGE"));
       bgimage_tf = new JTextField();
-      bgimage_tf.setToolTipText("ID of a Bitmap, used as the background image. When no bitmap is specified, the background will be filled using the bgcolor1 and bgcolor2 attributes.");
-      JLabel bgcolor1_l = new JLabel("BG color #1:");
+      bgimage_tf.setToolTipText(Language.get("WIN_PLAYTREE_BGIMAGE_TIP"));
+      JLabel bgcolor1_l = new JLabel(Language.get("WIN_PLAYTREE_BGCOLOR1"));
       bgcolor1_tf = new JTextField();
-      bgcolor1_tf.setToolTipText("Background color for odd playlist items. This attribute is ignored if the bgimage one is used.");
-      bgcolor1_btn = new JButton("Choose...");
+      bgcolor1_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
       bgcolor1_btn.addActionListener(this);
-      JLabel bgcolor2_l = new JLabel("BG color #2:");
+      JLabel bgcolor2_l = new JLabel(Language.get("WIN_PLAYTREE_BGCOLOR2"));
       bgcolor2_tf = new JTextField();
-      bgcolor2_tf.setToolTipText("Background color for even playlist items. This attribute is ignored if the bgimage one is used.");
-      bgcolor2_btn = new JButton("Choose...");
+      bgcolor2_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
       bgcolor2_btn.addActionListener(this);      
-      JLabel selcolor_l = new JLabel("Selection color:");
+      JLabel selcolor_l = new JLabel(Language.get("WIN_PLAYTREE_SELCOLOR"));
       selcolor_tf = new JTextField();
-      selcolor_btn = new JButton("Choose...");
+      selcolor_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
       selcolor_btn.addActionListener(this);
-      JLabel fgcolor_l = new JLabel("Text color:");
+      JLabel fgcolor_l = new JLabel(Language.get("WIN_PLAYTREE_FGCOLOR"));
       fgcolor_tf = new JTextField();
-      fgcolor_btn = new JButton("Choose...");
+      fgcolor_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
       fgcolor_btn.addActionListener(this);
-      JLabel playcolor_l = new JLabel("Now playing text color:");
+      JLabel playcolor_l = new JLabel(Language.get("WIN_PLAYTREE_PLAYCOLOR"));
       playcolor_tf = new JTextField();
-      playcolor_btn = new JButton("Choose...");
+      playcolor_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
       playcolor_btn.addActionListener(this);
-      JLabel flat_l = new JLabel("Flat playlist:");      
+      JLabel flat_l = new JLabel(Language.get("WIN_PLAYTREE_FLAT"));
       flat_cb = new JComboBox(bool_values);
-      flat_cb.setToolTipText("Boolean to indicate whether the playlist should use the tree structure or be completely \"flat\" (only show the leafs of the tree).");
-      JLabel itemimage_l = new JLabel("Item icon:");
+      flat_cb.setToolTipText(Language.get("WIN_PLAYTREE_FLAT_TIP"));
+      JLabel itemimage_l = new JLabel(Language.get("WIN_PLAYTREE_ITEMIMAGE"));
       itemimage_tf = new JTextField();
-      JLabel openimage_l = new JLabel("Open folder icon:");
+      JLabel openimage_l = new JLabel(Language.get("WIN_PLAYTREE_OPENIMAGE"));
       openimage_tf = new JTextField();
-      JLabel closedimage_l = new JLabel("Closed folder icon:");
+      JLabel closedimage_l = new JLabel(Language.get("WIN_PLAYTREE_CLOSEDIMAGE"));
       closedimage_tf = new JTextField();
-      slider_btn = new JButton("Edit Playlist's slider (scrollbar)");
+      slider_btn = new JButton(Language.get("WIN_PLAYTREE_SLIDER"));
       slider_btn.addActionListener(this);
-      
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
+
+      //Distance of textfields to WEST edge of container
+      Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, width_l, height_l, font_l, bgimage_l, bgcolor1_l, bgcolor2_l, selcolor_l, fgcolor_l, playcolor_l, flat_l, itemimage_l, openimage_l, closedimage_l};
+      int tf_dx = Helper.maxWidth(labels)+10;
+      //Max. textfield width
+      int tf_wd = Main.TEXTFIELD_WIDTH;
       
-      JPanel general = new JPanel(null);
+      JPanel general = new JPanel();
       general.add(id_l);
       general.add(id_tf);
-      id_l.setBounds(5,15,75,24);
-      id_tf.setBounds(85,15,150,24);
+      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
-      x_l.setBounds(5,45,75,24);
-      x_tf.setBounds(85,45,150,24);
       general.add(y_l);
-      general.add(y_tf);
-      y_l.setBounds(5,75,75,24);
-      y_tf.setBounds(85,75,150,24);      
+      general.add(y_tf);   
       general.add(lefttop_l);
       general.add(lefttop_cb);
-      lefttop_l.setBounds(5,105,75,24);
-      lefttop_cb.setBounds(85,105,150,24);
       general.add(rightbottom_l);
       general.add(rightbottom_cb);
-      rightbottom_l.setBounds(5,135,75,24);
-      rightbottom_cb.setBounds(85,135,150,24);
       general.add(xkeepratio_l);
       general.add(xkeepratio_cb);
-      xkeepratio_l.setBounds(5,165,75,24);
-      xkeepratio_cb.setBounds(85,165,150,24);
       general.add(ykeepratio_l);
       general.add(ykeepratio_cb);
-      ykeepratio_l.setBounds(5,195,75,24);
-      ykeepratio_cb.setBounds(85,195,150,24);
       general.add(visible_l);
       general.add(visible_tf);
       general.add(visible_btn);
-      visible_l.setBounds(5,225,75,24);
-      visible_tf.setBounds(85,225,120,24);
-      visible_btn.setBounds(210,225,24,24);
       general.add(help_l);
-      general.add(help_tf);
-      help_l.setBounds(5,255,75,24);
-      help_tf.setBounds(85,255,150,24);      
+      general.add(help_tf);   
       general.add(width_l);
       general.add(width_tf);
-      width_l.setBounds(5,285,75,24);
-      width_tf.setBounds(85,285,150,24);
       general.add(height_l);
       general.add(height_tf);
-      height_l.setBounds(5,315,75,24);
-      height_tf.setBounds(85,315,150,24);
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
-      general.setMinimumSize(new Dimension(240,345));
-      general.setPreferredSize(new Dimension(240,345));
-      general.setMaximumSize(new Dimension(240,345));
+
+      SpringLayout general_layout = new SpringLayout();
+      general.setLayout(general_layout);
+
+      general_layout.putConstraint(SpringLayout.NORTH, id_l, 5, SpringLayout.NORTH, general);
+      general_layout.putConstraint(SpringLayout.WEST, id_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, id_tf, 0, SpringLayout.VERTICAL_CENTER, id_l);
+      general_layout.putConstraint(SpringLayout.WEST, id_tf, tf_dx, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.NORTH, x_l, 10, SpringLayout.SOUTH, id_tf);
+      general_layout.putConstraint(SpringLayout.WEST, x_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, x_tf, 0, SpringLayout.VERTICAL_CENTER, x_l);
+      general_layout.putConstraint(SpringLayout.WEST, x_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, x_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, y_l, 10, SpringLayout.SOUTH, x_tf);
+      general_layout.putConstraint(SpringLayout.WEST, y_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, y_tf, 0, SpringLayout.VERTICAL_CENTER, y_l);
+      general_layout.putConstraint(SpringLayout.WEST, y_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, y_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, lefttop_l, 10, SpringLayout.SOUTH, y_tf);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, lefttop_cb, 0, SpringLayout.VERTICAL_CENTER, lefttop_l);
+      general_layout.putConstraint(SpringLayout.WEST, lefttop_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, lefttop_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, rightbottom_l, 10, SpringLayout.SOUTH, lefttop_cb);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, rightbottom_cb, 0, SpringLayout.VERTICAL_CENTER, rightbottom_l);
+      general_layout.putConstraint(SpringLayout.WEST, rightbottom_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, rightbottom_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, xkeepratio_l, 10, SpringLayout.SOUTH, rightbottom_cb);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, xkeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, xkeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, xkeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, xkeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, ykeepratio_l, 10, SpringLayout.SOUTH, xkeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, ykeepratio_cb, 0, SpringLayout.VERTICAL_CENTER, ykeepratio_l);
+      general_layout.putConstraint(SpringLayout.WEST, ykeepratio_cb, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, ykeepratio_cb, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, visible_l, 10, SpringLayout.SOUTH, ykeepratio_cb);
+      general_layout.putConstraint(SpringLayout.WEST, visible_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_tf, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.WEST, visible_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, visible_tf, -5, SpringLayout.WEST, visible_btn);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, visible_btn, 0, SpringLayout.VERTICAL_CENTER, visible_l);
+      general_layout.putConstraint(SpringLayout.EAST, visible_btn, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, help_l, 10, SpringLayout.SOUTH, visible_btn);
+      general_layout.putConstraint(SpringLayout.WEST, help_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, help_tf, 0, SpringLayout.VERTICAL_CENTER, help_l);
+      general_layout.putConstraint(SpringLayout.WEST, help_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, help_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, width_l, 10, SpringLayout.SOUTH, help_tf);
+      general_layout.putConstraint(SpringLayout.WEST, width_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, width_tf, 0, SpringLayout.VERTICAL_CENTER, width_l);
+      general_layout.putConstraint(SpringLayout.WEST, width_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, width_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.NORTH, height_l, 10, SpringLayout.SOUTH, width_tf);
+      general_layout.putConstraint(SpringLayout.WEST, height_l, 5, SpringLayout.WEST, general);
+
+      general_layout.putConstraint(SpringLayout.VERTICAL_CENTER, height_tf, 0, SpringLayout.VERTICAL_CENTER, height_l);
+      general_layout.putConstraint(SpringLayout.WEST, height_tf, tf_dx, SpringLayout.WEST, general);
+      general_layout.putConstraint(SpringLayout.EAST, height_tf, 0, SpringLayout.EAST, id_tf);
+
+      general_layout.putConstraint(SpringLayout.EAST, general, 5, SpringLayout.EAST, id_tf);
+      general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, height_tf);
+
       frame.add(general);
       
-      JPanel ptp = new JPanel(null);
+      JPanel ptp = new JPanel();
       ptp.add(font_l);
       ptp.add(font_tf);
-      font_l.setBounds(5,15,75,24);
-      font_tf.setBounds(85,15,150,24);
+      font_tf.setPreferredSize(new Dimension(tf_wd,font_tf.getPreferredSize().height));
       ptp.add(bgimage_l);
       ptp.add(bgimage_tf);
-      bgimage_l.setBounds(5,45,75,24);
-      bgimage_tf.setBounds(85,45,150,24);
       ptp.add(bgcolor1_l);
       ptp.add(bgcolor1_tf);
+      bgcolor1_tf.setPreferredSize(new Dimension(tf_wd/2,bgcolor1_tf.getPreferredSize().height));
       ptp.add(bgcolor1_btn);
-      bgcolor1_l.setBounds(5,75,75,24);
-      bgcolor1_tf.setBounds(85,75,75,24);
-      bgcolor1_btn.setBounds(165,75,70,24);
       ptp.add(bgcolor2_l);
       ptp.add(bgcolor2_tf);
+      bgcolor2_tf.setPreferredSize(new Dimension(tf_wd/2,bgcolor2_tf.getPreferredSize().height));
       ptp.add(bgcolor2_btn);
-      bgcolor2_l.setBounds(5,105,75,24);
-      bgcolor2_tf.setBounds(85,105,75,24);
-      bgcolor2_btn.setBounds(165,105,70,24);
       ptp.add(selcolor_l);
       ptp.add(selcolor_tf);
+      selcolor_tf.setPreferredSize(new Dimension(tf_wd/2,selcolor_tf.getPreferredSize().height));
       ptp.add(selcolor_btn);
-      selcolor_l.setBounds(5,135,75,24);
-      selcolor_tf.setBounds(85,135,75,24);
-      selcolor_btn.setBounds(165,135,70,24);
       ptp.add(fgcolor_l);
       ptp.add(fgcolor_tf);
-      ptp.add(fgcolor_btn);
-      fgcolor_l.setBounds(5,165,75,24);
-      fgcolor_tf.setBounds(85,165,75,24);
-      fgcolor_btn.setBounds(165,165,70,24);      
+      fgcolor_tf.setPreferredSize(new Dimension(tf_wd/2,fgcolor_tf.getPreferredSize().height));
+      ptp.add(fgcolor_btn);    
       ptp.add(playcolor_l);
       ptp.add(playcolor_tf);
+      playcolor_tf.setPreferredSize(new Dimension(tf_wd/2,playcolor_tf.getPreferredSize().height));
       ptp.add(playcolor_btn);
-      playcolor_l.setBounds(5,195,75,24);
-      playcolor_tf.setBounds(85,195,75,24);
-      playcolor_btn.setBounds(165,195,70,24);
       ptp.add(flat_l);
       ptp.add(flat_cb);
-      flat_l.setBounds(5,225,75,24);
-      flat_cb.setBounds(85,225,150,24);
       ptp.add(itemimage_l);
       ptp.add(itemimage_tf);
-      itemimage_l.setBounds(5,255,75,24);
-      itemimage_tf.setBounds(85,255,150,24);
       ptp.add(openimage_l);
       ptp.add(openimage_tf);
-      openimage_l.setBounds(5,285,75,24);
-      openimage_tf.setBounds(85,285,150,24);
       ptp.add(closedimage_l);
-      ptp.add(closedimage_tf);
-      closedimage_l.setBounds(5,315,75,24);
-      closedimage_tf.setBounds(85,315,150,24);      
-      ptp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Playtree Attributes"));
-      ptp.setMinimumSize(new Dimension(240,3455));
-      ptp.setPreferredSize(new Dimension(240,345));
-      ptp.setMaximumSize(new Dimension(240,345));
+      ptp.add(closedimage_tf);    
+      ptp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_PLAYTREE_ATTR")));
+
+      SpringLayout ptp_layout = new SpringLayout();
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, font_l, 5, SpringLayout.NORTH, ptp);
+      ptp_layout.putConstraint(SpringLayout.WEST, font_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, font_tf, 0, SpringLayout.VERTICAL_CENTER, font_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, font_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, bgimage_l, 10, SpringLayout.SOUTH, font_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgimage_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgimage_tf, 0, SpringLayout.VERTICAL_CENTER, bgimage_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgimage_tf, tf_dx, SpringLayout.WEST, ptp);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgimage_tf, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, bgcolor1_l, 10, SpringLayout.SOUTH, bgimage_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor1_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor1_tf, 0, SpringLayout.VERTICAL_CENTER, bgcolor1_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor1_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor1_btn, 0, SpringLayout.VERTICAL_CENTER, bgcolor1_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor1_btn, 5, SpringLayout.EAST, bgcolor1_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor1_btn, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, bgcolor2_l, 10, SpringLayout.SOUTH, bgcolor1_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor2_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor2_tf, 0, SpringLayout.VERTICAL_CENTER, bgcolor2_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor2_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor2_btn, 0, SpringLayout.VERTICAL_CENTER, bgcolor2_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, bgcolor2_btn, 5, SpringLayout.EAST, bgcolor2_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor2_btn, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, selcolor_l, 10, SpringLayout.SOUTH, bgcolor2_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, selcolor_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, selcolor_tf, 0, SpringLayout.VERTICAL_CENTER, selcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, selcolor_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, selcolor_btn, 0, SpringLayout.VERTICAL_CENTER, selcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, selcolor_btn, 5, SpringLayout.EAST, selcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, selcolor_btn, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, fgcolor_l, 10, SpringLayout.SOUTH, selcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, fgcolor_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, fgcolor_tf, 0, SpringLayout.VERTICAL_CENTER, fgcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, fgcolor_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, fgcolor_btn, 0, SpringLayout.VERTICAL_CENTER, fgcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, fgcolor_btn, 5, SpringLayout.EAST, fgcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, fgcolor_btn, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, playcolor_l, 10, SpringLayout.SOUTH, fgcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, playcolor_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, playcolor_tf, 0, SpringLayout.VERTICAL_CENTER, playcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, playcolor_tf, tf_dx, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, playcolor_btn, 0, SpringLayout.VERTICAL_CENTER, playcolor_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, playcolor_btn, 5, SpringLayout.EAST, playcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, playcolor_btn, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, flat_l, 10, SpringLayout.SOUTH, playcolor_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, flat_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, flat_cb, 0, SpringLayout.VERTICAL_CENTER, flat_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, flat_cb, tf_dx, SpringLayout.WEST, ptp);
+      ptp_layout.putConstraint(SpringLayout.EAST, flat_cb, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, itemimage_l, 10, SpringLayout.SOUTH, flat_cb);
+      ptp_layout.putConstraint(SpringLayout.WEST, itemimage_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, itemimage_tf, 0, SpringLayout.VERTICAL_CENTER, itemimage_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, itemimage_tf, tf_dx, SpringLayout.WEST, ptp);
+      ptp_layout.putConstraint(SpringLayout.EAST, itemimage_tf, 0, SpringLayout.EAST,font_tf);
+
+      ptp_layout.putConstraint(SpringLayout.NORTH, openimage_l, 10, SpringLayout.SOUTH, itemimage_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, openimage_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, openimage_tf, 0, SpringLayout.VERTICAL_CENTER, openimage_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, openimage_tf, tf_dx, SpringLayout.WEST, ptp);
+      ptp_layout.putConstraint(SpringLayout.EAST, openimage_tf, 0, SpringLayout.EAST,font_tf);
+      
+      ptp_layout.putConstraint(SpringLayout.NORTH, closedimage_l, 10, SpringLayout.SOUTH, openimage_tf);
+      ptp_layout.putConstraint(SpringLayout.WEST, closedimage_l, 5, SpringLayout.WEST, ptp);
+
+      ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, closedimage_tf, 0, SpringLayout.VERTICAL_CENTER, closedimage_l);
+      ptp_layout.putConstraint(SpringLayout.WEST, closedimage_tf, tf_dx, SpringLayout.WEST, ptp);
+      ptp_layout.putConstraint(SpringLayout.EAST, closedimage_tf, 0, SpringLayout.EAST,font_tf);
+      
+      ptp_layout.putConstraint(SpringLayout.EAST, ptp, 5, SpringLayout.EAST, font_tf);
+      ptp_layout.putConstraint(SpringLayout.SOUTH, ptp, 10, SpringLayout.SOUTH, closedimage_tf);
+
+      ptp.setLayout(ptp_layout);
+
       frame.add(ptp);
       
-      frame.add(slider_btn);
-      slider_btn.setPreferredSize(new Dimension(490,24));
-      slider_btn.setMinimumSize(new Dimension(490,24));
-      slider_btn.setMaximumSize(new Dimension(490,24));
+      frame.add(slider_btn);      
       
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
-      frame.setMinimumSize(new Dimension(500,470));
-      frame.setPreferredSize(new Dimension(500,470));
-      frame.setMaximumSize(new Dimension(500,470));
+      SpringLayout layout = new SpringLayout();
+
+      layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
+      layout.putConstraint(SpringLayout.WEST, general, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ptp, 10, SpringLayout.SOUTH, general);
+      layout.putConstraint(SpringLayout.WEST, ptp, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, slider_btn, 10, SpringLayout.SOUTH, ptp);
+      layout.putConstraint(SpringLayout.WEST, slider_btn, 5, SpringLayout.WEST, frame.getContentPane());
+      layout.putConstraint(SpringLayout.EAST, slider_btn, 0, SpringLayout.EAST, general);
+
+      layout.putConstraint(SpringLayout.NORTH, attr_l, 10, SpringLayout.SOUTH, slider_btn);
+      layout.putConstraint(SpringLayout.WEST, attr_l, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, attr_l);
+      layout.putConstraint(SpringLayout.WEST, ok_btn, 5, SpringLayout.WEST, frame.getContentPane());
+
+      layout.putConstraint(SpringLayout.NORTH, cancel_btn, 0, SpringLayout.NORTH, ok_btn);
+      layout.putConstraint(SpringLayout.WEST, cancel_btn, 5, SpringLayout.EAST, ok_btn);
+
+      layout.putConstraint(SpringLayout.NORTH, help_btn, 0, SpringLayout.NORTH, cancel_btn);
+      layout.putConstraint(SpringLayout.WEST, help_btn, 5, SpringLayout.EAST, cancel_btn);
+
+      layout.putConstraint(SpringLayout.SOUTH, frame.getContentPane(), 10, SpringLayout.SOUTH, ok_btn);
+      layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
+
+      frame.setLayout(layout);
       
       frame.pack();
       
@@ -549,30 +707,30 @@ public class Playtree extends Item implements ActionListener{
       }
       bgimage_res = s.getImageResource(bgimage_tf.getText());
       if(!bgimage_tf.getText().equals("none")&&bgimage_res==null) {
-        JOptionPane.showMessageDialog(frame,"Please choose an existing background image!","Bgimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", bgimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         bgimage_res = s.getImageResource(bgimage);
         return;
       }
       itemimage_res = s.getImageResource(itemimage_tf.getText());
       if(!itemimage_tf.getText().equals("none")&&itemimage_res==null) {
-        JOptionPane.showMessageDialog(frame,"Please choose an existing item icon!","Itemimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", itemimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         itemimage_res = s.getImageResource(itemimage);
         return;
       }
       openimage_res = s.getImageResource(openimage_tf.getText());
       if(!openimage_tf.getText().equals("none")&&openimage_res==null) {
-        JOptionPane.showMessageDialog(frame,"Please choose an existing open folder icon!","Openimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", openimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         openimage_res = s.getImageResource(openimage);
         return;
       }
       closedimage_res = s.getImageResource(closedimage_tf.getText());
       if(!closedimage_tf.getText().equals("none")&&closedimage_res==null) {
-        JOptionPane.showMessageDialog(frame,"Please choose an existing closed folder icon!","Closedimage does not exist",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", closedimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         closedimage_res = s.getImageResource(closedimage);
         return;
       }
       if(!font_tf.getText().equals("defaultfont")&&s.getResource(font_tf.getText())==null) {        
-        JOptionPane.showMessageDialog(frame,"Please choose an existing font!","Font does not exist",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_FONT_NEXIST").replaceAll("%i", font_tf.getText()),Language.get("ERROR_FONT_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();
@@ -581,7 +739,7 @@ public class Playtree extends Item implements ActionListener{
       frame = null;
     }
     else if (e.getSource().equals(bgcolor1_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(bgcolor1_tf.getText()));    
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(bgcolor1_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -594,7 +752,7 @@ public class Playtree extends Item implements ActionListener{
       }
     }
     else if (e.getSource().equals(bgcolor2_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(bgcolor2_tf.getText()));    
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(bgcolor2_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -607,7 +765,7 @@ public class Playtree extends Item implements ActionListener{
       }
     }
     else if (e.getSource().equals(fgcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(fgcolor_tf.getText()));    
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(fgcolor_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -620,7 +778,7 @@ public class Playtree extends Item implements ActionListener{
       }
     }
     else if (e.getSource().equals(selcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(selcolor_tf.getText()));    
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(selcolor_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -633,7 +791,7 @@ public class Playtree extends Item implements ActionListener{
       }
     }
     else if (e.getSource().equals(playcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,"Choose Color",Color.decode(playcolor_tf.getText()));    
+      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(playcolor_tf.getText()));
       if (color != null) {
         String hex = "#";
         if(color.getRed()<16) hex+="0";
@@ -850,5 +1008,5 @@ public class Playtree extends Item implements ActionListener{
     super.updateToGlobalVariables();
     if(slider!=null) slider.updateToGlobalVariables();
   }
-  
+
 }

@@ -24,11 +24,13 @@ package vlcskineditor.items;
 
 import vlcskineditor.*;
 import java.awt.*;
+import javax.swing.JOptionPane;
 import javax.swing.tree.*;
+import org.w3c.dom.Node;
 
 /**
  * RadialSlider item. 
- * <i>Not planned to be implemented for use</i><br>
+ * <i>Not planned to be implemented for use as RadialSliders are not enough documented.</i><br>
  * If you know how RadialSliders actually work or are displayed, let me know or fill out the missing parts of this file.
  * @author Daniel Dreibrodt
  */
@@ -49,7 +51,32 @@ public class RadialSlider extends Item{
   {
     type = Language.get("RADIALSLIDER");
   }
-  
+
+  /**
+   * Parses a Radial Slider from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public RadialSlider(Node n, Skin s_) {
+    s = s_;
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    x = XML.getIntAttributeValue(n, "x", x);
+    y = XML.getIntAttributeValue(n, "y", y);
+    lefttop = XML.getStringAttributeValue(n, "lefttop", lefttop);
+    rightbottom = XML.getStringAttributeValue(n, "rightbottom", rightbottom);
+    xkeepratio = XML.getBoolAttributeValue(n, "xkeepratio", xkeepratio);
+    ykeepratio = XML.getBoolAttributeValue(n, "ykeepratio", ykeepratio);
+    visible = XML.getStringAttributeValue(n, "visible", visible);
+    help = XML.getStringAttributeValue(n, "help", help);
+    sequence = XML.getStringAttributeValue(n, "sequence", sequence);
+    nbimages = XML.getIntAttributeValue(n, "nbimages", nbimages);
+    minangle = XML.getIntAttributeValue(n, "minangle", minangle);
+    maxangle = XML.getIntAttributeValue(n, "maxangle", maxangle);
+    value = XML.getStringAttributeValue(n, "value", value);
+    tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
+    created = true;
+  }
+
   /** Creates a new instance of RadialSlider */
   public RadialSlider(String xmlcode, Skin s_) {
     s = s_;
@@ -68,18 +95,22 @@ public class RadialSlider extends Item{
     if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
     if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
   }
+
   public RadialSlider(Skin s_) {
     s = s_;
-    id = "Unnamed radial slider #"+s.getNewId();
+    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
   @Override
   public void update() {
+    //TODO
+    created = true;
     updateToGlobalVariables();
   }
   @Override
   public void showOptions() {
-    
+    //TODO
+    JOptionPane.showMessageDialog(s.m, Language.get("ERROR_RADIALSLIDER"),Language.get("ERROR_RADIALSLIDER_TITLE"),JOptionPane.ERROR_MESSAGE);
   }
   @Override
   public String returnCode(String indent) {

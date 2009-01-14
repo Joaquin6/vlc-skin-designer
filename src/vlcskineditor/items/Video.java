@@ -156,7 +156,8 @@ public class Video extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Video settings");
+      frame = new JFrame(Language.get("WIN_VIDEO_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -171,10 +172,10 @@ public class Video extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TITLE"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TITLE"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -184,7 +185,7 @@ public class Video extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
@@ -196,10 +197,11 @@ public class Video extends Item implements ActionListener{
       JLabel height_l = new JLabel(Language.get("WIN_ITEM_HEIGHT"));
       height_tf = new JTextField();
       height_tf.setDocument(new NumbersOnlyDocument());
-      JLabel autoresize_l = new JLabel("Autoresize:");
+      JLabel autoresize_l = new JLabel(Language.get("WIN_VIDEO_AUTORESIZE"));
       autoresize_cb = new JComboBox(bool_values);
-      autoresize_cb.setToolTipText("Indicate whether the layout should be automatically resized to fit the dimensions of the played video.");
-      
+      autoresize_cb.setToolTipText(Language.get("WIN_VIDEO_AUTORESIZE_TITLE"));
+
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
@@ -277,7 +279,7 @@ public class Video extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
       frame.setMinimumSize(new Dimension(250,460));
       frame.setPreferredSize(new Dimension(250,460));

@@ -82,7 +82,7 @@ public class Skin implements ActionListener{
   public String themeinfo_name = THEMEINFO_NAME_DEFAULT;
   public String themeinfo_author = THEMEINFO_AUTHOR_DEFAULT;
   public String themeinfo_email = THEMEINFO_EMAIL_DEFAULT;
-  public String themeinfo_webpage = THEMEINFO_EMAIL_DEFAULT;
+  public String themeinfo_webpage = THEMEINFO_WEBPAGE_DEFAULT;
   File skinfile;
   public String skinfolder;
   public Main m;
@@ -122,6 +122,7 @@ public class Skin implements ActionListener{
     catch(Exception ex) {
       JOptionPane.showMessageDialog(null,Language.get("ERROR_NEWSKIN_TITLE")+"\n\n"+ex.toString(),Language.get("ERROR_NEWSKIN_TITLE"),JOptionPane.ERROR_MESSAGE);
     }
+    themeinfo_author = System.getProperty("user.name");
   }
   
   /**
@@ -468,7 +469,7 @@ public class Skin implements ActionListener{
         return;
       }
       if(Integer.parseInt(theme_movealpha_tf.getText())>255 || Integer.parseInt(theme_movealpha_tf.getText())<1) {
-        JOptionPane.showMessageDialog(theme_frame,Language.get("ERROR_MALPHA_MSG"),Language.get("ERROR_MALPHA_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(theme_frame,Language.get("ERROR_ALPHA_MSG"),Language.get("ERROR_ALPHA_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       ThemeEditEvent tee = new ThemeEditEvent(this);

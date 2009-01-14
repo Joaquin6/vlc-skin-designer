@@ -154,6 +154,7 @@ public class Anchor extends Item implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_ANCHOR_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));

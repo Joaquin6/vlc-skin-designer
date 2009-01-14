@@ -175,6 +175,7 @@ public class Image extends Item implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_IMAGE_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
@@ -201,7 +202,7 @@ public class Image extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
@@ -221,7 +222,7 @@ public class Image extends Item implements ActionListener{
       JLabel action2_l = new JLabel(Language.get("WIN_IMAGE_ACTION2"));
       action2_tf = new JTextField();
       action2_tf.setToolTipText(Language.get("WIN_IMAGE_ACTION2_TIP"));
-      action2_btn = new JButton("",s.m.editor_icon);
+      action2_btn = new JButton("",Main.editor_icon);
       action2_btn.addActionListener(this);
       
       ok_btn = new JButton(Language.get("BUTTON_OK"));

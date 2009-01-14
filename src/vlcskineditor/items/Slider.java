@@ -294,7 +294,8 @@ public class Slider extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Slider settings");
+      frame = new JFrame(Language.get("WIN_SLIDER_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -309,10 +310,10 @@ public class Slider extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -322,26 +323,25 @@ public class Slider extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
       
-      JLabel up_l = new JLabel("Normal image*:");
+      JLabel up_l = new JLabel(Language.get("WIN_SLIDER_UP"));
       up_tf = new JTextField();
-      JLabel over_l = new JLabel("Mouse-over image:");
+      JLabel over_l = new JLabel(Language.get("WIN_SLIDER_OVER"));
       over_tf = new JTextField();
-      JLabel down_l = new JLabel("Mouse-click image:");
+      JLabel down_l = new JLabel(Language.get("WIN_SLIDER_DOWN"));
       down_tf = new JTextField();
-      JLabel points_l = new JLabel("Points*:");
+      JLabel points_l = new JLabel(Language.get("WIN_SLIDER_POINTS"));
       points_tf = new JTextField();
-      JLabel thickness_l = new JLabel("Thickness:");
-      thickness_tf = new JTextField();
-      thickness_tf.setToolTipText("Thickness of the slider curve. This attribute is used to determine whether the mouse is over the slider (hence whether a mouse click will have an effect on the cursor position).");
-      JLabel value_l = new JLabel("Value*:");      
+      JLabel thickness_l = new JLabel(Language.get("WIN_SLIDER_THICKNESS"));
+      thickness_tf = new JTextField();      
+      JLabel value_l = new JLabel(Language.get("WIN_SLIDER_VALUE"));
       if (inPlaytree) {
-        String[] values = { "Playtree scrolling" };
+        String[] values = { Language.get("WIN_SLIDER_VALUE_SCROLL") };
         value_cb = new JComboBox(values);
       }
       else {
@@ -349,15 +349,13 @@ public class Slider extends Item implements ActionListener{
         value_cb = new JComboBox(values);
       }      
       JLabel tooltiptext_l = new JLabel(Language.get("WIN_ITEM_TOOLTIPTEXT"));
-      tooltiptext_tf = new JTextField();
+      tooltiptext_tf = new JTextField();     
       
-      
-      
-      sbg_chb = new JCheckBox("Enable Background");
+      sbg_chb = new JCheckBox(Language.get("WIN_SLIDER_BG_ENABLE"));
       sbg_chb.addActionListener(this);
-      sbg_btn = new JButton("Edit...");
+      sbg_btn = new JButton(Language.get("WIN_SLIDER_BG_EDIT"));
       sbg_btn.addActionListener(this);
-      
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
@@ -442,7 +440,7 @@ public class Slider extends Item implements ActionListener{
       button.add(tooltiptext_tf);
       tooltiptext_l.setBounds(5,195,75,24);
       tooltiptext_tf.setBounds(85,195,150,24);
-      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Slider Attributes"));
+      button.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SLIDER_ATTR")));
       button.setMinimumSize(new Dimension(240,225));
       button.setPreferredSize(new Dimension(240,225));
       button.setMaximumSize(new Dimension(240,225));
@@ -453,7 +451,7 @@ public class Slider extends Item implements ActionListener{
       back.add(sbg_btn);
       sbg_chb.setBounds(5,15,150,24);
       sbg_btn.setBounds(160,15,75,24);
-      back.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Slider background"));
+      back.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SLIDER_BG")));
       back.setMinimumSize(new Dimension(240,45));
       back.setPreferredSize(new Dimension(240,45));
       back.setMaximumSize(new Dimension(240,45));
@@ -462,7 +460,7 @@ public class Slider extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
       frame.setMinimumSize(new Dimension(250,630));
       frame.setPreferredSize(new Dimension(250,630));
@@ -510,24 +508,24 @@ public class Slider extends Item implements ActionListener{
       }
       up_res = s.getImageResource(up_tf.getText());
       if(up_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+up_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", up_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         up_res = s.getImageResource(up);
         return;
       }
       over_res = s.getImageResource(over_tf.getText());
       if(!over_tf.getText().equals("none") && over_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+over_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", over_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         over_res = s.getImageResource(over);
         return;
       }
       down_res = s.getImageResource(down_tf.getText());
       if(!down_tf.getText().equals("none") && down_res==null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+down_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", down_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         down_res = s.getImageResource(down);
         return;
       }
       if(points_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,"Please enter valid points!","Points not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_POINTS_INVALID"),Language.get("ERROR_POINTS_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();

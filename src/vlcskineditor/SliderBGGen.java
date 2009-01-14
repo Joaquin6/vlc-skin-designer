@@ -501,7 +501,7 @@ public class SliderBGGen extends JFrame implements ActionListener{
    */
   public static void main(String[] args) {
     Config.load();
-    Language.load(new java.io.File("lang"+java.io.File.separator+Config.get("language")+".txt"));
+    Language.loadLanguageByCode(Config.get("language"));
     
     try {	
       String laf = Config.get("swing.laf");

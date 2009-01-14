@@ -109,60 +109,97 @@ public class ActionPanel extends JPanel {
         bool_cb = new JComboBox(bools);
         if(action.toUpperCase().indexOf("TRUE")!=-1) bool_cb.setSelectedIndex(0);
         else bool_cb.setSelectedIndex(1);
-        add(bool_cb);        
-        desc.setText(Language.get("ACTION_RANDOM"));
-        add(desc);
+        int i = Language.get("ACTION_RANDOM").indexOf("%s");
+        String before = Language.get("ACTION_RANDOM").substring(0,i);
+        String after = Language.get("ACTION_RANDOM").substring(i+2);
+        add(new JLabel(before));
+        add(bool_cb);
+        add(new JLabel(after));
       }
       else if (action.indexOf(".setLoop")!=-1) {
         String[] bools = { Language.get("ACTION_ACTIVATE"), Language.get("ACTION_DEACTIVATE") };
         bool_cb = new JComboBox(bools);
         if(action.toUpperCase().indexOf("TRUE")!=-1) bool_cb.setSelectedIndex(0);
         else bool_cb.setSelectedIndex(1);
-        add(bool_cb);        
-        desc.setText(Language.get("ACTION_LOOP"));
-        add(desc);
+        int i = Language.get("ACTION_LOOP").indexOf("%s");
+        String before = Language.get("ACTION_LOOP").substring(0,i);
+        String after = Language.get("ACTION_LOOP").substring(i+2);
+        add(new JLabel(before));
+        add(bool_cb);
+        add(new JLabel(after));
       }
       else if (action.indexOf(".setRepeat")!=-1) {
         String[] bools = { Language.get("ACTION_ACTIVATE"), Language.get("ACTION_DEACTIVATE") };
         bool_cb = new JComboBox(bools);
         if(action.toUpperCase().indexOf("TRUE")!=-1) bool_cb.setSelectedIndex(0);
         else bool_cb.setSelectedIndex(1);
-        add(bool_cb);        
-        desc.setText(Language.get("ACTION_REPEAT"));
-        add(desc);
+        int i = Language.get("ACTION_REPEAT").indexOf("%s");
+        String before = Language.get("ACTION_REPEAT").substring(0,i);
+        String after = Language.get("ACTION_REPEAT").substring(i+2);
+        add(new JLabel(before));
+        add(bool_cb);
+        add(new JLabel(after));
       }
-      else if (action.indexOf(".show()")!=-1) {
-        desc.setText(Language.get("ACTION_SHOW"));
-        add(desc);
-        add(windowid_tf);
+      else if (action.indexOf(".show()")!=-1) {        
         windowid_tf.setText(action.substring(0,action.indexOf(".show()")));
+        int i = Language.get("ACTION_SHOW").indexOf("%i");
+        String before = Language.get("ACTION_SHOW").substring(0,i);
+        String after = Language.get("ACTION_SHOW").substring(i+2);
+        add(new JLabel(before));
+        add(windowid_tf);
+        add(new JLabel(after));
       }
       else if (action.indexOf(".hide()")!=-1) {
-        desc.setText(Language.get("ACTION_HIDE"));
-        add(desc);
-        add(windowid_tf);
         windowid_tf.setText(action.substring(0,action.indexOf(".hide()")));
-      }
-      else if (action.indexOf(".maximize()")!=-1) {
-        desc.setText(Language.get("ACTION_MAXIMIZE"));
-        add(desc);
+        int i = Language.get("ACTION_HIDE").indexOf("%i");
+        String before = Language.get("ACTION_HIDE").substring(0,i);
+        String after = Language.get("ACTION_HIDE").substring(i+2);
+        add(new JLabel(before));
         add(windowid_tf);
+        add(new JLabel(after));
+      }
+      else if (action.indexOf(".maximize()")!=-1) {        
         windowid_tf.setText(action.substring(0,action.indexOf(".maximize()")));
-      }
-      else if (action.indexOf(".unmaximize()")!=-1) {
-        desc.setText(Language.get("ACTION_UNMAXIMIZE"));
-        add(desc);
+        int i = Language.get("ACTION_MAXIMIZE").indexOf("%i");
+        String before = Language.get("ACTION_MAXIMIZE").substring(0,i);
+        String after = Language.get("ACTION_MAXIMIZE").substring(i+2);
+        add(new JLabel(before));
         add(windowid_tf);
+        add(new JLabel(after));
+      }
+      else if (action.indexOf(".unmaximize()")!=-1) {        
         windowid_tf.setText(action.substring(0,action.indexOf(".unmaximize()")));
-      }
-      else if (action.indexOf(".setLayout")!=-1) {
-        desc.setText(Language.get("ACTION_LAYOUT_OF"));
-        add(desc);
+        int i = Language.get("ACTION_MAXIMIZE").indexOf("%i");
+        String before = Language.get("ACTION_MAXIMIZE").substring(0,i);
+        String after = Language.get("ACTION_MAXIMIZE").substring(i+2);
+        add(new JLabel(before));
         add(windowid_tf);
-        windowid_tf.setText(action.substring(0,action.indexOf(".setLayout")));
-        add(new JLabel(Language.get("ACTION_LAYOUT_TO")));
-        add(layoutid_tf);
+        add(new JLabel(after));
+      }
+      else if (action.indexOf(".setLayout")!=-1) {        
+        windowid_tf.setText(action.substring(0,action.indexOf(".setLayout")));        
         layoutid_tf.setText(action.substring(action.indexOf("(")+1,action.indexOf(")")));
+        int i = Language.get("ACTION_LAYOUT").indexOf("%i");
+        int l = Language.get("ACTION_LAYOUT").indexOf("%l");
+        if(i>l) {
+          String before = Language.get("ACTION_LAYOUT").substring(0,l);
+          String inbetween = Language.get("ACTION_LAYOUT").substring(l+2,i);
+          String after = Language.get("ACTION_LAYOUT").substring(i+2);
+          add(new JLabel(before));
+          add(layoutid_tf);
+          add(new JLabel(inbetween));
+          add(windowid_tf);
+          add(new JLabel(after));
+        } else {
+          String before = Language.get("ACTION_LAYOUT").substring(0,i);
+          String inbetween = Language.get("ACTION_LAYOUT").substring(i+2,l);
+          String after = Language.get("ACTION_LAYOUT").substring(l+2);
+          add(new JLabel(before));
+          add(windowid_tf);
+          add(new JLabel(inbetween));
+          add(layoutid_tf);
+          add(new JLabel(after));
+        }
       }
       else {        
         add(desc);      

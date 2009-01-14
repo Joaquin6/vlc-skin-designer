@@ -174,7 +174,8 @@ public class Text extends Item implements ActionListener{
   @Override
   public void showOptions() {
     if(frame==null) {
-      frame = new JFrame("Text settings");
+      frame = new JFrame(Language.get("WIN_TEXT_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -189,10 +190,10 @@ public class Text extends Item implements ActionListener{
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
       lefttop_cb = new JComboBox(align_values);
-      lefttop_cb.setToolTipText("Indicate to which corner of the Layout the top-left-hand corner of this item is attached, in case of resizing.");
+      lefttop_cb.setToolTipText(Language.get("WIN_ITEM_LEFTTOP_TIP"));
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
-      rightbottom_cb.setToolTipText("Indicate to which corner of the Layout the bottom-right-hand corner of this item is attached, in case of resizing.");
+      rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
       Object[] bool_values = { true, false };
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
@@ -202,30 +203,31 @@ public class Text extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);      
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
       
-      JLabel text_l = new JLabel("Text:");
+      JLabel text_l = new JLabel(Language.get("WIN_TEXT_TEXT"));
       text_tf = new JTextField();
-      JLabel font_l = new JLabel("Font:");
+      JLabel font_l = new JLabel(Language.get("WIN_TEXT_FONT"));
       font_tf = new JTextField();
-      JLabel color_l = new JLabel("Color:");
+      JLabel color_l = new JLabel(Language.get("WIN_TEXT_COLOR"));
       color_tf = new JTextField();
-      color_btn = new JButton("Choose...");
+      color_btn = new JButton(Language.get("WIN_TEXT_CHOOSE"));
       color_btn.addActionListener(this);
       JLabel width_l = new JLabel(Language.get("WIN_ITEM_WIDTH"));
       width_tf = new JTextField();
       width_tf.setDocument(new NumbersOnlyDocument());
-      JLabel alignment_l = new JLabel("Alignment:");
+      JLabel alignment_l = new JLabel(Language.get("WIN_TEXT_ALIGNMENT"));
       String[] alignment_values = { "left","center","right" };
       alignment_cb = new JComboBox(alignment_values);
-      JLabel scrolling_l = new JLabel("Scrolling:");
+      JLabel scrolling_l = new JLabel(Language.get("WIN_TEXT_SCROLLING"));
       String[] scrolling_values = { "none","auto","manual" };      
       scrolling_cb = new JComboBox(scrolling_values);
-      
+
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
@@ -308,7 +310,7 @@ public class Text extends Item implements ActionListener{
       txt.add(scrolling_cb);
       scrolling_l.setBounds(5,165,75,24);
       scrolling_cb.setBounds(85,165,150,24);
-      txt.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Text Attributes"));
+      txt.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_TEXT_ATTR")));
       txt.setMinimumSize(new Dimension(240,195));
       txt.setPreferredSize(new Dimension(240,195));
       txt.setMaximumSize(new Dimension(240,195));
@@ -317,7 +319,7 @@ public class Text extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);      
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
       frame.setMinimumSize(new Dimension(250,550));
       frame.setPreferredSize(new Dimension(250,550));
@@ -360,7 +362,7 @@ public class Text extends Item implements ActionListener{
         }
       }      
       if(!font_tf.getText().equals("defaultfont") && s.getResource(font_tf.getText())==null) {
-        JOptionPane.showMessageDialog(frame,"The Font \""+font_tf.getText()+"\" does not exist.","Font not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_FONT_NEXIST").replaceAll("%i", font_tf.getText()),Language.get("ERROR_FONT_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();
@@ -372,7 +374,7 @@ public class Text extends Item implements ActionListener{
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/i-text.html");
     }
     else if (e.getSource().equals(color_btn)) {
-      Color color_c = JColorChooser.showDialog(frame,"Choose text color",Color.decode(color_tf.getText()));
+      Color color_c = JColorChooser.showDialog(frame,Language.get("WIN_TEXT_CHOOSER_TITLE"),Color.decode(color_tf.getText()));
       if (color_c != null) {
         String hex = "#";
         if(color_c.getRed()<16) hex+="0";

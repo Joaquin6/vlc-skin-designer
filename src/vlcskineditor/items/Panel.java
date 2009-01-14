@@ -204,6 +204,7 @@ public class Panel extends Item implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_PANEL_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
@@ -331,7 +332,7 @@ public class Panel extends Item implements ActionListener{
       width_tf.setPreferredSize(new Dimension(tf_wd,width_tf.getPreferredSize().height));
       dim.add(height_l);
       dim.add(height_tf);
-      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Dimensions"));
+      dim.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_PANEL_DIMENSIONS")));
 
       SpringLayout dim_layout = new SpringLayout();
 

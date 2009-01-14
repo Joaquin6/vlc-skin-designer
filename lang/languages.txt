@@ -1,0 +1,4 @@
+#Available languages
+#language code|Human-readable name|language file
+en|English|en.txt
+de|German|de.txt

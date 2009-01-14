@@ -43,7 +43,8 @@ public class Config {
   static {
     //Default values
     strings.put("autoupdate", "true");
-    strings.put("language", "English");
+    strings.put("language", "en");
+    if(Language.isLanguageAvailable(System.getProperty("user.language"))) strings.put("language",System.getProperty("user.language"));
     strings.put("win.main.width","800");
     strings.put("win.main.height","600");
     strings.put("win.main.maximized","false");
@@ -155,21 +156,14 @@ public class Config {
     final JCheckBox update_cb = new JCheckBox();
     update_cb.setSelected(Boolean.parseBoolean(Config.get("autoupdate")));
     
-    JLabel lang_l = new JLabel(Language.get("WIN_PREFS_LANG_L"));    
-    File[] lang_files = new File("lang").listFiles(new FileFilter() {
-      @Override
-      public boolean accept(File f) {
-        return f.getName().toLowerCase().endsWith(".txt");
-      }
-    });
-    String[] lang_choices = new String[lang_files.length];
-    int sel = 0;
-    for(int i=0;i<lang_files.length;i++) {
-      lang_choices[i] = lang_files[i].getName().replaceAll("\\.txt", "");
-      if(lang_choices[i].equals(Config.get("language"))) sel = i;
-    }
+    JLabel lang_l = new JLabel(Language.get("WIN_PREFS_LANG_L"));
+    Object[] lang_choices = Language.getAvailableLanguages().toArray();
     final JComboBox lang_cb = new JComboBox(lang_choices);
-    lang_cb.setSelectedIndex(sel);
+    for(int i=0;i<lang_choices.length;i++) {
+      if( ((Language)lang_choices[i]).getCode().equals(get("language")) ) {
+        lang_cb.setSelectedIndex(i);
+      }
+    }
     
     JLabel laf_l = new JLabel(Language.get("WIN_PREFS_LAF_L"));
     String[] lafs = { "System" , "Metal: Steel", "Metal: Ocean" };
@@ -183,7 +177,7 @@ public class Config {
       @Override
       public void actionPerformed(ActionEvent e) {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
-        strings.put("language", (String)lang_cb.getSelectedItem());        
+        strings.put("language", ((Language)lang_cb.getSelectedItem()).getCode());
         strings.put("swing.laf", (String)laf_cb.getSelectedItem());                
         frame.setVisible(false);
         frame.dispose();

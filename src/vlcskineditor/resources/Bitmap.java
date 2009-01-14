@@ -218,8 +218,8 @@ public class Bitmap extends ImageResource implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_BITMAP_TITLE"));
-      frame.setResizable(false);
-      frame.setLayout(new FlowLayout());      
+      frame.setIconImage(Main.edit_icon.getImage());
+      frame.setResizable(false); 
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();
       id_tf.setToolTipText(Language.get("WIN_ITEM_ID_TIP".replaceAll("%t", type)));

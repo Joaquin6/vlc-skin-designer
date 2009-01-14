@@ -181,8 +181,8 @@ public class Button extends Item implements ActionListener{
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_BUTTON_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
@@ -208,7 +208,7 @@ public class Button extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",s.m.help_icon);
+      visible_btn = new JButton("",Main.help_icon);
       visible_btn.addActionListener(this);
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
@@ -222,7 +222,7 @@ public class Button extends Item implements ActionListener{
       down_tf = new JTextField();
       JLabel action_l = new JLabel(Language.get("WIN_BUTTON_ACTION"));
       action_tf = new JTextField();
-      action_btn = new JButton("",s.m.editor_icon);
+      action_btn = new JButton("",Main.editor_icon);
       action_btn.addActionListener(this);
       JLabel tooltiptext_l = new JLabel(Language.get("WIN_ITEM_TOOLTIPTEXT"));
       tooltiptext_tf = new JTextField();

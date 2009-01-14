@@ -138,29 +138,30 @@ public class SliderBackground extends Item implements ActionListener{
   }  
   public void showOptions() {    
     if(frame==null) {
-      frame = new JFrame("Slider background settings");
+      frame = new JFrame(Language.get("WIN_SBG_TITLE"));
+      frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
       frame.setLayout(new FlowLayout());
       if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
       id_tf = new JTextField();      
-      gen_btn = new JButton("Open slider background wizard...");
+      gen_btn = new JButton(Language.get("WIN_SBG_WIZARD"));
       gen_btn.addActionListener(this);
-      JLabel image_l = new JLabel("Image*:");
+      JLabel image_l = new JLabel(Language.get("WIN_SBG_IMAGE"));
       image_tf = new JTextField();
-      JLabel nbhoriz_l =  new JLabel("Horiz. Sub-images:");
+      JLabel nbhoriz_l =  new JLabel(Language.get("WIN_SBG_NBHORIZ"));
       nbhoriz_tf = new JTextField();
       nbhoriz_tf.setDocument(new NumbersOnlyDocument());
-      JLabel nbvert_l =  new JLabel("Vert. Sub-images:");
+      JLabel nbvert_l =  new JLabel(Language.get("WIN_SBG_NBVERT"));
       nbvert_tf = new JTextField();
       nbvert_tf.setDocument(new NumbersOnlyDocument());
-      JLabel padhoriz_l =  new JLabel("Horiz. padding:");
+      JLabel padhoriz_l =  new JLabel(Language.get("WIN_SBG_PADHORIZ"));
       padhoriz_tf = new JTextField();
       padhoriz_tf.setDocument(new NumbersOnlyDocument());
-      JLabel padvert_l =  new JLabel("Vert. padding:");
+      JLabel padvert_l =  new JLabel(Language.get("WIN_SBG_PADVERT"));
       padvert_tf = new JTextField();
       padvert_tf.setDocument(new NumbersOnlyDocument());
-      
+      JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
       ok_btn.setPreferredSize(new Dimension(70,25));
@@ -206,7 +207,7 @@ public class SliderBackground extends Item implements ActionListener{
       specific.add(padvert_tf);
       padvert_l.setBounds(5,135,75,24);
       padvert_tf.setBounds(85,135,150,24);
-      specific.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Background Attributes"));
+      specific.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_SBG_ATTR")));
       specific.setMinimumSize(new Dimension(240,165));
       specific.setPreferredSize(new Dimension(240,165));
       specific.setMaximumSize(new Dimension(240,165));
@@ -215,7 +216,7 @@ public class SliderBackground extends Item implements ActionListener{
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
-      frame.add(new JLabel(Language.get("NOTE_STARRED")));
+      frame.add(attr_l);
       
       frame.setMinimumSize(new Dimension(250,320));
       frame.setPreferredSize(new Dimension(250,320));
@@ -247,7 +248,7 @@ public class SliderBackground extends Item implements ActionListener{
       }
       image_res = s.getImageResource(image_tf.getText());
       if(image_res == null) {
-        JOptionPane.showMessageDialog(frame,"The bitmap \""+image_tf.getText()+"\" does not exist!","Image not valid",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", image_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         image_res = s.getImageResource(image);
         return;
       }
