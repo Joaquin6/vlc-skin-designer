@@ -255,7 +255,7 @@ public class Slider extends Item implements ActionListener{
       s.updateItems();   
       s.expandItem(id);
       created=true;
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(sae);
@@ -591,7 +591,6 @@ public class Slider extends Item implements ActionListener{
 
       frame.setLayout(layout);
 
-      
       frame.pack();
       
       frame.getRootPane().setDefaultButton(ok_btn);

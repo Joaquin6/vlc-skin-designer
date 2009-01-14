@@ -213,7 +213,7 @@ public class Layout implements ActionListener{
       s.updateWindows();
       s.expandLayout(id);
       created = true;
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       s.m.hist.addEvent(lae);
     }
     else {

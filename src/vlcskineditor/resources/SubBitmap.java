@@ -126,7 +126,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      //frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
+      //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);
@@ -142,7 +142,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       height=Integer.parseInt(height_tf.getText());
       nbframes=Integer.parseInt(nbframes_tf.getText());
       fps=Integer.parseInt(fps_tf.getText());   
-      //frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);    
+      //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    
       updateImage();
       s.updateResources();
       s.expandResource(id);

@@ -142,7 +142,7 @@ public class Group extends Item implements ActionListener{
       }
       s.updateItems();    
       s.expandItem(id);
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
       
       ItemAddEvent gaa = new ItemAddEvent(s.getParentListOf(id),this);

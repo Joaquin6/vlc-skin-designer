@@ -129,7 +129,7 @@ public class Anchor extends Item implements ActionListener{
       updateBezier();
       s.updateItems();
       s.expandItem(id);
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
       ItemAddEvent aae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(aae);

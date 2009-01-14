@@ -164,13 +164,10 @@ public class SliderBackground extends Item implements ActionListener{
       JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
       
       
       JPanel general = new JPanel(null);

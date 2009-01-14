@@ -169,7 +169,7 @@ public class Panel extends Item implements ActionListener{
       for(Item i:items) {
         i.setOffset(x,y);
       }
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
       
       ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id),this);

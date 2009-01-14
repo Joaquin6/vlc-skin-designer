@@ -137,7 +137,7 @@ public class Text extends Item implements ActionListener{
 
       s.updateItems();
       s.expandItem(id);
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
       
       ItemAddEvent tae = new ItemAddEvent(s.getParentListOf(id),this);
@@ -230,13 +230,10 @@ public class Text extends Item implements ActionListener{
       JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
-      ok_btn.setPreferredSize(new Dimension(70,25));
       cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       cancel_btn.addActionListener(this);
-      cancel_btn.setPreferredSize(new Dimension(70,25));
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      help_btn.setPreferredSize(new Dimension(70,25));
       
       JPanel general = new JPanel(null);
       general.add(id_l);

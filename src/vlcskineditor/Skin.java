@@ -369,7 +369,7 @@ public class Skin implements ActionListener{
       theme_frame = new JFrame(Language.get("WIN_THEME_TITLE"));
       theme_frame.setResizable(false);
       theme_frame.setLayout(new FlowLayout());
-      theme_frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+      theme_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       JLabel themeinfo_name_l = new JLabel(Language.get("WIN_THEME_NAME"));
       themeinfo_name_tf = new JTextField();
@@ -393,13 +393,12 @@ public class Skin implements ActionListener{
       theme_alpha_tf.setToolTipText(Language.get("WIN_THEME_MOVEALPHA_TIP"));
       theme_ok_btn = new JButton(Language.get("BUTTON_OK"));
       theme_ok_btn.addActionListener(this);
-      theme_ok_btn.setPreferredSize(new Dimension(70,25));
       theme_cancel_btn = new JButton(Language.get("BUTTON_CANCEL"));
       theme_cancel_btn.addActionListener(this);
-      theme_cancel_btn.setPreferredSize(new Dimension(70,25));
       theme_help_btn = new JButton(Language.get("BUTTON_HELP"));
       theme_help_btn.addActionListener(this);
-      theme_help_btn.setPreferredSize(new Dimension(70,25));
+
+      //TODO new layout!!!
       
       JPanel themeinfo_p = new JPanel(null);
       themeinfo_p.add(themeinfo_name_l);

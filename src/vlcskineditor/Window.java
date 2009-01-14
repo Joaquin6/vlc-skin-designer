@@ -135,7 +135,7 @@ public class Window implements ActionListener{
       playondrop=Boolean.parseBoolean(playondrop_tf.getText());
       s.updateWindows();    
       created = true;
-      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);      
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      
       s.m.hist.addEvent(wae);
     }
     else {
