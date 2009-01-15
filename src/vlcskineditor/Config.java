@@ -38,8 +38,8 @@ import javax.swing.*;
 public class Config {
   
   private static Hashtable<String, String> strings = new Hashtable<String, String>();
-  private static File configFile = new File("VLCSkinEditor.cfg");
-  
+  private static File configFile;
+
   static {
     //Default values
     strings.put("autoupdate", "true");
@@ -61,6 +61,17 @@ public class Config {
     strings.put("win.items.width","190");
     strings.put("win.items.height","200");
     strings.put("swing.laf","System");
+
+    //Locate the config file
+    if(System.getProperty("os.name").indexOf("Windows")!=-1) {
+      File parent = new File(System.getenv("APPDATA"),"vlc");
+      if(!parent.exists()) parent.mkdirs();
+      configFile = new File(parent,"VLCSkinEditor.cfg");
+    } else {
+      File parent = new File("~/.vlc");
+      if(!parent.exists()) parent.mkdirs();
+      configFile = new File(parent,"VLCSkinEditor.cfg");
+    }
   }
   
   /**
