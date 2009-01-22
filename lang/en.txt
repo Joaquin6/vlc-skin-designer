@@ -54,8 +54,8 @@ MENU_EDIT_UNDO|Undo
 MENU_EDIT_UNDO_MN|U
 MENU_EDIT_REDO|Redo
 MENU_EDIT_REDO_MN|R
-MENU_EDIT_THEME|Theme settings
-MENU_EDIT_THEME_MN|T
+MENU_EDIT_THEME|Skin settings
+MENU_EDIT_THEME_MN|S
 MENU_EDIT_VARS|Global variables
 MENU_EDIT_VARS_MN|G
 MENU_EDIT_PREFS|Preferences
@@ -127,7 +127,7 @@ WIN_VARS_NOTE|<html>These variables only affect the preview.<br>They simulate th
 WIN_VARS_SLIDER|Slider position
 
 #Theme options window
-WIN_THEME_TITLE|Theme settings
+WIN_THEME_TITLE|Skin settings
 WIN_THEME_NAME|Name:
 WIN_THEME_AUTHOR|Author:
 WIN_THEME_EMAIL|Author's E-Mail:
