@@ -90,7 +90,7 @@ WIN_WIN_ADD_LAY|Add a new layout to the selected window
 WIN_WIN_MOVE_UP|Move selected layout up in hierarchy (last layout is the default layout for the window)
 WIN_WIN_MOVE_DOWN|Move selected layout down in hierarchy (last layout is the default layout for the window)
 WIN_WIN_COPY|Create a copy of the selected window or layout
-WIN_WIN_EDIT|Edit the selecte window or layout
+WIN_WIN_EDIT|Edit the selected window or layout
 WIN_WIN_DELETE|Delete the selected window or layout
 
 #Items window
