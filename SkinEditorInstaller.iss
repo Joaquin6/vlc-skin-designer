@@ -5,8 +5,7 @@ Source: README.TXT; DestDir: {app}; Flags: isreadme
 Source: skin.dtd; DestDir: {app}
 Source: share/VLCSkinEditor.exe; DestDir: {app}
 Source: VLCSkinEditor.jar; DestDir: {app}
-Source: lang/English.txt; DestDir: {app}/lang
-Source: lang/english/*.txt; DestDir: {app}/lang/english/
+Source: lang/*.txt; DestDir: {app}/lang
 [Icons]
 Name: {group}\VLC Skin Editor; Filename: {app}\VLCSkinEditor.exe; WorkingDir: {app}; IconFilename: {app}\VLCSkinEditor.exe; IconIndex: 0
 Name: {group}\Uninstall VLC Skin Editor; Filename: {uninstallexe}
