@@ -40,7 +40,6 @@ import javax.swing.SpringLayout;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import vlcskineditor.history.LayoutAddEvent;
 import vlcskineditor.history.LayoutEditEvent;
 import vlcskineditor.items.*;

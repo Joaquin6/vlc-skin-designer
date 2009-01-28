@@ -88,7 +88,9 @@ public class Skin implements ActionListener{
   File skinfile;
   public String skinfolder;
   public Main m;
+  //Currently selected window or parent window of currently selected Layout
   Window active_window = null;
+  //Currently selected layout
   Layout active_layout = null;
   int unnamed_ids = 0;  
   
@@ -780,6 +782,23 @@ public class Skin implements ActionListener{
     m.res_tree_model.setRoot(getResourcesTree());
     m.saved=false;
   }
+  /** Recreates the window hierarchies **/
+  public void updateWindows() {
+    m.win_tree_model.setRoot(getWindowsTree());
+    m.saved=false;
+  }
+  /** Recreates the item hierarchies **/
+  public void updateItems() {
+    m.items_tree_model.setRoot(getItemsTree());
+    m.saved=false;
+  }
+  /** Updates everything **/
+  public void update() {
+    updateResources();
+    updateWindows();
+    updateItems();
+    m.saved=false;
+  }
   /** Make an Resource of the given id visible in the tree (expand the TreePath) **/
   public void expandResource(String id) {   
     Resource r = getResource(id);
@@ -825,16 +844,6 @@ public class Skin implements ActionListener{
     TreePath ltp = findInTree(m.win_tree,id);
     if(ltp==null) return;
     m.win_tree.setSelectionPath(ltp);
-  }
-  /** Recreates the window hierarchies **/
-  public void updateWindows() {    
-    m.win_tree_model.setRoot(getWindowsTree());
-    m.saved=false;
-  }
-  /** Recreates the item hierarchies **/
-  public void updateItems() {
-    m.items_tree_model.setRoot(getItemsTree());
-    m.saved=false;
   }  
   /** Make an item of the given id visible in the tree (expand the TreePath) **/
   public void expandItem(String id) {
@@ -867,12 +876,5 @@ public class Skin implements ActionListener{
         row = (row + 1 + max) % max;
     } while (row != 0);
     return null;
-  }
-  /** Updates everything **/
-  public void update() {
-    updateResources();
-    updateWindows();
-    updateItems();    
-    m.saved=false;
-  }
+  }  
 }

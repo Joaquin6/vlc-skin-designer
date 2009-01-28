@@ -54,32 +54,38 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   //The version identification of the current build.   
   public final static String VERSION = "0.8.0.dev";
   //The directory in which the VLC executable is found
-  String vlc_dir = "";
+  private String vlc_dir = "";
   //The directory from which VLC loads its skins
-  String vlc_skins_dir = "";
-  JMenuBar mbar;
-  JMenu m_file, m_edit, m_help;
-  JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
-  JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
-  JMenuItem m_help_doc, m_help_about;  
-  JDesktopPane jdesk;
-  JInternalFrame resources,windows,items,current_window;  
-  JTree res_tree,win_tree,items_tree;  
-  DefaultTreeModel res_tree_model, win_tree_model, items_tree_model;
-  JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
-  JPopupMenu res_add_bitmap_pu;
-  JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
-  JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_duplicate, win_edit, win_del;  
-  JButton items_add, items_up, items_down, items_duplicate, items_edit, items_del;
-  JPopupMenu items_add_pu;  
-  JMenu items_add_pu_tp;
-  JMenuItem items_add_pu_tp_anchor, items_add_pu_tp_button, items_add_pu_tp_checkbox;
-  JMenuItem items_add_pu_tp_image, items_add_pu_tp_panel;
-  JMenuItem items_add_pu_tp_playtree, items_add_pu_tp_slider, items_add_pu_tp_text, items_add_pu_tp_video;
-  JMenuItem items_add_pu_anchor, items_add_pu_button, items_add_pu_checkbox;
-  JMenuItem items_add_pu_image, items_add_pu_panel;
-  JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;  
+  private String vlc_skins_dir = "";
+
+  private JMenuBar mbar;
+  private JMenu m_file, m_edit, m_help;
+  private JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
+  private JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
+  private JMenuItem m_help_doc, m_help_about;
+
+  private JDesktopPane jdesk;
+  private JInternalFrame resources,windows,items;
+  protected JTree res_tree,win_tree,items_tree;
+  protected DefaultTreeModel res_tree_model, win_tree_model, items_tree_model;
+  private DefaultTreeCellRenderer tree_renderer = new TreeRenderer();
+  private JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
+  private JPopupMenu res_add_bitmap_pu;
+  private JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
+  private JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_duplicate, win_edit, win_del;
+  private JButton items_add, items_up, items_down, items_duplicate, items_edit, items_del;
+  private JPopupMenu items_add_pu;
+  private JMenu items_add_pu_tp;
+  private JMenuItem items_add_pu_tp_anchor, items_add_pu_tp_button, items_add_pu_tp_checkbox;
+  private JMenuItem items_add_pu_tp_image, items_add_pu_tp_panel;
+  private JMenuItem items_add_pu_tp_playtree, items_add_pu_tp_slider, items_add_pu_tp_text, items_add_pu_tp_video;
+  private JMenuItem items_add_pu_anchor, items_add_pu_button, items_add_pu_checkbox;
+  private JMenuItem items_add_pu_image, items_add_pu_panel;
+  private JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;
+
+  //The Skin
   Skin s;
+
   public static ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");
   public static ImageIcon add_font_icon = createIcon("icons/add_font.png");
   public static ImageIcon copy_icon = createIcon("icons/copy.png");
@@ -105,11 +111,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public static ImageIcon resources_icon = createIcon("icons/resources.png");
   public static ImageIcon windows_icon = createIcon("icons/windows.png");
   public static ImageIcon items_icon = createIcon("icons/items.png");
+  public static ImageIcon preview_icon = createIcon("icons/preview.png");
     
-  DefaultTreeCellRenderer tree_renderer = new TreeRenderer();  
-  String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
-  JFileChooser base_fc, bitmap_adder, font_adder, vlt_saver;
-  PreviewWindow pvwin;
+  //IDs of selected objects
+  protected String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
+  
+  private JFileChooser base_fc, bitmap_adder, font_adder, vlt_saver;
+  //The preview window
+  protected PreviewWindow pvwin;
   //Specifies whether changes were made without having saved the skin.  
   public boolean saved = false;
   //Specifies whether a file is currently being opened
@@ -118,7 +127,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   boolean opened = false;
   //Handles undoing and redoing of actions
   public History hist;
-
+  //Textfield width for all editing dialogs
   public static final int TEXTFIELD_WIDTH = 200;
   
    /**
@@ -1561,7 +1570,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   @Override
   public void windowDeactivated(WindowEvent e) {
     if(pvwin==null || pvwin.fu==null) return;
-    pvwin.fu.run = false;
+    pvwin.fu.stopRunning();
     pvwin.fu = null;
   }
   @Override
@@ -1574,7 +1583,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   @Override
   public void windowIconified(WindowEvent e) {
     if(pvwin==null || pvwin.fu==null) return;
-    pvwin.fu.run = false;
+    pvwin.fu.stopRunning();
     pvwin.fu = null;
   }
   @Override
@@ -1759,7 +1768,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       ex.printStackTrace();
     }
   }
-  
+
+  /**
+   * Checks wheter the skin is saved and asks back if not. Then exits or aborts when user chooses to do so.
+   */
   private void exit() {
     if(!saved) {
       Object[] options= { Language.get("CHOICE_YES"), Language.get("CHOICE_NO"), Language.get("CHOICE_CANCEL") };
@@ -1788,7 +1800,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       doExit();
     }
   }
-  
+
+  /**
+   * Saves the configuration and quits the program
+   */
   private void doExit() {
     if(getExtendedState()!=JFrame.MAXIMIZED_BOTH) {
       Config.set("win.main.x",getX());

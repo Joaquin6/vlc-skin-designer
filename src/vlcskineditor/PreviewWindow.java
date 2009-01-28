@@ -84,7 +84,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     frame.setMinimumSize(zoom_panel.getPreferredSize());
     frame.setVisible(false);
     frame.setResizable(true);        
-    frame.setFrameIcon(createIcon("icons/preview.png"));
+    frame.setFrameIcon(Main.preview_icon);
     addMouseListener(this);
     addMouseMotionListener(this);    
   }
@@ -98,7 +98,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     if(selected_item!=null) selected_item.setSelected(false);
     selected_item=null;
     frame.setVisible(false);
-    if(fu!=null) fu.run = false;
+    if(fu!=null) fu.stopRunning();
     fu=null;
   }
   /**
@@ -254,20 +254,6 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     }
     catch (NullPointerException ex) {
       /* empty */
-    }
-  }
-  /**
-   * Creates an ImageIcon from a file.
-   */
-  public ImageIcon createIcon(String filename) {
-    java.awt.Image img = null;    
-    try {
-      img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));
-      //img = ImageIO.read(file);
-      return new ImageIcon(img);  
-    } catch (Exception e) {
-      System.out.println(e);
-      return null;
     }
   }
   /**

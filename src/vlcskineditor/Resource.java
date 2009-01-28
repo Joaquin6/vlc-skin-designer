@@ -22,8 +22,7 @@
 
 package vlcskineditor;
 
-import javax.swing.*;
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 /**
  * Abstract superclass representing a Bitmap, SubBitmap or Font
  * @author Daniel Dreibrodt

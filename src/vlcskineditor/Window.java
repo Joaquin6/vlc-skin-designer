@@ -29,7 +29,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

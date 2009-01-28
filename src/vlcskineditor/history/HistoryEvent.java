@@ -28,7 +28,7 @@ package vlcskineditor.history;
  */
 public abstract class HistoryEvent {
   
-  protected HistoryEvent next, previous;
+  private HistoryEvent next, previous;
   
   /** Creates a new HistoryEvent */
   public HistoryEvent() {

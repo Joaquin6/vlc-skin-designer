@@ -33,7 +33,7 @@ public class FrameUpdater extends Thread{
   JPanel c;
   int fps = 1;
   /** causes the thread to stop when set to true */
-  boolean run = false;
+  private boolean run = false;
   
   /** Creates a new instance of FrameUpdater
    * @param c_ The panel to redraw
@@ -58,5 +58,9 @@ public class FrameUpdater extends Thread{
       }           
     }
     return;
+  }
+
+  public void stopRunning() {
+    run = false;
   }
 }

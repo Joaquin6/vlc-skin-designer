@@ -25,6 +25,7 @@ package vlcskineditor;
 import java.io.*;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Class to manage the multi-language interface
@@ -133,7 +134,7 @@ public class Language {
     }
   }
 
-  public static LinkedList<Language> getAvailableLanguages() {
+  public static List<Language> getAvailableLanguages() {
     return langs;
   }
 

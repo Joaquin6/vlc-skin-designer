@@ -164,7 +164,6 @@ public class XML {
         children.add(new Text(nodes.item(i), s));
       else if(nodes.item(i).getNodeName().equals("Video"))
         children.add(new Video(nodes.item(i), s));
-
     }
   }
 }
