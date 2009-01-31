@@ -278,7 +278,7 @@ public class Checkbox extends Item implements ActionListener{
       over2_tf = new JTextField();
       JLabel down2_l = new JLabel(Language.get("WIN_CHECKBOX_DOWN"));
       down2_tf = new JTextField();
-      JLabel action2_l = new JLabel(Language.get("WIN_CHECKBOX_OVER"));
+      JLabel action2_l = new JLabel(Language.get("WIN_CHECKBOX_ACTION"));
       action2_tf = new JTextField();
       action2_btn = new JButton("",Main.editor_icon);
       action2_btn.addActionListener(this);
