@@ -64,7 +64,7 @@ public class Anchor extends Item implements ActionListener{
    */
   public Anchor(Node n, Skin s_) {
     s = s_;
-    id = type+" #"+s.getNewId();
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
     points = XML.getStringAttributeValue(n, "points", points);
     priority = XML.getIntAttributeValue(n, "priority", priority);
     range = XML.getIntAttributeValue(n, "range", range);
@@ -357,12 +357,12 @@ public class Anchor extends Item implements ActionListener{
   @Override
   public String returnCode(String indent) {
     String code = indent+"<Anchor";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" priority=\""+String.valueOf(priority)+"\"";
     if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";    
     code+="/>";
-    //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
     return code;
   }
   @Override

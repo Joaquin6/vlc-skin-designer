@@ -436,7 +436,8 @@ public class Panel extends Item implements ActionListener{
     }
   }
   public String returnCode(String indent) {
-    String code = indent+"<Panel";    
+    String code = indent+"<Panel";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" width=\""+String.valueOf(width)+"\" height=\""+String.valueOf(height)+"\"";
@@ -445,7 +446,6 @@ public class Panel extends Item implements ActionListener{
     if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
     if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
     code+=">";
-    if (!id.equals(ID_DEFAULT)) code+="<!--  id=\""+id+"\" -->";
     for (int i=0;i<items.size();i++) {
       code+="\n"+items.get(i).returnCode(indent+Skin.indentation);
     }

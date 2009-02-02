@@ -302,11 +302,11 @@ public class Group extends Item implements ActionListener{
   }
   @Override
   public String returnCode(String indent) {
-    String code = indent+"<Group";    
+    String code = indent+"<Group";
+    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";    
-    code+=">";
-    //if (id!=ID_DEFAULT) code+="<!-- id=\""+id+"\" -->";
+    code+=">";    
     for (int i=0;i<items.size();i++) {
       code+="\n"+items.get(i).returnCode(indent+Skin.indentation);
     }
