@@ -1673,7 +1673,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private void update() {
     if(VERSION.contains("dev")) return; //Development build won't be updated
     try {
-      URL updateURL = new URL(updateURL_s);
+      URL updateURL = new URL(updateURL_s+"?v="+URLEncoder.encode(VERSION,"UTF-8")+"&os="+URLEncoder.encode(System.getProperty("os.name"),"UTF-8"));
       InputStream uis = updateURL.openStream();
       InputStreamReader uisr = new InputStreamReader(uis);
       BufferedReader ubr = new BufferedReader(uisr);
@@ -1836,6 +1836,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+    //Post update code, only executed after update
     if(new File(".updated").exists()) {
       //Post update steps for 0.7.5
       System.out.println("Performing post-update steps to "+VERSION);
@@ -1874,7 +1875,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
 
       new File(".updated").delete();
     }
-    
+
+    //Normal program code    
     Config.load();
     Language.loadLanguageByCode(Config.get("language"));
     
