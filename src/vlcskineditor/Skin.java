@@ -845,14 +845,19 @@ public class Skin implements ActionListener{
     if(ltp==null) return;
     m.win_tree.setSelectionPath(ltp);
   }  
-  /** Make an item of the given id visible in the tree (expand the TreePath) **/
+  /**
+   * Make an item of the given id visible in the tree (expand the TreePath)
+   * @param id The id of the item to expand
+   **/
   public void expandItem(String id) {
     java.util.List<String> parents = new LinkedList<String>();
     Item p = getItem(id);
     if(p==null) return;
+    //Trace parents
     while((p=active_layout.getParentOf(p.id))!=null) {      
       parents.add(p.id);
     }
+    //Open each parent, starting with the highest one in hierarchy
     for(int i=parents.size()-1;i>=0;i--) {      
       TreePath tp = findInTree(m.items_tree,parents.get(i));
       if(tp==null) {
@@ -860,10 +865,11 @@ public class Skin implements ActionListener{
         return;
       }
       m.items_tree.expandPath(tp);
-      TreePath stp = findInTree(m.items_tree,id);
-      if(stp==null) return;
-      m.items_tree.setSelectionPath(stp);
-    }    
+    }
+    //Finding selection path
+    TreePath stp = findInTree(m.items_tree,id);
+    if(stp==null) return;
+    m.items_tree.setSelectionPath(stp);
   }
   /** Finds the first occurence of id in the first expanded tree in the given JTree**/
   public TreePath findInTree(JTree jt, String id) {    

@@ -137,7 +137,7 @@ public class Panel extends Item implements ActionListener{
       }
     }
     for(Item i:items) {
-      i.setOffset(x,y);
+      i.setOffset(x+offsetx,y+offsety);
     }
     created = true;
   }
@@ -167,7 +167,7 @@ public class Panel extends Item implements ActionListener{
       s.updateItems();    
       s.expandItem(id);
       for(Item i:items) {
-        i.setOffset(x,y);
+        i.setOffset(x+offsetx,y+offsety);
       }
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
@@ -194,7 +194,7 @@ public class Panel extends Item implements ActionListener{
       s.updateItems();    
       s.expandItem(id);
       for(Item i:items) {
-        i.setOffset(x,y);
+        i.setOffset(x+offsetx,y+offsety);
       }
       
       pee.setNew();
@@ -236,8 +236,10 @@ public class Panel extends Item implements ActionListener{
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
       JLabel width_l = new JLabel(Language.get("WIN_PANEL_WIDTH"));
       width_tf = new JTextField();
+      width_tf.setDocument(new NumbersOnlyDocument());
       JLabel height_l = new JLabel(Language.get("WIN_PANEL_HEIGHT"));
       height_tf = new JTextField();
+      height_tf.setDocument(new NumbersOnlyDocument());
       JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
@@ -453,12 +455,12 @@ public class Panel extends Item implements ActionListener{
     return code;
   }
   public void draw(Graphics2D g, int z) {     
-     draw(g,offsetx, offsety, z);
+     draw(g, offsetx, offsety, z);
   }
   public void draw(Graphics2D g, int x_, int y_, int z) {    
     for(Item i:items) {
-      i.draw(g, x+x, y+y_, z);
-      i.setOffset(x+offsetx,y+offsety);
+      i.setOffset(x+x_,y+y_);
+      i.draw(g, x+x_, y+y_, z);
     }
     if(selected) {
       g.setColor(Color.RED);

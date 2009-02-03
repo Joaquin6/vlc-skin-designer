@@ -85,7 +85,7 @@ public class PanelEditEvent extends HistoryEvent{
     p.height = height_old;
     
     for(Item i:p.items) {
-      i.setOffset(x_old,y_old);
+      i.setOffset(x_old+p.offsetx,y_old+p.offsety);
     }
   }
   @Override
@@ -104,7 +104,7 @@ public class PanelEditEvent extends HistoryEvent{
     p.height = height_new;
     
     for(Item i:p.items) {
-      i.setOffset(x_new,y_new);
+      i.setOffset(x_new+i.offsetx,y_new+i.offsety);
     }
   }
   @Override

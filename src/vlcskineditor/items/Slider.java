@@ -732,8 +732,8 @@ public class Slider extends Item implements ActionListener{
     offsety=y_;
     //boolean vis = s.gvars.parseBoolean(visible);
     if(sbg!=null && vis) {
-      sbg.draw(g,x+x_,y+y_,z);
-      sbg.setOffset(x+offsetx,y+offsety);
+      sbg.setOffset(x+x_,y+y_);
+      sbg.draw(g,x+x_,y+y_,z);      
     }    
     java.awt.image.BufferedImage si = up_res.image;
     if(vis && si!=null) g.drawImage(si,(int)(sliderPos.getX()+x+x_-si.getWidth()/2)*z,(int)(sliderPos.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);

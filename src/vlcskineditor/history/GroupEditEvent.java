@@ -53,7 +53,7 @@ public class GroupEditEvent extends HistoryEvent{
     g.y = y_old;
     
     for(Item i:g.items) {
-      i.setOffset(x_old,y_old);
+      i.setOffset(x_old+i.offsetx,y_old+i.offsety);
     }
   }
   @Override
@@ -63,7 +63,7 @@ public class GroupEditEvent extends HistoryEvent{
     g.y = y_new;
     
     for(Item i:g.items) {
-      i.setOffset(x_new,y_new);
+      i.setOffset(x_new+i.offsetx,y_new+i.offsety);
     }
   }
   @Override

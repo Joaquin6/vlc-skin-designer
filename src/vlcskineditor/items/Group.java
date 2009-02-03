@@ -121,7 +121,7 @@ public class Group extends Item implements ActionListener{
       }
     }
     for(Item i:items) {
-      i.setOffset(x,y);
+      i.setOffset(x+offsetx,y+offsety);
     }
     created = true;
   }
@@ -138,7 +138,7 @@ public class Group extends Item implements ActionListener{
       x=Integer.parseInt(x_tf.getText());
       y=Integer.parseInt(y_tf.getText());
       for(Item i:items) {
-        i.setOffset(x,y);
+        i.setOffset(x+offsetx,y+offsety);
       }
       s.updateItems();    
       s.expandItem(id);
@@ -154,7 +154,7 @@ public class Group extends Item implements ActionListener{
       x=Integer.parseInt(x_tf.getText());
       y=Integer.parseInt(y_tf.getText());
       for(Item i:items) {
-        i.setOffset(x,y);
+        i.setOffset(x+offsetx,y+offsety);
       }
       s.updateItems();    
       s.expandItem(id);
@@ -320,8 +320,8 @@ public class Group extends Item implements ActionListener{
   @Override
   public void draw(Graphics2D g,int x_,int y_, int z) {    
     for(Item i:items) {
+      i.setOffset(x+x_,y+y_);
       i.draw(g,x+x,y+y_,z);
-      i.setOffset(x+offsetx,y+offsety);
     }    
   }
   @Override
