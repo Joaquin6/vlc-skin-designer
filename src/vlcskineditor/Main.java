@@ -116,7 +116,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   //IDs of selected objects
   protected String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   
-  private JFileChooser base_fc, bitmap_adder, font_adder, vlt_saver;
+  private JFileChooser base_fc, bitmap_adder, font_adder, vlt_fc;
   //The preview window
   protected PreviewWindow pvwin;
   //Specifies whether changes were made without having saved the skin.  
@@ -872,16 +872,16 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Export VLT">
     else if(e.getSource().equals(m_file_vlt))  {      
-      if(vlt_saver==null) {
-        vlt_saver = new JFileChooser();
-        vlt_saver.setCurrentDirectory(new File(vlc_skins_dir));
-        vlt_saver.setFileFilter(new CustomFileFilter(vlt_saver,"vlt",".vlt  (VLC Theme)",false,""));
-        vlt_saver.setAcceptAllFileFilterUsed(false);
+      if(vlt_fc==null) {
+        vlt_fc = new JFileChooser();
+        vlt_fc.setCurrentDirectory(new File(vlc_skins_dir));
+        vlt_fc.setFileFilter(new CustomFileFilter(vlt_fc,"vlt",".vlt  (VLC Theme)",false,""));
+        vlt_fc.setAcceptAllFileFilterUsed(false);
       }
-      int returnVal = vlt_saver.showSaveDialog(this);
+      int returnVal = vlt_fc.showSaveDialog(this);
       File f = null;
       if(returnVal == JFileChooser.APPROVE_OPTION) {
-        f = vlt_saver.getSelectedFile();
+        f = vlt_fc.getSelectedFile();
         if(!f.getPath().toLowerCase().endsWith(".vlt")) f = new File(f.getPath()+".vlt");
       }      
       else return;
@@ -891,7 +891,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       try {        
         TarGzOutputStream tgz = new TarGzOutputStream(new FileOutputStream(f));
         TarEntry sf = new TarEntry(s.skinfile);
-        sf.setName("theme.xml");        
+        sf.setName("theme.xml");
         tgz.putNextEntry(sf);
         FileInputStream xmlfis = new FileInputStream(s.skinfile);
         while(true) {
@@ -908,8 +908,25 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
               Bitmap b = (Bitmap)s.resources.get(i);              
               String fn = s.skinfolder+b.file;
               if(!files.contains(fn)) { //To avoid double files (e.g. one font file used by several font objects)
+                File file = new File(fn);
+                if(!file.exists()) {
+                  if(System.getProperty("os.name").indexOf("Vista")!=-1) {
+                    String pFiles = System.getenv("ProgramFiles");
+                    if(!pFiles.endsWith("\\")) pFiles+="\\";
+                    String vpFiles = System.getenv("USERPROFILE")+"\\AppData\\Local\\VirtualStore\\Program Files\\";
+                    if(fn.indexOf(pFiles)!=-1) {
+                      fn = fn.replaceFirst(pFiles, vpFiles);
+                      file = new File(fn);
+                      if(!file.exists()) System.err.println("Error while creating VLT: File not found, not even in VirtualStore! "+fn);
+                    } else {
+                     System.err.println("Error while creating VLT: File not found! "+fn);
+                    }
+                  } else {
+                    System.err.println("Error while creating VLT: File not found! "+fn);
+                  }
+                }
                 tgz.putNextEntry(new TarEntry(b.file));
-                FileInputStream fis = new FileInputStream(fn);
+                FileInputStream fis = new FileInputStream(file);
                 while(true) {
                   int cb = fis.read();
                   if(cb==-1) break;
