@@ -1,0 +1,592 @@
+﻿#Slovak language file for VLC Skin Editor
+#Author/s: Marián Hikaník
+
+#General strings
+CHOICE_YES|OK
+CHOICE_NO|Nie
+CHOICE_CANCEL|Storno
+BUTTON_OK|OK
+BUTTON_CANCEL|Storno
+BUTTON_HELP|Pomocník
+
+#Item names
+THEME|Theme
+FONT|Font
+BITMAP|Bitmap
+SUBBITMAP|SubBitmap
+WINDOW|Window
+LAYOUT|Layout
+ANCHOR|Anchor
+BUTTON|Button
+CHECKBOX|Checkbox
+GROUP|Group
+IMAGE|Image
+PANEL|Panel
+PLAYTREE|Playtree
+RADIALSLIDER|RadialSlider
+SLIDER|Slider
+SLIDERBG|SliderBackground
+TEXT|Text
+VIDEO|Video
+UNNAMED|%t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Súbor
+MENU_FILE_MN|S
+MENU_FILE_NEW|Nový
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Otvoriť
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Uložiť
+MENU_FILE_SAVE_MN|U
+MENU_FILE_TEST|Otestovať vzhľad v programe VLC...
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Exportovať ako súbor VLT...
+MENU_FILE_VLT_MN|X
+MENU_FILE_PNG|Uložiť náhľad ako obrázok...
+MENU_FILE_PNG_MN|V
+MENU_FILE_EXIT|Ukončiť
+MENU_FILE_EXIT_MN|B
+MENU_EDIT|Upraviť
+MENU_EDIT_MN|B
+MENU_EDIT_UNDO|Dozadu
+MENU_EDIT_UNDO_MN|R
+MENU_EDIT_REDO|Opakovať
+MENU_EDIT_REDO_MN|W
+MENU_EDIT_THEME|Nastavenia vzhľadu
+MENU_EDIT_THEME_MN|T
+MENU_EDIT_VARS|Všeobecné premenné
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Nastavenia
+MENU_EDIT_PREFS_MN|E
+MENU_EDIT_UP|Posunúť vybraný objekt nahor
+MENU_EDIT_DOWN|Posunúť vybraný objekt nadol
+MENU_EDIT_LEFT|Posunúť vybraný objekt doľava
+MENU_EDIT_RIGHT|Posunúť vybraný objekt doprava
+MENU_HELP|Pomocník
+MENU_HELP_MN|H
+MENU_HELP_DOC|Pomocník
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|O programe
+MENU_HELP_ABOUT_MN|P
+
+#Resource Window
+WIN_RES_TITLE|Zdrojové súbory
+WIN_RES_ADD_BMP|Pridať novú bitmapu alebo pod-bitmapu
+WIN_RES_ADD_FONT|Pridať nový druh písma
+WIN_RES_COPY|Duplikovať vybraný zdroj
+WIN_RES_EDIT|Upraviť vybraný zdroj
+WIN_RES_DELETE|Vymazať vybraný zdroj
+WIN_RES_PU_ADD_BMP|Pridať bitmapu(y)
+WIN_RES_PU_ADD_SBMP|Pridať pod-bitmapu
+WIN_RES_BITMAPS|Obrázky
+WIN_RES_FONTS|Druhy písma
+
+#Windows window
+WIN_WIN_TITLE|Okno
+WIN_WIN_ADD|Pridať nové okno
+WIN_WIN_ADD_LAY|Pridať nové rozloženie do vybraného okna
+WIN_WIN_MOVE_UP|Presunúť vybrané rozloženie v zozname nahor (pri otvorení vzhľadu sa otvorí posledný vzhľad v zozname)
+WIN_WIN_MOVE_DOWN|Presunúť vybrané rozloženie v zozname nadol (pri otvorení vzhľadu sa otvorí posledný vzhľad v zozname)
+WIN_WIN_COPY|Duplikovať vybrané rozloženie alebo okno
+WIN_WIN_EDIT|Upraviť vybrané rozloženie alebo okno
+WIN_WIN_DELETE|Vymazať vybrané rozloženie alebo okno
+
+#Items window
+WIN_ITEMS_TITLE|Objekty
+WIN_ITEMS_ADD|Pridať nový objekt
+WIN_ITEMS_MOVE_UP|Posunúť vybraný objekt v zozname nahor
+WIN_ITEMS_MOVE_DOWN|Posunúť vybraný objekt v zozname nahor
+WIN_ITEMS_COPY|Duplikovať vybraný objekt
+WIN_ITEMS_EDIT|Upraviť vybraný objekt
+WIN_ITEMS_DELETE|Vymazať vybraný objekt
+WIN_ITEMS_PU_PANEL_ADD|Pridať nový objekt na vybraný panel
+
+#Welcome dialog
+WELCOME_TITLE|Vitajte v editore VLC Skin
+WELCOME_MSG|Čo chcete robiť?
+WELCOME_NEW|Vytvoriť nový súbor so vzhľadom
+WELCOME_OPEN|Otvoriť súbor so vzhľadom
+WELCOME_QUIT|Ukončiť program
+
+#Preferences window
+WIN_PREFS_TITLE|Nastavenia
+WIN_PREFS_UPDATE_L|Aktivovať automatické aktualizácie:
+WIN_PREFS_LANG_L|Jazyk:
+WIN_PREFS_LAF_L|Vzhľad programu:
+WIN_PREFS_RESTART_L|<html><i>Niektoré nastavenia sa aktivujú až po reštartovaní programu.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Upraviť pod-bitmapu
+ZOOM_FACTOR|Faktor zväčšenia:
+
+#Global variables editing window
+WIN_VARS_TITLE|Všeobecné premenné
+WIN_VARS_NOTE|<html>Tieto premenné sa týkajú len náhľadu.<br>Simulujú stav programu VLC.</html>
+WIN_VARS_SLIDER|Slider Position
+
+#Theme options window
+WIN_THEME_TITLE|Nastavenia vzhľadu
+WIN_THEME_NAME|Názov:
+WIN_THEME_AUTHOR|Autor:
+WIN_THEME_EMAIL|E-mailová adresa autora:
+WIN_THEME_WEB|Webstránka autora:
+WIN_THEME_MAGNET|Magnetizmus:
+WIN_THEME_MAGNET_TIP|Ak je vzdialenosť medzi okrajom okna a okrajom obrazovky menšia ako táto hodnota, pripojí sa okno na okraj obrazovky
+WIN_THEME_ALPHA|Priesvitnosť:
+WIN_THEME_ALPHA_TIP|Priesvitnosť okna. Zadajte hodnotu v rozmedzí od 1 (takmer neviditeľné do 255 (úplne viditeľné).
+WIN_THEME_MOVEALPHA|Priesvitnosť pri pohybe:
+WIN_THEME_MOVEALPHA_TIP|Priesvitnosť okna, keď sa pohybuje
+WIN_THEME_INFO_TITLE|Informácie o vzhľade
+WIN_THEME_ATTR_TITLE|Nastavenia vzhľadu
+
+#Action Editor
+WIN_ACTIONS_TITLE|Upraviť akciu
+
+#Popup menu in the action editor
+ACTIONS_PU|Akcie
+ACTIONS_DIALOGS|Otvoriť dialóg
+ACTIONS_PLAYLIST|Zoznam skladieb (playlist)
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Vzhľad
+ACTIONS_VLC_PLAY|Prehrať
+ACTIONS_VLC_PAUSE|Pozastaviť
+ACTIONS_VLC_STOP|Stop
+ACTIONS_VLC_FASTER|Prehrávať rýchlejšie
+ACTIONS_VLC_SLOWER|Prehrávať pomalšie
+ACTIONS_VLC_MUTE|Stlmiť hlasitosť
+ACTIONS_VLC_VOLUMEUP|Zvýšiť hlasitosť
+ACTIONS_VLC_VOLUMEDOWN|Znížiť hlasitosť
+ACTIONS_VLC_FULLSCREEN|Zapnutie/vypnutie celoobrazovkového režimu
+ACTIONS_VLC_SNAPSHOT|Vytvoriť snímku z videa
+ACTIONS_VLC_ONTOP|Aktivovať/deaktivovať vždy v popredí
+ACTIONS_VLC_MINIMIZE|Minimalizovať VLC
+ACTIONS_VLC_QUIT|Ukončiť VLC
+ACTIONS_EQ_ENABLE|Aktivovať ekvalizér
+ACTIONS_EQ_DISABLE|Deaktivovať ekvalizér
+ACTIONS_DIALOGS_CHANGESKIN|Zmeniť vzhľad
+ACTIONS_DIALOGS_FILESIMPLE|Otvoriť súbor (jednoducho)
+ACTIONS_DIALOGS_FILE|Otvoriť súbor (pokročilým spôsobom)
+ACTIONS_DIALOGS_DIRECTORY|Otvoriť priečinok
+ACTIONS_DIALOGS_DISC|Otvoriť médium
+ACTIONS_DIALOGS_NET|Otvoriť sieťové umiestnenie
+ACTIONS_DIALOGS_MESSAGES|Zobraziť hlásenia
+ACTIONS_DIALOGS_PREFS|Nastavenia
+ACTIONS_DIALOGS_FILEINFO|Informácie o súbore
+ACTIONS_DIALOGS_PLAYLIST|Nomálne okno s playlistom
+ACTIONS_DIALOGS_STREAMINGWIZARD|Konvertovať/streamovať
+ACTIONS_DIALOGS_POPUP|Celé vyskakovacie menu
+ACTIONS_DIALOGS_AUDIOPOPUP|Vyskakovacie menu Audio
+ACTIONS_DIALOGS_VIDEOPOPUP|Vyskakovacie menu Video
+ACTIONS_DIALOGS_MISCPOPUP|Rôzne nastavenia vyskakovacieho menu
+ACTIONS_PLAYLIST_ADD|Pridať nový objekt
+ACTIONS_PLAYLIST_DEL|Vymazať vybraný objekt
+ACTIONS_PLAYLIST_NEXT|Prehrať ďalší objekt
+ACTIONS_PLAYLIST_PREVIOUS|Prehrať predchádzajúci objekt
+ACTIONS_PLAYLIST_SETRANDOM|Aktivovať/deaktivovať náhodné poradie
+ACTIONS_PLAYLIST_SETLOOP|Aktivovať/deaktivovať opakovanie playlistu
+ACTIONS_PLAYLIST_SETREPEAT|Aktivovať/deaktivovať opakovanie aktuálneho objektu
+ACTIONS_PLAYLIST_SORT|Zoradiť podľa abecedy
+ACTIONS_PLAYLIST_LOAD|Načítať zo súboru
+ACTIONS_PLAYLIST_SAVE|Uložiť do súboru
+ACTIONS_DVD_NEXTTITLE|Ďalší titul
+ACTIONS_DVD_PREVIOUSTITLE|Predchádzajúci titul
+ACTIONS_DVD_NEXTCHAPTER|Ďalšia kapitola
+ACTIONS_DVD_PREVIOUSCHAPTER|Predchádzajúca kapitola
+ACTIONS_DVD_ROOTMENU|Hlavné menu
+ACTIONS_WINDOWS_SHOW|Zobraziť okno
+ACTIONS_WINDOWS_HIDE|Zatvoriť okno
+ACTIONS_WINDOWS_MAXIMIZE|Maximalizovať okno
+ACTIONS_WINDOWS_UNMAXIMIZE|Obnoviť okno
+ACTIONS_WINDOWS_SETLAYOUT|Zmeniť rozloženie okna
+
+#Action descriptions
+ACTION_DESC_NONE|Neurobiť nič.
+ACTION_DESC_CHANGESKIN|Zobraziť dialóg na otvorenie iného vzhľadu.
+ACTION_DESC_FILESIMPLE|Zobraziť jednoduchý dialóg na otvorenie súboru.
+ACTION_DESC_FILE|Zobraziť rozšírený dialóg na otvorenie súboru.
+ACTION_DESC_DIRECTORY|Zobraziť dialóg na otvorenie priečinka
+ACTION_DESC_DISC|Zobraziť dialóg na otvorenie média.
+ACTION_DESC_NET|Zobraziť dialóg na otvorenie sieťového streamu.
+ACTION_DESC_MSG|Zobraziť zoznam hlásení.
+ACTION_DESC_PREFS|Otvoriť nastavenia.
+ACTION_DESC_FILEINFO|Zobraziť informácie o súbore.
+ACTION_DESC_PLAYLIST|Zobraziť normálne okno s playlistom.
+ACTION_DESC_WIZARD|Zobraziť dialóg pre konverziu/uloženie a streamovanie.
+ACTION_DESC_POPUP|Zobraziť celé vyskakovacie menu.
+ACTION_DESC_AUDIOPU|Zobraziť vyskakovacie menu Audio.
+ACTION_DESC_VIDEOPU|Zobraziť vyskakovacie menu Video.
+ACTION_DESC_MISCPU|Zobraziť menu s nastaveniami prehrávanie a inými nastaveniami.
+ACTION_DESC_EQENABLE|Aktivovať ekvalizér.
+ACTION_DESC_EQDISABLE|Deaktivovať ekvalizér. 
+ACTION_DESC_PLAY|Spustiť prehrávanie.
+ACTION_DESC_PAUSE|Pozastaviť prehrávanie.
+ACTION_DESC_STOP|Zastaviť prehrávanie.
+ACTION_DESC_FASTER|Prehrávať rýchlejšie.
+ACTION_DESC_SLOWER|Prehrávať pomalšie.
+ACTION_DESC_MUTE|Aktivovať/deaktivovať stlmenie hlasitosti.
+ACTION_DESC_VOLUP|Zvýšiť hlasitosť.
+ACTION_DESC_VOLDOWN|Znížiť hlasitosť.
+ACTION_DESC_FULLSCREEN|Prepnúť na celoobrazovkový režim.
+ACTION_DESC_SNAPSHOT|Urobiť snímku z videa.
+ACTION_DESC_ONTOP|Aktivovať/deaktivovať vždy v popredí.
+ACTION_DESC_MIN|Minimalizovať VLC.
+ACTION_DESC_QUIT|Ukončiť VLC.
+ACTION_PL_ADD|Pridať do zoznamu skladieb nový objekt.
+ACTION_PL_DEL|Odstrániť vybraný objekt zo zoznamu skladieb.
+ACTION_PL_NEXT|Prehrať ďalší objekt v zozname skladieb.
+ACTION_PL_PREV|Prehrať predchádzajúci objekt v zozname skladieb.
+ACTION_PL_SORT|Abecedne zoraďovať zoznamy skladieb.
+ACTION_PL_LOAD|Načítať zoznam skladieb zo súboru.
+ACTION_PL_SAVE|Uložiť zoznam skladieb do súboru.
+ACTION_DVD_NEXTT|Prehrať ďalší titul na DVD.
+ACTION_DVD_PREVT|Prehrať predchádzajúci titul na DVD.
+ACTION_DVD_NEXTC|Prehrať ďalšiu kapitolu na DVD.
+ACTION_DVD_PREVC|Prehrať predchádzajúcu kapitolu na DVD.
+ACTION_DVD_MENU|Vyvolať hlavné menu DVD.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|aktivovať
+ACTION_DEACTIVATE|deaktivovať
+ACTION_RANDOM|Náhodné poradie prehrávania v zozname skladieb  %s
+ACTION_LOOP|Opakovanie zoznamu skladieb %s
+ACTION_REPEAT|Opakovanie aktuálne prehrávaného objektu %s
+ACTION_SHOW|Zobraziť okno s ID %i
+ACTION_HIDE|Skryť okno s ID %i
+ACTION_MAXIMIZE|Maximalizovať okno s ID %i
+ACTION_UNMAXIMIZE|Obnoviť okno s ID %i
+ACTION_LAYOUT|Zmeniť rozloženie okna s ID %i
+
+#Slider background generator
+SBGGEN_TITLE|
+SBGGEN_PREV|< Späť
+SBGGEN_NEXT|Ďalej >
+SBGGEN_CANCEL|Prerušiť
+SBGGEN_FINISH|Ukončiť
+
+SBGGEN_DESCR|Vitajte vo Generátore pozadia posuvníkov. Táto funkcia Vám pomôže pri tvorbe pozadia posuvníkov.
+SBGGEN_FIRST|Ako prvé si prosím zvoľte veľkosť pozadia a to, či bude posuvník prebiehať zľava-doprava alebo zhora-nadol.
+SBGGEN_WIDTH|Šírka:
+SBGGEN_HEIGHT|Výška:
+SBGGEN_LEFT_M|Vzdialenosť doľava:
+SBGGEN_RIGHT_M|Vzdialenosť doprava:
+SBGGEN_TOP_M|Vzdialenosť nahor:
+SBGGEN_BTM_M|Vzdialenosť nadol:
+SBGGEN_SECOND|Ďalej si zvoľte obrázky pre príslušné časti pozadia.
+SBGGEN_NOTE|Obrázky v ďalšej časti sú len zástupným symbolom pre tú-ktorú časť pozadia.
+
+SBGGEN_IMAGE|Súbor s obrázkom:
+SBGGEN_OPEN|Prehľadávať...
+SBGGEN_RESIZE|Zmena veľkosti:
+SBGGEN_TILE|Dlaždice
+SBGGEN_STRETCH|Roztiahnuť
+
+SBGGEN_BG|Pozadie
+SBGGEN_OVERLAY|Prekrývanie
+SBGGEN_LEFT_E|Ľavý okraj
+SBGGEN_RIGHT_E|Pravý okraj
+SBGGEN_TOP_E|Horný okraj
+SBGGEN_BTM_E|Dolný okraj
+SBGGEN_MIDDLE|Stredná časť
+
+SBGGEN_PROGRESS|Vytvára sa pozadie...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|O programe VLC Skin Editor %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Copyright 2007-%y Tím VideoLAN</h3>Zverejnené pod licenciou GPL 2+<br><br><b>Vedúci programátor:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Webstránka:</b> %w<br><br><b>Poďakovanie:</b><br>Timothy Gerard Endresovi za vytvorenie prístupu k registrom a podporu TAR (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) za ikony (Creative Commons BY-SA 2.5)<br>Cyrilovi Deguetovi (asmax@via.ecp.fr) a Olivierovi Teuli&egrave;reovi (ipkiss@via.ecp.fr) za kód na vyhodnocovanie Booleanových výrazov (GPL 2+)</html>
+VLT_EX_TITLE|Importovať súbor VLT
+#%f - name of the folder
+VLT_EX_MSG|Súbor VLT sa rozbalí do podpriečinka "%f".\nChcete pokračovať?
+VLT_EX_YES|Rozbaliť
+VLT_EX_NO|Nerozbaľovať
+VLT_EX_PROGRESS|Súbor VLT sa rozbaľuje...
+XML_PARSING_PROGRESS|Analyzuje sa súbor XML...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) v rámci priečinka so súborom XML
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (písma Open & True Type) v rámci priečinka so súborom XML 
+DUPLICATE_MSG|Zadajte prosím schému premenovávania duplicitných objektov.\n%oldid% sa nahradí pôvodným ID.
+DEL_CONFIRM_TITLE|Potvrdenie vymazania
+DEL_CONFIRM_MSG|Naozaj chcete "%n" vymazať?
+EXIT_CONFIRM_TITLE|Zmeny neboli uložené
+EXIT_CONFIRM_MSG|Chcete vykonané zmeny pred ukončením uložiť?
+UPDATE_TITLE|Aktualizácia programu
+UPDATE_MSG|Pre program Skin Editor sa našla aktualizácia.\nVaša verzia: %v\nNajnovšia verzia: %c\n Chcete program Skin Editor aktualizovať?
+VLT_PROGRESS|Vytvára sa súbor VLT...
+VLT_SUCCESS_MSG|Súbor VLT bol úspešne vytvorený
+VLT_SUCCESS_TITLE|Súbor VLT bol uložený
+DOWNLOAD_PROGRESS|Sťahuje sa...
+CONNECT_PROGRESS|Pripája sa...
+UPDATE_SUCCESS_TITLE|Aktualizácia ukončená
+UPDATE_SUCCESS_MSG|Aktualizácia bola úspešne stiahnutá a nainštalovaná.\nProgram sa teraz reštartuje.
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Chyba pri otváraní súboru.
+ERROR_FILENEXIST_MSG|Súbor "%f" sa nenašiel a preto ho nebolo možné otvoriť
+ERROR_VLT_UNPACK_TITLE|Rozbaliť súbor VLT
+ERROR_VLT_UNPACK_MSG|Súbor VLT sa nedá rozbaliť
+ERROR_VLT_NOTHEME_TITLE|Súbor XML sa nenašiel.
+ERROR_VLT_NOTHEME_MSG|Súbor "theme.xml" sa nepodarilo nájsť v rámci súboru VLT.\nPokúste sa otvoriť XML súbor sami.
+ERROR_VLC_LAUNCH_TITLE|Chyba
+ERROR_VLC_LAUNCH_MSG|Program VLC Media Player sa nepodarilo otvoriť
+ERROR_BROWSE_TITLE|Chyba
+ERROR_BROWSE_MSG|Nepodarilo sa otvoriť prehliadač.\nOtvorte prosím manuálne túto webstránku:\n%u
+ERROR_ADD_SBMP_TITLE|Pod-bitmapu nebolo možné pridať
+ERROR_ADD_SBMP_NOBMP|Nebola vybraná žiadna pod-bitmapa!
+ERROR_ADD_SBMP_NOTBMP|Zvolený zdroj nie je bitmapou!
+ERROR_RES_DEL_TITLE|Chyba
+ERROR_RES_DEL_INUSE|Zdroj nebolo možné vymazať, pretože sa ešte používa v súbore so vzhľadom.
+ERROR_ADD_LAYOUT_TITLE|Chyba
+ERROR_ADD_LAYOUT_MSG|Nevybrali ste žiadne okno!
+ERROR_UPDATE_TITLE|Chyba pri aktualizácii!
+ERROR_SAVEPNG_TITLE|Chyba pri ukladaní
+ERROR_SAVEPNG_MSG|Súbor s obrázkom nebolo možné uložiť
+ERROR_NEWSKIN_TITLE|Chyba
+ERROR_NEWSKIN_MSG|Nebolo možné vytvoriť nový súbor.
+ERROR_HEADER_INVALID|Zdá sa, že tento súbor nie je správnym súborom so vzhľadom!\nNesprávne záhlavie:
+ERROR_SKIN_INVALID|Zvolený súbor nie je súborom so vzhľadom!
+ERROR_VERSION_UNSUPPORTED|Verzia tohto vzhľadu ešte nie je podporovaná!
+ERROR_SAVE_TITLE|Chyba pri ukladaní
+ERROR_SAVE_MSG|Súbor so vzhľadom nebolo možné uložiť.
+ERROR_ALPHA_TITLE|Chybná hodnota priehľadnosti
+ERROR_ALPHA_MSG|Zadajte prosím správnu hodnotu priehľadnosti v rozmedzí od 0 do 255.
+ERROR_SBGGEN_MIDDLE_MSG|Obrázok v strednej časti sa nepodarilo načítať! Na vytvorenie pozadia je potrebná aspoň stredná časť.
+ERROR_VLT_TITLE|Chyba
+ERROR_VLT_MSG|Súbor VLT sa nepodarilo vytvoriť
+ERROR_ID_INVALID_TITLE|Chybné ID
+ERROR_ID_INVALID_MSG|Zadajte prosím správne ID!
+ERROR_ID_EXISTS_MSG|Objekt s ID "%i" už existuje.\nZvoľte si prosím iné ID.
+ERROR_WIDTH_INVALID_TITLE|Neplatná šírka
+ERROR_WIDTH_INVALID_MSG|Zadajte prosím platnú šírku.
+ERROR_HEIGHT_INVALID_TITLE|Neplatná výška
+ERROR_HEIGHT_INVALID_MSG|Zadajte prosím platnú výšku.
+ERROR_FILE_INVALID_TITLE|Neplatný súbor
+ERROR_FILE_INVALID_MSG|Zadajte prosím platný súbor.
+ERROR_BITMAP_INVALID_MSG|Zadaný súbor s obrázkom nebolo možné načítať!\nZvoľte si prosím nejaký iný.
+ERROR_NBFRAMES_TITLE|Neplatné číslo jednotlivého obrázka
+ERROR_NBFRAMES_MSG|Počet jednotlivých obrázkov nemôže byť menší ako 1!
+ERROR_OTF_TITLE|Písma typu OFT nie sú podporované
+ERROR_OTF_MSG|Vybrali ste si písmo typu OpenType. Program VLC zobrazuje takéto písma korektne, VLC Skin Editor to však nedokáže.\nV náhľade sa preto použije iný typ písma.
+ERROR_SIZE_INVALID_TITLE|Neplatná veľkosť
+ERROR_SIZE_INVALID_MSG|Zadajte prosím platnú veľkosť.
+ERROR_OUTSIDE_TITLE|Neplatné rozmery
+ERROR_OUTSIDE_MSG|Zadané rozmery sa nachádzajú mimo pôvodného obrázka.
+ERROR_BITMAP_NEXIST|Obrázok "%i" neexistuje!
+ERROR_BITMAP_NEXIST_TITLE|Neplatný obrázok!
+ERROR_BITMAP_LOAD|Súbor s obrázkom "%i" nemožno načítať.
+ERROR_BITMAP_LOAD_TITLE|Chyba
+ERROR_NOSTATE|Zadajte aspoň jednu podmienku pre stav!
+ERROR_NOSTATE_TITLE|Neplatná podmienka
+ERROR_FONT_NEXIST|Písmo "%i" neexistuje.
+ERROR_FONT_NEXIST_TITLE|Neplatný druh písma
+ERROR_POINTS_INVALID|Zadajte prosím platné body Bézeriovej krivky.
+ERROR_POINTS_INVALID_TITLE|Neplatná Bézeriova krivka
+ERROR_RADIALSLIDER|Radiálne posuvníky nie sú v programe Skin Editor zatiaľ podporované.
+ERROR_RADIALSLIDER_TITLE|Nepodporované
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Neznámy vzhľad
+THEMEINFO_AUTHOR_DEFAULT|Neznámy autor
+THEMEINFO_EMAIL_DEFAULT|Neznámy e-mail
+
+#History
+HIST_ITEM_ADD|pridať %t
+HIST_ITEM_DEL|vymazať %t
+HIST_ITEM_EDIT|upraviť %t
+HIST_ITEM_MOVE|presunúť %t
+HIST_RES_DEL|vymazať %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Atribút musí byť zadaný
+
+#Common strings
+WIN_ITEM_GENERAL|Všeobecné atribúty
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|Názov a identifikácia tohto objektu. Tieto údaje možno použiť len raz.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Šírka:
+WIN_ITEM_HEIGHT|Výška:
+WIN_ITEM_VISIBLE|Viditeľnosť:
+WIN_ITEM_LEFTTOP|Vľavo hore:
+WIN_ITEM_LEFTTOP_TIP|Udáva, na ktorý roh okna sa bude orientovať horný ľavý roh objektu – pre prípad zmeny veľkosti okna
+WIN_ITEM_RIGHTBOTTOM|Vpravo dole:
+WIN_ITEM_RIGHTBOTTOM_TIP|Udáva, na ktorý roh okna sa bude orientovať dolný pravý roh objektu – pre prípad zmeny veľkosti okna
+WIN_ITEM_XKEEPRATIO|Dodržiavať pomer X:
+WIN_ITEM_XKEEPRATIO_TIP|Ak sa bude dodržiavať pomer X, zachová si objekt svoju relatívnu horizontálnu polohu voči oknu aj pri zmene veľkosti okna
+WIN_ITEM_YKEEPRATIO|Dodržiavať pomer Y:
+WIN_ITEM_YKEEPRATIO_TIP|Ak sa bude dodržiavať pomer Y, zachová si objekt svoju relatívnu vertikálnu polohu voči oknu aj pri zmene veľkosti okna.
+WIN_ITEM_HELP|Pomocný text:
+WIN_ITEM_HELP_TIP|Textová premenná  '$H' obsahuje hodnotu, zadanú a zobrazovanú v čase, keď sa nad objektom nachádza kurzor.
+WIN_ITEM_TOOLTIPTEXT|Krátke info (tip):
+FILE_INDIR|v rovnakom priečinku ako súbor XML
+
+#Bitmap
+WIN_BITMAP_TITLE|Nastavenia bitmapy
+WIN_BITMAP_FILE|Súbor*:
+WIN_BITMAP_FILE_TIP|Cesta k súboru s obrázkom, relatívna voči miestu uloženia súboru XML
+WIN_BITMAP_OPEN|Prehľadávať...
+WIN_BITMAP_ALPHACOLOR|Priehľadná farba:
+WIN_BITMAP_ALPHACOLOR_TIP|Farba časti obrázka, ktorá má byť priehľadná. V prípade, že ide o PNG obrázok s vrstvou priehľadnosti, zahrnie sa aj táto vrstva.
+WIN_BITMAP_CHOOSE|Vybrať...
+WIN_BITMAP_NBFRAMES|Počet jednotlivých obrázkov:
+WIN_BITMAP_NBFRAMES_TIP|Pre animované obrázky. Toto je počet vertikálne usporiadaných jednotlivých obrázkov, ktoré sú obsiahnuté v tomto obrázku.
+WIN_BITMAP_FPS|Jednotlivé obrázky za sekundu:
+WIN_BITMAP_FPS_TIP|Platí pre animované obrázky. Tento počet obrázkov sa bude zobrazovať za sekundu.
+WIN_BITMAP_ANIMATION|Atribúty animácií
+WIN_BITMAP_CHOOSER_TITLE|Výber priehľadnej farby
+
+#SubBitmap
+WIN_SBMP_TITLE|Nastavenia pod-bitmapy
+WIN_SBMP_BOUNDS|Pozícia a veľkosť
+
+#Font
+WIN_FONT_TITLE|Nastavenia písma
+WIN_FONT_FILE|Súbor*:
+WIN_FONT_FILE_TIP|Súbor, ktorý obsahuje písmo.
+WIN_FONT_OPEN|Prehľadávať...
+WIN_FONT_SIZE|Veľkosť:
+
+#Layout
+WIN_LAYOUT_TITLE|Nastavenia vzhľadu
+WIN_LAYOUT_GENERAL|Všeobecné atribúty
+WIN_LAYOUT_DIMENSIONS|Veľkosť
+WIN_LAYOUT_WIDTH|Predvolená šírka*:
+WIN_LAYOUT_WIDTH_TIP|Pôvodná šírka vzhľadu.
+WIN_LAYOUT_HEIGHT|Predvolená výška*:
+WIN_LAYOUT_HEIGHT_TIP|Pôvodná výška vzhľadu.
+WIN_LAYOUT_MINWIDTH|Minimálna šírka:
+WIN_LAYOUT_MINWIDTH_TIP|Minimálna šírka vzhľadu. Ak ju nastavíte na hodnotu -1, nebude môcť byť okno užšie ako je predvolená šírka
+WIN_LAYOUT_MINHEIGHT|Minimálna výška:
+WIN_LAYOUT_MINHEIGHT_TIP|Minimálna výška vzhľadu. Ak ju nastavíte na hodnotu -1, nebude môcť byť okno nižšie ako je predvolená výška
+WIN_LAYOUT_MAXWIDTH|Maximálna šírka:
+WIN_LAYOUT_MAXWIDTH_TIP|Maximálna šírka vzhľadu. Ak ju nastavíte na hodnotu -1, nebude môcť byť okno širšie ako je predvolená šírka
+WIN_LAYOUT_MAXHEIGHT|Maximálna výška:
+WIN_LAYOUT_MAXHEIGHT_TIP|Minimálna výška vzhľadu. Ak ju nastavíte na hodnotu -1, nebude môcť byť okno vyššie ako je predvolená výška
+
+#Window
+WIN_WINDOW_TITLE|Nastavenia okien
+WIN_WINDOW_X_TIP|Predvolená pozícia na obrazovke
+WIN_WINDOW_Y_TIP|Predvolená pozícia na obrazovke
+WIN_WINDOW_VISIBLE_TIP|Udáva, či sa má okno zobraziť pri otvorení vzhľadu.
+WIN_WINDOW_DD|Ťahaj & pusť:
+WIN_WINDOW_DD_TIP|Udáva, či sa do okna môžu súbory s médiami pridávať technikou Ťahaj & pusť.
+WIN_WINDOW_PD|Okamžite prehrať:
+WIN_WINDOW_PD_TIP|Udáva, či sa súbory s médiami majú ihneď po pridaní prehrať, alebo sa pripoja na koniec playlistu.
+WIN_WINDOW_DD_PANEL|Nastavenia funkcie Ťahaj & pusť
+
+#Anchor
+WIN_ANCHOR_TITLE|Nastavenia ukotvenia
+WIN_ANCHOR_POINTS|Body:
+WIN_ANCHOR_POINTS_TIP|Body Bezériovej krivky, ktoré znázorňujú ukotvenie. Pre ukotvenie na súradniciach (0,0) môžete toto políčko ponechať prázdne.
+WIN_ANCHOR_RANGE|Dosah:
+WIN_ANCHOR_RANGE_TIP|Oblasť dosahu efektu
+WIN_ANCHOR_PRIORITY|Priorita*:
+WIN_ANCHOR_PRIORITY_TIP|Intenzita kotiev v porovnaní s inými kotvami.
+WIN_ANCHOR_BOUNDARIES|Ohraničenie
+
+#Button
+WIN_BUTTON_TITLE|Nastavenia tlačidiel
+WIN_BUTTON_UP|Normálny obraz*:
+WIN_BUTTON_OVER|Obrázok pri dotyku s myšou:
+WIN_BUTTON_DOWN|Obrázok pri kliknutí myšou:
+WIN_BUTTON_ACTION|Akcia:
+WIN_BUTTON_ATTR|Atribúty tlačidla
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Nastavenia výberových boxov
+WIN_CHECKBOX_UP|Normálny obraz*:
+WIN_CHECKBOX_OVER|Obrázok pri dotyku s myšou:
+WIN_CHECKBOX_DOWN|Obrázok pri kliknutí myšou:
+WIN_CHECKBOX_ACTION|Akcia
+WIN_CHECKBOX_CONDITION|Podmienka:
+WIN_CHECKBOX_CONDITION_TIP|Podmienka, ktorá udáva aký status dostane výberový box.
+WIN_CHECKBOX_STATE|Stav výberového boxu
+WIN_CHECKBOX_STATE1|Stav 1 (podmienka nesplnená):
+WIN_CHECKBOX_STATE2|Stav 2 (podmienka splnená):
+
+#Image
+WIN_IMAGE_TITLE|Nastavenia obrázka
+WIN_IMAGE_IMAGE|Obrázok*:
+WIN_IMAGE_IMAGE_TIP|ID obrázka
+WIN_IMAGE_RESIZE|Zmena veľkosti:
+WIN_IMAGE_RESIZE_TIP|Udáva, ako sa zachová obrázok pri zmene veľkosti
+WIN_IMAGE_ACTION|Akcia:
+WIN_IMAGE_ACTION_TIP|Akcia, ktorá sa spustí po kliknutí na obrázok.
+WIN_IMAGE_ACTION2|Akcia pri dvojkliknutí:
+WIN_IMAGE_ACTION2_TIP|Akcia, ktorá sa spustí po dvojitom kliknutí na obrázok.
+WIN_IMAGE_ATTR|Atribúty obrázka
+
+#Group
+WIN_GROUP_TITLE|Nastavenia skupiny
+
+#Panel
+WIN_PANEL_TITLE|Nastavenia panela
+WIN_PANEL_DIMENSIONS|Rozmery
+WIN_PANEL_WIDTH|Šírka*:
+WIN_PANEL_HEIGHT|Výška*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Nastavenia stromu
+WIN_PLAYTREE_FONT|Písmo*:
+WIN_PLAYTREE_BGIMAGE|Obrázok na pozadí:
+WIN_PLAYTREE_BGIMAGE_TIP|Ak nezadáte žiaden obrázok, vyplní sa pozadie striedavo obidvomi farbami.
+WIN_PLAYTREE_BGCOLOR1|Farba na pozadí 1:
+WIN_PLAYTREE_BGCOLOR2|Farba na pozadí 2:
+WIN_PLAYTREE_SELCOLOR|Farba výberu:
+WIN_PLAYTREE_FGCOLOR|Farba textu:
+WIN_PLAYTREE_PLAYCOLOR|Farba textu pri prehrávaní:
+WIN_PLAYTREE_FLAT|Ploché zoznamy:
+WIN_PLAYTREE_FLAT_TIP|Udáva, či majú mať zoznamy stromovú štruktúru, alebo sa majú zobrazovať "plocho".
+WIN_PLAYTREE_ITEMIMAGE|Obrázok objektu:
+WIN_PLAYTREE_OPENIMAGE|Otvorený priečinok s obrázkom:
+WIN_PLAYTREE_CLOSEDIMAGE|Zatvorený priečinok s obrázkom:
+WIN_PLAYTREE_SLIDER|Upraviť posuvník stromu
+WIN_PLAYTREE_ATTR|Atribúty stromu
+WIN_PLAYTREE_CHOOSE|Vybrať...
+WIN_PLAYTREE_CHOOSER_TITLE|Vybrať farbu
+
+#Slider
+WIN_SLIDER_TITLE|Nastavenia posuvníka
+WIN_SLIDER_UP|Normálny obraz*:
+WIN_SLIDER_OVER|Obrázok pri prejdení myši:
+WIN_SLIDER_DOWN|Obrázok pri kliknutí myši:
+WIN_SLIDER_POINTS|Body*:
+WIN_SLIDER_THICKNESS|Hrúbka:
+WIN_SLIDER_VALUE|Hodnota*:
+WIN_SLIDER_VALUE_SCROLL|Strom
+WIN_SLIDER_BG_ENABLE|Aktivovať pozadie
+WIN_SLIDER_BG_EDIT|Upraviť...
+WIN_SLIDER_ATTR|Atribúty posuvníka
+WIN_SLIDER_BG|Pozadie posuvníka
+
+#Slider background
+WIN_SBG_TITLE|Nastavenia pozadia posuvníka
+WIN_SBG_WIZARD|Otvoriť generátor pozadí posuvníka...
+WIN_SBG_IMAGE|Obrázok*:
+WIN_SBG_NBHORIZ|Horizontálne jednotlivé obrázky:
+WIN_SBG_NBVERT|Vertikálne jednotlivé obrázky:
+WIN_SBG_PADHORIZ|Horizontálna vzdialenosť:
+WIN_SBG_PADVERT|Vertikálna vzdialenosť:
+WIN_SBG_ATTR|Pozadie atribútov
+
+#Text
+WIN_TEXT_TITLE|Nastavenia textu
+WIN_TEXT_TEXT|Text*:
+WIN_TEXT_FONT|Písmo:
+WIN_TEXT_COLOR|Farba:
+WIN_TEXT_CHOOSE|Vybrať...
+WIN_TEXT_CHOOSER_TITLE|Vybrať farbu textu
+WIN_TEXT_ALIGNMENT|Smer
+WIN_TEXT_SCROLLING|Rolovanie:
+WIN_TEXT_ATTR|Atribúty textu
+
+#Video
+WIN_VIDEO_TITLE|Nastavenia videa
+WIN_VIDEO_AUTORESIZE|Prispôsobiť veľkosť:
+WIN_VIDEO_AUTORESIZE_TIP|Udáva, či sa okno prispôsobí veľkosti videa.
+WIN_VIDEO_ATTR|Atribúty videa

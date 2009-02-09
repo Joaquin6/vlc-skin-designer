@@ -4,4 +4,5 @@ en|English|en.txt
 nl|Dutch|nl.txt
 de|German|de.txt
 ru|Russian (Incomplete)|ru.txt
+sk|Slovak|sk.txt
 sv|Swedish (Incomplete)|sv.txt
