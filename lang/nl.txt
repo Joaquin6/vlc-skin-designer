@@ -1,0 +1,594 @@
+#Dutch language file for VLC Skin Editor
+#Author/s: Daniel Dreibrodt
+#Translator: Myckel Habets
+
+#General strings
+CHOICE_YES|Ja
+CHOICE_NO|Nee
+CHOICE_CANCEL|Annuleren
+BUTTON_OK|Ok
+BUTTON_CANCEL|Annuleren
+BUTTON_HELP|Help
+
+#Item names
+THEME|Thema
+FONT|Lettertype
+BITMAP|Bitmap
+SUBBITMAP|SubBitmap
+WINDOW|Venster
+LAYOUT|Layout
+ANCHOR|Anker
+BUTTON|Knop
+CHECKBOX|Selectievakje
+GROUP|Groep
+IMAGE|Afbeelding
+PANEL|Paneel
+PLAYTREE|Afspeellijst
+RADIALSLIDER|Radiale schuif
+SLIDER|Schuif
+SLIDERBG|Schuifachtergrond
+TEXT|Tekst
+VIDEO|Video
+UNNAMED|Naamloos %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Bestand
+MENU_FILE_MN|B
+MENU_FILE_NEW|Nieuw
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Openen
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Opslaan
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Test thema in VLC...
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Exporteer als VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Sla huidige voorbeeld op als afbeelding...
+MENU_FILE_PNG_MN|f
+MENU_FILE_EXIT|Afsluiten
+MENU_FILE_EXIT_MN|A
+MENU_EDIT|Bewerken
+MENU_EDIT_MN|w
+MENU_EDIT_UNDO|Ongedaan maken
+MENU_EDIT_UNDO_MN|O
+MENU_EDIT_REDO|Herhalen
+MENU_EDIT_REDO_MN|H
+MENU_EDIT_THEME|Thema-instellingen
+MENU_EDIT_THEME_MN|T
+MENU_EDIT_VARS|Globale variabelen
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Voorkeuren
+MENU_EDIT_PREFS_MN|V
+MENU_EDIT_UP|Verplaats geselecteerde item omhoog
+MENU_EDIT_DOWN|Verplaats geselecteerde item omlaag
+MENU_EDIT_LEFT|Verplaats geselecteerde item naar links
+MENU_EDIT_RIGHT|Verplaats geselecteerde item naar rechts
+MENU_HELP|Help
+MENU_HELP_MN|H
+MENU_HELP_DOC|Online help
+MENU_HELP_DOC_MN|l
+MENU_HELP_ABOUT|Over
+MENU_HELP_ABOUT_MN|O
+
+#Resource Window
+WIN_RES_TITLE|Bronnen
+WIN_RES_ADD_BMP|Een nieuwe bitmap of subbitmap toevoegen
+WIN_RES_ADD_FONT|Een nieuw lettertype toevoegen
+WIN_RES_COPY|Maak een kopie van de geselecteerde bron
+WIN_RES_EDIT|Bewerk de geselecteerde bron
+WIN_RES_DELETE|Verwijder de geselecteerde bron
+WIN_RES_PU_ADD_BMP|Bitmap(pen) toevoegen
+WIN_RES_PU_ADD_SBMP|Subbitmap toevoegen
+WIN_RES_BITMAPS|Bitmappen
+WIN_RES_FONTS|lettertypen
+
+#Windows window
+WIN_WIN_TITLE|Vensters
+WIN_WIN_ADD|Een nieuw venster toevoegen
+WIN_WIN_ADD_LAY|Een nieuwe layout aan het geselecteerde venster toevoegen
+WIN_WIN_MOVE_UP|Verplaats de geselecteerde layout omhoog in hiërarchie (laatste layout is de standaardlayout voor het venster)
+WIN_WIN_MOVE_DOWN|Verplaats de selected layout omlaag in hiërarchie (laatste layout is de standaardlayout voor het venster)
+WIN_WIN_COPY|Maak een kopie van het geselecteerde venster of de geselecteerde layout
+WIN_WIN_EDIT|Bewerk het geselecteerde venster of de geselecteerde layout
+WIN_WIN_DELETE|Verwijder het geselecteerde venster of de geselecteerde layout
+
+#Items window
+WIN_ITEMS_TITLE|Objecten
+WIN_ITEMS_ADD|Een nieuw object toevoegen
+WIN_ITEMS_MOVE_UP|Verplaats geselecteerd object omhoog in hiërarchie
+WIN_ITEMS_MOVE_DOWN|Verplaats geselecteerd object omlaag in hiërarchie
+WIN_ITEMS_COPY|Maak een kopie van het geselecteerde object
+WIN_ITEMS_EDIT|Bewerk het geselecteerde object
+WIN_ITEMS_DELETE|Verwijder het geselecteerde object
+WIN_ITEMS_PU_PANEL_ADD|Toevoegen aan geselecteerd paneel
+
+#Welcome dialog
+WELCOME_TITLE|Welkom bij de VLC Themabewerker
+WELCOME_MSG|Wat wilt u gaan doen?
+WELCOME_NEW|Een nieuw thema maken
+WELCOME_OPEN|Een bestaande thema openen
+WELCOME_QUIT|Afsluiten
+
+#Preferences window
+WIN_PREFS_TITLE|Voorkeuren
+WIN_PREFS_UPDATE_L|Auto-update activeren:
+WIN_PREFS_LANG_L|Taal:
+WIN_PREFS_LAF_L|Programma-uiterlijk:
+WIN_PREFS_RESTART_L|<html><i>Enkele instellingen worden pas van kracht na een herstart van het programma.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Subbitmap bewerken
+ZOOM_FACTOR|Schalingsfactor:
+
+#Global variables editing window
+WIN_VARS_TITLE|Globale variabelen
+WIN_VARS_NOTE|<html>Deze variabelen hebben alleen invloed op het voorbeeld.<br>Ze simuleren de status van VLC.</html>
+WIN_VARS_SLIDER|Schuifpositie
+
+#Theme options window
+WIN_THEME_TITLE|Thema-instellingen
+WIN_THEME_NAME|Naam:
+WIN_THEME_AUTHOR|Auteur:
+WIN_THEME_EMAIL|Email van auteur:
+WIN_THEME_WEB|Website van auteur:
+WIN_THEME_MAGNET|Magneet:
+WIN_THEME_MAGNET_TIP|Als de afstand tussen de rand van het scherm en een anker van een venster minder dan deze waarde is,
+zal het venster aan de schermrand plakken
+WIN_THEME_ALPHA|Ondoorzichtigheid:
+WIN_THEME_ALPHA_TIP|Zet de alfa-transparantie van de vensters. De waarde moet tussen 1 (bijna volledig transparant) en 255 (totaal ondoorzichtig) liggen. Lage waarden zouden vermeden moeten worden.
+WIN_THEME_MOVEALPHA|Ondoorzichtigheid bij verplaatsing:
+WIN_THEME_MOVEALPHA_TIP|Zet de alfa-transparantie van de vensters als deze verplaatst worden.
+WIN_THEME_INFO_TITLE|Thema-informatie
+WIN_THEME_ATTR_TITLE|Thema-attributen
+
+#Action Editor
+WIN_ACTIONS_TITLE|Actiesequentie bewerken
+
+#Popup menu in the action editor
+ACTIONS_PU|Actie's
+ACTIONS_DIALOGS|Een dialoogvenster weergeven
+ACTIONS_PLAYLIST|Afspeellijst
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Thema
+ACTIONS_VLC_PLAY|Afspelen
+ACTIONS_VLC_PAUSE|Pause
+ACTIONS_VLC_STOP|Stop
+ACTIONS_VLC_FASTER|Sneller afspelen
+ACTIONS_VLC_SLOWER|Langzamer afspelen
+ACTIONS_VLC_MUTE|Het volume dempen
+ACTIONS_VLC_VOLUMEUP|Het volume verhogen
+ACTIONS_VLC_VOLUMEDOWN|Het volume verlagen
+ACTIONS_VLC_FULLSCREEN|Schermvullende modus wisselen
+ACTIONS_VLC_SNAPSHOT|Een schermopname nemen
+ACTIONS_VLC_ONTOP|Altijd bovenop wisselen
+ACTIONS_VLC_MINIMIZE|VLC minimaliseren
+ACTIONS_VLC_QUIT|VLC Afsluiten
+ACTIONS_EQ_ENABLE|Equalizer activeren
+ACTIONS_EQ_DISABLE|Equalizer deactiveren
+ACTIONS_DIALOGS_CHANGESKIN|Thema veranderen
+ACTIONS_DIALOGS_FILESIMPLE|Bestand openen (eenvoudig)
+ACTIONS_DIALOGS_FILE|Bestand openen (geavanceerd)
+ACTIONS_DIALOGS_DIRECTORY|Directorie openen
+ACTIONS_DIALOGS_DISC|Schijf openen
+ACTIONS_DIALOGS_NET|Netwerk openen
+ACTIONS_DIALOGS_MESSAGES|Berichten
+ACTIONS_DIALOGS_PREFS|Voorkeuren
+ACTIONS_DIALOGS_FILEINFO|Bestandsinformatie
+ACTIONS_DIALOGS_PLAYLIST|Afspeellijst zonder thema
+ACTIONS_DIALOGS_STREAMINGWIZARD|Streamen
+ACTIONS_DIALOGS_POPUP|Volledig menu
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio-instellingen menu
+ACTIONS_DIALOGS_VIDEOPOPUP|Video-instellingen menu
+ACTIONS_DIALOGS_MISCPOPUP|Overige instellingen menu
+ACTIONS_PLAYLIST_ADD|Een nieuw item toevoegen
+ACTIONS_PLAYLIST_DEL|Geselecteerde item verwijderen
+ACTIONS_PLAYLIST_NEXT|Volgende item afspelen
+ACTIONS_PLAYLIST_PREVIOUS|Vorige item afspelen
+ACTIONS_PLAYLIST_SETRANDOM|Afspelen in willekeurige/normale volgorde
+ACTIONS_PLAYLIST_SETLOOP|Afspeellijst herhalen/eenmalig afspelen
+ACTIONS_PLAYLIST_SETREPEAT|Herhaling van huidige item activeren/deactiveren
+ACTIONS_PLAYLIST_SORT|Alfabetisch sorteren
+ACTIONS_PLAYLIST_LOAD|Openen van bestand
+ACTIONS_PLAYLIST_SAVE|opslaan naar bestand
+ACTIONS_DVD_NEXTTITLE|Volgende titel
+ACTIONS_DVD_PREVIOUSTITLE|Vorige titel
+ACTIONS_DVD_NEXTCHAPTER|Volgende hoofdstuk
+ACTIONS_DVD_PREVIOUSCHAPTER|Vorige hoofdstuk
+ACTIONS_DVD_ROOTMENU|Hoofdmenu
+ACTIONS_WINDOWS_SHOW|Een venster weergeven
+ACTIONS_WINDOWS_HIDE|Een venster verbergen
+ACTIONS_WINDOWS_MAXIMIZE|Een venster maximaliseren
+ACTIONS_WINDOWS_UNMAXIMIZE|Een venster demaximaliseren
+ACTIONS_WINDOWS_SETLAYOUT|De layout van een venster veranderen
+
+#Action descriptions
+ACTION_DESC_NONE|Doe niets.
+ACTION_DESC_CHANGESKIN|Geef een dialoogvenster om een nieuwe thema te laden weer.
+ACTION_DESC_FILESIMPLE|Geef het eenvoudige "Bestand openen" dialoogvenster weer.
+ACTION_DESC_FILE|Geef het geavanceerde "Bestand openen" dialoogvenster weer.
+ACTION_DESC_DIRECTORY|Geef het "Directorie openen" dialoogvenster weer.
+ACTION_DESC_DISC|Geef het "Schijf openen" dialoogvenster weer.
+ACTION_DESC_NET|Geef het "Netwerk openen" dialoogvenster weer.
+ACTION_DESC_MSG|Geef het Berichtenvenster weer.
+ACTION_DESC_PREFS|Geef het voorkeurenvenster weer.
+ACTION_DESC_FILEINFO|Geef het bestandsinformatievenster weer.
+ACTION_DESC_PLAYLIST|Geef het standaard (zonder thema) afspeellijstvenster weer.
+ACTION_DESC_WIZARD|Geef het "Streamen" dialoogvenster weer.
+ACTION_DESC_POPUP|Geef het volledige popup-menu weer.
+ACTION_DESC_AUDIOPU|Geef het audio-instellingen popup-menu weer.
+ACTION_DESC_VIDEOPU|Geef het video-instellingen popup-menu weer.
+ACTION_DESC_MISCPU|Geef het popup-menu met afspeelbesturing en algemene opties weer.
+ACTION_DESC_EQENABLE|Activeer de equalizer audiofilter.
+ACTION_DESC_EQDISABLE|Deactiveer de equalizer audio-filter.
+ACTION_DESC_PLAY|Speel het huidige afspeellijstitem af.
+ACTION_DESC_PAUSE|Pauzeer het afspelen.
+ACTION_DESC_STOP|Stop het afspelen.
+ACTION_DESC_FASTER|Sneller afspelen.
+ACTION_DESC_SLOWER|Langzamer afspelen.
+ACTION_DESC_MUTE|Audio dempen/ontdempen.
+ACTION_DESC_VOLUP|Verhoog het volume.
+ACTION_DESC_VOLDOWN|Verlaag het volume.
+ACTION_DESC_FULLSCREEN|Wissel de schermvullende modus.
+ACTION_DESC_SNAPSHOT|Neem een schermopname van de video.
+ACTION_DESC_ONTOP|Wissel de "altijd bovenop" status.
+ACTION_DESC_MIN|Minimaliseer VLC.
+ACTION_DESC_QUIT|VLC afsluiten.
+ACTION_PL_ADD|Een nieuw item aan de afspeellijst toevoegen.
+ACTION_PL_DEL|Verwijder geselecteerde items van de afspeellijst.
+ACTION_PL_NEXT|Speel de volgende item in de afspeellijst af.
+ACTION_PL_PREV|Speel de vorige item in de afspeellijst af.
+ACTION_PL_SORT|Sorteer de afspeellijst op alfabetische volgorde.
+ACTION_PL_LOAD|Laad een extern afspeellijstbestand.
+ACTION_PL_SAVE|Sla de huidige afspeellijst op naar een bestand.
+ACTION_DVD_NEXTT|Ga naar de volgende titel op de DVD.
+ACTION_DVD_PREVT|Ga naar de vorige titel op de DVD.
+ACTION_DVD_NEXTC|Ga naar het volgende hoofdstuk op de DVD.
+ACTION_DVD_PREVC|Ga naar het vorige hoofdstuk op de DVD.
+ACTION_DVD_MENU|Ga naar het hoofdmenu op de DVD.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Activeren
+ACTION_DEACTIVATE|Deactiveren
+ACTION_RANDOM|%s om ervoor te zorgen dat de items in de afspeellijst willekeurig afgespeeld worden.
+ACTION_LOOP|%s om ervoor te zorgen dat de afspeellijst herhaald wordt als het einde bereikt is.
+ACTION_REPEAT|%s om ervoor te zorgen dat de huidige item herhaald wordt als het einde van de item bereikt is.
+ACTION_SHOW|Geef het venster met het ID %i weer
+ACTION_HIDE|Verberg het venster met het ID %i
+ACTION_MAXIMIZE|Maximaliseer het venster met het ID %i
+ACTION_UNMAXIMIZE|Onmaximaliseer het venster met het ID %i
+ACTION_LAYOUT|Zet de layout van het venster met het ID %i naar %l
+
+#Slider background generator
+SBGGEN_TITLE|Schuiverachtergrond generator
+SBGGEN_PREV|< Vorige
+SBGGEN_NEXT|Volgende >
+SBGGEN_CANCEL|Annuleren
+SBGGEN_FINISH|Voltooien
+
+SBGGEN_DESCR|Welkom bij de schuiverachtergrond generator. Het zal u helpen om in een paar stappen gave schuivers van uw afbeeldingen te maken.
+SBGGEN_FIRST|Als een eerste stap, kies of de schuiver van links naar rechts of van boven naar beneden zal gaan en welke grootte de achtergrond moet hebben.
+SBGGEN_WIDTH|Breedte:
+SBGGEN_HEIGHT|Hoogte:
+SBGGEN_LEFT_M|Marge links:
+SBGGEN_RIGHT_M|Marge rechts:
+SBGGEN_TOP_M|Marge boven:
+SBGGEN_BTM_M|Marge onder:
+SBGGEN_SECOND|In de volgende stap moet u de juiste afbeelding kiezen om met de verschillende delen van uw schuiver te associeren.
+SBGGEN_NOTE|NB: De icoontjes zijn slechts voorbeelden om te illustreren wat de verschillende delen zijn. Zij zijn geen voorbeeld van de afbeeldingen die in de achtergrondgeneratie gebruikt zullen worden.
+
+SBGGEN_IMAGE|Afbeeldingsbestand:
+SBGGEN_OPEN|Openen...
+SBGGEN_RESIZE|Schalingsgedrag:
+SBGGEN_TILE|Tegelen
+SBGGEN_STRETCH|Strekken
+
+SBGGEN_BG|Achtergrond
+SBGGEN_OVERLAY|Overlapafbeelding
+SBGGEN_LEFT_E|Linkerrand
+SBGGEN_RIGHT_E|Rechterrand
+SBGGEN_TOP_E|Bovenrand
+SBGGEN_BTM_E|Onderrand
+SBGGEN_MIDDLE|Middenstuk
+
+SBGGEN_PROGRESS|Aanmaken van de achtergrond...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|Over VLC themabewerker %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Copyright 2007-%y Het VideoLAN Team</h3>Uitgegeven onder de voorwaarden van de GPL 2+<br><br><b> Hoofdprogrammeur:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Website:</b> %w<br><br><b>Dankbetuiging:</b><br>Timothy Gerard Endres voor registertoegang en TAR ondersteuning (Publiek Domein)<br>Het Tango! Desktop Project (http://tango.freedesktop.org) voor enkele ikoontjes (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) en Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) voor de Boolean Expressie Evaluator en Bezier code (GPL 2+)</html>
+VLT_EX_TITLE|Importeer een VLT bestand
+#%f - name of the folder
+VLT_EX_MSG|Het VLT bestand zal worden uitgepakt in de map genaamd "%f".\nWilt u doorgaan?
+VLT_EX_YES|Ja, uitpakken
+VLT_EX_NO|Nee, annuleren
+VLT_EX_PROGRESS|Uitpakken van VLT bestand...
+XML_PARSING_PROGRESS|Inlezen XML...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) binnen de directory van het XML bestand
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (Open & True type fonts) binnen de directory van het XML bestand
+DUPLICATE_MSG|Please enter the rename pattern for the duplicated objects.\n%oldid% will be replaced by the old ID of the object.
+DEL_CONFIRM_TITLE|Verwijderingsbevestiging
+DEL_CONFIRM_MSG|Wilt u "%n" echt verwijderen?
+EXIT_CONFIRM_TITLE|Uw aanpassingen werden niet opgeslagen
+EXIT_CONFIRM_MSG|Wilt u uw thema opslaan voordat u afsluit?
+UPDATE_TITLE|Update gevonden
+UPDATE_MSG|Er is een update voor de themabewerker beschikbaar.\nUw versie: %v\nNieuwste versie: %c\nWilt u de themabewerker nu updaten?
+VLT_PROGRESS|VLT bestand aanmaken...
+VLT_SUCCESS_MSG|VLT bestand is succesvol aangemaakt.
+VLT_SUCCESS_TITLE|VLT bestand aangemaakt
+DOWNLOAD_PROGRESS|Downloaden...
+CONNECT_PROGRESS|Verbinden...
+UPDATE_SUCCESS_TITLE|Update voltooid
+UPDATE_SUCCESS_MSG|De update was succesvol gedownload en geinstalleerd.\n VLC themabewerker zal nu herstarten
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Fout tijdens openen van bestand
+ERROR_FILENEXIST_MSG|Het bestand "%f" bestaat niet en kon dus niet worden geopend!
+ERROR_VLT_UNPACK_TITLE|Kon VLT bestand niet uitpakken
+ERROR_VLT_UNPACK_MSG|VLT bestand kon niet worden uitgepakt!
+ERROR_VLT_NOTHEME_TITLE|Kon theme.xml niet vinden
+ERROR_VLT_NOTHEME_MSG|Kon "theme.xml" niet in de uitgepakte inhoud van het VLT bestand vinden.\nProbeer het handmatig te openen.
+ERROR_VLC_LAUNCH_TITLE|Fout
+ERROR_VLC_LAUNCH_MSG|VLC mediaspeler kon niet opgestart worden
+ERROR_BROWSE_TITLE|Kon browser niet starten
+ERROR_BROWSE_MSG|De browser kon niet gestart worden.\nGa a.u.b. handmatig naar het volgende webadres:\n%u
+ERROR_ADD_SBMP_TITLE|Kon SubBitmap niet toevoegen
+ERROR_ADD_SBMP_NOBMP|Geen ouder-Bitmap is geselecteerd!
+ERROR_ADD_SBMP_NOTBMP|De geselecteeerde bron is geen Bitmap!
+ERROR_RES_DEL_TITLE|Kon bron niet verwijderen
+ERROR_RES_DEL_INUSE|Bron is nog steeds in gebruik door het thema en kan daarom niet verwijderd worden.
+ERROR_ADD_LAYOUT_TITLE|Kon layout niet toevoegen
+ERROR_ADD_LAYOUT_MSG|Geen oudervenster geselecteerd!
+ERROR_UPDATE_TITLE|Fout tijdens updaten!
+ERROR_SAVEPNG_TITLE|Fout tijdens opslaan afbeeldingsbestand
+ERROR_SAVEPNG_MSG|Kon afbeeldingsbestand niet opslaan.
+ERROR_NEWSKIN_TITLE|Fout tijdens aanmaken nieuw themabestand!
+ERROR_NEWSKIN_MSG|Het nieuwe themabestand kon niet aangemaakt worden.
+ERROR_HEADER_INVALID|Bestand lijkt geen geldig VLC thema te zijn!\nOngeldige header:
+ERROR_SKIN_INVALID|Geselecteerd bestand is geen geldig VLC themabestand!
+ERROR_VERSION_UNSUPPORTED|De versie van het thema is nog niet ondersteund!
+ERROR_SAVE_TITLE|Fout tijdens het opslaan van het themabestand!
+ERROR_SAVE_MSG|Themabestand kon niet opgeslagen worden.
+ERROR_ALPHA_TITLE|Ondoorzichtigheidswaarde niet geldig
+ERROR_ALPHA_MSG|Voer a.u.b. een geldige ondoorzichtigheid in! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Kon de middelste afbeelding niet laden!\nHet middelste gedeelte van de schuiver is ten minste nodig om een schuiverachtergrond te genereren.
+ERROR_VLT_TITLE|Kon VLT bestand niet aanmaken
+ERROR_VLT_MSG|VLT bestand kon niet aangemaakt worden!
+ERROR_ID_INVALID_TITLE|ID niet geldig
+ERROR_ID_INVALID_MSG|Voer a.u.b. een geldige ID in!
+ERROR_ID_EXISTS_MSG|De ID "%i" bestaat reeds.\nKies een andere.
+ERROR_WIDTH_INVALID_TITLE|Breedte niet geldig
+ERROR_WIDTH_INVALID_MSG|Voer a.u.b. een geldige breedte in!
+ERROR_HEIGHT_INVALID_TITLE|Hoogte niet geldig
+ERROR_HEIGHT_INVALID_MSG|Voer a.u.b. een geldige hoogte in!
+ERROR_FILE_INVALID_TITLE|Bestand niet geldig
+ERROR_FILE_INVALID_MSG|Kies a.u.b. een geldig bestand!
+ERROR_BITMAP_INVALID_MSG|Het opgegeven bitmapbestand kon niet geladen worden!\nKies a.u.b. een andere.
+ERROR_NBFRAMES_TITLE|Ongeldig aantal frames
+ERROR_NBFRAMES_MSG|Het aantal frames kan niet kleiner dan 1 zijn
+ERROR_OTF_TITLE|OTF niet ondersteund
+ERROR_OTF_MSG|U heeft een OpenType lettertype gekozen, VLC zal deze correct weergeven, maar de Themabewerker kan dit niet weergeven.\nU zal een ander lettertype in het voorbeeld zien.
+ERROR_SIZE_INVALID_TITLE|Ongeldige grootte
+ERROR_SIZE_INVALID_MSG|Voer a.u.b. een geldige grootte in.
+ERROR_OUTSIDE_TITLE|Dimensies ongeldig
+ERROR_OUTSIDE_MSG|Opgegeven dimensies bevinden zicht buiten de ouder-bitmap!
+ERROR_BITMAP_NEXIST|De bitmap %i bestaat niet.
+ERROR_BITMAP_NEXIST_TITLE|Afbeelding niet geldig!
+ERROR_BITMAP_LOAD|Het afbeeldingsbestand voor de bitmap %i kon niet geladen worden.
+ERROR_BITMAP_LOAD_TITLE|Fout tijdens laden van afbeeldingen
+ERROR_NOSTATE|Geef a.u.b. een statusconditie op!
+ERROR_NOSTATE_TITLE|Status ongeldig
+ERROR_FONT_NEXIST|Het lettertype %i bestaat niet.
+ERROR_FONT_NEXIST_TITLE|Lettertype ongeldig!
+ERROR_POINTS_INVALID|Voer a.u.b. geldige bezierpunten in!
+ERROR_POINTS_INVALID_TITLE|Punten ongeldig!
+ERROR_RADIALSLIDER|Radiale Schuivers worden nog niet ondersteund door de Themabewerker.
+ERROR_RADIALSLIDER_TITLE|Niet ondersteund
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Thema naamloos
+THEMEINFO_AUTHOR_DEFAULT|Onbekende auteur
+THEMEINFO_EMAIL_DEFAULT|Onbekend
+
+#History
+HIST_ITEM_ADD|%t toevoegen
+HIST_ITEM_DEL|%t verwijderen
+HIST_ITEM_EDIT|%t bewerken
+HIST_ITEM_MOVE|%t verplaatsen
+HIST_RES_DEL|Verwijderen van %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Attribuut moet opgegeven worden.
+
+#Common strings
+WIN_ITEM_GENERAL|Algemene attributen
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|Naam en identificatie van de %t. Moet uniek zijn.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Breedte:
+WIN_ITEM_HEIGHT|Hoogte:
+WIN_ITEM_VISIBLE|Zichtbaarheid:
+WIN_ITEM_LEFTTOP|Linksboven:
+WIN_ITEM_LEFTTOP_TIP|Geef aan welke hoek van de layout de linksboven hoek van dit object mee verbonden is, in geval van schalen.
+WIN_ITEM_RIGHTBOTTOM|Rechtsbeneden:
+WIN_ITEM_RIGHTBOTTOM_TIP|Geef aan welke hoek van de layout de rechtsbeneden hoek van dit object mee verbonden is, in geval van schalen.
+WIN_ITEM_XKEEPRATIO|Behoud X ratio:
+WIN_ITEM_XKEEPRATIO_TIP|Indien waar wordt het gedrag van horizontaal schalen veranderd. Bijvoorbeeld, als de witruimte links van de aansturing twee keer zo groot is als rechts, zal dit bij horizontaal schalen gelijk blijven. De breedte van de aansturing blijft gelijk.
+WIN_ITEM_YKEEPRATIO|Behoud Y ratio:
+WIN_ITEM_YKEEPRATIO_TIP|Indien waar wordt het gedrag van verticaal schalen veranderd. Bijvoorbeeld, als de witruimte boven van de aansturing twee keer zo groot is als beneden, zal dit bij verticaal schalen gelijk blijven. De hoogte van de aansturing blijft gelijk.
+WIN_ITEM_HELP|Helptekst:
+WIN_ITEM_HELP_TIP|De variabele '$H' zal aangegeven worden als de muis over de huidige aansturing gaat.
+WIN_ITEM_TOOLTIPTEXT|Hulptip:
+FILE_INDIR|in dezelfde map als het XML bestand
+
+#Bitmap
+WIN_BITMAP_TITLE|Bitmap settings
+WIN_BITMAP_FILE|Bestand*:
+WIN_BITMAP_FILE_TIP|Geef het pad en de naam van de te gebruiken afbeelding aan.
+WIN_BITMAP_OPEN|Openen...
+WIN_BITMAP_ALPHACOLOR|Alfakleur:
+WIN_BITMAP_ALPHACOLOR_TIP|Transparantiekleur van de bitmap in hexadecimale formaat. Als uw PNG bestand ook een transparantiemasker opgeeft, zal dat ook meegenomen worden.
+WIN_BITMAP_CHOOSE|Kiezen...
+WIN_BITMAP_NBFRAMES|Aantal frames:
+WIN_BITMAP_NBFRAMES_TIP|Deze attribuut is nodig om geanimeerde bitmaps te definieren; dit is het aantal frames (beelden) in uw animatie. Alle verschillende frames zijn gewoon afbeeldingen die verticaal in de bitmap gelegd worden.
+WIN_BITMAP_FPS|Frames per seconde:
+WIN_BITMAP_FPS_TIP|Alleen gebruikt bij geanimeerde bitmaps; dit is het aantal frames (beelden) per seconde van de animatie.
+WIN_BITMAP_ANIMATION|Animatieattributen
+WIN_BITMAP_CHOOSER_TITLE|Kies alfakleur
+
+#SubBitmap
+WIN_SBMP_TITLE|SubBitmapinstellingen
+WIN_SBMP_BOUNDS|Positie- en dimensieattributen
+
+#Font
+WIN_FONT_TITLE|lettertype-instellingen
+WIN_FONT_FILE|Bestand*:
+WIN_FONT_FILE_TIP|Het bestand met de te gebruiken TrueType of OpenType lettertype.
+WIN_FONT_OPEN|Openen...
+WIN_FONT_SIZE|Grootte:
+
+#Layout
+WIN_LAYOUT_TITLE|Layoutinstellingen
+WIN_LAYOUT_GENERAL|Algemene attributen
+WIN_LAYOUT_DIMENSIONS|Dimensies
+WIN_LAYOUT_WIDTH|Initiele breedte*:
+WIN_LAYOUT_WIDTH_TIP|Initiele breedte van de layout.
+WIN_LAYOUT_HEIGHT|Initiele hoogte*:
+WIN_LAYOUT_HEIGHT_TIP|Initiele hoogte van de layout.
+WIN_LAYOUT_MINWIDTH|Minimale breedte:
+WIN_LAYOUT_MINWIDTH_TIP|Minimale breedte van de layout. Alleen gebruikt bij schalen van de layout. Als deze waarde naar "-1" ingesteld wordt, dan zal de initiele breedte als minimale breedte gelden.
+WIN_LAYOUT_MINHEIGHT|Minimale hoogte:
+WIN_LAYOUT_MINHEIGHT_TIP|Minimale hoogte van de layout. Alleen gebruikt bij schalen van de layout. Als deze waarde naar "-1" ingesteld wordt, dan zal de initiele hoogte als minimale hoogte gelden.
+WIN_LAYOUT_MAXWIDTH|Maximale breedte:
+WIN_LAYOUT_MAXWIDTH_TIP|Maximale breedte van de layout. Alleen gebruikt bij schalen van de layout. Als deze waarde naar "-1" ingesteld wordt, dan zal de initele breedte als maximale breedte gelden.
+WIN_LAYOUT_MAXHEIGHT|Maximale hoogte:
+WIN_LAYOUT_MAXHEIGHT_TIP|Maximale hoogte van de layout. Alleen gebruikt bij schalen van de layout. Als deze waarde naar "-1" ingesteld wordt, dan zal de initele hoogte als maximale hoogte gelden.
+
+#Window
+WIN_WINDOW_TITLE|Vensterinstellingen
+WIN_WINDOW_X_TIP|Initiele afstand van het venster tot de linkerrand van het scherm.
+WIN_WINDOW_Y_TIP|Initiele afstand van het venster tot de bovenrand van het scherm.
+WIN_WINDOW_VISIBLE_TIP|Geeft aan of het venster weergegeven moet worden als VLC start. Omdat VLC de themavenster positie en zichtbaarheid onthoudt, zal deze attribuut alleen de eerste keer dat de thema geladen wordt gebruikt worden.
+WIN_WINDOW_DD|KLik en sleep:
+WIN_WINDOW_DD_TIP|Geeft aan of mediabestanden naar dit venster gesleept mogen worden.
+WIN_WINDOW_PD|Afspelen bij toevoeging:
+WIN_WINDOW_PD_TIP|Geeft aan of een bestand die naar dit venster gesleept wordt direct afgespeeld moet worden (waar) of dat het aan de afspeellijst toegevoegd moet worden (fout). Deze attribuut heeft geen effect als "Klik en sleep" op fout staat.
+WIN_WINDOW_DD_PANEL|Klik en sleep opties
+
+#Anchor
+WIN_ANCHOR_TITLE|Ankerinstellingen
+WIN_ANCHOR_POINTS|Punten:
+WIN_ANCHOR_POINTS_TIP|Punten die de Bezier curve gevolgd door het anker aangeven. U hoeft deze parameter niet te veranderen als u alleen maar een puntanker wilt.
+WIN_ANCHOR_RANGE|Bereik:
+WIN_ANCHOR_RANGE_TIP|Bereik van het anker's gebied van effect, in pixels.
+WIN_ANCHOR_PRIORITY|Prioriteit*:
+WIN_ANCHOR_PRIORITY_TIP|Elk anker heeft een prioriteit (priotiteit attribuut) en het anker met de hoogste prioriteit is de winnaar, wat betekend dat als u zijn venster verplaatst alle andere verankerde vensters ook zullen verplaatsen/ Om het effect van 2 verankerde vensters te breken, moet u het venster met een lagere prioriteit anker verplaatsen.
+WIN_ANCHOR_BOUNDARIES|Begrenzingen
+
+#Button
+WIN_BUTTON_TITLE|Knopinstellingen
+WIN_BUTTON_UP|Normale afbeelding*:
+WIN_BUTTON_OVER|Afbeelding bij muis erover:
+WIN_BUTTON_DOWN|Afbeelding bij geklik:
+WIN_BUTTON_ACTION|Actie:
+WIN_BUTTON_ATTR|Knopattributen
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Selectievakje-instellingen
+WIN_CHECKBOX_UP|Normale afbeelding*:
+WIN_CHECKBOX_OVER|Afbeelding bij muis erover:
+WIN_CHECKBOX_DOWN|Afbeelding bij geklik:
+WIN_CHECKBOX_ACTION|Actie:
+WIN_CHECKBOX_CONDITION|Conditie:
+WIN_CHECKBOX_CONDITION_TIP|Booleaanse expressie die de status van het selectievakje aangeeft: fout -> status #1, waar -> status #2
+WIN_CHECKBOX_STATE|Selectievakje status
+WIN_CHECKBOX_STATE1|Status #1 (Conditie niet bereikt):
+WIN_CHECKBOX_STATE2|Status #2 (Condition bereikt):
+
+#Image
+WIN_IMAGE_TITLE|Afbeeldingsinstellingen
+WIN_IMAGE_IMAGE|Afbeelding*:
+WIN_IMAGE_IMAGE_TIP|ID van een Bitmap
+WIN_IMAGE_RESIZE|Schalingsmodus:
+WIN_IMAGE_RESIZE_TIP|Specificeert het gedrag als de afbeelding geschaald wordt.
+WIN_IMAGE_ACTION|Actie:
+WIN_IMAGE_ACTION_TIP|Actie bij een klik op de afbeelding.
+WIN_IMAGE_ACTION2|Dubbelklik actie:
+WIN_IMAGE_ACTION2_TIP|Actie bij een dubbelklik op de afbeelding.
+WIN_IMAGE_ATTR|Afbeeldingsattributen
+
+#Group
+WIN_GROUP_TITLE|Groepinstellingen
+
+#Panel
+WIN_PANEL_TITLE|Paneelinstellingen
+WIN_PANEL_DIMENSIONS|Dimensies
+WIN_PANEL_WIDTH|Breedte*:
+WIN_PANEL_HEIGHT|Hoogte*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Afspeellijstinstellingen
+WIN_PLAYTREE_FONT|Lettertype*:
+WIN_PLAYTREE_BGIMAGE|Achtergrondafbeelding:
+WIN_PLAYTREE_BGIMAGE_TIP|ID van een Bitmap, gebruikt als achtergrondafbeelding. Als geen bitmap opgegeven is, zal de achtergrond gevuld worden met de bgcolor1 en bgcolor2 attributen.
+WIN_PLAYTREE_BGCOLOR1|Achtergrondkleur #1:
+WIN_PLAYTREE_BGCOLOR2|Achtergrondkleur #2:
+WIN_PLAYTREE_SELCOLOR|Selectiekleur:
+WIN_PLAYTREE_FGCOLOR|Tekstkleur:
+WIN_PLAYTREE_PLAYCOLOR|Tekstkleur bij afspelen:
+WIN_PLAYTREE_FLAT|Platte afspeellijst:
+WIN_PLAYTREE_FLAT_TIP|Geeft aan of de afspeellijst een boomstructuur moet hebben of compleet \"plat\" (alleen de bladeren van de boom weergeven) moet zijn
+WIN_PLAYTREE_ITEMIMAGE|Item icoon:
+WIN_PLAYTREE_OPENIMAGE|Open map icoon:
+WIN_PLAYTREE_CLOSEDIMAGE|Gesloten map icoon:
+WIN_PLAYTREE_SLIDER|Bewerk schuiver van afspeellijst (scrollbalk)
+WIN_PLAYTREE_ATTR|Afspeellijstattributen
+WIN_PLAYTREE_CHOOSE|Kiezen...
+WIN_PLAYTREE_CHOOSER_TITLE|Kies kleur
+
+#Slider
+WIN_SLIDER_TITLE|Schuiverinstellingen
+WIN_SLIDER_UP|Normale afbeelding*:
+WIN_SLIDER_OVER|Afbeelding bij muis erover:
+WIN_SLIDER_DOWN|Afbeelding bij geklik:
+WIN_SLIDER_POINTS|Punten*:
+WIN_SLIDER_THICKNESS|Dikte:
+WIN_SLIDER_VALUE|Waarde*:
+WIN_SLIDER_VALUE_SCROLL|Afspeellijst scrollen
+WIN_SLIDER_BG_ENABLE|Achtergrond activeren
+WIN_SLIDER_BG_EDIT|Bewerken...
+WIN_SLIDER_ATTR|Schuiverattributen
+WIN_SLIDER_BG|Schuiverachtergrond
+
+#Slider background
+WIN_SBG_TITLE|Schuiverachtergrondinstellingen
+WIN_SBG_WIZARD|Open schuiverachtergrond generator...
+WIN_SBG_IMAGE|Afbeelding*:
+WIN_SBG_NBHORIZ|Horizontale frames:
+WIN_SBG_NBVERT|Verticale frames:
+WIN_SBG_PADHORIZ|Horizontale marge:
+WIN_SBG_PADVERT|Verticale marge:
+WIN_SBG_ATTR|Achtergrondattributen
+
+#Text
+WIN_TEXT_TITLE|Tekstinstellingen
+WIN_TEXT_TEXT|Tekst*:
+WIN_TEXT_FONT|Lettertype:
+WIN_TEXT_COLOR|Kleur:
+WIN_TEXT_CHOOSE|Kiezen...
+WIN_TEXT_CHOOSER_TITLE|Kies een tekstkleur
+WIN_TEXT_ALIGNMENT|Uitlijning:
+WIN_TEXT_SCROLLING|Scrollen:
+WIN_TEXT_ATTR|Tekstattributen
+
+#Video
+WIN_VIDEO_TITLE|Video-instellingen
+WIN_VIDEO_AUTORESIZE|Autoschaling:
+WIN_VIDEO_AUTORESIZE_TIP|Geeft aan of de layout automatisch geschaald moet worden zodat deze binnen de dimensies van de afspelende video past.
+WIN_VIDEO_ATTR|Video-attributen
