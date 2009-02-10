@@ -36,7 +36,7 @@ import org.w3c.dom.Node;
  * Anchor item
  * @author Daniel Dreibrodt
  */
-public class Anchor extends Item implements ActionListener{
+public class Anchor extends Item implements ActionListener {
   
   
   public final String POINTS_DEFAULT = "(0,0)";

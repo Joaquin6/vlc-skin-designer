@@ -440,6 +440,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_tree.setRootVisible(false);
     items_tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     items_tree.addTreeSelectionListener(this);
+    items_tree.setDragEnabled(true);
+    items_tree.setDropMode(DropMode.ON_OR_INSERT);
+    items_tree.setTransferHandler(new ItemTransferHandler(s));
     items_tree.setShowsRootHandles(true);
     items_tree.addMouseListener(this);
     JScrollPane items_tree_sp = new JScrollPane(items_tree);

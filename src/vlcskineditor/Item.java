@@ -153,5 +153,5 @@ public abstract class Item {
    */
   public void updateToGlobalVariables() {
     vis = s.gvars.parseBoolean(visible);
-  }
+  } 
 }

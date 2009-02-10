@@ -809,4 +809,8 @@ public class Slider extends Item implements ActionListener{
     updateBezier();
     if(sbg!=null) sbg.updateToGlobalVariables();
   }
+
+  public boolean isInPlaytree() {
+    return inPlaytree;
+  }
 }
