@@ -118,6 +118,17 @@ public class Slider extends Item implements ActionListener{
     created = true;
   }
 
+  /**
+   * Parses a slider contained in a Playtree from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   * @param inPt The boolean value indicating whether the slider is inside a playtree or not
+   */
+  public Slider(Node n, Skin s_, boolean iPt) {
+    this(n, s_);
+    inPlaytree = iPt;
+  }
+
    /** Creates a new instance of Slider
    * @param xmlcode The XML code
    * @param s_ The parent skin
@@ -701,7 +712,7 @@ public class Slider extends Item implements ActionListener{
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
     code+=" points=\""+points+"\"";
     if (thickness!=THICKNESS_DEFAULT) code+=" thickness=\""+String.valueOf(thickness)+"\"";
-    if (!value.equals(VALUE_DEFAULT)) code+=" value=\""+value+"\"";
+    if(!inPlaytree) if (!value.equals(VALUE_DEFAULT)) code+=" value=\""+value+"\"";
     if (!tooltiptext.equals(TOOLTIPTEXT_DEFAULT)) code+=" tooltiptext=\""+tooltiptext+"\"";
     code+=" up=\""+up+"\"";
     if (!down.equals(DOWN_DEFAULT)) code+=" down=\""+down+"\"";

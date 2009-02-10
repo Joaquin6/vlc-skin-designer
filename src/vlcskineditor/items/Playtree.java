@@ -124,7 +124,7 @@ public class Playtree extends Item implements ActionListener{
     NodeList nodes = n.getChildNodes();
     for(int i=0;i<nodes.getLength();i++) {
       if(nodes.item(i).getNodeName().equals("Slider")) {
-        slider = new Slider(nodes.item(i), s);
+        slider = new Slider(nodes.item(i), s, true);
       }
     }
 
