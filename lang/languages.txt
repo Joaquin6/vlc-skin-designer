@@ -1,6 +1,7 @@
 #Available languages
 #language code|Human-readable name|language file
 en|English|en.txt
+ca|Catalan (Incomplete)|ca.txt
 nl|Dutch|nl.txt
 de|German|de.txt
 ru|Russian (Incomplete)|ru.txt
