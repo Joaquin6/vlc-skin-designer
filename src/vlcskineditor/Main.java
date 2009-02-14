@@ -52,7 +52,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final static String VERSION = "0.8.0.dev";
+  public final static String VERSION = "0.8";
   //The directory in which the VLC executable is found
   private String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -1856,6 +1856,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+    //Exe can not be deleted directly after update, only on 2nd start of the new program
+    if(new File("VLCSkinEditor.old.exe").exists()) new File("VLCSkinEditor.old.exe").delete();
     //Post update code, only executed after update
     if(new File(".updated").exists()) {
       //Post update steps for 0.7.5
@@ -1863,11 +1865,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       
       //Update system did not yet include exclusion for windows files on non-windows systems, so delete them
       if(System.getProperty("os.name").indexOf("Windows")==-1) {
-        new File("VLCSkinEditor.exe").delete();
+        new File("VLCSkinEditor.new.exe").delete();
         new File("ICE_JNIRegistry.dll").delete();
       }
-      //VLT icon changed on windows
       else {
+        //exe changed on windows
+        new File("VLCSkinEditor.exe").renameTo(new File("VLCSkinEditor.old.exe"));
+        new File("VLCSkinEditor.new.exe").renameTo(new File("VLCSkinEditor.exe"));
+        //VLT icon changed on windows
         try {
           RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_CLASSES_ROOT,"VLCSkinFile\\DefaultIcon",RegistryKey.ACCESS_ALL);
           if(vlc_key.hasDefaultValue()) {
@@ -1892,6 +1897,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           ex.printStackTrace();
         }
       }
+      lang_zip.delete();
 
       new File(".updated").delete();
     }
