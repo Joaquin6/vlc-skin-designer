@@ -18,7 +18,7 @@ VersionInfoDescription=Setup for the VLC Skin Editor
 VersionInfoCopyright=©2008 VideoLAN
 AppCopyright=©2008 VideoLAN Team
 AppName=VLC Skin Editor
-AppVerName=0.7.5
+AppVerName=0.8
 LicenseFile=LICENSE.TXT
 PrivilegesRequired=poweruser
 DefaultDirName={pf}\VideoLAN\VLC Skin Editor
@@ -29,7 +29,7 @@ AppPublisher=VideoLAN
 AppPublisherURL=http://www.videolan.org
 AppSupportURL=http://www.videolan.org/vlc/skineditor.html
 AppUpdatesURL=http://www.videolan.org/vlc/skineditor.html
-AppVersion=0.7
+AppVersion=0.8
 AppID={{977C5080-EA08-435D-8901-233A506E1651}}
 AppReadmeFile={app}\README.TXT
 UninstallDisplayIcon={app}\VLCSkinEditor.exe
@@ -37,9 +37,9 @@ UninstallDisplayName=VLC Skin Editor
 ChangesAssociations=true
 OutputDir=dist
 [Registry]
-Root: HKCR; Subkey: .vlt; ValueType: string; ValueData: VLCSkinFile; Flags: uninsdeletevalue
-Root: HKCR; Subkey: VLCSkinFile; ValueType: string; ValueData: Compressed VLC Skin; Flags: uninsdeletevalue
-Root: HKCR; Subkey: VLCSkinFile\DefaultIcon; ValueType: string; ValueData: """{app}\VLCSkinEditor.exe,2"""
+Root: HKCR; Subkey: .vlt; ValueType: string; ValueData: VLCSkinFile; Flags: uninsdeletekey
+Root: HKCR; Subkey: VLCSkinFile; ValueType: string; ValueData: Compressed VLC Skin; Flags: uninsdeletekey
+Root: HKCR; Subkey: VLCSkinFile\DefaultIcon; ValueType: string; ValueData: """{app}\VLCSkinEditor.exe"",2"
 Root: HKCR; Subkey: VLCSkinFile\shell\open\command; ValueType: string; ValueName: ; ValueData: """{app}\VLCSkinEditor.exe"" ""%1"""
 Root: HKCR; Subkey: VLCSkinFile\shell\open; ValueType: string; ValueData: Edit with VLC Skin Editor
 [InstallDelete]

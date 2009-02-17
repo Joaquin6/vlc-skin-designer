@@ -1857,7 +1857,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   public static void main(String[] args) {
     //Exe can not be deleted directly after update, only on 2nd start of the new program
-    if(new File("VLCSkinEditor.old.exe").exists()) new File("VLCSkinEditor.old.exe").delete();
+    if(new File("VLCSkinEditor.old.exe").exists()) {
+      new File("VLCSkinEditor.old.exe").delete();
+      new File("lang.zip").delete();
+    }
     //Post update code, only executed after update
     if(new File(".updated").exists()) {
       //Post update steps for 0.7.5
@@ -1897,8 +1900,6 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
           ex.printStackTrace();
         }
       }
-      lang_zip.delete();
-
       new File(".updated").delete();
     }
 
