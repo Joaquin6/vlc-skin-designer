@@ -64,6 +64,7 @@ public class Font extends Resource implements ActionListener{
     id = XML.getStringAttributeValue(n, "id", id);
     file = XML.getStringAttributeValue(n, "file", file);
     size = XML.getIntAttributeValue(n, "size", size);
+    updateFont();
   }
   
   /**
