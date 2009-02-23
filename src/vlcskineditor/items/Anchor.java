@@ -360,6 +360,7 @@ public class Anchor extends Item implements ActionListener {
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
+    if(!points.equals(POINTS_DEFAULT)) code+=" points=\""+points+"\"";
     code+=" priority=\""+String.valueOf(priority)+"\"";
     if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";    
     code+="/>";

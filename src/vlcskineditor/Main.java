@@ -47,12 +47,12 @@ import vlcskineditor.resources.SubBitmap;
  */
 public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
 
-  private static final long serialVersionUID = 80;
+  private static final long serialVersionUID = 801;
 
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final static String VERSION = "0.8";
+  public final static String VERSION = "0.8.1";
   //The directory in which the VLC executable is found
   private String vlc_dir = "";
   //The directory from which VLC loads its skins

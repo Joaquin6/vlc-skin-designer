@@ -1,12 +1,16 @@
-VLC Skin Editor release 0.8.0
+VLC Skin Editor release 0.8.1
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.8.1  - Font rendering bugfix
+       - Anchor points saving bugfix
+       
 0.8.0  - Performance improvements
        - Multi-language support
-       - Remembering of windows' last positions&sizes
+       - Remembering of windows' last positions & sizes
        - New parsing system for all valid skin files
        - Bug-fixes
+       
 0.7.0  - Preview can be saved as image
        - Improved SubBitmap editing
        - Resources/windows/layouts can be duplicated easily
@@ -16,7 +20,8 @@ Changelog:
        - Improved cross platform behaviour
        - Improved online help
        - Automatic update
-       - Some (critical) bugs were fixed       
+       - Some (critical) bugs were fixed
+       
 0.6.1b - Critical bufix for the Preview Window 
        - Bugfix for slider points parsing and XML parsing
        
@@ -81,7 +86,7 @@ Changelog:
 System Requirements
 -----------------------------------------------------------
 Java SE RE 6 or later (DL at java.sun.com)
-approximately at least 256MB RAM and a 500-1000MHz CPU
+approximately at least 256MB RAM and a 1GHz CPU
 -----------------------------------------------------------
 Usage:
 -----------------------------------------------------------
@@ -90,9 +95,19 @@ Or manually run "java -jar VLCSkinEditor.jar".
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2007 Daniel Dreibrodt (altglass@nurfuerspam.de)    
-Credits go to the Tango! Desktop Project for some icons I
-used (licensed under cc-sa), to Timothy Gerard Endres 
-(time@gjt.org) for his Windows registry access and TAR 
-access packages for Java (licensed under public domain)
+(c)2009 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
 See LICENSE.TXT for further details
+-----------------------------------------------------------
+Credits:
+-----------------------------------------------------------
+The Tango! Desktop Project for some icons (CC-ShareAlike)
+Timothy Gerard Endres for the Windows Registry access and
+  TAR support libraries for Java (Public Domain)
+Cyril Deguet and Olivier Teulière for the Boolean Expression
+ Evaluator and Bezier code (GPL 2+)
+Andrey Wolk for the Russian translation
+Daniel Nylander for the Swedish translation
+Myckel Habets for the Dutch translation
+Xènia Albà for the Catalan translation
+Marián Hikaník for the Slovak translation
+Jean-Baptiste Kempf for the French translation
