@@ -961,7 +961,7 @@ public class Playtree extends Item implements ActionListener{
       }
 
       g_.drawImage(buffi, (x+x_)*z, (y+y_)*z, width*z, height*z, null);
-      slider.draw(g_,z);
+      slider.draw(g_,x_,y_,z);
     }
     if(selected) {
       g_.setColor(Color.RED);

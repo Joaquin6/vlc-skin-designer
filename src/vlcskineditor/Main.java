@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Main.java
  *****************************************************************************
- * Copyright (C) 2007 Daniel Dreibrodt
+ * Copyright (C) 2009 Daniel Dreibrodt
  *
  * VLC Skin Editor
  *
@@ -52,7 +52,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   //The version identification of the current build.   
-  public final static String VERSION = "0.8.1";
+  public final static String VERSION = "0.8.2.dev";
   //The directory in which the VLC executable is found
   private String vlc_dir = "";
   //The directory from which VLC loads its skins
@@ -1856,50 +1856,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    //Exe can not be deleted directly after update, only on 2nd start of the new program
-    if(new File("VLCSkinEditor.old.exe").exists()) {
-      new File("VLCSkinEditor.old.exe").delete();
-      new File("lang.zip").delete();
-    }
     //Post update code, only executed after update
     if(new File(".updated").exists()) {
-      //Post update steps for 0.7.5
-      System.out.println("Performing post-update steps to "+VERSION);
       
-      //Update system did not yet include exclusion for windows files on non-windows systems, so delete them
-      if(System.getProperty("os.name").indexOf("Windows")==-1) {
-        new File("VLCSkinEditor.new.exe").delete();
-        new File("ICE_JNIRegistry.dll").delete();
-      }
-      else {
-        //exe changed on windows
-        new File("VLCSkinEditor.exe").renameTo(new File("VLCSkinEditor.old.exe"));
-        new File("VLCSkinEditor.new.exe").renameTo(new File("VLCSkinEditor.exe"));
-        //VLT icon changed on windows
-        try {
-          RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_CLASSES_ROOT,"VLCSkinFile\\DefaultIcon",RegistryKey.ACCESS_ALL);
-          if(vlc_key.hasDefaultValue()) {
-            RegistryValue reg_icon = vlc_key.getValue("");
-            String s = new String(reg_icon.getByteData())+",2";
-            reg_icon.setByteData(s.getBytes());
-            vlc_key.setValue(reg_icon);
-          }          
-        }
-        catch (Exception e) {
-          System.err.println("Could not change VLT icon");
-          e.printStackTrace();
-        }
-      }
-      //Unpack languages
-      File lang_zip = new File("lang.zip");
-      if(lang_zip.exists()) {
-        try {
-          Helper.unzip(lang_zip);
-          lang_zip.delete();
-        } catch(Exception ex) {
-          ex.printStackTrace();
-        }
-      }
       new File(".updated").delete();
     }
 
