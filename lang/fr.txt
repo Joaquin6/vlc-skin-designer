@@ -115,6 +115,7 @@ WIN_PREFS_TITLE|Préférences
 WIN_PREFS_UPDATE_L|Activer l'auto-update :
 WIN_PREFS_LANG_L|Langage:
 WIN_PREFS_LAF_L|Apparence du program :
+WIN_PREFS_TBAR_L|Afficher la barre d'outils :
 WIN_PREFS_RESTART_L|<html><i>Certaines options ne prennent effet qu'après redémarrage du programme.</i></html>
 
 #SubBitmap Edit and Skin Preview window

@@ -116,6 +116,7 @@ WIN_PREFS_TITLE|Voorkeuren
 WIN_PREFS_UPDATE_L|Auto-update activeren:
 WIN_PREFS_LANG_L|Taal:
 WIN_PREFS_LAF_L|Programma-uiterlijk:
+WIN_PREFS_TBAR_L|Toolbar activeren:
 WIN_PREFS_RESTART_L|<html><i>Enkele instellingen worden pas van kracht na een herstart van het programma.</i></html>
 
 #SubBitmap Edit and Skin Preview window

@@ -64,6 +64,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
   private JMenuItem m_help_doc, m_help_about;
 
+  private JPanel tbar;
+  private JButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn;
+
   private JDesktopPane jdesk;
   private JInternalFrame resources,windows,items;
   protected JTree res_tree,win_tree,items_tree;
@@ -266,6 +269,49 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     mbar.add(m_help);
     
     setJMenuBar(mbar);    
+
+    //Toolbar
+
+    if(Boolean.parseBoolean(Config.get("toolbar"))) {
+      tbar = new JPanel();
+      //tbar.setLayout(new BoxLayout(tbar, BoxLayout.LINE_AXIS));
+      tbar_open_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_open.png")));
+      tbar_open_btn.setToolTipText(Language.get("TOOLBAR_OPEN"));
+      tbar_open_btn.addActionListener(this);
+      tbar.add(tbar_open_btn);
+      tbar_save_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_save.png")));
+      tbar_save_btn.setToolTipText(Language.get("TOOLBAR_SAVE"));
+      tbar_save_btn.addActionListener(this);
+      tbar.add(tbar_save_btn);
+      JToolBar.Separator tbar_sep_1 = new JToolBar.Separator(new Dimension(10,22));
+      tbar_sep_1.setOrientation(JSeparator.VERTICAL);
+      tbar.add(tbar_sep_1);
+      tbar_undo_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_undo.png")));
+      tbar_undo_btn.setToolTipText(Language.get("TOOLBAR_UNDO"));
+      tbar_undo_btn.addActionListener(this);
+      tbar.add(tbar_undo_btn);
+      tbar_redo_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_redo.png")));
+      tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
+      tbar_redo_btn.addActionListener(this);
+      tbar.add(tbar_redo_btn);
+      SpringLayout tbar_layout = new SpringLayout();
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_open_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_open_btn, 2, SpringLayout.WEST, tbar);
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_save_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_save_btn, 2, SpringLayout.EAST, tbar_open_btn);
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_sep_1, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_sep_1, 2, SpringLayout.EAST, tbar_save_btn);
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_undo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_undo_btn, 2, SpringLayout.EAST, tbar_sep_1);
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_redo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_redo_btn, 2, SpringLayout.EAST, tbar_undo_btn);
+      tbar.setLayout(tbar_layout);
+      tbar.setPreferredSize(new Dimension(tbar.getPreferredSize().width,26));
+      tbar.setMaximumSize(new Dimension(tbar.getMaximumSize().width,26));
+      add(tbar);
+    }
+
+    //Resources, window and item windows
        
     jdesk = new JDesktopPane();
     
@@ -588,8 +634,22 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     items_add_pu.add(items_add_pu_video);
     jdesk.add(items_add_pu);     
     
-    jdesk.setMinimumSize(new Dimension(800,600));
-    add(jdesk);       
+    add(jdesk);
+
+    //Main window layout
+    if(Boolean.parseBoolean(Config.get("toolbar"))) {
+      SpringLayout layout = new SpringLayout();
+      layout.putConstraint(SpringLayout.NORTH, tbar, 0, SpringLayout.NORTH, getContentPane());
+      layout.putConstraint(SpringLayout.WEST, tbar, 0, SpringLayout.WEST, getContentPane());
+      layout.putConstraint(SpringLayout.EAST, tbar, 0, SpringLayout.EAST, getContentPane());
+      layout.putConstraint(SpringLayout.NORTH, jdesk, 0, SpringLayout.SOUTH, tbar);
+      layout.putConstraint(SpringLayout.WEST, jdesk, 0, SpringLayout.WEST, getContentPane());
+      layout.putConstraint(SpringLayout.EAST, getContentPane(), 0, SpringLayout.EAST, jdesk);
+      layout.putConstraint(SpringLayout.SOUTH, getContentPane(), 0, SpringLayout.SOUTH, jdesk);
+      setLayout(layout);
+    }
+
+    setMinimumSize(new Dimension(800,600));
         
     setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));
     if(Config.get("win.main.x")==null) setLocationRelativeTo(null);
@@ -600,7 +660,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
-    setVisible(true);       
+    setVisible(true);
 
     update();
 

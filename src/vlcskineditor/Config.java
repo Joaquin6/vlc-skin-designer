@@ -61,6 +61,7 @@ public class Config {
     strings.put("win.items.width","190");
     strings.put("win.items.height","200");
     strings.put("swing.laf","System");
+    strings.put("toolbar","true");
 
     //Locate the config file
     if(System.getProperty("os.name").indexOf("Windows")!=-1) {
@@ -179,8 +180,12 @@ public class Config {
     JLabel laf_l = new JLabel(Language.get("WIN_PREFS_LAF_L"));
     String[] lafs = { "System" , "Metal: Steel", "Metal: Ocean" };
     final JComboBox laf_cb = new JComboBox(lafs);
-    laf_cb.setSelectedItem(Config.get("swing.laf"));    
-    
+    laf_cb.setSelectedItem(Config.get("swing.laf"));
+
+    JLabel tbar_l = new JLabel(Language.get("WIN_PREFS_TBAR_L"));
+    final JCheckBox tbar_cb = new JCheckBox();
+    tbar_cb.setSelected(Boolean.parseBoolean(Config.get("toolbar")));
+
     JLabel restart_l = new JLabel(Language.get("WIN_PREFS_RESTART_L"));
     
     JButton ok_btn = new JButton(Language.get("BUTTON_OK"));
@@ -189,7 +194,10 @@ public class Config {
       public void actionPerformed(ActionEvent e) {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
         strings.put("language", ((Language)lang_cb.getSelectedItem()).getCode());
-        strings.put("swing.laf", (String)laf_cb.getSelectedItem());                
+        strings.put("swing.laf", (String)laf_cb.getSelectedItem());
+        strings.put("toolbar", String.valueOf(update_cb.isSelected()));
+        
+        
         frame.setVisible(false);
         frame.dispose();
       }
@@ -210,6 +218,8 @@ public class Config {
     frame.add(update_cb);
     frame.add(laf_l);
     frame.add(laf_cb);
+    frame.add(tbar_l);
+    frame.add(tbar_cb);
     frame.add(restart_l);
     frame.add(ok_btn);
     frame.add(cancel_btn);
@@ -241,7 +251,13 @@ public class Config {
     layout.putConstraint(SpringLayout.WEST, laf_cb, tf_dx, SpringLayout.WEST, frame.getContentPane());
     layout.putConstraint(SpringLayout.EAST, laf_cb, 0, SpringLayout.EAST, lang_cb);
 
-    layout.putConstraint(SpringLayout.NORTH, restart_l, 10, SpringLayout.SOUTH, laf_l);
+    layout.putConstraint(SpringLayout.NORTH, tbar_l, 10, SpringLayout.SOUTH, laf_l);
+    layout.putConstraint(SpringLayout.WEST, tbar_l, 5, SpringLayout.WEST, frame.getContentPane());
+    layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_cb, 0, SpringLayout.VERTICAL_CENTER, tbar_l);
+    layout.putConstraint(SpringLayout.WEST, tbar_cb, tf_dx, SpringLayout.WEST, frame.getContentPane());
+    layout.putConstraint(SpringLayout.EAST, tbar_cb, 0, SpringLayout.EAST, lang_cb);
+
+    layout.putConstraint(SpringLayout.NORTH, restart_l, 10, SpringLayout.SOUTH, tbar_l);
     layout.putConstraint(SpringLayout.WEST, restart_l, 5, SpringLayout.WEST, frame.getContentPane());
     
     layout.putConstraint(SpringLayout.NORTH, ok_btn, 10, SpringLayout.SOUTH, restart_l);

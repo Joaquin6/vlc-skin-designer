@@ -115,6 +115,7 @@ WIN_PREFS_TITLE|Nastavenia
 WIN_PREFS_UPDATE_L|Aktivovať automatické aktualizácie:
 WIN_PREFS_LANG_L|Jazyk:
 WIN_PREFS_LAF_L|Vzhľad programu:
+WIN_PREFS_TBAR_L|Show toolbar:
 WIN_PREFS_RESTART_L|<html><i>Niektoré nastavenia sa aktivujú až po reštartovaní programu.</i></html>
 
 #SubBitmap Edit and Skin Preview window

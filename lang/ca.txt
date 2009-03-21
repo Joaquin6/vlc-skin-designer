@@ -115,6 +115,7 @@ WIN_PREFS_TITLE|Preferències
 WIN_PREFS_UPDATE_L|Habilita l'actualització automàtica
 WIN_PREFS_LANG_L|Llengua:
 WIN_PREFS_LAF_L|Programa d'aspecte i comportament:
+WIN_PREFS_TBAR_L|Show toolbar:
 WIN_PREFS_RESTART_L|<html><i>Alguns paràmetres només tenen efecte quan el programa es reinicia.</i></html>
 
 #SubBitmap Edit and Skin Preview window

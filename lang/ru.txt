@@ -115,6 +115,7 @@ WIN_PREFS_TITLE|Preferences
 WIN_PREFS_UPDATE_L|Enable auto-update:
 WIN_PREFS_LANG_L|Language:
 WIN_PREFS_LAF_L|Program look-and-feel:
+WIN_PREFS_TBAR_L|Show toolbar:
 WIN_PREFS_RESTART_L|<html><i>Some settings only take effect when the program is restarted.</i></html>
 
 #SubBitmap Edit and Skin Preview window
