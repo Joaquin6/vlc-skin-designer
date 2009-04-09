@@ -195,8 +195,7 @@ public class Config {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
         strings.put("language", ((Language)lang_cb.getSelectedItem()).getCode());
         strings.put("swing.laf", (String)laf_cb.getSelectedItem());
-        strings.put("toolbar", String.valueOf(update_cb.isSelected()));
-        
+        strings.put("toolbar", String.valueOf(update_cb.isSelected()));        
         
         frame.setVisible(false);
         frame.dispose();

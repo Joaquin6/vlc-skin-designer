@@ -910,12 +910,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Open File"> 
-    else if(e.getSource().equals(m_file_open)) {
+    else if(e.getSource().equals(m_file_open)||e.getSource().equals(tbar_open_btn)) {
       openFile();
     }
     // </editor-fold>    
     // <editor-fold defaultstate="collapsed" desc="Save File">
-    else if(e.getSource().equals(m_file_save))  {
+    else if(e.getSource().equals(m_file_save)||e.getSource().equals(tbar_save_btn))  {
       s.save();
       saved=true;
     }
@@ -1585,10 +1585,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(m_edit_right)) pvwin.moveItem(1,0);
     else if(e.getSource().equals(m_edit_left)) pvwin.moveItem(-1,0);
     // </editor-fold>
-    else if(e.getSource().equals(m_edit_undo)) {
+    else if(e.getSource().equals(m_edit_undo)||e.getSource().equals(tbar_undo_btn)) {
       if(hist!=null) hist.undo();
     }
-    else if(e.getSource().equals(m_edit_redo)) {
+    else if(e.getSource().equals(m_edit_redo)||e.getSource().equals(tbar_redo_btn)) {
       if(hist!=null) hist.redo();
     }    
   }
@@ -1709,12 +1709,14 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   public void setUndoEnabled(boolean enabled) {
     m_edit_undo.setEnabled(enabled);
+    tbar_undo_btn.setEnabled(enabled);
   }
   /** Sets the activity state of the redo menu item to the given argument
    * @param enabled Activity state
    */
   public void setRedoEnabled(boolean enabled) {
     m_edit_redo.setEnabled(enabled);
+    tbar_redo_btn.setEnabled(enabled);
   }
   /** Sets the action description that can be undone
    * @param s Action description
