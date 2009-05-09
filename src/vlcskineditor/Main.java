@@ -51,11 +51,11 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
 
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
-  //The version identification of the current build.   
+  /** The version identification of the current build. */
   public final static String VERSION = "0.8.2.dev";
-  //The directory in which the VLC executable is found
+  /** The directory in which the VLC executable is found */
   private String vlc_dir = "";
-  //The directory from which VLC loads its skins
+  /** The directory from which VLC loads its skins */
   private String vlc_skins_dir = "";
 
   private JMenuBar mbar;
@@ -69,7 +69,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
 
   private JDesktopPane jdesk;
   private JInternalFrame resources,windows,items;
+  /** The trees containing the resources/windows/items hierarchy */
   protected JTree res_tree,win_tree,items_tree;
+  /** The tree models of the trees containing the resources/windows/items hierarchy */
   protected DefaultTreeModel res_tree_model, win_tree_model, items_tree_model;
   private DefaultTreeCellRenderer tree_renderer = new TreeRenderer();
   private JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
@@ -86,8 +88,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private JMenuItem items_add_pu_image, items_add_pu_panel;
   private JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;
 
-  //The Skin
-  Skin s;
+  /** The currently opened skin */
+  public Skin s;
 
   public static ImageIcon add_bitmap_icon = createIcon("icons/add_bitmap.png");
   public static ImageIcon add_font_icon = createIcon("icons/add_font.png");
@@ -103,7 +105,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public static ImageIcon up_icon = createIcon("icons/move_up.png");
   public static ImageIcon down_icon = createIcon("icons/move_down.png");
   public static ImageIcon help_icon = createIcon("icons/help.png");
-  //The VLC Skin Editor icon.
+  /** The VLC Skin Editor icon. */
   public static ImageIcon icon = createIcon("icons/icon.png");
   public static ImageIcon open_icon = createIcon("icons/open.png");
   public static ImageIcon save_icon = createIcon("icons/save.png");
@@ -116,21 +118,21 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public static ImageIcon items_icon = createIcon("icons/items.png");
   public static ImageIcon preview_icon = createIcon("icons/preview.png");
     
-  //IDs of selected objects
+  /** IDs of selected objects */
   protected String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   
   private JFileChooser base_fc, bitmap_adder, font_adder, vlt_fc;
-  //The preview window
+  /** The preview window */
   protected PreviewWindow pvwin;
-  //Specifies whether changes were made without having saved the skin.  
+  /** Specifies whether changes were made without having saved the skin. */
   public boolean saved = false;
-  //Specifies whether a file is currently being opened
+  /** Specifies whether a file is currently being opened */
   boolean opening = false;  
-  //Specifies if a file was opened
+  /** Specifies if a file was opened */
   boolean opened = false;
-  //Handles undoing and redoing of actions
+  /** Handles undoing and redoing of actions */
   public History hist;
-  //Textfield width for all editing dialogs
+  /** Textfield width for all editing dialogs */
   public static final int TEXTFIELD_WIDTH = 200;
   
    /**

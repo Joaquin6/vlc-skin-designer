@@ -33,19 +33,21 @@ import java.util.*;
  * @author Daniel Dreibrodt
  */
 public class Bezier {
-  
+
+  /** The maximal number of points in a bezier curve */
   public final int MAX_BEZIER_POINT = 1023;
-  /**
-   * Values to indicate which coordinate(s) must be checked to consider
-   * that two points are distinct
-   */
+
+  /** Constant value indicating that both coordinates have to be checked in order to distinguish two points */
   public static final int kCoordsBoth = 0;
+  /** Constant value indicating that only the x coordinate has to be checked in order to distinguish two points */
   public static final int kCoordsX = 1;
+  /** Constant value indicating that only the y coordinate has to be checked in order to distinguish two points */
   public static final int kCoordsY = 2;
   /** number of control points */
   int m_nbCtrlPt;
-  /** lists containing the coordinates of the control points */
+  /** list containing the x coordinates of the control points */
   List<Float> m_ptx = new LinkedList<Float>();
+  /** list containing the y coordinates of the control points */
   List<Float> m_pty = new LinkedList<Float>();
   /** Vector containing precalculated factoriels */
   List<Float> m_ft = new LinkedList<Float>();
@@ -58,7 +60,12 @@ public class Bezier {
   /** Vector with the percentages associated with the points of the curve */
   List<Float> m_percVect = new LinkedList<Float>();
   
-  /** Creates a new instance of Bezier */
+  /**
+   * Creates a new instance of Bezier
+   * @param x_ The x coordinates of the bezier curve points
+   * @param y_ The y coordinates of the bezier curve points
+   * @param flag Indicates whether x, y or both coordinates of a point have to be considered when distinguishing them
+   */
   public Bezier(int[] x_,int[] y_, int flag) {
     // Copy the control points coordinates
     for (int i=0;i<x_.length;i++) {
@@ -113,20 +120,33 @@ public class Bezier {
     m_percVect.set(m_nbPoints - 1, 1f);
   }
   
-  /** Get the number of control points used to define the curve */
+  /**
+   * Get the number of control points used to define the curve
+   * @return The number of control points
+   */
   public final int getNbCtrlPoints() { 
     return m_nbCtrlPt;
   }
   
-  /** Return the percentage (between 0 and 1) of the curve point nearest from (x, y) */
+  /**
+   * Return the percentage of the curve point nearest to a given point
+   * @param x The x coordinate of the point to be checked
+   * @param y The y coordinate of the point to be checked
+   * @return The percentage value [0-1] on the curve corresponding most closely to the given point
+   */
   public final float getNearestPercent( int x, int y ) {
     int nearest = findNearestPoint( x, y );
     return m_percVect.get(nearest);
   }
   
   /**
-   * Return the distance of (x, y) to the curve, corrected
+   * Return the distance of a point to the curve, corrected
    * by the (optional) given scale factors
+   * @param x The x coordinate of the point
+   * @param y The y coordinate of the point
+   * @param xScale The x scale factor
+   * @param yScale The y scale factor
+   * @return The distance from the point to the curve multiplied by the scale factors
    */
   public final float getMinDist( int x, int y, float xScale , float yScale ) {
     int nearest = findNearestPoint( x, y );
@@ -137,7 +157,9 @@ public class Bezier {
   
   /**
    * Get the coordinates of the point at t percent of
-   * the curve (t must be between 0 and 1) 
+   * the curve (t must be between 0 and 1)
+   * @param t The percentage value
+   * @return The point at percentage t of the curve
    */
   public final Point2D.Float getPoint( float t )  {
     // Find the precalculated point whose percentage is nearest from t
@@ -159,7 +181,10 @@ public class Bezier {
     return new Point2D.Float (m_leftVect.get(refPoint - 1), m_topVect.get(refPoint - 1));
   }
   
-  /** Get the width (maximum abscissa) of the curve */
+  /**
+   * Get the width (maximum abscissa) of the curve
+   * @return The curve's width
+   */
   public final int getWidth()  {
     int width = 0;
     for( int i = 0; i < m_nbPoints; i++ )
@@ -172,7 +197,10 @@ public class Bezier {
     return width;
   }
   
-  /** Get the height (maximum ordinate) of the curve */
+  /**
+   * Get the height (maximum ordinate) of the curve
+   * @return The curve's height
+   */
   public final int getHeight() {
     int height = 0;
     for( int i = 0; i < m_nbPoints; i++ )
@@ -185,7 +213,12 @@ public class Bezier {
     return height;
   }
   
-  /** Return the index of the curve point that is the nearest from (x, y) */
+  /**
+   * Finds the nearest reference point of the curve to a given point
+   * @param x The x coordinate of the point
+   * @param y The y coordinate of the point
+   * @return the index of the curve point that is the nearest to the given point
+   */
   private int findNearestPoint( int x, int y ) {
     // The distance to the first point is taken as the reference
     int refPoint = 0;
@@ -210,6 +243,8 @@ public class Bezier {
   /** 
    * Compute the coordinates of a point corresponding to a given
    * percentage
+   * @param t The percentage
+   * @return The corresponding point
    */
   private Point2D.Float computePoint( float t ) {
     // See http://astronomy.swin.edu.au/~pbourke/curves/bezier/ for a simple
@@ -227,13 +262,20 @@ public class Bezier {
     return new Point2D.Float(xPos,yPos);    
   }
   
-  /** Helper function to compute a coefficient of the curve */
+  /** 
+   * Helper function to compute a coefficient of the curve
+   */
   private float computeCoeff( int i, int n, float t ) {
     return (power( t, i ) * power( 1 - t, (n - i) ) *
         (m_ft.get(n) / m_ft.get(i) / m_ft.get(n - i)));
   }
   
-  /** x^n */
+  /** 
+   * x^n
+   * @param x The basis
+   * @param n The exponent
+   * @see java.lang.Math.pow()
+   */
   private float power( float x, int n ) {
     return (float)Math.pow( x, n );
   } 

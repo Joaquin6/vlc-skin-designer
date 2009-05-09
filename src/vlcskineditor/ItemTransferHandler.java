@@ -42,6 +42,10 @@ public class ItemTransferHandler extends TransferHandler {
   private Skin s;
   private DataFlavor itemFlavor = new DataFlavor(Item.class, "Skin item");
 
+  /**
+   * Creates a new ItemTransferHandler for the given skin
+   * @param s The skin
+   */
   public ItemTransferHandler(Skin s) {
     this.s = s;
   }

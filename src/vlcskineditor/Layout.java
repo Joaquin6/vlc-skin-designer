@@ -96,6 +96,7 @@ public class Layout implements ActionListener{
   /**
    * Creates a new Layout from XML.
    * @param xmlcode The XML code from which the Layout should be created.
+   * @param w_ The Window to which this Layout will belong
    * @param s_ The Skin in which the Layout is used.
    */
   public Layout(String xmlcode, Window w_, Skin s_) {
@@ -185,6 +186,7 @@ public class Layout implements ActionListener{
   }
   /**
    * Creates a new Layout from user input.
+   * @param w_ The Window to which this Layout will belong
    * @param s_ The Skin in which the Layout is used.
    */
   public Layout(Window w_, Skin s_) {
@@ -407,6 +409,7 @@ public class Layout implements ActionListener{
   }
   /**
    * Handles the user interaction with the editing dialog.
+   * @param e The action event
    */
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -532,6 +535,7 @@ public class Layout implements ActionListener{
   /**
    * Checks whether an item in this layout uses the resource of the given ID
    * @param id_ The ID of the resource
+   * @return True if the resource is used in the layout, false otherwise
    */
   public boolean uses(String id_) {
     for(Item i:items) {
@@ -539,7 +543,10 @@ public class Layout implements ActionListener{
     }
     return false;
   }
-  /** Renames the Layout and all its content after the copy process **/
+  /**
+   * Renames the Layout and all its content after the copy process
+   * @param p The renaming pattern, %oldid% will be replaced by the Layout's/Item's old ID
+   */
   public void renameForCopy(String p) {
     String p_ = p;
     p = p.replaceAll("%oldid%", id);     

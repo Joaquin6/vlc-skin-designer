@@ -36,18 +36,21 @@ import java.util.*;
  */
 public class ActionEditor extends JFrame implements ActionListener{
   
-  //The actions in the chain, respectively the Panels representing them 
+  /** The actions in the chain, respectively the Panels representing them */
   java.util.List<ActionPanel> aPanels = new LinkedList<ActionPanel>();  
   
+  /** The icon for the add button */
   public ImageIcon add_icon = createIcon("icons/add.png");
+  /** The icon for the delete button */
   public ImageIcon delete_icon = createIcon("icons/delete.png");  
   
-  //The panel that handels the scrolling through the list of actions
+  /** The panel that handels the scrolling through the list of actions */
   JScrollPane sPane;
-  //The panel containing the actual ActionPanels
+  /** The panel containing the actual ActionPanels */
   JPanel actions_p = new JPanel();
-  //Opens a PopupMenu from which the user can add an action to the end of the chain
-  JButton add_btn = new JButton(add_icon);  
+  /** Opens a PopupMenu from which the user can add an action to the end of the chain */
+  JButton add_btn = new JButton(add_icon);
+  /** The OK button */
   JButton ok_btn = new JButton(Language.get("BUTTON_OK"));
   
   JPopupMenu actions_pu = new JPopupMenu(Language.get("ACTIONS_PU"));
@@ -109,7 +112,10 @@ public class ActionEditor extends JFrame implements ActionListener{
   //The skin item to which the represented action chain belongs
   Item parent;
   
-  /** Creates a new instance of ActionEditor */
+  /**
+   * Creates a new instance of ActionEditor
+   * @param p The item whose action will be edited with this editor
+   */
   public ActionEditor(Item p) {
     super(Language.get("WIN_ACTIONS_TITLE"));  
         
@@ -356,6 +362,7 @@ public class ActionEditor extends JFrame implements ActionListener{
   }
   /**
    * Reacts to user interaction
+   * @param e The action event
    */
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(add_btn)) actions_pu.show(add_btn,0,0);
@@ -379,6 +386,8 @@ public class ActionEditor extends JFrame implements ActionListener{
   }
   /**
    * Creates an ImageIcon out of a file
+   * @param filename The name of the image file
+   * @return <i>null</i> if an Exception occured, otherwise an ImageIcon representing the given image file.
    */
   public ImageIcon createIcon(String filename) {
       java.awt.Image img = null;
@@ -390,39 +399,5 @@ public class ActionEditor extends JFrame implements ActionListener{
         System.out.println(e);
         return null;
       }
-  }
-  /**
-   * For testing purposes
-   */
-  public static void main (String[] args) {
-    Config.load();
-    Language.loadLanguageByCode("en");
-    
-    try {	
-      String laf = Config.get("swing.laf");
-      String lafClass = laf;
-      if(laf!=null) {
-        if(laf.equals("System")) {
-          lafClass = UIManager.getSystemLookAndFeelClassName();          
-        }
-        if(laf.equals("Metal: Steel")) {
-          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
-          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.DefaultMetalTheme());
-        } else if(laf.equals("Metal: Ocean")) {
-          lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
-          javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.OceanTheme());
-        }
-      }      
-      UIManager.setLookAndFeel(lafClass);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-    }
-    JFrame.setDefaultLookAndFeelDecorated(true);
-    ActionEditor ae = new ActionEditor(null);
-    ae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ae.editAction("none;dialogs.changeSkin();dialogs.fileSimple();dialogs.file();dialogs.directory();dialogs.disc();dialogs.net();dialogs.messages();dialogs.prefs();dialogs.fileInfo();dialogs.playlist();dialogs.streamingWizard();dialogs.popup();dialogs.audioPopup();dialogs.videoPopup();dialogs.miscPopup();equalizer.enable();equalizer.disable();vlc.play();vlc.pause();vlc.stop();vlc.faster();vlc.slower();vlc.mute();" +
-                                       "vlc.volumeUp();vlc.volumeDown();vlc.fullscreen();vlc.snapshot();vlc.onTop();vlc.minimize();vlc.quit();playlist.add();playlist.del();playlist.next();playlist.previous();playlist.sort();playlist.setRandom(true);playlist.setLoop(true);playlist.setRepeat(true);playlist.load();playlist.save();dvd.nextTitle();dvd.previousTitle();dvd.nextChapter();dvd.previousChapter();dvd.rootMenu();WindowID.show();WindowID.hide();" +
-                                       "WindowID.maximize();WindowID.unmaximize();WindowID.setLayout(LayoutID)");        
   }
 }

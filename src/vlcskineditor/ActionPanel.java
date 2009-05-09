@@ -40,7 +40,11 @@ public class ActionPanel extends JPanel {
   JTextField windowid_tf, layoutid_tf;
   JComboBox bool_cb;
   
-  /** Creates a new instance of ActionPanel */
+  /** 
+   * Creates a new action panel
+   * @param act The action string
+   * @param ae_ The action editor containing this action panel
+   */
   public ActionPanel(String act,ActionEditor ae_) {
     action=act;
     ae=ae_;

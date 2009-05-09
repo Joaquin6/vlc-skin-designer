@@ -41,6 +41,7 @@ public class BooleanExpressionEvaluator {
   }
   /**
    * Converts an infix boolean expression to reverse polish notation
+   * @param rExpr The boolean expression
    */
   public void parse(String rExpr) {
     m_stack.clear();   

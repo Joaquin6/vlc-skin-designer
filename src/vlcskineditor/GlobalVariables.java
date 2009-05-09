@@ -39,12 +39,15 @@ public class GlobalVariables implements ActionListener{
   public String $V = "50";
   /** Current time **/
   public String $T = "0:55:55";
+  /** Current time without hours if zero */
   public String $t = "55:55";
   /** Remaining time **/
   public String $L = "0:44:44";
+  /** Remaining time without hours if zero */
   public String $l = "44:44";
   /** Duration **/
   public String $D = "0:99:99";
+  /** Duration without hours if zero */
   public String $d = "99:99";
   /** Value of the help attribute **/
   public String $H = "Help text";

@@ -60,6 +60,9 @@ public class FrameUpdater extends Thread{
     return;
   }
 
+  /**
+   * Stops the FrameUpdater
+   */
   public void stopRunning() {
     run = false;
   }

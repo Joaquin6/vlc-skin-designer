@@ -19,7 +19,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-
 package vlcskineditor;
 
 import java.io.*;
@@ -32,10 +31,10 @@ import java.util.List;
  * @author Daniel Dreibrodt
  */
 public class Language {
-  
-  private static Hashtable<String, String> strings = new Hashtable<String, String>();
 
+  private static Hashtable<String, String> strings = new Hashtable<String, String>();
   private static LinkedList<Language> langs = new LinkedList<Language>();
+
 
   static {
     try {
@@ -43,11 +42,11 @@ public class Language {
       FileReader fr = new FileReader(index);
       BufferedReader br = new BufferedReader(fr);
       String line = "";
-      while( (line = br.readLine()) != null) {
-        line = new String(line.getBytes(),"UTF-8");
+      while((line = br.readLine()) != null) {
+        line = new String(line.getBytes(), "UTF-8");
         if(!line.startsWith("#")) {
           String[] fields = line.split("\\|");
-          if(fields.length==3) {
+          if(fields.length == 3) {
             langs.add(new Language(fields[0], fields[1], fields[2]));
           }
         }
@@ -59,7 +58,7 @@ public class Language {
     }
   }
 
-  private String name, code;
+  private String name,  code;
   private File file;
 
   /**
@@ -71,26 +70,38 @@ public class Language {
   private Language(String code, String name, String file) {
     this.name = name;
     this.code = code;
-    this.file = new File("lang",file);
+    this.file = new File("lang", file);
   }
 
+  /**
+   * Gets the languages ISO code
+   * @return The ISO language code
+   */
   public String getCode() {
     return code;
   }
 
+  /**
+   * Gets the language's name
+   * @return The native name of the language
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the language file
+   * @return The language file
+   */
   public File getFile() {
     return file;
   }
 
   @Override
   public String toString() {
-    return name+" ("+code+")";
+    return name + " (" + code + ")";
   }
-  
+
   /**
    * Loads the current language from a file
    * @param f The language file, e.g. lang/English.txt
@@ -99,24 +110,23 @@ public class Language {
     try {
       FileReader fr = new FileReader(f);
       BufferedReader br = new BufferedReader(fr);
-      
+
       String line = "";
-      while( (line = br.readLine()) != null) {
-        line = new String(line.getBytes(),"UTF-8");
+      while((line = br.readLine()) != null) {
+        line = new String(line.getBytes(), "UTF-8");
         if(line.startsWith("@include")) {
           String file = line.substring(9);
-          load(new File(f.getParent()+File.separator+file));
-        }        
-        else if(!line.startsWith("#")) {
+          load(new File(f.getParent() + File.separator + file));
+        } else if(!line.startsWith("#")) {
           String[] fields = line.split("\\|");
-          if(fields.length==2) {
+          if(fields.length == 2) {
             strings.put(fields[0], fields[1].replaceAll("\\\\n", "\n"));
           }
         }
       }
-      
+
       br.close();
-      fr.close();            
+      fr.close();
     } catch(FileNotFoundException ex) {
       ex.printStackTrace();
     } catch(IOException ex) {
@@ -124,35 +134,58 @@ public class Language {
     }
   }
 
-  public static void loadLanguage(Language l) {
-    load(l.getFile());
-  }
-
-  public static void loadLanguageByCode(String code) {
-    for(Language l:getAvailableLanguages()) {
-      if(l.getCode().equals(code)) loadLanguage(l);
-    }
-  }
-
-  public static List<Language> getAvailableLanguages() {
-    return langs;
-  }
-
-  public static boolean isLanguageAvailable(String code) {
-    for(Language l:getAvailableLanguages()) {
-      if(l.getName().equals(code)) return true;
-    }
-    return false;
-  }
-  
   /**
-   * Gets the string in the current language for the given key 
+   * Gets the string in the current language for the given key
    * @param key the string key
    * @return the translated string
    */
   public static String get(String key) {
-    String s = strings.get(key);    
-    return (s!=null)?s:key;
+    String s = strings.get(key);
+    return (s != null) ? s : key;
   }
-  
+
+  /**
+   * Loads a given language.
+   * Subsequent calls to Language.get() will give the strings defined in the given language.
+   * @param l The language to load
+   */
+  public static void loadLanguage(Language l) {
+    load(l.getFile());
+  }
+
+  /**
+   * Loads a given language by its ISO language code.
+   * Subsequent calls to Language.get() will give the strings defined in the given language.
+   * @param code The ISO language code
+   */
+  public static void loadLanguageByCode(String code) {
+    for(Language l : getAvailableLanguages()) {
+      if(l.getCode().equals(code)) {
+        loadLanguage(l);
+      }
+    }
+  }
+
+  /**
+   * List available translations
+   * @return The available languages in the lang folder
+   */
+  public static List<Language> getAvailableLanguages() {
+    return langs;
+  }
+
+  /**
+   * Checks whether a translation for a given language is available
+   * @param code The languages ISO language code
+   * @return True if a translation is available, false otherwise
+   */
+  public static boolean isLanguageAvailable(String code) {
+    for(Language l : getAvailableLanguages()) {
+      if(l.getName().equals(code)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

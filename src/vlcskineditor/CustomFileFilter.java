@@ -37,12 +37,13 @@ public class CustomFileFilter extends FileFilter{
   String desc;
   String[] ext;
   
-  /** Creates a new instance of CustomFileFilter
-   *  @param fc_ The file chooser that uses this file filter
-   *  @param ext_ An array of Strings representing the accepted extensions. e.g { "bmp", "jpg", "jpeg"}
-   *  @param desc_ The description of the FileFilter that is displayed in the FileChooser
-   *  @param oir_  If true files can be only chosen inside the given root folder
-   *  @param r_ The root folder (only useful in connection with <pre>oir_</pre>)
+  /** 
+   * Creates a new custom FileFilter
+   * @param fc_ The file chooser that uses this file filter
+   * @param ext_ An array of Strings representing the accepted extensions. e.g { "bmp", "jpg", "jpeg"}
+   * @param desc_ The description of the FileFilter that is displayed in the FileChooser
+   * @param oir_  If true files can be only chosen inside the given root folder
+   * @param r_ The root folder (only useful in connection with <pre>oir_</pre>)
    **/
   public CustomFileFilter(JFileChooser fc_, String[] ext_, String desc_, boolean oir_, String r_) {
     fc=fc_;
@@ -51,6 +52,14 @@ public class CustomFileFilter extends FileFilter{
     onlyinroot=oir_;    
     root = r_;
   }
+  /**
+   * Creates a new custom FileFilter
+   * @param fc_ The file chooser that uses this file filter
+   * @param ext_ The accepted file extension
+   * @param desc_ The description of the FileFilter that is displayed in the FileChooser
+   * @param oir_ If true files can be only chosen inside the given root folder
+   * @param r_ The root folder (only useful in connection with <pre>oir_</pre>)
+   */
   public CustomFileFilter(JFileChooser fc_, String ext_, String desc_, boolean oir_, String r_) {
     fc=fc_;
     String[] extt = new String[1];
@@ -60,7 +69,11 @@ public class CustomFileFilter extends FileFilter{
     onlyinroot=oir_;    
     root = r_;
   }
-  /** Checks whether a file is acceptable or not **/
+  /**
+   * Checks whether a file is acceptable or not
+   * @param f The file to be checked
+   * @return Whether the file should be shown in the file list or not
+   */
   public boolean accept(File f) {
         if(!f.getPath().startsWith(root) && onlyinroot) {          
           fc.setCurrentDirectory(new File(root));      
@@ -77,7 +90,8 @@ public class CustomFileFilter extends FileFilter{
         return false;
    }
   /**
-   * Returns a description for this FileFilter   
+   * Returns a description for this FileFilter
+   * @return The FileFilter's description
    */
   public String getDescription() {
     return desc;
@@ -88,13 +102,13 @@ public class CustomFileFilter extends FileFilter{
    * @return  Extension of <pre>f</pre>
    */
   public String getExtension(File f) {
-    String ext = null;
+    String x = null;
     String s = f.getName();
     int i = s.lastIndexOf('.');
     
     if (i > 0 &&  i < s.length() - 1) {
-      ext = s.substring(i+1).toLowerCase();
+      x = s.substring(i+1).toLowerCase();
     }
-    return ext;
+    return x;
   }
 }
