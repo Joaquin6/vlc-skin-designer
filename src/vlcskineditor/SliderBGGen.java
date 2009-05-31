@@ -243,8 +243,8 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(step1_cancel_btn);
     
     step1_horz_s.setBounds(5,390,525,5);    
-    step1_next_btn.setBounds(370, 395,75,25);
-    step1_cancel_btn.setBounds(450,395,75,25);    
+    step1_next_btn.setBounds(270,395,125,25);
+    step1_cancel_btn.setBounds(400,395,125,25);
     
     card_step1.setSize(540,400);   
     
@@ -385,9 +385,9 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step2.add(step2_cancel_btn);
     
     step2_horz_s.setBounds(5,390,525,5);    
-    step2_prev_btn.setBounds(275, 395,90,25);
-    step2_finish_btn.setBounds(370,395,75,25);
-    step2_cancel_btn.setBounds(450,395,75,25);    
+    step2_prev_btn.setBounds(140,395,125,25);
+    step2_finish_btn.setBounds(270,395,125,25);
+    step2_cancel_btn.setBounds(400,395,125,25);
   
     add(card_step2,STEP2);    
     
@@ -407,10 +407,11 @@ public class SliderBGGen extends JFrame implements ActionListener{
       layout.show(getContentPane(),STEP1);
     }
     else if (e.getSource().equals(step2_finish_btn)) {
-      File f = new File(s.skinfolder+sbg.id_tf.getText()+".png");
+      String name = s.skinfolder+sbg.id_tf.getText()+"_bg";
+      File f = new File(name+".png");
       int i = 1;
       while(f.exists()) {
-          f = new File(s.skinfolder+sbg.id_tf.getText()+"_"+String.valueOf(i)+".png");
+          f = new File(name+"_"+String.valueOf(i)+".png");
           i++;
       }
       SliderBGBuilder sbgb = new SliderBGBuilder(this);
@@ -426,7 +427,9 @@ public class SliderBGGen extends JFrame implements ActionListener{
           sbg.padvert_tf.setText("0");          
           setVisible(false);
           dispose();
-      }      
+          s.updateResources();
+          s.expandResource(b.id);
+      }
     }
     else if(e.getSource().equals(ltr_rb)) {
         bg_l.setIcon(bg_h);
