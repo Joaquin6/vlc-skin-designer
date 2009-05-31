@@ -711,14 +711,14 @@ public class Checkbox extends Item implements ActionListener{
   public String returnCode(String indent) {
     String code = indent+"<Checkbox";
     code+=" state=\""+state+"\" up1=\""+up1+"\" up2=\""+up2+"\"";
-    if (!down1.equals(ID_DEFAULT)) code+=" down1=\""+down1+"\"";
-    if (!down2.equals(ID_DEFAULT)) code+=" down2=\""+down2+"\"";
-    if (!over1.equals(ID_DEFAULT)) code+=" over1=\""+over1+"\"";
-    if (!over2.equals(ID_DEFAULT)) code+=" over2=\""+over2+"\"";
-    if (!action1.equals(ID_DEFAULT)) code+=" action1=\""+action1+"\"";
-    if (!action2.equals(ID_DEFAULT)) code+=" action2=\""+action2+"\"";
-    if (!tooltiptext1.equals(ID_DEFAULT)) code+=" tooltiptext1=\""+tooltiptext1+"\"";
-    if (!tooltiptext2.equals(ID_DEFAULT)) code+=" tooltiptext2=\""+tooltiptext2+"\"";
+    if (!down1.equals(DOWN1_DEFAULT)) code+=" down1=\""+down1+"\"";
+    if (!down2.equals(DOWN2_DEFAULT)) code+=" down2=\""+down2+"\"";
+    if (!over1.equals(OVER1_DEFAULT)) code+=" over1=\""+over1+"\"";
+    if (!over2.equals(OVER2_DEFAULT)) code+=" over2=\""+over2+"\"";
+    if (!action1.equals(ACTION1_DEFAULT)) code+=" action1=\""+action1+"\"";
+    if (!action2.equals(ACTION2_DEFAULT)) code+=" action2=\""+action2+"\"";
+    if (!tooltiptext1.equals(TOOLTIPTEXT1_DEFAULT)) code+=" tooltiptext1=\""+tooltiptext1+"\"";
+    if (!tooltiptext2.equals(TOOLTIPTEXT2_DEFAULT)) code+=" tooltiptext2=\""+tooltiptext2+"\"";
     if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
     if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
     if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
