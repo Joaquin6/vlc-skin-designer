@@ -35,7 +35,7 @@ public class SliderBGBuilder {
   public int nbframes;
   int total_height;
   boolean usebg, usee1, usee2, useoverlay, tile_bg, tile_middle, horizontal;
-  int bg_width, e1_width, middle_width, e2_width, e1_height, e2_height, middle_height, bg_height;
+  int bg_width = 0, e1_width = 0, middle_width = 0, e2_width = 0, e1_height = 0, e2_height = 0, middle_height = 0, bg_height = 0;
   BufferedImage output;
   JFrame frame;
   ProgressWindow pg_win;
@@ -102,7 +102,9 @@ public class SliderBGBuilder {
     //overlay_y = Integer.parseInt(sbgg.overlay_y_tf.getText());
     tile_bg = sbgg.bgt_rb.isSelected();
     tile_middle = sbgg.mdt_rb.isSelected();
-    horizontal = sbgg.ltr_rb.isSelected();  
+    horizontal = sbgg.ltr_rb.isSelected();
+    System.out.println("tile_bg: "+tile_bg);
+    System.out.println("tile_middle: "+tile_middle);
   }
   public void build() {    
     if (horizontal && cancontinue) {
@@ -129,15 +131,20 @@ public class SliderBGBuilder {
           }  
         }      
         if (i>0) {                
-          if(i<e1_width) {
+          if(i<=e1_width) {
             BufferedImage tmp = e1.getSubimage(0, 0, i, e1_height);
             g.drawImage(tmp,margin_left,height*i+margin_top,i,height-margin_top-margin_bottom,sbgg);
           }
-          else if (i<e1_width+middle_width) {          
+          else if (i<=e1_width+middle_width) {
             g.drawImage(e1,margin_left,height*i+margin_top,sbgg);
-            g.drawImage(middle,margin_left+e1_width,height*i+margin_top,i-e1_width,height-margin_top-margin_bottom,sbgg);
+            if(!tile_middle)
+              g.drawImage(middle,margin_left+e1_width,height*i+margin_top,i-e1_width,height-margin_top-margin_bottom,sbgg);
+            else {
+              g.drawImage(middle.getSubimage(0, 0, i-e1_width,height-margin_top-margin_bottom),
+                      margin_left+e1_width,height*i+margin_top,i-e1_width,height-margin_top-margin_bottom,sbgg);
+            }
           }
-          else if(i<e1_width+middle_width+e2_width) {          
+          else if(i<=e1_width+middle_width+e2_width) {
             g.drawImage(e1,margin_left,height*i+margin_top,sbgg);
             g.drawImage(middle,margin_left+e1_width,height*i+margin_top,sbgg);
             g.drawImage(e2,margin_left+e1_width+middle_width,height*i+margin_top,i-e1_width-middle_width,height-margin_top-margin_bottom,sbgg);
@@ -149,10 +156,10 @@ public class SliderBGBuilder {
               int middle_r = gap/middle_width;
               int middle_d = gap % middle_width;
               for (int x=0;x<middle_r;x++) {
-                g.drawImage(middle,margin_left+e1_width+x*middle_width,height*i+margin_top,sbgg);            
+                g.drawImage(middle,margin_left+e1_width+x*middle_width,height*i+margin_top,sbgg);
               }
-              g.drawImage(middle, margin_left+e1_width+middle_r*middle_width, height*i+margin_top, middle_d, height-margin_top-margin_bottom, sbgg);            
-            }
+                g.drawImage(middle, margin_left+e1_width+middle_r*middle_width, height*i+margin_top, middle_d, height-margin_top-margin_bottom, sbgg);
+              }
             else {
               int gap = i-e1_width-e2_width;
               g.drawImage(middle,margin_left+e1_width,height*i+margin_top,gap,height-margin_top-margin_bottom,sbgg);

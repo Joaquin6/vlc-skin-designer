@@ -88,6 +88,18 @@ public class History {
     }
     m.setUndoEnabled(true);
     m.setUndoString(current.getDescription());
+
+    String s_res = m.getSelectedResource();
+    m.s.updateResources();
+    m.s.expandResource(s_res);
+
+    String s_win = m.getSelectedInWindows();
+    m.s.updateWindows();
+    m.s.expandLayout(s_win);
+
+    String s_item = m.getSelectedItem();
+    m.s.updateItems();
+    m.s.expandItem(s_item);
   }
 
   /**
@@ -103,6 +115,18 @@ public class History {
     m.setRedoString(current.getNext().getDescription());
     m.setUndoEnabled(current != root);
     m.setUndoString(current.getDescription());
+
+    String s_res = m.getSelectedResource();
+    m.s.updateResources();
+    m.s.expandResource(s_res);
+
+    String s_win = m.getSelectedInWindows();
+    m.s.updateWindows();
+    m.s.expandLayout(s_win);
+
+    String s_item = m.getSelectedItem();
+    m.s.updateItems();
+    m.s.expandItem(s_item);
   }
 
 }

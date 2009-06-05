@@ -695,10 +695,10 @@ public class Skin implements ActionListener{
   public Item getItem(String id_) {    
     active_window = null;
     active_layout = null;
-    if(m.selected_window!=null && m.selected_layout!=null) {
-      active_window = getWindow(m.selected_window);
+    if(m.getSelectedWindow()!=null && m.getSelectedLayout()!=null) {
+      active_window = getWindow(m.getSelectedWindow());
       if(active_window!=null) {
-        active_layout = active_window.getLayout(m.selected_layout);
+        active_layout = active_window.getLayout(m.getSelectedLayout());
       }
     }
     if(active_layout!=null) {
@@ -737,10 +737,10 @@ public class Skin implements ActionListener{
   /** Creates the layout's items hierarchy **/
   public DefaultMutableTreeNode getItemsTree() {
     DefaultMutableTreeNode top = new DefaultMutableTreeNode("Root: Items");
-    if(m.selected_window!=null && m.selected_layout!=null) {
-      active_window = getWindow(m.selected_window);
+    if(m.getSelectedWindow()!=null && m.getSelectedLayout()!=null) {
+      active_window = getWindow(m.getSelectedWindow());
       if(active_window!=null) {
-        active_layout = active_window.getLayout(m.selected_layout);
+        active_layout = active_window.getLayout(m.getSelectedLayout());
       }
     }
     if(active_layout!=null) {
@@ -837,7 +837,7 @@ public class Skin implements ActionListener{
   public void expandLayout(String id) {       
     TreePath wtp = null;
     if(active_window!=null) wtp = findInTree(m.win_tree,active_window.id);
-    else wtp = findInTree(m.win_tree,m.selected_window);
+    else wtp = findInTree(m.win_tree,m.getSelectedLayout());
     if(wtp==null) return;
     m.win_tree.expandPath(wtp);
     

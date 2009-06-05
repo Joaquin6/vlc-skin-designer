@@ -45,7 +45,7 @@ import vlcskineditor.resources.SubBitmap;
  * The main class holds the GUI
  * @author Daniel
  */
-public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener{
+public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
 
   private static final long serialVersionUID = 801;
 
@@ -61,7 +61,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   private JMenuBar mbar;
   private JMenu m_file, m_edit, m_help;
   private JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
-  private JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left;
+  private JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left, m_edit_del;
   private JMenuItem m_help_doc, m_help_about;
 
   private JPanel tbar;
@@ -119,7 +119,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   public static ImageIcon preview_icon = createIcon("icons/preview.png");
     
   /** IDs of selected objects */
-  protected String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
+  private String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
   
   private JFileChooser base_fc, bitmap_adder, font_adder, vlt_fc;
   /** The preview window */
@@ -238,6 +238,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit_right = new JMenuItem(Language.get("MENU_EDIT_RIGHT"));
     m_edit_right.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,mask));
     m_edit_right.addActionListener(this);
+    m_edit_del = new JMenuItem(Language.get("WIN_ITEMS_DELETE"));
+    m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
+    m_edit_del.addActionListener(this);
+
     
     m_edit.add(m_edit_undo);
     m_edit.add(m_edit_redo);
@@ -251,6 +255,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit.add(m_edit_down);
     m_edit.add(m_edit_left);
     m_edit.add(m_edit_right);
+    m_edit.addSeparator();
+    m_edit.add(m_edit_del);
         
     m_help = new JMenu(Language.get("MENU_HELP"));
     m_help.setMnemonic(Language.get("MENU_HELP_MN").charAt(0));    
@@ -1101,8 +1107,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add SubBitmap">
     else if(e.getSource().equals(res_add_bitmap_pu_s)) {
-      if(selected_resource!=null) {
-        Resource r = s.getResource(selected_resource);
+      if(getSelectedResource()!=null) {
+        Resource r = s.getResource(getSelectedResource());
         if(r!=null) {
           if(r.getClass()==Bitmap.class) {
             Bitmap b = (Bitmap)r;
@@ -1148,8 +1154,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Duplicate resource">
     else if(e.getSource().equals(res_duplicate)) {
-      if(selected_resource==null) return;
-      Resource r = s.getResource(selected_resource);
+      if(getSelectedResource()==null) return;
+      Resource r = s.getResource(getSelectedResource());
       if(r==null) return;
       String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
@@ -1180,10 +1186,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Duplicate window/layout">
     else if(e.getSource().equals(win_duplicate)) {
-        if(selected_window==null) return;
+        if(getSelectedWindow()==null) return;
         String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
-        if(selected_layout==null) {
-            Window w = s.getWindow(selected_window);
+        if(getSelectedLayout()==null) {
+            Window w = s.getWindow(getSelectedWindow());
             if(w==null) return;
             Window w_ = new Window(w.returnCode(""), s);
             w_.renameForCopy(p);
@@ -1191,8 +1197,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
             s.updateWindows();
         }
         else {
-            Window w = s.getWindow(selected_window);
-            Layout l = w.getLayout(selected_layout);
+            Window w = s.getWindow(getSelectedWindow());
+            Layout l = w.getLayout(getSelectedLayout());
             Layout l_ = new Layout(l.returnCode(""), w, s);
             l_.renameForCopy(p);
             w.layouts.add(l_);
@@ -1203,9 +1209,9 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Duplicate item">
     else if(e.getSource().equals(items_duplicate)) {
-        if(selected_item==null) return;
+        if(getSelectedItem()==null) return;
         String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
-        Item i = s.getItem(selected_item);
+        Item i = s.getItem(getSelectedItem());
         if(i==null) return;        
         if(i.getClass()==Anchor.class) {
             Anchor a = new Anchor(i.returnCode(""), s);
@@ -1301,41 +1307,15 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Resource edit">
     else if(e.getSource().equals(res_edit)) {
-      if(selected_resource!=null) {
-        Resource r = s.getResource(selected_resource);
+      if(getSelectedResource()!=null) {
+        Resource r = s.getResource(getSelectedResource());
         if(r!=null) r.showOptions();        
       }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Delete Resource">
     else if(e.getSource().equals(res_del)) {
-      if(s.isUsed(selected_resource)) {
-        JOptionPane.showMessageDialog(this,Language.get("ERROR_RES_DEL_INUSE"),Language.get("ERROR_RES_DEL_TITLE"),JOptionPane.INFORMATION_MESSAGE);
-      }
-      else {
-        Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", selected_resource),Language.get("DEL_CONFIRM_TITLE"),
-                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-        if(n==0) {
-          Resource r = s.getResource(selected_resource);
-          Bitmap parent = null;
-          if(r.getClass().equals(SubBitmap.class)) {
-            for(Resource i:s.resources) {
-              if(i.getClass().equals(Bitmap.class)) {
-                if(((Bitmap)i).SubBitmaps.contains(r)) parent = (Bitmap)i;
-              }
-            }
-            SubBitmapDeletionEvent sde = new SubBitmapDeletionEvent(s,parent,(SubBitmap)r,parent.SubBitmaps.indexOf(r));
-            hist.addEvent(sde);
-            parent.SubBitmaps.remove(r);
-          } else {
-            ResourceDeletionEvent rde = new ResourceDeletionEvent(s,r,s.resources.indexOf(r));
-            hist.addEvent(rde);
-            s.resources.remove(r);
-          }
-          s.updateResources();          
-        }
-      }
+      deleteSelectedResource();
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add window">
@@ -1345,8 +1325,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add layout">
     else if(e.getSource().equals(win_add_layout)) {
-      if(selected_window!=null) {
-        Window w = s.getWindow(selected_window);
+      if(getSelectedWindow()!=null) {
+        Window w = s.getWindow(getSelectedWindow());
         if(w!=null) w.addLayout();
       }
       else {
@@ -1356,8 +1336,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Move layout">
     else if(e.getSource().equals(win_layout_up)) {
-      Window w = s.getWindow(selected_window);
-      Layout l = w.getLayout(selected_layout);
+      Window w = s.getWindow(getSelectedWindow());
+      Layout l = w.getLayout(getSelectedLayout());
       if(l==null) return;      
       int index = w.layouts.indexOf(l);
       if(index<=0) return;      
@@ -1366,8 +1346,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       s.expandLayout(l.id);
     }
     else if(e.getSource().equals(win_layout_down)) {
-      Window w = s.getWindow(selected_window);
-      Layout l = w.getLayout(selected_layout);
+      Window w = s.getWindow(getSelectedWindow());
+      Layout l = w.getLayout(getSelectedLayout());
       if(l==null) return;      
       int index = w.layouts.indexOf(l);
       if(index>=w.layouts.size()-1) return;      
@@ -1378,58 +1358,27 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Window edit">
     else if(e.getSource().equals(win_edit)) {
-      if(selected_layout!=null && selected_window!=null) {
-        Layout l = s.getWindow(selected_window).getLayout(selected_layout);
+      if(getSelectedLayout()!=null && getSelectedWindow()!=null) {
+        Layout l = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout());
         if(l!=null) l.showOptions();
       }
-      else if(selected_window!=null) {
-        Window w = s.getWindow(selected_window);
+      else if(getSelectedWindow()!=null) {
+        Window w = s.getWindow(getSelectedWindow());
         if(w!=null) w.showOptions();        
       }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Delete Window/Layout">
     else if(e.getSource().equals(win_del)) {
-      if(selected_layout!=null) {        
-        Window w = s.getWindow(selected_window);
-        Layout l = w.getLayout(selected_layout);
-        if(l!=null) {
-          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", l.id),Language.get("DEL_CONFIRM_TITLE"),
-                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-          if(n==0) {
-            LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
-            pvwin.clearLayout();   
-            m_file_png.setEnabled(false);
-            w.layouts.remove(l);
-            s.updateWindows();
-            s.updateItems();
-            hist.addEvent(lde);
-          }
-        }
-      }
-      else if(selected_window!=null) {        
-        Window w= s.getWindow(selected_window);
-        if(w!=null) {
-          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
-        int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", w.id),Language.get("DEL_CONFIRM_TITLE"),
-                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-          if(n==0) {
-            WindowDeletionEvent wde = new WindowDeletionEvent(w, s, s.windows.indexOf(w));
-            s.windows.remove(w);
-            s.updateWindows();
-            hist.addEvent(wde);
-          }
-        }
-      }
+      deleteSelectedLayoutOrWindow();
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add item">
     else if(e.getSource().equals(items_add)) {
-      if(selected_layout==null) return;
+      if(getSelectedLayout()==null) return;
       items_add_pu_tp.setEnabled(false);
-      if(selected_item!=null) {
-        Item i = s.getItem(selected_item);        
+      if(getSelectedItem()!=null) {
+        Item i = s.getItem(getSelectedItem());
         if(i!=null) {
           if(i.getClass().equals(Group.class)) items_add_pu_tp.setEnabled(true);                            
           if(i.getClass().equals(vlcskineditor.items.Panel.class)) items_add_pu_tp.setEnabled(true);                            
@@ -1441,31 +1390,31 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Move item">
     else if(e.getSource().equals(items_up)) {
-      Item i = s.getItem(selected_item);
+      Item i = s.getItem(getSelectedItem());
       if(i==null) return;
-      java.util.List<Item> l = s.getParentListOf(selected_item);
+      java.util.List<Item> l = s.getParentListOf(getSelectedItem());
       if(l==null) return;
       int index = l.indexOf(i);
       if(index<=0) return;      
       l.set(index,l.set(index-1,i));
       s.updateItems();      
-      s.expandItem(selected_item);
+      s.expandItem(getSelectedItem());
     }
     else if(e.getSource().equals(items_down)) {
-      Item i = s.getItem(selected_item);
+      Item i = s.getItem(getSelectedItem());
       if(i==null) return;
-      java.util.List<Item> l = s.getParentListOf(selected_item);
+      java.util.List<Item> l = s.getParentListOf(getSelectedItem());
       int index = l.indexOf(i);
       if(index>=l.size()-1) return;      
       l.set(index,l.set(index+1,i));
       s.updateItems();      
-      s.expandItem(selected_item);
+      s.expandItem(getSelectedItem());
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item edit">
     else if(e.getSource().equals(items_edit)) {
-      if(selected_item!=null) {
-        Item i = s.getItem(selected_item);
+      if(getSelectedItem()!=null) {
+        Item i = s.getItem(getSelectedItem());
         if(i!=null) i.showOptions();        
       }
     }
@@ -1473,112 +1422,98 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     //<editor-fold defaultstate="collapsed" desc="Add Item popups">
     else if(e.getSource().equals(items_add_pu_anchor)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new Anchor(s));           
     }
     else if(e.getSource().equals(items_add_pu_button)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new vlcskineditor.items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_checkbox)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new vlcskineditor.items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_panel)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new vlcskineditor.items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_image)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new vlcskineditor.items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_playtree)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new Playtree(s));           
     }
     else if(e.getSource().equals(items_add_pu_slider)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new Slider(s));           
     }
     else if(e.getSource().equals(items_add_pu_text)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new Text(s));           
     }
     else if(e.getSource().equals(items_add_pu_video)) {      
       java.util.List<Item> i = null;
-      if(selected_item!=null ) i = s.getParentListOf(selected_item);
-      if(i==null) i = s.getWindow(selected_window).getLayout(selected_layout).items;       
+      if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
+      if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
       i.add(new Video(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_anchor)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Anchor(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_button)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Button(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_checkbox)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Checkbox(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_image)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Image(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_panel)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Panel(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_playtree)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Playtree(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_slider)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Slider(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_text)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Text(s));           
     }
     else if(e.getSource().equals(items_add_pu_tp_video)) {      
-      java.util.List<Item> l = s.getListOf(selected_item);
+      java.util.List<Item> l = s.getListOf(getSelectedItem());
       if(l!=null) l.add(new vlcskineditor.items.Video(s));           
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item delete">
     else if(e.getSource().equals(items_del)) {
-      if(selected_item!=null) {
-        java.util.List<Item> p = s.getParentListOf(selected_item);
-        if(p!=null) {
-          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
-          int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", selected_item),Language.get("DEL_CONFIRM_TITLE"),
-                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-          if(n==0) {
-            Item i = s.getItem(selected_item);
-            ItemDeletionEvent ide = new ItemDeletionEvent(p,i,p.indexOf(i),s);
-            p.remove(s.getItem(selected_item));
-            s.updateItems();            
-            hist.addEvent(ide);
-          }
-        }       
-      }
+      deleteSelectedItem();
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Move selected item">
@@ -1587,12 +1522,108 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(m_edit_right)) pvwin.moveItem(1,0);
     else if(e.getSource().equals(m_edit_left)) pvwin.moveItem(-1,0);
     // </editor-fold>
+    else if(e.getSource().equals(m_edit_del)) {
+      if(items.isSelected()) {
+        deleteSelectedItem();
+      } else if(windows.isSelected()) {
+        deleteSelectedLayoutOrWindow();
+      } else if(resources.isSelected()) {
+        deleteSelectedResource();
+      }
+    }
     else if(e.getSource().equals(m_edit_undo)||e.getSource().equals(tbar_undo_btn)) {
       if(hist!=null) hist.undo();
     }
     else if(e.getSource().equals(m_edit_redo)||e.getSource().equals(tbar_redo_btn)) {
       if(hist!=null) hist.redo();
     }    
+  }
+
+  private void deleteSelectedItem() {
+    if(getSelectedItem()!=null) {
+      if(s.getItem(getSelectedItem()).getClass().equals(SliderBackground.class)) {
+        /* TODO */
+      } else {
+        java.util.List<Item> p = s.getParentListOf(getSelectedItem());
+        if(p!=null) {
+          Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+          int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n",getSelectedItem()),Language.get("DEL_CONFIRM_TITLE"),
+                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+          if(n==0) {
+            Item i = s.getItem(getSelectedItem());
+            ItemDeletionEvent ide = new ItemDeletionEvent(p,i,p.indexOf(i),s);
+            p.remove(s.getItem(getSelectedItem()));
+            s.updateItems();
+            hist.addEvent(ide);
+          }
+        }
+      }
+    }
+  }
+
+  private void deleteSelectedLayoutOrWindow() {
+    if(getSelectedLayout()!=null) {
+      Window w = s.getWindow(getSelectedWindow());
+      Layout l = w.getLayout(getSelectedLayout());
+      if(l!=null) {
+        Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+      int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", l.id),Language.get("DEL_CONFIRM_TITLE"),
+                                     JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+        if(n==0) {
+          LayoutDeletionEvent lde = new LayoutDeletionEvent(w, l, w.layouts.indexOf(l), s);
+          pvwin.clearLayout();
+          m_file_png.setEnabled(false);
+          w.layouts.remove(l);
+          s.updateWindows();
+          s.updateItems();
+          hist.addEvent(lde);
+        }
+      }
+    }
+    else if(getSelectedWindow()!=null) {
+      Window w= s.getWindow(getSelectedWindow());
+      if(w!=null) {
+        Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+      int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n", w.id),Language.get("DEL_CONFIRM_TITLE"),
+                                     JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+        if(n==0) {
+          WindowDeletionEvent wde = new WindowDeletionEvent(w, s, s.windows.indexOf(w));
+          s.windows.remove(w);
+          s.updateWindows();
+          hist.addEvent(wde);
+        }
+      }
+    }
+  }
+
+  private void deleteSelectedResource() {
+    if(s.isUsed(getSelectedResource())) {
+      JOptionPane.showMessageDialog(this,Language.get("ERROR_RES_DEL_INUSE"),Language.get("ERROR_RES_DEL_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+    }
+    else {
+      Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+      int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n",getSelectedResource()),Language.get("DEL_CONFIRM_TITLE"),
+                                     JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+      if(n==0) {
+        Resource r = s.getResource(getSelectedResource());
+        Bitmap parent = null;
+        if(r.getClass().equals(SubBitmap.class)) {
+          for(Resource i:s.resources) {
+            if(i.getClass().equals(Bitmap.class)) {
+              if(((Bitmap)i).SubBitmaps.contains(r)) parent = (Bitmap)i;
+            }
+          }
+          SubBitmapDeletionEvent sde = new SubBitmapDeletionEvent(s,parent,(SubBitmap)r,parent.SubBitmaps.indexOf(r));
+          hist.addEvent(sde);
+          parent.SubBitmaps.remove(r);
+        } else {
+          ResourceDeletionEvent rde = new ResourceDeletionEvent(s,r,s.resources.indexOf(r));
+          hist.addEvent(rde);
+          s.resources.remove(r);
+        }
+        s.updateResources();
+      }
+    }
   }
   
   /**
@@ -1621,7 +1652,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
         }
         else if(type.equals("Layout")) {
           selected_layout = path[i].toString().substring(path[i].toString().indexOf(": ")+2);
-          pvwin.setLayout(s.getWindow(selected_window),s.getWindow(selected_window).getLayout(selected_layout));
+          pvwin.setLayout(s.getWindow(getSelectedWindow()),s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()));
           s.updateItems();
           m_file_png.setEnabled(true);
           win_layout_up.setEnabled(true);
@@ -1632,7 +1663,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     else if(e.getSource().equals(items_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
       selected_item = selection.substring(selection.indexOf(": ")+2);
-      pvwin.selectItem(s.getItem(selected_item));
+      pvwin.selectItem(s.getItem(getSelectedItem()));
     }
   }
   @Override
@@ -1955,5 +1986,41 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     System.setProperty("apple.laf.useScreenMenuBar", "true");
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "VLC Skin Editor");
     new Main(args);      
+  }
+
+  /**
+   * @return the selected resource in the resources window
+   */
+  public String getSelectedResource() {
+    return selected_resource;
+  }
+
+  /**
+   * @return the object selected in the windows/layouts window
+   */
+  public String getSelectedInWindows() {
+    return selected_in_windows;
+  }
+
+  /**
+   * @return the selected window
+   */
+  public String getSelectedWindow() {
+    return selected_window;
+  }
+
+  /**
+   * @return the selected layout
+   */
+  public String getSelectedLayout() {
+    return selected_layout;
+  }
+
+  /**
+   * @return the selected item in the items window
+   */
+  public String getSelectedItem() {
+    System.out.println(selected_item);
+    return selected_item;
   }
 }

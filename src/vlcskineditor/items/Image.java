@@ -514,8 +514,9 @@ public class Image extends Item implements ActionListener{
   }
   @Override
   public void draw(Graphics2D g,int x_, int y_, int z) {
-    if(!created) return;    
+    if(!created) return;
     BufferedImage bi = image_res.image;
+    if(bi==null) return;
     if(vis) g.drawImage(bi,(x+x_)*z,(y+y_)*z,bi.getWidth()*z,bi.getHeight()*z,null);
     if(selected) {
       g.setColor(Color.RED);
