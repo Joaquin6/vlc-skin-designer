@@ -135,7 +135,13 @@ public class SubBitmap extends ImageResource implements ActionListener{
       created = true;
     }
     else {
-      id=id_tf.getText();
+      if(!id_tf.getText().equals(id)) {
+        String oldid = id;
+        id=id_tf.getText();
+        s.resourceRenamed(oldid, id);
+        s.updateResources();
+        s.expandResource(id);
+      }
       x=Integer.parseInt(x_tf.getText());
       y=Integer.parseInt(y_tf.getText());
       width=Integer.parseInt(width_tf.getText());

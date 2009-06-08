@@ -570,4 +570,12 @@ public class Button extends Item implements ActionListener{
   public boolean uses(String id_) {
     return (up.equals(id_)||over.equals(id_)||down.equals(id_));
   }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(up.equals(oldid)) up = newid;
+    if(over.equals(oldid)) over = newid;
+    if(down.equals(oldid)) down = newid;
+  }
+
 }

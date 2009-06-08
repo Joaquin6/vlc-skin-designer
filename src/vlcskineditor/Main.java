@@ -1098,10 +1098,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       int returnVal = bitmap_adder.showOpenDialog(this);
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = bitmap_adder.getSelectedFiles();
+        vlcskineditor.resources.Bitmap last_added = null;
         for(int i=0;i<files.length;i++) {
-          s.resources.add(new vlcskineditor.resources.Bitmap(s,files[i]));
+          s.resources.add(last_added = new vlcskineditor.resources.Bitmap(s,files[i]));
         }
         s.updateResources();
+        if(last_added!=null) s.expandItem(last_added.id);
       }      
     }
     // </editor-fold>
@@ -1145,10 +1147,12 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       int returnVal = font_adder.showOpenDialog(this);
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         File[] files = font_adder.getSelectedFiles();
+        vlcskineditor.resources.Font last_added = null;
         for(int i=0;i<files.length;i++) {
-          s.resources.add(new vlcskineditor.resources.Font(s,files[i]));
+          s.resources.add(last_added = new vlcskineditor.resources.Font(s,files[i]));
         }
         s.updateResources();
+        if(last_added!=null) s.expandItem(last_added.id);
       }    
     }
     // </editor-fold>

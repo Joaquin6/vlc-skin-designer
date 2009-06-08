@@ -108,12 +108,18 @@ public class Language {
    */
   private static void load(File f) {
     try {
-      FileReader fr = new FileReader(f);
-      BufferedReader br = new BufferedReader(fr);
+      //FileReader fr = new FileReader(f);
+      FileInputStream fis = new FileInputStream(f);
+      
 
-      String line = "";
-      while((line = br.readLine()) != null) {
-        line = new String(line.getBytes(), "UTF-8");
+      String text = "";
+      byte[] chars = new byte[1024];
+      while(fis.read(chars)!=-1) text+=new String(chars, "UTF-8");
+
+      String[] lines = text.split("\\n");
+
+      for(String line:lines) {
+        line = line.trim();
         if(line.startsWith("@include")) {
           String file = line.substring(9);
           load(new File(f.getParent() + File.separator + file));
@@ -125,8 +131,7 @@ public class Language {
         }
       }
 
-      br.close();
-      fr.close();
+      fis.close();
     } catch(FileNotFoundException ex) {
       ex.printStackTrace();
     } catch(IOException ex) {

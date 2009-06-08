@@ -668,6 +668,20 @@ public class Skin implements ActionListener{
     }
     return false;
   }
+
+  /**
+   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
+   * @param oldid The former ID of the renamed resource
+   * @param newid The new ID of the renamed resource
+   */
+  public void resourceRenamed(String oldid, String newid) {
+    for(Window w:windows) {
+      for(Layout l:w.layouts) {
+        l.resourceRenamed(oldid, newid);
+      }
+    }
+  }
+
   /** Returns the parent element that contains the item of the given id **/
   public java.util.List<Item> getParentListOf(String id_) {
     return active_layout.getParentListOf(id_);    

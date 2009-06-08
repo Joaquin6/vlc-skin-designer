@@ -207,7 +207,9 @@ public class Bitmap extends ImageResource implements ActionListener{
     nbframes=Integer.parseInt(nbframes_tf.getText());
     fps=Integer.parseInt(fps_tf.getText());   
     if(!id_tf.getText().equals(id)) {
+      String oldid = id;
       id=id_tf.getText();
+      s.resourceRenamed(oldid, id);
       s.updateResources();
       s.expandResource(id);
     }    

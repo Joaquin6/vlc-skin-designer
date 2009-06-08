@@ -19,7 +19,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-
 package vlcskineditor.items;
 
 import vlcskineditor.*;
@@ -37,29 +36,27 @@ import vlcskineditor.resources.ImageResource;
  * SliderBackground item
  * @author Daniel Dreibrodt
  */
-public class SliderBackground extends Item implements ActionListener{
-  
+public class SliderBackground extends Item implements ActionListener {
+
   public final int NBHORIZ_DEFAULT = 1;
   public final int NBVERT_DEFAULT = 1;
   public final int PADHORIZ_DEFAULT = 0;
   public final int PADVERT_DEFAULT = 0;
-  
   public String image;
   public int nbhoriz = NBHORIZ_DEFAULT;
   public int nbvert = NBVERT_DEFAULT;
   public int padhoriz = PADHORIZ_DEFAULT;
   public int padvert = PADVERT_DEFAULT;
-  
   JFrame frame;
-  public JTextField id_tf, image_tf, nbhoriz_tf, nbvert_tf, padhoriz_tf, padvert_tf;
+  public JTextField id_tf,  image_tf,  nbhoriz_tf,  nbvert_tf,  padhoriz_tf,  padvert_tf;
   JButton gen_btn, ok_btn, cancel_btn, help_btn;
   ImageResource image_res;
   BufferedImage bi = null;
   String bitmap_str = "";
   Slider sl;
-
   private float sliderVal = 0.5f;
-  
+
+
   {
     type = Language.get("SLIDERBG");
   }
@@ -72,8 +69,8 @@ public class SliderBackground extends Item implements ActionListener{
   public SliderBackground(Node n, Skin s_) {
     s = s_;
 
-    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
-    
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId())));
+
     image = XML.getStringAttributeValue(n, "image", image);
     nbhoriz = XML.getIntAttributeValue(n, "nbhoriz", nbhoriz);
     nbvert = XML.getIntAttributeValue(n, "nbvert", nbvert);
@@ -91,23 +88,36 @@ public class SliderBackground extends Item implements ActionListener{
    */
   public SliderBackground(String xmlcode, Skin s_) {
     s = s_;
-    image = XML.getValue(xmlcode,"image");
+    image = XML.getValue(xmlcode, "image");
     image_res = s.getImageResource(image);
-    if(xmlcode.indexOf("nbhoriz=\"")!=-1) nbhoriz = XML.getIntValue(xmlcode,"nbhoriz");
-    if(xmlcode.indexOf("nbvert=\"")!=-1) nbvert = XML.getIntValue(xmlcode,"nbvert");
-    if(xmlcode.indexOf("padhoriz=\"")!=-1) padhoriz = XML.getIntValue(xmlcode,"padhoriz");
-    if(xmlcode.indexOf("padvert=\"")!=-1) padvert = XML.getIntValue(xmlcode,"padvert");   
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");  
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
+    if(xmlcode.indexOf("nbhoriz=\"") != -1) {
+      nbhoriz = XML.getIntValue(xmlcode, "nbhoriz");
+    }
+    if(xmlcode.indexOf("nbvert=\"") != -1) {
+      nbvert = XML.getIntValue(xmlcode, "nbvert");
+    }
+    if(xmlcode.indexOf("padhoriz=\"") != -1) {
+      padhoriz = XML.getIntValue(xmlcode, "padhoriz");
+    }
+    if(xmlcode.indexOf("padvert=\"") != -1) {
+      padvert = XML.getIntValue(xmlcode, "padvert");
+    }
+    if(xmlcode.indexOf("id=\"") != -1) {
+      id = XML.getValue(xmlcode, "id");
+    } else {
+      id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
+    }
     created = true;
   }
+
   public SliderBackground(Skin s_, Slider sl_) {
     s = s_;
     sl = sl_;
     image = "none";
-    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
+    id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
     showOptions();
   }
+
   public void update() {
     if(!created) {
       id = id_tf.getText();
@@ -118,46 +128,48 @@ public class SliderBackground extends Item implements ActionListener{
       padvert = Integer.parseInt(padvert_tf.getText());
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       created = true;
-      
-      ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id),this);
+
+      ItemAddEvent sae = new ItemAddEvent(s.getParentListOf(id), this);
       s.m.hist.addEvent(sae);
-    }
-    else {
+    } else {
       SliderBackgroundEditEvent see = new SliderBackgroundEditEvent(this);
-      
+
       id = id_tf.getText();
       image = image_tf.getText();
       nbhoriz = Integer.parseInt(nbhoriz_tf.getText());
       nbvert = Integer.parseInt(nbvert_tf.getText());
       padhoriz = Integer.parseInt(padhoriz_tf.getText());
       padvert = Integer.parseInt(padvert_tf.getText());
-      
+
       see.setNew();
       s.m.hist.addEvent(see);
     }
-  }  
-  public void showOptions() {    
-    if(frame==null) {
+  }
+
+  public void showOptions() {
+    if(frame == null) {
       frame = new JFrame(Language.get("WIN_SBG_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      if(!created) {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      }
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
-      id_tf = new JTextField();      
+      id_tf = new JTextField();
       gen_btn = new JButton(Language.get("WIN_SBG_WIZARD"));
       gen_btn.addActionListener(this);
       JLabel image_l = new JLabel(Language.get("WIN_SBG_IMAGE"));
       image_tf = new JTextField();
-      JLabel nbhoriz_l =  new JLabel(Language.get("WIN_SBG_NBHORIZ"));
+      JLabel nbhoriz_l = new JLabel(Language.get("WIN_SBG_NBHORIZ"));
       nbhoriz_tf = new JTextField();
       nbhoriz_tf.setDocument(new NumbersOnlyDocument());
-      JLabel nbvert_l =  new JLabel(Language.get("WIN_SBG_NBVERT"));
+      JLabel nbvert_l = new JLabel(Language.get("WIN_SBG_NBVERT"));
       nbvert_tf = new JTextField();
       nbvert_tf.setDocument(new NumbersOnlyDocument());
-      JLabel padhoriz_l =  new JLabel(Language.get("WIN_SBG_PADHORIZ"));
+      JLabel padhoriz_l = new JLabel(Language.get("WIN_SBG_PADHORIZ"));
       padhoriz_tf = new JTextField();
       padhoriz_tf.setDocument(new NumbersOnlyDocument());
-      JLabel padvert_l =  new JLabel(Language.get("WIN_SBG_PADVERT"));
+      JLabel padvert_l = new JLabel(Language.get("WIN_SBG_PADVERT"));
       padvert_tf = new JTextField();
       padvert_tf.setDocument(new NumbersOnlyDocument());
       JLabel attr_l = new JLabel(Language.get("NOTE_STARRED"));
@@ -167,17 +179,17 @@ public class SliderBackground extends Item implements ActionListener{
       cancel_btn.addActionListener(this);
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      
+
       //Distance of textfields to WEST edge of container
-      Component[] labels = { id_l, image_l, nbhoriz_l, nbvert_l, padhoriz_l, padvert_l};
-      int tf_dx = Helper.maxWidth(labels)+10;
+      Component[] labels = {id_l, image_l, nbhoriz_l, nbvert_l, padhoriz_l, padvert_l};
+      int tf_dx = Helper.maxWidth(labels) + 10;
       //Max. textfield width
       int tf_wd = Main.TEXTFIELD_WIDTH;
 
       JPanel general = new JPanel(null);
       general.add(id_l);
       general.add(id_tf);
-      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
+      id_tf.setPreferredSize(new Dimension(tf_wd, id_tf.getPreferredSize().height));
       general.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_ITEM_GENERAL")));
 
       SpringLayout general_layout = new SpringLayout();
@@ -193,13 +205,13 @@ public class SliderBackground extends Item implements ActionListener{
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, id_tf);
 
       frame.add(general);
-      
+
       frame.add(gen_btn);
-      
+
       JPanel bg_panel = new JPanel(null);
       bg_panel.add(image_l);
       bg_panel.add(image_tf);
-      image_tf.setPreferredSize(new Dimension(tf_wd,image_tf.getPreferredSize().height));
+      image_tf.setPreferredSize(new Dimension(tf_wd, image_tf.getPreferredSize().height));
       bg_panel.add(nbhoriz_l);
       bg_panel.add(nbhoriz_tf);
       bg_panel.add(nbvert_l);
@@ -252,12 +264,12 @@ public class SliderBackground extends Item implements ActionListener{
       bg_panel.setLayout(bg_layout);
 
       frame.add(bg_panel);
-      
+
       frame.add(ok_btn);
       frame.add(cancel_btn);
       frame.add(help_btn);
       frame.add(attr_l);
-      
+
       SpringLayout layout = new SpringLayout();
 
       layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
@@ -286,9 +298,9 @@ public class SliderBackground extends Item implements ActionListener{
       layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
 
       frame.setLayout(layout);
-      
+
       frame.pack();
-      
+
       frame.getRootPane().setDefaultButton(ok_btn);
     }
     id_tf.setText(id);
@@ -299,21 +311,21 @@ public class SliderBackground extends Item implements ActionListener{
     padvert_tf.setText(String.valueOf(padvert));
     frame.setVisible(true);
   }
+
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_INVALID_MSG"), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         return;
-      }
-      else if(!id_tf.getText().equals(id)) {
+      } else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
       image_res = s.getImageResource(image_tf.getText());
       if(image_res == null) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", image_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", image_tf.getText()), Language.get("ERROR_BITMAP_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         image_res = s.getImageResource(image);
         return;
       }
@@ -323,70 +335,102 @@ public class SliderBackground extends Item implements ActionListener{
       frame.setVisible(false);
       frame.dispose();
       frame = null;
-    }
-    else if(e.getSource().equals(help_btn)) {
+    } else if(e.getSource().equals(help_btn)) {
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/i-sliderbg.html");
-    }
-    else if(e.getSource().equals(gen_btn)) {
+    } else if(e.getSource().equals(gen_btn)) {
       SliderBGGen sbgg = new SliderBGGen(this, s);
       sbgg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      sbgg.setVisible(true);      
-    }
-    else if(e.getSource().equals(cancel_btn)) {
+      sbgg.setVisible(true);
+    } else if(e.getSource().equals(cancel_btn)) {
       frame.setVisible(false);
       frame.dispose();
       frame = null;
-      if(!created) sl.removeBG();      
-    }    
-  }  
-  public String returnCode(String indent) {
-    String code = indent+"<SliderBackground";
-    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
-    code+=" image=\""+image+"\"";
-    if (nbhoriz!=NBHORIZ_DEFAULT) code+=" nbhoriz=\""+String.valueOf(nbhoriz)+"\"";
-    if (nbvert!=NBVERT_DEFAULT) code+=" nbvert=\""+String.valueOf(nbvert)+"\"";
-    if (padhoriz!=PADHORIZ_DEFAULT) code+=" padhoriz=\""+String.valueOf(padhoriz)+"\"";
-    if (padvert!=PADVERT_DEFAULT) code+=" padvert=\""+String.valueOf(padvert)+"\"";
-    code+="/>";
-    return code;
-  }
-  public void draw(Graphics2D g, int z) {
-    draw(g,0,0,z);
-  }
-  public void draw(Graphics2D g, int x_, int y_, int z) {
-    if(!created) return;
-    bi = image_res.image;
-    if(bi==null) return;
-    int fwidth = (bi.getWidth()-padhoriz*(nbhoriz-1))/nbhoriz;
-    int fheight = (bi.getHeight()-padvert*(nbvert-1))/nbvert;    
-    int fields = nbhoriz*nbvert;
-    int n = (int)(fields*sliderVal);
-    int fypos = n/nbhoriz-1;
-    if (fypos<0) fypos=0;
-    int fxpos = n%nbhoriz;    
-    if (fxpos<0) fxpos=0;
-    bi = bi.getSubimage(fxpos*fwidth+fxpos*padhoriz, fypos*fheight+fypos*padvert ,fwidth,fheight);
-    g.drawImage(bi,(x+x_)*z,(y+y_)*z, bi.getWidth()*z, bi.getHeight()*z,null);
-    if(selected) {
-      g.setColor(Color.RED);
-      g.drawRect((x+x_)*z,(y+y_)*z,bi.getWidth()*z-1,bi.getHeight()*z-1);
+      if(!created) {
+        sl.removeBG();
+      }
     }
   }
-  @Override
-  public boolean contains(int x_,int y_) {
-    if(bi==null) return false;
-    return (x_>=x+offsetx && x_<=x+bi.getWidth()+offsetx && y_>=y+offsety && y_<=y+bi.getHeight()+offsety);
+
+  public String returnCode(String indent) {
+    String code = indent + "<SliderBackground";
+    if(!id.equals(ID_DEFAULT)) {
+      code += " id=\"" + id + "\"";
+    }
+    code += " image=\"" + image + "\"";
+    if(nbhoriz != NBHORIZ_DEFAULT) {
+      code += " nbhoriz=\"" + String.valueOf(nbhoriz) + "\"";
+    }
+    if(nbvert != NBVERT_DEFAULT) {
+      code += " nbvert=\"" + String.valueOf(nbvert) + "\"";
+    }
+    if(padhoriz != PADHORIZ_DEFAULT) {
+      code += " padhoriz=\"" + String.valueOf(padhoriz) + "\"";
+    }
+    if(padvert != PADVERT_DEFAULT) {
+      code += " padvert=\"" + String.valueOf(padvert) + "\"";
+    }
+    code += "/>";
+    return code;
   }
+
+  public void draw(Graphics2D g, int z) {
+    draw(g, 0, 0, z);
+  }
+
+  public void draw(Graphics2D g, int x_, int y_, int z) {
+    if(!created) {
+      return;
+    }
+    bi = image_res.image;
+    if(bi == null) {
+      return;
+    }
+    int fwidth = (bi.getWidth() - padhoriz * (nbhoriz - 1)) / nbhoriz;
+    int fheight = (bi.getHeight() - padvert * (nbvert - 1)) / nbvert;
+    int fields = nbhoriz * nbvert;
+    int n = (int) (fields * sliderVal);
+    int fypos = n / nbhoriz - 1;
+    if(fypos < 0) {
+      fypos = 0;
+    }
+    int fxpos = n % nbhoriz;
+    if(fxpos < 0) {
+      fxpos = 0;
+    }
+    bi = bi.getSubimage(fxpos * fwidth + fxpos * padhoriz, fypos * fheight + fypos * padvert, fwidth, fheight);
+    g.drawImage(bi, (x + x_) * z, (y + y_) * z, bi.getWidth() * z, bi.getHeight() * z, null);
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect((x + x_) * z, (y + y_) * z, bi.getWidth() * z - 1, bi.getHeight() * z - 1);
+    }
+  }
+
+  @Override
+  public boolean contains(int x_, int y_) {
+    if(bi == null) {
+      return false;
+    }
+    return (x_ >= x + offsetx && x_ <= x + bi.getWidth() + offsetx && y_ >= y + offsety && y_ <= y + bi.getHeight() + offsety);
+  }
+
   public DefaultMutableTreeNode getTreeNode() {
-    DefaultMutableTreeNode node = new DefaultMutableTreeNode("SliderBackground: "+id);       
+    DefaultMutableTreeNode node = new DefaultMutableTreeNode("SliderBackground: " + id);
     return node;
   }
+
   @Override
   public boolean uses(String id_) {
     return (image.equals(id_));
   }
+
   @Override
   public void updateToGlobalVariables() {
-   sliderVal = s.gvars.getSliderValue();
+    sliderVal = s.gvars.getSliderValue();
   }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(image.equals(oldid)) image = newid;
+  }
+
 }

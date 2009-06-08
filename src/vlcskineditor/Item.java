@@ -235,4 +235,13 @@ public abstract class Item {
     vis = s.gvars.parseBoolean(visible);
   }
 
+  /**
+   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
+   * @param oldid The former ID of the renamed resource
+   * @param newid The new ID of the renamed resource
+   */
+  public void resourceRenamed(String oldid, String newid) {
+
+  }
+
 }

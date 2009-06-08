@@ -590,4 +590,10 @@ public class Text extends Item implements ActionListener{
   public boolean uses(String id_) {
     return (font.equals(id_));
   }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(font.equals(oldid)) font = newid;
+  }
+
 }

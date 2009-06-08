@@ -19,7 +19,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-
 package vlcskineditor.items;
 
 import vlcskineditor.*;
@@ -38,11 +37,11 @@ import vlcskineditor.resources.ImageResource;
  * Playtree item
  * @author Daniel Dreibrodt
  */
-public class Playtree extends Item implements ActionListener{
-  
+public class Playtree extends Item implements ActionListener {
+
   public final int WIDTH_DEFAULT = 0;
   public final int HEIGHT_DEFAULT = 0;
-  public final String VAR_DEFAULT = "playlist";    
+  public final String VAR_DEFAULT = "playlist";
   public final String BGIMAGE_DEFAULT = "none";
   public final String FGCOLOR_DEFAULT = "#000000";
   public final String PLAYCOLOR_DEFAULT = "#FF0000";
@@ -53,8 +52,6 @@ public class Playtree extends Item implements ActionListener{
   public final String ITEMIMAGE_DEFAULT = "none";
   public final String OPENIMAGE_DEFAULT = "none";
   public final String CLOSEDIMAGE_DEFAULT = "none";
-  
-  
   public int width = WIDTH_DEFAULT;
   public int height = HEIGHT_DEFAULT;
   public String font;
@@ -69,9 +66,7 @@ public class Playtree extends Item implements ActionListener{
   public String itemimage = ITEMIMAGE_DEFAULT;
   public String openimage = OPENIMAGE_DEFAULT;
   public String closedimage = CLOSEDIMAGE_DEFAULT;
-  
   Slider slider = null;
-  
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, width_tf, height_tf;
   JTextField font_tf, bgimage_tf, itemimage_tf, openimage_tf, closedimage_tf;
@@ -79,9 +74,9 @@ public class Playtree extends Item implements ActionListener{
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, flat_cb;
   JButton visible_btn, bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
   JButton cancel_btn;
-
   ImageResource bgimage_res, itemimage_res, openimage_res, closedimage_res;
-  
+
+
   {
     type = Language.get("PLAYTREE");
   }
@@ -94,7 +89,7 @@ public class Playtree extends Item implements ActionListener{
   public Playtree(Node n, Skin s_) {
     s = s_;
 
-    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
+    id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId())));
 
     x = XML.getIntAttributeValue(n, "x", x);
     y = XML.getIntAttributeValue(n, "y", y);
@@ -122,7 +117,7 @@ public class Playtree extends Item implements ActionListener{
     help = XML.getStringAttributeValue(n, "help", help);
 
     NodeList nodes = n.getChildNodes();
-    for(int i=0;i<nodes.getLength();i++) {
+    for(int i = 0; i < nodes.getLength(); i++) {
       if(nodes.item(i).getNodeName().equals("Slider")) {
         slider = new Slider(nodes.item(i), s, true);
       }
@@ -132,10 +127,10 @@ public class Playtree extends Item implements ActionListener{
     openimage_res = s.getImageResource(openimage);
     closedimage_res = s.getImageResource(closedimage);
     itemimage_res = s.getImageResource(itemimage);
-    
+
     created = true;
   }
-  
+
   /** Creates a new instance of Playtree
    * @param xmlcode The XML code
    * @param s_ The parent skin
@@ -143,78 +138,115 @@ public class Playtree extends Item implements ActionListener{
   public Playtree(String xmlcode, Skin s_) {
     s = s_;
     String[] xmllines = xmlcode.split("\n");
-    if(xmllines[0].startsWith("<Playlist")) flat=true;
-    font = XML.getValue(xmllines[0],"font");
-    if(xmllines[0].indexOf("width=\"")!=-1) width = XML.getIntValue(xmllines[0],"width");
-    if(xmllines[0].indexOf("height=\"")!=-1) height = XML.getIntValue(xmllines[0],"height");
-    if(xmllines[0].indexOf("var=\"")!=-1) var = XML.getValue(xmllines[0],"var");
-    if(xmllines[0].indexOf("bgimage=\"")!=-1) {
-      bgimage = XML.getValue(xmllines[0],"bgimage");
+    if(xmllines[0].startsWith("<Playlist")) {
+      flat = true;
+    }
+    font = XML.getValue(xmllines[0], "font");
+    if(xmllines[0].indexOf("width=\"") != -1) {
+      width = XML.getIntValue(xmllines[0], "width");
+    }
+    if(xmllines[0].indexOf("height=\"") != -1) {
+      height = XML.getIntValue(xmllines[0], "height");
+    }
+    if(xmllines[0].indexOf("var=\"") != -1) {
+      var = XML.getValue(xmllines[0], "var");
+    }
+    if(xmllines[0].indexOf("bgimage=\"") != -1) {
+      bgimage = XML.getValue(xmllines[0], "bgimage");
       bgimage_res = s.getImageResource(bgimage);
     }
-    if(xmllines[0].indexOf("openimage=\"")!=-1) {
-      openimage = XML.getValue(xmllines[0],"openimage");
+    if(xmllines[0].indexOf("openimage=\"") != -1) {
+      openimage = XML.getValue(xmllines[0], "openimage");
       openimage_res = s.getImageResource(openimage);
     }
-    if(xmllines[0].indexOf("closedimage=\"")!=-1) {
-      closedimage = XML.getValue(xmllines[0],"closedimage");
+    if(xmllines[0].indexOf("closedimage=\"") != -1) {
+      closedimage = XML.getValue(xmllines[0], "closedimage");
       closedimage_res = s.getImageResource(closedimage);
     }
-    if(xmllines[0].indexOf("itemimage=\"")!=-1) {
-      itemimage = XML.getValue(xmllines[0],"itemimage");
+    if(xmllines[0].indexOf("itemimage=\"") != -1) {
+      itemimage = XML.getValue(xmllines[0], "itemimage");
       itemimage_res = s.getImageResource(itemimage);
     }
-    if(xmllines[0].indexOf("fgcolor=\"")!=-1) fgcolor = XML.getValue(xmllines[0],"fgcolor");
-    if(xmllines[0].indexOf("playcolor=\"")!=-1) playcolor = XML.getValue(xmllines[0],"playcolor");
-    if(xmllines[0].indexOf("selcolor=\"")!=-1) selcolor = XML.getValue(xmllines[0],"selcolor");
-    if(xmllines[0].indexOf("bgcolor1=\"")!=-1) bgcolor1 = XML.getValue(xmllines[0],"bgcolor1");
-    if(xmllines[0].indexOf("bgcolor2=\"")!=-1) bgcolor2 = XML.getValue(xmllines[0],"bgcolor2");
-    if(xmllines[0].indexOf("flat=\"")!=-1) flat = XML.getBoolValue(xmllines[0],"flat");
-    if(xmllines[0].indexOf("x=\"")!=-1) x = XML.getIntValue(xmllines[0],"x");
-    if(xmllines[0].indexOf("y=\"")!=-1) y = XML.getIntValue(xmllines[0],"y");
-    if(xmllines[0].indexOf("id=\"")!=-1) id = XML.getValue(xmllines[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(xmllines[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmllines[0],"lefttop");
-    if(xmllines[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmllines[0],"rightbottom");
-    if(xmllines[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmllines[0],"xkeepratio");
-    if(xmllines[0].indexOf("ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmllines[0],"ykeepratio");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
-    
-    int i=1;
-    if(xmllines.length>1) {      
-      if (xmllines[i].trim().startsWith("<!--")) {
-        while(xmllines[i].trim().indexOf("-->")==-1) {
-          i++;          
+    if(xmllines[0].indexOf("fgcolor=\"") != -1) {
+      fgcolor = XML.getValue(xmllines[0], "fgcolor");
+    }
+    if(xmllines[0].indexOf("playcolor=\"") != -1) {
+      playcolor = XML.getValue(xmllines[0], "playcolor");
+    }
+    if(xmllines[0].indexOf("selcolor=\"") != -1) {
+      selcolor = XML.getValue(xmllines[0], "selcolor");
+    }
+    if(xmllines[0].indexOf("bgcolor1=\"") != -1) {
+      bgcolor1 = XML.getValue(xmllines[0], "bgcolor1");
+    }
+    if(xmllines[0].indexOf("bgcolor2=\"") != -1) {
+      bgcolor2 = XML.getValue(xmllines[0], "bgcolor2");
+    }
+    if(xmllines[0].indexOf("flat=\"") != -1) {
+      flat = XML.getBoolValue(xmllines[0], "flat");
+    }
+    if(xmllines[0].indexOf("x=\"") != -1) {
+      x = XML.getIntValue(xmllines[0], "x");
+    }
+    if(xmllines[0].indexOf("y=\"") != -1) {
+      y = XML.getIntValue(xmllines[0], "y");
+    }
+    if(xmllines[0].indexOf("id=\"") != -1) {
+      id = XML.getValue(xmllines[0], "id");
+    } else {
+      id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
+    }
+    if(xmllines[0].indexOf("lefttop=\"") != -1) {
+      lefttop = XML.getValue(xmllines[0], "lefttop");
+    }
+    if(xmllines[0].indexOf("rightbottom=\"") != -1) {
+      rightbottom = XML.getValue(xmllines[0], "rightbottom");
+    }
+    if(xmllines[0].indexOf("xkeepratio=\"") != -1) {
+      xkeepratio = XML.getBoolValue(xmllines[0], "xkeepratio");
+    }
+    if(xmllines[0].indexOf("ykeepratio=\"") != -1) {
+      ykeepratio = XML.getBoolValue(xmllines[0], "ykeepratio");
+    }
+    if(xmlcode.indexOf(" visible=\"") != -1) {
+      visible = XML.getValue(xmlcode, "visible");
+    }
+
+    int i = 1;
+    if(xmllines.length > 1) {
+      if(xmllines[i].trim().startsWith("<!--")) {
+        while(xmllines[i].trim().indexOf("-->") == -1) {
+          i++;
         }
-      }
-      else if(xmllines[i].trim().startsWith("<Slider")) {
-        if(xmllines[i].trim().indexOf("/>")!=-1) {
-          slider = new Slider(xmllines[i].trim(),s,true);
-        }
-        else {
+      } else if(xmllines[i].trim().startsWith("<Slider")) {
+        if(xmllines[i].trim().indexOf("/>") != -1) {
+          slider = new Slider(xmllines[i].trim(), s, true);
+        } else {
           String itemcode = xmllines[i].trim();
           i++;
-          while(!xmllines[i].trim().startsWith("</Slider>")) {          
-            itemcode += "\n"+xmllines[i];
+          while(!xmllines[i].trim().startsWith("</Slider>")) {
+            itemcode += "\n" + xmllines[i];
             i++;
           }
-          itemcode += "\n"+xmllines[i].trim();
-          slider = new Slider(itemcode,s,true);
-        }                
+          itemcode += "\n" + xmllines[i].trim();
+          slider = new Slider(itemcode, s, true);
+        }
       }
     }
-    created=true;
+    created = true;
   }
+
   public Playtree(Skin s_) {
     s = s_;
     font = "defaultfont";
-    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    slider = new Slider(s,true);
+    id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
+    slider = new Slider(s, true);
     showOptions();
-    s.updateItems();    
+    s.updateItems();
   }
+
   @Override
-  public void update()  {
+  public void update() {
     if(!created) {
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
@@ -238,19 +270,18 @@ public class Playtree extends Item implements ActionListener{
       playcolor = playcolor_tf.getText();
       bgcolor1 = bgcolor1_tf.getText();
       bgcolor2 = bgcolor2_tf.getText();
-      flat = (Boolean)flat_cb.getSelectedItem();
+      flat = (Boolean) flat_cb.getSelectedItem();
 
       s.updateItems();
       s.expandItem(id);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      created=true;
-      
-      ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id),this);      
+      created = true;
+
+      ItemAddEvent paa = new ItemAddEvent(s.getParentListOf(id), this);
       s.m.hist.addEvent(paa);
-    }
-    else {
+    } else {
       PlaytreeEditEvent pee = new PlaytreeEditEvent(this);
-      
+
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
       y = Integer.parseInt(y_tf.getText());
@@ -273,30 +304,33 @@ public class Playtree extends Item implements ActionListener{
       playcolor = playcolor_tf.getText();
       bgcolor1 = bgcolor1_tf.getText();
       bgcolor2 = bgcolor2_tf.getText();
-      flat = (Boolean)flat_cb.getSelectedItem();
+      flat = (Boolean) flat_cb.getSelectedItem();
 
       s.updateItems();
       s.expandItem(id);
-      
+
       pee.setNew();
       s.m.hist.addEvent(pee);
     }
     updateToGlobalVariables();
   }
+
   @Override
   public void showOptions() {
-    if(frame==null) {
+    if(frame == null) {
       frame = new JFrame(Language.get("WIN_PLAYTREE_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
       frame.setResizable(false);
-      if(!created) frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      if(!created) {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      }
       JLabel id_l = new JLabel(Language.get("WIN_ITEM_ID"));
-      id_tf = new JTextField();      
+      id_tf = new JTextField();
       JLabel x_l = new JLabel(Language.get("WIN_ITEM_X"));
-      x_tf = new JTextField();      
+      x_tf = new JTextField();
       x_tf.setDocument(new NumbersOnlyDocument());
       JLabel y_l = new JLabel(Language.get("WIN_ITEM_Y"));
-      y_tf = new JTextField();      
+      y_tf = new JTextField();
       y_tf.setDocument(new NumbersOnlyDocument());
       String[] align_values = {"lefttop", "leftbottom", "righttop", "rightbottom"};
       JLabel lefttop_l = new JLabel(Language.get("WIN_ITEM_LEFTTOP"));
@@ -305,7 +339,7 @@ public class Playtree extends Item implements ActionListener{
       JLabel rightbottom_l = new JLabel(Language.get("WIN_ITEM_RIGHTBOTTOM"));
       rightbottom_cb = new JComboBox(align_values);
       rightbottom_cb.setToolTipText(Language.get("WIN_ITEM_RIGHTBOTTOM_TIP"));
-      Object[] bool_values = { true, false };
+      Object[] bool_values = {true, false};
       JLabel xkeepratio_l = new JLabel(Language.get("WIN_ITEM_XKEEPRATIO"));
       xkeepratio_cb = new JComboBox(bool_values);
       xkeepratio_cb.setToolTipText(Language.get("WIN_ITEM_XKEEPRATIO_TIP"));
@@ -314,12 +348,12 @@ public class Playtree extends Item implements ActionListener{
       ykeepratio_cb.setToolTipText(Language.get("WIN_ITEM_YKEEPRATIO_TIP"));
       JLabel visible_l = new JLabel(Language.get("WIN_ITEM_VISIBLE"));
       visible_tf = new JTextField();
-      visible_btn = new JButton("",Main.help_icon);
-      visible_btn.addActionListener(this);      
+      visible_btn = new JButton("", Main.help_icon);
+      visible_btn.addActionListener(this);
       JLabel help_l = new JLabel(Language.get("WIN_ITEM_HELP"));
       help_tf = new JTextField();
       help_tf.setToolTipText(Language.get("WIN_ITEM_HELP_TIP"));
-      
+
       JLabel width_l = new JLabel(Language.get("WIN_ITEM_WIDTH"));
       width_tf = new JTextField();
       width_tf.setDocument(new NumbersOnlyDocument(false));
@@ -338,7 +372,7 @@ public class Playtree extends Item implements ActionListener{
       JLabel bgcolor2_l = new JLabel(Language.get("WIN_PLAYTREE_BGCOLOR2"));
       bgcolor2_tf = new JTextField();
       bgcolor2_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
-      bgcolor2_btn.addActionListener(this);      
+      bgcolor2_btn.addActionListener(this);
       JLabel selcolor_l = new JLabel(Language.get("WIN_PLAYTREE_SELCOLOR"));
       selcolor_tf = new JTextField();
       selcolor_btn = new JButton(Language.get("WIN_PLAYTREE_CHOOSE"));
@@ -371,19 +405,19 @@ public class Playtree extends Item implements ActionListener{
       help_btn.addActionListener(this);
 
       //Distance of textfields to WEST edge of container
-      Component[] labels = { id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, width_l, height_l, font_l, bgimage_l, bgcolor1_l, bgcolor2_l, selcolor_l, fgcolor_l, playcolor_l, flat_l, itemimage_l, openimage_l, closedimage_l};
-      int tf_dx = Helper.maxWidth(labels)+10;
+      Component[] labels = {id_l, x_l, y_l, lefttop_l, rightbottom_l, xkeepratio_l, ykeepratio_l, visible_l, help_l, width_l, height_l, font_l, bgimage_l, bgcolor1_l, bgcolor2_l, selcolor_l, fgcolor_l, playcolor_l, flat_l, itemimage_l, openimage_l, closedimage_l};
+      int tf_dx = Helper.maxWidth(labels) + 10;
       //Max. textfield width
       int tf_wd = Main.TEXTFIELD_WIDTH;
-      
+
       JPanel general = new JPanel();
       general.add(id_l);
       general.add(id_tf);
-      id_tf.setPreferredSize(new Dimension(tf_wd,id_tf.getPreferredSize().height));
+      id_tf.setPreferredSize(new Dimension(tf_wd, id_tf.getPreferredSize().height));
       general.add(x_l);
       general.add(x_tf);
       general.add(y_l);
-      general.add(y_tf);   
+      general.add(y_tf);
       general.add(lefttop_l);
       general.add(lefttop_cb);
       general.add(rightbottom_l);
@@ -396,7 +430,7 @@ public class Playtree extends Item implements ActionListener{
       general.add(visible_tf);
       general.add(visible_btn);
       general.add(help_l);
-      general.add(help_tf);   
+      general.add(help_tf);
       general.add(width_l);
       general.add(width_tf);
       general.add(height_l);
@@ -489,32 +523,32 @@ public class Playtree extends Item implements ActionListener{
       general_layout.putConstraint(SpringLayout.SOUTH, general, 10, SpringLayout.SOUTH, height_tf);
 
       frame.add(general);
-      
+
       JPanel ptp = new JPanel();
       ptp.add(font_l);
       ptp.add(font_tf);
-      font_tf.setPreferredSize(new Dimension(tf_wd,font_tf.getPreferredSize().height));
+      font_tf.setPreferredSize(new Dimension(tf_wd, font_tf.getPreferredSize().height));
       ptp.add(bgimage_l);
       ptp.add(bgimage_tf);
       ptp.add(bgcolor1_l);
       ptp.add(bgcolor1_tf);
-      bgcolor1_tf.setPreferredSize(new Dimension(tf_wd/2,bgcolor1_tf.getPreferredSize().height));
+      bgcolor1_tf.setPreferredSize(new Dimension(tf_wd / 2, bgcolor1_tf.getPreferredSize().height));
       ptp.add(bgcolor1_btn);
       ptp.add(bgcolor2_l);
       ptp.add(bgcolor2_tf);
-      bgcolor2_tf.setPreferredSize(new Dimension(tf_wd/2,bgcolor2_tf.getPreferredSize().height));
+      bgcolor2_tf.setPreferredSize(new Dimension(tf_wd / 2, bgcolor2_tf.getPreferredSize().height));
       ptp.add(bgcolor2_btn);
       ptp.add(selcolor_l);
       ptp.add(selcolor_tf);
-      selcolor_tf.setPreferredSize(new Dimension(tf_wd/2,selcolor_tf.getPreferredSize().height));
+      selcolor_tf.setPreferredSize(new Dimension(tf_wd / 2, selcolor_tf.getPreferredSize().height));
       ptp.add(selcolor_btn);
       ptp.add(fgcolor_l);
       ptp.add(fgcolor_tf);
-      fgcolor_tf.setPreferredSize(new Dimension(tf_wd/2,fgcolor_tf.getPreferredSize().height));
-      ptp.add(fgcolor_btn);    
+      fgcolor_tf.setPreferredSize(new Dimension(tf_wd / 2, fgcolor_tf.getPreferredSize().height));
+      ptp.add(fgcolor_btn);
       ptp.add(playcolor_l);
       ptp.add(playcolor_tf);
-      playcolor_tf.setPreferredSize(new Dimension(tf_wd/2,playcolor_tf.getPreferredSize().height));
+      playcolor_tf.setPreferredSize(new Dimension(tf_wd / 2, playcolor_tf.getPreferredSize().height));
       ptp.add(playcolor_btn);
       ptp.add(flat_l);
       ptp.add(flat_cb);
@@ -523,7 +557,7 @@ public class Playtree extends Item implements ActionListener{
       ptp.add(openimage_l);
       ptp.add(openimage_tf);
       ptp.add(closedimage_l);
-      ptp.add(closedimage_tf);    
+      ptp.add(closedimage_tf);
       ptp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_PLAYTREE_ATTR")));
 
       SpringLayout ptp_layout = new SpringLayout();
@@ -539,7 +573,7 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgimage_tf, 0, SpringLayout.VERTICAL_CENTER, bgimage_l);
       ptp_layout.putConstraint(SpringLayout.WEST, bgimage_tf, tf_dx, SpringLayout.WEST, ptp);
-      ptp_layout.putConstraint(SpringLayout.EAST, bgimage_tf, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgimage_tf, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, bgcolor1_l, 10, SpringLayout.SOUTH, bgimage_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, bgcolor1_l, 5, SpringLayout.WEST, ptp);
@@ -549,7 +583,7 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor1_btn, 0, SpringLayout.VERTICAL_CENTER, bgcolor1_l);
       ptp_layout.putConstraint(SpringLayout.WEST, bgcolor1_btn, 5, SpringLayout.EAST, bgcolor1_tf);
-      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor1_btn, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor1_btn, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, bgcolor2_l, 10, SpringLayout.SOUTH, bgcolor1_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, bgcolor2_l, 5, SpringLayout.WEST, ptp);
@@ -559,7 +593,7 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, bgcolor2_btn, 0, SpringLayout.VERTICAL_CENTER, bgcolor2_l);
       ptp_layout.putConstraint(SpringLayout.WEST, bgcolor2_btn, 5, SpringLayout.EAST, bgcolor2_tf);
-      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor2_btn, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, bgcolor2_btn, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, selcolor_l, 10, SpringLayout.SOUTH, bgcolor2_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, selcolor_l, 5, SpringLayout.WEST, ptp);
@@ -569,7 +603,7 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, selcolor_btn, 0, SpringLayout.VERTICAL_CENTER, selcolor_l);
       ptp_layout.putConstraint(SpringLayout.WEST, selcolor_btn, 5, SpringLayout.EAST, selcolor_tf);
-      ptp_layout.putConstraint(SpringLayout.EAST, selcolor_btn, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, selcolor_btn, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, fgcolor_l, 10, SpringLayout.SOUTH, selcolor_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, fgcolor_l, 5, SpringLayout.WEST, ptp);
@@ -579,7 +613,7 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, fgcolor_btn, 0, SpringLayout.VERTICAL_CENTER, fgcolor_l);
       ptp_layout.putConstraint(SpringLayout.WEST, fgcolor_btn, 5, SpringLayout.EAST, fgcolor_tf);
-      ptp_layout.putConstraint(SpringLayout.EAST, fgcolor_btn, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, fgcolor_btn, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, playcolor_l, 10, SpringLayout.SOUTH, fgcolor_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, playcolor_l, 5, SpringLayout.WEST, ptp);
@@ -589,50 +623,50 @@ public class Playtree extends Item implements ActionListener{
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, playcolor_btn, 0, SpringLayout.VERTICAL_CENTER, playcolor_l);
       ptp_layout.putConstraint(SpringLayout.WEST, playcolor_btn, 5, SpringLayout.EAST, playcolor_tf);
-      ptp_layout.putConstraint(SpringLayout.EAST, playcolor_btn, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, playcolor_btn, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, flat_l, 10, SpringLayout.SOUTH, playcolor_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, flat_l, 5, SpringLayout.WEST, ptp);
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, flat_cb, 0, SpringLayout.VERTICAL_CENTER, flat_l);
       ptp_layout.putConstraint(SpringLayout.WEST, flat_cb, tf_dx, SpringLayout.WEST, ptp);
-      ptp_layout.putConstraint(SpringLayout.EAST, flat_cb, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, flat_cb, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, itemimage_l, 10, SpringLayout.SOUTH, flat_cb);
       ptp_layout.putConstraint(SpringLayout.WEST, itemimage_l, 5, SpringLayout.WEST, ptp);
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, itemimage_tf, 0, SpringLayout.VERTICAL_CENTER, itemimage_l);
       ptp_layout.putConstraint(SpringLayout.WEST, itemimage_tf, tf_dx, SpringLayout.WEST, ptp);
-      ptp_layout.putConstraint(SpringLayout.EAST, itemimage_tf, 0, SpringLayout.EAST,font_tf);
+      ptp_layout.putConstraint(SpringLayout.EAST, itemimage_tf, 0, SpringLayout.EAST, font_tf);
 
       ptp_layout.putConstraint(SpringLayout.NORTH, openimage_l, 10, SpringLayout.SOUTH, itemimage_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, openimage_l, 5, SpringLayout.WEST, ptp);
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, openimage_tf, 0, SpringLayout.VERTICAL_CENTER, openimage_l);
       ptp_layout.putConstraint(SpringLayout.WEST, openimage_tf, tf_dx, SpringLayout.WEST, ptp);
-      ptp_layout.putConstraint(SpringLayout.EAST, openimage_tf, 0, SpringLayout.EAST,font_tf);
-      
+      ptp_layout.putConstraint(SpringLayout.EAST, openimage_tf, 0, SpringLayout.EAST, font_tf);
+
       ptp_layout.putConstraint(SpringLayout.NORTH, closedimage_l, 10, SpringLayout.SOUTH, openimage_tf);
       ptp_layout.putConstraint(SpringLayout.WEST, closedimage_l, 5, SpringLayout.WEST, ptp);
 
       ptp_layout.putConstraint(SpringLayout.VERTICAL_CENTER, closedimage_tf, 0, SpringLayout.VERTICAL_CENTER, closedimage_l);
       ptp_layout.putConstraint(SpringLayout.WEST, closedimage_tf, tf_dx, SpringLayout.WEST, ptp);
-      ptp_layout.putConstraint(SpringLayout.EAST, closedimage_tf, 0, SpringLayout.EAST,font_tf);
-      
+      ptp_layout.putConstraint(SpringLayout.EAST, closedimage_tf, 0, SpringLayout.EAST, font_tf);
+
       ptp_layout.putConstraint(SpringLayout.EAST, ptp, 5, SpringLayout.EAST, font_tf);
       ptp_layout.putConstraint(SpringLayout.SOUTH, ptp, 10, SpringLayout.SOUTH, closedimage_tf);
 
       ptp.setLayout(ptp_layout);
 
       frame.add(ptp);
-      
-      frame.add(slider_btn);      
-      
+
+      frame.add(slider_btn);
+
       frame.add(ok_btn);
       frame.add(cancel_btn);
-      frame.add(help_btn);      
+      frame.add(help_btn);
       frame.add(attr_l);
-      
+
       SpringLayout layout = new SpringLayout();
 
       layout.putConstraint(SpringLayout.NORTH, general, 5, SpringLayout.NORTH, frame.getContentPane());
@@ -660,12 +694,12 @@ public class Playtree extends Item implements ActionListener{
       layout.putConstraint(SpringLayout.EAST, frame.getContentPane(), 5, SpringLayout.EAST, general);
 
       frame.setLayout(layout);
-      
+
       frame.pack();
-      
+
       frame.getRootPane().setDefaultButton(ok_btn);
     }
-    id_tf.setText(id);    
+    id_tf.setText(id);
     x_tf.setText(String.valueOf(x));
     y_tf.setText(String.valueOf(y));
     lefttop_cb.setSelectedItem(lefttop);
@@ -674,7 +708,7 @@ public class Playtree extends Item implements ActionListener{
     ykeepratio_cb.setSelectedItem(ykeepratio);
     visible_tf.setText(visible);
     help_tf.setText(help);
-    
+
     width_tf.setText(String.valueOf(width));
     height_tf.setText(String.valueOf(height));
     font_tf.setText(font);
@@ -688,324 +722,429 @@ public class Playtree extends Item implements ActionListener{
     openimage_tf.setText(openimage);
     closedimage_tf.setText(closedimage);
     itemimage_tf.setText(itemimage);
-    
+
     frame.setVisible(true);
   }
+
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
       if(id_tf.getText().equals("")) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_INVALID_MSG"), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         return;
-      }
-      else if(!id_tf.getText().equals(id)) {
+      } else if(!id_tf.getText().equals(id)) {
         if(s.idExists(id_tf.getText())) {
-          JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
           return;
         }
       }
       bgimage_res = s.getImageResource(bgimage_tf.getText());
-      if(!bgimage_tf.getText().equals("none")&&bgimage_res==null) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", bgimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      if(!bgimage_tf.getText().equals("none") && bgimage_res == null) {
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", bgimage_tf.getText()), Language.get("ERROR_BITMAP_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         bgimage_res = s.getImageResource(bgimage);
         return;
       }
       itemimage_res = s.getImageResource(itemimage_tf.getText());
-      if(!itemimage_tf.getText().equals("none")&&itemimage_res==null) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", itemimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      if(!itemimage_tf.getText().equals("none") && itemimage_res == null) {
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", itemimage_tf.getText()), Language.get("ERROR_BITMAP_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         itemimage_res = s.getImageResource(itemimage);
         return;
       }
       openimage_res = s.getImageResource(openimage_tf.getText());
-      if(!openimage_tf.getText().equals("none")&&openimage_res==null) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", openimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      if(!openimage_tf.getText().equals("none") && openimage_res == null) {
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", openimage_tf.getText()), Language.get("ERROR_BITMAP_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         openimage_res = s.getImageResource(openimage);
         return;
       }
       closedimage_res = s.getImageResource(closedimage_tf.getText());
-      if(!closedimage_tf.getText().equals("none")&&closedimage_res==null) {
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", closedimage_tf.getText()),Language.get("ERROR_BITMAP_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      if(!closedimage_tf.getText().equals("none") && closedimage_res == null) {
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_BITMAP_NEXIST").replaceAll("%i", closedimage_tf.getText()), Language.get("ERROR_BITMAP_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         closedimage_res = s.getImageResource(closedimage);
         return;
       }
-      if(!font_tf.getText().equals("defaultfont")&&s.getResource(font_tf.getText())==null) {        
-        JOptionPane.showMessageDialog(frame,Language.get("ERROR_FONT_NEXIST").replaceAll("%i", font_tf.getText()),Language.get("ERROR_FONT_NEXIST_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+      if(!font_tf.getText().equals("defaultfont") && s.getResource(font_tf.getText()) == null) {
+        JOptionPane.showMessageDialog(frame, Language.get("ERROR_FONT_NEXIST").replaceAll("%i", font_tf.getText()), Language.get("ERROR_FONT_NEXIST_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         return;
       }
       update();
       frame.setVisible(false);
       frame.dispose();
       frame = null;
-    }
-    else if (e.getSource().equals(bgcolor1_btn)) {
-      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(bgcolor1_tf.getText()));
-      if (color != null) {
+    } else if(e.getSource().equals(bgcolor1_btn)) {
+      Color color = JColorChooser.showDialog(frame, Language.get("WIN_PLAYTREE_CHOOSER_TITLE"), Color.decode(bgcolor1_tf.getText()));
+      if(color != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color.getRed() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getRed()).toUpperCase();
+        if(color.getGreen() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getGreen()).toUpperCase();
+        if(color.getBlue() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getBlue()).toUpperCase();
         bgcolor1_tf.setText(hex);
       }
-    }
-    else if (e.getSource().equals(bgcolor2_btn)) {
-      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(bgcolor2_tf.getText()));
-      if (color != null) {
+    } else if(e.getSource().equals(bgcolor2_btn)) {
+      Color color = JColorChooser.showDialog(frame, Language.get("WIN_PLAYTREE_CHOOSER_TITLE"), Color.decode(bgcolor2_tf.getText()));
+      if(color != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color.getRed() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getRed()).toUpperCase();
+        if(color.getGreen() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getGreen()).toUpperCase();
+        if(color.getBlue() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getBlue()).toUpperCase();
         bgcolor2_tf.setText(hex);
       }
-    }
-    else if (e.getSource().equals(fgcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(fgcolor_tf.getText()));
-      if (color != null) {
+    } else if(e.getSource().equals(fgcolor_btn)) {
+      Color color = JColorChooser.showDialog(frame, Language.get("WIN_PLAYTREE_CHOOSER_TITLE"), Color.decode(fgcolor_tf.getText()));
+      if(color != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color.getRed() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getRed()).toUpperCase();
+        if(color.getGreen() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getGreen()).toUpperCase();
+        if(color.getBlue() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getBlue()).toUpperCase();
         fgcolor_tf.setText(hex);
       }
-    }
-    else if (e.getSource().equals(selcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(selcolor_tf.getText()));
-      if (color != null) {
+    } else if(e.getSource().equals(selcolor_btn)) {
+      Color color = JColorChooser.showDialog(frame, Language.get("WIN_PLAYTREE_CHOOSER_TITLE"), Color.decode(selcolor_tf.getText()));
+      if(color != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color.getRed() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getRed()).toUpperCase();
+        if(color.getGreen() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getGreen()).toUpperCase();
+        if(color.getBlue() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getBlue()).toUpperCase();
         selcolor_tf.setText(hex);
       }
-    }
-    else if (e.getSource().equals(playcolor_btn)) {
-      Color color = JColorChooser.showDialog(frame,Language.get("WIN_PLAYTREE_CHOOSER_TITLE"),Color.decode(playcolor_tf.getText()));
-      if (color != null) {
+    } else if(e.getSource().equals(playcolor_btn)) {
+      Color color = JColorChooser.showDialog(frame, Language.get("WIN_PLAYTREE_CHOOSER_TITLE"), Color.decode(playcolor_tf.getText()));
+      if(color != null) {
         String hex = "#";
-        if(color.getRed()<16) hex+="0";
-        hex+=Integer.toHexString(color.getRed()).toUpperCase();
-        if(color.getGreen()<16) hex+="0";
-        hex+=Integer.toHexString(color.getGreen()).toUpperCase();
-        if(color.getBlue()<16) hex+="0";
-        hex+=Integer.toHexString(color.getBlue()).toUpperCase();
+        if(color.getRed() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getRed()).toUpperCase();
+        if(color.getGreen() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getGreen()).toUpperCase();
+        if(color.getBlue() < 16) {
+          hex += "0";
+        }
+        hex += Integer.toHexString(color.getBlue()).toUpperCase();
         playcolor_tf.setText(hex);
       }
-    }
-    else if(e.getSource().equals(slider_btn)){
+    } else if(e.getSource().equals(slider_btn)) {
       //frame.setEnabled(false);
       slider.showOptions();
-    }
-    else if(e.getSource().equals(help_btn)) {
+    } else if(e.getSource().equals(help_btn)) {
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/i-playtree.html");
-    }
-    else if(e.getSource().equals(visible_btn)) {
+    } else if(e.getSource().equals(visible_btn)) {
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/boolexpr.html");
-    }
-    else if(e.getSource().equals(cancel_btn)) {
+    } else if(e.getSource().equals(cancel_btn)) {
       if(!created) {
         java.util.List<Item> l = s.getParentListOf(id);
-        if(l!=null) l.remove(this);
+        if(l != null) {
+          l.remove(this);
+        }
       }
       frame.setVisible(false);
       frame.dispose();
       frame = null;
     }
   }
+
   @Override
   public String returnCode(String indent) {
-    String code = indent+"<Playtree";
-    if (!id.equals(ID_DEFAULT)) code+=" id=\""+id+"\"";
-    code+=" font=\""+font+"\"";
-    if(!bgcolor1.equals(BGCOLOR1_DEFAULT)) code+=" bgcolor1=\""+bgcolor1+"\"";
-    if(!bgcolor2.equals(BGCOLOR2_DEFAULT)) code+=" bgcolor2=\""+bgcolor2+"\"";
-    if(!fgcolor.equals(FGCOLOR_DEFAULT)) code+=" fgcolor=\""+fgcolor+"\"";
-    if(!selcolor.equals(SELCOLOR_DEFAULT)) code+=" selcolor=\""+selcolor+"\"";
-    if(!playcolor.equals(PLAYCOLOR_DEFAULT)) code+=" playcolor=\""+playcolor+"\"";
-    if(!bgimage.equals(BGIMAGE_DEFAULT)) code+=" bgimage=\""+bgimage+"\"";
-    if(!itemimage.equals(ITEMIMAGE_DEFAULT)) code+=" itemimage=\""+itemimage+"\"";
-    if(!openimage.equals(OPENIMAGE_DEFAULT)) code+=" openimage=\""+openimage+"\"";
-    if(!closedimage.equals(CLOSEDIMAGE_DEFAULT)) code+=" closedimage=\""+closedimage+"\"";
-    if(!var.equals(VAR_DEFAULT)) code+=" var=\""+var+"\"";
-    if(flat!=FLAT_DEFAULT) code+=" flat=\""+String.valueOf(flat)+"\"";
-    if (x!=X_DEFAULT) code+=" x=\""+String.valueOf(x)+"\"";
-    if (y!=Y_DEFAULT) code+=" y=\""+String.valueOf(y)+"\"";
-    if (width!=WIDTH_DEFAULT) code+=" width=\""+String.valueOf(width)+"\"";
-    if (height!=HEIGHT_DEFAULT) code+=" height=\""+String.valueOf(height)+"\"";
-    if (!lefttop.equals(LEFTTOP_DEFAULT)) code+=" lefttop=\""+lefttop+"\"";
-    if (!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) code+=" rightbottom=\""+rightbottom+"\"";
-    if (xkeepratio!=XKEEPRATIO_DEFAULT) code+=" xkeepratio=\""+String.valueOf(xkeepratio)+"\"";
-    if (ykeepratio!=YKEEPRATIO_DEFAULT) code+=" ykeepratio=\""+String.valueOf(ykeepratio)+"\"";
-    if (!help.equals(HELP_DEFAULT)) code+=" help=\""+help+"\"";
-    if (!visible.equals(VISIBLE_DEFAULT)) code+=" visible=\""+visible+"\"";    
-    code+=">\n";    
-    code+=slider.returnCode(indent+Skin.indentation);
-    code+="\n"+indent+"</Playtree>";
+    String code = indent + "<Playtree";
+    if(!id.equals(ID_DEFAULT)) {
+      code += " id=\"" + id + "\"";
+    }
+    code += " font=\"" + font + "\"";
+    if(!bgcolor1.equals(BGCOLOR1_DEFAULT)) {
+      code += " bgcolor1=\"" + bgcolor1 + "\"";
+    }
+    if(!bgcolor2.equals(BGCOLOR2_DEFAULT)) {
+      code += " bgcolor2=\"" + bgcolor2 + "\"";
+    }
+    if(!fgcolor.equals(FGCOLOR_DEFAULT)) {
+      code += " fgcolor=\"" + fgcolor + "\"";
+    }
+    if(!selcolor.equals(SELCOLOR_DEFAULT)) {
+      code += " selcolor=\"" + selcolor + "\"";
+    }
+    if(!playcolor.equals(PLAYCOLOR_DEFAULT)) {
+      code += " playcolor=\"" + playcolor + "\"";
+    }
+    if(!bgimage.equals(BGIMAGE_DEFAULT)) {
+      code += " bgimage=\"" + bgimage + "\"";
+    }
+    if(!itemimage.equals(ITEMIMAGE_DEFAULT)) {
+      code += " itemimage=\"" + itemimage + "\"";
+    }
+    if(!openimage.equals(OPENIMAGE_DEFAULT)) {
+      code += " openimage=\"" + openimage + "\"";
+    }
+    if(!closedimage.equals(CLOSEDIMAGE_DEFAULT)) {
+      code += " closedimage=\"" + closedimage + "\"";
+    }
+    if(!var.equals(VAR_DEFAULT)) {
+      code += " var=\"" + var + "\"";
+    }
+    if(flat != FLAT_DEFAULT) {
+      code += " flat=\"" + String.valueOf(flat) + "\"";
+    }
+    if(x != X_DEFAULT) {
+      code += " x=\"" + String.valueOf(x) + "\"";
+    }
+    if(y != Y_DEFAULT) {
+      code += " y=\"" + String.valueOf(y) + "\"";
+    }
+    if(width != WIDTH_DEFAULT) {
+      code += " width=\"" + String.valueOf(width) + "\"";
+    }
+    if(height != HEIGHT_DEFAULT) {
+      code += " height=\"" + String.valueOf(height) + "\"";
+    }
+    if(!lefttop.equals(LEFTTOP_DEFAULT)) {
+      code += " lefttop=\"" + lefttop + "\"";
+    }
+    if(!rightbottom.equals(RIGHTBOTTOM_DEFAULT)) {
+      code += " rightbottom=\"" + rightbottom + "\"";
+    }
+    if(xkeepratio != XKEEPRATIO_DEFAULT) {
+      code += " xkeepratio=\"" + String.valueOf(xkeepratio) + "\"";
+    }
+    if(ykeepratio != YKEEPRATIO_DEFAULT) {
+      code += " ykeepratio=\"" + String.valueOf(ykeepratio) + "\"";
+    }
+    if(!help.equals(HELP_DEFAULT)) {
+      code += " help=\"" + help + "\"";
+    }
+    if(!visible.equals(VISIBLE_DEFAULT)) {
+      code += " visible=\"" + visible + "\"";
+    }
+    code += ">\n";
+    code += slider.returnCode(indent + Skin.indentation);
+    code += "\n" + indent + "</Playtree>";
     return code;
   }
+
   @Override
   public void draw(Graphics2D g, int z) {
-    draw(g,0,0,z);
+    draw(g, 0, 0, z);
   }
+
   @Override
   public void draw(Graphics2D g_, int x_, int y_, int z) {
-    if(width<=0||height<=0) return;
+    if(width <= 0 || height <= 0) {
+      return;
+    }
     BufferedImage buffi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-    Graphics2D g = (Graphics2D)(buffi.getGraphics());
-    g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-    if(!created) return;
+    Graphics2D g = (Graphics2D) (buffi.getGraphics());
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    if(!created) {
+      return;
+    }
     if(vis) {
       Font f = s.getFont(font);
       g.setFont(f);
       FontMetrics fm = g.getFontMetrics();
       if(!bgimage.equals("none")) {
-        g.drawImage(bgimage_res.image.getSubimage(0, 0, width, height),0,0,null);
-      }
-      else {
+        g.drawImage(bgimage_res.image.getSubimage(0, 0, width, height), 0, 0, null);
+      } else {
         g.setColor(Color.decode(bgcolor1));
-        g.fillRect(0,0,width,height);
-        for(int i=fm.getHeight();i<height;i=i+fm.getHeight()*2) {
+        g.fillRect(0, 0, width, height);
+        for(int i = fm.getHeight(); i < height; i = i + fm.getHeight() * 2) {
           g.setColor(Color.decode(bgcolor2));
-          g.fillRect(x,0+i,width,fm.getHeight());
+          g.fillRect(x, 0 + i, width, fm.getHeight());
         }
       }
       int liney = 0;
       BufferedImage cfi = null;
-      if(closedimage_res!=null) cfi = closedimage_res.image;
+      if(closedimage_res != null) {
+        cfi = closedimage_res.image;
+      }
       BufferedImage ofi = null;
-      if(openimage_res!=null) ofi = openimage_res.image;
+      if(openimage_res != null) {
+        ofi = openimage_res.image;
+      }
       BufferedImage iti = null;
-      if(itemimage_res!=null) iti = itemimage_res.image;
+      if(itemimage_res != null) {
+        iti = itemimage_res.image;
+      }
       int lineheight = fm.getHeight();
-      int cfi_offset=0,ofi_offset=0,iti_offset=0;
-      if(cfi!=null) {
-        if(cfi.getHeight()>lineheight) lineheight=cfi.getHeight();
-         cfi_offset = (lineheight-cfi.getHeight())/2;
+      int cfi_offset = 0, ofi_offset = 0, iti_offset = 0;
+      if(cfi != null) {
+        if(cfi.getHeight() > lineheight) {
+          lineheight = cfi.getHeight();
+        }
+        cfi_offset = (lineheight - cfi.getHeight()) / 2;
       }
-      if(ofi!=null) {
-        if(ofi.getHeight()>lineheight) lineheight=ofi.getHeight();
-        ofi_offset = (lineheight-ofi.getHeight())/2;
+      if(ofi != null) {
+        if(ofi.getHeight() > lineheight) {
+          lineheight = ofi.getHeight();
+        }
+        ofi_offset = (lineheight - ofi.getHeight()) / 2;
       }
-      if(iti!=null) {
-        if(iti.getHeight()>lineheight) lineheight=iti.getHeight();
-        iti_offset = (lineheight-iti.getHeight())/2;
+      if(iti != null) {
+        if(iti.getHeight() > lineheight) {
+          lineheight = iti.getHeight();
+        }
+        iti_offset = (lineheight - iti.getHeight()) / 2;
       }
-      int text_offset = (lineheight-fm.getAscent())/2;
+      int text_offset = (lineheight - fm.getAscent()) / 2;
 
       g.setColor(Color.decode(fgcolor));
-      if(cfi!=null && !flat) {
-        g.drawImage(cfi,0,liney+cfi_offset,null);
-        liney+=lineheight;
-        g.drawString("Closed folder",0+cfi.getWidth()+2,liney-text_offset);
+      if(cfi != null && !flat) {
+        g.drawImage(cfi, 0, liney + cfi_offset, null);
+        liney += lineheight;
+        g.drawString("Closed folder", 0 + cfi.getWidth() + 2, liney - text_offset);
       }
-      if(ofi!=null && !flat) {
-        g.drawImage(ofi,0,liney+ofi_offset,null);
-        liney+=lineheight;
-        g.drawString("Open folder",0+ofi.getWidth()+2,liney-text_offset);
+      if(ofi != null && !flat) {
+        g.drawImage(ofi, 0, liney + ofi_offset, null);
+        liney += lineheight;
+        g.drawString("Open folder", 0 + ofi.getWidth() + 2, liney - text_offset);
       }
-      if(ofi!=null && iti!=null && !flat) {
-        g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
-        liney+=lineheight;
-        g.drawString("Normal item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
-      }
-      else if(iti!=null) {
-        g.drawImage(iti,0,liney+iti_offset,null);
-        liney+=fm.getHeight();
-        g.drawString("Normal item",0+iti.getWidth()+4,liney-text_offset);
-      }
-      else {
-        liney+=fm.getHeight();
-        g.drawString("Normal item",0,liney-text_offset);
+      if(ofi != null && iti != null && !flat) {
+        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+        liney += lineheight;
+        g.drawString("Normal item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+      } else if(iti != null) {
+        g.drawImage(iti, 0, liney + iti_offset, null);
+        liney += fm.getHeight();
+        g.drawString("Normal item", 0 + iti.getWidth() + 4, liney - text_offset);
+      } else {
+        liney += fm.getHeight();
+        g.drawString("Normal item", 0, liney - text_offset);
       }
       g.setColor(Color.decode(playcolor));
-      if(ofi!=null && iti!=null && !flat) {
-        g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
-        liney+=lineheight;
-        g.drawString("Playing item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
-      }
-      else if(iti!=null) {
-        g.drawImage(iti,0,liney+iti_offset,null);
-        liney+=lineheight;
-        g.drawString("Playing item",0+iti.getWidth()+2,liney-text_offset);
-      }
-      else {
-        liney+=lineheight;
-        g.drawString("Playing item",0,liney-text_offset);
+      if(ofi != null && iti != null && !flat) {
+        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+        liney += lineheight;
+        g.drawString("Playing item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+      } else if(iti != null) {
+        g.drawImage(iti, 0, liney + iti_offset, null);
+        liney += lineheight;
+        g.drawString("Playing item", 0 + iti.getWidth() + 2, liney - text_offset);
+      } else {
+        liney += lineheight;
+        g.drawString("Playing item", 0, liney - text_offset);
       }
       g.setColor(Color.decode(selcolor));
-      g.fillRect(0,liney,width,lineheight);
+      g.fillRect(0, liney, width, lineheight);
       g.setColor(Color.decode(fgcolor));
-      if(ofi!=null && iti!=null && !flat) {
-        g.drawImage(iti,0+ofi.getWidth()+2,liney+iti_offset,null);
-        liney+=lineheight;
-        g.drawString("Selected item",0+ofi.getWidth()+iti.getWidth()+4,liney-text_offset);
-      }
-      else if(iti!=null) {
-        g.drawImage(iti,0,liney+iti_offset,null);
-        liney+=lineheight;
-        g.drawString("Selected item",0+iti.getWidth()+2,liney-text_offset);
-      }
-      else {
-        liney+=lineheight;
-        g.drawString("Selected item",0,liney-text_offset);
+      if(ofi != null && iti != null && !flat) {
+        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+        liney += lineheight;
+        g.drawString("Selected item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+      } else if(iti != null) {
+        g.drawImage(iti, 0, liney + iti_offset, null);
+        liney += lineheight;
+        g.drawString("Selected item", 0 + iti.getWidth() + 2, liney - text_offset);
+      } else {
+        liney += lineheight;
+        g.drawString("Selected item", 0, liney - text_offset);
       }
 
-      g_.drawImage(buffi, (x+x_)*z, (y+y_)*z, width*z, height*z, null);
-      slider.draw(g_,x_,y_,z);
+      g_.drawImage(buffi, (x + x_) * z, (y + y_) * z, width * z, height * z, null);
+      slider.draw(g_, x_, y_, z);
     }
     if(selected) {
       g_.setColor(Color.RED);
-      g_.drawRect((x+x_)*z,(y+y_)*z,width*z-1,height*z-1);
-      
+      g_.drawRect((x + x_) * z, (y + y_) * z, width * z - 1, height * z - 1);
+
     }
   }
+
   @Override
-  public boolean contains (int x_, int y_) {
-    return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+height+offsety);
+  public boolean contains(int x_, int y_) {
+    return (x_ >= x + offsetx && x_ <= x + width + offsetx && y_ >= y + offsety && y_ <= y + height + offsety);
   }
+
   @Override
   public DefaultMutableTreeNode getTreeNode() {
-    DefaultMutableTreeNode node = new DefaultMutableTreeNode("Playtree: "+id); 
+    DefaultMutableTreeNode node = new DefaultMutableTreeNode("Playtree: " + id);
     node.add(slider.getTreeNode());
     return node;
   }
+
   @Override
   public Item getItem(String id_) {
-    if(id.equals(id_)) return this;
-    else return slider.getItem(id_);
+    if(id.equals(id_)) {
+      return this;
+    } else {
+      return slider.getItem(id_);
+    }
   }
+
   @Override
   public Item getParentOf(String id_) {
-   if(slider!=null) {
-     if(slider.id.equals(id_)) return this;
-     else return slider.getParentOf(id_);
-   }
-   else return null;
+    if(slider != null) {
+      if(slider.id.equals(id_)) {
+        return this;
+      } else {
+        return slider.getParentOf(id_);
+      }
+    } else {
+      return null;
+    }
   }
+
   @Override
-  public boolean uses(String id_) {    
-    return (((slider!=null)?slider.uses(id_):false)||bgimage.equals(id_)||openimage.equals(id_)||closedimage.equals(id_)||itemimage.equals(id_)||font.equals(id_));
+  public boolean uses(String id_) {
+    return (((slider != null) ? slider.uses(id_) : false) || bgimage.equals(id_) || openimage.equals(id_) || closedimage.equals(id_) || itemimage.equals(id_) || font.equals(id_));
   }
-  @Override  
-  public void renameForCopy(String p) {    
+
+  @Override
+  public void renameForCopy(String p) {
     String p_ = p;
     super.renameForCopy(p);
     slider.renameForCopy(p_);
   }
+
   @Override
   public void updateToGlobalVariables() {
     super.updateToGlobalVariables();
-    if(slider!=null) slider.updateToGlobalVariables();
+    if(slider != null) {
+      slider.updateToGlobalVariables();
+    }
+  }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(slider!=null) slider.resourceRenamed(oldid, newid);
+    if(bgimage.equals(oldid)) bgimage = newid;
+    if(openimage.equals(oldid)) openimage = newid;
+    if(closedimage.equals(oldid)) closedimage = newid;
+    if(itemimage.equals(oldid)) itemimage = newid;
+    if(font.equals(oldid)) font = newid;
   }
 
 }

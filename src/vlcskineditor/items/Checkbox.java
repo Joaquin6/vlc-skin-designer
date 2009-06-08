@@ -773,4 +773,15 @@ public class Checkbox extends Item implements ActionListener{
     vis = s.gvars.parseBoolean(visible);
     state_bool = s.gvars.parseBoolean(state);
   }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(up1.equals(oldid)) up1 = newid;
+    if(over1.equals(oldid)) over1 = newid;
+    if(down1.equals(oldid)) down1 = newid;
+    if(up2.equals(oldid)) up2 = newid;
+    if(over2.equals(oldid)) over2 = newid;
+    if(down2.equals(oldid)) down2 = newid;
+  }
+
 }

@@ -813,4 +813,13 @@ public class Slider extends Item implements ActionListener{
   public boolean isInPlaytree() {
     return inPlaytree;
   }
+
+  @Override
+  public void resourceRenamed(String oldid, String newid) {
+    if(sbg!=null) sbg.resourceRenamed(oldid, newid);
+    if(up.equals(oldid)) up = newid;
+    if(over.equals(oldid)) over = newid;
+    if(down.equals(oldid)) down = newid;
+  }
+
 }

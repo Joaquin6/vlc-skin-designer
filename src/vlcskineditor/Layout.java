@@ -543,6 +543,15 @@ public class Layout implements ActionListener{
     }
     return false;
   }
+
+  /**
+   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
+   * @param oldid The former ID of the renamed resource
+   * @param newid The new ID of the renamed resource
+   */
+  public void resourceRenamed(String oldid, String newid) {
+    for(Item i:items) i.resourceRenamed(oldid, newid);
+  }
   /**
    * Renames the Layout and all its content after the copy process
    * @param p The renaming pattern, %oldid% will be replaced by the Layout's/Item's old ID

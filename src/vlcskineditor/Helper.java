@@ -89,6 +89,8 @@ public class Helper {
   
   /**
    * Taken from http://www.rgagnon.com/javadetails/java-0064.html
+   * Licensed under Creative Commons BY-NC-SA 2.5
+   * @author Real Gagnon
    * @param in Source File
    * @param out Destination File
    * @throws java.io.IOException

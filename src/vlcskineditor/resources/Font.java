@@ -152,14 +152,18 @@ public class Font extends Resource implements ActionListener{
   }
   @Override
   public void update() {
-    FontEditEvent fe = new FontEditEvent(this);
+    FontEditEvent fee = new FontEditEvent(this);
     file=file_tf.getText();
     size=Integer.parseInt(size_tf.getText());        
-    id=id_tf.getText();
-    s.updateResources();
-    s.expandResource(id);    
-    fe.setNew();
-    s.m.hist.addEvent(fe);
+    if(!id.equals(id_tf.getText())) {
+      String oldid = id;
+      id=id_tf.getText();
+      s.resourceRenamed(oldid, id);
+      s.updateResources();
+      s.expandResource(id);
+    }
+    fee.setNew();
+    s.m.hist.addEvent(fee);
   }
   @Override
   public void showOptions() {
