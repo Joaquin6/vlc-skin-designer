@@ -106,7 +106,7 @@ public class Slider extends Item implements ActionListener{
     NodeList nodes = n.getChildNodes();
     for(int i=0;i<nodes.getLength();i++) {
       if(nodes.item(i).getNodeName().equals("SliderBackground"))
-        sbg = new SliderBackground(nodes.item(i),s);
+        sbg = new SliderBackground(nodes.item(i),s,this);
     }
 
     up_res = s.getImageResource(up);

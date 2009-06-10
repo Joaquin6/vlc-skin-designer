@@ -47,13 +47,13 @@ public class SliderBackground extends Item implements ActionListener {
   public int nbvert = NBVERT_DEFAULT;
   public int padhoriz = PADHORIZ_DEFAULT;
   public int padvert = PADVERT_DEFAULT;
-  JFrame frame;
+  private JFrame frame;
   public JTextField id_tf,  image_tf,  nbhoriz_tf,  nbvert_tf,  padhoriz_tf,  padvert_tf;
-  JButton gen_btn, ok_btn, cancel_btn, help_btn;
-  ImageResource image_res;
-  BufferedImage bi = null;
-  String bitmap_str = "";
-  Slider sl;
+  private JButton gen_btn, ok_btn, cancel_btn, help_btn;
+  private ImageResource image_res;
+  private BufferedImage bi = null;
+  private String bitmap_str = "";
+  private Slider parent;
   private float sliderVal = 0.5f;
 
 
@@ -65,9 +65,11 @@ public class SliderBackground extends Item implements ActionListener {
    * Parses a SliderBackground from a XML node
    * @param n The XML node
    * @param s_ The parent skin
+   * @param pr The parent slider
    */
-  public SliderBackground(Node n, Skin s_) {
+  public SliderBackground(Node n, Skin s_, Slider pr) {
     s = s_;
+    parent = pr;
 
     id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId())));
 
@@ -112,7 +114,7 @@ public class SliderBackground extends Item implements ActionListener {
 
   public SliderBackground(Skin s_, Slider sl_) {
     s = s_;
-    sl = sl_;
+    parent = sl_;
     image = "none";
     id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
     showOptions();
@@ -346,7 +348,7 @@ public class SliderBackground extends Item implements ActionListener {
       frame.dispose();
       frame = null;
       if(!created) {
-        sl.removeBG();
+        parent.removeBG();
       }
     }
   }
@@ -433,4 +435,7 @@ public class SliderBackground extends Item implements ActionListener {
     if(image.equals(oldid)) image = newid;
   }
 
+  public Slider getParentSlider() {
+    return parent;
+  }
 }

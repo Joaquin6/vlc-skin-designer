@@ -1570,8 +1570,18 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
 
   private void deleteSelectedItem() {
     if(getSelectedItem()!=null) {
-      if(s.getItem(getSelectedItem()).getClass().equals(SliderBackground.class)) {
-        /* TODO */
+      Item i = s.getItem(getSelectedItem());
+      if(i.getClass().equals(SliderBackground.class)) {
+        Object[] options= {Language.get("CHOICE_YES"),Language.get("CHOICE_NO")};
+          int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n",getSelectedItem()),Language.get("DEL_CONFIRM_TITLE"),
+                                       JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+        if(n==0) {
+          SliderBackground sbg = (SliderBackground)i;
+          Slider parentSlider = sbg.getParentSlider();
+          //TODO make undoable
+          parentSlider.removeBG();
+          s.updateItems();
+        }
       } else {
         java.util.List<Item> p = s.getParentListOf(getSelectedItem());
         if(p!=null) {
@@ -1579,7 +1589,6 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
           int n = JOptionPane.showOptionDialog(this,Language.get("DEL_CONFIRM_MSG").replaceAll("%n",getSelectedItem()),Language.get("DEL_CONFIRM_TITLE"),
                                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
           if(n==0) {
-            Item i = s.getItem(getSelectedItem());
             ItemDeletionEvent ide = new ItemDeletionEvent(p,i,p.indexOf(i),s);
             p.remove(s.getItem(getSelectedItem()));
             s.updateItems();

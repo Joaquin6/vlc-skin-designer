@@ -149,9 +149,6 @@ public class SliderBGGen extends JFrame implements ActionListener{
     card_step1.add(btt_l);
     btt_l.setBounds(280,105,100,100);
     
-    btt_rb.setEnabled(false);
-    btt_l.setEnabled(false);
-    
     ButtonGroup dir_bg = new ButtonGroup();
     dir_bg.add(ltr_rb);
     ltr_rb.addActionListener(this);
@@ -421,8 +418,14 @@ public class SliderBGGen extends JFrame implements ActionListener{
           Bitmap b = new Bitmap(s, f);
           s.resources.add(b);
           sbg.image_tf.setText(b.id);
-          sbg.nbvert_tf.setText(String.valueOf(sbgb.nbframes));
-          sbg.nbhoriz_tf.setText("1");
+          if (sbgb.horizontal) {
+            sbg.nbvert_tf.setText(String.valueOf(sbgb.nbframes));
+            sbg.nbhoriz_tf.setText("1");
+          }
+          else {
+            sbg.nbvert_tf.setText("1");
+            sbg.nbhoriz_tf.setText(String.valueOf(sbgb.nbframes));
+          }
           sbg.padhoriz_tf.setText("0");
           sbg.padvert_tf.setText("0");          
           setVisible(false);
