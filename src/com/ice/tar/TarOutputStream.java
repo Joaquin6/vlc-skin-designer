@@ -92,9 +92,9 @@ extends		FilterOutputStream
 	 * @param debugF True to turn on debugging.
 	 */
 	public void
-	setBufferDebug( boolean debug )
+	setBufferDebug( boolean debugF )
 		{
-		this.buffer.setDebug( debug );
+		this.buffer.setDebug( debugF );
 		}
 
 	/**
@@ -242,7 +242,6 @@ extends		FilterOutputStream
 	 * This method simply calls read( byte[], int, int ).
 	 *
 	 * @param wBuf The buffer to write to the archive.
-	 * @return The number of bytes read, or -1 at EOF.
 	 */
 	public void
 	write( byte[] wBuf )

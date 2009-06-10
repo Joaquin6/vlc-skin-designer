@@ -515,8 +515,7 @@ implements	Cloneable
 
 	/**
 	 * Set this entry's modification time.
-	 *
-	 * @param time This entry's new modification time.
+	 * @return The entry's modification time
 	 */
 	public Date
 	getModTime()
@@ -796,7 +795,7 @@ implements	Cloneable
 	 * Old unix-style code contributed by David Mehringer <dmehring@astro.uiuc.edu>.
 	 *
 	 * @param hdr The TarHeader to fill in from the buffer information.
-	 * @param header The tar entry header buffer to get information from.
+	 * @param headerBuf The tar entry header buffer to get information from.
 	 */
 	public void
 	parseTarHeader( TarHeader hdr, byte[] headerBuf )

@@ -122,11 +122,11 @@ public class Slider extends Item implements ActionListener{
    * Parses a slider contained in a Playtree from a XML node
    * @param n The XML node
    * @param s_ The parent skin
-   * @param inPt The boolean value indicating whether the slider is inside a playtree or not
+   * @param isInPlaytree The boolean value indicating whether the slider is inside a playtree or not
    */
-  public Slider(Node n, Skin s_, boolean iPt) {
+  public Slider(Node n, Skin s_, boolean isInPlaytree) {
     this(n, s_);
-    inPlaytree = iPt;
+    inPlaytree = isInPlaytree;
   }
 
    /** Creates a new instance of Slider

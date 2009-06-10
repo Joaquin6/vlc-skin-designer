@@ -49,7 +49,7 @@ implements	Enumeration
 	 * exists then the constructor should be made <B>protected</B> and an empty
 	 * subclass should be written in the other package.
 	 *
-	 * @param <B>tis</B> the <B>TarInputStream</B> on which this enumeration has
+	 * @param tis the <B>TarInputStream</B> on which this enumeration has
 	 *  to be based.
 	 */
 	public

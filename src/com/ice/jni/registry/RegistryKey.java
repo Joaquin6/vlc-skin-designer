@@ -227,12 +227,12 @@ RegistryKey
 	/**
 	 * Open a Registry subkey of this key with the specified access.
 	 *
-	 * @param subkey The name of the subkey to open.
+	 * @param subKey The name of the subkey to open.
 	 * @param access The access level for the open.
 	 * @return The newly opened RegistryKey.
 	 *
-     * @exception  NoSuchKeyException  If the subkey does not exist.
-     * @exception  RegistryException  Any other registry API error.
+   * @exception  NoSuchKeyException  If the subkey does not exist.
+   * @exception  RegistryException  Any other registry API error.
 	 */
 
 	public native RegistryKey
@@ -518,7 +518,7 @@ RegistryKey
 	 * of System environment variables that are referenced via the
 	 * %variable% construct. This method invokes EnvExpandStrings().
 	 *
-	 * @param valueName The name of the value to increment.
+	 * @param exString The name of the value to increment.
 	 */
 
 	public static native String

@@ -643,7 +643,7 @@ TarArchive extends Object
 	 * and then, if the recurse flag is true, process each entry that is a
 	 * child of the directory.
 	 *
-	 * @param entry The TarEntry representing the entry to write to the archive.
+	 * @param oldEntry The TarEntry representing the entry to write to the archive.
 	 * @param recurse If true, process the children of directory entries.
 	 */
 

@@ -95,9 +95,8 @@ extends		FilterInputStream
 		}
 
 	/**
-	 * Sets the debugging flag.
-	 *
-	 * @param debugF True to turn on debugging.
+	 * Sets the entry factory
+   * @param factory The new entry factory
 	 */
 	public void
 	setEntryFactory( EntryFactory factory )
@@ -111,9 +110,9 @@ extends		FilterInputStream
 	 * @param debugF True to turn on debugging.
 	 */
 	public void
-	setBufferDebug( boolean debug )
+	setBufferDebug( boolean debugF )
 		{
-		this.buffer.setDebug( debug );
+		this.buffer.setDebug( debugF );
 		}
 
 	/**
@@ -223,7 +222,7 @@ extends		FilterInputStream
 	 * This method returns the number of bytes that have been read
 	 * from the current TarEntry's data.
 	 *
-	 * @returns The current entry offset.
+	 * @return The current entry offset.
 	 */
 
 	public long
@@ -238,7 +237,7 @@ extends		FilterInputStream
 	 * so it represents the actual position in input stream, as
 	 * opposed to the place where the tar archive parsing is.
 	 *
-	 * @returns The current file pointer.
+	 * @return The current file pointer.
 	 */
 
 	public long

@@ -187,8 +187,6 @@ Registry
 	 *
 	 * @param keyName The name of the top level key.
 	 * @return The top level RegistryKey, or null if unknown keyName.
-	 *
-	 * @see topLevelKeys
 	 */
 
 	public static RegistryKey
