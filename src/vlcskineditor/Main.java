@@ -45,10 +45,12 @@ import vlcskineditor.resources.SubBitmap;
  * The main class holds the GUI
  * @author Daniel
  */
-public class Main extends javax.swing.JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
+public class Main extends JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
 
+  /** Require for all JFrames, as they are serializable */
   private static final long serialVersionUID = 801;
 
+  /** The URL where to check for updates */
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   /** The version identification of the current build. */
@@ -58,35 +60,52 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
   /** The directory from which VLC loads its skins */
   private String vlc_skins_dir = "";
 
+  /** The menu bar */
   private JMenuBar mbar;
+  /** The menus */
   private JMenu m_file, m_edit, m_help;
+  /** The file menu's entries */
   private JMenuItem m_file_new, m_file_open, m_file_save, m_file_test, m_file_vlt, m_file_png, m_file_quit;
+  /** The edit menu's entries */
   private JMenuItem m_edit_undo, m_edit_redo, m_edit_theme, m_edit_vars, m_edit_prefs, m_edit_up, m_edit_down, m_edit_right, m_edit_left, m_edit_del;
+  /** The help menu's entries */
   private JMenuItem m_help_doc, m_help_about;
 
+  /** The toolbar */
   private JPanel tbar;
+  /** The toolbar buttons */
   private JButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn;
 
+  /** The desktop pane holding the resources, windows/layouts and items windows */
   private JDesktopPane jdesk;
+  /** The resources, windows/layouts and items windows */
   private JInternalFrame resources,windows,items;
   /** The trees containing the resources/windows/items hierarchy */
   protected JTree res_tree,win_tree,items_tree;
   /** The tree models of the trees containing the resources/windows/items hierarchy */
   protected DefaultTreeModel res_tree_model, win_tree_model, items_tree_model;
+  /** The tree renderer for the resources/window/items trees, responsible for showing the proper icon for each elements. */
   private DefaultTreeCellRenderer tree_renderer = new TreeRenderer();
+  /** Buttons in the resources window */
   private JButton res_add_bitmap, res_add_font, res_duplicate, res_edit, res_del;
+  /** Popup menu that is shown when the "add bitmap" button is clicked */
   private JPopupMenu res_add_bitmap_pu;
+  /** Elements of the "add bitmap" popup menu */
   private JMenuItem res_add_bitmap_pu_b, res_add_bitmap_pu_s;
+  /** Buttons in the windows/layouts window */
   private JButton win_add_window, win_add_layout, win_layout_up, win_layout_down, win_duplicate, win_edit, win_del;
+  /** Buttons in the items window */
   private JButton items_add, items_up, items_down, items_duplicate, items_edit, items_del;
-  private JPopupMenu items_add_pu;
+  /** The popup menu that is shown when the "add item" button is clicked */
+  private JPopupMenu items_add_pu;  
+  private JMenuItem items_add_pu_anchor, items_add_pu_button, items_add_pu_checkbox;
+  private JMenuItem items_add_pu_image, items_add_pu_panel;
+  private JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;
+  /** The submenu for adding items to an existing panel */
   private JMenu items_add_pu_tp;
   private JMenuItem items_add_pu_tp_anchor, items_add_pu_tp_button, items_add_pu_tp_checkbox;
   private JMenuItem items_add_pu_tp_image, items_add_pu_tp_panel;
   private JMenuItem items_add_pu_tp_playtree, items_add_pu_tp_slider, items_add_pu_tp_text, items_add_pu_tp_video;
-  private JMenuItem items_add_pu_anchor, items_add_pu_button, items_add_pu_checkbox;
-  private JMenuItem items_add_pu_image, items_add_pu_panel;
-  private JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;
 
   /** The currently opened skin */
   public Skin s;
@@ -120,7 +139,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
   /** IDs of selected objects */
   private String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
-  
+
+  /** The file chosing dialogs */
   private JFileChooser base_fc, bitmap_adder, font_adder, vlt_fc;
   /** The preview window */
   protected PreviewWindow pvwin;
@@ -142,15 +162,17 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
    */
   public Main(String[] args) {   
     setTitle("VLC Skin Editor "+VERSION);
-    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     addWindowListener(this);
-    setSize(800,700);
-    setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));    
+    setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));
+
+    //Menubar creation
     mbar = new JMenuBar();
     
     //For cross-platform feel (CTRL on Win & Linux, APPLE/COMMAND on Mac OS)
     int mask = java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-    
+
+    //Initializing of the file menu
     m_file = new JMenu(Language.get("MENU_FILE"));
     m_file.setMnemonic(Language.get("MENU_FILE_MN").charAt(0));
     m_file_new = new JMenuItem(Language.get("MENU_FILE_NEW"));
@@ -200,7 +222,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_file.add(m_file_png);
     m_file.addSeparator();
     if(System.getProperty("os.name").indexOf("Mac")==-1) m_file.add(m_file_quit);
-    
+
+    //Initializing of the edit menu
     m_edit = new JMenu(Language.get("MENU_EDIT"));
     m_edit.setMnemonic(Language.get("MENU_EDIT_MN").charAt(0));
     m_edit_undo = new JMenuItem(Language.get("MENU_EDIT_UNDO"));
@@ -241,7 +264,6 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit_del = new JMenuItem(Language.get("WIN_ITEMS_DELETE"));
     m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
     m_edit_del.addActionListener(this);
-
     
     m_edit.add(m_edit_undo);
     m_edit.add(m_edit_redo);
@@ -257,7 +279,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     m_edit.add(m_edit_right);
     m_edit.addSeparator();
     m_edit.add(m_edit_del);
-        
+
+    //Initializing of the help menu
     m_help = new JMenu(Language.get("MENU_HELP"));
     m_help.setMnemonic(Language.get("MENU_HELP_MN").charAt(0));    
     m_help_doc = new JMenuItem(Language.get("MENU_HELP_DOC"));
@@ -271,7 +294,8 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     
     m_help.add(m_help_doc);
     m_help.add(m_help_about);
-    
+
+    //Fill and set menubar
     mbar.add(m_file);
     mbar.add(m_edit);
     mbar.add(m_help);
@@ -279,10 +303,10 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
     setJMenuBar(mbar);    
 
     //Toolbar
-
     if(Boolean.parseBoolean(Config.get("toolbar"))) {
       tbar = new JPanel();
-      //tbar.setLayout(new BoxLayout(tbar, BoxLayout.LINE_AXIS));
+
+      //Toolbar elements
       tbar_open_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_open.png")));
       tbar_open_btn.setToolTipText(Language.get("TOOLBAR_OPEN"));
       tbar_open_btn.addActionListener(this);
@@ -302,6 +326,7 @@ public class Main extends javax.swing.JFrame implements ActionListener, TreeSele
       tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
       tbar_redo_btn.addActionListener(this);
       tbar.add(tbar_redo_btn);
+      //Toolbar layout
       SpringLayout tbar_layout = new SpringLayout();
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_open_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_open_btn, 2, SpringLayout.WEST, tbar);

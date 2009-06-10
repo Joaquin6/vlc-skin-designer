@@ -53,7 +53,7 @@ public class XML {
    * @deprecated Now the DOM model is used
    * @param line
    * @param field
-   * @return
+   * @return Integer value of the attribute
    */
   public static int getIntValue(String line, String field) {
     int i = 0;
@@ -71,7 +71,7 @@ public class XML {
    * @deprecated Now the DOM model is used
    * @param line
    * @param field
-   * @return
+   * @return Boolean value of the attribute
    */
   public static boolean getBoolValue(String line, String field) {
     boolean b = false;

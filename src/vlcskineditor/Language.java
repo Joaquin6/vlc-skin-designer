@@ -39,11 +39,15 @@ public class Language {
   static {
     try {
       File index = new File("lang/languages.txt");
-      FileReader fr = new FileReader(index);
-      BufferedReader br = new BufferedReader(fr);
-      String line = "";
-      while((line = br.readLine()) != null) {
-        line = new String(line.getBytes(), "UTF-8");
+      FileInputStream fis = new FileInputStream(index);
+      String text = "";
+      byte[] chars = new byte[1024];
+      while(fis.read(chars)!=-1) text+=new String(chars, "UTF-8");
+
+      String[] lines = text.split("\\n");
+
+      for(String line:lines) {
+        line = line.trim();
         if(!line.startsWith("#")) {
           String[] fields = line.split("\\|");
           if(fields.length == 3) {
@@ -51,8 +55,7 @@ public class Language {
           }
         }
       }
-      br.close();
-      fr.close();
+      fis.close();
     } catch(Exception ex) {
       ex.printStackTrace();
     }
@@ -108,10 +111,7 @@ public class Language {
    */
   private static void load(File f) {
     try {
-      //FileReader fr = new FileReader(f);
       FileInputStream fis = new FileInputStream(f);
-      
-
       String text = "";
       byte[] chars = new byte[1024];
       while(fis.read(chars)!=-1) text+=new String(chars, "UTF-8");
