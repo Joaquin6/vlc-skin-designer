@@ -72,9 +72,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   private JMenuItem m_help_doc, m_help_about;
 
   /** The toolbar */
-  private JPanel tbar;
+  private JToolBar tbar;
   /** The toolbar buttons */
-  private ToolbarButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn, tbar_move_btn, tbar_path_btn;
+  private JButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn, tbar_move_btn, tbar_path_btn;
 
   /** The desktop pane holding the resources, windows/layouts and items windows */
   private JDesktopPane jdesk;
@@ -304,66 +304,48 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
 
     //Toolbar
     if(Boolean.parseBoolean(Config.get("toolbar"))) {
-      tbar = new JPanel();
+      tbar = new JToolBar();
+      //tbar.setFloatable(false);
 
       //Toolbar elements
-      tbar_open_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_open.png")));
+      tbar_open_btn = new JButton();
+      tbar_open_btn.setIcon(createIcon("icons/tbar_open.png"));
       tbar_open_btn.setToolTipText(Language.get("TOOLBAR_OPEN"));
       tbar_open_btn.addActionListener(this);
       tbar.add(tbar_open_btn);
-      tbar_save_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_save.png")));
+      tbar_save_btn = new JButton();
+      tbar_save_btn.setIcon(createIcon("icons/tbar_save.png"));
       tbar_save_btn.setToolTipText(Language.get("TOOLBAR_SAVE"));
       tbar_save_btn.addActionListener(this);
       tbar.add(tbar_save_btn);
       JToolBar.Separator tbar_sep_1 = new JToolBar.Separator(new Dimension(10,22));
       tbar_sep_1.setOrientation(JSeparator.VERTICAL);
       tbar.add(tbar_sep_1);
-      tbar_undo_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_undo.png")));
+      tbar_undo_btn = new JButton();
+      tbar_undo_btn.setIcon(createIcon("icons/tbar_undo.png"));
       tbar_undo_btn.setToolTipText(Language.get("TOOLBAR_UNDO"));
       tbar_undo_btn.addActionListener(this);
       tbar.add(tbar_undo_btn);
-      tbar_redo_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_redo.png")));
+      tbar_redo_btn = new JButton();
+      tbar_redo_btn.setIcon(createIcon("icons/tbar_redo.png"));
       tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
       tbar_redo_btn.addActionListener(this);
       tbar.add(tbar_redo_btn);
       JToolBar.Separator tbar_sep_2 = new JToolBar.Separator(new Dimension(10,22));
       tbar_sep_2.setOrientation(JSeparator.VERTICAL);
       tbar.add(tbar_sep_2);
-      tbar_move_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_move.png")));
+      tbar_move_btn = new JButton();
+      tbar_move_btn.setIcon(createIcon("icons/tbar_move.png"));
       tbar_move_btn.setToolTipText(Language.get("TOOLBAR_MOVE"));
       tbar_move_btn.addActionListener(this);
-      tbar_move_btn.setPressed(true);
+      tbar_move_btn.setSelected(true);
       tbar.add(tbar_move_btn);
-      tbar_path_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_path.png")));
+      tbar_path_btn = new JButton();
+      tbar_path_btn.setIcon(createIcon("icons/tbar_path.png"));
       tbar_path_btn.setToolTipText(Language.get("TOOLBAR_PATH"));
       tbar_path_btn.addActionListener(this);
       tbar.add(tbar_path_btn);
-      //Toolbar layout
-      SpringLayout tbar_layout = new SpringLayout();
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_open_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_open_btn, 2, SpringLayout.WEST, tbar);
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_save_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_save_btn, 2, SpringLayout.EAST, tbar_open_btn);
-
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_sep_1, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_sep_1, 2, SpringLayout.EAST, tbar_save_btn);
-
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_undo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_undo_btn, 2, SpringLayout.EAST, tbar_sep_1);
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_redo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_redo_btn, 2, SpringLayout.EAST, tbar_undo_btn);
-
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_sep_2, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_sep_2, 2, SpringLayout.EAST, tbar_redo_btn);
-
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_move_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_move_btn, 2, SpringLayout.EAST, tbar_sep_2);
-      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_path_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
-      tbar_layout.putConstraint(SpringLayout.WEST, tbar_path_btn, 2, SpringLayout.EAST, tbar_move_btn);
-
-      tbar.setLayout(tbar_layout);
-      tbar.setPreferredSize(new Dimension(tbar.getPreferredSize().width,26));
-      tbar.setMaximumSize(new Dimension(tbar.getMaximumSize().width,26));
+      
       add(tbar);
     }
 
@@ -1590,13 +1572,13 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(hist!=null) hist.redo();
     }
     else if(e.getSource().equals(tbar_move_btn)) {
-      tbar_move_btn.setPressed(true);
-      tbar_path_btn.setPressed(false);
+      tbar_move_btn.setSelected(true);
+      tbar_path_btn.setSelected(false);
       if(pvwin!=null) pvwin.setCursorMode(PreviewWindow.CURSOR_MOVE);
     }
     else if(e.getSource().equals(tbar_path_btn)) {
-      tbar_move_btn.setPressed(false);
-      tbar_path_btn.setPressed(true);
+      tbar_move_btn.setSelected(false);
+      tbar_path_btn.setSelected(true);
       if(pvwin!=null) pvwin.setCursorMode(PreviewWindow.CURSOR_PATH);
     }
   }
