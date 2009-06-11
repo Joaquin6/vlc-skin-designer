@@ -122,7 +122,7 @@ public class Helper {
     while( (entry=zin.getNextEntry()) !=null ) {
       if(!(System.getProperty("os.name").indexOf("Windows")==-1 && (entry.getName().endsWith("exe")||entry.getName().endsWith("dll")))){
         File outf = new File(entry.getName());
-        System.out.println(outf.getAbsoluteFile());
+        System.out.println("Unzipping: "+outf.getAbsoluteFile());
         if(entry.isDirectory()) outf.mkdirs();
         else {
           outf.createNewFile();

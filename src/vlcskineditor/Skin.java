@@ -700,7 +700,7 @@ public class Skin implements ActionListener{
         l = g.items;
       }
       catch(Exception ex2) {
-        System.out.println(ex2);
+        ex2.printStackTrace();
       }
     }
     return l;

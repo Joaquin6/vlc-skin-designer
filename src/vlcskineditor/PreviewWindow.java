@@ -39,25 +39,40 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
 
   public static final long serialVersionUID = 071;
 
-  /**
-   * The JFrame in which a Layout of a Skin will be shown.
-   */
+  /** The JFrame in which a Layout of a Skin will be shown. */
   public JInternalFrame frame;
-  JScrollPane scroll_pane;
-  JPanel zoom_panel;
-  JButton zoom_more, zoom_less;
-  JLabel zoom_label;
-  int z = 1;  
-  Layout l;
-  FrameUpdater fu;  
-  Item selected_item;
-  boolean starteddragging = false;
-  int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
-  
-  JMenuItem up, down, right, left;
-  ItemMoveEvent ime = null;
-  Main m;
-  
+  /** The scroll pane holding the preview rendering */
+  private JScrollPane scroll_pane;
+  /** The panel holding the zoom controls */
+  private JPanel zoom_panel;
+  /** The zoom control buttons */
+  private JButton zoom_more, zoom_less;
+  /** The label showing the zoom factor */
+  private JLabel zoom_label;
+  /** The zoom factor */
+  private int z = 1;
+  /** The currently rendered layout */
+  private Layout l;
+  /** The frame updater who is responsible for updating the preview rendering */
+  protected FrameUpdater fu;
+  /** The currently selected item in the items window's tree */
+  private Item selected_item;
+  /** Indicates whether the cursors is in a drag action */
+  private boolean starteddragging = false;
+  /** The starting coordinates of the drag action */
+  private int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
+  /** The move event added to the history when the dragging action has finished */
+  private ItemMoveEvent ime = null;
+  /** The main program */
+  private Main m;
+
+  /** The cursor mode constant indicating that the cursor should move the selected item */
+  public static final int CURSOR_MOVE = 1;
+  /** The cursor mode constant indicating that the cursor should edit the path of the selected item */
+  public static final int CURSOR_PATH = 2;
+  /** The current cursor mode */
+  private int mode = CURSOR_MOVE;
+
   /**
    * Creates a new PreviewWindow that is initially hidden.
    * @param m_ the Main instance of the running Skin Editor
@@ -182,58 +197,81 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       setPreferredSize(new Dimension(l.width*z, l.height*z));
     }
   }
-  public void mouseClicked(MouseEvent e) {    
+  public void mouseClicked(MouseEvent e) {
+    if(mode==CURSOR_PATH) {
+      //TODO path editing mouseClicked
+    }
   }
   public void mouseDragged(MouseEvent e) {
     if(selected_item==null) return;
-    if(!starteddragging && selected_item.contains(e.getX()/z,e.getY()/z)) {
-      dragstartx=e.getX()/z;
-      dragstarty=e.getY()/z;
-      ime = new ItemMoveEvent(selected_item);
-      dragstartitemx=selected_item.x;
-      dragstartitemy=selected_item.y;
-      starteddragging=true;
-    }
-    else if(starteddragging) {
-      selected_item.x=dragstartitemx+e.getX()/z-dragstartx;
-      selected_item.y=dragstartitemy+e.getY()/z-dragstarty;
+    if(mode==CURSOR_MOVE) {
+      if(!starteddragging && selected_item.contains(e.getX()/z,e.getY()/z)) {
+        dragstartx=e.getX()/z;
+        dragstarty=e.getY()/z;
+        ime = new ItemMoveEvent(selected_item);
+        dragstartitemx=selected_item.x;
+        dragstartitemy=selected_item.y;
+        starteddragging=true;
+      }
+      else if(starteddragging) {
+        selected_item.x=dragstartitemx+e.getX()/z-dragstartx;
+        selected_item.y=dragstartitemy+e.getY()/z-dragstarty;
+      }
+    } else {
+      //TODO path editing mouseDragged
     }
   }  
   public void mouseEntered(MouseEvent e) {
-    
+    if(mode==CURSOR_PATH) {
+      setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+    }
   }
   public void mouseExited(MouseEvent e) {
-    
+    if(mode==CURSOR_PATH) {
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
   }
   public void mouseMoved(MouseEvent e) {
     if(selected_item==null) return;
-    if(selected_item.contains(e.getX()/z,e.getY()/z)) {
-      selected_item.setHover(true);
-      setCursor(new Cursor(Cursor.MOVE_CURSOR));
-    }
-    else {
-      selected_item.setHover(false);
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    if(mode==CURSOR_MOVE) {
+      if(selected_item.contains(e.getX()/z,e.getY()/z)) {
+        selected_item.setHover(true);
+        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+      }
+      else {
+        selected_item.setHover(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      }
+    } else {
+      //TODO path editing mouseMoved
     }
   }
   public void mousePressed(MouseEvent e) {
     fu.fps=25;
-    if(selected_item!=null) selected_item.setClicked(true);
+    if(mode==CURSOR_MOVE) {
+      if(selected_item!=null) selected_item.setClicked(true);
+    } else {
+      //TODO path editing mousePressed
+    }
   }
   public void mouseReleased(MouseEvent e) {
-    fu.fps=5;    
-    if(starteddragging) {
-      ime.setNew();
-      m.hist.addEvent(ime);
-      ime = null;
+    fu.fps=5;
+    if(mode==CURSOR_MOVE) {
+      if(starteddragging) {
+        ime.setNew();
+        m.hist.addEvent(ime);
+        ime = null;
+      }
+      starteddragging=false;
+      if(selected_item!=null) selected_item.setClicked(false);
+      else return;
+      dragstartx=selected_item.x+selected_item.offsetx;
+      dragstarty=selected_item.y+selected_item.offsety;
+      dragstartitemx=selected_item.x;
+      dragstartitemy=selected_item.y;
+    } else {
+      //TODO path editing mouseReleased
     }
-    starteddragging=false;
-    if(selected_item!=null) selected_item.setClicked(false);
-    else return;
-    dragstartx=selected_item.x+selected_item.offsetx;
-    dragstarty=selected_item.y+selected_item.offsety;
-    dragstartitemx=selected_item.x;
-    dragstartitemy=selected_item.y;
   }
   /**
    * Moves the currently selected item about the given distance.
@@ -271,5 +309,21 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       JOptionPane.showMessageDialog(m,Language.get("ERROR_SAVEPNG_MSG")+"\n"+e.toString(),Language.get("ERROR_SAVEPNG_TITLE"),JOptionPane.ERROR_MESSAGE);
       return;
     }
-  }  
+  }
+
+  /**
+   * Sets the cursor mode
+   * @param c One of the cursor mode constants
+   */
+  public void setCursorMode(int c) {
+    mode = c;
+  }
+
+  /**
+   * Gets the current cursor mode
+   * @return The cursor mode constants indicating the current cursor mode
+   */
+  public int getCursorMode() {
+    return mode;
+  }
 }

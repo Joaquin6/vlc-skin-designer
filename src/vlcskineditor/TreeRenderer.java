@@ -100,8 +100,8 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
       try {
         img = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(filename));        
         return new ImageIcon(img);  
-      } catch (Exception e) {
-        System.out.println(e);
+      } catch (Exception ex) {
+        ex.printStackTrace();
         return null;
       }
   }

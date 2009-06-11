@@ -74,7 +74,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   /** The toolbar */
   private JPanel tbar;
   /** The toolbar buttons */
-  private JButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn;
+  private ToolbarButton tbar_open_btn, tbar_save_btn, tbar_undo_btn, tbar_redo_btn, tbar_move_btn, tbar_path_btn;
 
   /** The desktop pane holding the resources, windows/layouts and items windows */
   private JDesktopPane jdesk;
@@ -326,18 +326,41 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
       tbar_redo_btn.addActionListener(this);
       tbar.add(tbar_redo_btn);
+      JToolBar.Separator tbar_sep_2 = new JToolBar.Separator(new Dimension(10,22));
+      tbar_sep_2.setOrientation(JSeparator.VERTICAL);
+      tbar.add(tbar_sep_2);
+      tbar_move_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_move.png")));
+      tbar_move_btn.setToolTipText(Language.get("TOOLBAR_MOVE"));
+      tbar_move_btn.addActionListener(this);
+      tbar_move_btn.setPressed(true);
+      tbar.add(tbar_move_btn);
+      tbar_path_btn = new ToolbarButton(Toolkit.getDefaultToolkit().createImage(Main.class.getResource("icons/tbar_path.png")));
+      tbar_path_btn.setToolTipText(Language.get("TOOLBAR_PATH"));
+      tbar_path_btn.addActionListener(this);
+      tbar.add(tbar_path_btn);
       //Toolbar layout
       SpringLayout tbar_layout = new SpringLayout();
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_open_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_open_btn, 2, SpringLayout.WEST, tbar);
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_save_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_save_btn, 2, SpringLayout.EAST, tbar_open_btn);
+
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_sep_1, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_sep_1, 2, SpringLayout.EAST, tbar_save_btn);
+
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_undo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_undo_btn, 2, SpringLayout.EAST, tbar_sep_1);
       tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_redo_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
       tbar_layout.putConstraint(SpringLayout.WEST, tbar_redo_btn, 2, SpringLayout.EAST, tbar_undo_btn);
+
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_sep_2, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_sep_2, 2, SpringLayout.EAST, tbar_redo_btn);
+
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_move_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_move_btn, 2, SpringLayout.EAST, tbar_sep_2);
+      tbar_layout.putConstraint(SpringLayout.VERTICAL_CENTER, tbar_path_btn, 0, SpringLayout.VERTICAL_CENTER, tbar);
+      tbar_layout.putConstraint(SpringLayout.WEST, tbar_path_btn, 2, SpringLayout.EAST, tbar_move_btn);
+
       tbar.setLayout(tbar_layout);
       tbar.setPreferredSize(new Dimension(tbar.getPreferredSize().width,26));
       tbar.setMaximumSize(new Dimension(tbar.getMaximumSize().width,26));
@@ -1565,7 +1588,17 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
     else if(e.getSource().equals(m_edit_redo)||e.getSource().equals(tbar_redo_btn)) {
       if(hist!=null) hist.redo();
-    }    
+    }
+    else if(e.getSource().equals(tbar_move_btn)) {
+      tbar_move_btn.setPressed(true);
+      tbar_path_btn.setPressed(false);
+      if(pvwin!=null) pvwin.setCursorMode(PreviewWindow.CURSOR_MOVE);
+    }
+    else if(e.getSource().equals(tbar_path_btn)) {
+      tbar_move_btn.setPressed(false);
+      tbar_path_btn.setPressed(true);
+      if(pvwin!=null) pvwin.setCursorMode(PreviewWindow.CURSOR_PATH);
+    }
   }
 
   private void deleteSelectedItem() {
@@ -1814,8 +1847,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         img = Toolkit.getDefaultToolkit().createImage(Main.class.getResource(filename));
         //img = ImageIO.read(file);
         return new ImageIcon(img);  
-      } catch (Exception e) {
-        System.out.println(e);
+      } catch (Exception ex) {
+        ex.printStackTrace();
         return null;
       }
   }
@@ -2058,7 +2091,6 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    * @return the selected item in the items window
    */
   public String getSelectedItem() {
-    System.out.println(selected_item);
     return selected_item;
   }
 }
