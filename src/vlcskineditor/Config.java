@@ -22,6 +22,7 @@
 
 package vlcskineditor;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -39,6 +40,7 @@ public class Config {
   
   private static Hashtable<String, String> strings = new Hashtable<String, String>();
   private static File configFile;
+  private static Main mainInstance;
 
   static {
     //Default values
@@ -62,6 +64,11 @@ public class Config {
     strings.put("win.items.height","200");
     strings.put("swing.laf","System");
     strings.put("toolbar","true");
+    strings.put("toolbar.floating", "false");
+    strings.put("toolbar.constraints", BorderLayout.PAGE_START);
+    strings.put("toolbar.x","0");
+    strings.put("toolbar.y","0");
+    strings.put("toolbar.orientation", String.valueOf(JToolBar.HORIZONTAL));
 
     //Locate the config file
     if(System.getProperty("os.name").indexOf("Windows")!=-1) {
@@ -195,8 +202,14 @@ public class Config {
         strings.put("autoupdate", String.valueOf(update_cb.isSelected()));
         strings.put("language", ((Language)lang_cb.getSelectedItem()).getCode());
         strings.put("swing.laf", (String)laf_cb.getSelectedItem());
-        strings.put("toolbar", String.valueOf(update_cb.isSelected()));        
-        
+        boolean toolbar = Boolean.parseBoolean(get("toolbar"));
+        strings.put("toolbar", String.valueOf(tbar_cb.isSelected()));
+        if(!toolbar && Boolean.parseBoolean(get("toolbar"))) {
+          mainInstance.showToolbar();
+        }
+        if(toolbar && !Boolean.parseBoolean(get("toolbar"))) {
+          mainInstance.hideToolbar();
+        }
         frame.setVisible(false);
         frame.dispose();
       }
@@ -272,6 +285,10 @@ public class Config {
     frame.pack();
     frame.setResizable(false);
     frame.setVisible(true);
+  }
+
+  public static void setMainInstance(Main m) {
+    mainInstance = m;
   }
   
 }

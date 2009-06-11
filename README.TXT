@@ -2,6 +2,10 @@ VLC Skin Editor release 0.8.1
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.8.5  - Various  bugfixes and technical improvements
+       - A toolbar was added
+       - Sliders can be edited in the preview window
+
 0.8.1  - Font rendering bugfix
        - Anchor points saving bugfix
        
@@ -90,8 +94,19 @@ approximately at least 256MB RAM and a 1GHz CPU
 -----------------------------------------------------------
 Usage:
 -----------------------------------------------------------
-To run the skin editor simply open the jar file.
-Or manually run "java -jar VLCSkinEditor.jar".
+On Windows launch the VLCSkinEditor executable.
+On Linux run the VLCSkinEditor launch script.
+
+Also you can run the skin editor by launching the jar file.
+You can do this by running "java -jar VLCSkinEditor.jar".
+Make sure that you run
+-----------------------------------------------------------
+Support:
+-----------------------------------------------------------
+There exists an online help & documentation at
+  http://www.videolan.org/vlc/skinedhlp
+Furthermore you can ask questions in the VideoLAN forum at
+  http://forum.videolan.org/viewforum.php?f=15
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------

@@ -35,6 +35,7 @@ import java.util.zip.*;
 import vlcskineditor.items.*;
 import com.ice.tar.*;
 import com.ice.jni.registry.*;
+import javax.swing.plaf.basic.BasicToolBarUI;
 import javax.swing.plaf.metal.*;
 import vlcskineditor.history.*;
 import vlcskineditor.resources.Bitmap;
@@ -59,6 +60,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   private String vlc_dir = "";
   /** The directory from which VLC loads its skins */
   private String vlc_skins_dir = "";
+
+  /** The main window layout */
+  BorderLayout layout;
 
   /** The menu bar */
   private JMenuBar mbar;
@@ -160,7 +164,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    * @param args Command line arguments passed by the console.
    * If there exist one or more arguments, the first argument is intepreted as a file locator for a skin to be loaded.
    */
-  public Main(String[] args) {   
+  public Main(String[] args) {
+    Config.setMainInstance(this);
+    
     setTitle("VLC Skin Editor "+VERSION);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     addWindowListener(this);
@@ -300,54 +306,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     mbar.add(m_edit);
     mbar.add(m_help);
     
-    setJMenuBar(mbar);    
-
-    //Toolbar
-    if(Boolean.parseBoolean(Config.get("toolbar"))) {
-      tbar = new JToolBar();
-      //tbar.setFloatable(false);
-
-      //Toolbar elements
-      tbar_open_btn = new JButton();
-      tbar_open_btn.setIcon(createIcon("icons/tbar_open.png"));
-      tbar_open_btn.setToolTipText(Language.get("TOOLBAR_OPEN"));
-      tbar_open_btn.addActionListener(this);
-      tbar.add(tbar_open_btn);
-      tbar_save_btn = new JButton();
-      tbar_save_btn.setIcon(createIcon("icons/tbar_save.png"));
-      tbar_save_btn.setToolTipText(Language.get("TOOLBAR_SAVE"));
-      tbar_save_btn.addActionListener(this);
-      tbar.add(tbar_save_btn);
-      JToolBar.Separator tbar_sep_1 = new JToolBar.Separator(new Dimension(10,22));
-      tbar_sep_1.setOrientation(JSeparator.VERTICAL);
-      tbar.add(tbar_sep_1);
-      tbar_undo_btn = new JButton();
-      tbar_undo_btn.setIcon(createIcon("icons/tbar_undo.png"));
-      tbar_undo_btn.setToolTipText(Language.get("TOOLBAR_UNDO"));
-      tbar_undo_btn.addActionListener(this);
-      tbar.add(tbar_undo_btn);
-      tbar_redo_btn = new JButton();
-      tbar_redo_btn.setIcon(createIcon("icons/tbar_redo.png"));
-      tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
-      tbar_redo_btn.addActionListener(this);
-      tbar.add(tbar_redo_btn);
-      JToolBar.Separator tbar_sep_2 = new JToolBar.Separator(new Dimension(10,22));
-      tbar_sep_2.setOrientation(JSeparator.VERTICAL);
-      tbar.add(tbar_sep_2);
-      tbar_move_btn = new JButton();
-      tbar_move_btn.setIcon(createIcon("icons/tbar_move.png"));
-      tbar_move_btn.setToolTipText(Language.get("TOOLBAR_MOVE"));
-      tbar_move_btn.addActionListener(this);
-      tbar_move_btn.setSelected(true);
-      tbar.add(tbar_move_btn);
-      tbar_path_btn = new JButton();
-      tbar_path_btn.setIcon(createIcon("icons/tbar_path.png"));
-      tbar_path_btn.setToolTipText(Language.get("TOOLBAR_PATH"));
-      tbar_path_btn.addActionListener(this);
-      tbar.add(tbar_path_btn);
-      
-      add(tbar);
-    }
+    setJMenuBar(mbar);
 
     //Resources, window and item windows
        
@@ -670,21 +629,17 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items_add_pu_video = new JMenuItem(Language.get("VIDEO"));
     items_add_pu_video.addActionListener(this);
     items_add_pu.add(items_add_pu_video);
-    jdesk.add(items_add_pu);     
-    
-    add(jdesk);
+    jdesk.add(items_add_pu);         
 
     //Main window layout
+    layout = new BorderLayout();
+    setLayout(layout);
+    add(jdesk, BorderLayout.CENTER);
+
     if(Boolean.parseBoolean(Config.get("toolbar"))) {
-      SpringLayout layout = new SpringLayout();
-      layout.putConstraint(SpringLayout.NORTH, tbar, 0, SpringLayout.NORTH, getContentPane());
-      layout.putConstraint(SpringLayout.WEST, tbar, 0, SpringLayout.WEST, getContentPane());
-      layout.putConstraint(SpringLayout.EAST, tbar, 0, SpringLayout.EAST, getContentPane());
-      layout.putConstraint(SpringLayout.NORTH, jdesk, 0, SpringLayout.SOUTH, tbar);
-      layout.putConstraint(SpringLayout.WEST, jdesk, 0, SpringLayout.WEST, getContentPane());
-      layout.putConstraint(SpringLayout.EAST, getContentPane(), 0, SpringLayout.EAST, jdesk);
-      layout.putConstraint(SpringLayout.SOUTH, getContentPane(), 0, SpringLayout.SOUTH, jdesk);
-      setLayout(layout);
+      showToolbar();
+    } else {
+      hideToolbar();
     }
 
     setMinimumSize(new Dimension(800,600));
@@ -736,6 +691,101 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else base_fc.setCurrentDirectory(new File(Config.get("open.folder")));
   }
 
+  public void showToolbar() {
+    if(tbar!=null) remove(tbar);
+    else initToolbar();
+    tbar.setOrientation(Config.getInt("toolbar.orientation"));
+    add(tbar, Config.get("toolbar.constraints"));
+    layout.layoutContainer(getContentPane());
+    tbar.doLayout();
+    if(Boolean.parseBoolean(Config.get("toolbar.floating"))) {
+      ((BasicToolBarUI)tbar.getUI()).setFloating(true, new Point(Config.getInt("toolbar.x"), Config.getInt("toolbar.y")));
+      Component c = tbar;
+      while( !c.getClass().toString().endsWith("ToolBarDialog") ) {
+        c = c.getParent();
+      }
+      c.setLocation(Config.getInt("toolbar.x"), Config.getInt("toolbar.y"));
+    }
+  }
+
+  public void hideToolbar() {
+    if(tbar==null) return;
+    saveToolbarState();
+    if(((BasicToolBarUI)tbar.getUI()).isFloating()) {
+      ((BasicToolBarUI)tbar.getUI()).setFloating(false, new Point(0,0));
+    }
+    remove(tbar);
+    layout.layoutContainer(getContentPane());
+  }
+
+  private void initToolbar() {
+    tbar = new JToolBar();    
+    //tbar.setFloatable(false);
+
+    //Toolbar elements
+    tbar_open_btn = new JButton();
+    tbar_open_btn.setIcon(createIcon("icons/tbar_open.png"));
+    tbar_open_btn.setToolTipText(Language.get("TOOLBAR_OPEN"));
+    tbar_open_btn.addActionListener(this);
+    tbar.add(tbar_open_btn);
+    tbar_save_btn = new JButton();
+    tbar_save_btn.setIcon(createIcon("icons/tbar_save.png"));
+    tbar_save_btn.setToolTipText(Language.get("TOOLBAR_SAVE"));
+    tbar_save_btn.addActionListener(this);
+    tbar.add(tbar_save_btn);
+    JToolBar.Separator tbar_sep_1 = new JToolBar.Separator(/*new Dimension(10,22)*/);
+    tbar_sep_1.setOrientation(JSeparator.VERTICAL);
+    tbar.add(tbar_sep_1);
+    tbar_undo_btn = new JButton();
+    tbar_undo_btn.setIcon(createIcon("icons/tbar_undo.png"));
+    tbar_undo_btn.setToolTipText(Language.get("TOOLBAR_UNDO"));
+    tbar_undo_btn.addActionListener(this);
+    tbar.add(tbar_undo_btn);
+    tbar_redo_btn = new JButton();
+    tbar_redo_btn.setIcon(createIcon("icons/tbar_redo.png"));
+    tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
+    tbar_redo_btn.addActionListener(this);
+    tbar.add(tbar_redo_btn);
+    JToolBar.Separator tbar_sep_2 = new JToolBar.Separator(/*new Dimension(10,22)*/);
+    tbar_sep_2.setOrientation(JSeparator.VERTICAL);
+    tbar.add(tbar_sep_2);
+    tbar_move_btn = new JButton();
+    tbar_move_btn.setIcon(createIcon("icons/tbar_move.png"));
+    tbar_move_btn.setToolTipText(Language.get("TOOLBAR_MOVE"));
+    tbar_move_btn.addActionListener(this);
+    tbar_move_btn.setSelected(true);
+    tbar.add(tbar_move_btn);
+    tbar_path_btn = new JButton();
+    tbar_path_btn.setIcon(createIcon("icons/tbar_path.png"));
+    tbar_path_btn.setToolTipText(Language.get("TOOLBAR_PATH"));
+    tbar_path_btn.addActionListener(this);
+    tbar.add(tbar_path_btn);
+  }
+
+  private void saveToolbarState() {
+    if(tbar!=null && layout.getConstraints(tbar)!=null && !layout.getConstraints(tbar).equals("null"))
+      Config.set("toolbar.constraints", layout.getConstraints(tbar));
+    
+    Config.set("toolbar.orientation", tbar.getOrientation());
+
+    if(((BasicToolBarUI)tbar.getUI()).isFloating()) {
+      Component c = tbar;
+      while( !c.getClass().toString().endsWith("ToolBarDialog") ) {        
+        c = c.getParent();
+      }
+      System.out.println(c.getClass().toString());
+      System.out.println(c.getBounds());
+      System.out.println(c.getX()+":"+c.getY());
+      System.out.println(c.getParent().getClass().toString());
+      System.out.println(c.getParent().getBounds());
+      Config.set("toolbar.floating", true);
+      Config.set("toolbar.x", c.getX());
+      Config.set("toolbar.y", c.getY());
+    } else {
+      Config.set("toolbar.floating", false);
+    }
+  }
+
   /**
    * Shows a dialog from which the user can choose to either create a new skin, open an existing skin or quit the skin editor.
    */
@@ -754,6 +804,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       exit();
     } 
   }
+
   /**
    * Shows the "Open File" dialog.
    */
@@ -794,6 +845,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       
     }
   }
+
   /**
    * Opens the given file as a skin.
    * @param f The skin file.
@@ -913,6 +965,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     hist = new History(this);
     s.gvars.sendUpdate();
   }
+
   /**
    * Shows a dialog to specify the new skin's location and creates an empty skin.
    */
@@ -936,6 +989,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         hist = new History(this);
       }
   }
+
   /**
    * Reacts to GUI actions
    * @param e The performed action
@@ -1790,20 +1844,23 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   public void mouseEntered(MouseEvent e) {}
   @Override
   public void mouseExited(MouseEvent e) {}
+
   /** Sets the activity state of the undo menu item to the given argument
    * @param enabled Activity state
    */
   public void setUndoEnabled(boolean enabled) {
     m_edit_undo.setEnabled(enabled);
-    tbar_undo_btn.setEnabled(enabled);
+    if(tbar_undo_btn!=null) tbar_undo_btn.setEnabled(enabled);
   }
+
   /** Sets the activity state of the redo menu item to the given argument
    * @param enabled Activity state
    */
   public void setRedoEnabled(boolean enabled) {
     m_edit_redo.setEnabled(enabled);
-    tbar_redo_btn.setEnabled(enabled);
+    if(tbar_redo_btn!=null) tbar_redo_btn.setEnabled(enabled);
   }
+
   /** Sets the action description that can be undone
    * @param s Action description
    */
@@ -1811,6 +1868,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(s.isEmpty()) m_edit_undo.setText(Language.get("MENU_EDIT_UNDO"));
     else m_edit_undo.setText(Language.get("MENU_EDIT_UNDO")+": "+s);
   }
+
   /** Sets the action description that can be redone
    * @param s Action description
    */
@@ -1818,6 +1876,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(s.isEmpty()) m_edit_redo.setText(Language.get("MENU_EDIT_REDO"));
     else m_edit_redo.setText(Language.get("MENU_EDIT_REDO")+": "+s);
   }
+
   /**
    * Creates an ImageIcon of an image included in the JAR
    * @param filename The path to the image file inside the JAR
@@ -1995,6 +2054,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     Config.set("win.items.width",items.getWidth());
     Config.set("win.items.height",items.getHeight());
     if(base_fc!=null) Config.set("open.folder",base_fc.getCurrentDirectory().getAbsolutePath());
+    saveToolbarState();
     Config.save();
     System.exit(0);
   }
@@ -2038,7 +2098,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     JFrame.setDefaultLookAndFeelDecorated(true);
     System.setProperty("apple.laf.useScreenMenuBar", "true");
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "VLC Skin Editor");
-    new Main(args);      
+    new Main(args);
   }
 
   /**
