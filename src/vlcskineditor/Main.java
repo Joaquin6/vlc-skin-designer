@@ -49,13 +49,13 @@ import vlcskineditor.resources.SubBitmap;
 public class Main extends JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
 
   /** Require for all JFrames, as they are serializable */
-  private static final long serialVersionUID = 801;
+  private static final long serialVersionUID = 85;
 
   /** The URL where to check for updates */
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   /** The version identification of the current build. */
-  public final static String VERSION = "0.8.2.dev";
+  public final static String VERSION = "0.8.5.dev";
   /** The directory in which the VLC executable is found */
   private String vlc_dir = "";
   /** The directory from which VLC loads its skins */
@@ -733,9 +733,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     tbar_save_btn.setToolTipText(Language.get("TOOLBAR_SAVE"));
     tbar_save_btn.addActionListener(this);
     tbar.add(tbar_save_btn);
-    JToolBar.Separator tbar_sep_1 = new JToolBar.Separator(/*new Dimension(10,22)*/);
-    tbar_sep_1.setOrientation(JSeparator.VERTICAL);
-    tbar.add(tbar_sep_1);
+    tbar.addSeparator();
     tbar_undo_btn = new JButton();
     tbar_undo_btn.setIcon(createIcon("icons/tbar_undo.png"));
     tbar_undo_btn.setToolTipText(Language.get("TOOLBAR_UNDO"));
@@ -746,9 +744,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     tbar_redo_btn.setToolTipText(Language.get("TOOLBAR_REDO"));
     tbar_redo_btn.addActionListener(this);
     tbar.add(tbar_redo_btn);
-    JToolBar.Separator tbar_sep_2 = new JToolBar.Separator(/*new Dimension(10,22)*/);
-    tbar_sep_2.setOrientation(JSeparator.VERTICAL);
-    tbar.add(tbar_sep_2);
+    tbar.addSeparator();
     tbar_move_btn = new JButton();
     tbar_move_btn.setIcon(createIcon("icons/tbar_move.png"));
     tbar_move_btn.setToolTipText(Language.get("TOOLBAR_MOVE"));
