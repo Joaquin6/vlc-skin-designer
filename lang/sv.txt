@@ -1,4 +1,4 @@
-﻿#Swedish language file for VLC Skin Editor
+#Swedish language file for VLC Skin Editor
 #Author/s: Daniel Nylander
 
 #General strings
@@ -23,9 +23,9 @@ GROUP|Grupp
 IMAGE|Bild
 PANEL|Panel
 PLAYTREE|Spelträd
-RADIALSLIDER|Radiell draglist
-SLIDER|Draglist
-SLIDERBG|SliderBackground
+RADIALSLIDER|Radiell skjutreglaget
+SLIDER|Skjutreglaget
+SLIDERBG|skjutreglaget bakgrund
 TEXT|Text
 VIDEO|Video
 UNNAMED|Namnlös %t #%i
@@ -70,6 +70,14 @@ MENU_HELP_DOC|Hjälp på nätet
 MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|Om
 MENU_HELP_ABOUT_MN|A
+
+#The toolbar
+TOOLBAR_OPEN|Öppna
+TOOLBAR_SAVE|Spara
+TOOLBAR_UNDO|Ångra
+TOOLBAR_REDO|Gör om
+TOOLBAR_MOVE|Rörliga redskap
+TOOLBAR_PATH|Skjutreglaget redigeringsverktyget
 
 #Resource Window
 WIN_RES_TITLE|Resurser

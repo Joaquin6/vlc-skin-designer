@@ -71,6 +71,14 @@ MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|Quant a
 MENU_HELP_ABOUT_MN|A
 
+#The toolbar
+TOOLBAR_OPEN|Obre
+TOOLBAR_SAVE|Desa
+TOOLBAR_UNDO|Desfés
+TOOLBAR_REDO|Refés
+TOOLBAR_MOVE|Mou l'elements
+TOOLBAR_PATH|Edita botons lliscants
+
 #Resource Window
 WIN_RES_TITLE|Recursos
 WIN_RES_ADD_BMP|Afegeix un nou mapa de bits o un mapa de bits inferior
@@ -115,7 +123,7 @@ WIN_PREFS_TITLE|Preferències
 WIN_PREFS_UPDATE_L|Habilita l'actualització automàtica
 WIN_PREFS_LANG_L|Llengua:
 WIN_PREFS_LAF_L|Programa d'aspecte i comportament:
-WIN_PREFS_TBAR_L|Show toolbar:
+WIN_PREFS_TBAR_L|Mostra la barra d'eines:
 WIN_PREFS_RESTART_L|<html><i>Alguns paràmetres només tenen efecte quan el programa es reinicia.</i></html>
 
 #SubBitmap Edit and Skin Preview window

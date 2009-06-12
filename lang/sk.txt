@@ -1,4 +1,4 @@
-﻿#Slovak language file for VLC Skin Editor
+#Slovak language file for VLC Skin Editor
 #Author/s: Marián Hikaník
 
 #General strings
@@ -70,6 +70,14 @@ MENU_HELP_DOC|Pomocník
 MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|O programe
 MENU_HELP_ABOUT_MN|P
+
+#The toolbar
+TOOLBAR_OPEN|Otvoriť
+TOOLBAR_SAVE|Uložiť
+TOOLBAR_UNDO|Dozadu
+TOOLBAR_REDO|Opakovať
+TOOLBAR_MOVE|Pohybujú nástroje
+TOOLBAR_PATH|Posuvník editačné nástroje
 
 #Resource Window
 WIN_RES_TITLE|Zdrojové súbory

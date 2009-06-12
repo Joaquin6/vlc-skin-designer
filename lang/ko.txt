@@ -71,6 +71,14 @@ MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|정보(A)
 MENU_HELP_ABOUT_MN|A
 
+#The toolbar
+TOOLBAR_OPEN|열기...
+TOOLBAR_SAVE|저장
+TOOLBAR_UNDO|실행취소
+TOOLBAR_REDO|실행복구
+TOOLBAR_MOVE|Item moving tool
+TOOLBAR_PATH|Slider editing tool
+
 #Resource Window
 WIN_RES_TITLE|자원
 WIN_RES_ADD_BMP|새 비트맵 또는 부분 비트맵 추가

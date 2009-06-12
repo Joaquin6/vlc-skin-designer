@@ -72,6 +72,14 @@ MENU_HELP_DOC_MN|l
 MENU_HELP_ABOUT|Over
 MENU_HELP_ABOUT_MN|O
 
+#The toolbar
+TOOLBAR_OPEN|Openen
+TOOLBAR_SAVE|Opslaan
+TOOLBAR_UNDO|Ongedaan maken
+TOOLBAR_REDO|Herhalen
+TOOLBAR_MOVE|Verplaats gereedschap
+TOOLBAR_PATH|Bewerk schuifknop gereedschap
+
 #Resource Window
 WIN_RES_TITLE|Bronnen
 WIN_RES_ADD_BMP|Een nieuwe bitmap of subbitmap toevoegen
@@ -116,7 +124,7 @@ WIN_PREFS_TITLE|Voorkeuren
 WIN_PREFS_UPDATE_L|Auto-update activeren:
 WIN_PREFS_LANG_L|Taal:
 WIN_PREFS_LAF_L|Programma-uiterlijk:
-WIN_PREFS_TBAR_L|Toolbar activeren:
+WIN_PREFS_TBAR_L|Toon werkbalk:
 WIN_PREFS_RESTART_L|<html><i>Enkele instellingen worden pas van kracht na een herstart van het programma.</i></html>
 
 #SubBitmap Edit and Skin Preview window

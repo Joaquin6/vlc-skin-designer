@@ -71,6 +71,14 @@ MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|О программе
 MENU_HELP_ABOUT_MN|О
 
+#The toolbar
+TOOLBAR_OPEN|Открыть
+TOOLBAR_SAVE|Сохранить
+TOOLBAR_UNDO|Отменить
+TOOLBAR_REDO|Вернуть
+TOOLBAR_MOVE|Item moving tool
+TOOLBAR_PATH|Slider editing tool
+
 #Resource Window
 WIN_RES_TITLE|Реcурcы
 WIN_RES_ADD_BMP|Добавить новый Bitmap или SubBitmap

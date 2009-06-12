@@ -71,6 +71,14 @@ MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|About
 MENU_HELP_ABOUT_MN|A
 
+#The toolbar
+TOOLBAR_OPEN|Open a skin...
+TOOLBAR_SAVE|Save skin modifications
+TOOLBAR_UNDO|Undo
+TOOLBAR_REDO|Redo
+TOOLBAR_MOVE|Item moving tool
+TOOLBAR_PATH|Slider editing tool
+
 #Resource Window
 WIN_RES_TITLE|Resources
 WIN_RES_ADD_BMP|Add a new Bitmap or SubBitmap

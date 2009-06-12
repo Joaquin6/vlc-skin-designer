@@ -10,22 +10,22 @@ BUTTON_CANCEL|Abbrechen
 BUTTON_HELP|Hilfe
 
 #Item names
-THEME|Theme
-FONT|Font
+THEME|Thema
+FONT|Schriftart
 BITMAP|Bitmap
-SUBBITMAP|SubBitmap
-WINDOW|Window
+SUBBITMAP|Teil-Bitmap
+WINDOW|Fenster
 LAYOUT|Layout
-ANCHOR|Anchor
-BUTTON|Button
-CHECKBOX|Checkbox
-GROUP|Group
-IMAGE|Image
-PANEL|Panel
-PLAYTREE|Playtree
+ANCHOR|Anker
+BUTTON|Schaltfläche
+CHECKBOX|Kontrollkästchen
+GROUP|Gruppe
+IMAGE|Bild
+PANEL|Feld
+PLAYTREE|Wiedergabeliste
 RADIALSLIDER|RadialSlider
-SLIDER|Slider
-SLIDERBG|SliderBackground
+SLIDER|Schieberegler
+SLIDERBG|Schieberegler-Hintergrund
 TEXT|Text
 VIDEO|Video
 UNNAMED|%t #%i
@@ -70,6 +70,14 @@ MENU_HELP_DOC|Online Hilfe
 MENU_HELP_DOC_MN|O
 MENU_HELP_ABOUT|Über
 MENU_HELP_ABOUT_MN|Ü
+
+#The toolbar
+TOOLBAR_OPEN|Skin öffnen...
+TOOLBAR_SAVE|Änderungen speichern
+TOOLBAR_UNDO|Rückgängig
+TOOLBAR_REDO|Wiederholen
+TOOLBAR_MOVE|Verschieben-Werkzeug
+TOOLBAR_PATH|Slider-Bearbeitungs-Werkzeug
 
 #Resource Window
 WIN_RES_TITLE|Ressourcen
