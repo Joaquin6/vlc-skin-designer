@@ -47,6 +47,6 @@ also have to make sure that ICE_JNIRegistry.dll is in the same
 directory, otherwise detection of where VLC is installed does not 
 work.
 
-When run for the first time the program will create a config file
-named "VLCSkinEditor.cfg". It is located in the same directory
-in which the program is run.
+When ran for the first time the program will create a config file
+named "VLCSkinEditor.cfg". It is located in the user directory.
+On Windows its stored in "%appdata%\VLC" on Linux in "~/.vlc/".
