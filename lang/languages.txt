@@ -5,6 +5,7 @@ ca|Catalan (Incomplete)|ca.txt
 nl|Dutch|nl.txt
 de|German|de.txt
 fr|French (Incomplete)|fr.txt
+ko|Korean|ko.txt
 ru|Russian (Incomplete)|ru.txt
 sk|Slovak|sk.txt
 sv|Swedish (Incomplete)|sv.txt

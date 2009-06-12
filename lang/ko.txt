@@ -1,0 +1,593 @@
+#English language file for VLC Skin Editor
+#Author/s: Airplanez <airplanez at gmail dot com>
+
+#General strings
+CHOICE_YES|예
+CHOICE_NO|아니오
+CHOICE_CANCEL|취소
+BUTTON_OK|확인
+BUTTON_CANCEL|취소
+BUTTON_HELP|도움말
+
+#Item names
+THEME|테마
+FONT|글꼴
+BITMAP|비트맵
+SUBBITMAP|부분 비트맵
+WINDOW|윈도우
+LAYOUT|레이아웃
+ANCHOR|앵커
+BUTTON|버튼
+CHECKBOX|체크박스
+GROUP|그룹
+IMAGE|이미지
+PANEL|패널
+PLAYTREE|나무형 재생목록
+RADIALSLIDER|방사형 슬라이더
+SLIDER|슬라이더
+SLIDERBG|슬라이더 배경
+TEXT|문자
+VIDEO|비디오
+UNNAMED|이름없는 %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|파일(F)
+MENU_FILE_MN|F
+MENU_FILE_NEW|새로(N)
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|열기(O)...
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|저장(S)
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|VLC 에서 스킨 테스트(T)
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|VLT 로 내보내기(V)...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|현재 미리보기를 이미지로 저장(P)...
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|종료(X)
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|수정(E)
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|실행취소(U)
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|실행복구(R)
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|스킨 설정(S)
+MENU_EDIT_THEME_MN|S
+MENU_EDIT_VARS|전역 변수
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|선택(P)
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|선택된 항목 위로 이동
+MENU_EDIT_DOWN|선택된 항목 아래로 이동
+MENU_EDIT_LEFT|선택된 항목 왼쪽으로 이동
+MENU_EDIT_RIGHT|선택된 항목 오른쪽으로 이동
+MENU_HELP|도움말(H)
+MENU_HELP_MN|H
+MENU_HELP_DOC|온라인 도움말(O)
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|정보(A)
+MENU_HELP_ABOUT_MN|A
+
+#Resource Window
+WIN_RES_TITLE|자원
+WIN_RES_ADD_BMP|새 비트맵 또는 부분 비트맵 추가
+WIN_RES_ADD_FONT|새 글꼴 추가
+WIN_RES_COPY|선택된 자원의 복사 만들기
+WIN_RES_EDIT|선택된 자원 수정
+WIN_RES_DELETE|선택된 자원 삭제
+WIN_RES_PU_ADD_BMP|비트맵 추가
+WIN_RES_PU_ADD_SBMP|부분 비트맵 추가
+WIN_RES_BITMAPS|비트맵
+WIN_RES_FONTS|글꼴
+
+#Windows window
+WIN_WIN_TITLE|윈도우
+WIN_WIN_ADD|새 윈도우 추가
+WIN_WIN_ADD_LAY|선택된 윈도우에 새 레이아웃 추가
+WIN_WIN_MOVE_UP|계층에서 선택된 레이아웃 위로 이동 (마지막 레이아웃이 윈도우의 기본 레이아웃 입니다)
+WIN_WIN_MOVE_DOWN|계층에서 선택된 레이아웃 아래로 이동 (마지막 레이아웃이 윈도우의 기본 레이아웃 입니다)
+WIN_WIN_COPY|선택된 윈도우 또는 레이아웃의 복사 만들기
+WIN_WIN_EDIT|선택된 윈도우 또는 레이아웃 수정
+WIN_WIN_DELETE|선택된 윈도우 또는 레이아웃 삭제
+
+#Items window
+WIN_ITEMS_TITLE|항목
+WIN_ITEMS_ADD|새 항목 추가
+WIN_ITEMS_MOVE_UP|계층에서 선택된 항목 위로 이동
+WIN_ITEMS_MOVE_DOWN|계층에서 선택된 항목 아래로 이동
+WIN_ITEMS_COPY|선택된 항목의 복사 만들기
+WIN_ITEMS_EDIT|선택된 항목 수정
+WIN_ITEMS_DELETE|선택된 항목 삭제
+WIN_ITEMS_PU_PANEL_ADD|선택된 패널에 추가
+
+#Welcome dialog
+WELCOME_TITLE|VLC 스킨 편집기에 오신것을 환영합니다
+WELCOME_MSG|무엇을 하시겠습니까?
+WELCOME_NEW|새 스킨 만들기
+WELCOME_OPEN|현재 스킨 열기
+WELCOME_QUIT|종료
+
+#Preferences window
+WIN_PREFS_TITLE|선택
+WIN_PREFS_UPDATE_L|자동-업데이트 사용:
+WIN_PREFS_LANG_L|언어:
+WIN_PREFS_LAF_L|프로그램 모양 및 느낌:
+WIN_PREFS_TBAR_L|도구표시줄 보기:
+WIN_PREFS_RESTART_L|<html><i>일부 설정은 프로그램이 재시작되어을때 효과를 가집니다.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|부분 비트맵 수정
+ZOOM_FACTOR|축소/확대 요소:
+
+#Global variables editing window
+WIN_VARS_TITLE|전역 변수
+WIN_VARS_NOTE|<html>이 변수는 미리보기에만 영향을 줍니다.<br>이 변수는 VLC 의 상태를 흉내냅니다.</html>
+WIN_VARS_SLIDER|슬라이더 위치
+
+#Theme options window
+WIN_THEME_TITLE|스킨 설정
+WIN_THEME_NAME|이름:
+WIN_THEME_AUTHOR|저자:
+WIN_THEME_EMAIL|저자의 이메일:
+WIN_THEME_WEB|저자의 웹페이지:
+WIN_THEME_MAGNET|자석효과:
+WIN_THEME_MAGNET_TIP|화면의 테두리와 윈도우의 앵커 사이의 거리가 이 값보다 작으면, 윈도우는 테두리에 달라붙게 됩니다
+WIN_THEME_ALPHA|불투명도:
+WIN_THEME_ALPHA_TIP|윈도우의 알파 투명도 설정. 값은 1 (거의 최대 투명도) 과 255 (최대 불투명도) 사이 이어야 합니다. 낮은 값은 피해야 합니다.
+WIN_THEME_MOVEALPHA|이동시 불투명:
+WIN_THEME_MOVEALPHA_TIP|윈도우 이동시의 윈도우 알파 투명도 설정.
+WIN_THEME_INFO_TITLE|테마 정보
+WIN_THEME_ATTR_TITLE|테마 속성
+
+#Action Editor
+WIN_ACTIONS_TITLE|동작 순서열 수정
+
+#Popup menu in the action editor
+ACTIONS_PU|동작
+ACTIONS_DIALOGS|대화창 보기
+ACTIONS_PLAYLIST|재생목록
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|스킨
+ACTIONS_VLC_PLAY|재생
+ACTIONS_VLC_PAUSE|일시중지
+ACTIONS_VLC_STOP|중지
+ACTIONS_VLC_FASTER|빠르게 재생
+ACTIONS_VLC_SLOWER|느리게 재생
+ACTIONS_VLC_MUTE|소리끄기
+ACTIONS_VLC_VOLUMEUP|음량 키우기
+ACTIONS_VLC_VOLUMEDOWN|음량 줄이기
+ACTIONS_VLC_FULLSCREEN|전체화면 모드 토글
+ACTIONS_VLC_SNAPSHOT|스냅샷 찍기
+ACTIONS_VLC_ONTOP|항상 상단 토글
+ACTIONS_VLC_MINIMIZE|VLC 최소화
+ACTIONS_VLC_QUIT|VLC 종료
+ACTIONS_EQ_ENABLE|이퀄라이저 사용
+ACTIONS_EQ_DISABLE|이퀄라이저 사용안함
+ACTIONS_DIALOGS_CHANGESKIN|스킨 변경
+ACTIONS_DIALOGS_FILESIMPLE|파일 열기 (간단)
+ACTIONS_DIALOGS_FILE|파일 열기 (확장)
+ACTIONS_DIALOGS_DIRECTORY|디렉토리 열기
+ACTIONS_DIALOGS_DISC|디스크 열기
+ACTIONS_DIALOGS_NET|네트워크 스트림 열기
+ACTIONS_DIALOGS_MESSAGES|메시지 로그
+ACTIONS_DIALOGS_PREFS|선택
+ACTIONS_DIALOGS_FILEINFO|파일 정보
+ACTIONS_DIALOGS_PLAYLIST|스킨없는 재생목록
+ACTIONS_DIALOGS_STREAMINGWIZARD|스트리밍 마법사
+ACTIONS_DIALOGS_POPUP|전체 팝업 메뉴
+ACTIONS_DIALOGS_AUDIOPOPUP|오디오 설정 팝업 메뉴
+ACTIONS_DIALOGS_VIDEOPOPUP|비디오 설정 팝업 메뉴
+ACTIONS_DIALOGS_MISCPOPUP|기타 설정 팝업 메뉴
+ACTIONS_PLAYLIST_ADD|새 항목 추가
+ACTIONS_PLAYLIST_DEL|선택된 항목 제거
+ACTIONS_PLAYLIST_NEXT|다음 항목 재생
+ACTIONS_PLAYLIST_PREVIOUS|이전 항목 재생
+ACTIONS_PLAYLIST_SETRANDOM|무작위/보통 순서로 재생
+ACTIONS_PLAYLIST_SETLOOP|재생목록/재생 한번 반복
+ACTIONS_PLAYLIST_SETREPEAT|현재 항목 반복 사용/사용안함
+ACTIONS_PLAYLIST_SORT|알파벳순 정렬
+ACTIONS_PLAYLIST_LOAD|파일에서 읽기
+ACTIONS_PLAYLIST_SAVE|파일에 저장
+ACTIONS_DVD_NEXTTITLE|다음 제목
+ACTIONS_DVD_PREVIOUSTITLE|이전 제목
+ACTIONS_DVD_NEXTCHAPTER|다음 챕터
+ACTIONS_DVD_PREVIOUSCHAPTER|이전 챕터
+ACTIONS_DVD_ROOTMENU|메인 메뉴
+ACTIONS_WINDOWS_SHOW|윈도우 보기
+ACTIONS_WINDOWS_HIDE|윈도우 숨김
+ACTIONS_WINDOWS_MAXIMIZE|윈도우 최대화
+ACTIONS_WINDOWS_UNMAXIMIZE|윈도우 최대화 취소
+ACTIONS_WINDOWS_SETLAYOUT|윈도우 레이아웃 변경
+
+#Action descriptions
+ACTION_DESC_NONE|아무것도 안함.
+ACTION_DESC_CHANGESKIN|새 스킨 읽기위해 대화창 보기.
+ACTION_DESC_FILESIMPLE|간단 "파일 열기" 대화창 보기.
+ACTION_DESC_FILE|확장 "파일 열기" 대화창 보기.
+ACTION_DESC_DIRECTORY|"디렉토리 열기" 대화창 보기.
+ACTION_DESC_DISC|"디스크 열기" 대화창 보기.
+ACTION_DESC_NET|"네트워크 스트림 열기" 대화창 보기.
+ACTION_DESC_MSG|메시지 로그 대화창 보기.
+ACTION_DESC_PREFS|선택 대화창 보기
+ACTION_DESC_FILEINFO|파일 정보 대화창 보기.
+ACTION_DESC_PLAYLIST|기본 (스킨없는) 재생목록 윈도우 보기.
+ACTION_DESC_WIZARD|"스트리밍 마법사" 대화창 보기.
+ACTION_DESC_POPUP|전체 팝업 메뉴 보기.
+ACTION_DESC_AUDIOPU|오디오 설정 팝업 메뉴 보기.
+ACTION_DESC_VIDEOPU|비디오 설정 팝업 메뉴 보기.
+ACTION_DESC_MISCPU|재생 제어 및 일반 옵션 포함 팝업 메뉴 보기.
+ACTION_DESC_EQENABLE|이퀄라이저 오디오 필더 사용.
+ACTION_DESC_EQDISABLE|이퀄라이저 오디오 필더 사용안함.
+ACTION_DESC_PLAY|현재 재생목록 항목 재생.
+ACTION_DESC_PAUSE|재생 일시중지.
+ACTION_DESC_STOP|재생 중지.
+ACTION_DESC_FASTER|빠르게 재생.
+ACTION_DESC_SLOWER|느리게 재생.
+ACTION_DESC_MUTE|소리끄기 토글.
+ACTION_DESC_VOLUP|음량 키우기.
+ACTION_DESC_VOLDOWN|음량 줄이기.
+ACTION_DESC_FULLSCREEN|전체화면 모드 토글.
+ACTION_DESC_SNAPSHOT|비디오의 스냅샷 찍기.
+ACTION_DESC_ONTOP|"항상 상단" 상태 토글.
+ACTION_DESC_MIN|VLC 최소화.
+ACTION_DESC_QUIT|VLC 종료.
+ACTION_PL_ADD|재생목록에 새 항목 추가.
+ACTION_PL_DEL|재생목록에서 선택된 항목 제거.
+ACTION_PL_NEXT|재생목록의 다음 항목 재생.
+ACTION_PL_PREV|재생목록의 이전 항목 재생.
+ACTION_PL_SORT|재생목록 알파벳순 정렬.
+ACTION_PL_LOAD|외부의 재생목록 파일 읽기.
+ACTION_PL_SAVE|현재 재생목록 파일에 저장.
+ACTION_DVD_NEXTT|DVD 의 다음 제목으로 가기.
+ACTION_DVD_PREVT|DVD 의 이전 제목으로 가기.
+ACTION_DVD_NEXTC|DVD 의 다음 챕터로 가기.
+ACTION_DVD_PREVC|DVD 의 이전 챕터로 가기.
+ACTION_DVD_MENU|DVD 의 루트 메뉴로 가기.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|활성화
+ACTION_DEACTIVATE|비활성화
+ACTION_RANDOM|%s : 재생목록의 항목은 무작위 순서로 재생됩니다.
+ACTION_LOOP|%s : 재생목록은 끝에 도달하면 반복됩니다.
+ACTION_REPEAT|%s : 현재 항목은 끝에 도달하면 반복됩니다
+ACTION_SHOW|ID %i 의 윈도우 보기
+ACTION_HIDE|ID %i 의 윈도우 숨김
+ACTION_MAXIMIZE|ID %i 의 윈도우 최대화
+ACTION_UNMAXIMIZE|ID %i 의 윈도우 최대화 취소
+ACTION_LAYOUT|ID %i 의 윈도우 레이아웃 %l 로 설정
+
+#Slider background generator
+SBGGEN_TITLE|슬라이더 배경 생성기
+SBGGEN_PREV|< 이전
+SBGGEN_NEXT|다음 >
+SBGGEN_CANCEL|취소
+SBGGEN_FINISH|종료
+
+SBGGEN_DESCR|슬라이더 배경 생성기에 오신것을 환영합니다. 몇번의 단계만으로, 이미지로 깔끔한 슬라이더를 만드는 것을 도와줄 것입니다.
+SBGGEN_FIRST|첫번째 단계로, 슬라이더가 왼쪽에서 오른쪽으로 또는 하단에서 상단으로 동작할지와 배경은 어떤 크기를 가질지를 선택하세요.
+SBGGEN_WIDTH|너비:
+SBGGEN_HEIGHT|높이:
+SBGGEN_LEFT_M|왼쪽 여백:
+SBGGEN_RIGHT_M|오른쪽 여백:
+SBGGEN_TOP_M|상단 여백:
+SBGGEN_BTM_M|하단 여백:
+SBGGEN_SECOND|다음 단계에서 슬라이더의 다른 부분을 연결하는 정확한 이미지를 선택해야 합니다.
+SBGGEN_NOTE|아이콘은 단지 서로 다른 부분이 표현하는것을 설명하는 예제 인것에 주의하세요. 배경 생성에 사용되는 이미지의 미리보기가 아닙니다.
+
+SBGGEN_IMAGE|이미지 파일:
+SBGGEN_OPEN|열기...
+SBGGEN_RESIZE|동작 크기조정:
+SBGGEN_TILE|바둑판식
+SBGGEN_STRETCH|늘이기
+
+SBGGEN_BG|배경
+SBGGEN_OVERLAY|중첩 이미지
+SBGGEN_LEFT_E|왼쪽 가장자리
+SBGGEN_RIGHT_E|오른쪽 가장자리
+SBGGEN_TOP_E|상단 가장자리
+SBGGEN_BTM_E|하단 가장자리
+SBGGEN_MIDDLE|중간 가장자리
+
+SBGGEN_PROGRESS|배경 생성중...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|VLC 스킨 편집기 %v 정보
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Copyright 2007-%y The VideoLAN Team</h3>Released under terms of the GPL 2+<br><br><b>리드 프로그래머:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>웹사이트:</b> %w<br><br><b>만든 사람들:</b><br>Timothy Gerard Endres for registry access and TAR support (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) for some icons (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)</html>
+VLT_EX_TITLE|VLT 파일 가져오기
+#%f - name of the folder
+VLT_EX_MSG|VLT 파일은 "%f" 하위폴더에 압축해제될 것입니다.\n계속 하시겠습니까?
+VLT_EX_YES|예, 압축해제
+VLT_EX_NO|아니오, 취소
+VLT_EX_PROGRESS|VLT 파일 압축해제중...
+XML_PARSING_PROGRESS|XML 분석중...
+ADD_BMP_FILE_FILTER_DESC|XML 파일 디렉토리 안의 *.png (Portable Network Graphic)
+ADD_FONT_FILE_FILTER_DESC|XML 파일 디렉토리 안의 *.otf/*.ttf (Open & True type fonts)
+DUPLICATE_MSG|중복된 객체의 이름변경 패턴을 입력하세요.\n%oldid% 가 객체의 이전 ID 로 교체됩니다.
+DEL_CONFIRM_TITLE|삭제 확인
+DEL_CONFIRM_MSG|정말 "%n" 를 삭제 하시겠습니까?
+EXIT_CONFIRM_TITLE|변경이 저장되지 않았습니다
+EXIT_CONFIRM_MSG|종료전에 스킨을 저장 하시겠습니까?
+UPDATE_TITLE|업데이트 발견됨
+UPDATE_MSG|사용가능한 스킨 편집기 업데이트가 있습니다.\n현재 버전: %v\n최신 버전: %c\n스킨 편집기를 지금 업데이트 하시겠습니까?
+VLT_PROGRESS|VLT 파일 만드는중...
+VLT_SUCCESS_MSG|VLT 파일이 정상적으로 만들어졌습니다.
+VLT_SUCCESS_TITLE|VLT 파일이 만들어졌습니다
+DOWNLOAD_PROGRESS|다운로드중...
+CONNECT_PROGRESS|연결중...
+UPDATE_SUCCESS_TITLE|업데이트 완료됨
+UPDATE_SUCCESS_MSG|정상적으로 업데이트가 다운로드 및 설치 되었습니다.\nVLC 스킨 편집기가 지금 재시작 됩니다
+
+#Error messages
+ERROR_FILENEXIST_TITLE|파일 여는중 오류
+ERROR_FILENEXIST_MSG|"%f" 파일은 존재하지 않으며 그래서 열수 없습니다!
+ERROR_VLT_UNPACK_TITLE|VLT 파일을 압축해제 할수 없음
+ERROR_VLT_UNPACK_MSG||VLT 파일을 압축해제 할수 없습니다!
+ERROR_VLT_NOTHEME_TITLE|theme.xml 을 찾을수 없음
+ERROR_VLT_NOTHEME_MSG|VLT 파일의 압축해제된 컨텐츠안에서 "theme.xml" 을 찾을수 없습니다.\n수동으로 열기를 시도해보세요.
+ERROR_VLC_LAUNCH_TITLE|오류
+ERROR_VLC_LAUNCH_MSG|VLC 미디어 플레이어를 실행할수 없습니다
+ERROR_BROWSE_TITLE|브라우저를 실행할수 없음
+ERROR_BROWSE_MSG|브라우저를 실행할수 없습니다.\n수동으로 다음 URL 로 가세요:\n%u
+ERROR_ADD_SBMP_TITLE|부분 비트맵을 추가할수 없음
+ERROR_ADD_SBMP_NOBMP|상위 비트맵이 선택되지 않았습니다!
+ERROR_ADD_SBMP_NOTBMP|선택된 자원은 비트맵이 아닙니다!
+ERROR_RES_DEL_TITLE|자원을 삭제할수 없습니다
+ERROR_RES_DEL_INUSE|자원이 아직 스킨에서 사용됩니다. 그래서 삭제할수 없습니다.
+ERROR_ADD_LAYOUT_TITLE|레이아웃을 추가할수 없습니다
+ERROR_ADD_LAYOUT_MSG|상위 윈도우가 선택되지 않았습니다!
+ERROR_UPDATE_TITLE|업데이트중 오류!
+ERROR_SAVEPNG_TITLE|이미지 저장중 오류
+ERROR_SAVEPNG_MSG|이미지를 저장할수 없습니다.
+ERROR_NEWSKIN_TITLE|새 스킨 파일을 만드는중 오류!
+ERROR_NEWSKIN_MSG|새 스킨 파일을 만들수 없습니다.
+ERROR_HEADER_INVALID|파일이 정확한 VLC 테마처럼 보이지 않습니다!\n부정확한 헤더:
+ERROR_SKIN_INVALID|선택된 파일은 정확한 VLC 스킨 파일이 아닙니다!
+ERROR_VERSION_UNSUPPORTED|선택된 스킨에서 사용되는 테마의 버전은 아직 지원하지 않습니다!
+ERROR_SAVE_TITLE|스킨 파일 저장중 오류!
+ERROR_SAVE_MSG|스킨 파일을 저장할수 없습니다.
+ERROR_ALPHA_TITLE|불투명도 값이 정확하지 않음
+ERROR_ALPHA_MSG|정확한 불투명도를 입력하세요! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|중간 이미지를 읽을수 없습니다!\n슬라이더 배경을 생성하기 위해 최소한 슬라이더의 중간 부분이 필요합니다.
+ERROR_VLT_TITLE|VLT 파일을 만들수 없음
+ERROR_VLT_MSG|VLT 파일을 만들수 없습니다!
+ERROR_ID_INVALID_TITLE|ID 가 정확하지 않음
+ERROR_ID_INVALID_MSG|정확한 ID 를 입력하세요!
+ERROR_ID_EXISTS_MSG|ID "%i" 가 이미 존재합니다.\n다른것을 선택하세요.
+ERROR_WIDTH_INVALID_TITLE|너비가 정확하지 않음
+ERROR_WIDTH_INVALID_MSG|정확한 너비를 입력하세요!
+ERROR_HEIGHT_INVALID_TITLE|높이가 정확하지 않음
+ERROR_HEIGHT_INVALID_MSG|정확한 높이를 입력하세요!
+ERROR_FILE_INVALID_TITLE|파일이 정확하지 않음
+ERROR_FILE_INVALID_MSG|정확한 파일을 선택하세요!
+ERROR_BITMAP_INVALID_MSG|지정된 비트맵을 읽을수 없습니다!\n다른것을 선택하세요.
+ERROR_NBFRAMES_TITLE|프레임수가 정확하지 않음
+ERROR_NBFRAMES_MSG|프레임수는 1 보다 작을수 없습니다
+ERROR_OTF_TITLE|OTF 지원하지 않음
+ERROR_OTF_MSG|OpenType 글꼴을 선택했습니다, VLC 은 정확히 표시할수 있지만 스킨 편집기는 표시할수 없습니다.\n미리보기에서 다른 글꼴을 보게될것 입니다.
+ERROR_SIZE_INVALID_TITLE|크기가 정확하지 않음
+ERROR_SIZE_INVALID_MSG|정확한 크기를 입력하세요.
+ERROR_OUTSIDE_TITLE|치수가 정확하지 않음
+ERROR_OUTSIDE_MSG|지정된 치수는 상위 비트맵의 바깥쪽 입니다!
+ERROR_BITMAP_NEXIST|비트맵 %i 이 존재하지 않습니다.
+ERROR_BITMAP_NEXIST_TITLE|이미지가 정확하지 않음!
+ERROR_BITMAP_LOAD|비트맵 %i 이미지 파일을 읽을수 없습니다.
+ERROR_BITMAP_LOAD_TITLE|이미지 읽는중 오류
+ERROR_NOSTATE|상태 조건을 제공하세요!
+ERROR_NOSTATE_TITLE|상태가 정확하지 않음
+ERROR_FONT_NEXIST|글꼴 %i 가 존재하지 않습니다.
+ERROR_FONT_NEXIST_TITLE|글꼴이 정확하지 않음!
+ERROR_POINTS_INVALID|정확한 베지어 위치를 입력하세요!
+ERROR_POINTS_INVALID_TITLE|위치가 정확하지 않음!
+ERROR_RADIALSLIDER|스킨 편집기는 아직 방사형 슬라이더를 지원하지 않습니다.
+ERROR_RADIALSLIDER_TITLE|지원하지 않음
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|이름없는 테마
+THEMEINFO_AUTHOR_DEFAULT|알수없는 저자
+THEMEINFO_EMAIL_DEFAULT|알수없음
+
+#History
+HIST_ITEM_ADD|%t 추가
+HIST_ITEM_DEL|%t 삭제
+HIST_ITEM_EDIT|%t 수정
+HIST_ITEM_MOVE|%t 이동
+HIST_RES_DEL|%t "%i" 삭제
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* 속성이 지정되어야 합니다.
+
+#Common strings
+WIN_ITEM_GENERAL|일반 속성
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|%t 의 이름 및 식별. 유일해야 합니다.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|너비:
+WIN_ITEM_HEIGHT|높이:
+WIN_ITEM_VISIBLE|가시성:
+WIN_ITEM_LEFTTOP|왼쪽상단:
+WIN_ITEM_LEFTTOP_TIP|크기조정 할때, 이 항목의 상단-왼쪽에 부착된 레이아웃 모퉁이를 나타냅니다.
+WIN_ITEM_RIGHTBOTTOM|오른쪽하단:
+WIN_ITEM_RIGHTBOTTOM_TIP|크기조정 할때, 이 항목의 하단-오른쪽에 부탁된 레이아웃 모퉁이를 나타냅니다.
+WIN_ITEM_XKEEPRATIO|X 비율 유지:
+WIN_ITEM_XKEEPRATIO_TIP|true 로 설정되면, 수평 크기조정의 동작이 변경됩니다. 예를 들어, 초기에 제어의 왼쪽까지의 공간이 오른쪽 공간의 두배가 되면, 어떤 수평 크기조정에도 동일하게 고정됩니다. 제어 너비는 상수로 고정됩니다.
+WIN_ITEM_YKEEPRATIO|Y 비율 유지:
+WIN_ITEM_YKEEPRATIO_TIP|true 로 설정되면, 수직 크기조정의 동작이 변경됩니다. 예를 들어, 초기에 제어의 상단까지의 공간이 하단 공간의 두배가 되면, 어떤 수직 크기조정에도 동일하게 고정됩니다. 제어 너비는 상수로 고정됩니다.
+WIN_ITEM_HELP|도움말:
+WIN_ITEM_HELP_TIP|변수 '$H' 는 마우스가 현재 제어에 호버되면 값을 확장합니다.
+WIN_ITEM_TOOLTIPTEXT|말풍선:
+FILE_INDIR|XML 파일과 같은 폴더에
+
+#Bitmap
+WIN_BITMAP_TITLE|비트맵 설정
+WIN_BITMAP_FILE|파일*:
+WIN_BITMAP_FILE_TIP|사용된 이미지 파일의 경로 및 이름을 나타냅니다.
+WIN_BITMAP_OPEN|열기...
+WIN_BITMAP_ALPHACOLOR|알파 색깔:
+WIN_BITMAP_ALPHACOLOR_TIP|비트맵의 투명도 색깔(16진수 형식). PNG 파일에 투명도 마스크가 지정되었다면, 역시 계산에 포함될것입니다.
+WIN_BITMAP_CHOOSE|선택...
+WIN_BITMAP_NBFRAMES|프레임수:
+WIN_BITMAP_NBFRAMES_TIP|이 속성은 애니메이션 비트맵을 정의하기 위해 필요합니다; 애니메이션에 포함된 초당 프레임수 (이미지수). 모든 서로 다른 프레임들은 비트맵에 단지 수직으로 놓여있는 이미지들 입니다..
+WIN_BITMAP_FPS|초당 프레임:
+WIN_BITMAP_FPS_TIP|애니메이션 비트맵에만 사용됨; 애니메이션의 초당 프레임수 (이미지수).
+WIN_BITMAP_ANIMATION|애니메이션 속성
+WIN_BITMAP_CHOOSER_TITLE|알파 색깔 선택
+
+#SubBitmap
+WIN_SBMP_TITLE|부분 비트맵 설정
+WIN_SBMP_BOUNDS|위치 및 치수 속성
+
+#Font
+WIN_FONT_TITLE|글꼴 설정
+WIN_FONT_FILE|파일*:
+WIN_FONT_FILE_TIP|사용된 TrueType 또는 OpenType 글꼴을 포함하는 파일.
+WIN_FONT_OPEN|열기...
+WIN_FONT_SIZE|크기:
+
+#Layout
+WIN_LAYOUT_TITLE|레이아웃 설정
+WIN_LAYOUT_GENERAL|일반 속성
+WIN_LAYOUT_DIMENSIONS|치수
+WIN_LAYOUT_WIDTH|초기 너비*:
+WIN_LAYOUT_WIDTH_TIP|레이아웃의 초기 너비.
+WIN_LAYOUT_HEIGHT|초기 높이*:
+WIN_LAYOUT_HEIGHT_TIP|레이아웃의 초기 높이.
+WIN_LAYOUT_MINWIDTH|최소 너비:
+WIN_LAYOUT_MINWIDTH_TIP|레이아웃의 최소 너비. 레이아웃의 크기를 조정할때만 사용됨. 이 값을 "-1" 로 설정하면, 최소 너비를 초기 너비로 사용합니다
+WIN_LAYOUT_MINHEIGHT|최소 높이:
+WIN_LAYOUT_MINHEIGHT_TIP|레이아웃의 최소 높이. 레이아웃의 크기를 조정할때만 사용됨. 이 값을 "-1" 로 설정하면, 최소 높이를 초기 높이로 사용합니다.
+WIN_LAYOUT_MAXWIDTH|최대 너비:
+WIN_LAYOUT_MAXWIDTH_TIP|레이아웃의 최대 너비. 레이아웃의 크기를 조정할때만 사용됨. 이 값을 "-1" 로 설정하면, 최대 너비를 초기 너비로 사용합니다.
+WIN_LAYOUT_MAXHEIGHT|최대 높이:
+WIN_LAYOUT_MAXHEIGHT_TIP|레이아웃의 최대 높이. 레이아웃의 크기를 조정할때만 사용됨. 이 값을 "-1" 로 설정하면, 최대 높이를 초기 높이로 사용합니다.
+
+#Window
+WIN_WINDOW_TITLE|윈도우 설정
+WIN_WINDOW_X_TIP|윈도우에서 화면 왼쪽 가장자리의 초기 거리.
+WIN_WINDOW_Y_TIP|윈도우에서 화면 상단 가장자리의 초기 거리.
+WIN_WINDOW_VISIBLE_TIP|VLC 가 시작할때 윈도우가 보이게 될지 아닌지를 나타냅니다. VLC 가 스킨 윈도우의 위치 및 가시성을 기억하기 때문에, 이 속성은 처음 스킨이 시작할때만 사용됩니다.
+WIN_WINDOW_DD|끌어서 놓기:
+WIN_WINDOW_DD_TIP|이 윈도우에 미디어 파일 끌어서 놓기를 허용하는지 아닌지를 나타냅니다.
+WIN_WINDOW_PD|놓으면 재생:
+WIN_WINDOW_PD_TIP|놓은 파일을 곧바로 재생 (true) 인지 단지 대기열에 넣을지 (false) 를 나타냅니다. 이 속성은 끌어서 놓기가 "false" 로 설정되면 효과를 가지지 않습니다.
+WIN_WINDOW_DD_PANEL|끌어서 놓기 옵션
+
+#Anchor
+WIN_ANCHOR_TITLE|앵커 설정
+WIN_ANCHOR_POINTS|위치:
+WIN_ANCHOR_POINTS_TIP|앵커를 따르는 베이지 곡선을 정의하는 위치. 점 앵커를 원한다면 이 매개변수를 변경할 필요가 없습니다.
+WIN_ANCHOR_RANGE|범위:
+WIN_ANCHOR_RANGE_TIP|앵커의 효과 영역 범위(픽셀).
+WIN_ANCHOR_PRIORITY|우선순위*:
+WIN_ANCHOR_PRIORITY_TIP|각각의 앵커는 우선순위를 가지고 있습니다 (우선순위 속성), 그리고 가장 높은 우선순위의 앵커가 우선합니다, 그 윈도우를 이동하면 앵커된 다른 모든 윈도우도 이동된다는 것을 의미합니다. 2개의 앵커된 윈도우의 효과를 중단하려면, 낮은 우선순위 앵커를 가지는 윈도우를 이동해야 합니다.
+WIN_ANCHOR_BOUNDARIES|경계
+
+#Button
+WIN_BUTTON_TITLE|버튼 설정
+WIN_BUTTON_UP|보통 이미지*:
+WIN_BUTTON_OVER|호버시 이미지:
+WIN_BUTTON_DOWN|클릭시 이미지:
+WIN_BUTTON_ACTION|동작:
+WIN_BUTTON_ATTR|버튼 속성
+
+#Checkbox
+WIN_CHECKBOX_TITLE|체크박스 설정
+WIN_CHECKBOX_UP|보통 이미지*:
+WIN_CHECKBOX_OVER|호버시 이미지:
+WIN_CHECKBOX_DOWN|클릭시 이미지:
+WIN_CHECKBOX_ACTION|동작:
+WIN_CHECKBOX_CONDITION|조건:
+WIN_CHECKBOX_CONDITION_TIP|체크박스의 상태를 지정하는 불 연산식: false -> 상태 #1, true -> 상태 #2
+WIN_CHECKBOX_STATE|체크박스 상태
+WIN_CHECKBOX_STATE1|상태 #1 (조건을 만족하지 않음):
+WIN_CHECKBOX_STATE2|상태 #2 (조건을 만족함):
+
+#Image
+WIN_IMAGE_TITLE|이미지 설정
+WIN_IMAGE_IMAGE|이미지*:
+WIN_IMAGE_IMAGE_TIP|비트맵 ID
+WIN_IMAGE_RESIZE|크기조정 모드:
+WIN_IMAGE_RESIZE_TIP|이미지의 크기가 조정되었을때 동작 지정.
+WIN_IMAGE_ACTION|동작:
+WIN_IMAGE_ACTION_TIP|이미지를 클릭했을 발생하는 동작.
+WIN_IMAGE_ACTION2|더블-클릭 동작:
+WIN_IMAGE_ACTION2_TIP|이미지를 더블-클릭했을때 발생하는 동작.
+WIN_IMAGE_ATTR|이미지 속성
+
+#Group
+WIN_GROUP_TITLE|그룹 설정
+
+#Panel
+WIN_PANEL_TITLE|패널 설정
+WIN_PANEL_DIMENSIONS|치수
+WIN_PANEL_WIDTH|너비*:
+WIN_PANEL_HEIGHT|높이*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|나무형 재생목록 설정
+WIN_PLAYTREE_FONT|글꼴*:
+WIN_PLAYTREE_BGIMAGE|배경 이미지:
+WIN_PLAYTREE_BGIMAGE_TIP|배경 이미지로 사용되는 비트맵 ID. 비트맵이 지정되지 않으면, bgcolor1 및 bgcolor2 속성을 사용하여 배경이 채워집니다.
+WIN_PLAYTREE_BGCOLOR1|배경 색깔 #1:
+WIN_PLAYTREE_BGCOLOR2|배경 색깔 #2:
+WIN_PLAYTREE_SELCOLOR|색깔 선택:
+WIN_PLAYTREE_FGCOLOR|문자 색깔:
+WIN_PLAYTREE_PLAYCOLOR|재생 문자 색깔:
+WIN_PLAYTREE_FLAT|고정 재생목록:
+WIN_PLAYTREE_FLAT_TIP|재생목록이 나무 구조 인지 \"간단\" 구조인지를 나타냅니다 (나무의 잎만 보임).
+WIN_PLAYTREE_ITEMIMAGE|아이템 아이콘:
+WIN_PLAYTREE_OPENIMAGE|열린 폴더 아이콘:
+WIN_PLAYTREE_CLOSEDIMAGE|닫힌 폴더 아이콘:
+WIN_PLAYTREE_SLIDER|재생목록의 슬라이더 수정 (스크롤바)
+WIN_PLAYTREE_ATTR|나무형 재생목록 속성
+WIN_PLAYTREE_CHOOSE|선택...
+WIN_PLAYTREE_CHOOSER_TITLE|색깔 선택
+
+#Slider
+WIN_SLIDER_TITLE|슬라이더 설정
+WIN_SLIDER_UP|보통 이미지*:
+WIN_SLIDER_OVER|호버시 이미지:
+WIN_SLIDER_DOWN|클릭시 이미지:
+WIN_SLIDER_POINTS|위치*:
+WIN_SLIDER_THICKNESS|두께:
+WIN_SLIDER_VALUE|값*:
+WIN_SLIDER_VALUE_SCROLL|나무형 재생목록 스크롤링
+WIN_SLIDER_BG_ENABLE|배경 사용
+WIN_SLIDER_BG_EDIT|수정...
+WIN_SLIDER_ATTR|슬라이더 속성
+WIN_SLIDER_BG|슬라이더 배경
+
+#Slider background
+WIN_SBG_TITLE|슬라이더 배경 설정
+WIN_SBG_WIZARD|슬라이더 배경 생성기 열기...
+WIN_SBG_IMAGE|이미지*:
+WIN_SBG_NBHORIZ|수평 프레임:
+WIN_SBG_NBVERT|수직 프레임:
+WIN_SBG_PADHORIZ|수평 채우기:
+WIN_SBG_PADVERT|수직 채우기:
+WIN_SBG_ATTR|배경 속성
+
+#Text
+WIN_TEXT_TITLE|문자 설정
+WIN_TEXT_TEXT|문자*:
+WIN_TEXT_FONT|글꼴:
+WIN_TEXT_COLOR|색깔:
+WIN_TEXT_CHOOSE|선택...
+WIN_TEXT_CHOOSER_TITLE|문자 색깔 선택
+WIN_TEXT_ALIGNMENT|정렬:
+WIN_TEXT_SCROLLING|스크롤링:
+WIN_TEXT_ATTR|문자 속성
+
+#Video
+WIN_VIDEO_TITLE|비디오 설정
+WIN_VIDEO_AUTORESIZE|자동크기조정:
+WIN_VIDEO_AUTORESIZE_TIP|레이아웃이 재생되는 비디오의 치수에 맞게 자동으로 크기를 조정하는지 아닌지를 나타냅니다.
+WIN_VIDEO_ATTR|비디오 속성
