@@ -66,8 +66,8 @@ public class Slider extends Item implements ActionListener{
 
   ImageResource up_res, over_res, down_res;
   
-  Bezier b;
-  int[] xpos,ypos;
+  private Bezier b;
+  private int[] xpos,ypos;
 
   private Point2D.Float sliderPos;
   private Point2D.Float[] bezierPoints;
@@ -207,6 +207,7 @@ public class Slider extends Item implements ActionListener{
     }       
     created=true;
   }
+  
   public Slider(Skin s_) {
     s = s_;
     up = "none";
@@ -216,6 +217,7 @@ public class Slider extends Item implements ActionListener{
     s.updateItems();
     s.expandItem(id);
   }
+
   public Slider(Skin s_, boolean ipt) {
     s = s_;
     up = "none";
@@ -223,6 +225,7 @@ public class Slider extends Item implements ActionListener{
     inPlaytree = ipt;
     created=true;
   }
+
   public void updateBezier() {
     String[] pnts = points.split("\\),\\(");
     xpos = new int[pnts.length];
@@ -240,6 +243,7 @@ public class Slider extends Item implements ActionListener{
       bezierPoints[(int)(f/10)] = b.getPoint(f/100);
     }
   }
+
   @Override
   public void update() {
     if(!created) {
@@ -302,6 +306,7 @@ public class Slider extends Item implements ActionListener{
     }
     updateToGlobalVariables();
   }
+
   @Override
   public void showOptions() {
     if(frame==null) {
@@ -629,6 +634,7 @@ public class Slider extends Item implements ActionListener{
     
     frame.setVisible(true);
   }
+
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
@@ -698,12 +704,14 @@ public class Slider extends Item implements ActionListener{
       frame = null;
     }
   }
+
   public void removeBG() {
     if(sbg==null) return;    
     sbg = null;
     sbg_chb.setSelected(false);
     sbg_btn.setEnabled(false);
   }
+
   @Override
   public String returnCode(String indent) {
     String code = indent+"<Slider";
@@ -732,10 +740,12 @@ public class Slider extends Item implements ActionListener{
     }
     return code;
   }
+
   @Override
   public void draw(Graphics2D g, int z) {
     draw(g,0,0,z);
   }
+
   @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {    
     if(!created) return;
@@ -760,24 +770,27 @@ public class Slider extends Item implements ActionListener{
         Point2D.Float p2 = bezierPoints[i+1];
         g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
       }
-      g.setColor(Color.ORANGE);
+      g.setColor(Color.YELLOW);
       for(int i=0;i<xpos.length;i++) {
         g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,3,3);
       }
     }
   }
+
   @Override
   public boolean contains(int x_,int y_) {    
     int h = b.getHeight();
     int w = b.getWidth();
     return (x_>=x+offsetx && x_<=x+offsetx+w && y_>=y+offsety && y_<=y+offsety+h);   
   }
+
   @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("Slider: "+id);
     if(sbg!=null) node.add(sbg.getTreeNode());
     return node;
   }
+
   @Override
   public Item getItem(String id_) {
     if(id.equals(id_)) return this;
@@ -785,6 +798,7 @@ public class Slider extends Item implements ActionListener{
     else if(sbg.id.equals(id_)) return sbg;
     else return null;
   }
+
   @Override
   public Item getParentOf(String id_) {
    if(sbg!=null) {
@@ -793,16 +807,19 @@ public class Slider extends Item implements ActionListener{
    }
    else return null;
   }
+
   @Override
   public boolean uses(String id_) {
     return(((sbg!=null)?sbg.uses(id_):false)||up.equals(id_)||over.equals(id_)||down.equals(id_));
   }
+
   @Override  
   public void renameForCopy(String p) {    
     String p_ = p;
     super.renameForCopy(p);
     if(sbg!=null) sbg.renameForCopy(p_);
   }
+
   @Override
   public void updateToGlobalVariables() {
     vis = s.gvars.parseBoolean(visible);
@@ -822,4 +839,19 @@ public class Slider extends Item implements ActionListener{
     if(down.equals(oldid)) down = newid;
   }
 
+  public Bezier getBezier() {
+    return b;
+  }
+
+  public int getControlX(int index) {
+    return xpos[index];
+  }
+
+  public int getControlY(int index) {
+    return ypos[index];
+  }
+
+  public int getControlPointNum() {
+    return xpos.length;
+  }
 }

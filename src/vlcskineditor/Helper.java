@@ -23,7 +23,15 @@
 package vlcskineditor;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -136,6 +144,24 @@ public class Helper {
         }
       }
     }
+  }
+
+  /**
+   * Creates a new image cursor
+   * @param imageFileName The path to the image resource, relative to the main class location
+   * @param x The x-coordinate of the hot spot
+   * @param y The y-coordinate of the hot spot
+   * @param com The Component in which the cursor will be used
+   * @return The cursor
+   */
+  public static Cursor createImageCursor(String imageFileName, int x, int y, Component com) {
+    Toolkit tk = Toolkit.getDefaultToolkit();
+    Image src = tk.createImage(Main.class.getResource(imageFileName));
+    /*Dimension d = tk.getBestCursorSize(src.getWidth(null), src.getHeight(null));
+    BufferedImage c = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = c.createGraphics();
+    g.drawImage(src, 0, 0, com);*/
+    return tk.createCustomCursor(src, new Point(x,y), imageFileName);
   }
 
 }

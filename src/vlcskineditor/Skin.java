@@ -168,6 +168,7 @@ public class Skin implements ActionListener{
    * @param f The file that should be parsed
    * @throws java.lang.Exception
    */
+  @Deprecated
   private void parse(File f) throws Exception {
     //System.out.println("Creating Buffered Reader...");
     BufferedReader br = new BufferedReader(new FileReader(f));
@@ -614,6 +615,7 @@ public class Skin implements ActionListener{
    * @param id The id of the Bitmap resource
    * @return the BufferedImage represented by the resource looked for
    */
+  @Deprecated
   public BufferedImage getBitmapImage(String id) {
     Resource r = getResource(id);
     if(r==null) {

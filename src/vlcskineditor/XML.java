@@ -42,6 +42,7 @@ public class XML {
    * @param field The name of the attribute whose value is to be retrieved
    * @return      The attribute's value
    */
+  @Deprecated
   public static String getValue(String line, String field) {    
     int value_start = line.indexOf(" "+field+"=\"") + field.length() +3;
     int value_end = line.indexOf("\"",value_start);
@@ -55,6 +56,7 @@ public class XML {
    * @param field
    * @return Integer value of the attribute
    */
+  @Deprecated
   public static int getIntValue(String line, String field) {
     int i = 0;
     try {
@@ -73,6 +75,7 @@ public class XML {
    * @param field
    * @return Boolean value of the attribute
    */
+  @Deprecated
   public static boolean getBoolValue(String line, String field) {
     boolean b = false;
     try {

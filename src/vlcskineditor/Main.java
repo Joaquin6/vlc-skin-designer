@@ -1882,7 +1882,6 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       java.awt.Image img = null;
       try {
         img = Toolkit.getDefaultToolkit().createImage(Main.class.getResource(filename));
-        //img = ImageIO.read(file);
         return new ImageIcon(img);  
       } catch (Exception ex) {
         ex.printStackTrace();

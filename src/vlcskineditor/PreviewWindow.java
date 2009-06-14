@@ -29,6 +29,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import vlcskineditor.history.*;
+import vlcskineditor.items.Slider;
 
 
 /**
@@ -66,6 +67,8 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   /** The main program */
   private Main m;
 
+  private Cursor move_normal_c, path_normal_c, path_active_c, path_add_c, path_del_c;
+
   /** The cursor mode constant indicating that the cursor should move the selected item */
   public static final int CURSOR_MOVE = 1;
   /** The cursor mode constant indicating that the cursor should edit the path of the selected item */
@@ -101,7 +104,13 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     frame.setResizable(true);        
     frame.setFrameIcon(Main.preview_icon);
     addMouseListener(this);
-    addMouseMotionListener(this);    
+    addMouseMotionListener(this);
+    
+    move_normal_c = new Cursor(Cursor.MOVE_CURSOR);
+    path_normal_c = Helper.createImageCursor("icons/path_cursor.gif", 4, 0, this);
+    path_active_c = Helper.createImageCursor("icons/path_cursor_active.gif", 4, 0, this);
+    path_add_c = Helper.createImageCursor("icons/path_cursor_add.gif", 4, 0, this);
+    path_del_c = Helper.createImageCursor("icons/path_cursor_del.gif", 4, 0, this);
   }
   /**
    * Is invoked when the user deselects a layout.
@@ -199,7 +208,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   }
   public void mouseClicked(MouseEvent e) {
     if(mode==CURSOR_PATH) {
-      //TODO path editing mouseClicked
+      
     }
   }
   public void mouseDragged(MouseEvent e) {
@@ -223,12 +232,12 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   }  
   public void mouseEntered(MouseEvent e) {
     if(mode==CURSOR_PATH) {
-      setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+      setCursor(path_normal_c);
     }
   }
   public void mouseExited(MouseEvent e) {
     if(mode==CURSOR_PATH) {
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(Cursor.getDefaultCursor());
     }
   }
   public void mouseMoved(MouseEvent e) {
@@ -236,14 +245,38 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
     if(mode==CURSOR_MOVE) {
       if(selected_item.contains(e.getX()/z,e.getY()/z)) {
         selected_item.setHover(true);
-        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        setCursor(move_normal_c);
       }
       else {
         selected_item.setHover(false);
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        setCursor(Cursor.getDefaultCursor());
       }
     } else {
-      //TODO path editing mouseMoved
+      if(selected_item.getClass().equals(Slider.class)) {
+        Slider s = (Slider)selected_item;
+        int mx = e.getX()/z-s.offsetx-s.x;
+        int my = e.getY()/z-s.offsety-s.y;
+        int over = -1;
+        for(int i=0; i<s.getControlPointNum(); i++) {
+          int dx = Math.abs(mx-s.getControlX(i));
+          int dy = Math.abs(my-s.getControlY(i));
+          if(dx<2 && dy<2) over = i;
+        }
+        if(over!=-1) {
+          if(e.isAltDown()) {
+            setCursor(path_del_c);
+          } else {
+            setCursor(path_active_c);
+          }
+        } else {
+          if(e.isShiftDown()) {
+            setCursor(path_add_c);
+          } else {
+            setCursor(path_normal_c);
+          }
+        }
+        //System.out.println(getCursor().getName());
+      }
     }
   }
   public void mousePressed(MouseEvent e) {
