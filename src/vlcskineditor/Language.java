@@ -41,7 +41,7 @@ public class Language {
       File index = new File("lang/languages.txt");
       FileInputStream fis = new FileInputStream(index);
       String text = "";
-      byte[] chars = new byte[1024];
+      byte[] chars = new byte[(int)index.length()];
       while(fis.read(chars)!=-1) text+=new String(chars, "UTF-8");
 
       String[] lines = text.split("\\n");
@@ -113,19 +113,21 @@ public class Language {
     try {
       FileInputStream fis = new FileInputStream(f);
       String text = "";
-      byte[] chars = new byte[1024];
+      byte[] chars = new byte[(int)f.length()];
       while(fis.read(chars)!=-1) text+=new String(chars, "UTF-8");
 
       String[] lines = text.split("\\n");
 
       for(String line:lines) {
-        line = line.trim();
+        //line = line.trim();
         if(line.startsWith("@include")) {
           String file = line.substring(9);
           load(new File(f.getParent() + File.separator + file));
         } else if(!line.startsWith("#")) {
+          System.out.println(line);
           String[] fields = line.split("\\|");
           if(fields.length == 2) {
+            System.out.println(fields[0]+"-->"+fields[1]);
             strings.put(fields[0], fields[1].replaceAll("\\\\n", "\n"));
           }
         }

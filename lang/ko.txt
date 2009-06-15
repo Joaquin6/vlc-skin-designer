@@ -72,12 +72,12 @@ MENU_HELP_ABOUT|정보(A)
 MENU_HELP_ABOUT_MN|A
 
 #The toolbar
-TOOLBAR_OPEN|열기...
-TOOLBAR_SAVE|저장
+TOOLBAR_OPEN|스킨 열기...
+TOOLBAR_SAVE|스킨 변경 저장
 TOOLBAR_UNDO|실행취소
 TOOLBAR_REDO|실행복구
-TOOLBAR_MOVE|Item moving tool
-TOOLBAR_PATH|Slider editing tool
+TOOLBAR_MOVE|항목 이동 도구
+TOOLBAR_PATH|슬라이더 수정 도구
 
 #Resource Window
 WIN_RES_TITLE|자원
