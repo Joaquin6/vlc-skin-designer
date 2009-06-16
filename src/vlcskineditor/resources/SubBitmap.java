@@ -73,28 +73,15 @@ public class SubBitmap extends ImageResource implements ActionListener{
     y = XML.getIntAttributeValue(n, "y", y);
     width = XML.getIntAttributeValue(n, "width", width);
     height = XML.getIntAttributeValue(n, "height", height);
+    nbframes = XML.getIntAttributeValue(n, "nbframes", nbframes);
+    fps = XML.getIntAttributeValue(n, "fps", fps);
 
     updateImage();
     
     created = true;
   }
   
-  /**
-   * Creates a new SubBitmap from XML.
-   * @param xmlcode The XML code from which the SubBitmap should be created. One line per tag.
-   * @param s_ The skin in which the SubBitmap is used.
-   * @param parent_ The parent Bitmap. This is necessary to create the image represented by the SubBitmap.
-   */
-  public SubBitmap(String xmlcode, Skin s_, Bitmap parent_) {
-    parent=parent_;
-    s=s_;
-    id = XML.getValue(xmlcode,"id");
-    x = XML.getIntValue(xmlcode,"x");
-    y = XML.getIntValue(xmlcode,"y");
-    width = XML.getIntValue(xmlcode,"width");
-    height = XML.getIntValue(xmlcode,"height");
-    created = true;
-  }  
+  
   /**
    * Creates a new SubBitmap from user input.
    * @param s_ The skin in which the SubBitmap is used.
@@ -110,6 +97,24 @@ public class SubBitmap extends ImageResource implements ActionListener{
     height = 1;
     showOptions();        
   }
+
+  /**
+   * Creates a copy of a SubBitmap
+   * @param b The SubBitmap to copy
+   */
+  public SubBitmap(SubBitmap b) {
+    s = b.s;
+    id = b.id;
+    parent = b.parent;
+    x = b.x;
+    y = b.y;
+    width = b.width;
+    height = b.height;
+    nbframes = b.nbframes;
+    fps = b.fps;
+    created = true;
+  }
+
   /**
    * Regenerates the image represented by the SubBitmap object.
    */
@@ -119,6 +124,7 @@ public class SubBitmap extends ImageResource implements ActionListener{
       fireResourceChangedEvent(id);
     }
   }
+
   @Override
   public void update() {    
     if(!created) {      

@@ -85,55 +85,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       }
     }
   }
-  
-  /**
-   * Creates a new Bitmap from xml code
-   * @param xmlcode The XML code from which the Bitmap should be created. One line per tag.
-   * @param s_ The skin in which the Bitmap is used. This is necessary in order that the image file can be located relatively to the skin file.
-   */  
-  public Bitmap(String xmlcode, Skin s_) { 
-    s = s_;
-    id = XML.getValue(xmlcode,"id"); 
-    file = XML.getValue(xmlcode,"file");         
-    
-    if(xmlcode.indexOf("alphacolor=\"")!=-1) {
-      alphacolor = XML.getValue(xmlcode,"alphacolor");        
-    }
-    
-    if(xmlcode.indexOf("nbframes=\"")!=-1) {      
-      nbframes = Integer.parseInt(XML.getValue(xmlcode,"nbframes"));        
-    }
-    
-    if(xmlcode.indexOf("fps=\"")!=-1) {
-     fps = Integer.parseInt(XML.getValue(xmlcode,"fps"));          
-    }
-    if (xmlcode.indexOf("\n")!=-1) {
-      String[] lines = xmlcode.split("\n");
-      for(int i=1;i<lines.length-1;i++) {
-        if(lines[i].startsWith("<SubBitmap")) SubBitmaps.add(new SubBitmap(lines[i],s,this));
-      }
-    }    
-    updateImage();
-  }
-  /**
-   * Creates a new Bitmap from given attributes
-   * @param id_ The ID of the new Bitmap
-   * @param file_ The relative path to the image file.
-   * @param alphacolor_ The alphacolor of the Bitmap. Format is #RRGGBB.
-   * @param nbframes_ If the Bitmap is animated this defines the number of frames.
-   * @param fps_ If the Bitmap is animated this defines the frames displayed per second.
-   * @param s_ The skin in which the Bitmap is used.
-   * This is necessary in order that the image file can be located relatively to the skin file.
-   */
-  public Bitmap(String id_, String file_, String alphacolor_, int nbframes_, int fps_, Skin s_) {
-    s=s_;
-    id=id_;
-    file=file_;
-    alphacolor=alphacolor_;
-    nbframes=nbframes_;
-    fps=fps_;        
-    updateImage();
-  }
+ 
   /**
    * Creates a new Bitmap from a given file.
    * @param s_ The skin in which the Bitmap is used.
@@ -150,7 +102,24 @@ public class Bitmap extends ImageResource implements ActionListener{
     id = id_t;
     s.updateResources();    
     updateImage();
-  } 
+  }
+
+  /**
+   * Creates a copy of a bitmap
+   * @param b The bitmap to copy
+   */
+  public Bitmap(Bitmap b) {
+    s = b.s;
+    id = b.id;
+    file = b.file;
+    alphacolor = b.alphacolor;
+    nbframes = b.nbframes;
+    fps = b.fps;
+
+    updateImage();
+
+    for(SubBitmap sb:b.SubBitmaps) SubBitmaps.add(new SubBitmap(sb));
+  }
   /**
    * Regenerates the image represented by the Bitmap object.
    */
@@ -199,6 +168,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     }
     return true;
   }
+
   @Override
   public void update() {
     BitmapEditEvent be = new BitmapEditEvent(this);
@@ -217,6 +187,7 @@ public class Bitmap extends ImageResource implements ActionListener{
     fireResourceChangedEvent(oldID);
   }
   @Override
+  
   public void showOptions() {
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_BITMAP_TITLE"));

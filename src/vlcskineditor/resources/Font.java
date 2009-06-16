@@ -68,34 +68,6 @@ public class Font extends Resource implements ActionListener{
   }
   
   /**
-   * Creates a Font from XML.
-   * @param xmlcode The XML code from which the Font should be created. One line per tag.
-   * @param s_ The Skin in which the Font is used.
-   */
-  public Font(String xmlcode, Skin s_) {
-    s = s_;
-    id = XML.getValue(xmlcode,"id");
-    file = XML.getValue(xmlcode,"file");
-    if(xmlcode.indexOf("size=\"")!=-1) {
-      size = Integer.parseInt(XML.getValue(xmlcode,"size"));
-    }
-    updateFont();
-  }
-  /**
-   * Creates a new Font from the given attributes.
-   * @param id_ The ID of the Font.
-   * @param file_ The relative path to the font file.
-   * @param size_ The Font's size.
-   * @param s_ The Skin in which the Font is used.
-   */
-  public Font(String id_,String file_,int size_, Skin s_) {
-    s=s_;
-    id=id_;
-    file=file_;
-    size=size_;
-    updateFont();
-  }
-  /**
    * Creates a new Font from a given file.
    * @param s_ The skin in which the Font is used.
    * @param f_ The font file. TrueType or OpenType. Notice that only OpenType fonts in a TrueType container
@@ -111,6 +83,7 @@ public class Font extends Resource implements ActionListener{
     s.expandResource(id);
     updateFont();
   }
+  
   /**
    * Creates a new Font from user input.
    * @param s_ The skin in which the Font is used.
@@ -123,6 +96,19 @@ public class Font extends Resource implements ActionListener{
     s.expandResource(id);
     showOptions();
   }
+
+  /**
+   * Creates a copy of a font
+   * @param f The font to copy
+   */
+  public Font(Font f) {
+    s = f.s;
+    id = f.id;
+    file = f.file;
+    size = f.size;
+    updateFont();
+  }
+
   public boolean updateFont() {
     try {      
       f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,new File(s.skinfolder+file));      

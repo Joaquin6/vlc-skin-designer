@@ -1246,7 +1246,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
         Bitmap b = (Bitmap)r;        
-        Bitmap b2 = new Bitmap(b.returnCode(""),s);        
+        Bitmap b2 = new Bitmap((Bitmap)b);
         b2.renameForCopy(p);
         s.resources.add(b2);
         s.updateResources();
@@ -1254,7 +1254,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       }
       else if(r.getClass()==SubBitmap.class) {
         SubBitmap sb = (SubBitmap)r;        
-        SubBitmap sb2 = new SubBitmap(sb.returnCode(""),s,sb.getParentBitmap());
+        SubBitmap sb2 = new SubBitmap(sb);
         sb2.renameForCopy(p);
         sb.getParentBitmap().SubBitmaps.add(sb2);
         s.updateResources();
@@ -1262,7 +1262,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       }
       else {
         vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;        
-        vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font(f.returnCode(""),s);
+        vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font((vlcskineditor.resources.Font)f);
         f2.renameForCopy(p);
         s.resources.add(f2);
         s.updateResources();

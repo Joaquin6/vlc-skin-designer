@@ -25,6 +25,7 @@ package vlcskineditor.resources;
 import vlcskineditor.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+import org.w3c.dom.Node;
 
 /**
  * Represents a BitmapFont
@@ -32,27 +33,46 @@ import javax.swing.tree.*;
  * You can't create or edit a BitmapFont in the editor nor are they displayed in the preview!</i>
  * @author Daniel Dreibrodt
  */
-public class BitmapFont extends Resource{
+public class BitmapFont extends Resource {
   String file;
   final String TYPE_DEFAULT = "digits";
   String ftype = TYPE_DEFAULT;
+  private boolean created = false;
   
   {
     type = "BitmapFont";
   }
-  
-  /** Creates a new instance of BitmapFont */
-  public BitmapFont(String xmlcode, Skin s_) {
+
+  /**
+   * Creates a BitmapFont from a XML node
+   * @param n The XML node
+   * @param s_ The parent skin
+   */
+  public BitmapFont(Node n, Skin s_) {
     s = s_;
-    id = XML.getValue(xmlcode,"id");
-    file = XML.getValue(xmlcode,"file");
-    if(xmlcode.indexOf("type=\"")!=-1) {
-      ftype = XML.getValue(xmlcode,"type");
-    }
+    id = XML.getStringAttributeValue(n, "id", id);
+    file = XML.getStringAttributeValue(n, "file", file);
+    ftype = XML.getStringAttributeValue(n, "type", ftype);
+    created = true;
   }
+
+  /**
+   * Creates a copy of a BitmapFont
+   * @param f The BitmapFont to copy
+   */
+  public BitmapFont(BitmapFont f) {
+    s = f.s;
+    id = f.id;
+    file = f.file;
+    ftype = f.ftype;
+    created = true;
+  }
+
+
   public void update() {
     
   }
+
   public void showOptions() {
     JOptionPane.showMessageDialog(s.m, "BitmapFonts are not yet supported.");
   }
