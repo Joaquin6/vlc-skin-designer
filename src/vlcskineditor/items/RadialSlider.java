@@ -75,43 +75,45 @@ public class RadialSlider extends Item{
     value = XML.getStringAttributeValue(n, "value", value);
     tooltiptext = XML.getStringAttributeValue(n, "tooltiptext", tooltiptext);
     created = true;
-  }
+  } 
 
-  /** Creates a new instance of RadialSlider */
-  public RadialSlider(String xmlcode, Skin s_) {
-    s = s_;
-    sequence = XML.getValue(xmlcode,"sequence");
-    nbimages = XML.getIntValue(xmlcode,"nbimages");
-    if(xmlcode.indexOf("minangle=\"")!=-1) minangle = XML.getIntValue(xmlcode,"minangle");
-    if(xmlcode.indexOf("maxangle=\"")!=-1) maxangle = XML.getIntValue(xmlcode,"maxangle");
-    if(xmlcode.indexOf("value=\"")!=-1) value = XML.getValue(xmlcode,"value");
-    if(xmlcode.indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(xmlcode,"tooltiptext");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = "Unnamed radial slider #"+s.getNewId();
-    if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
-  }
-
+  /**
+   * Creates an empty radial slider and shows a dialog to edit it
+   * @param s_ The parent skin
+   */
   public RadialSlider(Skin s_) {
     s = s_;
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+
+  /**
+   * Creates a copy of a radial slider
+   * @param r The slider to copy
+   */
+  public RadialSlider(RadialSlider r) {
+    super(r);
+    sequence = r.sequence;
+    nbimages = r.nbimages;
+    minangle = r.minangle;
+    maxangle = r.maxangle;
+    value = r.value;
+    tooltiptext = r.tooltiptext;
+  }
+
   @Override
   public void update() {
     //TODO
     created = true;
     updateToGlobalVariables();
   }
+
   @Override
   public void showOptions() {
     //TODO
     JOptionPane.showMessageDialog(s.m, Language.get("ERROR_RADIALSLIDER"),Language.get("ERROR_RADIALSLIDER_TITLE"),JOptionPane.ERROR_MESSAGE);
   }
+  
   @Override
   public String returnCode(String indent) {
     String code = indent+"<RadialSlider";
@@ -132,14 +134,17 @@ public class RadialSlider extends Item{
     code+="/>";
     return code;
   }
+
   @Override
   public void draw(Graphics2D g, int z) {
     draw(g,offsetx,offsety,z);
   }
+
   @Override
   public void draw(Graphics2D g, int x_, int y_, int z) {
     
   }
+  
   @Override
   public DefaultMutableTreeNode getTreeNode() {
     DefaultMutableTreeNode node = new DefaultMutableTreeNode("RadialSlider: "+id);       

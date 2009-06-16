@@ -89,6 +89,29 @@ public abstract class Item {
   /** Determines whether the process of creating the object has finished **/
   public boolean created = false;
 
+  public Item() {
+
+  }
+
+  /**
+   * Creates a copy of the given item
+   * @param i The item to copy
+   */
+  public Item(Item i) {
+    s = i.s;
+    id = i.id;
+    x = i.x;
+    y = i.y;
+    lefttop = i.lefttop;
+    rightbottom = i.rightbottom;
+    xkeepratio = i.xkeepratio;
+    ykeepratio = i.ykeepratio;
+    visible = i.visible;
+    help = i.help;
+    //The rest is implemented in the different item classes
+    created = true;
+  }
+
   /** Show a dialog to modify the items's parameters */
   public abstract void showOptions();
 
@@ -216,8 +239,8 @@ public abstract class Item {
    * @param p The rename pattern, where %oldid% will be replaced by the Item's old ID
    */
   public void renameForCopy(String p) {
-    p = p.replaceAll("%oldid%", id);
-    String newid_base = p;
+    String p_ = p.replaceAll("%oldid%", id);
+    String newid_base = p_;
     String newid = newid_base;
     int i = 1;
     while (s.idExists(newid)) {
@@ -233,15 +256,6 @@ public abstract class Item {
    */
   public void updateToGlobalVariables() {
     vis = s.gvars.parseBoolean(visible);
-  }
-
-  /**
-   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
-   * @param oldid The former ID of the renamed resource
-   * @param newid The new ID of the renamed resource
-   */
-  public void resourceRenamed(String oldid, String newid) {
-
   }
 
 }

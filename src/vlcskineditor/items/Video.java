@@ -80,29 +80,28 @@ public class Video extends Item implements ActionListener{
 
     created = true;
   }
-  
-  /** Creates a new instance of Video */
-  public Video(String xmlcode, Skin s_) {
-    s = s_;
-    if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");
-    if(xmlcode.indexOf(" height=\"")!=-1) height = XML.getIntValue(xmlcode,"height");
-    if(xmlcode.indexOf(" autoresize=\"")!=-1) autoresize = XML.getBoolValue(xmlcode,"autoresize");
-    if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf(" ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
-    created = true;
-  }
+
+  /**
+   * Creates a new empty video and shows its options dialog
+   * @param s_ The parent skin
+   */
   public Video(Skin s_) {
     s = s_;    
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+
+  /**
+   * Creates a copy of a video
+   * @param v The video to copy
+   */
+  public Video(Video v) {
+    super(v);
+    width = v.width;
+    height = v.height;
+    autoresize = v.autoresize;
+  }
+
   @Override
   public void update() {
     if(!created) {

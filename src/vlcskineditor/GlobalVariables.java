@@ -117,6 +117,7 @@ public class GlobalVariables implements ActionListener{
    * @return The evaluated expression
    */
   public boolean parseBoolean(String bool) {
+    if(bool==null) return false;
     String rName = bool;
     rName = rName.replaceAll("equalizer.isEnabled",String.valueOf(equalizer_isEnabled));
     rName = rName.replaceAll("vlc.hasVout",String.valueOf(vlc_hasVout));

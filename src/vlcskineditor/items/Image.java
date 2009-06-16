@@ -31,12 +31,14 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Image item
  * @author Daniel Dreibrodt
  */
-public class Image extends Item implements ActionListener {
+public class Image extends Item implements ActionListener, ResourceChangeListener {
 
   public final String RESIZE_DEFAULT = "mosaic";
   public final String ACTION_DEFAULT = "none";
@@ -83,63 +85,36 @@ public class Image extends Item implements ActionListener {
     help = XML.getStringAttributeValue(n, "help", help);
 
     image_res = s.getImageResource(image);
+    if(image_res!=null) image_res.addResourceChangeListener(this);
 
     created = true;
-  }
+  }  
 
-  /** Creates a new instance of Image
-   * @param xmlcode The XML code
-   * @param s_ The parent skin
+  /**
+   * Creates a new empty image and shows a dialog to edit it
+   * @param s_ The skin to which the Image belongs
    */
-  public Image(String xmlcode, Skin s_) {
-    s = s_;
-    image = XML.getValue(xmlcode, "image");
-    image_res = s.getImageResource(image);
-    if(xmlcode.indexOf("resize=\"") != -1) {
-      resize = XML.getValue(xmlcode, "resize");
-    }
-    if(xmlcode.indexOf("action=\"") != -1) {
-      action = XML.getValue(xmlcode, "action");
-    }
-    if(xmlcode.indexOf("action2=\"") != -1) {
-      action2 = XML.getValue(xmlcode, "action2");
-    }
-
-
-    if(xmlcode.indexOf("x=\"") != -1) {
-      x = XML.getIntValue(xmlcode, "x");
-    }
-    if(xmlcode.indexOf("y=\"") != -1) {
-      y = XML.getIntValue(xmlcode, "y");
-    }
-    if(xmlcode.indexOf("id=\"") != -1) {
-      id = XML.getValue(xmlcode, "id");
-    } else {
-      id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
-    }
-    if(xmlcode.indexOf("lefttop=\"") != -1) {
-      lefttop = XML.getValue(xmlcode, "lefttop");
-    }
-    if(xmlcode.indexOf("rightbottom=\"") != -1) {
-      rightbottom = XML.getValue(xmlcode, "rightbottom");
-    }
-    if(xmlcode.indexOf("xkeepratio=\"") != -1) {
-      xkeepratio = XML.getBoolValue(xmlcode, "xkeepratio");
-    }
-    if(xmlcode.indexOf("ykeepratio=\"") != -1) {
-      ykeepratio = XML.getBoolValue(xmlcode, "ykeepratio");
-    }
-    if(xmlcode.indexOf(" visible=\"") != -1) {
-      visible = XML.getValue(xmlcode, "visible");
-    }
-    created = true;
-  }
-
   public Image(Skin s_) {
     s = s_;
     image = "";
     id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
     showOptions();
+  }
+
+  /**
+   * Creates a copy of an image
+   * @param i The image to copy
+   */
+  public Image(Image i) {
+    super(i);
+
+    image = i.image;
+    resize = i.resize;
+    action = i.action;
+    action2 = i.action2;
+
+    image_res = s.getImageResource(image);
+    if(image_res!=null) image_res.addResourceChangeListener(this);
   }
 
   public void update() {
@@ -191,10 +166,12 @@ public class Image extends Item implements ActionListener {
       s.m.hist.addEvent(iee);
     }
     updateToGlobalVariables();
+    if(image_res!=null) image_res.addResourceChangeListener(this);
   }
 
   @Override
   public void showOptions() {
+    if(image_res!=null) image_res.removeResourceChangeListener(this);
     if(frame == null) {
       frame = new JFrame(Language.get("WIN_IMAGE_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
@@ -502,6 +479,7 @@ public class Image extends Item implements ActionListener {
           l.remove(this);
         }
       }
+      if(image_res!=null) image_res.addResourceChangeListener(this);
       frame.setVisible(false);
       frame.dispose();
       frame = null;
@@ -602,8 +580,8 @@ public class Image extends Item implements ActionListener {
   }
 
   @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(image.equals(oldid)) image = newid;
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(image.equals(e.getOldID())) image = e.getResource().id;
   }
 
 }

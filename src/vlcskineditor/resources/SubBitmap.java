@@ -114,7 +114,10 @@ public class SubBitmap extends ImageResource implements ActionListener{
    * Regenerates the image represented by the SubBitmap object.
    */
   public void updateImage() {
-    if(parent.image != null) image = parent.image.getSubimage(x,y,width,height);
+    if(parent.image != null) {
+      image = parent.image.getSubimage(x,y,width,height);
+      fireResourceChangedEvent(id);
+    }
   }
   @Override
   public void update() {    
@@ -135,12 +138,12 @@ public class SubBitmap extends ImageResource implements ActionListener{
       created = true;
     }
     else {
-      if(!id_tf.getText().equals(id)) {
-        String oldid = id;
-        id=id_tf.getText();
-        s.resourceRenamed(oldid, id);
+      String oldID = id;
+      id = id_tf.getText();
+      if(!oldID.equals(id)) {
         s.updateResources();
         s.expandResource(id);
+        fireResourceChangedEvent(oldID);
       }
       x=Integer.parseInt(x_tf.getText());
       y=Integer.parseInt(y_tf.getText());

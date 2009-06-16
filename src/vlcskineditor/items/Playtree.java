@@ -21,9 +21,14 @@
  *****************************************************************************/
 package vlcskineditor.items;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import vlcskineditor.*;
 import vlcskineditor.history.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.swing.*;
@@ -31,13 +36,16 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import vlcskineditor.resources.Font;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Playtree item
  * @author Daniel Dreibrodt
  */
-public class Playtree extends Item implements ActionListener {
+public class Playtree extends Item implements ActionListener, ResourceChangeListener {
 
   public final int WIDTH_DEFAULT = 0;
   public final int HEIGHT_DEFAULT = 0;
@@ -55,6 +63,7 @@ public class Playtree extends Item implements ActionListener {
   public int width = WIDTH_DEFAULT;
   public int height = HEIGHT_DEFAULT;
   public String font;
+  Font font_res;
   public String var = VAR_DEFAULT;
   public String bgimage = BGIMAGE_DEFAULT;
   public String fgcolor = FGCOLOR_DEFAULT;
@@ -75,6 +84,8 @@ public class Playtree extends Item implements ActionListener {
   JButton visible_btn, bgcolor1_btn, bgcolor2_btn, fgcolor_btn, playcolor_btn, selcolor_btn, slider_btn, ok_btn, help_btn;
   JButton cancel_btn;
   ImageResource bgimage_res, itemimage_res, openimage_res, closedimage_res;
+
+  BufferedImage cache = null;
 
 
   {
@@ -127,115 +138,24 @@ public class Playtree extends Item implements ActionListener {
     openimage_res = s.getImageResource(openimage);
     closedimage_res = s.getImageResource(closedimage);
     itemimage_res = s.getImageResource(itemimage);
+    try {
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
 
+    if(bgimage_res!=null) bgimage_res.addResourceChangeListener(this);
+    if(openimage_res!=null) openimage_res.addResourceChangeListener(this);
+    if(closedimage_res!=null) closedimage_res.addResourceChangeListener(this);
+    if(itemimage_res!=null) itemimage_res.addResourceChangeListener(this);
+    if(font_res!=null) font_res.addResourceChangeListener(this);
     created = true;
   }
 
-  /** Creates a new instance of Playtree
-   * @param xmlcode The XML code
-   * @param s_ The parent skin
+  /**
+   * Creates a new empty playtree and shows a dialog to edit it
+   * @param s_ The skin to which the playtree belongs
    */
-  public Playtree(String xmlcode, Skin s_) {
-    s = s_;
-    String[] xmllines = xmlcode.split("\n");
-    if(xmllines[0].startsWith("<Playlist")) {
-      flat = true;
-    }
-    font = XML.getValue(xmllines[0], "font");
-    if(xmllines[0].indexOf("width=\"") != -1) {
-      width = XML.getIntValue(xmllines[0], "width");
-    }
-    if(xmllines[0].indexOf("height=\"") != -1) {
-      height = XML.getIntValue(xmllines[0], "height");
-    }
-    if(xmllines[0].indexOf("var=\"") != -1) {
-      var = XML.getValue(xmllines[0], "var");
-    }
-    if(xmllines[0].indexOf("bgimage=\"") != -1) {
-      bgimage = XML.getValue(xmllines[0], "bgimage");
-      bgimage_res = s.getImageResource(bgimage);
-    }
-    if(xmllines[0].indexOf("openimage=\"") != -1) {
-      openimage = XML.getValue(xmllines[0], "openimage");
-      openimage_res = s.getImageResource(openimage);
-    }
-    if(xmllines[0].indexOf("closedimage=\"") != -1) {
-      closedimage = XML.getValue(xmllines[0], "closedimage");
-      closedimage_res = s.getImageResource(closedimage);
-    }
-    if(xmllines[0].indexOf("itemimage=\"") != -1) {
-      itemimage = XML.getValue(xmllines[0], "itemimage");
-      itemimage_res = s.getImageResource(itemimage);
-    }
-    if(xmllines[0].indexOf("fgcolor=\"") != -1) {
-      fgcolor = XML.getValue(xmllines[0], "fgcolor");
-    }
-    if(xmllines[0].indexOf("playcolor=\"") != -1) {
-      playcolor = XML.getValue(xmllines[0], "playcolor");
-    }
-    if(xmllines[0].indexOf("selcolor=\"") != -1) {
-      selcolor = XML.getValue(xmllines[0], "selcolor");
-    }
-    if(xmllines[0].indexOf("bgcolor1=\"") != -1) {
-      bgcolor1 = XML.getValue(xmllines[0], "bgcolor1");
-    }
-    if(xmllines[0].indexOf("bgcolor2=\"") != -1) {
-      bgcolor2 = XML.getValue(xmllines[0], "bgcolor2");
-    }
-    if(xmllines[0].indexOf("flat=\"") != -1) {
-      flat = XML.getBoolValue(xmllines[0], "flat");
-    }
-    if(xmllines[0].indexOf("x=\"") != -1) {
-      x = XML.getIntValue(xmllines[0], "x");
-    }
-    if(xmllines[0].indexOf("y=\"") != -1) {
-      y = XML.getIntValue(xmllines[0], "y");
-    }
-    if(xmllines[0].indexOf("id=\"") != -1) {
-      id = XML.getValue(xmllines[0], "id");
-    } else {
-      id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
-    }
-    if(xmllines[0].indexOf("lefttop=\"") != -1) {
-      lefttop = XML.getValue(xmllines[0], "lefttop");
-    }
-    if(xmllines[0].indexOf("rightbottom=\"") != -1) {
-      rightbottom = XML.getValue(xmllines[0], "rightbottom");
-    }
-    if(xmllines[0].indexOf("xkeepratio=\"") != -1) {
-      xkeepratio = XML.getBoolValue(xmllines[0], "xkeepratio");
-    }
-    if(xmllines[0].indexOf("ykeepratio=\"") != -1) {
-      ykeepratio = XML.getBoolValue(xmllines[0], "ykeepratio");
-    }
-    if(xmlcode.indexOf(" visible=\"") != -1) {
-      visible = XML.getValue(xmlcode, "visible");
-    }
-
-    int i = 1;
-    if(xmllines.length > 1) {
-      if(xmllines[i].trim().startsWith("<!--")) {
-        while(xmllines[i].trim().indexOf("-->") == -1) {
-          i++;
-        }
-      } else if(xmllines[i].trim().startsWith("<Slider")) {
-        if(xmllines[i].trim().indexOf("/>") != -1) {
-          slider = new Slider(xmllines[i].trim(), s, true);
-        } else {
-          String itemcode = xmllines[i].trim();
-          i++;
-          while(!xmllines[i].trim().startsWith("</Slider>")) {
-            itemcode += "\n" + xmllines[i];
-            i++;
-          }
-          itemcode += "\n" + xmllines[i].trim();
-          slider = new Slider(itemcode, s, true);
-        }
-      }
-    }
-    created = true;
-  }
-
   public Playtree(Skin s_) {
     s = s_;
     font = "defaultfont";
@@ -243,6 +163,46 @@ public class Playtree extends Item implements ActionListener {
     slider = new Slider(s, true);
     showOptions();
     s.updateItems();
+  }
+
+  /**
+   * Creates a copy of a playtree
+   * @param p The playtree to copy
+   */
+  public Playtree(Playtree p) {
+    super(p);
+
+    width = p.width;
+    height = p.height;
+    font = p.font;
+    bgimage = p.bgimage;
+    openimage = p.openimage;
+    closedimage = p.closedimage;
+    itemimage = p.itemimage;
+    fgcolor = p.fgcolor;
+    bgcolor1 = p.bgcolor1;
+    bgcolor2 = p.bgcolor2;
+    playcolor = p.playcolor;
+    selcolor = p.selcolor;
+    flat = p.flat;
+
+    if(p.slider!=null) slider = new Slider(p.slider);
+
+    bgimage_res = s.getImageResource(bgimage);
+    openimage_res = s.getImageResource(openimage);
+    closedimage_res = s.getImageResource(closedimage);
+    itemimage_res = s.getImageResource(itemimage);
+    try{
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
+
+    if(bgimage_res!=null) bgimage_res.addResourceChangeListener(this);
+    if(openimage_res!=null) openimage_res.addResourceChangeListener(this);
+    if(closedimage_res!=null) closedimage_res.addResourceChangeListener(this);
+    if(itemimage_res!=null) itemimage_res.addResourceChangeListener(this);
+    if(font_res!=null) font_res.addResourceChangeListener(this);
   }
 
   @Override
@@ -313,10 +273,28 @@ public class Playtree extends Item implements ActionListener {
       s.m.hist.addEvent(pee);
     }
     updateToGlobalVariables();
+    updateCache();
+
+    try{
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
+    if(bgimage_res!=null) bgimage_res.addResourceChangeListener(this);
+    if(openimage_res!=null) openimage_res.addResourceChangeListener(this);
+    if(closedimage_res!=null) closedimage_res.addResourceChangeListener(this);
+    if(itemimage_res!=null) itemimage_res.addResourceChangeListener(this);
+    if(font_res!=null) font_res.addResourceChangeListener(this);
   }
 
   @Override
   public void showOptions() {
+    if(bgimage_res!=null) bgimage_res.removeResourceChangeListener(this);
+    if(openimage_res!=null) openimage_res.removeResourceChangeListener(this);
+    if(closedimage_res!=null) closedimage_res.removeResourceChangeListener(this);
+    if(itemimage_res!=null) itemimage_res.removeResourceChangeListener(this);
+    if(font_res!=null) font_res.removeResourceChangeListener(this);
+
     if(frame == null) {
       frame = new JFrame(Language.get("WIN_PLAYTREE_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
@@ -874,6 +852,11 @@ public class Playtree extends Item implements ActionListener {
           l.remove(this);
         }
       }
+      if(bgimage_res!=null) bgimage_res.addResourceChangeListener(this);
+      if(openimage_res!=null) openimage_res.addResourceChangeListener(this);
+      if(closedimage_res!=null) closedimage_res.addResourceChangeListener(this);
+      if(itemimage_res!=null) itemimage_res.addResourceChangeListener(this);
+      if(font_res!=null) font_res.addResourceChangeListener(this);
       frame.setVisible(false);
       frame.dispose();
       frame = null;
@@ -965,121 +948,127 @@ public class Playtree extends Item implements ActionListener {
   public void draw(Graphics2D g_, int x_, int y_, int z) {
     if(width <= 0 || height <= 0) {
       return;
-    }
-    BufferedImage buffi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-    Graphics2D g = (Graphics2D) (buffi.getGraphics());
-    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    }    
     if(!created) {
       return;
     }
     if(vis) {
-      Font f = s.getFont(font);
-      g.setFont(f);
-      FontMetrics fm = g.getFontMetrics();
-      if(!bgimage.equals("none")) {
-        g.drawImage(bgimage_res.image.getSubimage(0, 0, width, height), 0, 0, null);
-      } else {
-        g.setColor(Color.decode(bgcolor1));
-        g.fillRect(0, 0, width, height);
-        for(int i = fm.getHeight(); i < height; i = i + fm.getHeight() * 2) {
-          g.setColor(Color.decode(bgcolor2));
-          g.fillRect(x, 0 + i, width, fm.getHeight());
-        }
-      }
-      int liney = 0;
-      BufferedImage cfi = null;
-      if(closedimage_res != null) {
-        cfi = closedimage_res.image;
-      }
-      BufferedImage ofi = null;
-      if(openimage_res != null) {
-        ofi = openimage_res.image;
-      }
-      BufferedImage iti = null;
-      if(itemimage_res != null) {
-        iti = itemimage_res.image;
-      }
-      int lineheight = fm.getHeight();
-      int cfi_offset = 0, ofi_offset = 0, iti_offset = 0;
-      if(cfi != null) {
-        if(cfi.getHeight() > lineheight) {
-          lineheight = cfi.getHeight();
-        }
-        cfi_offset = (lineheight - cfi.getHeight()) / 2;
-      }
-      if(ofi != null) {
-        if(ofi.getHeight() > lineheight) {
-          lineheight = ofi.getHeight();
-        }
-        ofi_offset = (lineheight - ofi.getHeight()) / 2;
-      }
-      if(iti != null) {
-        if(iti.getHeight() > lineheight) {
-          lineheight = iti.getHeight();
-        }
-        iti_offset = (lineheight - iti.getHeight()) / 2;
-      }
-      int text_offset = (lineheight - fm.getAscent()) / 2;
-
-      g.setColor(Color.decode(fgcolor));
-      if(cfi != null && !flat) {
-        g.drawImage(cfi, 0, liney + cfi_offset, null);
-        liney += lineheight;
-        g.drawString("Closed folder", 0 + cfi.getWidth() + 2, liney - text_offset);
-      }
-      if(ofi != null && !flat) {
-        g.drawImage(ofi, 0, liney + ofi_offset, null);
-        liney += lineheight;
-        g.drawString("Open folder", 0 + ofi.getWidth() + 2, liney - text_offset);
-      }
-      if(ofi != null && iti != null && !flat) {
-        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
-        liney += lineheight;
-        g.drawString("Normal item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
-      } else if(iti != null) {
-        g.drawImage(iti, 0, liney + iti_offset, null);
-        liney += fm.getHeight();
-        g.drawString("Normal item", 0 + iti.getWidth() + 4, liney - text_offset);
-      } else {
-        liney += fm.getHeight();
-        g.drawString("Normal item", 0, liney - text_offset);
-      }
-      g.setColor(Color.decode(playcolor));
-      if(ofi != null && iti != null && !flat) {
-        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
-        liney += lineheight;
-        g.drawString("Playing item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
-      } else if(iti != null) {
-        g.drawImage(iti, 0, liney + iti_offset, null);
-        liney += lineheight;
-        g.drawString("Playing item", 0 + iti.getWidth() + 2, liney - text_offset);
-      } else {
-        liney += lineheight;
-        g.drawString("Playing item", 0, liney - text_offset);
-      }
-      g.setColor(Color.decode(selcolor));
-      g.fillRect(0, liney, width, lineheight);
-      g.setColor(Color.decode(fgcolor));
-      if(ofi != null && iti != null && !flat) {
-        g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
-        liney += lineheight;
-        g.drawString("Selected item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
-      } else if(iti != null) {
-        g.drawImage(iti, 0, liney + iti_offset, null);
-        liney += lineheight;
-        g.drawString("Selected item", 0 + iti.getWidth() + 2, liney - text_offset);
-      } else {
-        liney += lineheight;
-        g.drawString("Selected item", 0, liney - text_offset);
-      }
-
-      g_.drawImage(buffi, (x + x_) * z, (y + y_) * z, width * z, height * z, null);
+      if(cache==null) updateCache();
+      g_.drawImage(cache, (x + x_) * z, (y + y_) * z, width * z, height * z, null);
       slider.draw(g_, x_, y_, z);
     }
     if(selected) {
       g_.setColor(Color.RED);
       g_.drawRect((x + x_) * z, (y + y_) * z, width * z - 1, height * z - 1);
 
+    }
+  }
+
+  /**
+   * Updates the cached rendering
+   */
+  public void updateCache() {
+    cache = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = (Graphics2D)cache.getGraphics();
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    java.awt.Font f = s.getFont(font);
+    g.setFont(f);
+    FontMetrics fm = g.getFontMetrics();
+    if(!bgimage.equals("none")) {
+      g.drawImage(bgimage_res.image.getSubimage(0, 0, width, height), 0, 0, null);
+    } else {
+      g.setColor(Color.decode(bgcolor1));
+      g.fillRect(0, 0, width, height);
+      for(int i = fm.getHeight(); i < height; i = i + fm.getHeight() * 2) {
+        g.setColor(Color.decode(bgcolor2));
+        g.fillRect(x, 0 + i, width, fm.getHeight());
+      }
+    }
+    int liney = 0;
+    BufferedImage cfi = null;
+    if(closedimage_res != null) {
+      cfi = closedimage_res.image;
+    }
+    BufferedImage ofi = null;
+    if(openimage_res != null) {
+      ofi = openimage_res.image;
+    }
+    BufferedImage iti = null;
+    if(itemimage_res != null) {
+      iti = itemimage_res.image;
+    }
+    int lineheight = fm.getHeight();
+    int cfi_offset = 0, ofi_offset = 0, iti_offset = 0;
+    if(cfi != null) {
+      if(cfi.getHeight() > lineheight) {
+        lineheight = cfi.getHeight();
+      }
+      cfi_offset = (lineheight - cfi.getHeight()) / 2;
+    }
+    if(ofi != null) {
+      if(ofi.getHeight() > lineheight) {
+        lineheight = ofi.getHeight();
+      }
+      ofi_offset = (lineheight - ofi.getHeight()) / 2;
+    }
+    if(iti != null) {
+      if(iti.getHeight() > lineheight) {
+        lineheight = iti.getHeight();
+      }
+      iti_offset = (lineheight - iti.getHeight()) / 2;
+    }
+    int text_offset = (lineheight - fm.getAscent()) / 2;
+
+    g.setColor(Color.decode(fgcolor));
+    if(cfi != null && !flat) {
+      g.drawImage(cfi, 0, liney + cfi_offset, null);
+      liney += lineheight;
+      g.drawString("Closed folder", 0 + cfi.getWidth() + 2, liney - text_offset);
+    }
+    if(ofi != null && !flat) {
+      g.drawImage(ofi, 0, liney + ofi_offset, null);
+      liney += lineheight;
+      g.drawString("Open folder", 0 + ofi.getWidth() + 2, liney - text_offset);
+    }
+    if(ofi != null && iti != null && !flat) {
+      g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+      liney += lineheight;
+      g.drawString("Normal item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+    } else if(iti != null) {
+      g.drawImage(iti, 0, liney + iti_offset, null);
+      liney += fm.getHeight();
+      g.drawString("Normal item", 0 + iti.getWidth() + 4, liney - text_offset);
+    } else {
+      liney += fm.getHeight();
+      g.drawString("Normal item", 0, liney - text_offset);
+    }
+    g.setColor(Color.decode(playcolor));
+    if(ofi != null && iti != null && !flat) {
+      g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+      liney += lineheight;
+      g.drawString("Playing item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+    } else if(iti != null) {
+      g.drawImage(iti, 0, liney + iti_offset, null);
+      liney += lineheight;
+      g.drawString("Playing item", 0 + iti.getWidth() + 2, liney - text_offset);
+    } else {
+      liney += lineheight;
+      g.drawString("Playing item", 0, liney - text_offset);
+    }
+    g.setColor(Color.decode(selcolor));
+    g.fillRect(0, liney, width, lineheight);
+    g.setColor(Color.decode(fgcolor));
+    if(ofi != null && iti != null && !flat) {
+      g.drawImage(iti, 0 + ofi.getWidth() + 2, liney + iti_offset, null);
+      liney += lineheight;
+      g.drawString("Selected item", 0 + ofi.getWidth() + iti.getWidth() + 4, liney - text_offset);
+    } else if(iti != null) {
+      g.drawImage(iti, 0, liney + iti_offset, null);
+      liney += lineheight;
+      g.drawString("Selected item", 0 + iti.getWidth() + 2, liney - text_offset);
+    } else {
+      liney += lineheight;
+      g.drawString("Selected item", 0, liney - text_offset);
     }
   }
 
@@ -1124,9 +1113,8 @@ public class Playtree extends Item implements ActionListener {
 
   @Override
   public void renameForCopy(String p) {
-    String p_ = p;
     super.renameForCopy(p);
-    slider.renameForCopy(p_);
+    slider.renameForCopy(p);
   }
 
   @Override
@@ -1137,14 +1125,13 @@ public class Playtree extends Item implements ActionListener {
     }
   }
 
-  @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(slider!=null) slider.resourceRenamed(oldid, newid);
-    if(bgimage.equals(oldid)) bgimage = newid;
-    if(openimage.equals(oldid)) openimage = newid;
-    if(closedimage.equals(oldid)) closedimage = newid;
-    if(itemimage.equals(oldid)) itemimage = newid;
-    if(font.equals(oldid)) font = newid;
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(bgimage.equals(e.getOldID())) bgimage = e.getResource().id;
+    if(openimage.equals(e.getOldID())) openimage = e.getResource().id;
+    if(closedimage.equals(e.getOldID())) closedimage = e.getResource().id;
+    if(itemimage.equals(e.getOldID())) itemimage = e.getResource().id;
+    if(font.equals(e.getOldID())) font = e.getResource().id;
+    updateCache();
   }
 
 }

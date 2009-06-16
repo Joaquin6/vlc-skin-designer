@@ -64,6 +64,8 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   private int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
   /** The move event added to the history when the dragging action has finished */
   private ItemMoveEvent ime = null;
+  /** The slider edit event added to the history when the slider point dragging action has finished */
+  private SliderEditEvent see = null;
   /** The main program */
   private Main m;
 
@@ -208,7 +210,30 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   }
   public void mouseClicked(MouseEvent e) {
     if(mode==CURSOR_PATH) {
-      
+      if(selected_item.getClass().equals(Slider.class)) {
+        Slider s = (Slider)selected_item;
+        int mx = e.getX()/z-s.offsetx-s.x;
+        int my = e.getY()/z-s.offsety-s.y;
+        int over = -1;
+        for(int i=0; i<s.getControlPointNum(); i++) {
+          int dx = Math.abs(mx-s.getControlX(i));
+          int dy = Math.abs(my-s.getControlY(i));
+          if(dx<2 && dy<2) over = i;
+        }
+        if(over!=-1) {
+          if(e.isAltDown()) {
+            s.removeControlPoint(over);
+          } else {
+            setCursor(path_active_c);
+          }
+        } else {
+          if(e.isShiftDown()) {
+            s.addControlPoint(mx, my);
+          } else {
+            setCursor(path_normal_c);
+          }
+        }
+      }
     }
   }
   public void mouseDragged(MouseEvent e) {

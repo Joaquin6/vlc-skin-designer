@@ -31,12 +31,14 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Button item
  * @author Daniel Dreibrodt
  */
-public class Button extends Item implements ActionListener{
+public class Button extends Item implements ActionListener, ResourceChangeListener {
   
   public final String DOWN_DEFAULT = "none";
   public final String OVER_DEFAULT = "none";
@@ -86,44 +88,47 @@ public class Button extends Item implements ActionListener{
     help = XML.getStringAttributeValue(n, "help", help);
 
     up_res = s.getImageResource(up);
+    if(up_res!=null) up_res.addResourceChangeListener(this);
     over_res = s.getImageResource(over);
+    if(over_res!=null) over_res.addResourceChangeListener(this);
     down_res = s.getImageResource(down);
+    if(down_res!=null) down_res.addResourceChangeListener(this);
     
-    created = true;   
-  }
-  
-  /** Creates a new instance of Button
-   * @param xmlcode The XML code
-   * @param s_ The parent skin
-   */
-  public Button(String xmlcode, Skin s_) {
-    s = s_;
-    up = XML.getValue(xmlcode,"up");
-    if(xmlcode.indexOf("down=\"")!=-1) down = XML.getValue(xmlcode,"down");
-    if(xmlcode.indexOf("over=\"")!=-1) over = XML.getValue(xmlcode,"over");
-    if(xmlcode.indexOf("action=\"")!=-1) action = XML.getValue(xmlcode,"action");
-    if(xmlcode.indexOf("x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf("y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf("id=\"")!=-1) id = XML.getValue(xmlcode,"id"); 
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf("ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
-    if(xmlcode.indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(xmlcode,"tooltiptext");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
     created = true;
-
-    up_res = s.getImageResource(up);
-    over_res = s.getImageResource(over);
-    down_res = s.getImageResource(down);
   }
+
+  /**
+   * Creates a new empty Button and shows the dialog to edit it
+   * @param s_ The skin to which this Button belongs
+   */
   public Button(Skin s_) {
     s=s_;
     up = "";
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+
+  /**
+   * Creates a copy of a given Button
+   * @param b The Button to copy
+   */
+  public Button(Button b) {
+    super(b);
+
+    up = b.up;
+    down = b.down;
+    over = b.over;
+    action = b.action;
+    tooltiptext = b.tooltiptext;
+
+    up_res = s.getImageResource(up);
+    if(up_res!=null) up_res.addResourceChangeListener(this);
+    over_res = s.getImageResource(over);
+    if(over_res!=null) over_res.addResourceChangeListener(this);
+    down_res = s.getImageResource(down);
+    if(down_res!=null) down_res.addResourceChangeListener(this);
+  }
+
   @Override
   public void update() {
     if(!created) {      
@@ -175,10 +180,17 @@ public class Button extends Item implements ActionListener{
       s.updateItems();    
       s.expandItem(id);
     }
+    if(up_res!=null) up_res.addResourceChangeListener(this);
+    if(over_res!=null) over_res.addResourceChangeListener(this);
+    if(down_res!=null) down_res.addResourceChangeListener(this);
     updateToGlobalVariables();
   }
+  
   @Override
   public void showOptions() {
+    if(up_res!=null) up_res.removeResourceChangeListener(this);
+    if(over_res!=null) over_res.removeResourceChangeListener(this);
+    if(down_res!=null) down_res.removeResourceChangeListener(this);
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_BUTTON_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
@@ -504,6 +516,12 @@ public class Button extends Item implements ActionListener{
         java.util.List<Item> l = s.getParentListOf(id);
         if(l!=null) l.remove(this);        
       }
+      up_res = s.getImageResource(up);
+      if(up_res!=null) up_res.addResourceChangeListener(this);
+      over_res = s.getImageResource(over);
+      if(over_res!=null) over_res.addResourceChangeListener(this);
+      down_res = s.getImageResource(down);
+      if(down_res!=null) down_res.addResourceChangeListener(this);
       frame.setVisible(false);
       frame.dispose();
       frame = null;
@@ -572,10 +590,16 @@ public class Button extends Item implements ActionListener{
   }
 
   @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(up.equals(oldid)) up = newid;
-    if(over.equals(oldid)) over = newid;
-    if(down.equals(oldid)) down = newid;
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(up.equals(e.getOldID())) {
+      up = e.getResource().id;
+    }
+    if(over.equals(e.getOldID())) {
+      over = e.getResource().id;
+    }
+    if(down.equals(e.getOldID())) {
+      down = e.getResource().id;
+    }
   }
 
 }

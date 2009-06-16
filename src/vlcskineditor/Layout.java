@@ -94,97 +94,6 @@ public class Layout implements ActionListener{
   }
   
   /**
-   * Creates a new Layout from XML.
-   * @param xmlcode The XML code from which the Layout should be created.
-   * @param w_ The Window to which this Layout will belong
-   * @param s_ The Skin in which the Layout is used.
-   */
-  public Layout(String xmlcode, Window w_, Skin s_) {
-    s=s_;
-    parent=w_;
-    String[] code = xmlcode.split("\n");
-    width = XML.getIntValue(code[0],"width");
-    height = XML.getIntValue(code[0],"height");
-    if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(code[0].indexOf("minwidth=\"")!=-1) minwidth = XML.getIntValue(code[0],"minwidth");
-    if(code[0].indexOf("maxwidth=\"")!=-1) maxwidth = XML.getIntValue(code[0],"maxwidth");
-    if(code[0].indexOf("minheight=\"")!=-1) minheight = XML.getIntValue(code[0],"minheight");
-    if(code[0].indexOf("maxheight=\"")!=-1) maxheight = XML.getIntValue(code[0],"maxheight");
-    
-    for(int i=0;i<code.length;i++) code[i] = code[i].trim();    
-    for(int i=1;i<code.length;i++) {      
-      if (code[i].startsWith("<!--")) {
-        while(code[i].indexOf("-->")==-1) {
-          i++;
-        }
-      }
-      else if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
-      else if(code[i].startsWith("<Button")) items.add(new vlcskineditor.items.Button(code[i],s));
-      else if(code[i].startsWith("<Checkbox")) items.add(new vlcskineditor.items.Checkbox(code[i],s));
-      else if(code[i].startsWith("<Image")) items.add(new vlcskineditor.items.Image(code[i],s));
-      else if(code[i].startsWith("<Text")) items.add(new Text(code[i],s));
-      else if(code[i].startsWith("<Video")) items.add(new Video(code[i],s));
-      else if(code[i].startsWith("<RadialSlider")) items.add(new RadialSlider(code[i],s));
-      else if(code[i].startsWith("<Group")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Group>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new Group(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Panel")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Panel>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new vlcskineditor.items.Panel(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Playlist")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Playlist>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new Playtree(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Playtree")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Playtree>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new Playtree(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Slider")) {
-        if(code[i].indexOf("/>")!=-1) {
-          items.add(new Slider(code[i],s));
-        }
-        else {
-          String itemcode = code[i];
-          i++;
-          while(!code[i].startsWith("</Slider>")) {          
-            itemcode += "\n"+code[i];
-            i++;
-          }
-          itemcode += "\n"+code[i];
-          items.add(new Slider(itemcode,s));
-        }                
-      }
-    }
-    created = true;
-  }
-  /**
    * Creates a new Layout from user input.
    * @param w_ The Window to which this Layout will belong
    * @param s_ The Skin in which the Layout is used.
@@ -196,6 +105,24 @@ public class Layout implements ActionListener{
     width=0;
     height=0;
     showOptions();
+  }
+
+  /**
+   * Creates a copy of a Layout
+   * @param l The layout to copy
+   */
+  public Layout(Layout l) {
+    s = l.s;
+    parent = l.parent;
+    id = l.id;
+    width = l.width;
+    height = l.height;
+    minwidth = l.minwidth;
+    minheight = l.minheight;
+    maxwidth = l.maxwidth;
+    maxheight = l.maxheight;
+    Helper.copyItems(l.items, items);
+    created = true;
   }
   /**
    * Updates the Layout's attributes according to the user input.
@@ -544,14 +471,7 @@ public class Layout implements ActionListener{
     return false;
   }
 
-  /**
-   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
-   * @param oldid The former ID of the renamed resource
-   * @param newid The new ID of the renamed resource
-   */
-  public void resourceRenamed(String oldid, String newid) {
-    for(Item i:items) i.resourceRenamed(oldid, newid);
-  }
+
   /**
    * Renames the Layout and all its content after the copy process
    * @param p The renaming pattern, %oldid% will be replaced by the Layout's/Item's old ID

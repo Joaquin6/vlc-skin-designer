@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Helper.java
  *****************************************************************************
- * Copyright (C) 2007 Daniel Dreibrodt
+ * Copyright (C) 2007-2009 Daniel Dreibrodt
  *
  * This file is part of VLC Skin Editor
  *
@@ -25,13 +25,8 @@ package vlcskineditor;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.MediaTracker;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,12 +34,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.swing.JOptionPane;
+import vlcskineditor.items.Anchor;
+import vlcskineditor.items.Button;
+import vlcskineditor.items.Checkbox;
+import vlcskineditor.items.Group;
+import vlcskineditor.items.Image;
+import vlcskineditor.items.Panel;
+import vlcskineditor.items.Playtree;
+import vlcskineditor.items.RadialSlider;
+import vlcskineditor.items.Slider;
+import vlcskineditor.items.SliderBackground;
+import vlcskineditor.items.Text;
+import vlcskineditor.items.Video;
 
 /**
- * Provides helper method
+ * Provides helper methods
  * @author Daniel Dreibrodt
  */
 public class Helper {
@@ -156,12 +164,33 @@ public class Helper {
    */
   public static Cursor createImageCursor(String imageFileName, int x, int y, Component com) {
     Toolkit tk = Toolkit.getDefaultToolkit();
-    Image src = tk.createImage(Main.class.getResource(imageFileName));
+    java.awt.Image src = tk.createImage(Main.class.getResource(imageFileName));
     /*Dimension d = tk.getBestCursorSize(src.getWidth(null), src.getHeight(null));
     BufferedImage c = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_ARGB);
     Graphics2D g = c.createGraphics();
     g.drawImage(src, 0, 0, com);*/
     return tk.createCustomCursor(src, new Point(x,y), imageFileName);
+  }
+
+  /**
+   * Copies items from one list to the other
+   * @param src The source item list
+   * @param target The target list, filled with copies of the source items
+   */
+  public static void copyItems(List<Item> src, List<Item> target) {
+    for(Item i:src) {
+      if(i.getClass().equals(Anchor.class)) target.add(new Anchor((Anchor)i));
+      else if(i.getClass().equals(Button.class)) target.add(new Button((Button)i));
+      else if(i.getClass().equals(Checkbox.class)) target.add(new Checkbox((Checkbox)i));
+      else if(i.getClass().equals(Group.class)) target.add(new Group((Group)i));
+      else if(i.getClass().equals(Image.class)) target.add(new Image((Image)i));
+      else if(i.getClass().equals(Panel.class)) target.add(new Panel((Panel)i));
+      else if(i.getClass().equals(Playtree.class)) target.add(new Playtree((Playtree)i));
+      else if(i.getClass().equals(RadialSlider.class)) target.add(new RadialSlider((RadialSlider)i));
+      else if(i.getClass().equals(Slider.class)) target.add(new Slider((Slider)i));
+      else if(i.getClass().equals(Text.class)) target.add(new Text((Text)i));
+      else if(i.getClass().equals(Video.class)) target.add(new Video((Video)i));
+    }
   }
 
 }

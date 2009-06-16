@@ -76,24 +76,6 @@ public class Anchor extends Item implements ActionListener {
   }
   
   /**
-   * Creates a new Anchor from XML.
-   * @param xmlcode The XML code from which the Anchor should be created. One line per tag.
-   * @param s_ The skin in which the Anchor is used.
-   */
-  public Anchor(String xmlcode, Skin s_) {
-    s=s_;
-    if (xmlcode.indexOf(" points=\"")!=-1) points = XML.getValue(xmlcode,"points");
-    updateBezier();
-    priority = XML.getIntValue(xmlcode,"priority");
-    if (xmlcode.indexOf(" range=\"")!=-1) range = XML.getIntValue(xmlcode,"range");
-    if (xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if (xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = type+" #"+s.getNewId();
-    if(xmlcode.indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");  
-    created = true;
-  }
-  /**
    * Creates a new Anchor from user input.
    * @param s_ The Skin in which the Anchor is used.
    */
@@ -104,6 +86,19 @@ public class Anchor extends Item implements ActionListener {
     updateBezier();
     showOptions();
   }
+
+  /**
+   * Creates a copy of a given anchor
+   * @param a The anchor to copy
+   */
+  public Anchor(Anchor a) {
+    super(a);
+    priority = a.priority;
+    points = a.points;
+    range = a.range;
+    updateBezier();
+  }
+
   public void updateBezier() {
     String[] pnts = points.split("\\),\\(");
     xpos = new int[pnts.length];

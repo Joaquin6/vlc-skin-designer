@@ -22,21 +22,29 @@
 
 package vlcskineditor.items;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import vlcskineditor.*;
 import vlcskineditor.history.*;
 import java.awt.event.*;
-import java.awt.*;
+
 import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
+import vlcskineditor.resources.Font;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Text item
  * @author Daniel Dreibrodt
  */
-public class Text extends Item implements ActionListener{
+public class Text extends Item implements ActionListener, ResourceChangeListener {
   
   public final String TEXT_DEFAULT = "";
   public final String COLOR_DEFAULT = "#000000";
@@ -55,6 +63,8 @@ public class Text extends Item implements ActionListener{
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, text_tf, font_tf, color_tf, width_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, alignment_cb, scrolling_cb;
   JButton visible_btn, color_btn, ok_btn, cancel_btn, help_btn;
+
+  private Font font_res;
   
   {
     type = Language.get("TEXT");
@@ -87,36 +97,49 @@ public class Text extends Item implements ActionListener{
     help = XML.getStringAttributeValue(n, "help", help);
 
     created = true;
+
+    try {
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
+    if(font_res!=null) font_res.addResourceChangeListener(this);
   }
   
-  /** Creates a new instance of Text */
-  public Text(String xmlcode, Skin s_) {
-    s = s_;
-    font = XML.getValue(xmlcode,"font");
-    if(xmlcode.indexOf(" text=\"")!=-1) text = XML.getValue(xmlcode,"text");
-    if(xmlcode.indexOf(" alignment=\"")!=-1) alignment = XML.getValue(xmlcode,"alignment");
-    if(xmlcode.indexOf(" scrolling=\"")!=-1) scrolling = XML.getValue(xmlcode,"scrolling");
-    if(xmlcode.indexOf(" color=\"")!=-1) color = XML.getValue(xmlcode,"color");
-    if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf(" width=\"")!=-1) width = XML.getIntValue(xmlcode,"width");    
-    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf(" ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
-    created = true;
-  }
+  /**
+   * Creates a new empty Text item and shows a dialog to edit it
+   * @param s_ The parent skin
+   */
   public Text(Skin s_) {
     s = s_;
     font = "defaultfont";
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+
+  /**
+   * Creates a copy of a text
+   * @param t The text to copy
+   */
+  public Text(Text t) {
+    super(t);
+    font = t.font;
+    text = t.text;
+    width = t.width;
+    alignment = t.alignment;
+    scrolling = t.scrolling;
+    color = t.color;
+    try {
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
+    if(font_res!=null) font_res.addResourceChangeListener(this);
+  }
+
   @Override
   public void update() {
+    if(font_res!=null) font_res.removeResourceChangeListener(this);
     if(!created) {
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
@@ -170,6 +193,12 @@ public class Text extends Item implements ActionListener{
       s.m.hist.addEvent(tee);      
     }
     updateToGlobalVariables();
+    try {
+      font_res = (Font)s.getResource(font);
+    } catch(Exception ex) {
+      ex.printStackTrace();
+    }
+    if(font_res!=null) font_res.addResourceChangeListener(this);
   }
   @Override
   public void showOptions() {
@@ -538,20 +567,22 @@ public class Text extends Item implements ActionListener{
   public void draw(Graphics2D g, int x_, int y_, int z) {
     if(!created || font==null) return;
     
-    Font f = s.getFont(font);
+    java.awt.Font f = s.getFont(font);
     if(f==null) {
       Resource fr = s.getResource(font);
       if(fr.type.equals("Font")) {
         vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)fr;
-        f = new Font(Font.SANS_SERIF,Font.PLAIN,fnt.size);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,fnt.size);
       }
       else {
-        f = new Font(Font.SANS_SERIF,Font.PLAIN,12);
+        f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12);
       }      
     }    
     if(vis) {
       BufferedImage bi;
       String ptext = s.gvars.parseString(text);
+      g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+      g.setFont(f);
       if(width==0) {
         bi = new BufferedImage((int)g.getFontMetrics().getStringBounds(ptext,g).getWidth(),g.getFontMetrics().getHeight(),BufferedImage.TYPE_INT_ARGB);
       }
@@ -578,7 +609,7 @@ public class Text extends Item implements ActionListener{
   }
   @Override
   public boolean contains(int x_, int y_) {
-    Font f = s.getFont(font);
+    java.awt.Font f = s.getFont(font);
     return (x_>=x+offsetx && x_<=x+width+offsetx && y_>=y+offsety && y_<=y+f.getSize()+offsety);    
   }
   @Override
@@ -591,9 +622,8 @@ public class Text extends Item implements ActionListener{
     return (font.equals(id_));
   }
 
-  @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(font.equals(oldid)) font = newid;
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(font.equals(e.getOldID())) font = e.getResource().id;
   }
 
 }

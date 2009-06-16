@@ -72,12 +72,12 @@ MENU_HELP_ABOUT|O programe
 MENU_HELP_ABOUT_MN|P
 
 #The toolbar
-TOOLBAR_OPEN|Otvoriť
-TOOLBAR_SAVE|Uložiť
-TOOLBAR_UNDO|Dozadu
-TOOLBAR_REDO|Opakovať
-TOOLBAR_MOVE|Pohybujú nástroje
-TOOLBAR_PATH|Posuvník editačné nástroje
+TOOLBAR_OPEN|Otvoriť súbor so vzhľadom
+TOOLBAR_SAVE|Uložiť úpravy vzhľadu
+TOOLBAR_UNDO|Späť
+TOOLBAR_REDO|Dopredu
+TOOLBAR_MOVE|Nástroj na presúvanie objektov
+TOOLBAR_PATH|Nástroj na úpravu posuvníkov
 
 #Resource Window
 WIN_RES_TITLE|Zdrojové súbory
@@ -123,7 +123,7 @@ WIN_PREFS_TITLE|Nastavenia
 WIN_PREFS_UPDATE_L|Aktivovať automatické aktualizácie:
 WIN_PREFS_LANG_L|Jazyk:
 WIN_PREFS_LAF_L|Vzhľad programu:
-WIN_PREFS_TBAR_L|Show toolbar:
+WIN_PREFS_TBAR_L|Zobraziť panel nástrojov:
 WIN_PREFS_RESTART_L|<html><i>Niektoré nastavenia sa aktivujú až po reštartovaní programu.</i></html>
 
 #SubBitmap Edit and Skin Preview window

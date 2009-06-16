@@ -119,15 +119,13 @@ public class Language {
       String[] lines = text.split("\\n");
 
       for(String line:lines) {
-        //line = line.trim();
+        line = line.trim();
         if(line.startsWith("@include")) {
           String file = line.substring(9);
           load(new File(f.getParent() + File.separator + file));
         } else if(!line.startsWith("#")) {
-          System.out.println(line);
           String[] fields = line.split("\\|");
           if(fields.length == 2) {
-            System.out.println(fields[0]+"-->"+fields[1]);
             strings.put(fields[0], fields[1].replaceAll("\\\\n", "\n"));
           }
         }

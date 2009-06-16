@@ -158,7 +158,6 @@ public class Font extends Resource implements ActionListener{
     if(!id.equals(id_tf.getText())) {
       String oldid = id;
       id=id_tf.getText();
-      s.resourceRenamed(oldid, id);
       s.updateResources();
       s.expandResource(id);
     }

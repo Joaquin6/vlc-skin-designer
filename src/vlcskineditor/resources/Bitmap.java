@@ -205,16 +205,16 @@ public class Bitmap extends ImageResource implements ActionListener{
     file=file_tf.getText();
     alphacolor=alphacolor_tf.getText();
     nbframes=Integer.parseInt(nbframes_tf.getText());
-    fps=Integer.parseInt(fps_tf.getText());   
-    if(!id_tf.getText().equals(id)) {
-      String oldid = id;
-      id=id_tf.getText();
-      s.resourceRenamed(oldid, id);
+    fps=Integer.parseInt(fps_tf.getText());
+    String oldID = id;
+    id = id_tf.getText();
+    if(!oldID.equals(id)) {
       s.updateResources();
       s.expandResource(id);
     }    
     be.setNew();
     s.m.hist.addEvent(be);
+    fireResourceChangedEvent(oldID);
   }
   @Override
   public void showOptions() {

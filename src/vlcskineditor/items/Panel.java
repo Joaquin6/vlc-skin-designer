@@ -52,6 +52,11 @@ public class Panel extends Item implements ActionListener{
     type = Language.get("PANEL");
   }
 
+  /**
+   * Creates a panel from a XML node
+   * @param n The XML node
+   * @param s_ The skin to which the panel belongs
+   */
   public Panel(Node n, Skin s_) {
     s = s_;
 
@@ -71,76 +76,10 @@ public class Panel extends Item implements ActionListener{
     created = true;
   }
 
-  /** Creates a new instance of Panel */
-  public Panel(String xmlcode, Skin s_) {
-    s = s_;
-    String[] code = xmlcode.split("\n");
-    width = Integer.parseInt(XML.getValue(code[0],"width"));
-    width = Integer.parseInt(XML.getValue(code[0],"height"));
-    if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
-    if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
-    if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(code[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
-    if(code[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
-    if(code[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
-    if(code[0].indexOf("ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(code[0],"ykeepratio");
-    
-    for(int i=0;i<code.length;i++) code[i] = code[i].trim();
-    for(int i=1;i<code.length;i++) {      
-      if (code[i].startsWith("<!--")) {
-        while(code[i].indexOf("-->")==-1) {
-          i++;
-        }
-      }
-      if(code[i].startsWith("<Anchor")) items.add(new Anchor(code[i],s));
-      else if(code[i].startsWith("<Button")) items.add(new Button(code[i],s));
-      else if(code[i].startsWith("<Checkbox")) items.add(new Checkbox(code[i],s));
-      else if(code[i].startsWith("<Image")) items.add(new Image(code[i],s));
-      else if(code[i].startsWith("<Text")) items.add(new Text(code[i],s));
-      else if(code[i].startsWith("<Video")) items.add(new Video(code[i],s));
-      else if(code[i].startsWith("<RadialSlider")) items.add(new RadialSlider(code[i],s));
-      else if(code[i].startsWith("<Playlist")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Playlist>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new Playtree(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Playtree")) {
-        String itemcode = code[i];
-        i++;
-        while(!code[i].startsWith("</Playtree>")) {          
-          itemcode += "\n"+code[i];
-          i++;
-        }
-        itemcode += "\n"+code[i];
-        items.add(new Playtree(itemcode,s));        
-      }
-      else if(code[i].startsWith("<Slider")) {
-        if(code[i].indexOf("/>")!=-1) {
-          items.add(new Slider(code[i],s));
-        }
-        else {
-          String itemcode = code[i];
-          i++;
-          while(!code[i].startsWith("</Slider>")) {          
-            itemcode += "\n"+code[i];
-            i++;
-          }
-          itemcode += "\n"+code[i];
-          items.add(new Slider(itemcode,s));
-        }                
-      }
-    }
-    for(Item i:items) {
-      i.setOffset(x+offsetx,y+offsety);
-    }
-    created = true;
-  }
+  /**
+   * Creates a new empty panel and opens a dialog to edit it
+   * @param s_ The skin to which the panel belongs
+   */
   public Panel(Skin s_) {
     s=s_;
     width = 0;
@@ -149,6 +88,18 @@ public class Panel extends Item implements ActionListener{
     showOptions();
     s.updateItems();    
   }
+
+  /**
+   * Creates a copy of a panel
+   * @param p The panel to copy
+   */
+  public Panel(Panel p) {
+    super(p);
+    width = p.width;
+    height = p.height;
+    Helper.copyItems(p.items, items);
+  }
+
   public void update() {
     if(!created) {     
       id = id_tf.getText();

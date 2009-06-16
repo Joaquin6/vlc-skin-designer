@@ -139,16 +139,11 @@ public class Skin implements ActionListener{
     skinfile=f;
     skinfolder = f.getParentFile().getAbsolutePath()+File.separator;    
     try {
-      //parse(f);
       parseXML(f);
     } 
     catch (Exception ex) {
       ex.printStackTrace();
-      String stackTrace ="";
-      /*for (int i=0;i<ex.getStackTrace().length;i++) {
-        stackTrace+=ex.getStackTrace()[i].toString()+"\n";
-      }*/
-      JOptionPane.showMessageDialog(null,ex.toString()+"\n\n"+stackTrace,ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
+      JOptionPane.showMessageDialog(null,ex.toString(),ex.getMessage(),JOptionPane.ERROR_MESSAGE);    
       update();
       m.showWelcomeDialog();
     }    
@@ -160,123 +155,6 @@ public class Skin implements ActionListener{
         }
       }
     }
-  }
-  
-  /**
-   * Parses the given file line by line, expecting each xml-tag to be in his own single line
-   * @deprecated parseXML(File f) should now be used, as it is more flexible
-   * @param f The file that should be parsed
-   * @throws java.lang.Exception
-   */
-  @Deprecated
-  private void parse(File f) throws Exception {
-    //System.out.println("Creating Buffered Reader...");
-    BufferedReader br = new BufferedReader(new FileReader(f));
-    //System.out.println("Ready...");
-    //System.out.println("Reading Header...");
-    String header = br.readLine();
-    //System.out.println("Header read");
-    if (header.indexOf("//VideoLAN//DTD VLC Skins")==-1) {
-      br.close();        
-      System.err.println("Invalid header:\n"+header);
-      throw new Exception(Language.get("ERROR_SKIN_INVALID"));        
-
-    }
-    //System.out.println("Valid header");
-    boolean eof = false;
-    String line = "";  
-    while(!eof) {              
-      try {
-        //System.out.println("Reading line");
-        line = br.readLine();          
-        if (line==null) break;
-        line = line.trim();
-      }        
-      catch(Exception e) {
-        eof = true;
-        break;
-      }    
-      if (line.startsWith("<!--")) {
-        while(line.indexOf("-->")==-1) {
-          line = br.readLine();
-        }
-      }
-      //<editor-fold defaultstate="collapsed" desc=" ThemeInfo tag "> 
-      else if(line.startsWith("<ThemeInfo")) {         
-        if(line.indexOf("name")!=-1) themeinfo_name = XML.getValue(line,"name");
-        if(line.indexOf("author")!=-1) themeinfo_author = XML.getValue(line,"author");
-        if(line.indexOf("email")!=-1) themeinfo_email = XML.getValue(line,"email");
-        if(line.indexOf("webpage")!=-1) themeinfo_webpage = XML.getValue(line,"webpage");
-      }
-      //</editor-fold>
-      //<editor-fold defaultstate="collapsed" desc=" Theme tag "> 
-      else if(line.startsWith("<Theme")) {
-        if(line.indexOf("version")!=-1) theme_version = XML.getValue(line,"version");          
-        if(line.indexOf("tooltipfont")!=-1) theme_tooltipfont = XML.getValue(line,"tooltipfont");
-        if(line.indexOf("magnet")!=-1) theme_magnet = Integer.parseInt(XML.getValue(line,"magnet"));
-        if(line.indexOf(" alpha")!=-1) theme_alpha = Integer.parseInt(XML.getValue(line,"alpha"));
-        if(line.indexOf("movealpha")!=-1) theme_movealpha = Integer.parseInt(XML.getValue(line,"movealpha"));
-      }
-      //</editor-fold>                
-      //<editor-fold defaultstate="collapsed" desc=" Bitmap tag "> 
-      else if(line.startsWith("<Bitmap")) {          
-        if(line.indexOf("/>")!=-1) {
-          resources.add(new Bitmap(line,this));
-          //System.out.println("Bitmap identified: "+line);
-        }
-        else {
-          //System.out.println("Bitmap with Subbitmaps identified: "+line);
-          boolean tagclosed=false;
-          String curline = "";
-          while(!tagclosed) {
-            try {
-              curline = br.readLine();
-              curline = curline.trim();           
-            }
-            catch (Exception e) {
-              tagclosed=true;
-            }
-            if(curline.startsWith("</Bitmap>"))  {
-              line +="\n"+curline;
-              tagclosed = true;
-            }
-            else {
-              line+="\n"+curline;
-            }
-          }
-          resources.add(new Bitmap(line,this));
-          //System.out.println("Bitmap with Subbmitmaps completely identified");
-        }
-      }
-      //</editor-fold>
-      else if(line.startsWith("<Font")) resources.add(new Font(line,this));
-      else if(line.startsWith("<BitmapFont")) resources.add(new BitmapFont(line,this));        
-      //<editor-fold defaultstate="collapsed" desc=" Window tag "> 
-      else if(line.startsWith("<Window")) {
-        boolean tagclosed=false;
-        String curline="";
-        while(!tagclosed) {
-          try {
-            curline = br.readLine();
-            curline = curline.trim();               
-          }
-          catch (Exception e) {
-            tagclosed=true;
-          }
-          if(curline.startsWith("</Window>"))  {
-            line +="\n"+curline;
-            tagclosed = true;
-          }
-          else {
-            line+="\n"+curline;
-          }
-        }
-        windows.add(new Window(line,this));
-      }
-      //</editor-fold>
-    }
-    br.close();
-    //System.out.println("Buffered Reader was closed");
   }
   
   /**
@@ -609,30 +487,6 @@ public class Skin implements ActionListener{
     return null;
   }
   
-  /**
-   * Returns the image object of a bitmap
-   * @deprecated Use getImageResource instead
-   * @param id The id of the Bitmap resource
-   * @return the BufferedImage represented by the resource looked for
-   */
-  @Deprecated
-  public BufferedImage getBitmapImage(String id) {
-    Resource r = getResource(id);
-    if(r==null) {
-      return null;
-    }
-    else {
-      if(r.getClass()==Bitmap.class) {        
-        Bitmap b = (Bitmap)r;
-        return b.image;        
-      }
-      else if(r.getClass()==SubBitmap.class) {
-        SubBitmap sb = (SubBitmap)r;
-        return sb.image;
-      }
-      else return null;
-    }
-  }
   public java.awt.Font getFont(String id) {
     if(id.equals("defaultfont")) {
       return (new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,12));
@@ -669,19 +523,6 @@ public class Skin implements ActionListener{
       }
     }
     return false;
-  }
-
-  /**
-   * Changes all references to the resource formerly identfied by <i>oldid</i> to the resources <i>newid</id>
-   * @param oldid The former ID of the renamed resource
-   * @param newid The new ID of the renamed resource
-   */
-  public void resourceRenamed(String oldid, String newid) {
-    for(Window w:windows) {
-      for(Layout l:w.layouts) {
-        l.resourceRenamed(oldid, newid);
-      }
-    }
   }
 
   /** Returns the parent element that contains the item of the given id **/

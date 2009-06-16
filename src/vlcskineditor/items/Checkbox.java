@@ -31,12 +31,14 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Checkbox item
  * @author Daniel Dreibrodt
  */
-public class Checkbox extends Item implements ActionListener{
+public class Checkbox extends Item implements ActionListener, ResourceChangeListener {
   
   public final String DOWN1_DEFAULT = "none";
   public final String DOWN2_DEFAULT = "none";
@@ -73,7 +75,12 @@ public class Checkbox extends Item implements ActionListener{
   {
     type = Language.get("CHECKBOX");
   }
-  
+
+  /**
+   * Creates a new Checkbox from a XML node
+   * @param n The XML node
+   * @param s_ The Skin to which the Checkbox belongs
+   */
   public Checkbox(Node n, Skin s_) {
     s = s_;
     id = XML.getStringAttributeValue(n, "id", Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId())));
@@ -100,55 +107,25 @@ public class Checkbox extends Item implements ActionListener{
     created = true;
     
     up1_res = s.getImageResource(up1);
+    if(up1_res!=null) up1_res.addResourceChangeListener(this);
     over1_res = s.getImageResource(over1);
+    if(over1_res!=null) over1_res.addResourceChangeListener(this);
     down1_res = s.getImageResource(down1);
+    if(down1_res!=null) down1_res.addResourceChangeListener(this);
     up2_res = s.getImageResource(up2);
+    if(up2_res!=null) up2_res.addResourceChangeListener(this);
     over2_res = s.getImageResource(over2);
+    if(over2_res!=null) over2_res.addResourceChangeListener(this);
     down2_res = s.getImageResource(down2);
+    if(down2_res!=null) down2_res.addResourceChangeListener(this);
+
+    updateToGlobalVariables();
   }
-  
-  /** Creates a new instance of Checkbox
-   * @param xmlcode The XML code
-   * @param s_ The parent skin
+
+  /**
+   * Creates a new empty Checkbox and opens a dialog to edit it
+   * @param s_ The skin to which the Checkbox belongs
    */
-  public Checkbox(String xmlcode, Skin s_) {
-    s = s_;
-    up1 = XML.getValue(xmlcode,"up1");
-    up1_res = s.getImageResource(up1);
-    up2 = XML.getValue(xmlcode,"up2");
-    up2_res = s.getImageResource(up2);
-    state = XML.getValue(xmlcode,"state");
-    if(xmlcode.indexOf(" over1=\"")!=-1) {
-      over1 = XML.getValue(xmlcode,"over1");
-      over1_res = s.getImageResource(over1);
-    }
-    if(xmlcode.indexOf(" over2=\"")!=-1) {
-      over2 = XML.getValue(xmlcode,"over2");
-      over2_res = s.getImageResource(over2);
-    }
-    if(xmlcode.indexOf(" down1=\"")!=-1) {
-      down1 = XML.getValue(xmlcode,"down1");
-      down1_res = s.getImageResource(down1);
-    }
-    if(xmlcode.indexOf(" down2=\"")!=-1) {
-      down2 = XML.getValue(xmlcode,"down2");
-      down2_res = s.getImageResource(down2);
-    }
-    if(xmlcode.indexOf(" action1=\"")!=-1) action1 = XML.getValue(xmlcode,"action1");
-    if(xmlcode.indexOf(" action2=\"")!=-1) action2 = XML.getValue(xmlcode,"action2");
-    if(xmlcode.indexOf(" tooltiptext1=\"")!=-1) tooltiptext1 = XML.getValue(xmlcode,"tooltiptext1");
-    if(xmlcode.indexOf(" tooltiptext2=\"")!=-1) tooltiptext2 = XML.getValue(xmlcode,"tooltiptext2");
-    if(xmlcode.indexOf(" x=\"")!=-1) x = XML.getIntValue(xmlcode,"x");
-    if(xmlcode.indexOf(" y=\"")!=-1) y = XML.getIntValue(xmlcode,"y");
-    if(xmlcode.indexOf(" id=\"")!=-1) id = XML.getValue(xmlcode,"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(xmlcode.indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(xmlcode,"lefttop");
-    if(xmlcode.indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(xmlcode,"rightbottom");
-    if(xmlcode.indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(xmlcode,"xkeepratio");
-    if(xmlcode.indexOf(" ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(xmlcode,"ykeepratio");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
-    created = true;
-  }
   public Checkbox(Skin s_) {
     s = s_;
     up1="none";
@@ -157,8 +134,45 @@ public class Checkbox extends Item implements ActionListener{
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     showOptions();
   }
+
+  /**
+   * Creates a copy of a Checkbox
+   * @param c The Checkbox to copy
+   */
+  public Checkbox(Checkbox c) {
+    super(c);
+
+    state = c.state;
+
+    up1 = c.up1;
+    down1 = c.down1;
+    over1 = c.over1;
+    action1 = c.action1;
+    tooltiptext1 = c.tooltiptext1;
+    up2 = c.up2;
+    down2 = c.down2;
+    over2 = c.over2;
+    action2 = c.action2;
+    tooltiptext2 = c.tooltiptext2;
+
+    up1_res = s.getImageResource(up1);
+    if(up1_res!=null) up1_res.addResourceChangeListener(this);
+    over1_res = s.getImageResource(over1);
+    if(over1_res!=null) over1_res.addResourceChangeListener(this);
+    down1_res = s.getImageResource(down1);
+    if(down1_res!=null) down1_res.addResourceChangeListener(this);
+    up2_res = s.getImageResource(up2);
+    if(up2_res!=null) up2_res.addResourceChangeListener(this);
+    over2_res = s.getImageResource(over2);
+    if(over2_res!=null) over2_res.addResourceChangeListener(this);
+    down2_res = s.getImageResource(down2);
+    if(down2_res!=null) down2_res.addResourceChangeListener(this);
+
+    updateToGlobalVariables();
+  }
+
   @Override
-  public void update() {
+  public void update() {    
     if(!created) {
       id = id_tf.getText();
       x = Integer.parseInt(x_tf.getText());
@@ -222,9 +236,23 @@ public class Checkbox extends Item implements ActionListener{
       s.expandItem(id);
     }
     updateToGlobalVariables();
+    if(up1_res!=null) up1_res.addResourceChangeListener(this);
+    if(over1_res!=null) over1_res.addResourceChangeListener(this);
+    if(down1_res!=null) down1_res.addResourceChangeListener(this);
+    if(up2_res!=null) up2_res.addResourceChangeListener(this);
+    if(over2_res!=null) over2_res.addResourceChangeListener(this);
+    if(down2_res!=null) down2_res.addResourceChangeListener(this);
   }
+  
   @Override
   public void showOptions() {
+    if(up1_res!=null) up1_res.removeResourceChangeListener(this);
+    if(over1_res!=null) over1_res.removeResourceChangeListener(this);
+    if(down1_res!=null) down1_res.removeResourceChangeListener(this);
+    if(up2_res!=null) up2_res.removeResourceChangeListener(this);
+    if(over2_res!=null) over2_res.removeResourceChangeListener(this);
+    if(down2_res!=null) down2_res.removeResourceChangeListener(this);
+    
     if(frame==null) {
       frame = new JFrame(Language.get("WIN_CHECKBOX_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
@@ -697,6 +725,18 @@ public class Checkbox extends Item implements ActionListener{
         java.util.List<Item> l = s.getParentListOf(id);
         if(l!=null) l.remove(this);
       }
+      up1_res = s.getImageResource(up1);
+      if(up1_res!=null) up1_res.addResourceChangeListener(this);
+      over1_res = s.getImageResource(over1);
+      if(over1_res!=null) over1_res.addResourceChangeListener(this);
+      down1_res = s.getImageResource(down1);
+      if(down1_res!=null) down1_res.addResourceChangeListener(this);
+      up2_res = s.getImageResource(up2);
+      if(up2_res!=null) up2_res.addResourceChangeListener(this);
+      over2_res = s.getImageResource(over2);
+      if(over2_res!=null) over2_res.addResourceChangeListener(this);
+      down2_res = s.getImageResource(down2);
+      if(down2_res!=null) down2_res.addResourceChangeListener(this);
       frame.setVisible(false);
       frame.dispose();
       frame = null;
@@ -774,14 +814,13 @@ public class Checkbox extends Item implements ActionListener{
     state_bool = s.gvars.parseBoolean(state);
   }
 
-  @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(up1.equals(oldid)) up1 = newid;
-    if(over1.equals(oldid)) over1 = newid;
-    if(down1.equals(oldid)) down1 = newid;
-    if(up2.equals(oldid)) up2 = newid;
-    if(over2.equals(oldid)) over2 = newid;
-    if(down2.equals(oldid)) down2 = newid;
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(up1.equals(e.getOldID())) up1 = e.getResource().id;
+    if(over1.equals(e.getOldID())) over1 = e.getResource().id;
+    if(down1.equals(e.getOldID())) down1 = e.getResource().id;
+    if(up2.equals(e.getOldID())) up2 = e.getResource().id;
+    if(over2.equals(e.getOldID())) over2 = e.getResource().id;
+    if(down2.equals(e.getOldID())) down2 = e.getResource().id;
   }
 
 }

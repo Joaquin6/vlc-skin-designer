@@ -29,7 +29,7 @@ import vlcskineditor.Resource;
  * To summarize Bitmaps and SubBitmaps to one type accesible by all items
  * @author Daniel Dreibrodt
  */
-public abstract class ImageResource extends Resource{
+public abstract class ImageResource extends Resource {
   /**
    * The image represented by the resource
    */

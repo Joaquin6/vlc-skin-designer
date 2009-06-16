@@ -82,47 +82,36 @@ public class Window implements ActionListener{
         layouts.add(new Layout(nodes.item(i), this, s));
     }
     created = true;
-  }
-  
-  /** Creates a new instance of Window */
-  public Window(String xmlcode, Skin s_) {
-    s = s_;
-    String[] code = xmlcode.split("\n");
-    if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(code[0].indexOf("visible=\"")!=-1) visible = XML.getValue(code[0],"visible");
-    if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
-    if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
-    if(code[0].indexOf("dragdrop=\"")!=-1) dragdrop = XML.getBoolValue(code[0],"dragdrop");
-    if(code[0].indexOf("playondrop=\"")!=-1) playondrop = XML.getBoolValue(code[0],"playondrop");
-    String layoutcode = "";
-    for(int i=0;i<code.length;i++) code[i] = code[i].trim();
-    for (int i=1;i<code.length;i++) {      
-      if (code[i].startsWith("<!--")) {
-        while(code[i].indexOf("-->")==-1) {
-          i++;
-        }
-      }
-      else if(code[i].startsWith("<Layout")) {        
-        layoutcode = code[i];
-      }
-      else if(code[i].startsWith("</Layout>")) {
-        layoutcode+="\n"+code[i];
-        layouts.add(new Layout(layoutcode,this,s));
-        layoutcode = "";
-      }
-      else {
-        layoutcode+="\n"+code[i];
-      }
-    }
-    created = true;
-  }
+  }  
+
+  /**
+   * Creates a new empty window and opens a dialog to edit it
+   * @param s_ The skin to which the window belongs
+   */
   public Window(Skin s_) {
     s=s_;
     id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
     s.updateWindows();
     showOptions();
   }
+
+  /**
+   * Creates a copy of a Window
+   * @param w The window to copy
+   */
+  public Window(Window w) {
+    s = w.s;
+    id = w.id;
+    visible = w.visible;
+    x = w.x;
+    y = w.y;
+    dragdrop = w.dragdrop;
+    playondrop = w.playondrop;
+    for(Layout l:w.layouts)
+      layouts.add(new Layout(l));
+    created = true;
+  }
+  
   public void update() {
     if(!created) {
       WindowAddEvent wae = new WindowAddEvent(s,this);

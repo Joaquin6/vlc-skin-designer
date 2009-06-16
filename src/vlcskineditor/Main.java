@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Main.java
  *****************************************************************************
- * Copyright (C) 2009 Daniel Dreibrodt
+ * Copyright (C) 2007-2009 Daniel Dreibrodt
  *
  * VLC Skin Editor
  *
@@ -38,13 +38,14 @@ import com.ice.jni.registry.*;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import javax.swing.plaf.metal.*;
 import vlcskineditor.history.*;
+import vlcskineditor.items.Checkbox;
 import vlcskineditor.resources.Bitmap;
 import vlcskineditor.resources.SubBitmap;
 
 
 /**
  * The main class holds the GUI
- * @author Daniel
+ * @author Daniel Dreibrodt <daniel.dreibrodt@gmail.com>
  */
 public class Main extends JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
 
@@ -948,6 +949,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     pwin.setVisible(true);
     setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
     m_file_png.setEnabled(false);
+    s = new Skin(this);
     s.open(f);                  
     selected_resource = null;
     selected_in_windows = null;
@@ -1275,19 +1277,19 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         if(getSelectedLayout()==null) {
             Window w = s.getWindow(getSelectedWindow());
             if(w==null) return;
-            Window w_ = new Window(w.returnCode(""), s);
-            w_.renameForCopy(p);
-            s.windows.add(w_);
+            Window wCopy = new Window(w);
+            wCopy.renameForCopy(p);
+            s.windows.add(wCopy);
             s.updateWindows();
         }
         else {
             Window w = s.getWindow(getSelectedWindow());
             Layout l = w.getLayout(getSelectedLayout());
-            Layout l_ = new Layout(l.returnCode(""), w, s);
-            l_.renameForCopy(p);
-            w.layouts.add(l_);
+            Layout lCopy = new Layout(l);
+            lCopy.renameForCopy(p);
+            w.layouts.add(lCopy);
             s.updateWindows();
-            s.expandLayout(l_.id);
+            s.expandLayout(lCopy.id);
         }
     }
     // </editor-fold>
@@ -1298,65 +1300,63 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         Item i = s.getItem(getSelectedItem());
         if(i==null) return;        
         if(i.getClass()==Anchor.class) {
-            Anchor a = new Anchor(i.returnCode(""), s);
-            //Because IDs of Anchors are not stored in the XML and can thus not be copied via returnCode()
-            a.id = i.id;
+            Anchor a = new Anchor((Anchor)i);
             a.renameForCopy(p);
             s.getParentListOf(i.id).add(a);
             s.updateItems();
             s.expandItem(a.id);
         }
         else if(i.getClass()==vlcskineditor.items.Button.class) {
-            vlcskineditor.items.Button b = new vlcskineditor.items.Button(i.returnCode(""), s);
+            vlcskineditor.items.Button b = new vlcskineditor.items.Button((vlcskineditor.items.Button)i);
             b.renameForCopy(p);
             s.getParentListOf(i.id).add(b);
             s.updateItems();
             s.expandItem(b.id);
         }
         else if(i.getClass()==vlcskineditor.items.Checkbox.class) {
-            vlcskineditor.items.Checkbox c = new vlcskineditor.items.Checkbox(i.returnCode(""), s);
+            Checkbox c = new Checkbox((Checkbox)i);
             c.renameForCopy(p);
             s.getParentListOf(i.id).add(c);
             s.updateItems();
             s.expandItem(c.id);
         }
         else if(i.getClass()==Group.class) {
-            Group g = new Group(i.returnCode(""), s);
+            Group g = new Group((Group)i);
             g.renameForCopy(p);
             s.getParentListOf(i.id).add(g);
             s.updateItems();
             s.expandItem(g.id);
         }        
         else if(i.getClass()==vlcskineditor.items.Image.class) {
-            vlcskineditor.items.Image im = new vlcskineditor.items.Image(i.returnCode(""), s);
+            vlcskineditor.items.Image im = new vlcskineditor.items.Image((vlcskineditor.items.Image)i);
             im.renameForCopy(p);
             s.getParentListOf(i.id).add(im);
             s.updateItems();
             s.expandItem(im.id);
         }
         else if(i.getClass()==vlcskineditor.items.Panel.class) {
-            vlcskineditor.items.Panel pa = new vlcskineditor.items.Panel(i.returnCode(""), s);
+            vlcskineditor.items.Panel pa = new vlcskineditor.items.Panel((vlcskineditor.items.Panel)i);
             pa.renameForCopy(p);
             s.getParentListOf(i.id).add(pa);
             s.updateItems();
             s.expandItem(pa.id);
         }
         else if(i.getClass()==Playtree.class) {
-            Playtree pl = new Playtree(i.returnCode(""), s);
+            Playtree pl = new Playtree((Playtree)i);
             pl.renameForCopy(p);
             s.getParentListOf(i.id).add(pl);
             s.updateItems();
             s.expandItem(pl.id);
         }
         else if(i.getClass()==RadialSlider.class) {
-            RadialSlider r = new RadialSlider(i.returnCode(""), s);
+            RadialSlider r = new RadialSlider((RadialSlider)i);
             r.renameForCopy(p);
             s.getParentListOf(i.id).add(r);
             s.updateItems();
             s.expandItem(r.id);
         }
         else if(i.getClass()==Slider.class) {
-            Slider sl = new Slider(i.returnCode(""), s);
+            Slider sl = new Slider((Slider)i);
             sl.renameForCopy(p);
             java.util.List<Item> l = s.getParentListOf(i.id);
             if(l!=null) {
@@ -1374,14 +1374,14 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
            JOptionPane.showMessageDialog(this,"A slider cannot contain more than one background!","SliderBackgrounds cannot be duplicated",JOptionPane.INFORMATION_MESSAGE); 
         }
         else if(i.getClass()==Text.class) {
-            Text t = new Text(i.returnCode(""), s);
+            Text t = new Text((Text)i);
             t.renameForCopy(p);
             s.getParentListOf(i.id).add(t);
             s.updateItems();
             s.expandItem(t.id);
         }
         else if(i.getClass()==Video.class) {
-            Video v = new Video(i.returnCode(""), s);
+            Video v = new Video((Video)i);
             v.renameForCopy(p);
             s.getParentListOf(i.id).add(v);
             s.updateItems();

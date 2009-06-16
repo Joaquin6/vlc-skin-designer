@@ -31,12 +31,14 @@ import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * SliderBackground item
  * @author Daniel Dreibrodt
  */
-public class SliderBackground extends Item implements ActionListener {
+public class SliderBackground extends Item implements ActionListener, ResourceChangeListener {
 
   public final int NBHORIZ_DEFAULT = 1;
   public final int NBVERT_DEFAULT = 1;
@@ -52,10 +54,10 @@ public class SliderBackground extends Item implements ActionListener {
   private JButton gen_btn, ok_btn, cancel_btn, help_btn;
   private ImageResource image_res;
   private BufferedImage bi = null;
-  private String bitmap_str = "";
   private Slider parent;
   private float sliderVal = 0.5f;
 
+  private BufferedImage cache;
 
   {
     type = Language.get("SLIDERBG");
@@ -80,44 +82,35 @@ public class SliderBackground extends Item implements ActionListener {
     padvert = XML.getIntAttributeValue(n, "padvert", padvert);
 
     image_res = s.getImageResource(image);
+    if(image_res!=null) image_res.addResourceChangeListener(this);
 
     created = true;
   }
 
-  /** Creates a new instance of SliderBackground
-   * @param xmlcode The XML code
+  /**
+   * Creates a new empty slider and shows a dialog to edit it
    * @param s_ The parent skin
+   * @param sl_ The parent slider
    */
-  public SliderBackground(String xmlcode, Skin s_) {
-    s = s_;
-    image = XML.getValue(xmlcode, "image");
-    image_res = s.getImageResource(image);
-    if(xmlcode.indexOf("nbhoriz=\"") != -1) {
-      nbhoriz = XML.getIntValue(xmlcode, "nbhoriz");
-    }
-    if(xmlcode.indexOf("nbvert=\"") != -1) {
-      nbvert = XML.getIntValue(xmlcode, "nbvert");
-    }
-    if(xmlcode.indexOf("padhoriz=\"") != -1) {
-      padhoriz = XML.getIntValue(xmlcode, "padhoriz");
-    }
-    if(xmlcode.indexOf("padvert=\"") != -1) {
-      padvert = XML.getIntValue(xmlcode, "padvert");
-    }
-    if(xmlcode.indexOf("id=\"") != -1) {
-      id = XML.getValue(xmlcode, "id");
-    } else {
-      id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
-    }
-    created = true;
-  }
-
   public SliderBackground(Skin s_, Slider sl_) {
     s = s_;
     parent = sl_;
     image = "none";
     id = Language.get("UNNAMED").replaceAll("%t", type).replaceAll("%i", String.valueOf(s.getNewId()));
     showOptions();
+  }
+
+  public SliderBackground(SliderBackground sbg) {
+    super(sbg);
+    image = sbg.image;
+    nbhoriz = sbg.nbhoriz;
+    nbvert = sbg.nbvert;
+    padhoriz = sbg.padhoriz;
+    padvert = sbg.padvert;
+    parent = sbg.parent;
+
+    image_res = s.getImageResource(image);
+    if(image_res!=null) image_res.addResourceChangeListener(this);
   }
 
   public void update() {
@@ -146,9 +139,11 @@ public class SliderBackground extends Item implements ActionListener {
       see.setNew();
       s.m.hist.addEvent(see);
     }
+    if(image_res!=null) image_res.addResourceChangeListener(this);
   }
 
   public void showOptions() {
+    if(image_res!=null) image_res.removeResourceChangeListener(this);
     if(frame == null) {
       frame = new JFrame(Language.get("WIN_SBG_TITLE"));
       frame.setIconImage(Main.edit_icon.getImage());
@@ -349,6 +344,8 @@ public class SliderBackground extends Item implements ActionListener {
       frame = null;
       if(!created) {
         parent.removeBG();
+      } else {
+        if(image_res!=null) image_res.removeResourceChangeListener(this);
       }
     }
   }
@@ -383,6 +380,18 @@ public class SliderBackground extends Item implements ActionListener {
     if(!created) {
       return;
     }
+    if(cache==null) updateCache();
+    g.drawImage(cache, (x + x_) * z, (y + y_) * z, cache.getWidth() * z, cache.getHeight() * z, null);
+    if(selected) {
+      g.setColor(Color.RED);
+      g.drawRect((x + x_) * z, (y + y_) * z, cache.getWidth() * z - 1, cache.getHeight() * z - 1);
+    }
+  }
+
+  /**
+   * Update the cached rendering
+   */
+  public void updateCache() {
     bi = image_res.image;
     if(bi == null) {
       return;
@@ -399,12 +408,7 @@ public class SliderBackground extends Item implements ActionListener {
     if(fxpos < 0) {
       fxpos = 0;
     }
-    bi = bi.getSubimage(fxpos * fwidth + fxpos * padhoriz, fypos * fheight + fypos * padvert, fwidth, fheight);
-    g.drawImage(bi, (x + x_) * z, (y + y_) * z, bi.getWidth() * z, bi.getHeight() * z, null);
-    if(selected) {
-      g.setColor(Color.RED);
-      g.drawRect((x + x_) * z, (y + y_) * z, bi.getWidth() * z - 1, bi.getHeight() * z - 1);
-    }
+    cache = bi.getSubimage(fxpos * fwidth + fxpos * padhoriz, fypos * fheight + fypos * padvert, fwidth, fheight);
   }
 
   @Override
@@ -428,14 +432,15 @@ public class SliderBackground extends Item implements ActionListener {
   @Override
   public void updateToGlobalVariables() {
     sliderVal = s.gvars.getSliderValue();
-  }
-
-  @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(image.equals(oldid)) image = newid;
+    updateCache();
   }
 
   public Slider getParentSlider() {
     return parent;
+  }
+
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(image.equals(e.getOldID())) image = e.getResource().id;
+    updateCache();
   }
 }

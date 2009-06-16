@@ -27,18 +27,21 @@ import vlcskineditor.history.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import vlcskineditor.resources.ImageResource;
+import vlcskineditor.resources.ResourceChangeListener;
+import vlcskineditor.resources.ResourceChangedEvent;
 
 /**
  * Slider item
  * @author Daniel Dreibrodt
  */
-public class Slider extends Item implements ActionListener{
+public class Slider extends Item implements ActionListener, ResourceChangeListener {
   
   public final String DOWN_DEFAULT = "none";
   public final String OVER_DEFAULT = "none";  
@@ -113,7 +116,11 @@ public class Slider extends Item implements ActionListener{
     over_res = s.getImageResource(over);
     down_res = s.getImageResource(down);
 
-    updateBezier();
+    if(up_res!=null) up_res.addResourceChangeListener(this);
+    if(over_res!=null) over_res.addResourceChangeListener(this);
+    if(down_res!=null) down_res.addResourceChangeListener(this);
+
+    updateToGlobalVariables();
 
     created = true;
   }
@@ -129,104 +136,67 @@ public class Slider extends Item implements ActionListener{
     inPlaytree = isInPlaytree;
   }
 
-   /** Creates a new instance of Slider
-   * @param xmlcode The XML code
-   * @param s_ The parent skin
+  /**
+   * Creates a copy of a slider
+   * @param s The slider to copy
    */
-  public Slider(String xmlcode, Skin s_) {
-    s = s_;
-    String[] code = xmlcode.split("\n");
-    up = XML.getValue(code[0],"up");
+  public Slider(Slider sl) {
+    super(sl);
+    up = sl.up;
+    down = sl.down;
+    over = sl.over;
+    points = sl.points;
+    thickness = sl.thickness;
+    value = sl.value;
+    inPlaytree = sl.isInPlaytree();
+
     up_res = s.getImageResource(up);
-    if(code[0].indexOf(" down=\"")!=-1) {
-      down = XML.getValue(code[0],"down");
-      down_res = s.getImageResource(down);
-    }
-    if(code[0].indexOf(" over=\"")!=-1) {
-      over = XML.getValue(code[0],"over");
-      over_res = s.getImageResource(over);
-    }
-    points = XML.getValue(code[0],"points");  
-    updateBezier();
-    if(code[0].indexOf(" thickness=\"")!=-1) thickness = XML.getIntValue(code[0],"thickness");
-    if(code[0].indexOf(" value=\"")!=-1) value = XML.getValue(code[0],"value");
-    if(code[0].indexOf(" tooltiptext=\"")!=-1) tooltiptext = XML.getValue(code[0],"tooltiptext");
-    if(code[0].indexOf(" x=\"")!=-1) x = XML.getIntValue(code[0],"x");
-    if(code[0].indexOf(" y=\"")!=-1) y = XML.getIntValue(code[0],"y");
-    if(code[0].indexOf(" id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(code[0].indexOf(" lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
-    if(code[0].indexOf(" rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
-    if(code[0].indexOf(" xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
-    if(code[0].indexOf(" ykeepratio=\"")!=-1) ykeepratio = XML.getBoolValue(code[0],"ykeepratio");
-    if(xmlcode.indexOf(" visible=\"")!=-1) visible = XML.getValue(xmlcode,"visible");
-    if(code.length>1) {
-      for(int i=0;i<code.length;i++) {
-        code[i] = code[i].trim();
-        if (code[i].startsWith("<!--")) {
-          while(code[i].indexOf("-->")==-1) {
-            i++;
-          }
-        }
-        else if(code[i].startsWith("<SliderBackground")) {
-          sbg = new SliderBackground(code[i],s);
-          break;
-        } 
-      }        
-    }        
-    created=true;
-  }
-  public Slider(String xmlcode, Skin s_, boolean ipt) {
-    s = s_;
-    String[] code = xmlcode.split("\n");
-    inPlaytree = ipt;
-    up = XML.getValue(code[0],"up");
-    up_res = s.getImageResource(up);
-    if(code[0].indexOf("down=\"")!=-1) down = XML.getValue(code[0],"down");
-    if(code[0].indexOf("over=\"")!=-1) over = XML.getValue(code[0],"over");
-    points = XML.getValue(code[0],"points");
-    updateBezier();
-    if(code[0].indexOf("thickness=\"")!=-1) thickness = XML.getIntValue(code[0],"thickness");
-    //if(code[0].indexOf("value=\"")!=-1) value = XML.getValue(code[0],"value");
-    if(code[0].indexOf("tooltiptext=\"")!=-1) tooltiptext = XML.getValue(code[0],"tooltiptext");
-    if(code[0].indexOf("x=\"")!=-1) x = XML.getIntValue(code[0],"x");
-    if(code[0].indexOf("y=\"")!=-1) y = XML.getIntValue(code[0],"y");
-    if(code[0].indexOf("id=\"")!=-1) id = XML.getValue(code[0],"id");
-    else id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    if(code[0].indexOf("lefttop=\"")!=-1) lefttop = XML.getValue(code[0],"lefttop");
-    if(code[0].indexOf("rightbottom=\"")!=-1) rightbottom = XML.getValue(code[0],"rightbottom");
-    if(code[0].indexOf("xkeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"xkeepratio");
-    if(code[0].indexOf("ykeepratio=\"")!=-1) xkeepratio = XML.getBoolValue(code[0],"ykeepratio");
-    if(code.length>1) {
-      for(int i=0;i<code.length;i++) {
-        if(code[i].startsWith("<SliderBackground")) {
-          sbg = new SliderBackground(code[i],s);
-          break;
-        } 
-      }        
-    }       
-    created=true;
-  }
-  
-  public Slider(Skin s_) {
-    s = s_;
-    up = "none";
-    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    updateBezier();
-    showOptions();    
-    s.updateItems();
-    s.expandItem(id);
+    over_res = s.getImageResource(over);
+    down_res = s.getImageResource(down);
+
+    if(up_res!=null) up_res.addResourceChangeListener(this);
+    if(over_res!=null) over_res.addResourceChangeListener(this);
+    if(down_res!=null) down_res.addResourceChangeListener(this);
+
+    updateToGlobalVariables();
+
+    if(sl.sbg!=null) sbg = new SliderBackground(sl.sbg);
   }
 
+  /**
+   * Creates an empty slider and shows a dialog to edit it
+   * @param s_ The skin to which the slider belongs
+   */
+  public Slider(Skin s_) {
+    this(s_, false);
+  }
+
+  /**
+   * Creates an empty slider for use in a playtree
+   * @param s_
+   * @param ipt This should be true
+   */
   public Slider(Skin s_, boolean ipt) {
-    s = s_;
-    up = "none";
-    id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
-    inPlaytree = ipt;
-    created=true;
+    if(ipt) {
+      s = s_;
+      up = "none";
+      id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
+      updateToGlobalVariables();
+      inPlaytree = ipt;
+      created=true;
+    } else {
+      s = s_;
+      up = "none";
+      id = Language.get("UNNAMED").replaceAll("%t",type).replaceAll("%i",String.valueOf(s.getNewId()));
+      updateToGlobalVariables();
+      showOptions();
+      s.updateItems();
+      s.expandItem(id);
+    }
   }
 
   public void updateBezier() {
+    if(points==null) return;
     String[] pnts = points.split("\\),\\(");
     xpos = new int[pnts.length];
     ypos = new int[pnts.length];
@@ -756,8 +726,10 @@ public class Slider extends Item implements ActionListener{
       sbg.setOffset(x+x_,y+y_);
       sbg.draw(g,x+x_,y+y_,z);      
     }    
-    java.awt.image.BufferedImage si = up_res.image;
-    if(vis && si!=null) g.drawImage(si,(int)(sliderPos.getX()+x+x_-si.getWidth()/2)*z,(int)(sliderPos.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
+    BufferedImage si = up_res.image;
+    if(vis && si!=null) {
+      g.drawImage(si,(int)(sliderPos.getX()+x+x_-si.getWidth()/2)*z,(int)(sliderPos.getY()+y+y_-si.getHeight()/2)*z,si.getWidth()*z,si.getHeight()*z,null);
+    }
     if(selected) {
       g.setColor(Color.RED);
       /*for(float f=0f;f<=1f;f=f+0.1f) {
@@ -831,14 +803,6 @@ public class Slider extends Item implements ActionListener{
     return inPlaytree;
   }
 
-  @Override
-  public void resourceRenamed(String oldid, String newid) {
-    if(sbg!=null) sbg.resourceRenamed(oldid, newid);
-    if(up.equals(oldid)) up = newid;
-    if(over.equals(oldid)) over = newid;
-    if(down.equals(oldid)) down = newid;
-  }
-
   public Bezier getBezier() {
     return b;
   }
@@ -853,5 +817,46 @@ public class Slider extends Item implements ActionListener{
 
   public int getControlPointNum() {
     return xpos.length;
+  }
+
+  public void removeControlPoint(int index) {
+    SliderEditEvent see = new SliderEditEvent(this);
+    if(index>=xpos.length) return;
+    String points_new = "";
+    for(int i=0;i<xpos.length;i++) {
+      if(i!=index) {
+        if(points_new.length()>0) points_new+=",";
+        points_new+="("+xpos[i]+","+ypos[i]+")";
+      }
+    }
+    points = points_new;
+    updateBezier();
+    see.setNew();
+    s.m.hist.addEvent(see);
+  }
+
+  public void addControlPoint(int x, int y) {
+    SliderEditEvent see = new SliderEditEvent(this);
+    if(points.length()>0) points+=",";
+    points+="("+x+","+y+")";
+    updateBezier();
+    see.setNew();
+    s.m.hist.addEvent(see);
+  }
+
+  public void moveControlPointTo(int index, int x, int y) {
+
+  }
+
+  public void onResourceChanged(ResourceChangedEvent e) {
+    if(up.equals(e.getOldID())) {
+      up = e.getResource().id;
+    }
+    if(over.equals(e.getOldID())) {
+      over = e.getResource().id;
+    }
+    if(down.equals(e.getOldID())) {
+      down = e.getResource().id;
+    }
   }
 }
