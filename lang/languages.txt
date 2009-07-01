@@ -6,6 +6,7 @@ nl|Dutch|nl.txt
 de|German|de.txt
 fr|French (Incomplete)|fr.txt
 ko|Korean|ko.txt
+pt-br|Portuguese (Brasil)|pt-br.txt
 ru|Russian (Incomplete)|ru.txt
 sk|Slovak|sk.txt
 sv|Swedish (Incomplete)|sv.txt

@@ -1,0 +1,601 @@
+﻿#Brazilian Portuguese language file for VLC Skin Editor
+#Author/s: Sidney Doria
+
+#General strings
+CHOICE_YES|Sim
+CHOICE_NO|Não
+CHOICE_CANCEL|Cancelar
+BUTTON_OK|OK
+BUTTON_CANCEL|Cancelar
+BUTTON_HELP|Ajuda
+
+#Item names
+THEME|Tema
+FONT|Fonte
+BITMAP|Bitmap
+SUBBITMAP|SubBitmap
+WINDOW|Janela
+LAYOUT|Leiaute
+ANCHOR|Âncora
+BUTTON|Botão
+CHECKBOX|Caixa de Verificação
+GROUP|Grupo
+IMAGE|Imagem
+PANEL|Painel
+PLAYTREE|Playtree
+RADIALSLIDER|Barra de Rolagem Radial
+SLIDER|Barra de Rolagem
+SLIDERBG|Barra de Rolagem de Plano de Fundo
+TEXT|Texto
+VIDEO|Vídeo
+UNNAMED|Sem Título %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Arquivo
+MENU_FILE_MN|A
+MENU_FILE_NEW|Novo
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Abrir...
+MENU_FILE_OPEN_MN|i
+MENU_FILE_SAVE|Salvar
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Testar a capa no VLC
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Exportar como VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Salvar esboço atual como imagem...
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Fechar
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|Editar
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Desfazer
+MENU_EDIT_UNDO_MN|D
+MENU_EDIT_REDO|Refazer
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Configurações de capa
+MENU_EDIT_THEME_MN|C
+MENU_EDIT_VARS|Variáveis globais
+MENU_EDIT_VARS_MN|V
+MENU_EDIT_PREFS|Preferências
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|Mover item selecionado para cima
+MENU_EDIT_DOWN|Mover item selecionado para baixo
+MENU_EDIT_LEFT|Mover item selecionado para a esquerda
+MENU_EDIT_RIGHT|Mover item selecionado para a direita
+MENU_HELP|Ajuda
+MENU_HELP_MN|j
+MENU_HELP_DOC|Ajuda on-line
+MENU_HELP_DOC_MN|o
+MENU_HELP_ABOUT|Sobre
+MENU_HELP_ABOUT_MN|S
+
+#The toolbar
+TOOLBAR_OPEN|Abrir uma capa...
+TOOLBAR_SAVE|Salvar as modificações da capa
+TOOLBAR_UNDO|Desfazer
+TOOLBAR_REDO|Refazer
+TOOLBAR_MOVE|Ferramenta de movimentação de item
+TOOLBAR_PATH|Ferramenta de edição de barra de rolagem
+
+#Resource Window
+WIN_RES_TITLE|Recursos
+WIN_RES_ADD_BMP|Adicionar um novo Bitmap ou SubBitmap
+WIN_RES_ADD_FONT|Adicionar uma nova Fonte
+WIN_RES_COPY|Criar uma cópia da fonte selecionada
+WIN_RES_EDIT|Editar o recurso selecionado
+WIN_RES_DELETE|Excluir o recurso selecionado
+WIN_RES_PU_ADD_BMP|Adicionar Bitmap(s)
+WIN_RES_PU_ADD_SBMP|Adicionar SubBitmap
+WIN_RES_BITMAPS|Bitmaps
+WIN_RES_FONTS|Fontes
+
+#Windows window
+WIN_WIN_TITLE|Janelas
+WIN_WIN_ADD|Adicionar uma nova janela
+WIN_WIN_ADD_LAY|Adicionar um novo liaute à janela selecionada
+WIN_WIN_MOVE_UP|Mover o leiaute selecionado para cima na hierarquia (o último leiaute é o leiaute padrão da janela)
+WIN_WIN_MOVE_DOWN|Movee o leiaute selecionado para baixo na hierarquia (o último leiaute é o leiaute padrão da janela)
+WIN_WIN_COPY|Criar uma cópia da janela selecionada ou do leiaute selecionado
+WIN_WIN_EDIT|Editar a janela selecionada ou o leiaute selecionado
+WIN_WIN_DELETE|Excluir a janela selecionada ou o leiaute selecionado
+
+#Items window
+WIN_ITEMS_TITLE|Itens
+WIN_ITEMS_ADD|Adicionar um novo item
+WIN_ITEMS_MOVE_UP|Mover o item selecionado para cima na hierarquia
+WIN_ITEMS_MOVE_DOWN|Mover o item selecionado para baixo na hierarquia
+WIN_ITEMS_COPY|Criar uma cópia do item selecionado
+WIN_ITEMS_EDIT|Editar o item selecionado
+WIN_ITEMS_DELETE|Excluir o item selecionado
+WIN_ITEMS_PU_PANEL_ADD|Adicionar ao painel selecionado
+
+#Welcome dialog
+WELCOME_TITLE|Bem vindo ao editor de capas do VLC
+WELCOME_MSG|O que você gostaria de fazer?
+WELCOME_NEW|Criar uma nova capa
+WELCOME_OPEN|Abrir uma capa existente
+WELCOME_QUIT|Fechar
+
+#Preferences window
+WIN_PREFS_TITLE|Preferências
+WIN_PREFS_UPDATE_L|Habilitar as atualizações automáticas:
+WIN_PREFS_LANG_L|Língua:
+WIN_PREFS_LAF_L|Aparência do programa:
+WIN_PREFS_TBAR_L|Exibir a barra de ferramentas:
+WIN_PREFS_RESTART_L|<html><i>Algumas configurações só terão efeito quando o programa for reiniciado.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Editar SubBitmap
+ZOOM_FACTOR|Fator de amproximação:
+
+#Global variables editing window
+WIN_VARS_TITLE|Variáveis globais
+WIN_VARS_NOTE|<html>Essas variáveis afetam apenas o esboço.<br>Elas simulam um estado do VLC.</html>
+WIN_VARS_SLIDER|Posição da barra de rolagem
+
+#Theme options window
+WIN_THEME_TITLE|Configurações de capa
+WIN_THEME_NAME|Nome:
+WIN_THEME_AUTHOR|Autor:
+WIN_THEME_EMAIL|E-mail do autor:
+WIN_THEME_WEB|Página Web do autor:
+WIN_THEME_MAGNET|ímã:
+WIN_THEME_MAGNET_TIP|Quando a distância entre a borda da tela e uma âncora de uma janela for menor que este valor, a janela será encaixada à borda
+WIN_THEME_ALPHA|Opacidade:
+WIN_THEME_ALPHA_TIP|Define a transparência alfa das janelas. O valor deve ser entre 1 (totalmente transparente) e 255 (totalmente opaco). Valores baixos devem ser evitados.
+WIN_THEME_MOVEALPHA|Opacidade durante movimentos:
+WIN_THEME_MOVEALPHA_TIP|Define a transparência alfa das janelas enquanto estão sendo movidas.
+WIN_THEME_INFO_TITLE|Informações do tema
+WIN_THEME_ATTR_TITLE|Atributos do tema
+
+#Action Editor
+WIN_ACTIONS_TITLE|Editar seqüência de ações
+
+#Popup menu in the action editor
+ACTIONS_PU|Ações
+ACTIONS_DIALOGS|Exibir uma janela
+ACTIONS_PLAYLIST|Lista de reprodução
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Capa
+ACTIONS_VLC_PLAY|Reproduzir
+ACTIONS_VLC_PAUSE|Pausar
+ACTIONS_VLC_STOP|Parar
+ACTIONS_VLC_FASTER|Reproduzir mais rápido
+ACTIONS_VLC_SLOWER|Reproduzir mais devagar
+ACTIONS_VLC_MUTE|Sem áudio
+ACTIONS_VLC_VOLUMEUP|Aumentar o volume
+ACTIONS_VLC_VOLUMEDOWN|Reduzir o volume
+ACTIONS_VLC_FULLSCREEN|Alternar modo de Tela Inteira
+ACTIONS_VLC_SNAPSHOT|Tirar um instantâneo
+ACTIONS_VLC_ONTOP|Alternar Sempre no Topo
+ACTIONS_VLC_MINIMIZE|Minimizar o VLC
+ACTIONS_VLC_QUIT|Fechar o VLC
+ACTIONS_EQ_ENABLE|Habilitar o Equalizador
+ACTIONS_EQ_DISABLE|Desabilitar o Equalizador
+ACTIONS_DIALOGS_CHANGESKIN|Modificar a capa
+ACTIONS_DIALOGS_FILESIMPLE|Abrir arquivo (simplificado)
+ACTIONS_DIALOGS_FILE|Abrir arquivo (com opções)
+ACTIONS_DIALOGS_DIRECTORY|Abrir pasta
+ACTIONS_DIALOGS_DISC|Abrir disco
+ACTIONS_DIALOGS_NET|Abrir fluxo de rede
+ACTIONS_DIALOGS_MESSAGES|Registro de mensagens
+ACTIONS_DIALOGS_PREFS|Preferências
+ACTIONS_DIALOGS_FILEINFO|Inforações do arquivo
+ACTIONS_DIALOGS_PLAYLIST|Lista de reprodução em capa
+ACTIONS_DIALOGS_STREAMINGWIZARD|Assistente de criação de fluxo
+ACTIONS_DIALOGS_POPUP|Menu totalmente destacável
+ACTIONS_DIALOGS_AUDIOPOPUP|Menu destacável de configurações de áudio
+ACTIONS_DIALOGS_VIDEOPOPUP|Menu destacável de configurações de vídeo
+ACTIONS_DIALOGS_MISCPOPUP|Menu destacável de outras configurações
+ACTIONS_PLAYLIST_ADD|Adicionar um novo item
+ACTIONS_PLAYLIST_DEL|Excluir o item selecionado
+ACTIONS_PLAYLIST_NEXT|Reproduzir o próximo item
+ACTIONS_PLAYLIST_PREVIOUS|Reproduzir o item anterior
+ACTIONS_PLAYLIST_SETRANDOM|Reproduzir em ordem aleatória/normal
+ACTIONS_PLAYLIST_SETLOOP|Repetir a lista de reprodução/reproduzir apenas uma vez
+ACTIONS_PLAYLIST_SETREPEAT|Habilitar/desabilitar a repetição do item atual
+ACTIONS_PLAYLIST_SORT|Ordenar em ordem alfabética
+ACTIONS_PLAYLIST_LOAD|carregar de um arquivo
+ACTIONS_PLAYLIST_SAVE|Gravar em um arquivo
+ACTIONS_DVD_NEXTTITLE|Próximo título
+ACTIONS_DVD_PREVIOUSTITLE|Título anterior
+ACTIONS_DVD_NEXTCHAPTER|Próximo capítulo
+ACTIONS_DVD_PREVIOUSCHAPTER|Capítulo anterior
+ACTIONS_DVD_ROOTMENU|Menu principal
+ACTIONS_WINDOWS_SHOW|Exibir uma janela
+ACTIONS_WINDOWS_HIDE|Ocultar uma janela
+ACTIONS_WINDOWS_MAXIMIZE|Maximizar uma janela
+ACTIONS_WINDOWS_UNMAXIMIZE|Restaurar uma janela
+ACTIONS_WINDOWS_SETLAYOUT|Modificar o leiaute de uma janela
+
+#Action descriptions
+ACTION_DESC_NONE|Não faz nada.
+ACTION_DESC_CHANGESKIN|Exibe uma janela para carregar uma nova capa.
+ACTION_DESC_FILESIMPLE|Exibe a janela "Abrir Arquivo" simplificada.
+ACTION_DESC_FILE|Exibe a janela "Abrir Arquivo" com opções.
+ACTION_DESC_DIRECTORY|Exibe a janela "Abrir Pasta".
+ACTION_DESC_DISC|Exibe a janela "Abrir Disco".
+ACTION_DESC_NET|Exibe a janela "Abrir Fluxo de Rede".
+ACTION_DESC_MSG|Exibe a janela de registro de mensagens.
+ACTION_DESC_PREFS|Exibe a janela de preferências.
+ACTION_DESC_FILEINFO|Exibe a janela de informações de arquivo.
+ACTION_DESC_PLAYLIST|Exibe a janela de lista de reprodução padrão (sem capa).
+ACTION_DESC_WIZARD|Exibe a janela "Assistente de Criação de Fluxo".
+ACTION_DESC_POPUP|Exibe o menu totalmente destacável.
+ACTION_DESC_AUDIOPU|Exibe o menu destacável de configurações de áudio.
+ACTION_DESC_VIDEOPU|Exibe o menu destacável de configurações de vídeo.
+ACTION_DESC_MISCPU|Exibe um menu destacável contendo o controle de reprodução e opções gerais.
+ACTION_DESC_EQENABLE|Habilita o filtro de áudio de equalização.
+ACTION_DESC_EQDISABLE|Habilita o filtro de áudio de equalização.
+ACTION_DESC_PLAY|Reproduz o item atual da lista de reprodução.
+ACTION_DESC_PAUSE|Pausa a reprodução.
+ACTION_DESC_STOP|Pára a reprodução.
+ACTION_DESC_FASTER|Reproduz mais rápido.
+ACTION_DESC_SLOWER|Reproduz mais devagar.
+ACTION_DESC_MUTE|Alterna Sem Áudio.
+ACTION_DESC_VOLUP|Aumenta o volume.
+ACTION_DESC_VOLDOWN|Reduz o volume.
+ACTION_DESC_FULLSCREEN|Alterna o modo Tela Inteira.
+ACTION_DESC_SNAPSHOT|Tira um instantâneo do vídeo.
+ACTION_DESC_ONTOP|Alterna o status de "sempre no topo".
+ACTION_DESC_MIN|Minimiza o VLC.
+ACTION_DESC_QUIT|Fecha o VLC.
+ACTION_PL_ADD|Adiciona um novo item à lista de reprodução.
+ACTION_PL_DEL|Exclui os itens selecionados da lista de reprodução.
+ACTION_PL_NEXT|Reprduz o próximo item na lista de reprodução.
+ACTION_PL_PREV|Reprduz o item anterior na lista de reprodução.
+ACTION_PL_SORT|Ordena a lista de reprodução em ordem alfabética.
+ACTION_PL_LOAD|Carrega um arquivo externo de lista de reprodução.
+ACTION_PL_SAVE|Grava a lista de reprodução atual em um arquivo.
+ACTION_DVD_NEXTT|Vai para o próximo título do DVD.
+ACTION_DVD_PREVT|Vai para o título anterior do DVD.
+ACTION_DVD_NEXTC|Vai para o próximo capítulo do DVD.
+ACTION_DVD_PREVC|Vai para o capítulo anterior do DVD.
+ACTION_DVD_MENU|Vai para o menu inicial do DVD.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Habilitar
+ACTION_DEACTIVATE|Desabilitar
+ACTIONs_RANDOM|%s que os itens na lista de reprodução são reproduzidos em ordem aleatória.
+ACTION_LOOP|%s que a lista de reprodução é repetida quando chegar ao fim.
+ACTION_REPEAT|%s que o item atual é repetido quando chegar ao fim
+ACTION_SHOW|Exibe a janela com o ID %i
+ACTION_HIDE|Oculta a janela com o ID %i
+ACTION_MAXIMIZE|Maximiza a janela com o ID %i
+ACTION_UNMAXIMIZE|Restaura a janela com o ID %i
+ACTION_LAYOUT|Define o leiaute da janela com o ID %i a %l
+
+#Slider background generator
+SBGGEN_TITLE|Gerador de Barra de Rolagem de Plano de Fundo
+SBGGEN_PREV|< Anterior
+SBGGEN_NEXT|Próximo >
+SBGGEN_CANCEL|Cancelar
+SBGGEN_FINISH|Finalizar
+
+SBGGEN_DESCR|Bem vindo ao gerador de barra de rolagem de plano de fundo. Ele ajudará a criar uma barra de rolagem à partir das suas imagens, em apenas alguns passos.
+SBGGEN_FIRST|Como primeiro passo, por favor escolha que se a barra de rolagem se moverá da esquerda para a direita ou de cima para baixo e que tamanho o plano de fundo deve ter.
+SBGGEN_WIDTH|Largura
+SBGGEN_HEIGHT|Altura:
+SBGGEN_LEFT_M|Margem esquerda:
+SBGGEN_RIGHT_M|Margem direita:
+SBGGEN_TOP_M|Margem superior:
+SBGGEN_BTM_M|Margem inferior:
+SBGGEN_SECOND|No próximo passo, escolha os arquivos de imagem corretos associados às diferentes partes da sua barra de rolagem.
+SBGGEN_NOTE|Note que os ícones são apenas exemplos para ilustrar que partes diferentes representam. Eles não são esboços das imagens que serão usadas na geração do plano de fundo.
+
+SBGGEN_IMAGE|Arquivo de imagem:
+SBGGEN_OPEN|Abrir...
+SBGGEN_RESIZE|Comportamento no redimensionamento:
+SBGGEN_TILE|Lado a lado
+SBGGEN_STRETCH|Ajustar
+
+SBGGEN_BG|Plano de Fundo
+SBGGEN_OVERLAY|Imagem de sobreposição
+SBGGEN_LEFT_E|Canto esquerdo
+SBGGEN_RIGHT_E|Canto direito
+SBGGEN_TOP_E|Canto superior
+SBGGEN_BTM_E|Canto inferior
+SBGGEN_MIDDLE|Centro
+
+SBGGEN_PROGRESS|Gerando o Plano de Fundo...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|Sobre o Editor de Capas do VLC %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Direito de Cópia 2007-%y Grupo VideoLAN</h3>Disponível sob os termos da GPL 2+<br><br><b>Programador Líder:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Sítio da Web:</b> %w<br><br><b>Créditos:</b><br>Timothy Gerard Endres pelo acesso e o suporte ao TAR (Domínio Público)<br>The Tango! Desktop Project (http://tango.freedesktop.org) para alguns ícones (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) e Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) para o Avaliador de Expressões Booleanas e o código de Bezier (GPL 2+)</html>
+VLT_EX_TITLE|Importando um arquivo VLT
+#%f - name of the folder
+VLT_EX_MSG|O arquivo VLT será será desempacotado em uma pasta chamada "%f".\nDeseja continuar?
+VLT_EX_YES|Sim, desempacotar
+VLT_EX_NO|Não, cancelar
+VLT_EX_PROGRESS|Desempacotando o arquivo VLT...
+XML_PARSING_PROGRESS|Lendo o XML...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) dentro da pasta de arquivos XML
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (Fontes Livres & True type) dentro da pasta de arquivos XML
+DUPLICATE_MSG|Por favor preencha o padrão de renomeação para objetos duplicados.\n%oldid% será substituído por pelo ID antigo do objeto.
+DEL_CONFIRM_TITLE|Confirmação de exclusão
+DEL_CONFIRM_MSG|Deseja excluir "%n"?
+EXIT_CONFIRM_TITLE|Suas modificações não serão gravadas
+EXIT_CONFIRM_MSG|Gostaria de gravar sua capa antes de sair?
+UPDATE_TITLE|Foi encontrada uma atualização
+UPDATE_MSG|Há uma atualização disponível para o Editor de Capas.\nVersão atual: %v\nNova versão: %c\nDeseja atualizar o Editor de Capas agora?
+VLT_PROGRESS|Criando o arquivo VLT...
+VLT_SUCCESS_MSG|O arquivo VLT foi criado com sucesso.
+VLT_SUCCESS_TITLE|Arquivo VLT criado
+DOWNLOAD_PROGRESS|Baixando...
+CONNECT_PROGRESS|Conectando...
+UPDATE_SUCCESS_TITLE|Atualização concluída
+UPDATE_SUCCESS_MSG|A atualização foi baixada e instalada com sucesso.\nO Editor de Capas do VLC será reiniciado agora
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Erro ao abrir arquivo
+ERROR_FILENEXIST_MSG|O arquivo "%f" não existe e portanto não pode ser aberto!
+ERROR_VLT_UNPACK_TITLE|Não foi possível desempacotar o arquivo VLT
+ERROR_VLT_UNPACK_MSG|Não foi possível desempacotar o arquivo VLT!
+ERROR_VLT_NOTHEME_TITLE|Não foi possível encontrar theme.xml
+ERROR_VLT_NOTHEME_MSG|Não foi possível encontrar "theme.xml" dentro do conteúdo desempacotado do arquivo VLT.\nTente abrí-lo manualmente.
+ERROR_VLC_LAUNCH_TITLE|Erro
+ERROR_VLC_LAUNCH_MSG|Não foi possível iniciar o VLC media player
+ERROR_BROWSE_TITLE|Não foi possível iniciar o navegador
+ERROR_BROWSE_MSG|Não foi possível iniciar o navegador.\nPor favor abra a seguinte URL manualmente:\n%u
+ERROR_ADD_SBMP_TITLE|Não foi possível adicionar SubBitmap
+ERROR_ADD_SBMP_NOBMP|Nenhum Bitmap proprietário foi selecionado!
+ERROR_ADD_SBMP_NOTBMP|O recurso selecionado não é um Bitmap!
+ERROR_RES_DEL_TITLE|Não foi possível excluir o recurso
+ERROR_RES_DEL_INUSE|O recurso ainda está sendo usado na capa, portanto não pode ser excluído.
+ERROR_ADD_LAYOUT_TITLE|Não foi possível adicionar um leiaute
+ERROR_ADD_LAYOUT_MSG|Nenhuma janela proprietária foi selecionada!
+ERROR_UPDATE_TITLE|Ocorreu um erro durante a atualização!
+ERROR_SAVEPNG_TITLE|Ocorreu um erro durante a gravação da imagem
+ERROR_SAVEPNG_MSG|Não foi possível gravar a imagem.
+ERROR_NEWSKIN_TITLE|Ocorreu um erro durante a criação do novo arquivo de capa!
+ERROR_NEWSKIN_MSG|Não foi possível criar um novo arquivo de capa.
+ERROR_HEADER_INVALID|O arquivo não parece ser um tema válido do VLC!\nCabeçalho inválido:
+ERROR_SKIN_INVALID|O arquivo selecionado não é um arquivo de capa do VLC válido!
+ERROR_VERSION_UNSUPPORTED|Não há mais suporte à versão do tema usado na capa selecionada!
+ERROR_SAVE_TITLE|Ocorreu um erro durante a gravação do arquivo de capa!
+ERROR_SAVE_MSG|O arquivo de capa não pôde ser gravado.
+ERROR_ALPHA_TITLE|O valor de opacidade não é válido
+ERROR_ALPHA_MSG|Por favor preencha com um valor válido de opacidade! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Não foi possível carregar a imagem central!\nPelo menos a parte central da área de rolagem é necessária para gerar um plano de fundo de rolagem.
+ERROR_VLT_TITLE|Não foi possível criar o arquivo VLT
+ERROR_VLT_MSG|Não foi possível criar o arquivo VLT!
+ERROR_ID_INVALID_TITLE|O identificador não é válido
+ERROR_ID_INVALID_MSG|Por favor preencha com um identificador válido!
+ERROR_ID_EXISTS_MSG|O identificador "%i" já existe.\nPor favor escolha outro.
+ERROR_WIDTH_INVALID_TITLE|A largura não é válida
+ERROR_WIDTH_INVALID_MSG|Por favor digite uma largura válida!
+ERROR_HEIGHT_INVALID_TITLE|A altura não é válida
+ERROR_HEIGHT_INVALID_MSG|Por favor digite uma altura válida!
+ERROR_FILE_INVALID_TITLE|O arquivo não é válido
+ERROR_FILE_INVALID_MSG|Por favor escolha um arquivo válido!
+ERROR_BITMAP_INVALID_MSG|Não foi possível carregar o arquivo bitmap informado!\nPor favor escolha outro.
+ERROR_NBFRAMES_TITLE|Número de quadros inválido
+ERROR_NBFRAMES_MSG|O número de quadros não pode ser menor que 1
+ERROR_OTF_TITLE|Não há suporte a OTF
+ERROR_OTF_MSG|Foi escolhida uma fonte OpenType. O VLC exibirá a fonte corretamente, mas o editor de capas não pode exibí-la.\nVocê verá outra fonte na visualização de racunho.
+ERROR_SIZE_INVALID_TITLE|Tamanho inválido
+ERROR_SIZE_INVALID_MSG|Por favor digite um tamanho válido.
+ERROR_OUTSIDE_TITLE|As dimensões são inválidas
+ERROR_OUTSIDE_MSG|As dimensões especificadas extrapolam as dimensões do bitmap proprietário!
+ERROR_BITMAP_NEXIST|O bitmap %i não existe.
+ERROR_BITMAP_NEXIST_TITLE|A imagem não é válida!
+ERROR_BITMAP_LOAD|O arquivo de imagem para o bitmap %i não pôde ser carregado.
+ERROR_BITMAP_LOAD_TITLE|Ocorreu um erro durante a carga das imagens
+ERROR_NOSTATE|Por favor, providencie a condição de funcionamento!
+ERROR_NOSTATE_TITLE|A condição não é válida
+ERROR_FONT_NEXIST|A fonte %i não existe.
+ERROR_FONT_NEXIST_TITLE|A fonte não é válida!
+ERROR_POINTS_INVALID|Por favor digite pontos bezier válidos!
+ERROR_POINTS_INVALID_TITLE|Os pontos não são válidos!
+ERROR_RADIALSLIDER|Ainda não há suporte às barras de rolagem radiais no editor de capas.
+ERROR_RADIALSLIDER_TITLE|Não há suporte
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Tema sem título
+THEMEINFO_AUTHOR_DEFAULT|Autor desconhecido
+THEMEINFO_EMAIL_DEFAULT|Desconhecido
+
+#History
+HIST_ITEM_ADD|Adicionar %t
+HIST_ITEM_DEL|Excluir %t
+HIST_ITEM_EDIT|Editar %t
+HIST_ITEM_MOVE|Mover %t
+HIST_RES_DEL|Excluir %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* O atributo deve ser especificado.
+
+#Common strings
+WIN_ITEM_GENERAL|Atributos gerais
+WIN_ITEM_ID|Identificador*:
+WIN_ITEM_ID_TIP|O nome e a identificação do %t. Deve ser exclusiva.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Largura:
+WIN_ITEM_HEIGHT|Altura:
+WIN_ITEM_VISIBLE|Visibilidade:
+WIN_ITEM_LEFTTOP|Superior-esquerdo:
+WIN_ITEM_LEFTTOP_TIP|Indica a que canto do leiaute o está associado o item, em caso de redimensionamento.
+WIN_ITEM_RIGHTBOTTOM|Inferior-direito:
+WIN_ITEM_RIGHTBOTTOM_TIP|Indica a que canto do leiaute este item está associado, em caso de redimensionamento.
+WIN_ITEM_XKEEPRATIO|Manter Proporção X:
+WIN_ITEM_XKEEPRATIO_TIP|Quando habilitado, o comportamento do redimensionamento horizontal é alterado. Por exemplo, se o espaço à esquerda do controle é inicialmente duas vezes maior que o da direita, isto permanecerá durante um redmensionamento horizontal. A largura do controle permanecerá constante.
+WIN_ITEM_YKEEPRATIO|Manter Proporção Y:
+WIN_ITEM_YKEEPRATIO_TIP|Quando habilitado, o comportamento do redimensionamento vertical é alterado. Por exemplo, se o espaço acima do controle é duas vezes maior que o de baixo, isto permanecerá durante um redimensionamento vertical. A altura do controle permanecerá constante.
+WIN_ITEM_HELP|Texto de ajuda:
+WIN_ITEM_HELP_TIP|A variável '$H' será expandida para este valor quando o mouse passar por cima do controle atual.
+WIN_ITEM_TOOLTIPTEXT|Dica da ferramenta:
+FILE_INDIR|na mesma pasta do arquio XML
+
+#Bitmap
+WIN_BITMAP_TITLE|Configurações de bitmap
+WIN_BITMAP_FILE|Arquivo*:
+WIN_BITMAP_FILE_TIP|Indica o caminho e o nome do arquivo de imagem utilizado.
+WIN_BITMAP_OPEN|Abrir...
+WIN_BITMAP_ALPHACOLOR|Cor alfa:
+WIN_BITMAP_ALPHACOLOR_TIP|A cor de transparência do bitmap no formato hexadecimal. Se seu arquivo PNG especificar uma máscara de transparência, ela será levada em conta também.
+WIN_BITMAP_CHOOSE|Escolher...
+WIN_BITMAP_NBFRAMES|Número de quadros:
+WIN_BITMAP_NBFRAMES_TIP|Este atributo é necessário para definir os bitmaps animados; é o número de quadros (imagens) contidas na sua animação. Todos os quadros diferentes são apenas imagens dispostas verticalmente no bitmap.
+WIN_BITMAP_FPS|Quadros por segundo:
+WIN_BITMAP_FPS_TIP|Usado apenas em bitmaps animados; é o número de quadros (imagens) por segundo, da animação.
+WIN_BITMAP_ANIMATION|Atributos da animação
+WIN_BITMAP_CHOOSER_TITLE|Escolher a cor alfa
+
+#SubBitmap
+WIN_SBMP_TITLE|Configurações de Sub Bitmap
+WIN_SBMP_BOUNDS|Atributos de posição e dimensão
+
+#Font
+WIN_FONT_TITLE|Configurações de fonte
+WIN_FONT_FILE|Arquivo*:
+WIN_FONT_FILE_TIP|O arquivo contendo a fonte TrueType ou OpenType usada.
+WIN_FONT_OPEN|Abrir...
+WIN_FONT_SIZE|Tamanho:
+
+#Layout
+WIN_LAYOUT_TITLE|Configurações de leiaute
+WIN_LAYOUT_GENERAL|Atributos gerais
+WIN_LAYOUT_DIMENSIONS|Dimensões
+WIN_LAYOUT_WIDTH|Largura inicial*:
+WIN_LAYOUT_WIDTH_TIP|A largura inicial do leiaute.
+WIN_LAYOUT_HEIGHT|Altura inicial*:
+WIN_LAYOUT_HEIGHT_TIP|A altura inicial do leiaute.
+WIN_LAYOUT_MINWIDTH|Largura mínima:
+WIN_LAYOUT_MINWIDTH_TIP|A largura mínima do leiaute. Usado apenas quando estiver ocorrendo um redimensionamento do leiaute. Se o valor for ajustado para "-1", a largura inicial será usada como largura mínima.
+WIN_LAYOUT_MINHEIGHT|Altura mínima:
+WIN_LAYOUT_MINHEIGHT_TIP|A altura mínima do leiaute. Usado apenas quando estiver ocorrendo um redimensionamento do leiaute. Se o varlo for ajustado para "-1", a altura inicial será usada como altura mínima.
+WIN_LAYOUT_MAXWIDTH|Largura máxima:
+WIN_LAYOUT_MAXWIDTH_TIP|Largura máxima do leiaute. Usado somente quando estiver ocorrendo um redimensionamento do leiaute. Se o varlo for ajustado para "-1", a altura inicial será usada como largura máxima.
+WIN_LAYOUT_MAXHEIGHT|Altura máxima:
+WIN_LAYOUT_MAXHEIGHT_TIP|Altura máxima do leiaute. Usado somente quando estiver ocorrendo um redimensionamento do leiaute. Se o varlo for ajustado para "-1", a altura inicial será usada como altura máxima.
+
+#Window
+WIN_WINDOW_TITLE|Configurações de janela
+WIN_WINDOW_X_TIP|Distância inicial da janela para o canto esquerdo da tela.
+WIN_WINDOW_Y_TIP|Distância inicial da janela para o canto superior da tela.
+WIN_WINDOW_VISIBLE_TIP|Indica se uma janela deve aparecer quando o VLC for iniciado. Já que o VLC guarda as posições e a visibilidade das janelas da capa, este atributo só será usado na primeira vez que a capa for iniciada.
+WIN_WINDOW_DD|Arrastar e soltar:
+WIN_WINDOW_DD_TIP|Indica se o arrastar e soltar de arquivos de mídia é permitido nesta janela.
+WIN_WINDOW_PD|Reproduzir ao soltar:
+WIN_WINDOW_PD_TIP|Indica se um arquivo arrastado e solto será reprodudo diretamente (habilitado) ou será enfileirado (desabilitado). Este atributo não tem efeito se o arrastar e soltar estiver definido como "falso".
+WIN_WINDOW_DD_PANEL|Opções de arrastar e soltar
+
+#Anchor
+WIN_ANCHOR_TITLE|Configurações de âncora
+WIN_ANCHOR_POINTS|Pontos:
+WIN_ANCHOR_POINTS_TIP|Pontos que definem uma curva de Bezier seguida pela âncora. Não é necessário alterar este parâmetro se for necessária apenas uma âncora pontual.
+WIN_ANCHOR_RANGE|Faixa:
+WIN_ANCHOR_RANGE_TIP|Faixa de área de efeito da âncora, em pixels.
+WIN_ANCHOR_PRIORITY|Prioridade*:
+WIN_ANCHOR_PRIORITY_TIP|Cara âncora tem uma prioridade (atributo prioridade), e a âncora com maior prioridade é a vencedora, o que significa que quando sua janela for movida, todas as outras janelas ancoradas também serão movidas também. Para evitar o efeito de duas janelas ancoradas, é preciso mover a janela que tem a âncora com menor prioridade.
+WIN_ANCHOR_BOUNDARIES|Limites
+
+#Button
+WIN_BUTTON_TITLE|Configurações de botão
+WIN_BUTTON_UP|Imagem normal*:
+WIN_BUTTON_OVER|Imagem quando apontado:
+WIN_BUTTON_DOWN|Imagem quando clicado:
+WIN_BUTTON_ACTION|Ação:
+WIN_BUTTON_ATTR|Atributos de Botão
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Configurações de Marcador
+WIN_CHECKBOX_UP|Imagem normal*:
+WIN_CHECKBOX_OVER|Imagem quando apontado:
+WIN_CHECKBOX_DOWN|Imagem quando clicado:
+WIN_CHECKBOX_ACTION|Ação:
+WIN_CHECKBOX_CONDITION|Condição:
+WIN_CHECKBOX_CONDITION_TIP|Expressão booleana especificando o estado do marcador: falso -> estado No 1, verdadeiro -> estado No 2
+WIN_CHECKBOX_STATE|Estado do marcador
+WIN_CHECKBOX_STATE1|Estado No 1 (A condição não foi satisfeita):
+WIN_CHECKBOX_STATE2|Estado No 2 (A condição foi satisfeita):
+
+#Image
+WIN_IMAGE_TITLE|Configuração de imagem
+WIN_IMAGE_IMAGE|Imagem*:
+WIN_IMAGE_IMAGE_TIP|Identificador de um Bitmap
+WIN_IMAGE_RESIZE|Modo de redimensionamento:
+WIN_IMAGE_RESIZE_TIP|Especifica o comportamento da imagem quando estiver sendo redimensionada.
+WIN_IMAGE_ACTION|Ação:
+WIN_IMAGE_ACTION_TIP|Ação iniciada por um clique na imagem.
+WIN_IMAGE_ACTION2|Ação do duplo-clique:
+WIN_IMAGE_ACTION2_TIP|Ação iniciada por um duplo-clique na imagem.
+WIN_IMAGE_ATTR|Atributos da imagem
+
+#Group
+WIN_GROUP_TITLE|Configurações de Grupo
+
+#Panel
+WIN_PANEL_TITLE|Configurações de painel
+WIN_PANEL_DIMENSIONS|Dimensões
+WIN_PANEL_WIDTH|Largura*:
+WIN_PANEL_HEIGHT|Altura*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Configurações de árvore de reprodução
+WIN_PLAYTREE_FONT|Fonte*:
+WIN_PLAYTREE_BGIMAGE|Imagem de plano de fundo:
+WIN_PLAYTREE_BGIMAGE_TIP|ID de um Bitmap, usado como imagem de plano de fundo. Quando nenhum bitmap é especificado, o plano de fundo é preenchido usando os atributos bgcolor1 e bgcolor2.
+WIN_PLAYTREE_BGCOLOR1|Cor de fundo No 1:
+WIN_PLAYTREE_BGCOLOR2|Cor de fundo No 2:
+WIN_PLAYTREE_SELCOLOR|Cor de seleção:
+WIN_PLAYTREE_FGCOLOR|Cor do texto:
+WIN_PLAYTREE_PLAYCOLOR|Cor do texto de reprodução:
+WIN_PLAYTREE_FLAT|Lista de reprodução plana:
+WIN_PLAYTREE_FLAT_TIP|Indica se a lista de reprodução deve usar a estrutura de árvore ou ser completamente \"plana\" (mostra somente as folhas da árvore).
+WIN_PLAYTREE_ITEMIMAGE|Ícone do item:
+WIN_PLAYTREE_OPENIMAGE|Ícone de abrir pasta:
+WIN_PLAYTREE_CLOSEDIMAGE|Ícone de pasta fechada:
+WIN_PLAYTREE_SLIDER|Barra de rolagem de edição da lista de reprodução
+WIN_PLAYTREE_ATTR|Atributos de árvore de reprodução
+WIN_PLAYTREE_CHOOSE|Escolher...
+WIN_PLAYTREE_CHOOSER_TITLE|Escolha a cor
+
+#Slider
+WIN_SLIDER_TITLE|Configurações de barra de rolagem
+WIN_SLIDER_UP|Imagem normal*:
+WIN_SLIDER_OVER|Imagem quando apontado:
+WIN_SLIDER_DOWN|Imagem quando clicado:
+WIN_SLIDER_POINTS|Pontos*:
+WIN_SLIDER_THICKNESS|Sensibilidade:
+WIN_SLIDER_VALUE|Valor*:
+WIN_SLIDER_VALUE_SCROLL|Rolagem da árvore
+WIN_SLIDER_BG_ENABLE|Habilitar plano de fundo
+WIN_SLIDER_BG_EDIT|Editar...
+WIN_SLIDER_ATTR|Atributos de barra de rolagem
+WIN_SLIDER_BG|Barra de rolagem de plano de fundo
+
+#Slider background
+WIN_SBG_TITLE|Configurações de barra de rolagem de plano de fundo
+WIN_SBG_WIZARD|Abrir Gerador de Barra de Rolagem de Fundo...
+WIN_SBG_IMAGE|Imagem*:
+WIN_SBG_NBHORIZ|Lado-a-lado horizontal:
+WIN_SBG_NBVERT|Lado-a-lado vertical:
+WIN_SBG_PADHORIZ|Em cascata horizontal:
+WIN_SBG_PADVERT|Em cascata vertical:
+WIN_SBG_ATTR|Atributos de plano de fundo
+
+#Text
+WIN_TEXT_TITLE|Configurações de texto
+WIN_TEXT_TEXT|Texto*:
+WIN_TEXT_FONT|Fonte:
+WIN_TEXT_COLOR|Cor:
+WIN_TEXT_CHOOSE|Escolher...
+WIN_TEXT_CHOOSER_TITLE|Escolhe a cor do texto
+WIN_TEXT_ALIGNMENT|Alinhamento:
+WIN_TEXT_SCROLLING|Rolagem:
+WIN_TEXT_ATTR|Atributos de texto
+
+#Video
+WIN_VIDEO_TITLE|Configurações de vídeo
+WIN_VIDEO_AUTORESIZE|Redimensionar automaticamente:
+WIN_VIDEO_AUTORESIZE_TIP|Indica que leioute deverá ser redimensionado automaticamente para encaixar nas dimensões do vídeo em reprodução.
+WIN_VIDEO_ATTR|Atributos de vídeo
