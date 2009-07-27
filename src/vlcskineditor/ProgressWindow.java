@@ -43,7 +43,7 @@ public class ProgressWindow extends JDialog{
     setLayout(new BorderLayout());
     pbar = new JProgressBar();
     add(pbar,BorderLayout.CENTER);
-    if(p_ != null && p_.isVisible()) setBounds(p_.getX()+p_.getWidth()/2,p_.getY()+p_.getHeight()/2,300,50);
+    if(p_ != null && p_.isVisible()) setBounds(p_.getX()+p_.getWidth()/2-150,p_.getY()+p_.getHeight()/2-25,300,50);
     else setSize(300,50);
     setResizable(false);
     pbar.setString("...");
