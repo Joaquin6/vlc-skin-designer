@@ -19,7 +19,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-
 package vlcskineditor;
 
 import java.awt.*;
@@ -31,7 +30,6 @@ import javax.swing.*;
 import vlcskineditor.history.*;
 import vlcskineditor.items.Slider;
 
-
 /**
  * Handles the preview window and user interaction with it.
  * @author Daniel Dreibrodt
@@ -39,7 +37,6 @@ import vlcskineditor.items.Slider;
 public class PreviewWindow extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 
   public static final long serialVersionUID = 85;
-
   /** The JFrame in which a Layout of a Skin will be shown. */
   public JInternalFrame frame;
   /** The scroll pane holding the preview rendering */
@@ -47,7 +44,7 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   /** The panel holding the zoom controls */
   private JPanel zoom_panel;
   /** The zoom control buttons */
-  private JButton zoom_more, zoom_less;
+  private JButton zoom_more,  zoom_less;
   /** The label showing the zoom factor */
   private JLabel zoom_label;
   /** The zoom factor */
@@ -57,20 +54,20 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   /** The frame updater who is responsible for updating the preview rendering */
   protected FrameUpdater fu;
   /** The currently selected item in the items window's tree */
-  private Item selected_item;
+  private Item selectedItem;
   /** Indicates whether the cursors is in a drag action */
-  private boolean starteddragging = false;
+  private boolean startedDragging = false;
   /** The starting coordinates of the drag action */
-  private int dragstartx, dragstarty, dragstartitemx, dragstartitemy;
+  private int dragStartX,  dragStartY,  dragStartItemX,  dragStartItemY;
+  /** The index of the control point in the slider that is dragged */
+  private int draggedSliderPoint;
   /** The move event added to the history when the dragging action has finished */
   private ItemMoveEvent ime = null;
   /** The slider edit event added to the history when the slider point dragging action has finished */
   private SliderEditEvent see = null;
   /** The main program */
   private Main m;
-
-  private Cursor move_normal_c, path_normal_c, path_active_c, path_add_c, path_del_c;
-
+  private Cursor move_normal_c,  path_normal_c,  path_active_c,  path_add_c,  path_del_c;
   /** The cursor mode constant indicating that the cursor should move the selected item */
   public static final int CURSOR_MOVE = 1;
   /** The cursor mode constant indicating that the cursor should edit the path of the selected item */
@@ -82,51 +79,57 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
    * Creates a new PreviewWindow that is initially hidden.
    * @param m_ the Main instance of the running Skin Editor
    */
-  public PreviewWindow(Main m_) {   
+  public PreviewWindow(Main m_) {
     m = m_;
     frame = new JInternalFrame();
     frame.setLayout(new BorderLayout());
     zoom_panel = new JPanel();
     zoom_panel.setLayout(new FlowLayout());
-    zoom_less = new JButton("-");   
+    zoom_less = new JButton("-");
     zoom_less.addActionListener(this);
     zoom_panel.add(zoom_less);
-    zoom_label = new JLabel(Language.get("ZOOM_FACTOR")+" 1x");
+    zoom_label = new JLabel(Language.get("ZOOM_FACTOR") + " 1x");
     zoom_panel.add(zoom_label);
     zoom_more = new JButton("+");
     zoom_more.addActionListener(this);
     zoom_panel.add(zoom_more);
-    zoom_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);    
+    zoom_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     frame.add(zoom_panel, BorderLayout.PAGE_START);
-    scroll_pane = new JScrollPane(this);   
-    frame.add(scroll_pane,BorderLayout.CENTER);     
+    scroll_pane = new JScrollPane(this);
+    frame.add(scroll_pane, BorderLayout.CENTER);
     frame.pack();
     frame.setMinimumSize(zoom_panel.getPreferredSize());
     frame.setVisible(false);
-    frame.setResizable(true);        
+    frame.setResizable(true);
     frame.setFrameIcon(Main.preview_icon);
     addMouseListener(this);
     addMouseMotionListener(this);
-    
+
     move_normal_c = new Cursor(Cursor.MOVE_CURSOR);
     path_normal_c = Helper.createImageCursor("icons/path_cursor.gif", 4, 0, this);
     path_active_c = Helper.createImageCursor("icons/path_cursor_active.gif", 4, 0, this);
     path_add_c = Helper.createImageCursor("icons/path_cursor_add.gif", 4, 0, this);
     path_del_c = Helper.createImageCursor("icons/path_cursor_del.gif", 4, 0, this);
   }
+
   /**
    * Is invoked when the user deselects a layout.
    * All references to the old layout are cleared and the window is hidden.
    * Additionally the FrameUpdater is stopped.
    */
   public void clearLayout() {
-    l=null;
-    if(selected_item!=null) selected_item.setSelected(false);
-    selected_item=null;
+    l = null;
+    if(selectedItem != null) {
+      selectedItem.setSelected(false);
+    }
+    selectedItem = null;
     frame.setVisible(false);
-    if(fu!=null) fu.stopRunning();
-    fu=null;
+    if(fu != null) {
+      fu.stopRunning();
+    }
+    fu = null;
   }
+
   /**
    * Invoked when the user selects a Layout.
    * Shows the preview window and there draws the selected layout.
@@ -134,93 +137,100 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
    * @param l_ The Layout that should be displayed.
    */
   public void setLayout(Window w_, Layout l_) {
-    if(l_==null) {
+    if(l_ == null) {
       clearLayout();
       return;
     }
-    l=l_;    
-    setPreferredSize(new Dimension(l.width*z,l.height*z));
-    int spane_w = l.width*z+scroll_pane.getBorder().getBorderInsets(scroll_pane).left+scroll_pane.getBorder().getBorderInsets(scroll_pane).right;
-    int spane_h = l.height*z;//+scroll_pane.getBorder().getBorderInsets(scroll_pane).top+scroll_pane.getBorder().getBorderInsets(scroll_pane).bottom;
-    scroll_pane.setPreferredSize(new Dimension(spane_w, spane_h));    
-    frame.setTitle("Window: "+w_.id + " - Layout: " + l.id);    
+    l = l_;
+    setPreferredSize(new Dimension(l.width * z, l.height * z));
+    int spane_w = l.width * z + scroll_pane.getBorder().getBorderInsets(scroll_pane).left + scroll_pane.getBorder().getBorderInsets(scroll_pane).right;
+    int spane_h = l.height * z;//+scroll_pane.getBorder().getBorderInsets(scroll_pane).top+scroll_pane.getBorder().getBorderInsets(scroll_pane).bottom;
+    scroll_pane.setPreferredSize(new Dimension(spane_w, spane_h));
+    frame.setTitle("Window: " + w_.id + " - Layout: " + l.id);
     frame.pack();
-    frame.setVisible(true);        
-    if(fu==null) {
-      fu = new FrameUpdater(this,5);
-      fu.start();      
-    }    
+    frame.setVisible(true);
+    if(fu == null) {
+      fu = new FrameUpdater(this, 5);
+      fu.start();
+    }
   }
+
   /**
    * Invoked when a user selects an Item. This tells the PreviewWindow which item should be moved when the user interacts with the window.
    * @param i The Item selected by the user.
    */
-  public void selectItem(Item i) {    
-    if(selected_item!=null) selected_item.setSelected(false);
-    if(i==null) return;
-    selected_item = i;
-    selected_item.setSelected(true);
+  public void selectItem(Item i) {
+    if(selectedItem != null) {
+      selectedItem.setSelected(false);
+    }
+    if(i == null) {
+      return;
+    }
+    selectedItem = i;
+    selectedItem.setSelected(true);
   }
+
   /**
    * Paints the selected layout into the window.
    * @param g The Graphics context into which is drawn.
    */
   @Override
-  public void paint(Graphics g) {  
-    if(l==null) return;   
-    BufferedImage bi = (BufferedImage) createImage(getWidth(),getHeight());    
+  public void paint(Graphics g) {
+    if(l == null) {
+      return;
+    }
+    BufferedImage bi = (BufferedImage) createImage(getWidth(), getHeight());
     Graphics2D g2d = bi.createGraphics();
-    g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     g2d.setColor(Color.WHITE);
-    g2d.fillRect(0,0,getWidth(),getHeight());
+    g2d.fillRect(0, 0, getWidth(), getHeight());
     g2d.setColor(Color.LIGHT_GRAY);
-    for(int x=0;x<getWidth();x=x+20) {
-      for(int y=0;y<getHeight();y=y+20) {
-        g2d.fillRect(x,y,10,10);
-        g2d.fillRect(x+10,y+10,10,10);
+    for(int x = 0; x < getWidth(); x = x + 20) {
+      for(int y = 0; y < getHeight(); y = y + 20) {
+        g2d.fillRect(x, y, 10, 10);
+        g2d.fillRect(x + 10, y + 10, 10, 10);
       }
     }
     try {
       l.draw(g2d, z);
-    }
-    //In case any exception occurs while trying to draw the layout (e.g. missing bitmap/negative or zero width of items)
+    } //In case any exception occurs while trying to draw the layout (e.g. missing bitmap/negative or zero width of items)
     catch(Exception e) {
       e.printStackTrace();
     }
     g.drawImage(bi, 0, 0, this);
   }
+
   @Override
   public void update(Graphics g) {
     //Needs to be overriden so that repainting is smooth
-    //paint(g);
-  }  
+  }
+
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(zoom_less)) {
-      if(z>1) z--;
-      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z+"x");
-      setSize(l.width*z, l.height*z);
-      setPreferredSize(new Dimension(l.width*z, l.height*z));
-    }
-    else if(e.getSource().equals(zoom_more)) {
-      if(z<16) z++;
-      zoom_label.setText(Language.get("ZOOM_FACTOR")+" "+z+"x");
-      setSize(l.width*z, l.height*z);
-      setPreferredSize(new Dimension(l.width*z, l.height*z));
+      if(z > 1) {
+        z--;
+      }
+      zoom_label.setText(Language.get("ZOOM_FACTOR") + " " + z + "x");
+      setSize(l.width * z, l.height * z);
+      setPreferredSize(new Dimension(l.width * z, l.height * z));
+    } else if(e.getSource().equals(zoom_more)) {
+      if(z < 16) {
+        z++;
+      }
+      zoom_label.setText(Language.get("ZOOM_FACTOR") + " " + z + "x");
+      setSize(l.width * z, l.height * z);
+      setPreferredSize(new Dimension(l.width * z, l.height * z));
     }
   }
+
   public void mouseClicked(MouseEvent e) {
-    if(mode==CURSOR_PATH) {
-      if(selected_item.getClass().equals(Slider.class)) {
-        Slider s = (Slider)selected_item;
-        int mx = e.getX()/z-s.offsetx-s.x;
-        int my = e.getY()/z-s.offsety-s.y;
-        int over = -1;
-        for(int i=0; i<s.getControlPointNum(); i++) {
-          int dx = Math.abs(mx-s.getControlX(i));
-          int dy = Math.abs(my-s.getControlY(i));
-          if(dx<2 && dy<2) over = i;
-        }
-        if(over!=-1) {
+    if(mode == CURSOR_PATH) {
+      if(selectedItem.getClass().equals(Slider.class)) {
+        Slider s = (Slider) selectedItem;
+        int mx = e.getX() / z - s.offsetx - s.x;
+        int my = e.getY() / z - s.offsety - s.y;
+        int over = getSliderPointAt(s, mx, my);
+        if(over != -1) {
           if(e.isAltDown()) {
             s.removeControlPoint(over);
           } else {
@@ -236,58 +246,79 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
       }
     }
   }
+
   public void mouseDragged(MouseEvent e) {
-    if(selected_item==null) return;
-    if(mode==CURSOR_MOVE) {
-      if(!starteddragging && selected_item.contains(e.getX()/z,e.getY()/z)) {
-        dragstartx=e.getX()/z;
-        dragstarty=e.getY()/z;
-        ime = new ItemMoveEvent(selected_item);
-        dragstartitemx=selected_item.x;
-        dragstartitemy=selected_item.y;
-        starteddragging=true;
-      }
-      else if(starteddragging) {
-        selected_item.x=dragstartitemx+e.getX()/z-dragstartx;
-        selected_item.y=dragstartitemy+e.getY()/z-dragstarty;
+    if(selectedItem == null) {
+      return;
+    }
+    if(mode == CURSOR_MOVE) {
+      if(!startedDragging && selectedItem.contains(e.getX() / z, e.getY() / z)) {
+        dragStartX = e.getX() / z;
+        dragStartY = e.getY() / z;
+        ime = new ItemMoveEvent(selectedItem);
+        dragStartItemX = selectedItem.x;
+        dragStartItemY = selectedItem.y;
+        startedDragging = true;
+      } else if(startedDragging) {
+        selectedItem.x = dragStartItemX + e.getX() / z - dragStartX;
+        selectedItem.y = dragStartItemY + e.getY() / z - dragStartY;
       }
     } else {
-      //TODO path editing mouseDragged
+      if(selectedItem.getClass().equals(Slider.class)) {
+        Slider s = (Slider) selectedItem;
+        int mx = e.getX() / z - s.offsetx - s.x;
+        int my = e.getY() / z - s.offsety - s.y;        
+        if(!startedDragging) {
+          int sliderPoint = getSliderPointAt(s, mx, my);
+          if(sliderPoint!=-1) {
+            draggedSliderPoint = sliderPoint;
+            dragStartX = mx;
+            dragStartY = my;
+            dragStartItemX = s.getControlX(sliderPoint);
+            dragStartItemY = s.getControlY(sliderPoint);
+            see = new SliderEditEvent(s);
+            startedDragging = true;
+          }
+        } else if(startedDragging) {
+          int x = dragStartItemX + (mx-dragStartX);
+          int y = dragStartItemY + (my-dragStartY);
+          s.moveControlPointTo(draggedSliderPoint, x, y);
+        }
+      }
     }
-  }  
+  }
+
   public void mouseEntered(MouseEvent e) {
-    if(mode==CURSOR_PATH) {
+    if(mode == CURSOR_PATH) {
       setCursor(path_normal_c);
     }
   }
+
   public void mouseExited(MouseEvent e) {
-    if(mode==CURSOR_PATH) {
+    if(mode == CURSOR_PATH) {
       setCursor(Cursor.getDefaultCursor());
     }
   }
+
   public void mouseMoved(MouseEvent e) {
-    if(selected_item==null) return;
-    if(mode==CURSOR_MOVE) {
-      if(selected_item.contains(e.getX()/z,e.getY()/z)) {
-        selected_item.setHover(true);
+    if(selectedItem == null) {
+      return;
+    }
+    if(mode == CURSOR_MOVE) {
+      if(selectedItem.contains(e.getX() / z, e.getY() / z)) {
+        selectedItem.setHover(true);
         setCursor(move_normal_c);
-      }
-      else {
-        selected_item.setHover(false);
+      } else {
+        selectedItem.setHover(false);
         setCursor(Cursor.getDefaultCursor());
       }
-    } else {
-      if(selected_item.getClass().equals(Slider.class)) {
-        Slider s = (Slider)selected_item;
-        int mx = e.getX()/z-s.offsetx-s.x;
-        int my = e.getY()/z-s.offsety-s.y;
-        int over = -1;
-        for(int i=0; i<s.getControlPointNum(); i++) {
-          int dx = Math.abs(mx-s.getControlX(i));
-          int dy = Math.abs(my-s.getControlY(i));
-          if(dx<2 && dy<2) over = i;
-        }
-        if(over!=-1) {
+    } else { //Slider editing
+      if(selectedItem.getClass().equals(Slider.class)) {
+        Slider s = (Slider) selectedItem;
+        int mx = e.getX() / z - s.offsetx - s.x;
+        int my = e.getY() / z - s.offsety - s.y;
+        int over = getSliderPointAt(s, mx, my);
+        if(over != -1) {
           if(e.isAltDown()) {
             setCursor(path_del_c);
           } else {
@@ -300,71 +331,90 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
             setCursor(path_normal_c);
           }
         }
-        //System.out.println(getCursor().getName());
+      //System.out.println(getCursor().getName());
       }
     }
   }
+
   public void mousePressed(MouseEvent e) {
-    fu.fps=25;
-    if(mode==CURSOR_MOVE) {
-      if(selected_item!=null) selected_item.setClicked(true);
+    fu.fps = 25;
+    if(mode == CURSOR_MOVE) {
+      if(selectedItem != null) {
+        selectedItem.setClicked(true);
+      }
     } else {
       //TODO path editing mousePressed
     }
   }
+
   public void mouseReleased(MouseEvent e) {
-    fu.fps=5;
-    if(mode==CURSOR_MOVE) {
-      if(starteddragging) {
+    fu.fps = 5;
+    if(mode == CURSOR_MOVE) {
+      if(startedDragging) {
         ime.setNew();
         m.hist.addEvent(ime);
         ime = null;
       }
-      starteddragging=false;
-      if(selected_item!=null) selected_item.setClicked(false);
-      else return;
-      dragstartx=selected_item.x+selected_item.offsetx;
-      dragstarty=selected_item.y+selected_item.offsety;
-      dragstartitemx=selected_item.x;
-      dragstartitemy=selected_item.y;
+      startedDragging = false;
+      if(selectedItem != null) {
+        selectedItem.setClicked(false);
+      } else {
+        return;
+      }
+      dragStartX = selectedItem.x + selectedItem.offsetx;
+      dragStartY = selectedItem.y + selectedItem.offsety;
+      dragStartItemX = selectedItem.x;
+      dragStartItemY = selectedItem.y;
     } else {
-      //TODO path editing mouseReleased
+      if(startedDragging) {
+        see.setNew();
+        m.hist.addEvent(see);
+        see = null;
+        startedDragging = false;
+      }
     }
   }
+
   /**
    * Moves the currently selected item about the given distance.
    * @param x Movement along the X-Axis.
    * @param y Movement along the Y-Axis.
    */
-  public void moveItem(int x, int y) {    
+  public void moveItem(int x, int y) {
     try {
-      if(ime==null) {
-        ime = new ItemMoveEvent(selected_item);
+      if(ime == null) {
+        ime = new ItemMoveEvent(selectedItem);
         m.hist.addEvent(ime);
-      }      
-      selected_item.x+=x;
-      selected_item.y+=y;
-      if(ime.getNext()==null) ime.setNew();
-      else ime = null;
+      }
+      selectedItem.x += x;
+      selectedItem.y += y;
+      if(ime.getNext() == null) {
+        ime.setNew();
+      } else {
+        ime = null;
+      }
       repaint();
-    }
-    catch (NullPointerException ex) {
+    } catch(NullPointerException ex) {
       /* empty */
     }
   }
+
   /**
    * Saves a preview of the selected layout to a file
    */
   public void savePNG(File f) {
     BufferedImage bi = new BufferedImage(l.width, l.height, BufferedImage.TYPE_INT_ARGB);
-    if(selected_item!=null) selected_item.setSelected(false);
+    if(selectedItem != null) {
+      selectedItem.setSelected(false);
+    }
     l.draw(bi.createGraphics(), 1);
-    if(selected_item!=null) selected_item.setSelected(true);
+    if(selectedItem != null) {
+      selectedItem.setSelected(true);
+    }
     try {
       ImageIO.write(bi, "png", f);
-    }
-    catch (Exception e) {
-      JOptionPane.showMessageDialog(m,Language.get("ERROR_SAVEPNG_MSG")+"\n"+e.toString(),Language.get("ERROR_SAVEPNG_TITLE"),JOptionPane.ERROR_MESSAGE);
+    } catch(Exception e) {
+      JOptionPane.showMessageDialog(m, Language.get("ERROR_SAVEPNG_MSG") + "\n" + e.toString(), Language.get("ERROR_SAVEPNG_TITLE"), JOptionPane.ERROR_MESSAGE);
       return;
     }
   }
@@ -384,4 +434,18 @@ public class PreviewWindow extends JPanel implements MouseListener, MouseMotionL
   public int getCursorMode() {
     return mode;
   }
+
+  private int getSliderPointAt(Slider s, int x, int y) {
+    int over = -1;
+    for(int i = 0; i < s.getControlPointNum(); i++) {
+      int dx = Math.abs(x - s.getControlX(i));
+      int dy = Math.abs(y - s.getControlY(i));
+      if(dx < 2 && dy < 2) {
+        over = i;
+      }
+    }
+    return over;
+  }
+
+
 }

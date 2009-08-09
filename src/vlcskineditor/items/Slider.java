@@ -68,8 +68,10 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
   JButton visible_btn, ok_btn, cancel_btn, help_btn, sbg_btn;
 
   ImageResource up_res, over_res, down_res;
-  
+
+  /** This object manages the maths around the bezier curve of the slider */
   private Bezier b;
+  /** The slider control points */
   private int[] xpos,ypos;
 
   private Point2D.Float sliderPos;
@@ -741,10 +743,12 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
         Point2D.Float p1 = bezierPoints[i];
         Point2D.Float p2 = bezierPoints[i+1];
         g.drawLine((int)(p1.getX()+x+x_)*z,(int)(p1.getY()+y+y_)*z,(int)(p2.getX()+x+x_)*z,(int)(p2.getY()+y+y_)*z);
-      }
-      g.setColor(Color.YELLOW);
+      }      
       for(int i=0;i<xpos.length;i++) {
-        g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,3,3);
+        g.setColor(Color.BLACK);
+        g.fillOval((xpos[i]+x+x_-2)*z,(ypos[i]+y+y_-2)*z,4,4);
+        g.setColor(Color.YELLOW);
+        g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,2,2);
       }
     }
   }
@@ -845,7 +849,15 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
   }
 
   public void moveControlPointTo(int index, int x, int y) {
-
+    xpos[index] = x;
+    ypos[index] = y;
+    String points_new = "";
+    for(int i=0;i<xpos.length;i++) {
+      if(points_new.length()>0) points_new+=",";
+      points_new+="("+xpos[i]+","+ypos[i]+")";
+    }
+    points = points_new;
+    updateBezier();
   }
 
   public void onResourceChanged(ResourceChangedEvent e) {
