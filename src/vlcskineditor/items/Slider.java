@@ -746,9 +746,9 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
       }      
       for(int i=0;i<xpos.length;i++) {
         g.setColor(Color.BLACK);
-        g.fillOval((xpos[i]+x+x_-2)*z,(ypos[i]+y+y_-2)*z,4,4);
+        g.fillOval((xpos[i]+x+x_)*z-2,(ypos[i]+y+y_)*z-2,4,4);
         g.setColor(Color.YELLOW);
-        g.fillOval((xpos[i]+x+x_-1)*z,(ypos[i]+y+y_-1)*z,2,2);
+        g.fillOval((xpos[i]+x+x_)*z-1,(ypos[i]+y+y_)*z-1,2,2);
       }
     }
   }

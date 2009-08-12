@@ -56,7 +56,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   /** The version identification of the current build. */
-  public final static String VERSION = "0.8.5.dev";
+  public final static String VERSION = "0.8.5";
   /** The directory in which the VLC executable is found */
   private String vlc_dir = "";
   /** The directory from which VLC loads its skins */

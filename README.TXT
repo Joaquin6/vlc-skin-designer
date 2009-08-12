@@ -5,6 +5,8 @@ Changelog:
 0.8.5  - Various  bugfixes and technical improvements
        - A toolbar was added
        - Sliders can be edited in the preview window
+       - Slider background generator now supports vertical
+         sliders
 
 0.8.1  - Font rendering bugfix
        - Anchor points saving bugfix
@@ -92,14 +94,15 @@ System Requirements
 Java SE RE 6 or later (DL at java.sun.com)
 approximately at least 256MB RAM and a 1GHz CPU
 -----------------------------------------------------------
-Usage:
+How to run the program:
 -----------------------------------------------------------
-On Windows launch the VLCSkinEditor executable.
+On Windows simply launch the VLCSkinEditor executable.
 On Linux run the VLCSkinEditor launch script.
 
 Also you can run the skin editor by launching the jar file.
 You can do this by running "java -jar VLCSkinEditor.jar".
-Make sure that you run
+Make sure that you run java in the same directory as the
+jar file and the "lang" folder.
 -----------------------------------------------------------
 Support:
 -----------------------------------------------------------
@@ -110,7 +113,7 @@ Furthermore you can ask questions in the VideoLAN forum at
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2009 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
+(c)2007-2009 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
 See LICENSE.TXT for further details
 -----------------------------------------------------------
 Credits:
