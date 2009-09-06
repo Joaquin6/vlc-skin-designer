@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Pausar
 ACTIONS_VLC_STOP|Parar
 ACTIONS_VLC_FASTER|Reproduzir mais rápido
 ACTIONS_VLC_SLOWER|Reproduzir mais devagar
+ACTIONS_VLC_NEXTFRAME|vlc.nextFrame()
 ACTIONS_VLC_MUTE|Sem áudio
 ACTIONS_VLC_VOLUMEUP|Aumentar o volume
 ACTIONS_VLC_VOLUMEDOWN|Reduzir o volume
 ACTIONS_VLC_FULLSCREEN|Alternar modo de Tela Inteira
 ACTIONS_VLC_SNAPSHOT|Tirar um instantâneo
+ACTIONS_VLC_TOGGLERECORD|vlc.toggleRecord()
 ACTIONS_VLC_ONTOP|Alternar Sempre no Topo
 ACTIONS_VLC_MINIMIZE|Minimizar o VLC
 ACTIONS_VLC_QUIT|Fechar o VLC
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Pausa a reprodução.
 ACTION_DESC_STOP|Pára a reprodução.
 ACTION_DESC_FASTER|Reproduz mais rápido.
 ACTION_DESC_SLOWER|Reproduz mais devagar.
+ACTION_DESC_NEXTFRAME|vlc.nextFrame()
 ACTION_DESC_MUTE|Alterna Sem Áudio.
 ACTION_DESC_VOLUP|Aumenta o volume.
 ACTION_DESC_VOLDOWN|Reduz o volume.
 ACTION_DESC_FULLSCREEN|Alterna o modo Tela Inteira.
 ACTION_DESC_SNAPSHOT|Tira um instantâneo do vídeo.
+ACTION_DESC_TOGGLERECORD|vlc.toggleRecord()
 ACTION_DESC_ONTOP|Alterna o status de "sempre no topo".
 ACTION_DESC_MIN|Minimiza o VLC.
 ACTION_DESC_QUIT|Fecha o VLC.

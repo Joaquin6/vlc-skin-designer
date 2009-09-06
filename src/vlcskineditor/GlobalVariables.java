@@ -68,6 +68,8 @@ public class GlobalVariables implements ActionListener{
   boolean vlc_isSeekable = true;
   boolean vlc_isMute = false;
   boolean vlc_isOnTop = false;
+  boolean vlc_canRecord = true;
+  boolean vlc_isRecording = false;
   boolean playlist_isRandom = false;
   boolean playlist_isLoop = false;
   boolean playlist_isRepeat = true;
@@ -77,7 +79,7 @@ public class GlobalVariables implements ActionListener{
   
   JFrame frame;
   JComboBox eq_cb,vout_cb,audio_cb,fullscreen_cb,playing_cb,stopped_cb,
-            paused_cb,seekable_cb,mute_cb,ontop_cb,random_cb,loop_cb,repeat_cb,dvd_cb;
+            paused_cb,seekable_cb,mute_cb,ontop_cb,canrecord_cb,recording_cb,random_cb,loop_cb,repeat_cb,dvd_cb;
   JSlider slider_s;
   JButton ok_btn,help_btn;
 
@@ -128,6 +130,8 @@ public class GlobalVariables implements ActionListener{
     rName = rName.replaceAll("vlc.isSeekable",String.valueOf(vlc_isSeekable));
     rName = rName.replaceAll("vlc.isMute",String.valueOf(vlc_isMute));
     rName = rName.replaceAll("vlc.isOnTop",String.valueOf(vlc_isOnTop));
+    rName = rName.replaceAll("vlc.canRecord",String.valueOf(vlc_canRecord));
+    rName = rName.replaceAll("vlc.isRecording",String.valueOf(vlc_isRecording));
     rName = rName.replaceAll("playlist.isRandom",String.valueOf(playlist_isRandom));
     rName = rName.replaceAll("playlist.isLoop",String.valueOf(playlist_isLoop));
     rName = rName.replaceAll("playlist.isRepeat",String.valueOf(playlist_isRepeat));
@@ -246,6 +250,10 @@ public class GlobalVariables implements ActionListener{
       mute_cb = new JComboBox(bool_values);
       JLabel ontop_l = new JLabel("vlc.isOnTop");
       ontop_cb = new JComboBox(bool_values);
+      JLabel canrecord_l = new JLabel("vlc.canRecord");
+      canrecord_cb = new JComboBox(bool_values);
+      JLabel recording_l = new JLabel("vlc.isRecording");
+      recording_cb = new JComboBox(bool_values);
       JLabel random_l = new JLabel("playlist.isRandom");
       random_cb = new JComboBox(bool_values);
       JLabel loop_l = new JLabel("vlc.isLoop");
@@ -266,7 +274,9 @@ public class GlobalVariables implements ActionListener{
       ok_btn.addActionListener(this);
       help_btn = new JButton(Language.get("BUTTON_HELP"));
       help_btn.addActionListener(this);
-      
+
+      //TODO do a better layout
+
       frame.add(desc_l);
       desc_l.setBounds(5, 5, 305, 50);
       JPanel panel = new JPanel(null);      

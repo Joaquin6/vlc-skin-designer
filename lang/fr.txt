@@ -28,7 +28,7 @@ SLIDER|Slider
 SLIDERBG|SliderBackground
 TEXT|Texte
 VIDEO|Vidéo
-UNNAMED|Sans titre %t #%i
+UNNAMED|%t innommé #%i
 
 #The Menu bar and its entries
 #The access key for a menu entry is defined by the MN (for Mnemonic) value
@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Pause
 ACTIONS_VLC_STOP|Stop
 ACTIONS_VLC_FASTER|Accélération
 ACTIONS_VLC_SLOWER|Décelération
+ACTIONS_VLC_NEXTFRAME|Lecture image par image
 ACTIONS_VLC_MUTE|Coupe le son
 ACTIONS_VLC_VOLUMEUP|Augmente le volume sonore
 ACTIONS_VLC_VOLUMEDOWN|Diminue le volume sonore
 ACTIONS_VLC_FULLSCREEN|Passe en mode plein-écran
 ACTIONS_VLC_SNAPSHOT|Prend un cliché instantanné
+ACTIONS_VLC_TOGGLERECORD|Commencer/arreter l'enregistrement
 ACTIONS_VLC_ONTOP|Place la vidéo au dessus des autres fenêtres
 ACTIONS_VLC_MINIMIZE|Minimiser VLC
 ACTIONS_VLC_QUIT|Quitter VLC
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Pauser la lecture.
 ACTION_DESC_STOP|Arrêter la lecture.
 ACTION_DESC_FASTER|Accélérer.
 ACTION_DESC_SLOWER|Déccelérer.
+ACTION_DESC_NEXTFRAME|Afficher la prochaine image du video (lecture image par image).
 ACTION_DESC_MUTE|Couper l'audio.
 ACTION_DESC_VOLUP|Augmenter le volume.
 ACTION_DESC_VOLDOWN|Réduire le volume.
 ACTION_DESC_FULLSCREEN|Passer en mode plein-écran.
 ACTION_DESC_SNAPSHOT|Prendre un cliché de la vidéo.
+ACTION_DESC_TOGGLERECORD|Commencer ou arrêter l'enregistrement du lecture.
 ACTION_DESC_ONTOP|Passer en mode "always on top".
 ACTION_DESC_MIN|Minimizer VLC.
 ACTION_DESC_QUIT|Quitter VLC.
@@ -333,16 +337,16 @@ UPDATE_SUCCESS_TITLE|Mise-à-jour accomplie
 UPDATE_SUCCESS_MSG|La mise-à-jour a été correctement téléchargée et installée.\nVLC Skin Editor va redémarrer maintenant.
 
 #Error messages
-ERROR_FILENEXIST_TITLE|Error while opening file
-ERROR_FILENEXIST_MSG|The file "%f" does not exist and thus could not be opened!
-ERROR_VLT_UNPACK_TITLE|Could not unpack VLT file
-ERROR_VLT_UNPACK_MSG|VLT file could not be unpacked!
-ERROR_VLT_NOTHEME_TITLE|Could not find theme.xml
-ERROR_VLT_NOTHEME_MSG|Could not find "theme.xml" inside the unpacked contents of the VLT file.\nTry opening it manually.
-ERROR_VLC_LAUNCH_TITLE|Error
-ERROR_VLC_LAUNCH_MSG|VLC media player could not be launched
-ERROR_BROWSE_TITLE|Could not launch Browser
-ERROR_BROWSE_MSG|The browser could not be launched.\nPlease go to the following URL manually:\n%u
+ERROR_FILENEXIST_TITLE|Erreur lors de l'ouverture du fichier
+ERROR_FILENEXIST_MSG|Le fichier "%f" n'existe pas!
+ERROR_VLT_UNPACK_TITLE|Erreur en décompressant
+ERROR_VLT_UNPACK_MSG|Le fichier VLT n'a pas pu être décompressé
+ERROR_VLT_NOTHEME_TITLE|N'a pas pu trouver theme.xml
+ERROR_VLT_NOTHEME_MSG|Le fichier "theme.xml" n'a pas pu être trouvé dans le contentu décompressé du fichier VLT.\nEssayer de l'ouvrier manuellement.
+ERROR_VLC_LAUNCH_TITLE|Erreur
+ERROR_VLC_LAUNCH_MSG|VLC media player n'a pas pu être lancé.
+ERROR_BROWSE_TITLE|Erreur lors de l'ouverture du navigateur.
+ERROR_BROWSE_MSG|Le navigateur Web n'a pas pu être lancé.\nS’il te plaît ouvrir le page Web suivante manuellement:\n%u
 ERROR_ADD_SBMP_TITLE|Could not add SubBitmap
 ERROR_ADD_SBMP_NOBMP|No parent Bitmap has been selected!
 ERROR_ADD_SBMP_NOTBMP|The selected resource is not a Bitmap!
@@ -397,9 +401,9 @@ ERROR_RADIALSLIDER|Radial Sliders are not yet supported by the Skin Editor.
 ERROR_RADIALSLIDER_TITLE|Not supported
 
 #Other strings
-THEMEINFO_NAME_DEFAULT|Unnamed Theme
-THEMEINFO_AUTHOR_DEFAULT|Unknown Author
-THEMEINFO_EMAIL_DEFAULT|Unknown
+THEMEINFO_NAME_DEFAULT|Thème innommé
+THEMEINFO_AUTHOR_DEFAULT|Auteur inconnu
+THEMEINFO_EMAIL_DEFAULT|Inconnu
 
 #History
 HIST_ITEM_ADD|Ajouter %t
@@ -410,7 +414,7 @@ HIST_RES_DEL|Effacer %t "%i"
 
 #Editing dialogues
 #General strings
-NOTE_STARRED|* Attribute must be specified.
+NOTE_STARRED|* Il faut que cet attribut soit défini.
 
 #Common strings
 WIN_ITEM_GENERAL|General attributes
@@ -432,7 +436,7 @@ WIN_ITEM_YKEEPRATIO_TIP|When set to true, the behaviour of the vertical resizing
 WIN_ITEM_HELP|Aide contextuelle :
 WIN_ITEM_HELP_TIP|The variable '$H' will be expanded to this value when the mouse hovers the current control.
 WIN_ITEM_TOOLTIPTEXT|Texte contextuel:
-FILE_INDIR|in the same folder as the XML file
+FILE_INDIR|dans le même dossier que le fichier XML.
 
 #Bitmap
 WIN_BITMAP_TITLE|Bitmap settings

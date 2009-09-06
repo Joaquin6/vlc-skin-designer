@@ -50,13 +50,13 @@ import vlcskineditor.resources.SubBitmap;
 public class Main extends JFrame implements ActionListener, TreeSelectionListener, WindowListener, MouseListener {
 
   /** Require for all JFrames, as they are serializable */
-  private static final long serialVersionUID = 85;
+  private static final long serialVersionUID = 86;
 
   /** The URL where to check for updates */
   private final String updateURL_s = "http://www.videolan.org/vlc/skineditor_update.php";
 
   /** The version identification of the current build. */
-  public final static String VERSION = "0.8.5";
+  public final static String VERSION = "0.8.6.dev";
   /** The directory in which the VLC executable is found */
   private String vlc_dir = "";
   /** The directory from which VLC loads its skins */

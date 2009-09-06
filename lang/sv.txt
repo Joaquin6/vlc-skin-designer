@@ -47,19 +47,19 @@ MENU_FILE_VLT_MN|V
 MENU_FILE_PNG|Spara aktuell förhandsvisning som bild...
 MENU_FILE_PNG_MN|p
 MENU_FILE_EXIT|Avsluta
-MENU_FILE_EXIT_MN|x
+MENU_FILE_EXIT_MN|A
 MENU_EDIT|Redigera
 MENU_EDIT_MN|R
 MENU_EDIT_UNDO|Ångra
-MENU_EDIT_UNDO_MN|U
+MENU_EDIT_UNDO_MN|Å
 MENU_EDIT_REDO|Gör om
-MENU_EDIT_REDO_MN|R
+MENU_EDIT_REDO_MN|G
 MENU_EDIT_THEME|Temainställningar
 MENU_EDIT_THEME_MN|T
 MENU_EDIT_VARS|Allmänna variabler
-MENU_EDIT_VARS_MN|G
+MENU_EDIT_VARS_MN|v
 MENU_EDIT_PREFS|Inställningar
-MENU_EDIT_PREFS_MN|P
+MENU_EDIT_PREFS_MN|I
 MENU_EDIT_UP|Flytta markerat objekt uppåt
 MENU_EDIT_DOWN|Flytta markerat objekt nedåt
 MENU_EDIT_LEFT|Flytta markerat objekt åt vänster
@@ -67,9 +67,9 @@ MENU_EDIT_RIGHT|Flytta markerat objekt åt höger
 MENU_HELP|Hjälp
 MENU_HELP_MN|H
 MENU_HELP_DOC|Hjälp på nätet
-MENU_HELP_DOC_MN|O
+MENU_HELP_DOC_MN|n
 MENU_HELP_ABOUT|Om
-MENU_HELP_ABOUT_MN|A
+MENU_HELP_ABOUT_MN|O
 
 #The toolbar
 TOOLBAR_OPEN|Öppna
@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Gör paus
 ACTIONS_VLC_STOP|Stoppa
 ACTIONS_VLC_FASTER|Spela snabbare
 ACTIONS_VLC_SLOWER|Spela långsammare
+ACTIONS_VLC_NEXTFRAME|Play next frame
 ACTIONS_VLC_MUTE|Tyst
 ACTIONS_VLC_VOLUMEUP|Öka volymen
 ACTIONS_VLC_VOLUMEDOWN|Sänk volymen
 ACTIONS_VLC_FULLSCREEN|Växla helskärmsläge
 ACTIONS_VLC_SNAPSHOT|Ta en skärmbild
+ACTIONS_VLC_TOGGLERECORD|Toggle recording
 ACTIONS_VLC_ONTOP|Toggle always on top
 ACTIONS_VLC_MINIMIZE|Minimera VLC
 ACTIONS_VLC_QUIT|Avsluta VLC
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Pause the playback.
 ACTION_DESC_STOP|Stop the playback.
 ACTION_DESC_FASTER|Play faster.
 ACTION_DESC_SLOWER|Play slower.
+ACTION_DESC_NEXTFRAME|Advances the playback by one frame (frame by frame playback).
 ACTION_DESC_MUTE|Toggle audio muting.
 ACTION_DESC_VOLUP|Increase the volume.
 ACTION_DESC_VOLDOWN|Reduce the volume.
 ACTION_DESC_FULLSCREEN|Toggle the fullscreen mode.
 ACTION_DESC_SNAPSHOT|Take a snapshot of the video.
+ACTION_DESC_TOGGLERECORD|Toggles recording of the playback.
 ACTION_DESC_ONTOP|Toggle the "always on top" status.
 ACTION_DESC_MIN|Minimera VLC.
 ACTION_DESC_QUIT|Avsluta VLC.
@@ -261,7 +265,7 @@ ACTION_ACTIVATE|Activate
 ACTION_DEACTIVATE|Deactivate
 ACTION_RANDOM|%s that the items in the playlist are played in random order.
 ACTION_LOOP|%s that the playlist is repeated when its end is reached.
-ACTION_REPEAT|%s that the current item is repeated after its end is reached
+ACTION_REPEAT|%s that the current item is repeated after its end is reached.
 ACTION_SHOW|Show the window with the ID %i
 ACTION_HIDE|Hide the window with the ID %i
 ACTION_MAXIMIZE|Maximize the window with the ID %i

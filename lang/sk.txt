@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Pozastaviť
 ACTIONS_VLC_STOP|Stop
 ACTIONS_VLC_FASTER|Prehrávať rýchlejšie
 ACTIONS_VLC_SLOWER|Prehrávať pomalšie
+ACTIONS_VLC_NEXTFRAME|vlc.nextFrame()
 ACTIONS_VLC_MUTE|Stlmiť hlasitosť
 ACTIONS_VLC_VOLUMEUP|Zvýšiť hlasitosť
 ACTIONS_VLC_VOLUMEDOWN|Znížiť hlasitosť
 ACTIONS_VLC_FULLSCREEN|Zapnutie/vypnutie celoobrazovkového režimu
 ACTIONS_VLC_SNAPSHOT|Vytvoriť snímku z videa
+ACTIONS_VLC_TOGGLERECORD|vlc.toggleRecord()
 ACTIONS_VLC_ONTOP|Aktivovať/deaktivovať vždy v popredí
 ACTIONS_VLC_MINIMIZE|Minimalizovať VLC
 ACTIONS_VLC_QUIT|Ukončiť VLC
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Pozastaviť prehrávanie.
 ACTION_DESC_STOP|Zastaviť prehrávanie.
 ACTION_DESC_FASTER|Prehrávať rýchlejšie.
 ACTION_DESC_SLOWER|Prehrávať pomalšie.
+ACTION_DESC_NEXTFRAME|vlc.nextFrame()
 ACTION_DESC_MUTE|Aktivovať/deaktivovať stlmenie hlasitosti.
 ACTION_DESC_VOLUP|Zvýšiť hlasitosť.
 ACTION_DESC_VOLDOWN|Znížiť hlasitosť.
 ACTION_DESC_FULLSCREEN|Prepnúť na celoobrazovkový režim.
 ACTION_DESC_SNAPSHOT|Urobiť snímku z videa.
+ACTION_DESC_TOGGLERECORD|vlc.toggleRecord()
 ACTION_DESC_ONTOP|Aktivovať/deaktivovať vždy v popredí.
 ACTION_DESC_MIN|Minimalizovať VLC.
 ACTION_DESC_QUIT|Ukončiť VLC.

@@ -165,12 +165,14 @@ ACTIONS_VLC_PLAY|Afspelen
 ACTIONS_VLC_PAUSE|Pause
 ACTIONS_VLC_STOP|Stop
 ACTIONS_VLC_FASTER|Sneller afspelen
+ACTIONS_VLC_NEXTFRAME|Ga naar de volgende beeld
 ACTIONS_VLC_SLOWER|Langzamer afspelen
 ACTIONS_VLC_MUTE|Het volume dempen
 ACTIONS_VLC_VOLUMEUP|Het volume verhogen
 ACTIONS_VLC_VOLUMEDOWN|Het volume verlagen
 ACTIONS_VLC_FULLSCREEN|Schermvullende modus wisselen
 ACTIONS_VLC_SNAPSHOT|Een schermopname nemen
+ACTIONS_VLC_TOGGLERECORD|Start/Stop de opname
 ACTIONS_VLC_ONTOP|Altijd bovenop wisselen
 ACTIONS_VLC_MINIMIZE|VLC minimaliseren
 ACTIONS_VLC_QUIT|VLC Afsluiten
@@ -236,11 +238,13 @@ ACTION_DESC_PAUSE|Pauzeer het afspelen.
 ACTION_DESC_STOP|Stop het afspelen.
 ACTION_DESC_FASTER|Sneller afspelen.
 ACTION_DESC_SLOWER|Langzamer afspelen.
+ACTION_DESC_NEXTFRAME|vlc.nextFrame()
 ACTION_DESC_MUTE|Audio dempen/ontdempen.
 ACTION_DESC_VOLUP|Verhoog het volume.
 ACTION_DESC_VOLDOWN|Verlaag het volume.
 ACTION_DESC_FULLSCREEN|Wissel de schermvullende modus.
 ACTION_DESC_SNAPSHOT|Neem een schermopname van de video.
+ACTION_DESC_TOGGLERECORD|vlc.toggleRecord()
 ACTION_DESC_ONTOP|Wissel de "altijd bovenop" status.
 ACTION_DESC_MIN|Minimaliseer VLC.
 ACTION_DESC_QUIT|VLC afsluiten.

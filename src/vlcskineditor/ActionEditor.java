@@ -63,11 +63,13 @@ public class ActionEditor extends JFrame implements ActionListener{
   JMenuItem actions_vlc_stop = new JMenuItem(Language.get("ACTIONS_VLC_STOP"));
   JMenuItem actions_vlc_faster = new JMenuItem(Language.get("ACTIONS_VLC_FASTER"));
   JMenuItem actions_vlc_slower = new JMenuItem(Language.get("ACTIONS_VLC_SLOWER"));
+  JMenuItem actions_vlc_nextFrame = new JMenuItem(Language.get("ACTIONS_VLC_NEXTFRAME"));
   JMenuItem actions_vlc_mute = new JMenuItem(Language.get("ACTIONS_VLC_MUTE"));
   JMenuItem actions_vlc_volumeUp = new JMenuItem(Language.get("ACTIONS_VLC_VOLUMEUP"));
   JMenuItem actions_vlc_volumeDown = new JMenuItem(Language.get("ACTIONS_VLC_VOLUMEDOWN"));
   JMenuItem actions_vlc_fullscreen = new JMenuItem(Language.get("ACTIONS_VLC_FULLSCREEN"));
   JMenuItem actions_vlc_snapshot = new JMenuItem(Language.get("ACTIONS_VLC_SNAPSHOT"));
+  JMenuItem actions_vlc_toggleRecord = new JMenuItem(Language.get("ACTIONS_VLC_TOGGLERECORD"));
   JMenuItem actions_vlc_onTop = new JMenuItem(Language.get("ACTIONS_VLC_ONTOP"));
   JMenuItem actions_vlc_minimize = new JMenuItem(Language.get("ACTIONS_VLC_MINIMIZE"));
   JMenuItem actions_vlc_quit = new JMenuItem(Language.get("ACTIONS_VLC_QUIT"));  
@@ -139,6 +141,9 @@ public class ActionEditor extends JFrame implements ActionListener{
     actions_pu.add(actions_vlc_slower);
     actions_vlc_slower.addActionListener(this);
     actions_vlc_slower.setActionCommand("vlc.slower()");
+    actions_pu.add(actions_vlc_nextFrame);
+    actions_vlc_nextFrame.addActionListener(this);
+    actions_vlc_nextFrame.setActionCommand("vlc.nextFrame()");
     actions_pu.add(actions_vlc_mute);
     actions_vlc_mute.addActionListener(this);
     actions_vlc_mute.setActionCommand("vlc.mute()");
@@ -154,6 +159,9 @@ public class ActionEditor extends JFrame implements ActionListener{
     actions_pu.add(actions_vlc_snapshot);
     actions_vlc_snapshot.addActionListener(this);
     actions_vlc_snapshot.setActionCommand("vlc.snapshot()");
+    actions_pu.add(actions_vlc_toggleRecord);
+    actions_vlc_toggleRecord.addActionListener(this);
+    actions_vlc_toggleRecord.setActionCommand("vlc.toggleRecord()");
     actions_pu.add(actions_vlc_minimize);
     actions_vlc_minimize.addActionListener(this);
     actions_vlc_minimize.setActionCommand("vlc.minimize()");

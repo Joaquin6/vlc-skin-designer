@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Pausa
 ACTIONS_VLC_STOP|Atura
 ACTIONS_VLC_FASTER|Reprodueix més ràpidament
 ACTIONS_VLC_SLOWER|Reprodueix més lentament
+ACTIONS_VLC_NEXTFRAME|Següent fitxer
 ACTIONS_VLC_MUTE|Sense so
 ACTIONS_VLC_VOLUMEUP|Puja el volum
 ACTIONS_VLC_VOLUMEDOWN|Baixa el volum
 ACTIONS_VLC_FULLSCREEN|Passa al mode de pantalla completa
 ACTIONS_VLC_SNAPSHOT|Captura una instantània
+ACTIONS_VLC_TOGGLERECORD|Enregistra
 ACTIONS_VLC_ONTOP|Commuta sempre a la part superior
 ACTIONS_VLC_MINIMIZE|Minimitza el VLC
 ACTIONS_VLC_QUIT|Surt del VLC
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Pausa el playback.
 ACTION_DESC_STOP|Atura el playback.
 ACTION_DESC_FASTER|Reprodueix més ràpidament.
 ACTION_DESC_SLOWER|Reprodueix més lentament.
+ACTION_DESC_NEXTFRAME|Següent fitxer.
 ACTION_DESC_MUTE|Commuta al mode sense so.
 ACTION_DESC_VOLUP|Puja el volum.
 ACTION_DESC_VOLDOWN|Baixa el volum.
 ACTION_DESC_FULLSCREEN|Passa al mode de pantalla completa.
-ACTION_DESC_SNAPSHOT|Captura una instantània del vídeo.
+ACTION_DESC_SNAPSHOT|Captura una instantània del vídeo.
+ACTION_DESC_TOGGLERECORD|Enregistra.
 ACTION_DESC_ONTOP|Commuta a l'estat "sempre a la part superior".
 ACTION_DESC_MIN|Minimitza el VLC.
 ACTION_DESC_QUIT|Surt del VLC.

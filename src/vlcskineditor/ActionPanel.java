@@ -84,11 +84,13 @@ public class ActionPanel extends JPanel {
       else if (action.equals("vlc.stop()")) desc.setText(Language.get("ACTION_DESC_STOP"));
       else if (action.equals("vlc.faster()")) desc.setText(Language.get("ACTION_DESC_FASTER"));
       else if (action.equals("vlc.slower()")) desc.setText(Language.get("ACTION_DESC_SLOWER"));
+      else if (action.equals("vlc.nextFrame()")) desc.setText(Language.get("ACTION_DESC_NEXTFRAME"));
       else if (action.equals("vlc.mute()")) desc.setText(Language.get("ACTION_DESC_MUTE"));
       else if (action.equals("vlc.volumeUp()")) desc.setText(Language.get("ACTION_DESC_VOLUP"));
       else if (action.equals("vlc.volumeDown()")) desc.setText(Language.get("ACTION_DESC_VOLDOWN"));
       else if (action.equals("vlc.fullscreen()")) desc.setText(Language.get("ACTION_DESC_FULLSCREEN"));
       else if (action.equals("vlc.snapshot()")) desc.setText(Language.get("ACTION_DESC_SNAPSHOT"));
+      else if (action.equals("vlc.toggleRecord()")) desc.setText(Language.get("ACTION_DESC_TOGGLERECORD"));
       else if (action.equals("vlc.onTop()")) desc.setText(Language.get("ACTION_DESC_ONTOP"));
       else if (action.equals("vlc.minimize()")) desc.setText(Language.get("ACTION_DESC_MIN"));
       else if (action.equals("vlc.quit()")) desc.setText(Language.get("ACTION_DESC_QUIT"));

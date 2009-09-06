@@ -164,11 +164,13 @@ ACTIONS_VLC_PAUSE|Pausieren
 ACTIONS_VLC_STOP|Stopp
 ACTIONS_VLC_FASTER|Schneller abspielen
 ACTIONS_VLC_SLOWER|Langsamer abspielen
+ACTIONS_VLC_NEXTFRAME|Nächstes Einzelbild zeigen
 ACTIONS_VLC_MUTE|Lautstärke stumm schalten
 ACTIONS_VLC_VOLUMEUP|Lautstärke erhöhen
 ACTIONS_VLC_VOLUMEDOWN|Lautstärke verringern
 ACTIONS_VLC_FULLSCREEN|Vollbildmodus an-/ausschalten
 ACTIONS_VLC_SNAPSHOT|Einen Schnappschuss vom Video machen
+ACTIONS_VLC_TOGGLERECORD|Aufnahme an-/ausschalten
 ACTIONS_VLC_ONTOP|Immer im Vordergrund de-/aktivieren
 ACTIONS_VLC_MINIMIZE|VLC minimieren
 ACTIONS_VLC_QUIT|VLC beenden
@@ -234,11 +236,13 @@ ACTION_DESC_PAUSE|Wiedergabe pausieren.
 ACTION_DESC_STOP|Wiedergabe anhalten.
 ACTION_DESC_FASTER|Schneller abspielen.
 ACTION_DESC_SLOWER|Langsamer abspielen.
+ACTION_DESC_NEXTFRAME|Zeigt das nächste Einzelbild (frame by frame Wiedergabe).
 ACTION_DESC_MUTE|Stummschaltung de-/aktivieren.
 ACTION_DESC_VOLUP|Lautstärke steigern.
 ACTION_DESC_VOLDOWN|Lautstärke verringern.
 ACTION_DESC_FULLSCREEN|Toggle the fullscreen mode.
 ACTION_DESC_SNAPSHOT|Einen Schnappschuss vom Video machen.
+ACTION_DESC_TOGGLERECORD|De-/Aktiviert die Aufnahme der Wiedergabe.
 ACTION_DESC_ONTOP|"Immer im Vordergrund" de-/aktivieren
 ACTION_DESC_MIN|VLC minimieren.
 ACTION_DESC_QUIT|VLC beenden.
