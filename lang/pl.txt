@@ -1,0 +1,605 @@
+#Polish language file for VLC Skin Editor
+#Author/s: Michał Trzebiatowski
+
+#General strings
+CHOICE_YES|Tak
+CHOICE_NO|Nie
+CHOICE_CANCEL|Anuluj
+BUTTON_OK|OK
+BUTTON_CANCEL|Anuluj
+BUTTON_HELP|Pomoc
+
+#Item names
+THEME|Motyw
+FONT|Czcionka
+BITMAP|Bitmapa
+SUBBITMAP|PodBitmapa
+WINDOW|Okno
+LAYOUT|Wygląd
+ANCHOR|Kotwica
+BUTTON|Przycisk
+CHECKBOX|Pole wyboru
+GROUP|Grupa
+IMAGE|Obraz
+PANEL|Panel
+PLAYTREE|Drzewo odtwarzania
+RADIALSLIDER|Suwak radialny
+SLIDER|Suwak
+SLIDERBG|Suwak tła
+TEXT|Tekst
+VIDEO|Wideo
+UNNAMED|Bez nazwy %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Plik
+MENU_FILE_MN|P
+MENU_FILE_NEW|Nowy
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Otwórz...
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Zapisz
+MENU_FILE_SAVE_MN|Z
+MENU_FILE_TEST|Testuj skórę w VLC
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Eksportuj jako VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Zapisz aktualny podgląd jako obraz...
+MENU_FILE_PNG_MN|a
+MENU_FILE_EXIT|Wyjdź
+MENU_FILE_EXIT_MN|W
+MENU_EDIT|Edytuj
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Cofnij
+MENU_EDIT_UNDO_MN|C
+MENU_EDIT_REDO|Ponów
+MENU_EDIT_REDO_MN|n
+MENU_EDIT_THEME|Ustawienia skór
+MENU_EDIT_THEME_MN|U
+MENU_EDIT_VARS|Zmienne globalne
+MENU_EDIT_VARS_MN|g
+MENU_EDIT_PREFS|Preferencje
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|Przenieś zaznaczony element w górę
+MENU_EDIT_DOWN|Przenieś zaznaczony element w dół
+MENU_EDIT_LEFT|Przenieś zaznaczony element w lewo
+MENU_EDIT_RIGHT|Przenieś zaznaczony element w prawo
+MENU_HELP|Pomoc
+MENU_HELP_MN|P
+MENU_HELP_DOC|Pomoc online
+MENU_HELP_DOC_MN|c
+MENU_HELP_ABOUT|O
+MENU_HELP_ABOUT_MN|O
+
+#The toolbar
+TOOLBAR_OPEN|Otwórz skórę...
+TOOLBAR_SAVE|Zapisz zmiany skóry
+TOOLBAR_UNDO|Cofnij
+TOOLBAR_REDO|Ponów
+TOOLBAR_MOVE|Narzędzie przenoszące elementy
+TOOLBAR_PATH|Narzędzie edytowania suwaka
+
+#Resource Window
+WIN_RES_TITLE|Zasoby
+WIN_RES_ADD_BMP|Dodaj nową Bitmapę lub PodBitmapę
+WIN_RES_ADD_FONT|Dodaj nową czcionkę
+WIN_RES_COPY|Utwórz kopię wybranego zasobu
+WIN_RES_EDIT|Edytuj wybrany zasób
+WIN_RES_DELETE|Usuń wybrany zasób
+WIN_RES_PU_ADD_BMP|Dodaj Bitmapę/y
+WIN_RES_PU_ADD_SBMP|Dodaj PodBitmapę/y
+WIN_RES_BITMAPS|Bitmapy
+WIN_RES_FONTS|Czcionki
+
+#Windows window
+WIN_WIN_TITLE|Windows
+WIN_WIN_ADD|Dodaj nowe okno
+WIN_WIN_ADD_LAY|Dodaj nowy wygląd dla wybranego okna
+WIN_WIN_MOVE_UP|Przenieś wybrany wygląd w gorę w hierarchii (ostatni wygląd to domyślny wygląd okna)
+WIN_WIN_MOVE_DOWN|Przenieś wybrany wygląd w dół w hierarchii (ostatni wygląd to domyślny wygląd okna)
+WIN_WIN_COPY|Stwórz kopię wybranego okna lub wyglądu
+WIN_WIN_EDIT|Edytuj wybrane okno lub wygląd
+WIN_WIN_DELETE|Usuń wybrane okno lub wygląd
+
+#Items window
+WIN_ITEMS_TITLE|Elementy
+WIN_ITEMS_ADD|Dodaj nowy element
+WIN_ITEMS_MOVE_UP|Przenieś zaznaczony element w gorę w hierarchii
+WIN_ITEMS_MOVE_DOWN|Przenieś zaznaczony element w dół w hierarchii
+WIN_ITEMS_COPY|Stwórz kopię wybranego elementu
+WIN_ITEMS_EDIT|Edytuj wybrany element
+WIN_ITEMS_DELETE|Usuń wybrany element
+WIN_ITEMS_PU_PANEL_ADD|Dodaj do wybranego Panelu
+
+#Welcome dialog
+WELCOME_TITLE|Zapraszamy do edytora skór VLC
+WELCOME_MSG|Co chcesz zrobić?
+WELCOME_NEW|Stwórz nową skórkę
+WELCOME_OPEN|Otwórz istniejącą skórę
+WELCOME_QUIT|Zamknij
+
+#Preferences window
+WIN_PREFS_TITLE|Preferencje
+WIN_PREFS_UPDATE_L|Włącz automatyczną aktualizację:
+WIN_PREFS_LANG_L|Język:
+WIN_PREFS_LAF_L|Wygląd i zachowanie programu:
+WIN_PREFS_TBAR_L|Pokaż pasek narzędzi:
+WIN_PREFS_RESTART_L|<html><i>Niektóre ustawienia zadziałają dopiero po ponownym uruchomieniu programu.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Edytuj PodBitmapę
+ZOOM_FACTOR|Współczynnik skali:
+
+#Global variables editing window
+WIN_VARS_TITLE|Zmienne globalne
+WIN_VARS_NOTE|<html>Zmienne te mają wpływ tylko na podgląd.<br>Symulują one stan VLC.</html>
+WIN_VARS_SLIDER|Pozycja suwaka
+
+#Theme options window
+WIN_THEME_TITLE|Ustawienia skóry
+WIN_THEME_NAME|Nazwa:
+WIN_THEME_AUTHOR|Autor:
+WIN_THEME_EMAIL|E-Mail autora:
+WIN_THEME_WEB|Strona internetowa autora:
+WIN_THEME_MAGNET|Magnes:
+WIN_THEME_MAGNET_TIP|Gdy odległość pomiędzy brzegu ekranu i kotwicą okna jest mniejsza niż ta wartość, okno przyklei się do brzegu
+WIN_THEME_ALPHA|Nieprzezroczystość:
+WIN_THEME_ALPHA_TIP|Ustawia przezroczystości alfy dla okien. Wartość musi być między 1 (prawie całkowita przejrzystość) i 255 (całkowita nieprzezroczystość).  Należy unikać niskich wartości.
+WIN_THEME_MOVEALPHA|Nieprzezroczystość przy przenoszeniu:
+WIN_THEME_MOVEALPHA_TIP|Ustawia przezroczystości alfy dla okien, gdy są przenoszone.
+WIN_THEME_INFO_TITLE|Informacje skóry
+WIN_THEME_ATTR_TITLE|Atrybuty skóry
+
+#Action Editor
+WIN_ACTIONS_TITLE|Edytuj sekwencję akcji
+
+#Popup menu in the action editor
+ACTIONS_PU|Akcje
+ACTIONS_DIALOGS|Pokaż dialog
+ACTIONS_PLAYLIST|Lista odtwarzania
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Skóra
+ACTIONS_VLC_PLAY|Odtwarzaj
+ACTIONS_VLC_PAUSE|Pauza
+ACTIONS_VLC_STOP|Zatrzymaj
+ACTIONS_VLC_FASTER|Odtwarzaj szybciej
+ACTIONS_VLC_SLOWER|Odtwarzaj wolniej
+ACTIONS_VLC_NEXTFRAME|Odtwórz następną klatkę
+ACTIONS_VLC_MUTE|Wycisz dźwięk
+ACTIONS_VLC_VOLUMEUP|Zwiększ głośność
+ACTIONS_VLC_VOLUMEDOWN|Zmniejsz głośność
+ACTIONS_VLC_FULLSCREEN|Włącz lub wyłącz tryb pełnoekranowy
+ACTIONS_VLC_SNAPSHOT|Zrób zrzut ekranu
+ACTIONS_VLC_TOGGLERECORD|Włącz lub wyłącz nagrywanie
+ACTIONS_VLC_ONTOP|Włącz lub wyłącz zawsze na wierzchu
+ACTIONS_VLC_MINIMIZE|Minimalizuj VLC
+ACTIONS_VLC_QUIT|Zamknij VLC
+ACTIONS_EQ_ENABLE|Włącz korektor
+ACTIONS_EQ_DISABLE|Wyłącz korektor
+ACTIONS_DIALOGS_CHANGESKIN|Zmień skórę
+ACTIONS_DIALOGS_FILESIMPLE|Otwórz plik (prosto)
+ACTIONS_DIALOGS_FILE|Otwórz plik (wersja rozszerzona)
+ACTIONS_DIALOGS_DIRECTORY|Otwórz katalog
+ACTIONS_DIALOGS_DISC|Otwórz nośnik
+ACTIONS_DIALOGS_NET|Otwórz strumień sieciowy
+ACTIONS_DIALOGS_MESSAGES|Pokazuj dziennik
+ACTIONS_DIALOGS_PREFS|Preferencje
+ACTIONS_DIALOGS_FILEINFO|Informacje pliku
+ACTIONS_DIALOGS_PLAYLIST|Nieoskórowana lista odtwarzania
+ACTIONS_DIALOGS_STREAMINGWIZARD|Kreator strumieniowania
+ACTIONS_DIALOGS_POPUP|Pełne menu podręczne
+ACTIONS_DIALOGS_AUDIOPOPUP|Menu podręczne ustawień dźwięku
+ACTIONS_DIALOGS_VIDEOPOPUP|Menu podręczne ustawień wideo
+ACTIONS_DIALOGS_MISCPOPUP|Menu podręczne różnych ustawień
+ACTIONS_PLAYLIST_ADD|Dodaj nową pozycję
+ACTIONS_PLAYLIST_DEL|Usuń zaznaczoną pozycję
+ACTIONS_PLAYLIST_NEXT|Odtwórz następny element
+ACTIONS_PLAYLIST_PREVIOUS|Odtwórz poprzedni element
+ACTIONS_PLAYLIST_SETRANDOM|Włącz lub wyłącz odtwarzanie losowe
+ACTIONS_PLAYLIST_SETLOOP|Włącz lub wyłącz powtarzanie listy odtwarzania
+ACTIONS_PLAYLIST_SETREPEAT|Włącz lub wyłącz powtarzanie bieżącej pozycji
+ACTIONS_PLAYLIST_SORT|Sortuj alfabetycznie
+ACTIONS_PLAYLIST_LOAD|Wczytaj z pliku
+ACTIONS_PLAYLIST_SAVE|Zapisz do pliku
+ACTIONS_DVD_NEXTTITLE|Następny tytuł
+ACTIONS_DVD_PREVIOUSTITLE|Poprzedni tytuł
+ACTIONS_DVD_NEXTCHAPTER|Następny rozdział
+ACTIONS_DVD_PREVIOUSCHAPTER|Poprzedni rozdział
+ACTIONS_DVD_ROOTMENU|Główne menu
+ACTIONS_WINDOWS_SHOW|Pokaż okno
+ACTIONS_WINDOWS_HIDE|Ukryj okno
+ACTIONS_WINDOWS_MAXIMIZE|Maksymalizuj okno
+ACTIONS_WINDOWS_UNMAXIMIZE|Przywróć okno
+ACTIONS_WINDOWS_SETLAYOUT|Zmień wygląd okna
+
+#Action descriptions
+ACTION_DESC_NONE|Nic nie rób.
+ACTION_DESC_CHANGESKIN|Pokaż okno dialogowe, aby otworzyć nową skórę.
+ACTION_DESC_FILESIMPLE|Pokaż proste okno dialogowe "Otwórz plik".
+ACTION_DESC_FILE|Pokaż rozszerzone okno dialogowe "Otwórz plik".
+ACTION_DESC_DIRECTORY|Pokaż okno dialogowe "Otwórz katalog".
+ACTION_DESC_DISC|Pokaż okno dialogowe "Otwórz płytę".
+ACTION_DESC_NET|Pokaż okno dialogowe "Otwórz strumień sieciowy".
+ACTION_DESC_MSG|Pokaż okno dialogowe raportu komunikatów.
+ACTION_DESC_PREFS|Pokaż okno dialogowe preferencji.
+ACTION_DESC_FILEINFO|Pokaż okno dialogowe informacji o pliku.
+ACTION_DESC_PLAYLIST|Pokaż domyślne (nieoskórowane) okno listy odtwarzania.
+ACTION_DESC_WIZARD|Pokaż okno dialogowe "Kreator strumieniowania".
+ACTION_DESC_POPUP|Pokaż pełne menu podręczne.
+ACTION_DESC_AUDIOPU|Pokaż menu podręczne ustawień dźwięku.
+ACTION_DESC_VIDEOPU|Pokaż menu podręczne ustawień wideo.
+ACTION_DESC_MISCPU|Pokaż menu podręczne zawierające sterowanie odtwarzaniem i ogólne opcje.
+ACTION_DESC_EQENABLE|Włącz filtr korektora dźwięku.
+ACTION_DESC_EQDISABLE|Wyłącz filtr korektora dźwięku.
+ACTION_DESC_PLAY|Odtwórz bieżącą pozycję listy odtwarzania.
+ACTION_DESC_PAUSE|Wstrzymaj odtwarzanie.
+ACTION_DESC_STOP|Zatrzymaj odtwarzanie.
+ACTION_DESC_FASTER|Odtwarzaj szybciej.
+ACTION_DESC_SLOWER|Odtwarzaj wolniej.
+ACTION_DESC_NEXTFRAME|Przesuwa odtwarzanie o jedną klatkę (odtwarzanie klatka po klatce).
+ACTION_DESC_MUTE|Włącz lub wyłącz wyciszenie dźwięku.
+ACTION_DESC_VOLUP|Zwiększ głośność.
+ACTION_DESC_VOLDOWN|Zmniejsz głośność.
+ACTION_DESC_FULLSCREEN|Przełącz tryb pełnoekranowy.
+ACTION_DESC_SNAPSHOT|Zrób zrzut ekranu obrazu.
+ACTION_DESC_TOGGLERECORD|Włącz lub wyłącz nagrywanie odtwarzania.
+ACTION_DESC_ONTOP|Włącz lub wyłącz status "Zawsze na wierzchu".
+ACTION_DESC_MIN|Minimalizuj VLC.
+ACTION_DESC_QUIT|Zamknij VLC.
+ACTION_PL_ADD|Dodaj nową pozycję do listy odtwarzania.
+ACTION_PL_DEL|Usuń zaznaczoną pozycję z listy odtwarzania.
+ACTION_PL_NEXT|Odtwórz następną pozycję na liście odtwarzania.
+ACTION_PL_PREV|Odtwórz poprzednią pozycję na liście odtwarzania.
+ACTION_PL_SORT|Sortuj listę odtwarzania w kolejności alfabetycznej.
+ACTION_PL_LOAD|Otwórz zewnętrzny plik listy odtwarzania.
+ACTION_PL_SAVE|Zapisz bieżącą listę odtwarzania do pliku.
+ACTION_DVD_NEXTT|Przejdź do następnego tytułu na płycie DVD.
+ACTION_DVD_PREVT|Przejdź do poprzedniego tytułu na płycie DVD.
+ACTION_DVD_NEXTC|Przejdź do następnego rozdziału na płycie DVD.
+ACTION_DVD_PREVC|Przejdź do poprzedniego rozdziału na płycie DVD.
+ACTION_DVD_MENU|Przejdź do głównego menu na płycie DVD.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Włącz
+ACTION_DEACTIVATE|Wyłącz
+ACTION_RANDOM|%s odtwarzanie pozycji z listy odtwarzania w kolejności losowej.
+ACTION_LOOP|%s powtórkę listy po zakończeniu odtwarzania.
+ACTION_REPEAT|%s powtórkę bieżącej pozycji po zakończeniu odtwarzania.
+ACTION_SHOW|Pokaż okno z identyfikatorem %i
+ACTION_HIDE|Ukryj okno z identyfikatorem %i
+ACTION_MAXIMIZE|Maksymalizuj okno z identyfikatorem %i
+ACTION_UNMAXIMIZE|Przywróć okno z identyfikatorem %i
+ACTION_LAYOUT|Ustaw wygląd okna z identyfikatorem %i na %l
+
+#Slider background generator
+SBGGEN_TITLE|Generator tła suwaka
+SBGGEN_PREV|< Wstecz
+SBGGEN_NEXT|Dalej >
+SBGGEN_CANCEL|Anuluj
+SBGGEN_FINISH|Zakończ
+
+SBGGEN_DESCR|Zapraszamy do generatora tła suwaka. Pomoże Ci w zaledwie kilku krokach, stworzyć suwak z twoich obrazów.
+SBGGEN_FIRST|Jako pierwszy krok zdecyduj, czy kierunek suwaka będzie z lewej do prawej lub z dołu do góry i jaki rozmiar będzie miało tło.
+SBGGEN_WIDTH|Szerokość:
+SBGGEN_HEIGHT|Wysokość:
+SBGGEN_LEFT_M|Lewy margines:
+SBGGEN_RIGHT_M|Prawy margines:
+SBGGEN_TOP_M|Górny margines:
+SBGGEN_BTM_M|Dolny margines:
+SBGGEN_SECOND|W następnym kroku musisz wybrać prawidłowe pliki graficzne powiązane z różnymi częściami suwaka.
+SBGGEN_NOTE|Przedstawione w kolejnym kroku ikony, są tylko przykładem (a nie podglądem) określającym części tła suwaka.
+
+SBGGEN_IMAGE|Plik obrazu:
+SBGGEN_OPEN|Otwórz...
+SBGGEN_RESIZE|Ustawienia rozmiaru:
+SBGGEN_TILE|Kafelkuj
+SBGGEN_STRETCH|Rozciągnij
+
+SBGGEN_BG|Tło
+SBGGEN_OVERLAY|Nakłada obrazu
+SBGGEN_LEFT_E|Lewy brzeg
+SBGGEN_RIGHT_E|Prawy brzeg
+SBGGEN_TOP_E|Górny brzeg
+SBGGEN_BTM_E|Dolny brzeg
+SBGGEN_MIDDLE|Środkowa część
+
+SBGGEN_PROGRESS|Tworzenie tła...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|O VLC Skin Editor %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Copyright 2007-%y The VideoLAN Team</h3>Wydany w ramach licencji GPL 2+<br><br><b>Główny programista:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Strona internetowa:</b> %w<br><br><b>Kredyty:</b><br>Timothy Gerard Endres za dostęp do rejestru oraz wsparcie TAR (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) za niektóre ikony (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) i Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) za Boolean Expression Evaluator i kod Béziera (GPL 2+)</html>
+VLT_EX_TITLE|Importowanie pliku VLT
+#%f - name of the folder
+VLT_EX_MSG|Plik VLT zostanie rozpakowany do podfolderu o nazwie "%f".\nCzy chcesz kontynuować?
+VLT_EX_YES|Tak, rozpakuj
+VLT_EX_NO|Nie, anuluj
+VLT_EX_PROGRESS|Rozpakowanie pliku VLT...
+XML_PARSING_PROGRESS|Analizowanie XML...
+ADD_BMP_FILE_FILTER_DESC|*. png (Portable Network Graphic) w katalogu zawartym w pliku XML
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (Open i True type fonts) w katalogu zawartym w pliku XML
+DUPLICATE_MSG|Podaj wzór zamiany nazwy podwójnych obiektów.\n%oldid% zostanie zastąpiony przez stary identyfikator obiektu.
+DEL_CONFIRM_TITLE|Potwierdzenie usunięcia
+DEL_CONFIRM_MSG|Czy na pewno chcesz usunąć "%n"?
+EXIT_CONFIRM_TITLE|Twoje zmiany nie zostały zapisane
+EXIT_CONFIRM_MSG|Chcesz zapisać skórę przed zamknięciem edytora?
+UPDATE_TITLE|Znaleziono aktualizacje
+UPDATE_MSG|Jest dostępna aktualizacja dla edytora skór.\nTwoja wersja: %v\nNajnowsza wersja: %c\nCzy chcesz teraz zaktualizować edytora skór?
+VLT_PROGRESS|Tworzenie pliku VLT...
+VLT_SUCCESS_MSG|Plik VLT został pomyślnie utworzony.
+VLT_SUCCESS_TITLE|Utworzony plik VLT
+DOWNLOAD_PROGRESS|Pobieranie...
+CONNECT_PROGRESS|Łączenie...
+UPDATE_SUCCESS_TITLE|Zakończono aktualizację
+UPDATE_SUCCESS_MSG|Aktualizacja została pomyślnie pobrana i zainstalowana.\nTeraz edytor skór VLC zostanie ponowne uruchomiony
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Błąd otwierania pliku
+ERROR_FILENEXIST_MSG|Plik "%f" nie istnieje, a zatem nie można go otworzyć!
+ERROR_VLT_UNPACK_TITLE|Błąd rozpakowania pliku VLT
+ERROR_VLT_UNPACK_MSG|VLT plik nie może zostać rozpakowany!
+ERROR_VLT_NOTHEME_TITLE|Nie znaleziono theme.xml
+ERROR_VLT_NOTHEME_MSG|Nie można znaleźć "theme.xml" wewnątrz rozpakowanej zawartości pliku VLT.\nSpróbuj otworzyć go ręcznie.
+ERROR_VLC_LAUNCH_TITLE|Błąd VLC media playera
+ERROR_VLC_LAUNCH_MSG|Nie można uruchomić VLC media playera
+ERROR_BROWSE_TITLE|Błąd przeglądarki
+ERROR_BROWSE_MSG|Nie można uruchomić przeglądarki.\nProszę ręcznie podaj adres URL:\n%u
+ERROR_ADD_SBMP_TITLE|Błąd dodania PodBitmapy
+ERROR_ADD_SBMP_NOBMP|Nie wybrano żadnej Bitmapy!
+ERROR_ADD_SBMP_NOTBMP|Wybrany zasób nie jest Bitmapą!
+ERROR_RES_DEL_TITLE|Błąd usuwania zasobu
+ERROR_RES_DEL_INUSE|Zasób jest nadal używany w skórze, dlatego nie może zostać usunięty.
+ERROR_ADD_LAYOUT_TITLE|Błąd dodania wygładu
+ERROR_ADD_LAYOUT_MSG|Nie wybrano żadnego okna!
+ERROR_UPDATE_TITLE|Błąd aktualizacji!
+ERROR_SAVEPNG_TITLE|Błąd zapisywania obrazu
+ERROR_SAVEPNG_MSG|Nie można zapisać obrazu.
+ERROR_NEWSKIN_TITLE|Błąd utworzenia pliku skóry!
+ERROR_NEWSKIN_MSG|Nie można utworzyć nowego pliku skóry.
+ERROR_HEADER_INVALID|Plik wydaje się być nieprawidłowym motywem VLC!\nNieprawidłowy nagłówek:
+ERROR_SKIN_INVALID|Wybrany plik jest nieprawidłowym plikiem skóry VLC!
+ERROR_VERSION_UNSUPPORTED|Wersja motywu w wybranej skórze nie jest jeszcze obsługiwana!
+ERROR_SAVE_TITLE|Błąd zapisywania pliku skóry!
+ERROR_SAVE_MSG|Nie można zapisać pliku skóry.
+ERROR_ALPHA_TITLE|Błąd wartości nieprzezroczystości
+ERROR_ALPHA_MSG|Podaj prawidłową wartość nieprzezroczystości! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Nie można otworzyć środkowego obrazu!\nŚrodkowa cześć suwaka jest co najmniej potrzebna do utworzenia tła suwaka.
+ERROR_VLT_TITLE|Błąd utworzenia pliku VLT
+ERROR_VLT_MSG|Nie można utworzyć pliku VLT!
+ERROR_ID_INVALID_TITLE|Nieprawidłowy identyfikator
+ERROR_ID_INVALID_MSG|Podaj prawidłowy identyfikator!
+ERROR_ID_EXISTS_MSG|Identyfikator "%i" już istnieje.\nWybierz inny.
+ERROR_WIDTH_INVALID_TITLE|Nieprawidłowa szerokość
+ERROR_WIDTH_INVALID_MSG|Podaj prawidłową szerokość!
+ERROR_HEIGHT_INVALID_TITLE|Nieprawidłowa wysokość
+ERROR_HEIGHT_INVALID_MSG|Podaj prawidłową wysokość!
+ERROR_FILE_INVALID_TITLE|Nieprawidłowy plik
+ERROR_FILE_INVALID_MSG|Podaj prawidłowy plik!
+ERROR_BITMAP_INVALID_MSG|Nie można otworzyć podanego pliku bitmapy!\nWybierz inny.
+ERROR_NBFRAMES_TITLE|Nieprawidłowa liczba klatek
+ERROR_NBFRAMES_MSG|Liczba klatek nie może być mniejsza niż 1
+ERROR_OTF_TITLE|Czcionka OTF nie jest obsługiwana
+ERROR_OTF_MSG|Wybrałeś czcionkę typu OpenType, VLC wyświetla ją poprawnie, ale nie ten edytor.\nZobaczysz inną czcionkę w podglądzie.
+ERROR_SIZE_INVALID_TITLE|Nieprawidłowy rozmiar
+ERROR_SIZE_INVALID_MSG|Podaj prawidłowy rozmiar.
+ERROR_OUTSIDE_TITLE|Nieprawidłowe wymiary
+ERROR_OUTSIDE_MSG|Określone wymiary są poza oryginalnej bitmapy!
+ERROR_BITMAP_NEXIST|Bitmapa %i nie istnieje.
+ERROR_BITMAP_NEXIST_TITLE|Nieprawidłowy obraz!
+ERROR_BITMAP_LOAD|Nie można otworzyć pliku obrazu dla bitmapy %i.
+ERROR_BITMAP_LOAD_TITLE|Błąd otwierania obrazów
+ERROR_NOSTATE|Podaj warunek stanu!
+ERROR_NOSTATE_TITLE|Nieprawidłowy stan
+ERROR_FONT_NEXIST|Czcionka %i nie istnieje.
+ERROR_FONT_NEXIST_TITLE|Nieprawidłowa czcionka!
+ERROR_POINTS_INVALID|Podaj prawidłowe punkty krzywej Béziera!
+ERROR_POINTS_INVALID_TITLE|Nieprawidłowe krzywe Béziera!
+ERROR_RADIALSLIDER|Suwaki radialne nie są jeszcze obsługiwane przez edytora skór.
+ERROR_RADIALSLIDER_TITLE|Nie obsługiwane
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Nienazwany motyw
+THEMEINFO_AUTHOR_DEFAULT|Nieznany autor
+THEMEINFO_EMAIL_DEFAULT|Nieznany
+
+#History
+HIST_ITEM_ADD|Dodaj %t
+HIST_ITEM_DEL|Usuń %t
+HIST_ITEM_EDIT|Edytuj %t
+HIST_ITEM_MOVE|Przenieś %t
+HIST_RES_DEL|Usuń %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Atrybut musi być określony.
+
+#Common strings
+WIN_ITEM_GENERAL|Atrybuty ogólne
+WIN_ITEM_ID|Identyfikator*:
+WIN_ITEM_ID_TIP|Nazwa i identyfikacja obiektu %t. Muszą być unikatowe.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Szerokość:
+WIN_ITEM_HEIGHT|Wysokość:
+WIN_ITEM_VISIBLE|Widzialność:
+WIN_ITEM_LEFTTOP|Lewy górny:
+WIN_ITEM_LEFTTOP_TIP|Określ, do którego rogu okna wyglądu, dopasowany będzie lewy górny róg obiektu, w przypadku zmiany rozmiaru okna.
+WIN_ITEM_RIGHTBOTTOM|Prawy dolny:
+WIN_ITEM_RIGHTBOTTOM_TIP|Określ, do którego rogu okna wyglądu, dopasowany będzie prawy dolny róg obiektu, w przypadku zmiany rozmiaru okna.
+WIN_ITEM_XKEEPRATIO|Zachowaj proporcję poziomą:
+WIN_ITEM_XKEEPRATIO_TIP|Włącz zachowanie rozmiaru poziomego, aby nie uległ zmianie. Na przykład, jeśli lewy odstęp obiektu jest o dwa razy większy niż prawy, szerokość pozioma nie zostaje zmieniona podczas zmiany rozmiaru.
+WIN_ITEM_YKEEPRATIO|Zachowaj proporcję pionową:
+WIN_ITEM_YKEEPRATIO_TIP|Włącz zachowanie rozmiaru pionowego, aby nie uległ zmianie. Na przykład, jeśli górny odstęp obiektu jest o dwa razy większy niż dolny, wysokość pionowa nie zostaje zmieniona podczas zmiany rozmiaru.
+WIN_ITEM_HELP|Tekst pomocniczy:
+WIN_ITEM_HELP_TIP|Zmienna '$H' otrzymuje określą wartość, gdy mysz jest nad obiektem.
+WIN_ITEM_TOOLTIPTEXT|Podpowiedź:
+FILE_INDIR|w tym samym katalogu co plik XML
+
+#Bitmap
+WIN_BITMAP_TITLE|Ustawienia bitmapy
+WIN_BITMAP_FILE|Plik*:
+WIN_BITMAP_FILE_TIP|Wskazuje ścieżkę i nazwę używanego pliku obrazu.
+WIN_BITMAP_OPEN|Otwórz...
+WIN_BITMAP_ALPHACOLOR|Kolor przejrzystości:
+WIN_BITMAP_ALPHACOLOR_TIP|Kolor przejrzystości bitmapy w formacie szesnastkowym. Jeśli plik PNG określa maskę przejrzystości, także będzie brana pod uwagę.
+WIN_BITMAP_CHOOSE|Wybierz...
+WIN_BITMAP_NBFRAMES|Liczba klatek:
+WIN_BITMAP_NBFRAMES_TIP|Ten atrybut określa liczbę klatek (obrazów) zawartych w animacji. To są tylko obrazy położone pionowo w bitmapie.
+WIN_BITMAP_FPS|Klatek na sekundę:
+WIN_BITMAP_FPS_TIP|Stosowane tylko w animowanych bitmapach. To jest liczba klatek (obrazów) na sekundę w animacji.
+WIN_BITMAP_ANIMATION|Atrybuty animacji
+WIN_BITMAP_CHOOSER_TITLE|Wybierz kolor przejrzystości
+
+#SubBitmap
+WIN_SBMP_TITLE|Ustawienia PodBitmapy
+WIN_SBMP_BOUNDS|Atrybuty położenia i wymiaru
+
+#Font
+WIN_FONT_TITLE|Ustawienia czcionki
+WIN_FONT_FILE|Plik*:
+WIN_FONT_FILE_TIP|Plik zawiera używane czcionki TrueType i OpenType.
+WIN_FONT_OPEN|Otwórz...
+WIN_FONT_SIZE|Rozmiar:
+
+#Layout
+WIN_LAYOUT_TITLE|Ustawienia wyglądu
+WIN_LAYOUT_GENERAL|Atrybuty ogólne
+WIN_LAYOUT_DIMENSIONS|Wymiary
+WIN_LAYOUT_WIDTH|Początkowa szerokość*:
+WIN_LAYOUT_WIDTH_TIP|Początkowa szerokość wyglądu.
+WIN_LAYOUT_HEIGHT|Początkowa wysokość*:
+WIN_LAYOUT_HEIGHT_TIP|Początkowa wysokość wyglądu.
+WIN_LAYOUT_MINWIDTH|Minimalna szerokość:
+WIN_LAYOUT_MINWIDTH_TIP|Minimalna szerokość wyglądu. Używana tylko podczas zmiany rozmiaru wyglądu. Jeżeli ta wartość ustawiona jest na "-1", okno nie może być cieńsze niż szerokość wstępna.
+WIN_LAYOUT_MINHEIGHT|Minimalna wysokość:
+WIN_LAYOUT_MINHEIGHT_TIP|Minimalna wysokość wyglądu. Używana tylko podczas zmiany rozmiaru wyglądu. Jeżeli ta wartość ustawiona jest na "-1", okno nie może być mniejsze niż wysokość wstępna.
+WIN_LAYOUT_MAXWIDTH|Maksymalna szerokość:
+WIN_LAYOUT_MAXWIDTH_TIP|Maksymalna szerokość wyglądu. Używana tylko podczas zmiany rozmiaru wyglądu. Jeżeli ta wartość ustawiona jest na "-1", okno nie może być grubsze niż szerokość wstępna.
+WIN_LAYOUT_MAXHEIGHT|Maksymalna wysokość:
+WIN_LAYOUT_MAXHEIGHT_TIP|Maksymalna wysokość wyglądu. Używana tylko podczas zmiany rozmiaru wyglądu. Jeżeli ta wartość ustawiona jest na "-1", okno nie może być większe niż wysokość wstępna.
+
+#Window
+WIN_WINDOW_TITLE|Ustawienia okna
+WIN_WINDOW_X_TIP|Początkowa odległość okna do lewej krawędzi ekranu.
+WIN_WINDOW_Y_TIP|Początkowa odległość okna do górnej krawędzi ekranu.
+WIN_WINDOW_VISIBLE_TIP|Ustawia pojawianie okna przy uruchomianiu VLC. Ponieważ VLC zapamięta pozycję skóry okna i widoczności, atrybut ten zostanie wykorzystany tylko przy pierwszym uruchomianiu skóry.
+WIN_WINDOW_DD|Przeciągnij i upuść:
+WIN_WINDOW_DD_TIP|Ustawia przeciąganie i upuszczanie plików multimedialnych w tym oknie.
+WIN_WINDOW_PD|Odtwórz przy upuszczeniu:
+WIN_WINDOW_PD_TIP|Ustawia, czy upuszczony plik jest bezpośrednio odtwarzany (włączone), czy tylko dodany do listy (wyłączone). Ten atrybut nie ma wpływu, jeśli przeciąganie i upuszczenie jest wyłączone.
+WIN_WINDOW_DD_PANEL|Ustawienia przeciągania i upuszczenia
+
+#Anchor
+WIN_ANCHOR_TITLE|Ustawienia kotwicy
+WIN_ANCHOR_POINTS|Punkty:
+WIN_ANCHOR_POINTS_TIP|Punkty określające krzywą Béziera następującej kotwicy. Nie musisz zmieniać tego parametru, gdy chcesz otrzymać punktualną kotwicę.
+WIN_ANCHOR_RANGE|Zakres:
+WIN_ANCHOR_RANGE_TIP|Zakres wpływu obszaru kotwicy, w pikselach.
+WIN_ANCHOR_PRIORITY|Priorytet*:
+WIN_ANCHOR_PRIORITY_TIP|Każda kotwica ma swój priorytet (atrybut priorytetu), a kotwica z najwyższym priorytetem zwycięża, co oznacza, że po przeniesieniu jej okna, wszystkie inne zakotwiczone  okna będą też przenoszone. Aby przerwać ten efekt dwóch zakotwiczonych okien, musisz przenieść okno z niższym priorytetem kotwicy.
+WIN_ANCHOR_BOUNDARIES|Granice
+
+#Button
+WIN_BUTTON_TITLE|Ustawienia przycisku
+WIN_BUTTON_UP|Zwykły obraz*:
+WIN_BUTTON_OVER|Obraz przy nadjechaniu:
+WIN_BUTTON_DOWN|Obraz przy kliknięciu:
+WIN_BUTTON_ACTION|Akcja:
+WIN_BUTTON_ATTR|Atrybuty przycisku
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Ustawienia pola wyboru
+WIN_CHECKBOX_UP|Zwykły obraz*:
+WIN_CHECKBOX_OVER|Obraz przy nadjechaniu:
+WIN_CHECKBOX_DOWN|Obraz przy kliknięciu:
+WIN_CHECKBOX_ACTION|Akcja:
+WIN_CHECKBOX_CONDITION|Warunek:
+WIN_CHECKBOX_CONDITION_TIP|Wyrażenie logiczne określające stan pola: ważne -> stan #1, nieważne-> stan #2
+WIN_CHECKBOX_STATE|Stan pola wyboru
+WIN_CHECKBOX_STATE1|Stan #1 (warunek nie jest spełniony):
+WIN_CHECKBOX_STATE2|Stan #2 (warunek jest spełniony):
+
+#Image
+WIN_IMAGE_TITLE|Ustawienia obrazu
+WIN_IMAGE_IMAGE|Obraz*:
+WIN_IMAGE_IMAGE_TIP|Identyfikator Bitmapy
+WIN_IMAGE_RESIZE|Tryb zmiany rozmiaru:
+WIN_IMAGE_RESIZE_TIP|Określa zachowanie obrazu, gdy zmieniany jest rozmiar.
+WIN_IMAGE_ACTION|:
+WIN_IMAGE_ACTION_TIP|Akcja wywołana kliknięciem na obraz.
+WIN_IMAGE_ACTION2|Akcja podwójnego kliknięcia:
+WIN_IMAGE_ACTION2_TIP|Akcja wywołana podwójnym kliknięciem na obraz.
+WIN_IMAGE_ATTR|Atrybuty obrazu
+
+#Group
+WIN_GROUP_TITLE|Ustawienia grupy
+
+#Panel
+WIN_PANEL_TITLE|Ustawienia panelu
+WIN_PANEL_DIMENSIONS|Wymiary
+WIN_PANEL_WIDTH|Szerokość*:
+WIN_PANEL_HEIGHT|Wysokość*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Ustawienia drzewa odtwarzań
+WIN_PLAYTREE_FONT|Czcionka*:
+WIN_PLAYTREE_BGIMAGE|Obraz tła:
+WIN_PLAYTREE_BGIMAGE_TIP|Identyfikator Bitmapy, używany jako obraz tła. Gdy nie określono bitmapy, tło wypełnione zostanie dwoma atrybutami koloru.
+WIN_PLAYTREE_BGCOLOR1|Kolor tła #1:
+WIN_PLAYTREE_BGCOLOR2|Kolor tła #2:
+WIN_PLAYTREE_SELCOLOR|Kolor wyboru:
+WIN_PLAYTREE_FGCOLOR|Kolor tekstu:
+WIN_PLAYTREE_PLAYCOLOR|Kolor tekstu odtwarzania:
+WIN_PLAYTREE_FLAT|Płaska lista odtwarzania:
+WIN_PLAYTREE_FLAT_TIP|Ustaw czy lista odtwarzania używa strukturę drzewa lub jest jest całkowicie \"płaska\" (pokazuj tylko liście drzewa).
+WIN_PLAYTREE_ITEMIMAGE|Ikona pozycji:
+WIN_PLAYTREE_OPENIMAGE|Ikona otwartego folderu:
+WIN_PLAYTREE_CLOSEDIMAGE|Ikona zamkniętego folderu:
+WIN_PLAYTREE_SLIDER|Edytuj suwak listy odtwarzania (pasek przewijania)
+WIN_PLAYTREE_ATTR|Atrybuty drzewa odtwarzań
+WIN_PLAYTREE_CHOOSE|Wybierz...
+WIN_PLAYTREE_CHOOSER_TITLE|Wybierz kolor
+
+#Slider
+WIN_SLIDER_TITLE|Ustawienia suwaka
+WIN_SLIDER_UP|Zwykły obraz*:
+WIN_SLIDER_OVER|Obraz przy nadjechaniu:
+WIN_SLIDER_DOWN|Obraz przy kliknięciu:
+WIN_SLIDER_POINTS|Punkty*:
+WIN_SLIDER_THICKNESS|Grubość:
+WIN_SLIDER_VALUE|Wartość*:
+WIN_SLIDER_VALUE_SCROLL|Przewijanie drzewa odtwarzań
+WIN_SLIDER_BG_ENABLE|Włącz tło
+WIN_SLIDER_BG_EDIT|Edytuj...
+WIN_SLIDER_ATTR|Atrybuty suwaka
+WIN_SLIDER_BG|Tło suwaka
+
+#Slider background
+WIN_SBG_TITLE|Ustawienia tła suwaka
+WIN_SBG_WIZARD|Otwórz generatora tła suwaka...
+WIN_SBG_IMAGE|Obraz*:
+WIN_SBG_NBHORIZ|Poziome klatki:
+WIN_SBG_NBVERT|Pionowe klatki:
+WIN_SBG_PADHORIZ|Poziome wyrównanie:
+WIN_SBG_PADVERT|Pionowe wyrównanie:
+WIN_SBG_ATTR|Atrybuty tła
+
+#Text
+WIN_TEXT_TITLE|Ustawienia tekstu
+WIN_TEXT_TEXT|Tekst*:
+WIN_TEXT_FONT|Czcionka:
+WIN_TEXT_COLOR|Kolor:
+WIN_TEXT_CHOOSE|Wybierz...
+WIN_TEXT_CHOOSER_TITLE|Wybierz kolor tekstu
+WIN_TEXT_ALIGNMENT|Wyrównanie:
+WIN_TEXT_SCROLLING|Przewijanie:
+WIN_TEXT_ATTR|Atrybuty tekstu
+
+#Video
+WIN_VIDEO_TITLE|Ustawienia widea
+WIN_VIDEO_AUTORESIZE|Automatyczna zmiana rozmiaru:
+WIN_VIDEO_AUTORESIZE_TIP|Ustaw, czy motyw powinien dopasowany być automatycznie do wymiarów odtwarzanego widea.
+WIN_VIDEO_ATTR|Atrybuty widea

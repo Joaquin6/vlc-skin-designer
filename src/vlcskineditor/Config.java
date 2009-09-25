@@ -76,7 +76,7 @@ public class Config {
       if(!parent.exists()) parent.mkdirs();
       configFile = new File(parent,"VLCSkinEditor.cfg");
     } else {
-      File parent = new File("~/.vlc");
+      File parent = new File("/home/"+System.getProperty("user.name")+"/.vlc");
       if(!parent.exists()) parent.mkdirs();
       configFile = new File(parent,"VLCSkinEditor.cfg");
     }
