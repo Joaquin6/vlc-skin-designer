@@ -643,7 +643,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       hideToolbar();
     }
 
-    setMinimumSize(new Dimension(800,600));
+    setMinimumSize(new Dimension(640,480));
         
     setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));
     if(Config.get("win.main.x")==null) setLocationRelativeTo(null);
