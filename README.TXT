@@ -1,4 +1,4 @@
-VLC Skin Editor release 0.8.5
+﻿VLC Skin Editor release 0.8.5
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
@@ -55,7 +55,7 @@ Changelog:
 0.4.0a - Items can be positioned with the mouse
        - Trees don't collapse anymore completely when an
          element in it is updated, they automatically
-	       expand the path to the updated item and select it
+         expand the path to the updated item and select it
          
 0.3.5b - NullPointerException fix for Playtree rendering
        - VLT files can be imported
@@ -113,19 +113,26 @@ Furthermore you can ask questions in the VideoLAN forum at
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2007-2009 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
+(c)2007-2010 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
 See LICENSE.TXT for further details
 -----------------------------------------------------------
-Credits:
+Special thanks to:
 -----------------------------------------------------------
-The Tango! Desktop Project for some icons (CC-ShareAlike)
+Xènia Albà for the Catalan translation
+Joseph S. for the Spanish translation
+Jean-Baptiste Kempf for the French translation
+"Airplanez" for the Korean translation
+Myckel Habets for the Dutch translation
+Michał Trzebiatowski for the Polish translation
+Sidney Doria for the Brasilian Portuguese translation
+Andrey Wolk for the Russian translation
+Marián Hikaník for the Slovak translation
+Daniel Nylander for the Swedish translation
+-----------------------------------------------------------
+Further credits:
+-----------------------------------------------------------
+The Tango! Desktop Project for some icons (Public Domain)
 Timothy Gerard Endres for the Windows Registry access and
   TAR support libraries for Java (Public Domain)
 Cyril Deguet and Olivier Teulière for the Boolean Expression
  Evaluator and Bezier code (GPL 2+)
-Andrey Wolk for the Russian translation
-Daniel Nylander for the Swedish translation
-Myckel Habets for the Dutch translation
-Xènia Albà for the Catalan translation
-Marián Hikaník for the Slovak translation
-Jean-Baptiste Kempf for the French translation

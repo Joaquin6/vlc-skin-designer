@@ -10,4 +10,5 @@ pl|Polish|pl.txt
 pt-br|Portuguese (Brasil)|pt-br.txt
 ru|Russian (Incomplete)|ru.txt
 sk|Slovak|sk.txt
+es|Spanish|es.txt
 sv|Swedish (Incomplete)|sv.txt
