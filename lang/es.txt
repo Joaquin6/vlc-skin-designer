@@ -430,9 +430,9 @@ WIN_ITEM_LEFTTOP_TIP|Indique a cuál esquina del estilo la esquina superior izqu
 WIN_ITEM_RIGHTBOTTOM|Inferior derecho:
 WIN_ITEM_RIGHTBOTTOM_TIP|Indique a cuál esquina del estilo la esquina inferior derecha de este elemento está pegada, en caso de redimensionamiento.
 WIN_ITEM_XKEEPRATIO|Mantener proporción X:
-WIN_ITEM_XKEEPRATIO_TIP|Cuando es verdadero, el comportamiento del redimensionado horizontal cambia. Por ejemplo, si inicialmente el espacio a la izquierda del control es el doble del tamaño del que está a su derecha, esto se mantendrá durante cualquier redimensionado horizontal. El ancho del control se mantiene constante.
+WIN_ITEM_XKEEPRATIO_TIP|Cuando es "true", el comportamiento del redimensionado horizontal cambia. Por ejemplo, si inicialmente el espacio a la izquierda del control es el doble del tamaño del que está a su derecha, esto se mantendrá durante cualquier redimensionado horizontal. El ancho del control se mantiene constante.
 WIN_ITEM_YKEEPRATIO|Mantener proporción Y:
-WIN_ITEM_YKEEPRATIO_TIP|Cuando es verdadero, el comportamiento del redimensionado vertical cambia. Por ejemplo, si inicialmente el espacio sobre el control es el doble del tamaño del que está bajo éste, esto se mantendrá durante cualquier redimensionado vertical. La altura del control se mantiene constante.
+WIN_ITEM_YKEEPRATIO_TIP|Cuando es "true", el comportamiento del redimensionado vertical cambia. Por ejemplo, si inicialmente el espacio sobre el control es el doble del tamaño del que está bajo éste, esto se mantendrá durante cualquier redimensionado vertical. La altura del control se mantiene constante.
 WIN_ITEM_HELP|Texto de ayuda:
 WIN_ITEM_HELP_TIP|La variable '$H' se expandirá a este valor cuando el ratón apunta al control actual.
 WIN_ITEM_TOOLTIPTEXT|Información sobre herramientas:
@@ -489,7 +489,7 @@ WIN_WINDOW_VISIBLE_TIP|Indica si la ventana debe aparecer cuando se inicia VLC. 
 WIN_WINDOW_DD|Arrastrar y soltar:
 WIN_WINDOW_DD_TIP|Indica si se permite arrastrar y soltar archivos de medios en esta ventana.
 WIN_WINDOW_PD|Reproducir al soltar:
-WIN_WINDOW_PD_TIP|Indica si un archivo soltado se reproduce directamente (verdadero) o sólo se agrega a la lista de reproducción (falso). Este atributo no tiene efecto si arrastrar-soltar es "falso".
+WIN_WINDOW_PD_TIP|Indica si un archivo soltado se reproduce directamente (true) o sólo se agrega a la lista de reproducción (false). Este atributo no tiene efecto si arrastrar-soltar es "false".
 WIN_WINDOW_DD_PANEL|Opciones de arrastrar y soltar
 
 #Anchor
@@ -517,7 +517,7 @@ WIN_CHECKBOX_OVER|Imagen al apuntar:
 WIN_CHECKBOX_DOWN|Imagen al hacer clic:
 WIN_CHECKBOX_ACTION|Acción:
 WIN_CHECKBOX_CONDITION|Condición:
-WIN_CHECKBOX_CONDITION_TIP|Expresión booleana especificando el estado de la casilla: falso -> estado #1, verdadero -> estado #2
+WIN_CHECKBOX_CONDITION_TIP|Expresión booleana especificando el estado de la casilla: false -> estado #1, true -> estado #2
 WIN_CHECKBOX_STATE|Estado de la casilla
 WIN_CHECKBOX_STATE1|Estado #1 (Condición no se cumple):
 WIN_CHECKBOX_STATE2|Estado #2 (Condición se cumple):
