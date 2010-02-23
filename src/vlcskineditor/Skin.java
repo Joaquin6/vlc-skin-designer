@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.LinkedList;
@@ -236,10 +237,9 @@ public class Skin implements ActionListener{
   /** Saves the XML Code into the skinfile **/
   public void save() {   
     try {
-      FileWriter writer = new FileWriter(skinfile);
-      writer.write(returnCode());
-      writer.flush();
-      writer.close();
+      FileOutputStream fos = new FileOutputStream(skinfile);
+      fos.write(returnCode().getBytes("UTF-8"));
+      fos.close();
     }
     catch(Exception ex) {
       JOptionPane.showMessageDialog(null,Language.get("ERROR_SAVE_MSG")+"\n\n"+ex.toString(),Language.get("ERROR_SAVE_TITLE"),JOptionPane.ERROR_MESSAGE);

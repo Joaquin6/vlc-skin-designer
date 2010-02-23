@@ -1,7 +1,9 @@
-﻿VLC Skin Editor release 0.8.5
+﻿VLC Skin Editor release 0.8.6
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
+0.8.6  - Bugfix: XML Output was not proper UTF-8
+
 0.8.5  - Various  bugfixes and technical improvements
        - A toolbar was added
        - Sliders can be edited in the preview window

@@ -11,14 +11,15 @@ Name: {group}\VLC Skin Editor; Filename: {app}\VLCSkinEditor.exe; WorkingDir: {a
 Name: {group}\Uninstall VLC Skin Editor; Filename: {uninstallexe}
 Name: {group}\Online Help; Filename: http://www.videolan.org/vlc/skinedhlp/
 [Setup]
-OutputBaseFilename=VLCSkinEditor_setup
 VersionInfoVersion=0.8.6
+AppVersion=0.8.6
+AppVerName=0.8.6
+OutputBaseFilename=VLCSkinEditor_setup
 VersionInfoCompany=VideoLAN
 VersionInfoDescription=Setup for the VLC Skin Editor
 VersionInfoCopyright=©2009 VideoLAN
 AppCopyright=©2009 VideoLAN Team
 AppName=VLC Skin Editor
-AppVerName=0.8.6
 LicenseFile=LICENSE.TXT
 PrivilegesRequired=poweruser
 DefaultDirName={pf}\VideoLAN\VLC Skin Editor
@@ -29,7 +30,6 @@ AppPublisher=VideoLAN
 AppPublisherURL=http://www.videolan.org
 AppSupportURL=http://www.videolan.org/vlc/skineditor.html
 AppUpdatesURL=http://www.videolan.org/vlc/skineditor.html
-AppVersion=0.8.5
 AppID={{977C5080-EA08-435D-8901-233A506E1651}}
 AppReadmeFile={app}\README.TXT
 UninstallDisplayIcon={app}\VLCSkinEditor.exe
