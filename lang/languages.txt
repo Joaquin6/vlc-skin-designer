@@ -9,6 +9,8 @@ ko|Korean|ko.txt
 pl|Polish|pl.txt
 pt-br|Portuguese (Brasil)|pt-br.txt
 ru|Russian (Incomplete)|ru.txt
+sr|Serbian (Latin)|sr.lat.txt
+sr-cyr|Serbian (Cyrillic)|sr.cyr.txt
 sk|Slovak|sk.txt
 es|Spanish|es.txt
 sv|Swedish (Incomplete)|sv.txt

@@ -126,6 +126,7 @@ Myckel Habets for the Dutch translation
 Michał Trzebiatowski for the Polish translation
 Sidney Doria for the Brasilian Portuguese translation
 Andrey Wolk for the Russian translation
+Ђорђе Васиљевић for the Serbian translation
 Marián Hikaník for the Slovak translation
 Daniel Nylander for the Swedish translation
 -----------------------------------------------------------

@@ -1,0 +1,600 @@
+﻿#Srpska jezička datoteka za VLC upravljač maskama
+#Author/s: Charmed94
+
+#General strings
+CHOICE_YES|Da
+CHOICE_NO|Ne
+CHOICE_CANCEL|Otkaži
+BUTTON_OK|U redu
+BUTTON_CANCEL|Otkaži
+BUTTON_HELP|Pomoć
+
+#Item names
+THEME|Tema
+FONT|Font
+BITMAP|Bitmap
+SUBBITMAP|Pod-bitmap
+WINDOW|Prozor
+LAYOUT|Izgled
+ANCHOR|Sidro
+BUTTON|Dugme
+CHECKBOX|Kućica
+GROUP|Grupa
+IMAGE|Slika
+PANEL|Panel
+PLAYTREE|Playtree
+RADIALSLIDER|Radijalni klizač
+SLIDER|Klizač
+SLIDERBG|Pozadina klizača
+TEXT|Tekst
+VIDEO|Video
+UNNAMED|Neimenovani plan #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Datoteka
+MENU_FILE_MN|F
+MENU_FILE_NEW|Novo
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Otvori...
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|Sačuvaj
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Proveri masku u VLC-u
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Izvezi kao VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Sačuvaj trenutni pregled kao sliku...
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Izlaz
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|Prikaz
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Opozovi
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|Obnovi
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Postavke maski
+MENU_EDIT_THEME_MN|S
+MENU_EDIT_VARS|Globalne promenljive
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Postavke
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|Pomeri izabranu stavku nagore
+MENU_EDIT_DOWN|Pomeri izabranu stavku nadole
+MENU_EDIT_LEFT|Pomeri izabranu stavku nalevo
+MENU_EDIT_RIGHT|Pomeri izabranu stavku nadesno
+MENU_HELP|Pomoć
+MENU_HELP_MN|H
+MENU_HELP_DOC|Pomoć na mreži
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|O programu
+MENU_HELP_ABOUT_MN|A
+
+#The toolbar
+TOOLBAR_OPEN|Otvori masku...
+TOOLBAR_SAVE|Sačuvaj izmene maske
+TOOLBAR_UNDO|Opozovi
+TOOLBAR_REDO|Obnovi
+TOOLBAR_MOVE|Alat za pomeranje stavki
+TOOLBAR_PATH|Alat za izmenu klizača
+
+#Resource Window
+WIN_RES_TITLE|Izvor
+WIN_RES_ADD_BMP|Dodaj novu bitmapu ili pod-bitmapu
+WIN_RES_ADD_FONT|Dodaj novi font
+WIN_RES_COPY|Napravi kopiju izabranog izvora
+WIN_RES_EDIT|Izmeni izabrani izvor
+WIN_RES_DELETE|Izbriši izabrani izvor
+WIN_RES_PU_ADD_BMP|Dodaj bitmapu
+WIN_RES_PU_ADD_SBMP|Dodaj pod-bitmapu
+WIN_RES_BITMAPS|Bitmapi
+WIN_RES_FONTS|Fontovi
+
+#windows window
+WIN_WIN_TITLE|Prozori
+WIN_WIN_ADD|Dodaj novi prozor
+WIN_WIN_ADD_LAY|Dodaj novi plan za izabrani prozor
+WIN_WIN_MOVE_UP|Pomeri izabrani plan na redosled (poslednji plan je podrazumevan za prozor)
+WIN_WIN_MOVE_DOWN|Pomeri izabrani plan pod redosled (poslednji plan je podrazumevan za prozor)
+WIN_WIN_COPY|Napravi kopiju izabranog prozora ili plana
+WIN_WIN_EDIT|Izmeni izabrani prozor ili plan
+WIN_WIN_DELETE|Izbriši izabrani prozor ili plan
+
+#Items window
+WIN_ITEMS_TITLE|Stavke
+WIN_ITEMS_ADD|Dodaj novu stavku
+WIN_ITEMS_MOVE_UP|Pomeri izabranu stavku na redosled
+WIN_ITEMS_MOVE_DOWN|Pomeri izabranu stavku pod redosled
+WIN_ITEMS_COPY|Napravi kopiju izabrane stavke
+WIN_ITEMS_EDIT|Izmeni izabranu stavku
+WIN_ITEMS_DELETE|Izbriši izabranu stavku
+WIN_ITEMS_PU_PANEL_ADD|Dodaj u izabrani panel
+
+#Welcome dialog
+WELCOME_TITLE|Dobro došli u VLC upravljač maskama
+WELCOME_MSG|Šta želite da uradite?
+WELCOME_NEW|Napravi novu masku
+WELCOME_OPEN|Otvori već postojeću masku
+WELCOME_QUIT|Izađi
+
+#Preferences window
+WIN_PREFS_TITLE|Postavke
+WIN_PREFS_UPDATE_L|Omogući auto-dogradnju:
+WIN_PREFS_LANG_L|Jezik:
+WIN_PREFS_LAF_L|Izgled i stil programa:
+WIN_PREFS_TBAR_L|Prikaži paletu alata:
+WIN_PREFS_RESTART_L|<html><i>Neke postavke stupaju na snagu samo nakon ponovnog pokretanja programa.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Izmeni pod-bitmapu
+ZOOM_FACTOR|Uvećanje:
+
+#Global variables editing window
+WIN_VARS_TITLE|Opšte promenljive
+WIN_VARS_NOTE|<html>Ove promenljive utiču samo na pregled.<br>One simuliraju stanje VLC-a.</html>
+WIN_VARS_SLIDER|Pozicija klizača
+
+#Theme options window
+WIN_THEME_TITLE|Postavke maski
+WIN_THEME_NAME|Ime:
+WIN_THEME_AUTHOR|Autor:
+WIN_THEME_EMAIL|E-pošta autora:
+WIN_THEME_WEB|Veb-sajt autora:
+WIN_THEME_MAGNET|Magnet:
+WIN_THEME_MAGNET_TIP|Kada je rastojanje između ivice ekrana i sidra prozora manje od ovih vrednosti, prozor će se uskladiti ivici
+WIN_THEME_ALPHA|Neprovidnost:
+WIN_THEME_ALPHA_TIP|Postavi alfa transparentnost prozora. Unos mora biti između 1 (potpuna providnost) i 255 (potpuna neprovidnost). Niske vrednosti treba izbegavati.
+WIN_THEME_MOVEALPHA|Neprovidnost prilikom pomeranja:
+WIN_THEME_MOVEALPHA_TIP|Postavlja alfa transparentnost prozora kada su pomereni.
+WIN_THEME_INFO_TITLE|Podaci o maski
+WIN_THEME_ATTR_TITLE|Osobine maske
+
+#Action Editor
+WIN_ACTIONS_TITLE|Uredi sekvencu akcija
+
+#Popup menu in the action editor
+ACTIONS_PU|Akcije
+ACTIONS_DIALOGS|Prikaži dijalog
+ACTIONS_PLAYLIST|Spisak numera
+ACTIONS_DVD|DVD
+ACTIONS_windows|Maska
+ACTIONS_VLC_PLAY|Pusti
+ACTIONS_VLC_PAUSE|Pauziraj
+ACTIONS_VLC_STOP|Zaustavi
+ACTIONS_VLC_FASTER|Pusti brže
+ACTIONS_VLC_SLOWER|Pusti sporije
+ACTIONS_VLC_MUTE|Isključi zvuk
+ACTIONS_VLC_VOLUMEUP|Pojačaj zvuk
+ACTIONS_VLC_VOLUMEDOWN|Smanji zvuk
+ACTIONS_VLC_FULLSCREEN|Režim celog ekrana
+ACTIONS_VLC_SNAPSHOT|Uslikaj
+ACTIONS_VLC_ONTOP|Uvek na vrhu
+ACTIONS_VLC_MINIMIZE|Umanji
+ACTIONS_VLC_QUIT|Izađi
+ACTIONS_EQ_ENABLE|Omogući ekvilajzer
+ACTIONS_EQ_DISABLE|Onemogući ekvilajzer
+ACTIONS_DIALOGS_CHANGESKIN|Promeni masku
+ACTIONS_DIALOGS_FILESIMPLE|Otvoru datoteku (jednostavno)
+ACTIONS_DIALOGS_FILE|Otvori datoteku (prošireno)
+ACTIONS_DIALOGS_DIRECTORY|Otvori fasciklu
+ACTIONS_DIALOGS_DISC|Otvori disk
+ACTIONS_DIALOGS_NET|Otvori izvor mreže
+ACTIONS_DIALOGS_MESSAGES|Izveštaj
+ACTIONS_DIALOGS_PREFS|Postavke
+ACTIONS_DIALOGS_FILEINFO|Podaci o datoteci
+ACTIONS_DIALOGS_PLAYLIST|Spisak numera bez maske
+ACTIONS_DIALOGS_STREAMINGWIZARD|Pomoćnik
+ACTIONS_DIALOGS_POPUP|Iskačući meni
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio postavke iskačućeg menija
+ACTIONS_DIALOGS_VIDEOPOPUP|Video postavke iskačućeg menija
+ACTIONS_DIALOGS_MISCPOPUP|Razne postavke iskačućeg menija
+ACTIONS_PLAYLIST_ADD|Dodaj novu stavku
+ACTIONS_PLAYLIST_DEL|Ukloni izabranu stavku
+ACTIONS_PLAYLIST_NEXT|Pusti sledeću stavku
+ACTIONS_PLAYLIST_PREVIOUS|Pusti prethodnu stavku
+ACTIONS_PLAYLIST_SETRANDOM|Pusti u nasumičnom/normalnom redu
+ACTIONS_PLAYLIST_SETLOOP|Pusti stavku iz liste numera jedanput
+ACTIONS_PLAYLIST_SETREPEAT|Omogući/onemogući ponavljanje trenutne stavke
+ACTIONS_PLAYLIST_SORT|Poređaj po alfabetnom redu
+ACTIONS_PLAYLIST_LOAD|Učitaj iz datoteke
+ACTIONS_PLAYLIST_SAVE|Sačuvaj u datoteku
+ACTIONS_DVD_NEXTTITLE|Sledeći naslov
+ACTIONS_DVD_PREVIOUSTITLE|Prethodni naslov
+ACTIONS_DVD_NEXTCHAPTER|Sledeće poglavlje
+ACTIONS_DVD_PREVIOUSCHAPTER|Prethodno poglavlje
+ACTIONS_DVD_ROOTMENU|Glavni meni
+ACTIONS_windows_SHOW|Pokaži prozor
+ACTIONS_windows_HIDE|Sakrij prozor
+ACTIONS_windows_MAXIMIZE|Uvećaj prozor
+ACTIONS_windows_UNMAXIMIZE|Umanji prozor
+ACTIONS_windows_SETLAYOUT|Promeni plan prozora
+
+#Action descriptions
+ACTION_DESC_NONE|Ne radi ništa.
+ACTION_DESC_CHANGESKIN|Pokaži dijalog za učitavanje nove maske.
+ACTION_DESC_FILESIMPLE|Pokaži osnovni „Otvori datoteku“ dijalog.
+ACTION_DESC_FILE|Pokaži prošireni „Otvori datoteku“ dijalog.
+ACTION_DESC_DIRECTORY|Pokaži „Otvori fasciklu“ dijalog.
+ACTION_DESC_DISC|Pokaži „Otvori disk“ dijalog.
+ACTION_DESC_NET|Pokaži „Otvori izvor mreže“ dijalog.
+ACTION_DESC_MSG|Pokaži dijalog izveštaja.
+ACTION_DESC_PREFS|Pokaži dijalog postavki.
+ACTION_DESC_FILEINFO|Pokaži dijalog u vezi s podacima o datoteci.
+ACTION_DESC_PLAYLIST|Pokaži podrazumevane prozore (bez maske) liste numera.
+ACTION_DESC_WIZARD|Pokaži „Pomoćnik“ dijalog.
+ACTION_DESC_POPUP|Pokaži iskačući meni.
+ACTION_DESC_AUDIOPU|Pokaži audio postavke iskačućeg menija.
+ACTION_DESC_VIDEOPU|Pokaži video postavke iskačućeg menija.
+ACTION_DESC_MISCPU|Pokaži iskačući meni s nadzornikom spiska numera i opštim postavkama.
+ACTION_DESC_EQENABLE|Omogući ekvilajzer audio filtera.
+ACTION_DESC_EQDISABLE|Onemogući ekvilajzer audio filtera.
+ACTION_DESC_PLAY|Pusti trenutnu stavku sa spiska numera.
+ACTION_DESC_PAUSE|Pauziraj stavke sa spiska numera.
+ACTION_DESC_STOP|Zaustavi stavke sa spiska numera.
+ACTION_DESC_FASTER|Pusti brže.
+ACTION_DESC_SLOWER|Pusti sporije.
+ACTION_DESC_MUTE|Isključivanje zvuka.
+ACTION_DESC_VOLUP|Pojačaj zvuk.
+ACTION_DESC_VOLDOWN|Smanji zvuk.
+ACTION_DESC_FULLSCREEN|Režim celog ekrana.
+ACTION_DESC_SNAPSHOT|Uslikaj video.
+ACTION_DESC_ONTOP|Uvek na vrhu.
+ACTION_DESC_MIN|Umanji.
+ACTION_DESC_QUIT|Izađi.
+ACTION_PL_ADD|Dodaj novu stavku na spisak numera.
+ACTION_PL_DEL|Ukloni izabrane stavke sa spiska numera.
+ACTION_PL_NEXT|Pusti sledeću stavku sa spiska numera.
+ACTION_PL_PREV|Pusti prethodnu stavku sa spiska numera.
+ACTION_PL_SORT|Poređaj spisak numera po alfabetnom redu.
+ACTION_PL_LOAD|Učitaj datoteku spiska numera.
+ACTION_PL_SAVE|Sačuvaj trenutni spisak numera na datoteku.
+ACTION_DVD_NEXTT|Idi na sledeći naslov na DVD-u.
+ACTION_DVD_PREVT|Idi na prethodni naslov na DVD-u.
+ACTION_DVD_NEXTC|Idi na sledeće poglavlje na DVD-u.
+ACTION_DVD_PREVC|Idi na prethodno poglavlje na DVD-u.
+ACTION_DVD_MENU|Idi na koreni meni DVD-a.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Aktiviraj
+ACTION_DEACTIVATE|Deaktiviraj
+ACTION_RANDOM|%s tako da stavke u spisku numera budu puštene nasumično.
+ACTION_LOOP|%s da se spisak numera ponavlja kada se završi.
+ACTION_REPEAT|%s da se trenutna stavka ponavlja kada se završi.
+ACTION_SHOW|Prikaži prozor s ID-om %i
+ACTION_HIDE|Sakrij prozor s ID-om %i
+ACTION_MAXIMIZE|Povećaj prozor s ID-om %i
+ACTION_UNMAXIMIZE|Umanji prozor s ID-om %i
+ACTION_LAYOUT|Postavi plan prozora s ID-om %i u %l
+
+#Slider background generator
+SBGGEN_TITLE|Upravljač klizačima
+SBGGEN_PREV|< Nazad
+SBGGEN_NEXT|Dalje >
+SBGGEN_CANCEL|Otkaži
+SBGGEN_FINISH|Završi
+
+SBGGEN_DESCR|Dobro došli u upravljač klizačima. Pomoćiće Vam da napravite uredan klizač s Vaših slika, sa samo nekoliko koraka.
+SBGGEN_FIRST|Prvi korak, izaberite da li će klizač biti s leve ka desnoj strani ili s dna ka vrhu, kao i veličina pozadine.
+SBGGEN_WIDTH|Širina:
+SBGGEN_HEIGHT|Visina:
+SBGGEN_LEFT_M|Leva margina:
+SBGGEN_RIGHT_M|Desna margina:
+SBGGEN_TOP_M|Margina na vrhu:
+SBGGEN_BTM_M|Margina na dnu:
+SBGGEN_SECOND|U sledećem koraku imate da izaberete ispravnu sliku koja je povezana s različitim delovima Vašeg klizača.
+SBGGEN_NOTE|Imajte u vidu da su ikone samo primeri koji Vam ilustruju razlike različitih delova. Oni nisu pregledi slika koji će se koristiti u pozadini.
+
+SBGGEN_IMAGE|Slika:
+SBGGEN_OPEN|Otvori...
+SBGGEN_RESIZE|Veličina:
+SBGGEN_TILE|Pločica
+SBGGEN_STRETCH|Rastezanje
+
+SBGGEN_BG|Pozadina
+SBGGEN_OVERLAY|Slika preko površine
+SBGGEN_LEFT_E|Leva ivica
+SBGGEN_RIGHT_E|Desna ivica
+SBGGEN_TOP_E|Ivica na vrhu
+SBGGEN_BTM_E|Ivica na dnu
+SBGGEN_MIDDLE|Središnji deo
+
+SBGGEN_PROGRESS|Pravljenje pozadine...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|O VLC upravljaču maski %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Autorska prava 2007-%y VideoLAN tim</h3>Izdato pod uslovima GPL 2+<br><br><b>Glavni programer:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Veb-sajt:</b> %w<br><br><b>Zasluge:</b><br>Timothy Gerard Endres-u za pristup registri i TAR podršci (javni domen)<br>Tango! projektu (http://tango.freedesktop.org) za pojedine ikone (Creative Commons BY-SA 2.5)<br>Cyril Deguet-u (asmax@via.ecp.fr) i Olivier Teuli-u&egrave;re (ipkiss@via.ecp.fr) za Bolov izraz i Bezierov kôd (GPL 2+)</html>
+VLT_EX_TITLE|Uvoženje VLT datoteke
+#%f - name of the folder
+VLT_EX_MSG|VLT datoteka biće otpakovana u potfolder pod nazivom „%f“.\nDa li želite da nastavite?
+VLT_EX_YES|Da, otpakuj
+VLT_EX_NO|Ne, otkaži
+VLT_EX_PROGRESS|Otpakivanje VLT datoteke...
+XML_PARSING_PROGRESS|Raščlanjavanje XML datoteke...
+ADD_BMP_FILE_FILTER_DESC|*.png unutar XML fascikle
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (OpenType i TrueType fontovi) unutar XML fascikle
+DUPLICATE_MSG|Molimo, preimenujte obrazac za duplirane objekte.\n%oldid% biće zamenjene sa starim ID-om objekta.
+DEL_CONFIRM_TITLE|Potvrda za brisanje
+DEL_CONFIRM_MSG|Zaista želite da izbrišete „%n“?
+EXIT_CONFIRM_TITLE|Vaše radnje nisu sačuvane
+EXIT_CONFIRM_MSG|Želite li da sačuvate masku pre izlaska?
+UPDATE_TITLE|Dogradnja nije pronađena
+UPDATE_MSG|Dogradnja je dostupna za upravljač maskama.\nVaše izdanje: %v\nPoslednje izdanje: %c\nŽelite li da dogradite upravljač maskama?
+VLT_PROGRESS|Pravljenje VLT datoteke...
+VLT_SUCCESS_MSG|VLT datoteka je uspešno napravljena.
+VLT_SUCCESS_TITLE|VLT datoteka je napravljena
+DOWNLOAD_PROGRESS|Preuzimanje...
+CONNECT_PROGRESS|Povezivanje...
+UPDATE_SUCCESS_TITLE|Dogradnja je završena
+UPDATE_SUCCESS_MSG|Dogradnja je uspešno preuzeta i instalirana.\nVLC upravljač maskama će se ponovo pokrenuti
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Greška pri otvaranju datoteke
+ERROR_FILENEXIST_MSG|Datoteka „%f“ ne postoji i zato ne može biti otvorena!
+ERROR_VLT_UNPACK_TITLE|Otpakivanje VLT datoteke nije uspelo
+ERROR_VLT_UNPACK_MSG|VLT datoteka ne može da se otpakuje!
+ERROR_VLT_NOTHEME_TITLE|Ne mogu da pronađem theme.xml
+ERROR_VLT_NOTHEME_MSG|Ne mogu da pronađem theme.xml unutar raspakovanog sadržaja VLT datoteke.\nPokušajte da je otvorite ručno.
+ERROR_VLC_LAUNCH_TITLE|Greška
+ERROR_VLC_LAUNCH_MSG|VLC medija plejer ne može biti pokrenut
+ERROR_BROWSE_TITLE|Pregledač ne može da bude pokrenut
+ERROR_BROWSE_MSG|Pregledač ne može biti pokrenut.\nMolimo, idite na sledeću adresu ručno:\n%u
+ERROR_ADD_SBMP_TITLE|Pod-bitmapa ne može biti dodata
+ERROR_ADD_SBMP_NOBMP|Nema srodnih izabranih bitmapa!
+ERROR_ADD_SBMP_NOTBMP|Izabrani izvor nije bitmapa!
+ERROR_RES_DEL_TITLE|Izvor ne može da se izbriše
+ERROR_RES_DEL_INUSE|Izvor se još uvek koristi kao maska, tako da ne može biti obrisan.
+ERROR_ADD_LAYOUT_TITLE|Plan ne može da se doda
+ERROR_ADD_LAYOUT_MSG|Nema srodnih izabranih prozora!
+ERROR_UPDATE_TITLE|Greška pri dogradnji!
+ERROR_SAVEPNG_TITLE|Greška pri spremanju slike
+ERROR_SAVEPNG_MSG|Slika ne može da se sačuva.
+ERROR_NEWSKIN_TITLE|Greška pri pravljenju novih maska!
+ERROR_NEWSKIN_MSG|Nova maska ne može biti napravljena.
+ERROR_HEADER_INVALID|Datoteka nije ispravna kao VLC tema!\nNeispravno zaglavlje:
+ERROR_SKIN_INVALID|Izabrana datoteka nije ispravna VLC maska!
+ERROR_VERSION_UNSUPPORTED|Izdanje teme korišćeno u izabranoj maski još uvek nije podržano!
+ERROR_SAVE_TITLE|Greška pri spremanju maske!
+ERROR_SAVE_MSG|Maska nije sačuvana.
+ERROR_ALPHA_TITLE|Unos providnosti nije ispravan
+ERROR_ALPHA_MSG|Molimo, unesite ispravnu vrednost za providnost! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Središnja slika ne može da se učita!\nBar središnji deo klizača je potreban da bi se napravila pozadina za klizač.
+ERROR_VLT_TITLE|VLT datoteka ne može da se napravi
+ERROR_VLT_MSG|VLT datoteka ne može biti napravljena!
+ERROR_ID_INVALID_TITLE|ID nije ispravan
+ERROR_ID_INVALID_MSG|Molimo, unesite ispravan ID!
+ERROR_ID_EXISTS_MSG|ID „%i“ već postoji.\nMolimo, izaberite drugi.
+ERROR_WIDTH_INVALID_TITLE|Širina nije ispravna
+ERROR_WIDTH_INVALID_MSG|Molimo, unesite ispravnu širinu!
+ERROR_HEIGHT_INVALID_TITLE|Visina nije ispravna
+ERROR_HEIGHT_INVALID_MSG|Molimo, unesite ispravnu širinu!
+ERROR_FILE_INVALID_TITLE|Datoteka nije ispravna
+ERROR_FILE_INVALID_MSG|Molimo, izaberite ispravnu datoteku!
+ERROR_BITMAP_INVALID_MSG|Bitmapa koji ste izabrali ne može da se učita!\nMolimo, unesite drugu.
+ERROR_NBFRAMES_TITLE|Neispravan broj sličica
+ERROR_NBFRAMES_MSG|Broj sličica ne može biti manji od 1
+ERROR_OTF_TITLE|OTF nije podržan
+ERROR_OTF_MSG|Izabrali ste „OpenType“ font. VLC će ga prikazati ispravno, ali upravljač maski neće.\nVidećete još jedan font u pregledu.
+ERROR_SIZE_INVALID_TITLE|Neispravna veličina
+ERROR_SIZE_INVALID_MSG|Molimo, unesite ispravnu veličinu.
+ERROR_OUTSIDE_TITLE|Neispravne dimenzije
+ERROR_OUTSIDE_MSG|Unesene dimenzije su van srodnih bitmapa!
+ERROR_BITMAP_NEXIST|Bitmapa %i ne postoji.
+ERROR_BITMAP_NEXIST_TITLE|Neispravna slika!
+ERROR_BITMAP_LOAD|Slika za bitmapu %i ne može da se učita.
+ERROR_BITMAP_LOAD_TITLE|Greška pri učitavanju slika
+ERROR_NOSTATE|Molimo, unesite stanje!
+ERROR_NOSTATE_TITLE|Stanje neispravno
+ERROR_FONT_NEXIST|Font %i ne postoji.
+ERROR_FONT_NEXIST_TITLE|Neispravan font!
+ERROR_POINTS_INVALID|Molimo, unesite ispravne Bezierove poene!
+ERROR_POINTS_INVALID_TITLE|Poeni nisu ispravni!
+ERROR_RADIALSLIDER|Radijalni klizač još uvek nije podržan od strane upravljača maskama.
+ERROR_RADIALSLIDER_TITLE|Nije podržano
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Neimenovana maska
+THEMEINFO_AUTHOR_DEFAULT|Nepoznat autor
+THEMEINFO_EMAIL_DEFAULT|Nepoznata
+
+#History
+HIST_ITEM_ADD|Dodaj %t
+HIST_ITEM_DEL|Izbriši %t
+HIST_ITEM_EDIT|Izmeni %t
+HIST_ITEM_MOVE|Pomeri %t
+HIST_RES_DEL|Izbriši %t „%i“
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Attribute must be specified.
+
+#Common strings
+WIN_ITEM_GENERAL|Opšte osobine
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|Ime i identifikacija pod-bitmapa. Mora biti jedinstveno.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Širina:
+WIN_ITEM_HEIGHT|Visina:
+WIN_ITEM_VISIBLE|Vidljivost:
+WIN_ITEM_LEFTTOP|Levi ćošak:
+WIN_ITEM_LEFTTOP_TIP|Odredi na koji ćošak želite da postavite plan — gornji levi ugao ove stavke je zakačen, u slučaju preuveličavanja.
+WIN_ITEM_RIGHTBOTTOM|Desni ćošak:
+WIN_ITEM_RIGHTBOTTOM_TIP|Odredi na koji ćošak želite da postavite plan — gornji desni ugao ove stavke je zakačen, u slučaju preuveličavanja.
+WIN_ITEM_XKEEPRATIO|Zadrži X razmeru:
+WIN_ITEM_XKEEPRATIO_TIP|Kada je postavljeno na tačno, horizontalna veličina je promenjena. Na primer, ako je na početku prostor s leve strane dvostruko veći od prostora s desne, ovo će ostati isto tokom bilo kakvih horizontalnih preuveličavanja. Širina kontrole ostaje konstantna.
+WIN_ITEM_YKEEPRATIO|Zadrži Y razmeru:
+WIN_ITEM_YKEEPRATIO_TIP|Kada je postavljeno na tačno, vertikalna veličina je promenjena. Na primer, ako je na početku prostor s vrha dvostruko veći od svog dna, ovo će ostati isto tokom bilo kakvih vertikalnih preuveličavanja. Visina kontrole ostaje konstantna.
+WIN_ITEM_HELP|Pomoćni tekst:
+WIN_ITEM_HELP_TIP|Promenljiva '$H' biće proširena na ovu vrednost kada miš pokrije trenutnu kontrolu.
+WIN_ITEM_TOOLTIPTEXT|Prikaz balona:
+FILE_INDIR|u istoj fascikli kao i XML datoteka
+
+#Bitmap
+WIN_BITMAP_TITLE|Postavke bitmapa
+WIN_BITMAP_FILE|Datoteka*:
+WIN_BITMAP_FILE_TIP|Označava stazu i naziv korišćene slike.
+WIN_BITMAP_OPEN|Otvori...
+WIN_BITMAP_ALPHACOLOR|Alfa boja:
+WIN_BITMAP_ALPHACOLOR_TIP|Transparentna boja bitmapa u heksadecimalnom formatu. Ako Vaša PNG datoteka precizira transparentnu masku, biće prenešena u nalog.
+WIN_BITMAP_CHOOSE|Izaberi...
+WIN_BITMAP_NBFRAMES|Broj sličica:
+WIN_BITMAP_NBFRAMES_TIP|Ova osobina je potrebna za određivanje animiranih bitmapa; to je broj sličica sadržanih u Vašoj animaciji. Sve ostale sličice su samo slike položene vertikalno na bitmapu.
+WIN_BITMAP_FPS|Sličica po sekundi:
+WIN_BITMAP_FPS_TIP|Koristi se samo u animiranim bitmapama; to je broj sličica po sekundi svake animacije.
+WIN_BITMAP_ANIMATION|Osobine animacije
+WIN_BITMAP_CHOOSER_TITLE|Izaberi alfa boju
+
+#SubBitmap
+WIN_SBMP_TITLE|Postavke pod-bitmapa
+WIN_SBMP_BOUNDS|Pozicije i dimenzije
+
+#Font
+WIN_FONT_TITLE|Postavke fonta
+WIN_FONT_FILE|Datoteka*:
+WIN_FONT_FILE_TIP|Datoteka koja sadrži „TrueType“ ili „OpenType“ fontove.
+WIN_FONT_OPEN|Otvori...
+WIN_FONT_SIZE|Veličina:
+
+#Layout
+WIN_LAYOUT_TITLE|Postavke plana
+WIN_LAYOUT_GENERAL|Opšte osnove
+WIN_LAYOUT_DIMENSIONS|Dimenzije
+WIN_LAYOUT_WIDTH|Početna širina*:
+WIN_LAYOUT_WIDTH_TIP|Početna širina plana.
+WIN_LAYOUT_HEIGHT|Početna visina*:
+WIN_LAYOUT_HEIGHT_TIP|Početna visina plana.
+WIN_LAYOUT_MINWIDTH|Minimalna širina:
+WIN_LAYOUT_MINWIDTH_TIP|Minimalna širina plana. Koristi se samo kod preuveličavanja. Ukoliko je ova vrednost postavljena na „-1“, početna širina biće korišćena kao minimalna.
+WIN_LAYOUT_MINHEIGHT|Minimalna visina:
+WIN_LAYOUT_MINHEIGHT_TIP|Minimalna visina plana. Koristi se samo kod preuveličavanja. Ukoliko je ova vrednost postavljena na „-1“, početna visina biće korišćena kao minimalna.
+WIN_LAYOUT_MAXWIDTH|Maksimalna širina:
+WIN_LAYOUT_MAXWIDTH_TIP|Maksimalna širina plana. Koristi se samo kod preuveličavanja. Ukoliko je ova vrednost postavljena na „-1“, početna širina biće korišćena kao maksimalna.
+WIN_LAYOUT_MAXHEIGHT|Maksimalna visina:
+WIN_LAYOUT_MAXHEIGHT_TIP|Maksimalna visina plana. Koristi se samo kod preuveličavanja. Ukoliko je ova vrednost postavljena na „-1“, početna visina biće korišćena kao maksimalna.
+
+#Window
+WIN_WINDOW_TITLE|Postavke prozora
+WIN_WINDOW_X_TIP|Početna razdaljina prozora s leve ivice ekrana.
+WIN_WINDOW_Y_TIP|Početna razdaljina prozora s vrha ekrana.
+WIN_WINDOW_VISIBLE_TIP|Određuje da li prozor treba da se pojavi kada se VLC pokrene. Budući da VLC pamti masku, poziciju i vidljivost, ova osobina će biti korišćena samo prvi put kada je maska učitana.
+WIN_WINDOW_DD|Premeštanje:
+WIN_WINDOW_DD_TIP|Određuje da li je funkcija premeštanja medija datotekâ dozvoljena na ovom prozoru.
+WIN_WINDOW_PD|Pusti pri primeštanju:
+WIN_WINDOW_PD_TIP|Određuje da li je premeštena datoteka puštena direktno (tačno) ili samo postavljena (netačno). Ova osobina nema efekta ako je premeštanje podešeno na „netačno“.
+WIN_WINDOW_DD_PANEL|Postavke premeštanja
+
+#Anchor
+WIN_ANCHOR_TITLE|Postavke sidra
+WIN_ANCHOR_POINTS|Poeni:
+WIN_ANCHOR_POINTS_TIP|Poeni koji definišu Bezierove krive praćene sa sidrom. Ne morate da menjate parametre ako je sve što želite tačkino sidro.
+WIN_ANCHOR_RANGE|Rastojanje:
+WIN_ANCHOR_RANGE_TIP|Rastojanje sidrine površine efekta, u pikselima.
+WIN_ANCHOR_PRIORITY|Prioritet*:
+WIN_ANCHOR_PRIORITY_TIP|Svako sidro ima prioritet (osobinu prioriteta), tako da sidro s najvećim prioritetom jeste pobednik, što znači da pri pomeranju njegovih prozora svi ostali usidreni prozori će se takođe pomerati. Da bi se razbio efekat dva usidrena prozora, potrebno da je pomerite prozor čije sidro ima manji prioritet.
+WIN_ANCHOR_BOUNDARIES|Granice
+
+#Button
+WIN_BUTTON_TITLE|Postavke dugmadi
+WIN_BUTTON_UP|Normalna slika*:
+WIN_BUTTON_OVER|Slika kada pluta:
+WIN_BUTTON_DOWN|Slika kada je kliknuta:
+WIN_BUTTON_ACTION|Akcija:
+WIN_BUTTON_ATTR|Osobine dugmadi
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Postavke kućica
+WIN_CHECKBOX_UP|Normalna slika*:
+WIN_CHECKBOX_OVER|Slika kada pluta:
+WIN_CHECKBOX_DOWN|Slika kada je kliknuta:
+WIN_CHECKBOX_ACTION|Akcija:
+WIN_CHECKBOX_CONDITION|Stanje:
+WIN_CHECKBOX_CONDITION_TIP|Bulov izraz koji određuje stanje kućice: netačno -> stanje #1, tačno -> stanje #2
+WIN_CHECKBOX_STATE|Stanje kućicâ
+WIN_CHECKBOX_STATE1|State #1 (Uslov nije popunjen):
+WIN_CHECKBOX_STATE2|State #2 (Uslov nije popunjen):
+
+#Image
+WIN_IMAGE_TITLE|Postavke slikâ
+WIN_IMAGE_IMAGE|Slika*:
+WIN_IMAGE_IMAGE_TIP|ID bitmapa
+WIN_IMAGE_RESIZE|Režim preuveličavanja:
+WIN_IMAGE_RESIZE_TIP|Navedi ponašanje slike kada joj je promenjena veličina.
+WIN_IMAGE_ACTION|Akcija:
+WIN_IMAGE_ACTION_TIP|Akcija praćena klikom na sliku.
+WIN_IMAGE_ACTION2|Dupli-klik akcija:
+WIN_IMAGE_ACTION2_TIP|Akcija praćena duplim-klikom na sliku.
+WIN_IMAGE_ATTR|Osobine slikâ
+#Group
+WIN_GROUP_TITLE|Postavke grupa
+
+#Panel
+WIN_PANEL_TITLE|Postavke panela
+WIN_PANEL_DIMENSIONS|Dimenzije
+WIN_PANEL_WIDTH|Širina*:
+WIN_PANEL_HEIGHT|Visina*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Postavke stabla
+WIN_PLAYTREE_FONT|Font*:
+WIN_PLAYTREE_BGIMAGE|Slika pozadine:
+WIN_PLAYTREE_BGIMAGE_TIP|ID bitmapa, korišćena kao pozadina. Kada bitmapa nije unešena, pozadina će biti popunjena uz pomoć bgcolor1 i bgcolor2 osobina.
+WIN_PLAYTREE_BGCOLOR1|Boja pozadine #1:
+WIN_PLAYTREE_BGCOLOR2|Boja pozadine #2:
+WIN_PLAYTREE_SELCOLOR|Boja selekcije:
+WIN_PLAYTREE_FGCOLOR|Boja teksta:
+WIN_PLAYTREE_PLAYCOLOR|Reprodukcija boje teksta:
+WIN_PLAYTREE_FLAT|Ravan spiska numera:
+WIN_PLAYTREE_FLAT_TIP|Određuje da li bi spisak numera trebao da koristi stablastu strukturu ili u potpunosti \„flat\“ (pokaži samo lišće stabla).
+WIN_PLAYTREE_ITEMIMAGE|Ikona stavke:
+WIN_PLAYTREE_OPENIMAGE|Otvori ikonu fascikle:
+WIN_PLAYTREE_CLOSEDIMAGE|Zatvori ikonu fascikle:
+WIN_PLAYTREE_SLIDER|Uredi klizač spiska numera
+WIN_PLAYTREE_ATTR|Osobine stabla
+WIN_PLAYTREE_CHOOSE|Izaberi...
+WIN_PLAYTREE_CHOOSER_TITLE|Izaberi boju
+
+#Slider
+WIN_SLIDER_TITLE|Postavke klizača
+WIN_SLIDER_UP|Normalna slika*:
+WIN_SLIDER_OVER|Slika kada pluta:
+WIN_SLIDER_DOWN|Slika kada je kliknuta:
+WIN_SLIDER_POINTS|Poeni*:
+WIN_SLIDER_THICKNESS|Debljina:
+WIN_SLIDER_VALUE|Vrednost*:
+WIN_SLIDER_VALUE_SCROLL|Pomeranje stabla
+WIN_SLIDER_BG_ENABLE|Omogući pozadinu
+WIN_SLIDER_BG_EDIT|Izmeni...
+WIN_SLIDER_ATTR|Osobine klizača
+WIN_SLIDER_BG|Pozadina klizača
+
+#Slider background
+WIN_SBG_TITLE|Postavke pozadine klizača
+WIN_SBG_WIZARD|Otvori pozadinu klizača...
+WIN_SBG_IMAGE|Slika*:
+WIN_SBG_NBHORIZ|Horizontalne sličice:
+WIN_SBG_NBVERT|Vertikalne sličice:
+WIN_SBG_PADHORIZ|Horizontalno postavljanje:
+WIN_SBG_PADVERT|Vertikalno postavljanje:
+WIN_SBG_ATTR|Osobine pozadine
+
+#Text
+WIN_TEXT_TITLE|Postavke teksta
+WIN_TEXT_TEXT|Tekst*:
+WIN_TEXT_FONT|Font:
+WIN_TEXT_COLOR|Boja:
+WIN_TEXT_CHOOSE|Izaberi...
+WIN_TEXT_CHOOSER_TITLE|Izaberi boju teksta
+WIN_TEXT_ALIGNMENT|Poravnanje:
+WIN_TEXT_SCROLLING|Pomeranje:
+WIN_TEXT_ATTR|Osobine teksta
+
+#Video
+WIN_VIDEO_TITLE|Video postavke
+WIN_VIDEO_AUTORESIZE|Automatski preuveličaj:
+WIN_VIDEO_AUTORESIZE_TIP|Određuje da li bi plan trebao da se automatski poveća/smanji da odgovara dimenzijama puštenog videa.
+WIN_VIDEO_ATTR|Video osobine
