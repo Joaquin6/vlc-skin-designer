@@ -27,12 +27,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.LinkedList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -54,7 +50,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import vlcskineditor.history.ThemeEditEvent;
 import vlcskineditor.resources.Bitmap;
-import vlcskineditor.resources.BitmapFont;
 import vlcskineditor.resources.Font;
 import vlcskineditor.resources.ImageResource;
 import vlcskineditor.resources.SubBitmap;
@@ -728,16 +723,32 @@ public class Skin implements ActionListener{
     if(stp==null) return;
     m.items_tree.setSelectionPath(stp);
   }
-  /** Finds the first occurence of id in the first expanded tree in the given JTree**/
-  public TreePath findInTree(JTree jt, String id) {    
-    int max = jt.getRowCount();		
-    int row = 0;
-    do {
+
+  /**
+   * Finds the first occurence of id in the first expanded tree in the given JTree
+   * @param jt The JTree in which to search
+   * @param id The ID of the item to look for
+   * @return The path to the element in the tree which has the given ID. If the
+   * item cannot be found in the tree <b>null</b> is returned.
+   **/
+  public TreePath findInTree(JTree jt, String id) {
+    //Get number of rows in tree
+    int max = jt.getRowCount();
+    //Set row index to 0
+    //int row = 0;
+    //Check each row of the tree
+    //do {
+    for(int row=0;row<max;row++) {
+        //Get path to row
         TreePath path = jt.getPathForRow(row);
+        //Get name of path's last element
         String text = path.getLastPathComponent().toString();
-        if (text.toUpperCase().indexOf(id.toUpperCase())!=-1) return path;
-        row = (row + 1 + max) % max;
-    } while (row != 0);
+        //If this row contains the desired item return the path to it.
+        if (text.toUpperCase().endsWith(id.toUpperCase()))
+            return path;
+    }
+        //row = (row + 1 + max) % max;
+    //} while (row != 0);
     return null;
   }  
 }

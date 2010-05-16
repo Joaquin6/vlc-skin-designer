@@ -685,8 +685,10 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
     else if(System.getProperty("os.name").indexOf("Linux")!=-1){
       vlc_skins_dir = "/home/"+System.getProperty("user.name")+"/.local/share/vlc/skins2/";
-    }  
+    }
 
+    if(vlc_skins_dir==null) vlc_skins_dir = "";
+    
     if(base_fc==null) base_fc = new JFileChooser();
     if(Config.get("open.folder")==null) base_fc.setCurrentDirectory(new File(vlc_skins_dir));
     else base_fc.setCurrentDirectory(new File(Config.get("open.folder")));

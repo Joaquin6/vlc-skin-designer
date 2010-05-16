@@ -122,7 +122,7 @@ Special thanks to:
 -----------------------------------------------------------
 Xènia Albà for the Catalan translation
 Joseph S. for the Spanish translation
-Jean-Baptiste Kempf for the French translation
+"Alex64" and Jean-Baptiste Kempf for the French translation
 "Airplanez" for the Korean translation
 Myckel Habets for the Dutch translation
 Michał Trzebiatowski for the Polish translation
