@@ -24,6 +24,7 @@
            destdir="${build}/classes"
            target="1.6"
            source="1.6"
+           debug="on" debuglevel="lines,vars,source"
            fork="true" />
   </target>
 
@@ -117,4 +118,8 @@
                                       package-win32,
                                       package-unix,
                                       installer-win32" />
+
+  <target name="run" depends="jar">
+      <java jar="VLCSkinEditor.jar"/>
+  </target>
 </project>

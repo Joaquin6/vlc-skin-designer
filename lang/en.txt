@@ -533,6 +533,7 @@ WIN_IMAGE_ACTION_TIP|Action triggered by a click on the image.
 WIN_IMAGE_ACTION2|Double-click action:
 WIN_IMAGE_ACTION2_TIP|Action triggered by a double-click on the image.
 WIN_IMAGE_ATTR|Image attributes
+WIN_IMAGE_ART|Replace image with cover art, when available
 
 #Group
 WIN_GROUP_TITLE|Group settings

@@ -47,9 +47,11 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
   public String resize = RESIZE_DEFAULT;
   public String action = ACTION_DEFAULT;
   public String action2 = ACTION2_DEFAULT;
+  public boolean art = false;
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, image_tf, action2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb;
+  JCheckBox art_cb;
   JButton visible_btn, action2_btn, ok_btn, cancel_btn, help_btn;
   ActionEditor action2_ae;
   ImageResource image_res;
@@ -86,6 +88,8 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
 
     image_res = s.getImageResource(image);
     if(image_res!=null) image_res.addResourceChangeListener(this);
+
+    art = XML.getBoolAttributeValue(n, "art", art);
 
     created = true;
   }  
@@ -134,6 +138,8 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       action = action_cb.getSelectedItem().toString();
       action2 = action2_tf.getText();
 
+      art = art_cb.isSelected();
+
       s.updateItems();
       s.expandItem(id);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -158,6 +164,8 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       resize = resize_cb.getSelectedItem().toString();
       action = action_cb.getSelectedItem().toString();
       action2 = action2_tf.getText();
+
+      art = art_cb.isSelected();
 
       s.updateItems();
       s.expandItem(id);
@@ -213,7 +221,7 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       image_tf = new JTextField();
       image_tf.setToolTipText(Language.get("WIN_IMAGE_IMAGE_TIP"));
       JLabel resize_l = new JLabel(Language.get("WIN_IMAGE_RESIZE"));
-      String[] resize_values = {"mosaic", "scale"};
+      String[] resize_values = {"mosaic", "scale", "scale2"};
       resize_cb = new JComboBox(resize_values);
       resize_cb.setToolTipText(Language.get("WIN_IMAGE_RESIZE_TIP"));
       JLabel action_l = new JLabel(Language.get("WIN_IMAGE_ACTION"));
@@ -225,6 +233,8 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       action2_tf.setToolTipText(Language.get("WIN_IMAGE_ACTION2_TIP"));
       action2_btn = new JButton("", Main.editor_icon);
       action2_btn.addActionListener(this);
+
+      art_cb = new JCheckBox(Language.get("WIN_IMAGE_ART"), art);
 
       ok_btn = new JButton(Language.get("BUTTON_OK"));
       ok_btn.addActionListener(this);
@@ -348,6 +358,7 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       image_panel.add(action2_l);
       image_panel.add(action2_tf);
       image_panel.add(action2_btn);
+      image_panel.add(art_cb);
       image_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Language.get("WIN_IMAGE_ATTR")));
 
       SpringLayout image_layout = new SpringLayout();
@@ -382,8 +393,12 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       image_layout.putConstraint(SpringLayout.VERTICAL_CENTER, action2_btn, 0, SpringLayout.VERTICAL_CENTER, action2_l);
       image_layout.putConstraint(SpringLayout.EAST, action2_btn, 0, SpringLayout.EAST, image_tf);
 
+      image_layout.putConstraint(SpringLayout.NORTH, art_cb, 10, SpringLayout.SOUTH, action2_tf);
+      image_layout.putConstraint(SpringLayout.WEST, art_cb, 5, SpringLayout.WEST, image_panel);
+      image_layout.putConstraint(SpringLayout.EAST, art_cb, 0, SpringLayout.EAST, image_tf);
+
       image_layout.putConstraint(SpringLayout.EAST, image_panel, 5, SpringLayout.EAST, image_tf);
-      image_layout.putConstraint(SpringLayout.SOUTH, image_panel, 10, SpringLayout.SOUTH, action2_btn);
+      image_layout.putConstraint(SpringLayout.SOUTH, image_panel, 10, SpringLayout.SOUTH, art_cb);
 
       image_panel.setLayout(image_layout);
 

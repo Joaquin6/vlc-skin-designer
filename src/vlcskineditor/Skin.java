@@ -633,16 +633,19 @@ public class Skin implements ActionListener{
   public void updateResources() {  
     m.res_tree_model.setRoot(getResourcesTree());
     m.saved=false;
+    m.res_tree.repaint();
   }
   /** Recreates the window hierarchies **/
   public void updateWindows() {
     m.win_tree_model.setRoot(getWindowsTree());
     m.saved=false;
+    m.win_tree.repaint();
   }
   /** Recreates the item hierarchies **/
   public void updateItems() {
     m.items_tree_model.setRoot(getItemsTree());
     m.saved=false;
+    m.items_tree.repaint();
   }
   /** Updates everything **/
   public void update() {

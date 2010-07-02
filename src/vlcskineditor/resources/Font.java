@@ -117,7 +117,7 @@ public class Font extends Resource implements ActionListener{
     catch(Exception e) {
       e.printStackTrace();
       if(file.indexOf(".otf")==-1) {
-        //Font file corrupt
+        //Font file most probably corrupt, as its not OTF but still cannot be loaded by Java
         f = new java.awt.Font(java.awt.Font.SANS_SERIF,java.awt.Font.PLAIN,size);        
         return false;
       }

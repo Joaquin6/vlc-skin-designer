@@ -658,7 +658,11 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
 
     update();
 
-    getVLCdirectory();
+    try {
+        getVLCdirectory();
+    } catch(UnsatisfiedLinkError ex) {
+        ex.printStackTrace();
+    }
 
     if(args.length>0) {
       File f = new File(args[0]);
@@ -672,15 +676,22 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    */
   private void getVLCdirectory() {
     if(System.getProperty("os.name").indexOf("Windows")!=-1) {
-      try {
-        RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);
-        String installDir = vlc_key.getStringValue("InstallDir");
-        vlc_dir = installDir+File.separator;
-        vlc_skins_dir = vlc_dir+"skins\\";
-      }
-      catch (Exception e) {
-        System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
-        e.printStackTrace();
+      File f = new File(System.getProperty("ProgramFiles"), "VideoLAN/VLC");
+      File exe = new File(f, "vlc.exe");
+      if(f.exists() && exe.exists()) {
+          vlc_dir = f.getPath();
+          vlc_skins_dir = new File(f, "skins").getPath();
+      } else {
+          try {
+            RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);
+            String installDir = vlc_key.getStringValue("InstallDir");
+            vlc_dir = installDir+File.separator;
+            vlc_skins_dir = vlc_dir+"skins\\";
+          }
+          catch (Exception e) {
+            System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
+            e.printStackTrace();
+          }
       }
     }
     else if(System.getProperty("os.name").indexOf("Linux")!=-1){

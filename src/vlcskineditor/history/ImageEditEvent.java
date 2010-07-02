@@ -40,6 +40,8 @@ public class ImageEditEvent extends HistoryEvent{
   
   private String image_old, image_new, resize_old, resize_new;
   private String action_old, action_new, action2_old, action2_new;
+
+  private boolean art_old, art_new;
   
   public ImageEditEvent(Image ima) {
     i = ima;
@@ -58,6 +60,8 @@ public class ImageEditEvent extends HistoryEvent{
     resize_old = i.resize;
     action_old = i.action;
     action2_old = i.action2;
+
+    art_old = i.art;
   }
   public void setNew() {
     id_new = i.id;
@@ -74,6 +78,8 @@ public class ImageEditEvent extends HistoryEvent{
     resize_new = i.resize;
     action_new = i.action;
     action2_new = i.action2;
+
+    art_new = i.art;
   }
   @Override
   public void undo() {
@@ -91,6 +97,8 @@ public class ImageEditEvent extends HistoryEvent{
     i.resize = resize_old;
     i.action = action_old;
     i.action2 = action2_old;
+
+    i.art = art_old;
   }
   @Override
   public void redo() {
@@ -108,6 +116,8 @@ public class ImageEditEvent extends HistoryEvent{
     i.resize = resize_new;
     i.action = action_new;
     i.action2 = action2_new;
+
+    i.art = art_new;
   }
   @Override
   public String getDescription() {

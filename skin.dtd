@@ -138,6 +138,7 @@
         action2     CDATA   "none"
         resize      CDATA   "mosaic"
         help        CDATA   ""
+		art         CDATA   "false"
     >
 <!ELEMENT Button EMPTY>
     <!ATTLIST Button
