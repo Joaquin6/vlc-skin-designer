@@ -139,14 +139,14 @@ public class Button extends Item implements ActionListener, ResourceChangeListen
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       up = up_tf.getText();
       over = over_tf.getText();
       down = down_tf.getText();
-      action = action_tf.getText();
-      tooltiptext = tooltiptext_tf.getText();
+      action = action_tf.getText().replaceAll("\"","'");
+      tooltiptext = tooltiptext_tf.getText().replaceAll("\"","'");
       
       ItemAddEvent bae = new ItemAddEvent(s.getParentListOf(id),this);
       s.m.hist.addEvent(bae);
@@ -165,8 +165,8 @@ public class Button extends Item implements ActionListener, ResourceChangeListen
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       up = up_tf.getText();
       over = over_tf.getText();
@@ -468,7 +468,7 @@ public class Button extends Item implements ActionListener, ResourceChangeListen
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

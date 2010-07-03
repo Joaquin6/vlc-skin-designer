@@ -95,7 +95,7 @@ public class Bitmap extends ImageResource implements ActionListener{
   public Bitmap(Skin s_, File f_) {
     s = s_;
     //Gets the relative path to the bitmap file
-    file = f_.getPath().replace(s.skinfolder,"");
+    file = f_.getPath().replace(s.skinfolder,"").replaceAll("\\\\", "/");
     //Sets the bitmap's id according to the pattern subfolder_filename
     String id_t = file.replaceAll("\\\\","_").replaceAll("/","_").substring(0,file.lastIndexOf("."));
     if(s.idExists(id_t)) id_t += "_"+s.getNewId();
@@ -125,7 +125,7 @@ public class Bitmap extends ImageResource implements ActionListener{
    */
   public boolean updateImage() {
     try {
-      image = ImageIO.read(new File(s.skinfolder+file));       
+      image = ImageIO.read(new File(s.skinfolder,file));
       image = image.getSubimage(0,0,image.getWidth(),image.getHeight()/nbframes);         
       if(image.getType()!=13) { //If PNG is not indexed
         BufferedImage bi = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -172,7 +172,7 @@ public class Bitmap extends ImageResource implements ActionListener{
   @Override
   public void update() {
     BitmapEditEvent be = new BitmapEditEvent(this);
-    file=file_tf.getText();
+    file=file_tf.getText().replaceAll("\\\\","/");
     alphacolor=alphacolor_tf.getText();
     nbframes=Integer.parseInt(nbframes_tf.getText());
     fps=Integer.parseInt(fps_tf.getText());
@@ -382,7 +382,7 @@ public class Bitmap extends ImageResource implements ActionListener{
       }
     }    
     else if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

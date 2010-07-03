@@ -112,8 +112,8 @@ public class Video extends Item implements ActionListener{
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       width = Integer.parseInt(width_tf.getText());  
       height = Integer.parseInt(height_tf.getText());  
@@ -137,8 +137,8 @@ public class Video extends Item implements ActionListener{
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       width = Integer.parseInt(width_tf.getText());  
       height = Integer.parseInt(height_tf.getText());  
@@ -400,7 +400,7 @@ public class Video extends Item implements ActionListener{
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

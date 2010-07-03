@@ -321,7 +321,7 @@ public class Anchor extends Item implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
@@ -330,6 +330,10 @@ public class Anchor extends Item implements ActionListener {
           JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_EXISTS_MSG").replaceAll("%i", id_tf.getText()),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
           return;
         }
+      }
+      if(points_tf.getText().equals("")||points.contains("\"")) {
+        JOptionPane.showMessageDialog(frame,Language.get("ERROR_POINTS_INVALID"),Language.get("ERROR_POINTS_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
+        return;
       }
       update();
       frame.setVisible(false);

@@ -2,7 +2,16 @@
 -----------------------------------------------------------
 Changelog:
 -----------------------------------------------------------
-0.8.6  - Bugfix: XML Output was not proper UTF-8
+0.8.6  - Support for new skins2 features in VLC 1.1/1.2
+           + cover art
+           + video recording action
+           + new image resize mode
+       - Bugfix: XML Output was not proper UTF-8
+       - Bugfix: " was tolerated as value for IDs, actions
+         etc. and could thus break your skin file
+       - Bugfix: Paths to resource files could contain \
+         and thus break your skin on Linux
+       - several other small bugfixes
 
 0.8.5  - Various  bugfixes and technical improvements
        - A toolbar was added

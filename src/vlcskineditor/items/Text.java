@@ -148,12 +148,12 @@ public class Text extends Item implements ActionListener, ResourceChangeListener
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
-      text = text_tf.getText();
+      text = text_tf.getText().replaceAll("\"","'");
       font = font_tf.getText();
-      color = color_tf.getText();
+      color = color_tf.getText().replaceAll("\"","'");
       width = Integer.parseInt(width_tf.getText());
       alignment = alignment_cb.getSelectedItem().toString();
       scrolling = scrolling_cb.getSelectedItem().toString();
@@ -176,12 +176,12 @@ public class Text extends Item implements ActionListener, ResourceChangeListener
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
-      text = text_tf.getText();
+      text = text_tf.getText().replaceAll("\"","'");
       font = font_tf.getText();
-      color = color_tf.getText();
+      color = color_tf.getText().replaceAll("\"","'");
       width = Integer.parseInt(width_tf.getText());
       alignment = alignment_cb.getSelectedItem().toString();
       scrolling = scrolling_cb.getSelectedItem().toString();
@@ -491,7 +491,7 @@ public class Text extends Item implements ActionListener, ResourceChangeListener
   @Override
   public void actionPerformed(ActionEvent e) {    
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

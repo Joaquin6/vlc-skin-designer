@@ -215,8 +215,8 @@ public class Playtree extends Item implements ActionListener, ResourceChangeList
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       width = Integer.parseInt(width_tf.getText());
       height = Integer.parseInt(height_tf.getText());
@@ -225,11 +225,11 @@ public class Playtree extends Item implements ActionListener, ResourceChangeList
       itemimage = itemimage_tf.getText();
       openimage = openimage_tf.getText();
       closedimage = closedimage_tf.getText();
-      fgcolor = fgcolor_tf.getText();
-      selcolor = selcolor_tf.getText();
-      playcolor = playcolor_tf.getText();
-      bgcolor1 = bgcolor1_tf.getText();
-      bgcolor2 = bgcolor2_tf.getText();
+      fgcolor = fgcolor_tf.getText().replaceAll("\"","'");
+      selcolor = selcolor_tf.getText().replaceAll("\"","'");
+      playcolor = playcolor_tf.getText().replaceAll("\"","'");
+      bgcolor1 = bgcolor1_tf.getText().replaceAll("\"","'");
+      bgcolor2 = bgcolor2_tf.getText().replaceAll("\"","'");
       flat = (Boolean) flat_cb.getSelectedItem();
 
       s.updateItems();
@@ -249,8 +249,8 @@ public class Playtree extends Item implements ActionListener, ResourceChangeList
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       width = Integer.parseInt(width_tf.getText());
       height = Integer.parseInt(height_tf.getText());
@@ -259,11 +259,11 @@ public class Playtree extends Item implements ActionListener, ResourceChangeList
       itemimage = itemimage_tf.getText();
       openimage = openimage_tf.getText();
       closedimage = closedimage_tf.getText();
-      fgcolor = fgcolor_tf.getText();
-      selcolor = selcolor_tf.getText();
-      playcolor = playcolor_tf.getText();
-      bgcolor1 = bgcolor1_tf.getText();
-      bgcolor2 = bgcolor2_tf.getText();
+      fgcolor = fgcolor_tf.getText().replaceAll("\"","'");
+      selcolor = selcolor_tf.getText().replaceAll("\"","'");
+      playcolor = playcolor_tf.getText().replaceAll("\"","'");
+      bgcolor1 = bgcolor1_tf.getText().replaceAll("\"","'");
+      bgcolor2 = bgcolor2_tf.getText().replaceAll("\"","'");
       flat = (Boolean) flat_cb.getSelectedItem();
 
       s.updateItems();
@@ -707,7 +707,7 @@ public class Playtree extends Item implements ActionListener, ResourceChangeList
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_INVALID_MSG"), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         return;
       } else if(!id_tf.getText().equals(id)) {

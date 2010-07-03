@@ -226,8 +226,8 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       up = up_tf.getText();
       over = over_tf.getText();
@@ -235,7 +235,7 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
       points = points_tf.getText();
       thickness = Integer.parseInt(thickness_tf.getText());
       if(!inPlaytree) value = (String)value_cb.getSelectedItem();
-      tooltiptext = tooltiptext_tf.getText();
+      tooltiptext = tooltiptext_tf.getText().replaceAll("\"","'");
 
       updateBezier();
 
@@ -257,8 +257,8 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       up = up_tf.getText();
       over = over_tf.getText();
@@ -266,7 +266,7 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
       points = points_tf.getText();
       thickness = Integer.parseInt(thickness_tf.getText());
       if(!inPlaytree) value = (String)value_cb.getSelectedItem();
-      tooltiptext = tooltiptext_tf.getText();
+      tooltiptext = tooltiptext_tf.getText().replaceAll("\"","'");
 
       updateBezier();
 
@@ -599,7 +599,7 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
     thickness_tf.setText(String.valueOf(thickness));
     points_tf.setText(points);
     if(!inPlaytree) value_cb.setSelectedItem(value);
-    tooltiptext_tf.setText(tooltiptext);    
+    tooltiptext_tf.setText(tooltiptext);
     
     sbg_chb.setSelected(sbg!=null);
     sbg_btn.setEnabled(sbg!=null);         
@@ -610,7 +610,7 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
@@ -638,7 +638,7 @@ public class Slider extends Item implements ActionListener, ResourceChangeListen
         down_res = s.getImageResource(down);
         return;
       }
-      if(points_tf.getText().equals("")) {
+      if(points_tf.getText().equals("")||points.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_POINTS_INVALID"),Language.get("ERROR_POINTS_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }

@@ -43,11 +43,12 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
   public final String RESIZE_DEFAULT = "mosaic";
   public final String ACTION_DEFAULT = "none";
   public final String ACTION2_DEFAULT = "none";
+  public final boolean ART_DEFAULT = false;
   public String image;
   public String resize = RESIZE_DEFAULT;
   public String action = ACTION_DEFAULT;
   public String action2 = ACTION2_DEFAULT;
-  public boolean art = false;
+  public boolean art = ART_DEFAULT;
   JFrame frame = null;
   JTextField id_tf, x_tf, y_tf, help_tf, visible_tf, image_tf, action2_tf;
   JComboBox lefttop_cb, rightbottom_cb, xkeepratio_cb, ykeepratio_cb, resize_cb, action_cb;
@@ -130,13 +131,13 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       image = image_tf.getText();
       resize = resize_cb.getSelectedItem().toString();
       action = action_cb.getSelectedItem().toString();
-      action2 = action2_tf.getText();
+      action2 = action2_tf.getText().replaceAll("\"","'");
 
       art = art_cb.isSelected();
 
@@ -157,13 +158,13 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
       rightbottom = rightbottom_cb.getSelectedItem().toString();
       xkeepratio = Boolean.parseBoolean(xkeepratio_cb.getSelectedItem().toString());
       ykeepratio = Boolean.parseBoolean(ykeepratio_cb.getSelectedItem().toString());
-      visible = visible_tf.getText();
-      help = help_tf.getText();
+      visible = visible_tf.getText().replaceAll("\"","'");
+      help = help_tf.getText().replaceAll("\"","'");
 
       image = image_tf.getText();
       resize = resize_cb.getSelectedItem().toString();
       action = action_cb.getSelectedItem().toString();
-      action2 = action2_tf.getText();
+      action2 = action2_tf.getText().replaceAll("\"","'");
 
       art = art_cb.isSelected();
 
@@ -459,7 +460,7 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame, Language.get("ERROR_ID_INVALID_MSG"), Language.get("ERROR_ID_INVALID_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         return;
       } else if(!id_tf.getText().equals(id)) {
@@ -522,6 +523,11 @@ public class Image extends Item implements ActionListener, ResourceChangeListene
     }
 
     code += " image=\"" + image + "\"";
+
+    if(art!=ART_DEFAULT) {
+        code += "art=\""+String.valueOf(art)+"\"";
+    }
+
     if(!action.equals(ACTION_DEFAULT)) {
       code += " action=\"" + action + "\"";
     }

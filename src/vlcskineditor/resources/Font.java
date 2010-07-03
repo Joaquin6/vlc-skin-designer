@@ -71,14 +71,14 @@ public class Font extends Resource implements ActionListener{
    * Creates a new Font from a given file.
    * @param s_ The skin in which the Font is used.
    * @param f_ The font file. TrueType or OpenType. Notice that only OpenType fonts in a TrueType container
-   * can be displayed by the Skin Editor. VLC can display both.
+   * can be displayed by the Skin Editor. VLC can display both. This will be fixed in JRE 7
    */
   public Font(Skin s_, File f_) {
     s = s_;
     String id_t = f_.getName().substring(0,f_.getName().lastIndexOf("."));
     if(s.idExists(id_t)) id_t += "_"+s.getNewId();
     id = id_t;
-    file = f_.getPath().replace(s.skinfolder,"");    
+    file = f_.getPath().replace(s.skinfolder,"").replaceAll("\\\\","/");
     s.updateResources();
     s.expandResource(id);
     updateFont();
@@ -139,10 +139,9 @@ public class Font extends Resource implements ActionListener{
   @Override
   public void update() {
     FontEditEvent fee = new FontEditEvent(this);
-    file=file_tf.getText();
+    file=file_tf.getText().replaceAll("\\\\","/");
     size=Integer.parseInt(size_tf.getText());        
     if(!id.equals(id_tf.getText())) {
-      String oldid = id;
       id=id_tf.getText();
       s.updateResources();
       s.expandResource(id);
@@ -279,7 +278,7 @@ public class Font extends Resource implements ActionListener{
       }
     }    
     else if(e.getSource().equals(ok_btn)) {
-      if(id_tf.getText().equals("")) {
+      if(id_tf.getText().equals("")||id.contains("\"")) {
         JOptionPane.showMessageDialog(frame,Language.get("ERROR_ID_INVALID_MSG"),Language.get("ERROR_ID_INVALID_TITLE"),JOptionPane.INFORMATION_MESSAGE);
         return;
       }
