@@ -533,7 +533,7 @@ WIN_IMAGE_ACTION_TIP|Aktion die ausgeführt wird, wenn auf das Bild geklickt wir
 WIN_IMAGE_ACTION2|Doppelklick Aktion:
 WIN_IMAGE_ACTION2_TIP|Aktion die ausgeführt wird, wenn auf das Bild doppelt geklickt wird.
 WIN_IMAGE_ATTR|Image Eigenschaften
-WIN_IMAGE_ART|Ersetze bild durch Albumcover, wenn verfügbar
+WIN_IMAGE_ART|Ersetze Bild durch Albumcover, wenn verfügbar
 
 #Group
 WIN_GROUP_TITLE|Group Einstellungen

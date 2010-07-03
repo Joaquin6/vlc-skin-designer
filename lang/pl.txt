@@ -533,6 +533,7 @@ WIN_IMAGE_ACTION_TIP|Akcja wywołana kliknięciem na obraz.
 WIN_IMAGE_ACTION2|Akcja podwójnego kliknięcia:
 WIN_IMAGE_ACTION2_TIP|Akcja wywołana podwójnym kliknięciem na obraz.
 WIN_IMAGE_ATTR|Atrybuty obrazu
+WIN_IMAGE_ART|Zastąp obraz okładką albumu, jeśli jest dostępna
 
 #Group
 WIN_GROUP_TITLE|Ustawienia grupy
