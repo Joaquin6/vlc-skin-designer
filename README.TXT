@@ -12,6 +12,7 @@ Changelog:
        - Bugfix: Paths to resource files could contain \
          and thus break your skin on Linux
        - several other small bugfixes
+	   - more languages
 
 0.8.5  - Various  bugfixes and technical improvements
        - A toolbar was added
@@ -140,6 +141,7 @@ Andrey Wolk for the Russian translation
 Ђорђе Васиљевић for the Serbian translation
 Marián Hikaník for the Slovak translation
 Daniel Nylander for the Swedish translation
+Kaya Zeren for the Turkish translation
 -----------------------------------------------------------
 Further credits:
 -----------------------------------------------------------

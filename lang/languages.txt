@@ -1,10 +1,10 @@
 #Available languages
 #language code|Human-readable name|language file
-en|English|en.txt
 ca|Catalan (Incomplete)|ca.txt
 nl|Dutch|nl.txt
+en|English|en.txt
+fr|French|fr.txt
 de|German|de.txt
-fr|French (Incomplete)|fr.txt
 ko|Korean|ko.txt
 pl|Polish|pl.txt
 pt-br|Portuguese (Brasil)|pt-br.txt
@@ -12,5 +12,6 @@ ru|Russian (Incomplete)|ru.txt
 sr|Serbian (Latin)|sr.lat.txt
 sr-cyr|Serbian (Cyrillic)|sr.cyr.txt
 sk|Slovak|sk.txt
+tr|Turkish|tr.txt
 es|Spanish|es.txt
 sv|Swedish (Incomplete)|sv.txt

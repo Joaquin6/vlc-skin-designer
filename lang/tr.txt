@@ -1,0 +1,601 @@
+#Turkish language file for VLC Skin Editor
+#Author/s: Kaya Zeren
+
+#General strings
+CHOICE_YES|Evet
+CHOICE_NO|Hayır
+CHOICE_CANCEL|İptal
+BUTTON_OK|Tamam
+BUTTON_CANCEL|İptal
+BUTTON_HELP|Yardım
+
+#Item names
+THEME|Tema
+FONT|Yazı Tipi
+BITMAP|Bitmap
+SUBBITMAP|SubBitmap
+WINDOW|Pencere
+LAYOUT|Yerleşim
+ANCHOR|Çapa
+BUTTON|Düğme
+CHECKBOX|Checkbox
+GROUP|Grup
+IMAGE|Resim
+PANEL|Panel
+PLAYTREE|Oyun ağacı
+RADIALSLIDER|Radyal kaydırıcı
+SLIDER|Kaydırıcı
+SLIDERBG|KaydırıcıArtAlanı
+TEXT|Metin
+VIDEO|Görüntü
+UNNAMED|Adsız %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Dosya
+MENU_FILE_MN|D
+MENU_FILE_NEW|Yeni
+MENU_FILE_NEW_MN|Y
+MENU_FILE_OPEN|Aç...
+MENU_FILE_OPEN_MN|A
+MENU_FILE_SAVE|Kaydet
+MENU_FILE_SAVE_MN|K
+MENU_FILE_TEST|Temayı VLC ile sına
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|VLT olarak ver...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Ön izlemeyi resim olarak kaydet...
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Çıkış
+MENU_FILE_EXIT_MN|k
+MENU_EDIT|Düzelt
+MENU_EDIT_MN|D
+MENU_EDIT_UNDO|Geri Al
+MENU_EDIT_UNDO_MN|G
+MENU_EDIT_REDO|Yinele
+MENU_EDIT_REDO_MN|Y
+MENU_EDIT_THEME|Tema ayarları
+MENU_EDIT_THEME_MN|T
+MENU_EDIT_VARS|Genel değişkenler
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Seçenekler
+MENU_EDIT_PREFS_MN|S
+MENU_EDIT_UP|Seçili ögeyi yukarı kaydır
+MENU_EDIT_DOWN|Seçili ögeyi aşağı kaydır
+MENU_EDIT_LEFT|Seçili ögeyi sola kaydır
+MENU_EDIT_RIGHT|Seçili ögeyi sağa kaydır
+MENU_HELP|Yardım
+MENU_HELP_MN|Y
+MENU_HELP_DOC|Çevrim içi yardım
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|Hakkında
+MENU_HELP_ABOUT_MN|H
+
+#The toolbar
+TOOLBAR_OPEN|Bir tema aç...
+TOOLBAR_SAVE|Tema değişikliklerini kaydet
+TOOLBAR_UNDO|Geri al
+TOOLBAR_REDO|Yinele
+TOOLBAR_MOVE|Öge kaydırma aracı
+TOOLBAR_PATH|Kaydırıcı düzenleme aracı
+
+#Resource Window
+WIN_RES_TITLE|Kaynaklar
+WIN_RES_ADD_BMP|Yeni bir Bitmap ya da SubBitmap ekle
+WIN_RES_ADD_FONT|Yeni bir yazı tipi ekle
+WIN_RES_COPY|Seçili kaynağın kopyasını oluştur
+WIN_RES_EDIT|Seçili kaynağı düzenle
+WIN_RES_DELETE|Seçili kaynağı sil
+WIN_RES_PU_ADD_BMP|Bitmap ekle
+WIN_RES_PU_ADD_SBMP|SubBitmap ekle
+WIN_RES_BITMAPS|Bitmap dosyaları
+WIN_RES_FONTS|Yazı tipleri
+
+#Windows window
+WIN_WIN_TITLE|Pencereler
+WIN_WIN_ADD|Yeni pencere ekle
+WIN_WIN_ADD_LAY|Seçili pencereye yeni katman ekle
+WIN_WIN_MOVE_UP|Seçili katmanı sıralamada öne al (penceredeki son katman varsayılan katmandır)
+WIN_WIN_MOVE_DOWN|Seçili katmanı sıralamada arkaya al (penceredeki son katman varsayılan katmandır)
+WIN_WIN_COPY|Seçili pencere ya da katmanın bir kopyasını oluştur
+WIN_WIN_EDIT|Seçili pencere ya da katmanı düzenle
+WIN_WIN_DELETE|Seçili pencere ya da katmanı sil
+
+#Items window
+WIN_ITEMS_TITLE|Ögeler
+WIN_ITEMS_ADD|Yeni öge ekle
+WIN_ITEMS_MOVE_UP|Seçili ögeyi sıralamada öne al
+WIN_ITEMS_MOVE_DOWN|Seçili ögeyi sıralamada arkaya al
+WIN_ITEMS_COPY|Seçili ögenin kopyasını oluştur
+WIN_ITEMS_EDIT|Seçili ögeyi düzenle
+WIN_ITEMS_DELETE|Seçili ögeyi sil
+WIN_ITEMS_PU_PANEL_ADD|Seçili panele ekle
+
+#Welcome dialog
+WELCOME_TITLE|VLC Tema Düzenleyicisine Hoş Geldiniz
+WELCOME_MSG|Ne yapmak istiyorsunuz?
+WELCOME_NEW|Yeni tema oluşturmak
+WELCOME_OPEN|Var olan temayı açmak
+WELCOME_QUIT|Çıkmak
+
+#Preferences window
+WIN_PREFS_TITLE|Seçenekler
+WIN_PREFS_UPDATE_L|Kendiliğinden güncelle:
+WIN_PREFS_LANG_L|Dil:
+WIN_PREFS_LAF_L|Program görünümü ve hissi:
+WIN_PREFS_TBAR_L|Araç çubuğunu göster:
+WIN_PREFS_RESTART_L|<html><i>Bazı ayarların geçerli olması için programı yeniden başlatmalısınız.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|SubBitmap Düzenle
+ZOOM_FACTOR|Büyütme çarpanı:
+
+#Global variables editing window
+WIN_VARS_TITLE|Genel değişkenler
+WIN_VARS_NOTE|<html>Bu değişkenler yalnız ön izlemeyi etkiler.<br>VLC'nin durumunu benzetirler.</html>
+WIN_VARS_SLIDER|Kaydırıcı konumu
+
+#Theme options window
+WIN_THEME_TITLE|Tema ayarları
+WIN_THEME_NAME|Ad:
+WIN_THEME_AUTHOR|Yazar:
+WIN_THEME_EMAIL|Yazarın E-postası:
+WIN_THEME_WEB|Yazarın Web Sitesi:
+WIN_THEME_MAGNET|Yapış:
+WIN_THEME_MAGNET_TIP|Ekranın sınırı ile pencerenin çerçevesi arasındaki uzaklık bu değerden küçükse pencere sınıra yapışır
+WIN_THEME_ALPHA|Matlık:
+WIN_THEME_ALPHA_TIP|Pencerelerin alfa saydamlığını ayarlar. Bu değer 1 (yaklaşık olarak tamamen saydam) ile 255 (tamamen mat) arasında olmalıdır. Düşük değerlerden kaçının.
+WIN_THEME_MOVEALPHA|Taşırken matlık:
+WIN_THEME_MOVEALPHA_TIP|Pencereler taşınırken alfa matlığını ayarlar.
+WIN_THEME_INFO_TITLE|Tema bilgisi
+WIN_THEME_ATTR_TITLE|Tema özellikleri
+
+#Action Editor
+WIN_ACTIONS_TITLE|Eylem sırasını düzenle
+
+#Popup menu in the action editor
+ACTIONS_PU|Eylemler
+ACTIONS_DIALOGS|bir pencere göster
+ACTIONS_PLAYLIST|Oynatma Listesi
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Tema
+ACTIONS_VLC_PLAY|Oynat
+ACTIONS_VLC_PAUSE|Duraklat
+ACTIONS_VLC_STOP|Durdur
+ACTIONS_VLC_FASTER|Hızlandır
+ACTIONS_VLC_SLOWER|Yavaşlat
+ACTIONS_VLC_MUTE|Sesi kes
+ACTIONS_VLC_VOLUMEUP|Sesi aç
+ACTIONS_VLC_VOLUMEDOWN|Sesi kıs
+ACTIONS_VLC_FULLSCREEN|Tam ekrana gir/çık
+ACTIONS_VLC_SNAPSHOT|Fotoğraf çek
+ACTIONS_VLC_ONTOP|Her zaman üstte ol/olma
+ACTIONS_VLC_MINIMIZE|VLC'yi küçült
+ACTIONS_VLC_QUIT|VLC'den çık
+ACTIONS_EQ_ENABLE|Dengeleyiciyi Aç
+ACTIONS_EQ_DISABLE|Dengeleyiciyi Kapat
+ACTIONS_DIALOGS_CHANGESKIN|Temayı değiştir
+ACTIONS_DIALOGS_FILESIMPLE|Dosya aç (basit)
+ACTIONS_DIALOGS_FILE|Dosya aç (gelişmiş)
+ACTIONS_DIALOGS_DIRECTORY|Klasör aç
+ACTIONS_DIALOGS_DISC|Diski aç
+ACTIONS_DIALOGS_NET|Ağ akışını aç
+ACTIONS_DIALOGS_MESSAGES|İleti günlüğü
+ACTIONS_DIALOGS_PREFS|Seçenekler
+ACTIONS_DIALOGS_FILEINFO|Dosya Bilgisi
+ACTIONS_DIALOGS_PLAYLIST|Temasız oynatma listesi
+ACTIONS_DIALOGS_STREAMINGWIZARD|Akış Yardımcısı
+ACTIONS_DIALOGS_POPUP|Tam beliren menü
+ACTIONS_DIALOGS_AUDIOPOPUP|Ses ayarları beliren menü
+ACTIONS_DIALOGS_VIDEOPOPUP|Görüntü ayarları beliren menü
+ACTIONS_DIALOGS_MISCPOPUP|Çeşitli ayarlar beliren menü
+ACTIONS_PLAYLIST_ADD|Yeni öge ekle
+ACTIONS_PLAYLIST_DEL|Seçili ögeyi kaldır
+ACTIONS_PLAYLIST_NEXT|Sonraki ögeyi çal
+ACTIONS_PLAYLIST_PREVIOUS|Önceki ögeyi çal
+ACTIONS_PLAYLIST_SETRANDOM|Rastgele/Normal sırada çal
+ACTIONS_PLAYLIST_SETLOOP|Liteyi sürekli/bir kez çal
+ACTIONS_PLAYLIST_SETREPEAT|Geçerli ögeyi yinele/yineleme
+ACTIONS_PLAYLIST_SORT|Alfabetik diz
+ACTIONS_PLAYLIST_LOAD|Dosyadan yükle
+ACTIONS_PLAYLIST_SAVE|Dosyaya kaydet
+ACTIONS_DVD_NEXTTITLE|Sonraki başlık
+ACTIONS_DVD_PREVIOUSTITLE|Önceki başlık
+ACTIONS_DVD_NEXTCHAPTER|Sonraki bölüm
+ACTIONS_DVD_PREVIOUSCHAPTER|Önceki bölüm
+ACTIONS_DVD_ROOTMENU|Ana menü
+ACTIONS_WINDOWS_SHOW|Bir pencere göster
+ACTIONS_WINDOWS_HIDE|Bir pencereyi gizle
+ACTIONS_WINDOWS_MAXIMIZE|Bir pencereyi büyüt
+ACTIONS_WINDOWS_UNMAXIMIZE|Bir pencereyi önceki boyutuna döndür
+ACTIONS_WINDOWS_SETLAYOUT|Bir pencerenin yerleşimini değiştir
+
+#Action descriptions
+ACTION_DESC_NONE|Bir şey yapma
+ACTION_DESC_CHANGESKIN|Yeni tema yüklensin mi sor.
+ACTION_DESC_FILESIMPLE|Basit "Dosya Aç" penceresini göster.
+ACTION_DESC_FILE|Gelişmiş "Dosya Aç" penceresini göster.
+ACTION_DESC_DIRECTORY|"Klasör Aç" penceresini göster.
+ACTION_DESC_DISC|"Disk Aç" penceresini göster.
+ACTION_DESC_NET|"Ağ Akışı Aç" penceresini göster.
+ACTION_DESC_MSG|İleti günlüğü penceresini göster.
+ACTION_DESC_PREFS|Ayarlar penceresini göster.
+ACTION_DESC_FILEINFO|Dosya bilgisi penceresini göster.
+ACTION_DESC_PLAYLIST|Varsayılan (temasız) oynatıcı listesi penceresini göster.
+ACTION_DESC_WIZARD|"Akış Yardımcısı" penceresini göster.
+ACTION_DESC_POPUP|Beliren menünün tamamını göster.
+ACTION_DESC_AUDIOPU|Ses ayarları beliren menüsünü göster.
+ACTION_DESC_VIDEOPU|Görüntü ayarları beliren menüsünü göster.
+ACTION_DESC_MISCPU|Oynatma denetimi ve genel seçenekleri içeren bir beliren menü göster.
+ACTION_DESC_EQENABLE|Dengeleyici ses süzgecini etkinleştir.
+ACTION_DESC_EQDISABLE|Dengeleyici ses süzgecini devre dışı bırak.
+ACTION_DESC_PLAY|Geçerli oynatma listesi ögesini oynat.
+ACTION_DESC_PAUSE|Oynatmayı duraklat.
+ACTION_DESC_STOP|Oynatmayı durdur.
+ACTION_DESC_FASTER|Hızlandır.
+ACTION_DESC_SLOWER|Yavaşlat.
+ACTION_DESC_MUTE|Sesi kapat/aç
+ACTION_DESC_VOLUP|Sesi aç.
+ACTION_DESC_VOLDOWN|Sesi kıs.
+ACTION_DESC_FULLSCREEN|Tam ekran kipini aç/kapat.
+ACTION_DESC_SNAPSHOT|Görüntünün fotoğrafını çek.
+ACTION_DESC_ONTOP|"Her zaman üstte" durumunu değiştir.
+ACTION_DESC_MIN|VLC'yi küçült.
+ACTION_DESC_QUIT|VLC'den çık.
+ACTION_PL_ADD|Oynatma listesine yeni bir öge ekle.
+ACTION_PL_DEL|Seçili ögeleri oynatma listesinden çıkar.
+ACTION_PL_NEXT|Oynatma listesinde sonraki ögeyi çal.
+ACTION_PL_PREV|Oynatma listesinde önceki ögeyi çal.
+ACTION_PL_SORT|Oynatma listesini alfabetik olarak sırala.
+ACTION_PL_LOAD|Oynatma listesi dosyasını yükle.
+ACTION_PL_SAVE|Geçerli oynatma listesini dosyaya kaydet.
+ACTION_DVD_NEXTT|DVD'de sonraki başlığa git.
+ACTION_DVD_PREVT|DVD'de önceki başlığa git.
+ACTION_DVD_NEXTC|DVD'de sonraki bölüme git.
+ACTION_DVD_PREVC|DVD'de önceki bölüme git.
+ACTION_DVD_MENU|DVD menüsüne git.
+#%s = Seçenek olarak ACTION_ACTIVATE ve ACTION_DEACTIVE bulunan seçici
+#%i = Pencere kimliği yazı alanı
+#%l = Yerleşim kimliği yazı alanı
+ACTION_ACTIVATE|Etkinleştir
+ACTION_DEACTIVATE|Devre dışı bırak
+ACTION_RANDOM|Oynatma listesindeki ögeler rastgele sırada çalınırken %s yap.
+ACTION_LOOP|Oynatma listesi yinelenirken listenin sonuna gelindiğinde %s yap.
+ACTION_REPEAT|Geçerli öge yinelenirken sona gelindiğinde %s yap
+ACTION_SHOW|%i kimlikli pencereyi göster
+ACTION_HIDE|%i kimlikli pencereyi gizle
+ACTION_MAXIMIZE|%i kimlikli pencereyi büyüt
+ACTION_UNMAXIMIZE|%i kimlikli pencereyi önceki boyutuna döndür
+ACTION_LAYOUT|%i kimlikli pencerenin yerleşimini %l olarak ayarla
+
+#Slider background generator
+SBGGEN_TITLE|Kaydırıcı Art Alanı Üreteci
+SBGGEN_PREV|< Önceki
+SBGGEN_NEXT|Sonraki >
+SBGGEN_CANCEL|İptal
+SBGGEN_FINISH|Bitir
+
+SBGGEN_DESCR|Kaydırıcı art alan üretecine hoş geldiniz. It will help you to create a neat slider from your images, in just a few steps.
+SBGGEN_FIRST|İlk adım olarak, kaydırıcının soldan sağa mı alttan üste mi olacağını ve art alanın ne boyutta olacağını seçin.
+SBGGEN_WIDTH|Genişlik:
+SBGGEN_HEIGHT|Yükseklik:
+SBGGEN_LEFT_M|Sol boşluk:
+SBGGEN_RIGHT_M|Sağ boşluk:
+SBGGEN_TOP_M|Üst boşluk:
+SBGGEN_BTM_M|Alt boşluk:
+SBGGEN_SECOND|Bu adımda kaydırıcınızın farklı parçalarına karşılık gelen doğru resim dosyalarını seçmelisiniz.
+SBGGEN_NOTE|Simgelerin yalnızca farklı parçaların nasıl görüneceğini gösterdiğini unutmayın. Bunlar art alan resminin üretilmesinde kullanılacak resimlerin ön izlemesi değildir.
+
+SBGGEN_IMAGE|Resim dosyası:
+SBGGEN_OPEN|Aç...
+SBGGEN_RESIZE|Yeniden boyutlandır davranışı:
+SBGGEN_TILE|Döşe
+SBGGEN_STRETCH|Yay
+
+SBGGEN_BG|Art alan
+SBGGEN_OVERLAY|Resmi bindir
+SBGGEN_LEFT_E|Sol eşik
+SBGGEN_RIGHT_E|Sağ eşik
+SBGGEN_TOP_E|Üst eşik
+SBGGEN_BTM_E|Alt eşik
+SBGGEN_MIDDLE|Orta bölüm
+
+SBGGEN_PROGRESS|Art alan oluşturuluyor...
+
+#Message dialogues
+#%v - sürüm
+ABOUT_TITLE|VLC Tema Düzenleyici Hakkında %v
+#%y - geçerli yıl
+#%w - websitesi
+ABOUT_MSG|<html><h3>Copyright 2007-%y VideoLAN Takımı</h3>GPL 2+ koşulları altında yayınlanmaktadır<br><br><b>Baş programcı:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Websitesi:</b> %w<br><br><b>Katkılar:</b><br>Timothy Gerard Endres kayıt defteri erişimi ve TAR desteği için (Genel Alan)<br>The Tango! Masaüstü Projesi (http://tango.freedesktop.org) bazı simgeler için (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) ve Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) Mantıksal Eşitlik Geliştiricisi ve Bezier kodu (GPL 2+)</html>
+VLT_EX_TITLE|VLT dosyası alınıyor
+#%f - klasörün adı
+VLT_EX_MSG|VLT dosyası "%f" adındaki klasöre açılacak.\nDevam etmek istiyor musunuz?
+VLT_EX_YES|Evet, aç
+VLT_EX_NO|Hayır, iptal et
+VLT_EX_PROGRESS|VLT dosyası açılıyor...
+XML_PARSING_PROGRESS|XML işleniyor...
+ADD_BMP_FILE_FILTER_DESC|XML dosyasının içindeki *.png (Portable Network Graphic)
+ADD_FONT_FILE_FILTER_DESC|XML dosyasının içindeki *.otf/*.ttf (Open ve True type yazı tipleri)
+DUPLICATE_MSG|Birden fazla olan nesneler için eniden adlandırma şeklini yazın.\n%oldid% nesnenin eski kimliği ile değiştirilir.
+DEL_CONFIRM_TITLE|Silme onayı
+DEL_CONFIRM_MSG|"%n" silinsin istiyor musunuz?
+EXIT_CONFIRM_TITLE|Değişiklikleriniz kaydedilmedi
+EXIT_CONFIRM_MSG|Çıkmadan önce temanızı kaydetmek ister misiniz?
+UPDATE_TITLE|Güncelleme var
+UPDATE_MSG|Tema düzenleyici için bir güncelleme var.\nSürümünüz: %v\nSon sürüm: %c\nTema editörünü şimdi güncellemek istiyor musunuz?
+VLT_PROGRESS|VLT dosyası oluşturuluyor...
+VLT_SUCCESS_MSG|VLT dosyası sorunsuz oluşturuldu.
+VLT_SUCCESS_TITLE|VLT dosyası oluşturuldu
+DOWNLOAD_PROGRESS|İndiriliyor...
+CONNECT_PROGRESS|Bağlanıyor...
+UPDATE_SUCCESS_TITLE|Güncelleme tamamlandı
+UPDATE_SUCCESS_MSG|Güncelleme sorunsuz indirildi ve kuruldu.\nVLC Tema Düzenleyici şimdi yeniden başlatılacak
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Dosya açılırken hata
+ERROR_FILENEXIST_MSG|"%f" dosyası bulunamadığından açılamadı!
+ERROR_VLT_UNPACK_TITLE|VLT dosyası açılamadı
+ERROR_VLT_UNPACK_MSG|VLT dosyası açılamadı!
+ERROR_VLT_NOTHEME_TITLE|theme.xml bulunamadı
+ERROR_VLT_NOTHEME_MSG|Açılan VLT dosyasının içinde olması gereken "theme.xml" dosyası bulunamadı.\nElle açmayı deneyin.
+ERROR_VLC_LAUNCH_TITLE|Hata
+ERROR_VLC_LAUNCH_MSG|VLC medya oynatıcısı başlatılamadı
+ERROR_BROWSE_TITLE|Tarayıcı başlatılamadı
+ERROR_BROWSE_MSG|Tarayıcı başlatılamadı.\nLütfen şu web adresine kendiniz bağlanın:\n%u
+ERROR_ADD_SBMP_TITLE|SubBitmap eklenemedi
+ERROR_ADD_SBMP_NOBMP|Üst Bitmap seçilmedi!
+ERROR_ADD_SBMP_NOTBMP|Seçili kaynak bir Bitmap değil!
+ERROR_RES_DEL_TITLE|Kaynak silinemedi
+ERROR_RES_DEL_INUSE|Tema hala kullandığından kaynak silinemiyor.
+ERROR_ADD_LAYOUT_TITLE|Yerleşim eklenemedi
+ERROR_ADD_LAYOUT_MSG|Üst pencere seçilmedi!
+ERROR_UPDATE_TITLE|Güncelleme sırasında hata!
+ERROR_SAVEPNG_TITLE|Resim kaydedilirken hata
+ERROR_SAVEPNG_MSG|Resim kaydedilemedi.
+ERROR_NEWSKIN_TITLE|Yeni tema dosyası oluşturulurken hata!
+ERROR_NEWSKIN_MSG|Yeni tema dosyası oluşturulamadı.
+ERROR_HEADER_INVALID|Dosya geçerli bir VLC Tema dosyası gibi değil!\nGeçersiz başlık:
+ERROR_SKIN_INVALID|Seçili dosya geçerli bir VLC tema dosyası değil!
+ERROR_VERSION_UNSUPPORTED|Seçili tema içinde kullanılan sürüm henüz desteklenmiyor!
+ERROR_SAVE_TITLE|Tema dosyası kaydedilirken hata!
+ERROR_SAVE_MSG|Tema dosyası kaydedilemedi.
+ERROR_ALPHA_TITLE|Matlık değeri geçersiz
+ERROR_ALPHA_MSG|Lütfen geçerli bir matlık değeri yazın! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Orta resim yüklenemedi!\nKaydırıcı art alanı oluşturmak için en azından orta parçanın olması gerekir.
+ERROR_VLT_TITLE|VLT dosyası oluşturulamadı
+ERROR_VLT_MSG|VLT dosyası oluşturulamadı!
+ERROR_ID_INVALID_TITLE|Kimlik geçersiz
+ERROR_ID_INVALID_MSG|Lütfen geçerli bir kimlik yazın!
+ERROR_ID_EXISTS_MSG|"%i" kimliği zaten var.\nLütfen başka bir kimlik seçin.
+ERROR_WIDTH_INVALID_TITLE|Genişlik geçersiz
+ERROR_WIDTH_INVALID_MSG|Lütfen geçerli bir genişlik yazın!
+ERROR_HEIGHT_INVALID_TITLE|Yükseklik geçersiz
+ERROR_HEIGHT_INVALID_MSG|Lütfen geçerli bir yükseklik yazın!
+ERROR_FILE_INVALID_TITLE|Dosya geçersiz
+ERROR_FILE_INVALID_MSG|Lütfen geçerli bir dosya seçin!
+ERROR_BITMAP_INVALID_MSG|Belirttiğiniz bitmap dosyası yüklenemiyor!\nLütfen başka bir dosya seçin.
+ERROR_NBFRAMES_TITLE|Geçersiz kare sayısı
+ERROR_NBFRAMES_MSG|Kare sayısı 1'den küçük olamaz
+ERROR_OTF_TITLE|OTF desteklenmiyor
+ERROR_OTF_MSG|Bir OpenType yazı tipi seçtiniz, VLC bunu sorunsuz gösterir fakat Tema Düzenleyici gösteremez.\nÖn izlemede başka bir yazı tipi göreceksiniz.
+ERROR_SIZE_INVALID_TITLE|Geçersiz boyut
+ERROR_SIZE_INVALID_MSG|Lütfen eçerli bir boyut yazın.
+ERROR_OUTSIDE_TITLE|Boyutlar geçersiz
+ERROR_OUTSIDE_MSG|Belirttiğiniz boyutlar asıl bitmap resminden daha büyük!
+ERROR_BITMAP_NEXIST|%i bitmap resmi bulunamadı.
+ERROR_BITMAP_NEXIST_TITLE|Resm geçersiz!
+ERROR_BITMAP_LOAD|%i bitmap resmi için resim dosyası yüklenemedi.
+ERROR_BITMAP_LOAD_TITLE|Resimler yüklenirken hata
+ERROR_NOSTATE|Lütfen durum koşulunu belirtin!
+ERROR_NOSTATE_TITLE|Durum geçersiz
+ERROR_FONT_NEXIST|%i yazı tipi bulunamadı.
+ERROR_FONT_NEXIST_TITLE|Yazı tipi geçersiz!
+ERROR_POINTS_INVALID|Lütfen geçerli bezier noktaları yazın!
+ERROR_POINTS_INVALID_TITLE|Noktalar geçersiz!
+ERROR_RADIALSLIDER|Tema Düzenleyici henüz Radyal Kaydırıcıları desteklemiyor.
+ERROR_RADIALSLIDER_TITLE|Desteklenmiyor
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Adsız Tema
+THEMEINFO_AUTHOR_DEFAULT|Bilinmeyen Yazar
+THEMEINFO_EMAIL_DEFAULT|Bilinmiyor
+
+#History
+HIST_ITEM_ADD|%t ekle
+HIST_ITEM_DEL|%t sil
+HIST_ITEM_EDIT|%t düzenle
+HIST_ITEM_MOVE|%t taşı
+HIST_RES_DEL|%t sil "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* işaretli özellikler belirtilmek zorundadır.
+
+#Common strings
+WIN_ITEM_GENERAL|Genel özellikler
+WIN_ITEM_ID|Kimlik*:
+WIN_ITEM_ID_TIP|%t için ad ve tanım. Eşsiz olmalı.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Genişlik:
+WIN_ITEM_HEIGHT|Yükseklik:
+WIN_ITEM_VISIBLE|Görünürlük:
+WIN_ITEM_LEFTTOP|Sol üst:
+WIN_ITEM_LEFTTOP_TIP|Yeniden boyutlandırma durumunda yerleşimin hangi köşesinin üst sol köşe olarak alınacağını gösterir.
+WIN_ITEM_RIGHTBOTTOM|Sağalt:
+WIN_ITEM_RIGHTBOTTOM_TIP|Yeniden boyutlandırma durumunda yerleşimin hangi köşesinin alt sağ köşe olarak alınacağını gösterir.
+WIN_ITEM_XKEEPRATIO|X oranını koru:
+WIN_ITEM_XKEEPRATIO_TIP|\"true\" olarak ayarlandığında yatay yeniden boyutlandırma davranışı değişir. Örneğin, boyutlandırmaya başlamadan önce denetimin sol tarafındaki boşluk sağ tarafındakinin iki katı ise boyutlandırmadan sonra da bu oran aynı kalır. Denetimin genişliği sabit kalır.
+WIN_ITEM_YKEEPRATIO|Y oranını koru:
+WIN_ITEM_YKEEPRATIO_TIP|\"true\" olarak ayarlandığında dikey yeniden boyutlandırma davranışı değişir. Örneğin, boyutlandırmaya başlamadan önce denetimin üst tarafındaki boşluk alt tarafındakinin iki katı ise boyutlandırmadan sonra da bu oran aynı kalır. Denetimin yüksekliği sabit kalır.
+WIN_ITEM_HELP|Yardım yazısı:
+WIN_ITEM_HELP_TIP|Fare bir denetimin üstünden geçerken '$H' değişkeni bu değeri alır.
+WIN_ITEM_TOOLTIPTEXT|İp ucu:
+FILE_INDIR|aynı klasörde XML dosyası olarak
+
+#Bitmap
+WIN_BITMAP_TITLE|Bitmap ayarları
+WIN_BITMAP_FILE|Dosya*:
+WIN_BITMAP_FILE_TIP|Kullanılan resim dosyasının yol ve adını belirtir.
+WIN_BITMAP_OPEN|Aç...
+WIN_BITMAP_ALPHACOLOR|Alfarenk:
+WIN_BITMAP_ALPHACOLOR_TIP|Onaltılık biçimde bitmap resminin saydamlık rengi. PNG dosyasında saydamlık maskesi belirtilmişse o da göz önüne alınır.
+WIN_BITMAP_CHOOSE|Seçin...
+WIN_BITMAP_NBFRAMES|Kare sayısı:
+WIN_BITMAP_NBFRAMES_TIP|Bu özellik hareketli bitmap resimleri tanımlamak için gereklidir. Bu değer animasyon içinde yer alacak kare (resim) sayısıdır. Tüm farklı kareler bitmap içinde dikey olarak dizilmiş resimlerdir.
+WIN_BITMAP_FPS|Saniyedeki kare:
+WIN_BITMAP_FPS_TIP|Yalnızca hareketli bitmap resimlerinde kullanılır. Animasyonun her saniyesindeki kare (resim) sayısını belirtir.
+WIN_BITMAP_ANIMATION|Animasyon özellikleri
+WIN_BITMAP_CHOOSER_TITLE|Alfarengi seçin
+
+#SubBitmap
+WIN_SBMP_TITLE|SubBitmap ayarları
+WIN_SBMP_BOUNDS|konum ve boyut özellikleri
+
+#Font
+WIN_FONT_TITLE|Yazı tipi ayarları
+WIN_FONT_FILE|Dosya*:
+WIN_FONT_FILE_TIP|Kullanılan TrueType ya da OpenType yazı tipini içeren dosya.
+WIN_FONT_OPEN|Aç...
+WIN_FONT_SIZE|Boyut:
+
+#Layout
+WIN_LAYOUT_TITLE|Yerleşim ayarları
+WIN_LAYOUT_GENERAL|Genel özellikler
+WIN_LAYOUT_DIMENSIONS|Boyutlar
+WIN_LAYOUT_WIDTH|Başlangıç genişliği*:
+WIN_LAYOUT_WIDTH_TIP|Yerleşimin başlangıç genişliği.
+WIN_LAYOUT_HEIGHT|Başlangıç yüksekliği*:
+WIN_LAYOUT_HEIGHT_TIP|Yerleşimin başlangıç yüksekliği
+WIN_LAYOUT_MINWIDTH|En küçük genişlik:
+WIN_LAYOUT_MINWIDTH_TIP|Yerleşimin en küçük genişliği. Yalnız yerleşim yeniden boyutlandırıldığında kullanılır. "-1" olarak ayarlanırsa, başlangıç genişliği kullanılır.
+WIN_LAYOUT_MINHEIGHT|En küçük yükseklik:
+WIN_LAYOUT_MINHEIGHT_TIP|Yerleşimin en küçük yüksekliği. Yalnız yerleşim yeniden boyutlandırıldığında kullanılır. "-1" olarak ayarlanırsa, başlangıç yüksekliği kullanılır.
+WIN_LAYOUT_MAXWIDTH|En büyük genişlik:
+WIN_LAYOUT_MAXWIDTH_TIP|Yerleşimin en büyük genişliği. Yalnız yerleşim yeniden boyutlandırıldığında kullanılır. "-1" olarak ayarlanırsa, başlangıç değeri en büyük genişlik olarak kullanılır.
+WIN_LAYOUT_MAXHEIGHT|En büyük yükseklik:
+WIN_LAYOUT_MAXHEIGHT_TIP|Yerleşimin en büyük yüksekliği. Yalnız yerleşim yeniden boyutlandırıldığında kullanılır. "-1" olarak ayarlanırsa, başlangıç yüksekliği kullanılır.
+
+#Window
+WIN_WINDOW_TITLE|Pencere ayarları
+WIN_WINDOW_X_TIP|Pencerenin ekranın sol kenarına başlangıçtaki uzaklığı.
+WIN_WINDOW_Y_TIP|Pencerenin ekranın üst kenarına başlangıçtaki uzaklığı.
+WIN_WINDOW_VISIBLE_TIP|VLC başlatıldığında pencerenin görünüp görünmeyeceğini belirtir. VLC tema pencere konumu ve görünürlüğünü hatırlayacağından, bu özellik yalnızca tema ilk kez başlatıldığında kullanılır.
+WIN_WINDOW_DD|Sürükle ve bırak:
+WIN_WINDOW_DD_TIP|Medya dosyalarının bu pencereye sürüklenip bırakılmasına izin verilip verilmeyeceğini belirtir.
+WIN_WINDOW_PD|Bırakıldığında oynat:
+WIN_WINDOW_PD_TIP|Bırakılan bir dosyanın hemen oynatılacağını (true) ya da listeye ekleneceğini (false) belirtir. Sürükle ve bırak "yanlış" olarak ayarlandıysa bu özelliğin bir etkisi olmaz.
+WIN_WINDOW_DD_PANEL|Sürükle ve bırak seçenekleri
+
+#Anchor
+WIN_ANCHOR_TITLE|Bağlama ayarları
+WIN_ANCHOR_POINTS|Noktalar:
+WIN_ANCHOR_POINTS_TIP|Bağlamanın takip edeceği Bezier eğrisini tanımlayan noktalar. Yalnızca nokta bir bağlantı istiyorsanız bu ayarı değiştirmenize gerek yoktur.
+WIN_ANCHOR_RANGE|Bölge:
+WIN_ANCHOR_RANGE_TIP|Piksel olarak bağlantının etkin olacağı bölge.
+WIN_ANCHOR_PRIORITY|Öncelik*:
+WIN_ANCHOR_PRIORITY_TIP|Her bağlantının bir önceliği vardır ve en yüksek öncelikli bağlantı en öndedir. Yani öncelikli bir pencere taşınırken tüm diğer bağlantılı pencereler de taşınır. Birbirine bağlı iki pencereyi ayrı taşımak için, daha düşük önceliğe sahip pencereyi taşımalısınız.
+WIN_ANCHOR_BOUNDARIES|Sınırlar
+
+#Button
+WIN_BUTTON_TITLE|Düğme ayarları
+WIN_BUTTON_UP|Normal resim*:
+WIN_BUTTON_OVER|Üzerine gelindiğindeki resim:
+WIN_BUTTON_DOWN|Tıklandığındaki resim:
+WIN_BUTTON_ACTION|Eylem:
+WIN_BUTTON_ATTR|Düğme Özellikleri
+
+#Checkbox
+WIN_CHECKBOX_TITLE|İşaret kutusu ayarları
+WIN_CHECKBOX_UP|Normal resim*:
+WIN_CHECKBOX_OVER|Üzerine gelindiğindeki resim:
+WIN_CHECKBOX_DOWN|Tıklandığındaki resim:
+WIN_CHECKBOX_ACTION|Eylem:
+WIN_CHECKBOX_CONDITION|Koşul:
+WIN_CHECKBOX_CONDITION_TIP|İşaret kutusunun durumunu açıklayan ikili formül: false -> durum #1, true -> durum #2
+WIN_CHECKBOX_STATE|İşaret kutusu durumu
+WIN_CHECKBOX_STATE1|Durum #1 (Koşul sağlanmadı):
+WIN_CHECKBOX_STATE2|Durum #2 (Koşul sağlandı):
+
+#Image
+WIN_IMAGE_TITLE|Resim ayarları
+WIN_IMAGE_IMAGE|Resim*:
+WIN_IMAGE_IMAGE_TIP|Bitmap kimliği
+WIN_IMAGE_RESIZE|Boyutlandırma kipi:
+WIN_IMAGE_RESIZE_TIP|Resmin yeniden boyutlandırıldığındaki davranışını belirtin.
+WIN_IMAGE_ACTION|Eylem:
+WIN_IMAGE_ACTION_TIP|Resim üzerine tıklandığında yürütülecek eylem.
+WIN_IMAGE_ACTION2|Çift tık eylemi:
+WIN_IMAGE_ACTION2_TIP|Resim üzerine çift tıklandığında yürütülecek eylem.
+WIN_IMAGE_ATTR|Resim özellikleri
+
+#Group
+WIN_GROUP_TITLE|Grup ayarları
+
+#Panel
+WIN_PANEL_TITLE|Panel ayarları
+WIN_PANEL_DIMENSIONS|Boyutlar
+WIN_PANEL_WIDTH|Genişlik*:
+WIN_PANEL_HEIGHT|Yükseklik*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Oyun ağacı ayarları
+WIN_PLAYTREE_FONT|Yazı tipi*:
+WIN_PLAYTREE_BGIMAGE|Art alan resmi:
+WIN_PLAYTREE_BGIMAGE_TIP|Art alan resmi olarak kullanılacak Bitmap kimliği. Hiç bitmap belirtilmemişse art alan bgcolor1 ve bgcolor2 ayarları kullanılarak doldurulur.
+WIN_PLAYTREE_BGCOLOR1|Art alan rengi #1:
+WIN_PLAYTREE_BGCOLOR2|Art alan rengi #2:
+WIN_PLAYTREE_SELCOLOR|Seçim rengi:
+WIN_PLAYTREE_FGCOLOR|Yazı rengi:
+WIN_PLAYTREE_PLAYCOLOR|Oynatılıyor yazısı rengi:
+WIN_PLAYTREE_FLAT|Düz oynatma listesi:
+WIN_PLAYTREE_FLAT_TIP|Oynatma listesinin ağaç yapısında ya da tamamen \"düz\" (yalnızca ağacın yaprakları gösterilir) olacağını belirtir.
+WIN_PLAYTREE_ITEMIMAGE|Öge simgesi:
+WIN_PLAYTREE_OPENIMAGE|Açık klasör simgesi:
+WIN_PLAYTREE_CLOSEDIMAGE|Kapalı klasör simgesi:
+WIN_PLAYTREE_SLIDER|Oynatma listesi kaydırıcısını düzenle
+WIN_PLAYTREE_ATTR|Çalma ağacı özellikleri
+WIN_PLAYTREE_CHOOSE|Seçin...
+WIN_PLAYTREE_CHOOSER_TITLE|Rengi seçin
+
+#Slider
+WIN_SLIDER_TITLE|Kaydırıcı ayarları
+WIN_SLIDER_UP|Normal resim*:
+WIN_SLIDER_OVER|Üzerine gelindiğindeki resim:
+WIN_SLIDER_DOWN|Tıklandığındaki resim:
+WIN_SLIDER_POINTS|Noktalar*:
+WIN_SLIDER_THICKNESS|Kalınlık:
+WIN_SLIDER_VALUE|Değer*:
+WIN_SLIDER_VALUE_SCROLL|Oynatma ağacı kaydırma
+WIN_SLIDER_BG_ENABLE|Art Alanı Etkinleştir
+WIN_SLIDER_BG_EDIT|Düzenle...
+WIN_SLIDER_ATTR|Kaydırıcı özellikleri
+WIN_SLIDER_BG|Kaydırıcı art alanı
+
+#Slider background
+WIN_SBG_TITLE|Kaydırıcı art alan ayarları
+WIN_SBG_WIZARD|Art Alan Kaydırıcı Üretecini Aç...
+WIN_SBG_IMAGE|Resim*:
+WIN_SBG_NBHORIZ|Yatay kareler:
+WIN_SBG_NBVERT|Dikey kareler:
+WIN_SBG_PADHORIZ|Yatay yastıklama:
+WIN_SBG_PADVERT|Dikey yastıklama:
+WIN_SBG_ATTR|Art alan özellikleri
+
+#Text
+WIN_TEXT_TITLE|Yazı ayarları
+WIN_TEXT_TEXT|Yazı*:
+WIN_TEXT_FONT|Yazı tipi:
+WIN_TEXT_COLOR|Renk:
+WIN_TEXT_CHOOSE|Seçin...
+WIN_TEXT_CHOOSER_TITLE|Yazı rengini seçin
+WIN_TEXT_ALIGNMENT|Hiza:
+WIN_TEXT_SCROLLING|Kaydırma:
+WIN_TEXT_ATTR|Yazı özellikleri
+
+#Video
+WIN_VIDEO_TITLE|Görüntü ayarları
+WIN_VIDEO_AUTORESIZE|Kendiliğinden boyutlandır:
+WIN_VIDEO_AUTORESIZE_TIP|Yerleşimin oynatılan görüntüye uygun olarak kendiliğinden boyutlandırılıp boyutlandırılmayacağını göster.
+WIN_VIDEO_ATTR|Görüntü özellikleri
