@@ -1,0 +1,606 @@
+﻿#Traditional Chinese language file for VLC Skin Editor
+#Author/s: alan@stable
+
+#General strings
+CHOICE_YES|是
+CHOICE_NO|否
+CHOICE_CANCEL|取消
+BUTTON_OK|確定
+BUTTON_CANCEL|取消
+BUTTON_HELP|說明
+
+#Item names
+THEME|佈景主題
+FONT|字型
+BITMAP|點陣圖
+SUBBITMAP|子點陣圖
+WINDOW|視窗
+LAYOUT|配置
+ANCHOR|作者
+BUTTON|按鈕
+CHECKBOX|核取方塊
+GROUP|群組
+IMAGE|圖像
+PANEL|面板
+PLAYTREE|播放樹
+RADIALSLIDER|弧形滑桿
+SLIDER|滑桿
+SLIDERBG|滑桿背景
+TEXT|文字
+VIDEO|視訊
+UNNAMED|未命名 %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|檔案(F)
+MENU_FILE_MN|F
+MENU_FILE_NEW|新增(N)
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|開啟(O)...
+MENU_FILE_OPEN_MN|O
+MENU_FILE_SAVE|儲存(S)
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|在 VLC 中測試面板(T)
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|匯出為 VLT(V)...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|儲存面前預覽為圖像(P)...
+MENU_FILE_PNG_MN|P
+MENU_FILE_EXIT|結束(X)
+MENU_FILE_EXIT_MN|X
+MENU_EDIT|編輯(E)
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|復原(U)
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|重做(R)
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|面板設定(S)
+MENU_EDIT_THEME_MN|S
+MENU_EDIT_VARS|全域變數(G)
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|喜好設定(P)
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|上移選取項目
+MENU_EDIT_DOWN|下移選取項目
+MENU_EDIT_LEFT|左移選取項目
+MENU_EDIT_RIGHT|右移選取項目
+MENU_HELP|說明(H)
+MENU_HELP_MN|H
+MENU_HELP_DOC|線上說明(O)
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|關於(A)
+MENU_HELP_ABOUT_MN|A
+
+#The toolbar
+TOOLBAR_OPEN|開啟面板...
+TOOLBAR_SAVE|儲存面板修改
+TOOLBAR_UNDO|復原
+TOOLBAR_REDO|重做
+TOOLBAR_MOVE|項目移動工具
+TOOLBAR_PATH|滑桿編輯工具
+
+#Resource Window
+WIN_RES_TITLE|資源
+WIN_RES_ADD_BMP|新增點陣圖或子點陣圖
+WIN_RES_ADD_FONT|新增字型
+WIN_RES_COPY|建立選取資源的複本
+WIN_RES_EDIT|編輯選取的資源
+WIN_RES_DELETE|刪除選取的資源
+WIN_RES_PU_ADD_BMP|加入點陣圖
+WIN_RES_PU_ADD_SBMP|加入子點陣圖
+WIN_RES_BITMAPS|點陣圖
+WIN_RES_FONTS|字型
+
+#Windows window
+WIN_WIN_TITLE|視窗
+WIN_WIN_ADD|新增視窗
+WIN_WIN_ADD_LAY|新增配置到選取的視窗
+WIN_WIN_MOVE_UP|上移選取配置的層次 (上次配置是視窗的預設配置)
+WIN_WIN_MOVE_DOWN|下移選取配置的層次 (上次配置是視窗的預設配置)
+WIN_WIN_COPY|建立選取視窗或配置的複製
+WIN_WIN_EDIT|編輯選取的視窗或配置
+WIN_WIN_DELETE|刪除選取的視窗或配置
+
+#Items window
+WIN_ITEMS_TITLE|項目
+WIN_ITEMS_ADD|新增項目
+WIN_ITEMS_MOVE_UP|上移選取項目的層次
+WIN_ITEMS_MOVE_DOWN|下移選取項目的層次
+WIN_ITEMS_COPY|建立選取項目的複本
+WIN_ITEMS_EDIT|編輯選取的項目
+WIN_ITEMS_DELETE|刪除選取的項目
+WIN_ITEMS_PU_PANEL_ADD|加入到選取的面板
+
+#Welcome dialog
+WELCOME_TITLE|歡迎使用 VLC 面板編輯器
+WELCOME_MSG|您希望做什麼?
+WELCOME_NEW|建立新面板
+WELCOME_OPEN|開啟現有的面板
+WELCOME_QUIT|離開
+
+#Preferences window
+WIN_PREFS_TITLE|喜好設定
+WIN_PREFS_UPDATE_L|啟用自動更新:
+WIN_PREFS_LANG_L|語言:
+WIN_PREFS_LAF_L|程式外觀:
+WIN_PREFS_TBAR_L|顯示工具列:
+WIN_PREFS_RESTART_L|<html><i>某些設定只有在重新啟動程式時生效。</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|編輯子點陣圖
+ZOOM_FACTOR|縮放係數:
+
+#Global variables editing window
+WIN_VARS_TITLE|全域變數
+WIN_VARS_NOTE|<html>這些值只影響預覽。<br>它們模擬 VLC 的狀態。</html>
+WIN_VARS_SLIDER|滑桿位置
+
+#Theme options window
+WIN_THEME_TITLE|面板設定
+WIN_THEME_NAME|名稱:
+WIN_THEME_AUTHOR|作者:
+WIN_THEME_EMAIL|作者的電子郵件:
+WIN_THEME_WEB|作者的網頁:
+WIN_THEME_MAGNET|磁性:
+WIN_THEME_MAGNET_TIP|當螢幕邊框和視窗錨點之間的距離小於這個值，視窗將吸附到邊框
+WIN_THEME_ALPHA|不透明度:
+WIN_THEME_ALPHA_TIP|設定視窗時的 alpha 透明度。 值必須介於 1  (最接近全透明) 和 255 (全不透明) 之間。 應避免太低的值。
+WIN_THEME_MOVEALPHA|移動時不透明度:
+WIN_THEME_MOVEALPHA_TIP|設定在移動視窗時的 alpha 透明度。
+WIN_THEME_INFO_TITLE|佈景主題資訊
+WIN_THEME_ATTR_TITLE|佈景主題屬性
+
+#Action Editor
+WIN_ACTIONS_TITLE|編輯動作序列
+
+#Popup menu in the action editor
+ACTIONS_PU|動作
+ACTIONS_DIALOGS|顯示對話方塊
+ACTIONS_PLAYLIST|播放清單
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|面板
+ACTIONS_VLC_PLAY|播放
+ACTIONS_VLC_PAUSE|暫停
+ACTIONS_VLC_STOP|停止
+ACTIONS_VLC_FASTER|播放加快
+ACTIONS_VLC_SLOWER|播放減慢
+ACTIONS_VLC_NEXTFRAME|播放下個框架
+ACTIONS_VLC_MUTE|靜音
+ACTIONS_VLC_VOLUMEUP|提高音量
+ACTIONS_VLC_VOLUMEDOWN|降低音量
+ACTIONS_VLC_FULLSCREEN|切換全螢幕模式
+ACTIONS_VLC_SNAPSHOT|拍照
+ACTIONS_VLC_TOGGLERECORD|切換錄製
+ACTIONS_VLC_ONTOP|切換最上層顯示
+ACTIONS_VLC_MINIMIZE|最小化 VLC
+ACTIONS_VLC_QUIT|離開 VLC
+ACTIONS_EQ_ENABLE|啟用等化器
+ACTIONS_EQ_DISABLE|停用等化器
+ACTIONS_DIALOGS_CHANGESKIN|變更面板
+ACTIONS_DIALOGS_FILESIMPLE|開啟檔案 (簡單)
+ACTIONS_DIALOGS_FILE|開啟檔案 (擴充)
+ACTIONS_DIALOGS_DIRECTORY|開啟目錄
+ACTIONS_DIALOGS_DISC|開啟光碟
+ACTIONS_DIALOGS_NET|開啟網路串流
+ACTIONS_DIALOGS_MESSAGES|訊息日誌
+ACTIONS_DIALOGS_PREFS|喜好設定
+ACTIONS_DIALOGS_FILEINFO|檔案資訊
+ACTIONS_DIALOGS_PLAYLIST|未面板化的播放清單
+ACTIONS_DIALOGS_STREAMINGWIZARD|串流精靈
+ACTIONS_DIALOGS_POPUP|完整快顯功能表
+ACTIONS_DIALOGS_AUDIOPOPUP|音訊設定快顯功能表
+ACTIONS_DIALOGS_VIDEOPOPUP|視訊設定快顯功能表
+ACTIONS_DIALOGS_MISCPOPUP|雜項設定快顯功能表
+ACTIONS_PLAYLIST_ADD|新增項目
+ACTIONS_PLAYLIST_DEL|移取選取的項目
+ACTIONS_PLAYLIST_NEXT|播放下個項目
+ACTIONS_PLAYLIST_PREVIOUS|播放上個項目
+ACTIONS_PLAYLIST_SETRANDOM|以隨機/標準順序播放
+ACTIONS_PLAYLIST_SETLOOP|循環播放清單/播放一次
+ACTIONS_PLAYLIST_SETREPEAT|啟用/停用目前項目的重複
+ACTIONS_PLAYLIST_SORT|依字母順序排序
+ACTIONS_PLAYLIST_LOAD|從檔案載入
+ACTIONS_PLAYLIST_SAVE|儲存到檔案
+ACTIONS_DVD_NEXTTITLE|下個標題
+ACTIONS_DVD_PREVIOUSTITLE|上個標題
+ACTIONS_DVD_NEXTCHAPTER|下個章節
+ACTIONS_DVD_PREVIOUSCHAPTER|上個章節
+ACTIONS_DVD_ROOTMENU|主功能表
+ACTIONS_WINDOWS_SHOW|顯示視窗
+ACTIONS_WINDOWS_HIDE|隱藏視窗
+ACTIONS_WINDOWS_MAXIMIZE|最大化視窗
+ACTIONS_WINDOWS_UNMAXIMIZE|還原視窗
+ACTIONS_WINDOWS_SETLAYOUT|變更視窗的配置
+
+#Action descriptions
+ACTION_DESC_NONE|不動作。
+ACTION_DESC_CHANGESKIN|顯示對話方塊以載入新面板。
+ACTION_DESC_FILESIMPLE|顯示簡單 [開啟檔案] 對話方塊。
+ACTION_DESC_FILE|顯示擴充 [開啟檔案] 對話方塊。
+ACTION_DESC_DIRECTORY|顯示 [開啟目錄] 對話方塊。
+ACTION_DESC_DISC|顯示 [開啟光碟] 對話方塊。
+ACTION_DESC_NET|顯示 [開啟網路串流] 對話方塊。
+ACTION_DESC_MSG|顯示 [訊息日誌] 對話方塊。
+ACTION_DESC_PREFS|顯示 [喜好設定] 對話方塊。
+ACTION_DESC_FILEINFO|顯示 [檔案資訊] 對話方塊。
+ACTION_DESC_PLAYLIST|顯示 預設 (未面板化) 播放清單視窗。
+ACTION_DESC_WIZARD|顯示 [串流精靈] 對話方塊。
+ACTION_DESC_POPUP|顯示完整快顯功能表。
+ACTION_DESC_AUDIOPU|顯示音訊設定快顯功能表。
+ACTION_DESC_VIDEOPU|顯示視訊設定快顯功能表。
+ACTION_DESC_MISCPU|顯示包含播放控制和一般選項的快顯功能表。
+ACTION_DESC_EQENABLE|啟用等化器音訊篩選器。
+ACTION_DESC_EQDISABLE|停用等化器音訊篩選器。
+ACTION_DESC_PLAY|播放目前播放清單項目。
+ACTION_DESC_PAUSE|暫停播放。
+ACTION_DESC_STOP|停止播放。
+ACTION_DESC_FASTER|播放加快。
+ACTION_DESC_SLOWER|播放減慢。
+ACTION_DESC_NEXTFRAME|前進一個框架播放 (逐一框架播放)。
+ACTION_DESC_MUTE|切換靜音。
+ACTION_DESC_VOLUP|降低音量。
+ACTION_DESC_VOLDOWN|提高音量。
+ACTION_DESC_FULLSCREEN|切換全螢幕模式。
+ACTION_DESC_SNAPSHOT|取得視訊快照。
+ACTION_DESC_TOGGLERECORD|切換播放的錄製。
+ACTION_DESC_ONTOP|切換 [最上層顯示] 狀態。
+ACTION_DESC_MIN|最小化 VLC。
+ACTION_DESC_QUIT|離開 VLC。
+ACTION_PL_ADD|新增項目到播放清單。
+ACTION_PL_DEL|從播放清單移除選取的項目。
+ACTION_PL_NEXT|播放播放清單中下個項目。
+ACTION_PL_PREV|播放播放清單中上個項目。
+ACTION_PL_SORT|依字母順序排序播放清單。
+ACTION_PL_LOAD|載入外部播放清單檔案。
+ACTION_PL_SAVE|儲存目前播放清單到檔案。
+ACTION_DVD_NEXTT|移至 DVD 下個標題。
+ACTION_DVD_PREVT|移至 DVD 上個標題。
+ACTION_DVD_NEXTC|移至 DVD 下個章節。
+ACTION_DVD_PREVC|移至 DVD 上個章節。
+ACTION_DVD_MENU|移至 DVD 的根選單。
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|啟用
+ACTION_DEACTIVATE|停用
+ACTION_RANDOM|%s 項目在播放清單中以隨機順序播放。
+ACTION_LOOP|%s 在到達播放清單結尾時重複。
+ACTION_REPEAT|%s 在到達播放清單結尾後重複目前項目。
+ACTION_SHOW|顯示 ID %i 的視窗
+ACTION_HIDE|隱藏 ID %i 的視窗
+ACTION_MAXIMIZE|最大化 ID %i 的視窗
+ACTION_UNMAXIMIZE|還原 ID %i 的視窗
+ACTION_LAYOUT|設定 ID %i 到 %l 的視窗配置
+
+#Slider background generator
+SBGGEN_TITLE|滑桿背景產生器
+SBGGEN_PREV|< 上一步
+SBGGEN_NEXT|下一步 >
+SBGGEN_CANCEL|取消
+SBGGEN_FINISH|完成
+
+SBGGEN_DESCR|歡迎使用滑桿背景產生器。 它將協助您從圖片建立整齊的滑桿，只要幾個步驟。
+SBGGEN_FIRST|第一步，請選擇滑桿的方向為從左到右或從下到上，和背景應有的大小。
+SBGGEN_WIDTH|寬度:
+SBGGEN_HEIGHT|高度:
+SBGGEN_LEFT_M|左邊界:
+SBGGEN_RIGHT_M|右邊界:
+SBGGEN_TOP_M|上邊界:
+SBGGEN_BTM_M|下邊界:
+SBGGEN_SECOND|在以下步驟，您必須選擇目前的圖片檔關聯到滑桿的不同部分。
+SBGGEN_NOTE|請注意，圖示只是範例以說明所呈現的不同部份。 將不會有圖片的預覽用在背景產生中。
+
+SBGGEN_IMAGE|圖像檔案:
+SBGGEN_OPEN|開啟...
+SBGGEN_RESIZE|調整大小行為:
+SBGGEN_TILE|標題
+SBGGEN_STRETCH|延展
+
+SBGGEN_BG|背景
+SBGGEN_OVERLAY|重疊圖像
+SBGGEN_LEFT_E|左邊緣
+SBGGEN_RIGHT_E|右邊緣
+SBGGEN_TOP_E|上邊緣
+SBGGEN_BTM_E|下邊緣
+SBGGEN_MIDDLE|中間部分
+
+SBGGEN_PROGRESS|正在產生背景...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|關於 VLC 面板編輯器 %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>著作權 2007-%y The VideoLAN Team</h3>以 GPL 2+ 條款發佈<br><br><b>首席程式設計:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>網站:</b> %w<br><br><b>製作群 :</b><br>Timothy Gerard Endres 於登錄檔存取和 TAR 支援 (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) 於一些圖示 (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) 和 Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) 於 Boolean Expression Evaluator 和 Bezier 碼 (GPL 2+)</html>
+VLT_EX_TITLE|正在匯入 VLT 檔案
+#%f - name of the folder
+VLT_EX_MSG|VLT 檔案將解封裝到名為「%f」的子目錄。\n您要繼續嗎?
+VLT_EX_YES|是，解封裝
+VLT_EX_NO|否，取消
+VLT_EX_PROGRESS|正在解封裝 VLT 檔案...
+XML_PARSING_PROGRESS|正在分析 XML...
+ADD_BMP_FILE_FILTER_DESC|在 XML 檔案目錄內的 *.png (可攜式網路圖形)
+ADD_FONT_FILE_FILTER_DESC|在 XML 檔案目錄內的 *.otf/*.ttf (Open & True Type 字型)
+DUPLICATE_MSG|清輸入重複物件的重新命名樣式。\n%oldid% 將由物件的舊 ID 所取代。
+DEL_CONFIRM_TITLE|刪除確認
+DEL_CONFIRM_MSG|您真的確定要刪除「%n」嗎?
+EXIT_CONFIRM_TITLE|您的修改已儲存
+EXIT_CONFIRM_MSG|您希望在結束前儲存您的面板嗎?
+UPDATE_TITLE|發現更新
+UPDATE_MSG|有 [面板編輯器] 可以使用的更新。\n您的版本: %v\n最新版本: %c\n您要立即更新 [面板編輯器] 嗎?
+VLT_PROGRESS|建立 VLT 檔案...
+VLT_SUCCESS_MSG|VLT 檔案已成功建立。
+VLT_SUCCESS_TITLE|VLT 檔案已建立
+DOWNLOAD_PROGRESS|正在下載...
+CONNECT_PROGRESS|正在連線...
+UPDATE_SUCCESS_TITLE|已完成更新
+UPDATE_SUCCESS_MSG|更新已成功下載及更新。\nVLC 面板編輯器將立即重新啟動
+
+#Error messages
+ERROR_FILENEXIST_TITLE|在開啟檔案時錯誤
+ERROR_FILENEXIST_MSG|檔案「%f」不存在，因此無法開啟!
+ERROR_VLT_UNPACK_TITLE|無法解封裝 VLT 檔案
+ERROR_VLT_UNPACK_MSG|VLT 檔案無法解封裝!
+ERROR_VLT_NOTHEME_TITLE|找不到 theme.xml
+ERROR_VLT_NOTHEME_MSG|在 VLT 檔案解封裝的內容中找不到「theme.xml」。\n請嘗試手動開啟。
+ERROR_VLC_LAUNCH_TITLE|錯誤
+ERROR_VLC_LAUNCH_MSG|無法啟動 VLC 媒體播放程式
+ERROR_BROWSE_TITLE|無法啟動瀏覽器
+ERROR_BROWSE_MSG|無法啟動瀏覽器。\n請手動移至以下 URL:\n%u
+ERROR_ADD_SBMP_TITLE|無法加入子點陣圖
+ERROR_ADD_SBMP_NOBMP|未選取上層點陣圖!
+ERROR_ADD_SBMP_NOTBMP|選取的資源非點陣圖!
+ERROR_RES_DEL_TITLE|無法刪除資源
+ERROR_RES_DEL_INUSE|資源仍然在面板中使用，因此無法開啟。
+ERROR_ADD_LAYOUT_TITLE|無法加入配置
+ERROR_ADD_LAYOUT_MSG|未選取上層視窗!
+ERROR_UPDATE_TITLE|更新時錯誤!
+ERROR_SAVEPNG_TITLE|儲存圖片時錯誤
+ERROR_SAVEPNG_MSG|無法儲存圖片。
+ERROR_NEWSKIN_TITLE|在建立新面板時錯誤!
+ERROR_NEWSKIN_MSG|新的面板檔案無法建立。
+ERROR_HEADER_INVALID|檔案似乎不是有效的 VLC 佈景主題!\n無效的標頭:
+ERROR_SKIN_INVALID|選取的檔案不是有效的 VLC 面板!
+ERROR_VERSION_UNSUPPORTED|選取面板中所使用的佈景主題版本尚未支援!
+ERROR_SAVE_TITLE|在儲存面板檔案時錯誤!
+ERROR_SAVE_MSG|面板檔案無法儲存。
+ERROR_ALPHA_TITLE|不透明值無效
+ERROR_ALPHA_MSG|請輸入有效的不透明! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|無法載入中間圖像!\n至少需要滑桿的中間部分以建立滑桿的背景。
+ERROR_VLT_TITLE|無法建立 VLT 檔案
+ERROR_VLT_MSG|VLT 檔案無法建立!
+ERROR_ID_INVALID_TITLE|ID 無效
+ERROR_ID_INVALID_MSG|請輸入有效的 ID!
+ERROR_ID_EXISTS_MSG|ID「%i」已經存在。\n請選擇另一個。
+ERROR_WIDTH_INVALID_TITLE|寬度無效
+ERROR_WIDTH_INVALID_MSG|請輸入有效的寬度!
+ERROR_HEIGHT_INVALID_TITLE|高度無效
+ERROR_HEIGHT_INVALID_MSG|請輸入有效的高度!
+ERROR_FILE_INVALID_TITLE|檔案無效
+ERROR_FILE_INVALID_MSG|請選擇有效的檔案!
+ERROR_BITMAP_INVALID_MSG|給予的點陣圖檔案無法載入!\n請選擇另一個。
+ERROR_NBFRAMES_TITLE|畫面數無效
+ERROR_NBFRAMES_MSG|畫面數不能小於 1
+ERROR_OTF_TITLE|OTF 不支援
+ERROR_OTF_MSG|您必須選擇 OpenType 字型， VLC 將正確顯示，但 [面板編輯器] 無法顯示。\n您將在預覽中看到另一個字型。
+ERROR_SIZE_INVALID_TITLE|大小無效
+ERROR_SIZE_INVALID_MSG|請輸入有效的大小。
+ERROR_OUTSIDE_TITLE|尺寸無效
+ERROR_OUTSIDE_MSG|指定的尺寸在上層點陣圖之外!
+ERROR_BITMAP_NEXIST|點陣圖 %i 不存在。
+ERROR_BITMAP_NEXIST_TITLE|圖片無效!
+ERROR_BITMAP_LOAD|點陣圖 %i 的圖像檔無法載入。
+ERROR_BITMAP_LOAD_TITLE|在載入點陣圖時錯誤
+ERROR_NOSTATE|請提供狀態條件!
+ERROR_NOSTATE_TITLE|狀態無效
+ERROR_FONT_NEXIST|字型 %i 不存在。
+ERROR_FONT_NEXIST_TITLE|檔案無效!
+ERROR_POINTS_INVALID|請輸入有效的貝茲點!
+ERROR_POINTS_INVALID_TITLE|點無效!
+ERROR_RADIALSLIDER|面板編輯器尚未支援 [弧形滑桿]。
+ERROR_RADIALSLIDER_TITLE|不支援
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|未知佈景主題
+THEMEINFO_AUTHOR_DEFAULT|未知作者
+THEMEINFO_EMAIL_DEFAULT|未知
+
+#History
+HIST_ITEM_ADD|新增 %t
+HIST_ITEM_DEL|刪除 %t
+HIST_ITEM_EDIT|編輯 %t
+HIST_ITEM_MOVE|移動 %t
+HIST_RES_DEL|刪除 %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* 屬性必須指定。
+
+#Common strings
+WIN_ITEM_GENERAL|一般屬性
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|%t 的名稱和 ID 必須唯一。
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|寬度:
+WIN_ITEM_HEIGHT|高度:
+WIN_ITEM_VISIBLE|可見性:
+WIN_ITEM_LEFTTOP|左上:
+WIN_ITEM_LEFTTOP_TIP|指示在調整大小時這個項目的左上角要附加到配置的哪個角落。
+WIN_ITEM_RIGHTBOTTOM|右下:
+WIN_ITEM_RIGHTBOTTOM_TIP|指示在調整大小時這個項目的右下角要附加到配置的哪個角落。
+WIN_ITEM_XKEEPRATIO|保持 X 比例:
+WIN_ITEM_XKEEPRATIO_TIP|當設定為 true 時，變更調整水平大小的行為。 例如，如果最初空間到控制項左側是到右側的兩倍大，則在任何調整水平大小期間保持相同。 控制項的寬度保持不變。
+WIN_ITEM_YKEEPRATIO|保持 Y 比例:
+WIN_ITEM_YKEEPRATIO_TIP|當設定為 true 時，變更調整垂直大小的行為。 例如，如果最初空間到控制項上方是到下方的兩倍大，則在任何調整垂直大小期間保持相同。 控制項的高度保持不變。
+WIN_ITEM_HELP|說明文字:
+WIN_ITEM_HELP_TIP|當滑鼠暫留目前控制項時，變數「$H」將擴充為這個值。
+WIN_ITEM_TOOLTIPTEXT|工具列:
+FILE_INDIR|與 XML 檔案相同的資料夾中
+
+#Bitmap
+WIN_BITMAP_TITLE|點陣圖設定
+WIN_BITMAP_FILE|檔案*:
+WIN_BITMAP_FILE_TIP|指示所使用圖像檔的路徑和名稱。
+WIN_BITMAP_OPEN|開啟...
+WIN_BITMAP_ALPHACOLOR|Alpha 色彩:
+WIN_BITMAP_ALPHACOLOR_TIP|點陣圖的透明色，以 16 進位格式。 如果您的 PNG 檔案指定透明遮罩，也將同時考慮。
+WIN_BITMAP_CHOOSE|選擇...
+WIN_BITMAP_NBFRAMES|畫面數:
+WIN_BITMAP_NBFRAMES_TIP|這個屬性是定義動態的點陣圖所需，是動畫中所包含的畫面 (圖像) 數。 所有不同的畫面只是點陣圖中圖像的垂直舖設。
+WIN_BITMAP_FPS|每秒畫面:
+WIN_BITMAP_FPS_TIP|只在動態的點陣圖中使用，這是動畫的每秒畫面 (圖像) 數。
+WIN_BITMAP_ANIMATION|動畫屬性
+WIN_BITMAP_CHOOSER_TITLE|選擇 Alpha 色彩
+
+#SubBitmap
+WIN_SBMP_TITLE|子點陣圖設定
+WIN_SBMP_BOUNDS|位置和尺寸屬性
+
+#Font
+WIN_FONT_TITLE|字型設定
+WIN_FONT_FILE|檔案*:
+WIN_FONT_FILE_TIP|檔案包含所使用的 TrueType 或 OpenType 字型。
+WIN_FONT_OPEN|開啟...
+WIN_FONT_SIZE|大小:
+
+#Layout
+WIN_LAYOUT_TITLE|配置設定
+WIN_LAYOUT_GENERAL|一般屬性
+WIN_LAYOUT_DIMENSIONS|尺寸
+WIN_LAYOUT_WIDTH|初始寬度*:
+WIN_LAYOUT_WIDTH_TIP|配置的初始寬度。
+WIN_LAYOUT_HEIGHT|初始高度*:
+WIN_LAYOUT_HEIGHT_TIP|配置的初始高度。
+WIN_LAYOUT_MINWIDTH|最小寬度:
+WIN_LAYOUT_MINWIDTH_TIP|配置的最小寬度，只有在調整配置大小時使用。 如果這個值設定為「-1」初始的寬度將作為最小寬度。
+WIN_LAYOUT_MINHEIGHT|最小高度:
+WIN_LAYOUT_MINHEIGHT_TIP|配置的最小高度，只有在調整配置大小時使用。 如果這個值設定為「-1」初始的高度將作為最小高度。
+WIN_LAYOUT_MAXWIDTH|最大寬度:
+WIN_LAYOUT_MAXWIDTH_TIP|配置的最大寬度，只有在調整配置大小時使用。 如果這個值設定為「-1」初始的寬度將作為最大寬度。
+WIN_LAYOUT_MAXHEIGHT|最大高度:
+WIN_LAYOUT_MAXHEIGHT_TIP|配置的最大高度，只有在調整配置大小時使用。 如果這個值設定為「-1」初始的高度將作為最大高度。
+
+#Window
+WIN_WINDOW_TITLE|視窗設定
+WIN_WINDOW_X_TIP|視窗到螢幕左邊緣的初始距離。
+WIN_WINDOW_Y_TIP|視窗到螢幕上邊緣的初始距離。
+WIN_WINDOW_VISIBLE_TIP|指示當 VLC 啟動時，視窗應顯示的位置。 由於 VLC 會記住面板視窗的位置和可見性，這個屬性只有在面板首次啟動時使用。
+WIN_WINDOW_DD|拖放:
+WIN_WINDOW_DD_TIP|指示是否允許媒體檔案拖放到這個視窗。
+WIN_WINDOW_PD|拖放播放:
+WIN_WINDOW_PD_TIP|指示拖放的檔案是直接播放 (true) 或僅排入佇列 (false)。 如果 [拖放] 設定為「false」則這個屬性沒有作用。
+WIN_WINDOW_DD_PANEL|拖放選項
+
+#Anchor
+WIN_ANCHOR_TITLE|作者設定
+WIN_ANCHOR_POINTS|點:
+WIN_ANCHOR_POINTS_TIP|點定義貝茲曲線所跟隨的錨點。 如果您只要使用預設錨點，則不需變更這個參數。
+WIN_ANCHOR_RANGE|範圍:
+WIN_ANCHOR_RANGE_TIP|錨點區域影響的範圍，單位像素。
+WIN_ANCHOR_PRIORITY|優先順序*:
+WIN_ANCHOR_PRIORITY_TIP|每個錨點有優先順序 (優先順序屬性)，最高優先順序的錨點是贏家，代表在移動它的視窗時，所有其它錨定的視窗也會移動。 若要中斷 2 個錨定視窗的效果，您需要移動有較低優先順序錨點的視窗。
+WIN_ANCHOR_BOUNDARIES|邊界
+
+#Button
+WIN_BUTTON_TITLE|按鈕設定
+WIN_BUTTON_UP|一般圖像*:
+WIN_BUTTON_OVER|移至上方圖像:
+WIN_BUTTON_DOWN|按一下圖像:
+WIN_BUTTON_ACTION|動作:
+WIN_BUTTON_ATTR|按鈕屬性
+
+#Checkbox
+WIN_CHECKBOX_TITLE|核取方塊設定
+WIN_CHECKBOX_UP|一般圖像*:
+WIN_CHECKBOX_OVER|移至上方圖像:
+WIN_CHECKBOX_DOWN|按一下圖像:
+WIN_CHECKBOX_ACTION|動作:
+WIN_CHECKBOX_CONDITION|條件:
+WIN_CHECKBOX_CONDITION_TIP|布林運算式指定核取方塊的狀態: false -> 狀態 #1, true -> 狀態 #2
+WIN_CHECKBOX_STATE|核取方塊狀態
+WIN_CHECKBOX_STATE1|狀態 #1 (不符合條件):
+WIN_CHECKBOX_STATE2|狀態 #2 (符合條件):
+
+#Image
+WIN_IMAGE_TITLE|圖像設定
+WIN_IMAGE_IMAGE|圖像*:
+WIN_IMAGE_IMAGE_TIP|點陣圖的 ID
+WIN_IMAGE_RESIZE|調整大小模式:
+WIN_IMAGE_RESIZE_TIP|指定調整圖片大小時的行為。
+WIN_IMAGE_ACTION|動作:
+WIN_IMAGE_ACTION_TIP|在圖片按一下所觸發的動作。
+WIN_IMAGE_ACTION2|按兩下動作:
+WIN_IMAGE_ACTION2_TIP|在圖片按兩下所觸發的動作。
+WIN_IMAGE_ATTR|圖像屬性
+WIN_IMAGE_ART|在可用時以封面藝術取代圖像
+
+#Group
+WIN_GROUP_TITLE|群組設定
+
+#Panel
+WIN_PANEL_TITLE|面板設定
+WIN_PANEL_DIMENSIONS|尺寸
+WIN_PANEL_WIDTH|寬度*:
+WIN_PANEL_HEIGHT|高度*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|播放樹設定
+WIN_PLAYTREE_FONT|字型*:
+WIN_PLAYTREE_BGIMAGE|背景圖像:
+WIN_PLAYTREE_BGIMAGE_TIP|作為背景圖像的點陣圖 ID。 未指定點陣圖時，將使用 [背景色 #1] 和 [背景色 #2] 屬性填滿背景。
+WIN_PLAYTREE_BGCOLOR1|背景色 #1:
+WIN_PLAYTREE_BGCOLOR2|背景色 #2:
+WIN_PLAYTREE_SELCOLOR|選取色彩:
+WIN_PLAYTREE_FGCOLOR|文字色彩:
+WIN_PLAYTREE_PLAYCOLOR|正在播放文字色彩:
+WIN_PLAYTREE_FLAT|平面播放清單:
+WIN_PLAYTREE_FLAT_TIP|指示播放清單應使用樹狀結構或完全「平面」 (只顯示樹葉)。
+WIN_PLAYTREE_ITEMIMAGE|項目圖示:
+WIN_PLAYTREE_OPENIMAGE|開啟資料夾圖示:
+WIN_PLAYTREE_CLOSEDIMAGE|已關閉資料夾圖示:
+WIN_PLAYTREE_SLIDER|編輯播放清單的滑桿 (捲軸)
+WIN_PLAYTREE_ATTR|播放樹屬性
+WIN_PLAYTREE_CHOOSE|選擇...
+WIN_PLAYTREE_CHOOSER_TITLE|選擇色彩
+
+#Slider
+WIN_SLIDER_TITLE|滑桿設定
+WIN_SLIDER_UP|一般圖像*:
+WIN_SLIDER_OVER|移至上方圖像:
+WIN_SLIDER_DOWN|按一下圖像:
+WIN_SLIDER_POINTS|點*:
+WIN_SLIDER_THICKNESS|厚度:
+WIN_SLIDER_VALUE|值*:
+WIN_SLIDER_VALUE_SCROLL|播放樹捲動
+WIN_SLIDER_BG_ENABLE|啟用背景
+WIN_SLIDER_BG_EDIT|編輯...
+WIN_SLIDER_ATTR|滑桿屬性
+WIN_SLIDER_BG|滑桿背景
+
+#Slider background
+WIN_SBG_TITLE|滑桿背景設定
+WIN_SBG_WIZARD|開啟滑桿背景產生器...
+WIN_SBG_IMAGE|圖像*:
+WIN_SBG_NBHORIZ|水平框架:
+WIN_SBG_NBVERT|垂直框架:
+WIN_SBG_PADHORIZ|水平間距:
+WIN_SBG_PADVERT|垂直間距:
+WIN_SBG_ATTR|背景屬性
+
+#Text
+WIN_TEXT_TITLE|文字設定
+WIN_TEXT_TEXT|文字*:
+WIN_TEXT_FONT|字型:
+WIN_TEXT_COLOR|色彩:
+WIN_TEXT_CHOOSE|選擇...
+WIN_TEXT_CHOOSER_TITLE|選擇文字色彩
+WIN_TEXT_ALIGNMENT|對齊:
+WIN_TEXT_SCROLLING|捲動:
+WIN_TEXT_ATTR|文字屬性
+
+#Video
+WIN_VIDEO_TITLE|視訊設定
+WIN_VIDEO_AUTORESIZE|自動調整大小:
+WIN_VIDEO_AUTORESIZE_TIP|指示是否應自動調整配置大小以適合播放視訊的尺寸。
+WIN_VIDEO_ATTR|視訊屬性

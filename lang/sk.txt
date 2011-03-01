@@ -1,4 +1,4 @@
-#Slovak language file for VLC Skin Editor
+﻿#Slovak language file for VLC Skin Editor
 #Author/s: Marián Hikaník
 
 #General strings
@@ -10,22 +10,22 @@ BUTTON_CANCEL|Storno
 BUTTON_HELP|Pomocník
 
 #Item names
-THEME|Theme
-FONT|Font
-BITMAP|Bitmap
-SUBBITMAP|SubBitmap
-WINDOW|Window
-LAYOUT|Layout
-ANCHOR|Anchor
-BUTTON|Button
-CHECKBOX|Checkbox
-GROUP|Group
-IMAGE|Image
+THEME|Téma
+FONT|Písmo
+BITMAP|Bitmapa
+SUBBITMAP|Pod-bitmapa
+WINDOW|Okno
+LAYOUT|Rozloženie
+ANCHOR|Kotva
+BUTTON|Tlačidlo
+CHECKBOX|Políčko pre výber
+GROUP|Skupina
+IMAGE|Obrázok
 PANEL|Panel
-PLAYTREE|Playtree
-RADIALSLIDER|RadialSlider
-SLIDER|Slider
-SLIDERBG|SliderBackground
+PLAYTREE|Strom
+RADIALSLIDER|Radiálny posuvník
+SLIDER|Posuvník
+SLIDERBG|Pozadie posuvníka
 TEXT|Text
 VIDEO|Video
 UNNAMED|%t #%i
@@ -133,7 +133,7 @@ ZOOM_FACTOR|Faktor zväčšenia:
 #Global variables editing window
 WIN_VARS_TITLE|Všeobecné premenné
 WIN_VARS_NOTE|<html>Tieto premenné sa týkajú len náhľadu.<br>Simulujú stav programu VLC.</html>
-WIN_VARS_SLIDER|Slider Position
+WIN_VARS_SLIDER|Pozícia posuvníka
 
 #Theme options window
 WIN_THEME_TITLE|Nastavenia vzhľadu
@@ -144,7 +144,7 @@ WIN_THEME_WEB|Webstránka autora:
 WIN_THEME_MAGNET|Magnetizmus:
 WIN_THEME_MAGNET_TIP|Ak je vzdialenosť medzi okrajom okna a okrajom obrazovky menšia ako táto hodnota, pripojí sa okno na okraj obrazovky
 WIN_THEME_ALPHA|Priesvitnosť:
-WIN_THEME_ALPHA_TIP|Priesvitnosť okna. Zadajte hodnotu v rozmedzí od 1 (takmer neviditeľné do 255 (úplne viditeľné).
+WIN_THEME_ALPHA_TIP|Priesvitnosť okna. Zadajte hodnotu v rozmedzí od 1 (takmer neviditeľné) do 255 (úplne viditeľné).
 WIN_THEME_MOVEALPHA|Priesvitnosť pri pohybe:
 WIN_THEME_MOVEALPHA_TIP|Priesvitnosť okna, keď sa pohybuje
 WIN_THEME_INFO_TITLE|Informácie o vzhľade
@@ -164,13 +164,11 @@ ACTIONS_VLC_PAUSE|Pozastaviť
 ACTIONS_VLC_STOP|Stop
 ACTIONS_VLC_FASTER|Prehrávať rýchlejšie
 ACTIONS_VLC_SLOWER|Prehrávať pomalšie
-ACTIONS_VLC_NEXTFRAME|vlc.nextFrame()
 ACTIONS_VLC_MUTE|Stlmiť hlasitosť
 ACTIONS_VLC_VOLUMEUP|Zvýšiť hlasitosť
 ACTIONS_VLC_VOLUMEDOWN|Znížiť hlasitosť
 ACTIONS_VLC_FULLSCREEN|Zapnutie/vypnutie celoobrazovkového režimu
 ACTIONS_VLC_SNAPSHOT|Vytvoriť snímku z videa
-ACTIONS_VLC_TOGGLERECORD|vlc.toggleRecord()
 ACTIONS_VLC_ONTOP|Aktivovať/deaktivovať vždy v popredí
 ACTIONS_VLC_MINIMIZE|Minimalizovať VLC
 ACTIONS_VLC_QUIT|Ukončiť VLC
@@ -236,13 +234,11 @@ ACTION_DESC_PAUSE|Pozastaviť prehrávanie.
 ACTION_DESC_STOP|Zastaviť prehrávanie.
 ACTION_DESC_FASTER|Prehrávať rýchlejšie.
 ACTION_DESC_SLOWER|Prehrávať pomalšie.
-ACTION_DESC_NEXTFRAME|vlc.nextFrame()
 ACTION_DESC_MUTE|Aktivovať/deaktivovať stlmenie hlasitosti.
 ACTION_DESC_VOLUP|Zvýšiť hlasitosť.
 ACTION_DESC_VOLDOWN|Znížiť hlasitosť.
 ACTION_DESC_FULLSCREEN|Prepnúť na celoobrazovkový režim.
 ACTION_DESC_SNAPSHOT|Urobiť snímku z videa.
-ACTION_DESC_TOGGLERECORD|vlc.toggleRecord()
 ACTION_DESC_ONTOP|Aktivovať/deaktivovať vždy v popredí.
 ACTION_DESC_MIN|Minimalizovať VLC.
 ACTION_DESC_QUIT|Ukončiť VLC.
@@ -258,9 +254,9 @@ ACTION_DVD_PREVT|Prehrať predchádzajúci titul na DVD.
 ACTION_DVD_NEXTC|Prehrať ďalšiu kapitolu na DVD.
 ACTION_DVD_PREVC|Prehrať predchádzajúcu kapitolu na DVD.
 ACTION_DVD_MENU|Vyvolať hlavné menu DVD.
-#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
-#%i = Window ID textfield
-#%l = Layout ID textfield
+#%s = Výber s možnosťami ACTION_ACTIVATE a ACTION_DEACTIVE
+#%i = Textové pole pre ID okna
+#%l = Textové pole pre ID rozloženia a vzhľadu
 ACTION_ACTIVATE|aktivovať
 ACTION_DEACTIVATE|deaktivovať
 ACTION_RANDOM|Náhodné poradie prehrávania v zozname skladieb  %s
@@ -273,13 +269,13 @@ ACTION_UNMAXIMIZE|Obnoviť okno s ID %i
 ACTION_LAYOUT|Zmeniť rozloženie okna s ID %i
 
 #Slider background generator
-SBGGEN_TITLE|
+SBGGEN_TITLE|Generátor pozadí posuvníkov
 SBGGEN_PREV|< Späť
 SBGGEN_NEXT|Ďalej >
 SBGGEN_CANCEL|Prerušiť
 SBGGEN_FINISH|Ukončiť
 
-SBGGEN_DESCR|Vitajte vo Generátore pozadia posuvníkov. Táto funkcia Vám pomôže pri tvorbe pozadia posuvníkov.
+SBGGEN_DESCR|Vitajte v Generátore pozadia posuvníkov. Táto funkcia Vám pomôže pri tvorbe pozadia posuvníkov.
 SBGGEN_FIRST|Ako prvé si prosím zvoľte veľkosť pozadia a to, či bude posuvník prebiehať zľava-doprava alebo zhora-nadol.
 SBGGEN_WIDTH|Šírka:
 SBGGEN_HEIGHT|Výška:
@@ -307,13 +303,13 @@ SBGGEN_MIDDLE|Stredná časť
 SBGGEN_PROGRESS|Vytvára sa pozadie...
 
 #Message dialogues
-#%v - version
+#%v - verzia
 ABOUT_TITLE|O programe VLC Skin Editor %v
-#%y - current year
-#%w - website
-ABOUT_MSG|<html><h3>Copyright 2007-%y Tím VideoLAN</h3>Zverejnené pod licenciou GPL 2+<br><br><b>Vedúci programátor:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Webstránka:</b> %w<br><br><b>Poďakovanie:</b><br>Timothy Gerard Endresovi za vytvorenie prístupu k registrom a podporu TAR (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) za ikony (Creative Commons BY-SA 2.5)<br>Cyrilovi Deguetovi (asmax@via.ecp.fr) a Olivierovi Teuli&egrave;reovi (ipkiss@via.ecp.fr) za kód na vyhodnocovanie Booleanových výrazov (GPL 2+)</html>
+#%y - aktuálny rok
+#%w - webstránka
+ABOUT_MSG|<html><h3>Copyright 2007-%y Tím VideoLAN</h3>Zverejnené pod licenciou GPL 2+<br><br><b>Vedúci programátor:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Webstránka:</b> %w<br><br><b>Poďakovanie:</b><br>Timothy Gerard Endresovi za vytvorenie prístupu k registrom a podporu TAR (Public Domain)<br>The Tango! Desktop Project (http://tango.freedesktop.org) za ikony (Creative Commons BY-SA 2.5)<br>Cyrilovi Deguetovi (asmax@via.ecp.fr) a Olivierovi Teuli&egrave;reovi (ipkiss@via.ecp.fr) za kód na vyhodnocovanie výrazov typu Boolean výrazov (GPL 2+)</html>
 VLT_EX_TITLE|Importovať súbor VLT
-#%f - name of the folder
+#%f - názov priečinka
 VLT_EX_MSG|Súbor VLT sa rozbalí do podpriečinka "%f".\nChcete pokračovať?
 VLT_EX_YES|Rozbaliť
 VLT_EX_NO|Nerozbaľovať
