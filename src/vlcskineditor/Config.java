@@ -75,10 +75,15 @@ public class Config {
       File parent = new File(System.getenv("APPDATA"),"vlc");
       if(!parent.exists()) parent.mkdirs();
       configFile = new File(parent,"VLCSkinEditor.cfg");
+    } else if(System.getProperty("os.name").indexOf("Mac")==-1) {
+        File parent = new File("/home/"+System.getProperty("user.name")+"/.vlc");
+        if(!parent.exists()) parent.mkdirs();
+        configFile = new File(parent,"VLCSkinEditor.cfg");
     } else {
-      File parent = new File("/home/"+System.getProperty("user.name")+"/.vlc");
+      File parent = new File("/Users/"+System.getProperty("user.name")+"/Library/Application Support/VLC Skin Editor");
       if(!parent.exists()) parent.mkdirs();
       configFile = new File(parent,"VLCSkinEditor.cfg");
+
     }
   }
   
@@ -148,6 +153,8 @@ public class Config {
    */
   public static void save() {
     try {
+      if(!configFile.exists())
+          configFile.createNewFile();
       FileWriter fw = new FileWriter(configFile);
       BufferedWriter bw = new BufferedWriter(fw);
       Enumeration<String> keys = strings.keys();
@@ -160,6 +167,8 @@ public class Config {
       bw.close();
       fw.close();
     } catch(IOException ex) {
+      System.out.println(configFile);
+      System.out.println(System.getProperty("os.name"));
       ex.printStackTrace();
     }
     
@@ -210,6 +219,7 @@ public class Config {
         if(toolbar && !Boolean.parseBoolean(get("toolbar"))) {
           mainInstance.hideToolbar();
         }
+        save();
         frame.setVisible(false);
         frame.dispose();
       }

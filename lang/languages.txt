@@ -1,18 +1,19 @@
 #Available languages
 #language code|Human-readable name|language file
-ca|Catalan (Incomplete)|ca.txt
-nl|Dutch|nl.txt
+ca|Catalan (Incomplete) - Català|ca.txt
+zh-tw|Chinese (Taiwanese Mandarin) - 國語|zh-tw.txt
+cz|Czech - Čeština|cz.txt
+nl|Dutch - Nederlands|nl.txt
 en|English|en.txt
-fr|French|fr.txt
-de|German|de.txt
-ko|Korean|ko.txt
-pl|Polish|pl.txt
-pt-br|Portuguese (Brasil)|pt-br.txt
-ru|Russian (Incomplete)|ru.txt
-sr|Serbian (Latin)|sr.lat.txt
-sr-cyr|Serbian (Cyrillic)|sr.cyr.txt
-sk|Slovak|sk.txt
-tr|Turkish|tr.txt
-es|Spanish|es.txt
-sv|Swedish (Incomplete)|sv.txt
-zh-tw|Traditional Chinese|zh-tw.txt
+fr|French - Français|fr.txt
+de|German - Deutsch|de.txt
+ko|Korean - 한국어/조선말|ko.txt
+pl|Polish - Polski|pl.txt
+pt-br|Portuguese (Brasil) - Português (Brasil)|pt-br.txt
+ru|Russian (Incomplete) - Русский|ru.txt
+sr|Serbian (Latin) - Srpski|sr.lat.txt
+sr-cyr|Serbian (Cyrillic) - Српски|sr.cyr.txt
+sk|Slovak - Slovenský|sk.txt
+tr|Turkish - Türkçe|tr.txt
+es|Spanish - Español|es.txt
+sv|Swedish (Incomplete) - Svenska|sv.txt

@@ -173,6 +173,13 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     addWindowListener(this);
     setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("icons/icon16.png")));
 
+    if(System.getProperty("os.name").indexOf("Mac")!=-1) {
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "TeacherTool Desktop");
+        com.apple.eawt.Application.getApplication().setDockIconImage(createIcon("icons/icon.png").getImage());
+    }
+
+
     //Menubar creation
     mbar = new JMenuBar();
     
@@ -227,8 +234,10 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     m_file.add(m_file_test);
     m_file.add(m_file_vlt);
     m_file.add(m_file_png);
-    m_file.addSeparator();
-    if(System.getProperty("os.name").indexOf("Mac")==-1) m_file.add(m_file_quit);
+    if(System.getProperty("os.name").indexOf("Mac")==-1) {
+        m_file.addSeparator();
+        m_file.add(m_file_quit);
+    }
 
     //Initializing of the edit menu
     m_edit = new JMenu(Language.get("MENU_EDIT"));
@@ -269,7 +278,10 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     m_edit_right.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,mask));
     m_edit_right.addActionListener(this);
     m_edit_del = new JMenuItem(Language.get("WIN_ITEMS_DELETE"));
-    m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
+    if(System.getProperty("os.name").indexOf("Mac")!=-1)
+        m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE,mask));
+    else
+        m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
     m_edit_del.addActionListener(this);
     
     m_edit.add(m_edit_undo);
@@ -2104,8 +2116,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
     
     JFrame.setDefaultLookAndFeelDecorated(true);
-    System.setProperty("apple.laf.useScreenMenuBar", "true");
-    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "VLC Skin Editor");
+    
     new Main(args);
   }
 

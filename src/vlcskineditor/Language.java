@@ -102,7 +102,7 @@ public class Language {
 
   @Override
   public String toString() {
-    return name + " (" + code + ")";
+    return name;// + " (" + code + ")";
   }
 
   /**
