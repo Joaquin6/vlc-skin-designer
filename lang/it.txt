@@ -1,0 +1,550 @@
+#file libreria Linguaggio Italiano per VLC Skin Editor
+#Author/s: Lorenzo Marrocchi
+
+#General strings
+CHOICE_YES|Si
+CHOICE_NO|No
+CHOICE_CANCEL|Annulla
+BUTTON_OK|OK
+BUTTON_CANCEL|Annulla
+BUTTON_HELP|Aiuto
+
+#Item names
+THEME|Tema
+FONT|Carattere
+BITMAP|figura
+SUBBITMAP|Sottofigura
+WINDOW|finestra
+LAYOUT|Schema
+ANCHOR|Ancora
+BUTTON|Bottone
+CHECKBOX|controllo
+GROUP|Gruppo
+IMAGE|Immagine
+PANEL|Pannello
+PLAYTREE|Passa
+RADIALSLIDER|Scorrimento Radiale
+SLIDER|Scorrimento
+SLIDERBG|diapositiva di sfndo
+TEXT|Testo
+VIDEO|Video
+UNNAMED|senza nome %t #%i
+
+#IL Menu bar e le entrate
+#chiave di accsso per le entrate del menu sono definite per Memoria) valuta
+MENU_FILE|File
+MENU_FILE_MN|F
+MENU_FILE_NEW|Nuovo
+MENU_FILE_NEW_MN|N
+MENU_FILE_OPEN|Apri...
+MENU_FILE_OPEN_MN|A
+MENU_FILE_SAVE|Salva
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Testa lo skin in VLC
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Esporta in VLT...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Salva l'anteprima in immagine...
+MENU_FILE_PNG_MN|i
+MENU_FILE_EXIT|Esci
+MENU_FILE_EXIT_MN|E
+MENU_EDIT|Modifica
+MENU_EDIT_MN|M
+MENU_EDIT_UNDO|Annulla
+MENU_EDIT_UNDO_MN|A
+MENU_EDIT_REDO|Ripeti
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Skin settaggi
+MENU_EDIT_THEME_MN|S
+MENU_EDIT_VARS|Variabili Globali 
+MENU_EDIT_VARS_MN|V
+MENU_EDIT_PREFS|Preferenze
+MENU_EDIT_PREFS_MN|P
+MENU_EDIT_UP|Muovi voce selezionata su
+MENU_EDIT_DOWN|Muovi voce selezionata giu
+MENU_EDIT_LEFT|Muovi voce selezionata a sinistra
+MENU_EDIT_RIGHT|Muovi voce selezionata a destra
+MENU_HELP|Aiuto
+MENU_HELP_MN|A
+MENU_HELP_DOC|Aiuto Online
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|Informazioni su
+MENU_HELP_ABOUT_MN|I
+
+#The toolbar
+TOOLBAR_OPEN|Apri uno skin...
+TOOLBAR_SAVE|Salva modifiche skin
+TOOLBAR_UNDO|Annulla
+TOOLBAR_REDO|Ripeti
+TOOLBAR_MOVE|Voce che effettua il movimento
+TOOLBAR_PATH|cursore montaggio strumento
+
+#Risorse di wondows
+WIN_RES_TITLE|Risorse
+WIN_RES_ADD_BMP|Aggiungi una nuova Figura o SottoFigura
+WIN_RES_ADD_FONT|Aggiungi un nuovo Carattere
+WIN_RES_COPY|Crea una copia della risorsa selezionata 
+WIN_RES_EDIT|Modifica la risorsa selezionata
+WIN_RES_DELETE|Cancella la risorsa selezionata
+WIN_RES_PU_ADD_BMP|Aggungi figura/e
+WIN_RES_PU_ADD_SBMP|Aggiungi sottofigura
+WIN_RES_BITMAPS|Figura
+WIN_RES_FONTS|Caratteri
+
+#Finestra finestra
+WIN_WIN_TITLE|Finestre
+WIN_WIN_ADD|Aggiungi una nuova finestra
+WIN_WIN_ADD_LAY|Aggiungi una nuovo schema nella finestra selezionata
+WIN_WIN_MOVE_UP|Muovi lo schema selezionato in alto nella gerarchia (ultimo schema e' quello di default per la finestra)
+WIN_WIN_MOVE_DOWN|Muovi lo schema selezionato in basso nella gerarchia(ultimo schema e' quello di default per la finestra)
+WIN_WIN_COPY|Crea una copia della finestra selezionata o schema
+WIN_WIN_EDIT|Modifica la finestra o schema selezionato
+WIN_WIN_DELETE|Cancella la finestra o schema selezionato
+
+#Voci finestra
+WIN_ITEMS_TITLE|Voci
+WIN_ITEMS_ADD|Aggiungi una nuova voce
+WIN_ITEMS_MOVE_UP|Muovi voce selezionata in alto nella gerarchia 
+WIN_ITEMS_MOVE_DOWN|Muovi voce selezionata in basso nella gerarchia 
+WIN_ITEMS_COPY|Crea una copia della voce selezionata
+WIN_ITEMS_EDIT|Modifica la voce selezionata
+WIN_ITEMS_DELETE|Cancella la voce selezionata
+WIN_ITEMS_PU_PANEL_ADD|Aggiungi il pannello selezionato
+
+#Welcome dialog
+WELCOME_TITLE|Benvenuti in VLC skin editor
+WELCOME_MSG|Cosa ti piacerebbe fare?
+WELCOME_NEW|Crea un nuovo skin
+WELCOME_OPEN|Apri uno skin esistente
+WELCOME_QUIT|Esci
+
+#Prefereze finestra
+WIN_PREFS_TITLE|Preferenze
+WIN_PREFS_UPDATE_L|Abilita auto-aggiornamento:
+WIN_PREFS_LANG_L|Lingua:
+WIN_PREFS_LAF_L|Aspetto programma:
+WIN_PREFS_TBAR_L|Visualizza toolbar:
+WIN_PREFS_RESTART_L|<html><i>Alcune impostazioni hanno effetto solo quando il programma viene riavviato.</i></html>
+
+# Modifica Sottofigure e anteprima Skin nella finestra
+WIN_SBMP_EDIT_TITLE|Modifica sottofigure
+ZOOM_FACTOR|Fattore Zoom:
+
+#Variabili Globali modifica finestra
+WIN_VARS_TITLE|Variabili Globali
+WIN_VARS_NOTE|<html>Queste variabili riguardano solo l'anteprima.<br>Essi simulano lo stato di VLC.</html>
+WIN_VARS_SLIDER|Posizione Scorrimento
+
+#Tema opzioni finestra
+WIN_THEME_TITLE|Settaggi Skin
+WIN_THEME_NAME|Nome:
+WIN_THEME_AUTHOR|Autore:
+WIN_THEME_EMAIL|Autori E-Mail:
+WIN_THEME_WEB|Autori webpage:
+WIN_THEME_MAGNET|Magnete:
+WIN_THEME_MAGNET_TIP|Quando la distanza tra il bordo dello schermo e un ancoraggio di una finestra e' inferiore a tale valore, la finestra che si attacchi al confine
+WIN_THEME_ALPHA|Opacita':
+WIN_THEME_ALPHA_TIP|Setta alpha transparensa della finestra. Il valore deve essere compreso tra 1 (quasi trasparenza totale) e 255 (totale opacita'). Valori bassi dovrebbero essere evitati.
+WIN_THEME_MOVEALPHA|Opacita' durante lo spostamento:
+WIN_THEME_MOVEALPHA_TIP|Imposta la trasparenza alfa delle finestre quando vengono spostati.
+WIN_THEME_INFO_TITLE|Informazioni Tema
+WIN_THEME_ATTR_TITLE|Attributi Tema
+
+#Editor Azioni
+WIN_ACTIONS_TITLE|Modifica sequenza azioni
+
+#Menu di scelta rapida nell'editor azione
+ACTIONS_PU|Azioni
+ACTIONS_DIALOGS|Visualizza dialogo
+ACTIONS_PLAYLIST|Scaletta
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Skin
+ACTIONS_VLC_PLAY|Riproduzione
+ACTIONS_VLC_PAUSE|Pausa
+ACTIONS_VLC_STOP|Stop
+ACTIONS_VLC_FASTER|Riproduzione veloce
+ACTIONS_VLC_SLOWER|riproduzione piano
+ACTIONS_VLC_NEXTFRAME|Riproduti nuovo frame
+ACTIONS_VLC_MUTE|Volume Muto
+ACTIONS_VLC_VOLUMEUP|Incrementa il volume
+ACTIONS_VLC_VOLUMEDOWN|Riduci il volume
+ACTIONS_VLC_FULLSCREEN|Togli schermo intero modo
+ACTIONS_VLC_SNAPSHOT|Prendi fotografia
+ACTIONS_VLC_TOGGLERECORD|Togli registra
+ACTIONS_VLC_ONTOP|Togli sempre in primo piano
+ACTIONS_VLC_MINIMIZE|Metti a icona VLC
+ACTIONS_VLC_QUIT|Esci VLC
+ACTIONS_EQ_ENABLE|Abilita Equalizzatore
+ACTIONS_EQ_DISABLE|Disabilita Equalizzatore
+ACTIONS_DIALOGS_CHANGESKIN|Cambia skin
+ACTIONS_DIALOGS_FILESIMPLE|Apri file (semplice)
+ACTIONS_DIALOGS_FILE|Apri file (esteso)
+ACTIONS_DIALOGS_DIRECTORY|Apri cartella
+ACTIONS_DIALOGS_DISC|apri disco
+ACTIONS_DIALOGS_NET|Apri flusso di rete
+ACTIONS_DIALOGS_MESSAGES|Messaggio di log
+ACTIONS_DIALOGS_PREFS|Preferenze
+ACTIONS_DIALOGS_FILEINFO|Informazioni file
+ACTIONS_DIALOGS_PLAYLIST|Unskinned scaletta
+ACTIONS_DIALOGS_STREAMINGWIZARD|Guida Flusso
+ACTIONS_DIALOGS_POPUP|Popup menu completo
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio impostazioni popup menu
+ACTIONS_DIALOGS_VIDEOPOPUP|Impostazioni video popup menu
+ACTIONS_DIALOGS_MISCPOPUP|Varie impostazioni del menu popup
+ACTIONS_PLAYLIST_ADD|Aggiungere un nuovo elemento
+ACTIONS_PLAYLIST_DEL|Rimuovi elemento selezionato
+ACTIONS_PLAYLIST_NEXT|Riproduci nuovo elemento
+ACTIONS_PLAYLIST_PREVIOUS|Riproduci vecchio elemento
+ACTIONS_PLAYLIST_SETRANDOM|Riproduci in casuale/normale ordine
+ACTIONS_PLAYLIST_SETLOOP|Cicla scaletta/riproduci una volta
+ACTIONS_PLAYLIST_SETREPEAT|Abilita/disabilita ripetizione dell' elemento
+ACTIONS_PLAYLIST_SORT|Ordine alfabetico
+ACTIONS_PLAYLIST_LOAD|Carica da file
+ACTIONS_PLAYLIST_SAVE|Salva il file
+ACTIONS_DVD_NEXTTITLE|Nuovo titolo
+ACTIONS_DVD_PREVIOUSTITLE|titolo precedente
+ACTIONS_DVD_NEXTCHAPTER|Nuovo capitolo
+ACTIONS_DVD_PREVIOUSCHAPTER|Capitolo precedente
+ACTIONS_DVD_ROOTMENU|Menu principale
+ACTIONS_WINDOWS_SHOW|Visualizza finestra
+ACTIONS_WINDOWS_HIDE|Nascondi finestra
+ACTIONS_WINDOWS_MAXIMIZE|Massimizza finestra
+ACTIONS_WINDOWS_UNMAXIMIZE|Rimpicciolisci finestra
+ACTIONS_WINDOWS_SETLAYOUT|Cambia lo schema e la finestra
+
+#Descrizione Azione
+ACTION_DESC_NONE|Non Fare nulla.
+ACTION_DESC_CHANGESKIN|Mostra una finestra di dialogo per caricare un nuovo skin.ACTION_DESC_FILESIMPLE|Mostra il semplice "Apri File" finestra di dialogo.
+ACTION_DESC_FILE|Mostra esteso "Apri File" finestra di dialogo.
+ACTION_DESC_DIRECTORY|Mostra del "Apri Directory" finestra di dialogo.
+ACTION_DESC_DISC|Mostra del "Apri Disco" finestra di dialogo.
+ACTION_DESC_NET|Mostra della "Rete Apri Stream" finestra di dialogo.
+ACTION_DESC_MSG|Mostra la finestra di log dei messaggi di dialogo.
+ACTION_DESC_PREFS|Mostra finestra di dialogo Preferenze.
+ACTION_DESC_FILEINFO|Mostra le informazioni del file finestra di dialogo.
+ACTION_DESC_PLAYLIST|Mostra il (non scuoiati) finestra di scaletta predefinite.
+ACTION_DESC_WIZARD|Mostra il "Streaming Wizard" finestra di dialogo.
+ACTION_DESC_POPUP|Mostra il menu completo.
+ACTION_DESC_AUDIOPU|Mostra l'audio popup impostazioni del menu.
+ACTION_DESC_VIDEOPU|Mostra il video popup impostazioni del menu.
+ACTION_DESC_MISCPU|Mostra un menu popup contenente il controllo della riproduzione e le opzioni generali.
+ACTION_DESC_EQENABLE|Abilita il filtro equalizzatore audio.
+ACTION_DESC_EQDISABLE|Disattivare il filtro equalizzatore audio.
+ACTION_DESC_PLAY|Ascolta la voce corrente scaletta.
+ACTION_DESC_PAUSE|Mettere in pausa la riproduzione.
+ACTION_DESC_STOP|interrompere la riproduzione.
+ACTION_DESC_FASTER|riproduci più velocemente.
+ACTION_DESC_SLOWER|riproduci più lento.
+ACTION_DESC_NEXTFRAME|Anticipi la riproduzione di un fotogramma (fotogramma per fotogramma la riproduzione).
+ACTION_DESC_MUTE|Toggle muting audio.
+ACTION_DESC_VOLUP|Aumenta il volume.
+ACTION_DESC_VOLDOWN|Ridurre il volume.
+ACTION_DESC_FULLSCREEN|Attiva o disattiva la modalita' a schermo intero.
+ACTION_DESC_SNAPSHOT|Scatta una foto del video.
+ACTION_DESC_TOGGLERECORD|Attiva registrazione della riproduzione.
+ACTION_DESC_ONTOP|Togli "sempre in primo piano" di stato.
+ACTION_DESC_MIN|Minimizzare VLC.
+ACTION_DESC_QUIT|Uscire da VLC.
+ACTION_PL_ADD|Aggiungi un nuovo elemento alla scaletta.
+ACTION_PL_DEL|Rimuovi gli elementi selezionati della .
+ACTION_PL_NEXT|Riproduci l'elemento successivo nella .
+ACTION_PL_PREV|Riproduci l'elemento precedente nella .
+ACTION_PL_SORT|ordinare la  in ordine alfabetico.
+ACTION_PL_LOAD|Caricare un file di  esterno.
+ACTION_PL_SAVE|Salva la  corrente in un file.
+ACTION_DVD_NEXTT|Vai al titolo del DVD.
+ACTION_DVD_PREVT|Vai al titolo precedente sul DVD.
+ACTION_DVD_NEXTC|Vai al capitolo successivo del DVD.
+ACTION_DVD_PREVC|Vai al capitolo precedente del DVD.
+ACTION_DVD_MENU|Vai al menu principale del DVD.#%S = Selettore con ACTION_ACTIVATE e ACTION_DEACTIVE come scelte.#%= Le finestre ID file di testoldLayout #%l = ID file di testold
+ACTION_ACTIVATE|Attiva
+ACTION_DEACTIVATE|Disattivare
+ACTION_RANDOM |%s che gli elementi nella lista di brani vengono riprodotti in ordine casuale.
+ACTION_LOOP |%s che la  viene ripetuta quando la sua fine e' raggiunto.
+ACTION_REPEAT |%s che la voce corrente e' ripetuto dopo la sua fine e' raggiunto.
+ACTION_SHOW|Mostra la finestra con l'i%ID
+ACTION_HIDE|nascondi la finestra con l'i%ID
+ACTION_MAXIMIZE|Massimizzare la finestra con l'i%ID
+ACTION_UNMAXIMIZE|Minimizzare la finestra con l'i%ID
+ACTION_LAYOUT|Impostare il layout della finestra con l'i%ID per l%
+# Generatore sfondo scorrimento
+SBGGEN_TITLE|scorrimento sfondo generatore
+SBGGEN_PREV|Precedente
+SBGGEN_NEXT|Avanti
+SBGGEN_CANCEL|Cancella
+SBGGEN_FINISH|Fine
+SBGGEN_DESCR|Benvenuti al generatore di fondo di scorrimento. Vi Aiuto per creare un cursore accurato dalle vostre immagini, in pochi passi.
+SBGGEN_FIRST|Come primo passo, si prega di scegliere se il cursore va da sinistra a destra o dal basso verso l'alto e di che dimensioni lo sfondo dovrebbe avere.
+SBGGEN_WIDTH|Larghezza:
+SBGGEN_HEIGHT|Altezza:
+SBGGEN_LEFT_M|Margine sinistro:
+SBGGEN_RIGHT_M|margine destro:
+SBGGEN_TOP_M|Margine superiore:
+SBGGEN_BTM_M|Margine inferiore:
+SBGGEN_SECOND|Nella fase successiva si dovra' scegliere l'immagine corretta file associati alle diverse parti del cursore.
+SBGGEN_NOTE|Nota che le icone sono solo esempi per illustrare ciò che rappresentano le diverse parti. Essi non sono un'anteprima delle immagini che saranno utilizzate nella generazione di sfondo.
+SBGGEN_IMAGE|Image file:
+SBGGEN_OPEN|Apri ...
+SBGGEN_RESIZE|Ridimensiona comportamento:
+SBGGEN_TILE|Tile
+SBGGEN_STRETCH|Stretch
+SBGGEN_BG|sfondo
+SBGGEN_OVERLAY|sovrapposizione di immagini
+SBGGEN_LEFT_E|Sinistra bordo
+SBGGEN_RIGHT_E|Diritto bordo
+SBGGEN_TOP_E|bordo superiore
+SBGGEN_BTM_E|bordo inferiore
+SBGGEN_MIDDLE|Medio parte
+SBGGEN_PROGRESS|Generazione sullo sfondo ...# Messaggio di dialoghi#%V - version
+ABOUT_TITLE|A proposito di VLC Modificaor v Skin%
+#%Y - anno in corso#%W - sito web
+ABOUT_MSG|<html> <h3> Copyright 2007-%y Il team VideoLAN </ h3> Rilasciato sotto licenza GPL 2 + <br> programmatore <br> <b> Lead: </b> Daniel Dreibrodt (daniel.dreibrodt @ gmail.com) <br> <b> Sito web: </b>%w <br> CrModificas <b>: </b> <br> Timothy Gerard Endres per l'accesso al registro di sistema e supporto TAR (Public Domain) <br> Il Tango! Desktop Project (http://tango.freedesktop.org) per alcune icone (Creative Commons BY-SA 2.5) <br> Cyril Deguet (asmax@via.ecp.fr) e Olivier Teulie're (ipkiss@via.ecp.fr) per l'espressione booleana Evaluator e il codice di Bezier (GPL 2 +) </html>
+VLT_EX_TITLE|Importazione di un file VLT#%F - nome della cartella
+VLT_EX_MSG|Il file VLT sara' scompattato in una sottocartella denominata "%f" \n Si desidera continuare.?
+VLT_EX_YES|Si, decomprimere
+VLT_EX_NO|No, Cancella
+VLT_EX_PROGRESS|Disimballaggio VLT file ...
+XML_PARSING_PROGRESS|XML Parsing ...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) all'interno della directory del file XML
+ADD_FONT_FILE_FILTER_DESC|*.otf / *.ttf (apri & font true type) all'interno della directory del file XML
+DUPLICATE_MSG|Inserisci il modello per rinominare gli oggetti duplicati \n%oldid% sara' sostituito dal vecchio ID dell'oggetto..
+DEL_CONFIRM_TITLE|Cancellazione conferma
+DEL_CONFIRM_MSG|Sei sicuro di voler eliminare "%n"?
+EXIT_CONFIRM_TITLE|Le modifiche apportate non sono state salvate
+EXIT_CONFIRM_MSG|Volete salvare la pelle prima di uscire?
+UPDATE_TITLE|Aggiornamento trovato
+UPDATE_MSG|C'e' un aggiornamento disponibile per l'editor di skin \ nIl versione: %v \ versione nLatest:%c \ nSi desidera aggiornare l'editor di skin ora.?
+VLT_PROGRESS|Creare file VLT ...
+VLT_SUCCESS_MSG|file VLT e' stato creato con successo.
+VLT_SUCCESS_TITLE|VLT file creato
+DOWNLOAD_PROGRESS|Download ...
+CONNECT_PROGRESS|Connessione in corso ...
+UPDATE_SUCCESS_TITLE|Finito l'aggiornamento
+UPDATE_SUCCESS_MSG|aggiornamento e' stato scaricato e installato con successo \ nVLC Skin Editor verra' riavviato ora.# I messaggi di errore
+ERROR_FILENEXIST_TITLE|Errore durante l'apertura del file
+ERROR_FILENEXIST_MSG|Il "%f" file non esiste e quindi non può essere aperto!
+ERROR_VLT_UNPACK_TITLE|Impossibile decomprimere file VLT
+ERROR_VLT_UNPACK_MSG|file VLT non potrebbe essere spacchettato!
+ERROR_VLT_NOTHEME_TITLE|Impossibile trovare theme.xml
+ERROR_VLT_NOTHEME_MSG|Impossibile trovare "theme.xml" all'interno del contenuto del file scompattato VLT \ apertura nProva manualmente..
+ERROR_VLC_LAUNCH_TITLE|Errore
+ERROR_VLC_LAUNCH_MSG|VLC media player, non potrebbe essere lanciato
+ERROR_BROWSE_TITLE|Non e' stato possibile lanciare il browser
+ERROR_BROWSE_MSG|Il browser non potrebbe essere lanciato \ nPer favore vai alla seguente URL manualmente: \%u n.
+ERROR_ADD_SBMP_TITLE|Impossibile aggiungere SubBitmap
+ERROR_ADD_SBMP_NOBMP|Nessun genitore Bitmap e' stata selezionata!
+ERROR_ADD_SBMP_NOTBMP|La risorsa selezionata non e' una bitmap!
+ERROR_RES_DEL_TITLE|Impossibile cancellare risorsa
+ERROR_RES_DEL_INUSE|risorse e' ancora usato nella pelle, quindi non può essere eliminato.
+ERROR_ADD_LAYOUT_TITLE|Impossibile aggiungere layout
+ERROR_ADD_LAYOUT_MSG|Nessun finestra padre selezionata!
+ERROR_UPDATE_TITLE|Errore durante l'aggiornamento!
+ERROR_SAVEPNG_TITLE|Errore durante il salvataggio di immagini
+ERROR_SAVEPNG_MSG|Impossibile salvare l'immagine.
+ERROR_NEWSKIN_TITLE|Errore durante la creazione del nuovo file di pelle!
+ERROR_NEWSKIN_MSG|Il file di nuova pelle non può essere creata.
+ERROR_HEADER_INVALID|file non sembra essere un valido tema VLC \ intestazione nInvalid:!
+ERROR_SKIN_INVALID|file selezionato non e' un valido file skin VLC!
+ERROR_VERSION_UNSUPPORTED|La versione del tema utilizzato nella pelle selezionata non e' ancora supportato!
+ERROR_SAVE_TITLE|Errore durante il salvataggio del file pelle!
+ERROR_SAVE_MSG|file della pelle non può essere salvato.
+ERROR_ALPHA_TITLE|Opacita' valore non valido
+ERROR_ALPHA_MSG|Inserisci un opacita' valido! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Impossibile caricare l'immagine centrale \ nat almeno la parte centrale del dispositivo di scorrimento e' necessario per generare un cursore sullo sfondo!.
+ERROR_VLT_TITLE|Impossibile creare il file VLT
+ERROR_VLT_MSG|file VLT non può essere creato!
+ERROR_ID_INVALID_TITLE|non valido documento di identita'
+ERROR_ID_INVALID_MSG|Si prega di inserire un ID valido!
+ERROR_ID_EXISTS_MSG|Il "%i" ID esiste gia' \ nPer favore sceglierne un altro..
+ERROR_WIDTH_INVALID_TITLE|larghezza non valida
+ERROR_WIDTH_INVALID_MSG|Si prega di inserire una larghezza valida!
+ERROR_HEIGHT_INVALID_TITLE|Altezza non valida
+ERROR_HEIGHT_INVALID_MSG|Inserisci un altezza valida!
+ERROR_FILE_INVALID_TITLE|File non valido
+ERROR_FILE_INVALID_MSG|Scegliere un file valido!
+ERROR_BITMAP_INVALID_MSG|Il file bitmap dato non può essere caricato \ nPer favore scegliere un altro!.
+ERROR_NBFRAMES_TITLE|numero di fotogrammi non valido
+ERROR_NBFRAMES_MSG|Il numero di fotogrammi non può essere inferiore a 1
+ERROR_OTF_TITLE|OTF non supportato
+ERROR_OTF_MSG|Hai scelto un Caratteri ApriType, VLC lo visualizzera' correttamente, ma l'editor di skin non e' possibile visualizzare \ nNon sara' vedere un altro Caratteri in anteprima..
+ERROR_SIZE_INVALID_TITLE|valide dimensione
+ERROR_SIZE_INVALID_MSG|Inserisci un formato valido.
+ERROR_OUTSIDE_TITLE|Dimensioni non e' valido
+ERROR_OUTSIDE_MSG|Dimensioni indicate sono al di fuori della bitmap genitore!
+ERROR_BITMAP_NEXIST|Il%i bitmap non esiste.
+ERROR_BITMAP_NEXIST_TITLE|Immagine non valida!
+ERROR_BITMAP_LOAD|Il file di immagine per l'%i immagine non potrebbe essere caricato.
+ERROR_BITMAP_LOAD_TITLE|Errore durante il caricamento di immagini
+ERROR_NOSTATE|Si prega di fornire la condizione di stato!
+ERROR_NOSTATE_TITLE|Stati non valida
+ERROR_FONT_NEXIST|%il Carattere non esiste.
+ERROR_FONT_NEXIST_TITLE|Caratteri non validi!
+ERROR_POINTS_INVALID|Si prega di inserire i punti di Bezier valido!
+ERROR_POINTS_INVALID_TITLE|I punti non valido!
+ERROR_RADIALSLIDER|scorrimentos radiali non sono ancora supportati dalla Editor di skin.
+ERROR_RADIALSLIDER_TITLE|Non supportato# Altre stringhe
+THEMEINFO_NAME_DEFAULT|Tema Unnamed
+THEMEINFO_AUTHOR_DEFAULT|Autore Sconosciuto
+THEMEINFO_EMAIL_DEFAULT|Sconosciuto# Storia
+HIST_ITEM_ADD|Aggiungi%t
+HIST_ITEM_DEL|Elimina%t
+HIST_ITEM_EDIT|Modifica e' t%
+HIST_ITEM_MOVE|Sposta%t
+HIST_RES_DEL|Elimina t "%i"%# Dialoghi Editing# Stringhe generale
+NOTE_STARRED|* attributi devono essere specificati.# Stringhe comune
+WIN_ITEM_GENERAL|Generale attributi
+WIN_ITEM_ID|ID *:
+WIN_ITEM_ID_TIP|Nome e l'identificazione del t.%Deve essere univoco.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Larghezza:
+WIN_ITEM_HEIGHT|Altezza:
+WIN_ITEM_VISIBLE|Visibilita':
+WIN_ITEM_LEFTTOP|Lefttop:
+WIN_ITEM_LEFTTOP_TIP|indicare a quale angolo del layout in alto a sinistra di questa voce e' collegata, in caso di ridimensionamento.
+WIN_ITEM_RIGHTBOTTOM|Rightbottom:
+WIN_ITEM_RIGHTBOTTOM_TIP|indicare a quale angolo del layout in basso a destra di questo articolo e' collegato a, in caso di ridimensionamento.
+WIN_ITEM_XKEEPRATIO|Mantieni proporzioni X:
+WIN_ITEM_XKEEPRATIO_TIP|Quando e' impostata su true, il comportamento del ridimensionamento orizzontale e' cambiato. Ad esempio, se inizialmente lo spazio a sinistra del controllo e' due volte più grande di quella alla sua destra, questo rimarra' lo stesso nel corso di un ridimensionamento orizzontale. La larghezza del controllo rimane costante.
+WIN_ITEM_YKEEPRATIO|Mantieni proporzioni Y:
+WIN_ITEM_YKEEPRATIO_TIP|Quando e' impostata su true, il comportamento del ridimensionamento verticale e' cambiato. Ad esempio, se inizialmente lo spazio per la parte superiore del controllo e' due volte più grande di quello al fondo, questa rimarra' la stessa nel corso di un ridimensionamento verticale. L'altezza del controllo rimane costante.
+WIN_ITEM_HELP|Aiuto testo:
+WIN_ITEM_HELP_TIP|La variabile '$ H' sara' ampliato a questo valore quando il mouse si libra il controllo corrente.
+WIN_ITEM_TOOLTIPTEXT|Tooltip:
+FILE_INDIR|nella stessa cartella del file XML# Bitmap
+WIN_BITMAP_TITLE|Bitmap impostazioni
+WIN_BITMAP_FILE|File *:
+WIN_BITMAP_FILE_TIP|Indica il percorso e il nome del file immagine utilizzati.
+WIN_BITMAP_OPEN|Apri ...
+WIN_BITMAP_ALPHACOLOR|Alphacolor:
+WIN_BITMAP_ALPHACOLOR_TIP|Trasparenza colore della bitmap in formato esadecimale. Se il file PNG specifica una maschera di trasparenza, sara' presa in considerazione anche.
+WIN_BITMAP_CHOOSE|Scegli ...
+WIN_BITMAP_NBFRAMES|Numero di fotogrammi:
+WIN_BITMAP_NBFRAMES_TIP|Questo attributo e' necessario per definire animati bitmap, e' il numero di frame (immagini) contenute nella vostra animazione. Tutti i telai diversi sono solo immagini fissate verticalmente nella bitmap.
+WIN_BITMAP_FPS|fotogrammi al secondo:
+WIN_BITMAP_FPS_TIP|Usato solo in bitmap animata, e' il numero di frame (immagini) per ogni secondo di animazione.
+WIN_BITMAP_ANIMATION|Animazione attributi
+WIN_BITMAP_CHOOSER_TITLE|Scegli alphacolor# SubBitmap
+WIN_SBMP_TITLE|SubBitmap impostazioni
+WIN_SBMP_BOUNDS|posizione e dimensione attributi# Caratteri
+WIN_FONT_TITLE|Caratteri impostazioni
+WIN_FONT_FILE|File *:
+WIN_FONT_FILE_TIP|Il file che contiene il TrueType utilizzati o Caratteri ApriType.
+WIN_FONT_OPEN|Apri ...
+WIN_FONT_SIZE|Dimensione:# Layout
+WIN_LAYOUT_TITLE|Layout impostazioni
+WIN_LAYOUT_GENERAL|Generale attributi
+WIN_LAYOUT_DIMENSIONS|Dimensioni
+WIN_LAYOUT_WIDTH|larghezza iniziale *:
+WIN_LAYOUT_WIDTH_TIP|larghezza iniziale del layout.
+WIN_LAYOUT_HEIGHT|altezza iniziale *:
+WIN_LAYOUT_HEIGHT_TIP|altezza iniziale del layout.
+
+WIN_LAYOUT_MINWIDTH|Larghezza minima:
+WIN_LAYOUT_MINWIDTH_TIP|larghezza minima del layout. Usato solo quando il ridimensionamento del layout. Se questo valore e' impostato su "-1", la larghezza iniziale sara' utilizzato come larghezza minima.
+WIN_LAYOUT_MINHEIGHT|Altezza minima:
+WIN_LAYOUT_MINHEIGHT_TIP|Altezza minima del layout. Usato solo quando il ridimensionamento del layout. Se questo valore e' impostato su "-1", l'altezza iniziale sara' utilizzato come altezza minima.
+WIN_LAYOUT_MAXWIDTH|Larghezza massima:
+WIN_LAYOUT_MAXWIDTH_TIP|Larghezza massima del layout. Usato solo quando il ridimensionamento del layout. Se questo valore e' impostato su "-1", la larghezza iniziale sara' utilizzato come larghezza massima.
+WIN_LAYOUT_MAXHEIGHT|Altezza massima:
+WIN_LAYOUT_MAXHEIGHT_TIP|L'altezza massima del layout. Usato solo quando il ridimensionamento del layout. Se questo valore e' impostato su "-1", l'altezza iniziale sara' utilizzato come altezza massima.# Window
+WIN_WINDOW_TITLE| Impostazioni finestra
+WIN_WINDOW_X_TIP|Distanza iniziale della finestra per il bordo sinistro dello schermo. 
+WIN_WINDOW_Y_TIP|distanza iniziale della finestra verso il bordo superiore dello schermo.
+WIN_WINDOW_VISIBLE_TIP|Indica se la finestra deve essere visualizzato quando VLC e' avviato. Dal momento che VLC ricorda la posizione della pelle finestre e visibilita', questo attributo verra' utilizzato soltanto la prima volta che la pelle e' avviato.
+WIN_WINDOW_DD|Drag and drop:
+WIN_WINDOW_DD_TIP|Indica se il drag and drop dei file multimediali e' consentito in questa finestra.
+WIN_WINDOW_PD|Play in calo:
+WIN_WINDOW_PD_TIP|Indica se un file rilasciato viene riprodotto direttamente (true) o solo accodato (false). Questo attributo non ha effetto se dragdrop e' impostato su "false".
+WIN_WINDOW_DD_PANEL|Drag and drop opzioni# Anchor
+WIN_ANCHOR_TITLE|Ancora impostazioni
+WIN_ANCHOR_POINTS|Punti:
+WIN_ANCHOR_POINTS_TIP|punti che definiscono la curva di Bezier seguita da l'ancora. Non e' necessario cambiare questo parametro, se tutti si desidera e' una puntuale ancoraggio.
+WIN_ANCHOR_RANGE|Gamma:
+WIN_ANCHOR_RANGE_TIP|Gamma dei tasselli area di effetto, in pixel.
+WIN_ANCHOR_PRIORITY|Priorita' *:
+WIN_ANCHOR_PRIORITY_TIP|Ogni ancoraggio ha una priorita' (attributo di priorita'), e l'ancora con la priorita' più alta e' il vincitore, il che significa che quando si sposta la sua finestra tutte le altre finestre ancorate si spostera' troppo. Per spezzare l'effetto di 2 finestre ancorate, e' necessario spostare la finestra di cui ancora ha la priorita' più bassa.
+WIN_ANCHOR_BOUNDARIES|Confini# Button
+WIN_BUTTON_TITLE|impostazioni di Button
+WIN_BUTTON_UP|Immagine normale *:
+WIN_BUTTON_OVER|immagine quando si librava:
+WIN_BUTTON_DOWN|Image quando si fa clic:
+WIN_BUTTON_ACTION|Azione:
+WIN_BUTTON_ATTR|pulsante Attributi# Casella di controllo
+WIN_CHECKBOX_TITLE|Casella di controllo delle impostazioni
+WIN_CHECKBOX_UP|Immagine normale *:
+WIN_CHECKBOX_OVER|immagine quando si librava:
+WIN_CHECKBOX_DOWN|Image quando si fa clic:
+WIN_CHECKBOX_ACTION|Azione:
+WIN_CHECKBOX_CONDITION|Condizione:
+WIN_CHECKBOX_CONDITION_TIP|espressione booleana che specifica lo stato del CheckBox: false -> Stato # 1, true -> Stato # 2
+WIN_CHECKBOX_STATE|Casella di controllo dello stato
+WIN_CHECKBOX_STATE1|Stato # 1 (condizione non e' soddisfatta):
+WIN_CHECKBOX_STATE2|Stato # 2 (condizione e' soddisfatta):# Image
+WIN_IMAGE_TITLE|Impostazioni immagini
+WIN_IMAGE_IMAGE|Image *:
+WIN_IMAGE_IMAGE_TIP|ID di una bitmap
+WIN_IMAGE_RESIZE|Ridimensiona modalita':
+WIN_IMAGE_RESIZE_TIP|Specificare il comportamento delle immagini quando viene ridimensionato.
+WIN_IMAGE_ACTION|Azione:
+WIN_IMAGE_ACTION_TIP|Azione attivato da un clic sull'immagine.
+WIN_IMAGE_ACTION2|Fare doppio clic su azione:
+WIN_IMAGE_ACTION2_TIP|Azione innescata da un doppio clic sull'immagine.
+WIN_IMAGE_ATTR|Immagine attributi
+WIN_IMAGE_ART|Sostituire l'immagine con copertina, se disponibile# Gruppo
+WIN_GROUP_TITLE|impostazioni del gruppo# Pannello
+WIN_PANEL_TITLE|Pannello impostazioni
+WIN_PANEL_DIMENSIONS|Dimensioni
+WIN_PANEL_WIDTH|Larghezza *:
+WIN_PANEL_HEIGHT|Altezza *:# Sequenza di riproduzione
+WIN_PLAYTREE_TITLE|Passa impostazioni
+WIN_PLAYTREE_FONT|Caratteri *:
+WIN_PLAYTREE_BGIMAGE|Immagine di sfondo:
+WIN_PLAYTREE_BGIMAGE_TIP|ID di una bitmap, usato come immagine di sfondo. Quando non viene specificato bitmap, lo sfondo sara' riempito con il bgcolor1 e bgcolor2 attributi.
+WIN_PLAYTREE_BGCOLOR1|colore di sfondo # 1:
+WIN_PLAYTREE_BGCOLOR2|colore di sfondo # 2:
+WIN_PLAYTREE_SELCOLOR|Selezione colore:
+WIN_PLAYTREE_FGCOLOR|Colore del testo:
+WIN_PLAYTREE_PLAYCOLOR|Riproduzione colore del testo:
+WIN_PLAYTREE_FLAT|Flat :
+WIN_PLAYTREE_FLAT_TIP|Indica se la  deve utilizzare la struttura ad albero o essere completamente \ "flat \" (mostra solo le foglie dell'albero).
+WIN_PLAYTREE_ITEMIMAGE|Voce icona:
+WIN_PLAYTREE_OPENIMAGE|Apri cartella icona:
+WIN_PLAYTREE_CLOSEDIMAGE|icona di cartella di chiusura:
+WIN_PLAYTREE_SLIDER|Modifica lo scorrimento della scaletta(scrollbar)
+WIN_PLAYTREE_ATTR|Passa attributi
+WIN_PLAYTREE_CHOOSE|Scegli ...
+WIN_PLAYTREE_CHOOSER_TITLE|Scegli il colore# scorrimento
+WIN_SLIDER_TITLE|scorrimento impostazioni
+WIN_SLIDER_UP|Immagine normale *:
+WIN_SLIDER_OVER|immagine quando si librava:
+WIN_SLIDER_DOWN|Image quando si fa clic:
+WIN_SLIDER_POINTS|Punti *:
+WIN_SLIDER_THICKNESS|Spessore:
+WIN_SLIDER_VALUE|Valore *:
+WIN_SLIDER_VALUE_SCROLL|Passa scorrimento
+WIN_SLIDER_BG_ENABLE|Abilita sfondo
+WIN_SLIDER_BG_EDIT|Modifica e' ...
+WIN_SLIDER_ATTR|scorrimento attributi
+WIN_SLIDER_BG|scorrimento sfondo# Sfondo scorrimento
+WIN_SBG_TITLE|scorrimento impostazioni di fondo
+WIN_SBG_WIZARD|Apri scorrimento generatore sfondo ...
+WIN_SBG_IMAGE|Image *:
+WIN_SBG_NBHORIZ|telai orizzontali:
+WIN_SBG_NBVERT|telai verticali:
+WIN_SBG_PADHORIZ|orizzontale padding:
+WIN_SBG_PADVERT|verticale padding:
+WIN_SBG_ATTR|attributi sfondo # Testo
+WIN_TEXT_TITLE|Testo impostazioni
+WIN_TEXT_TEXT|Testo *:
+WIN_TEXT_FONT|Caratteri:
+WIN_TEXT_COLOR|Colore:
+WIN_TEXT_CHOOSE|Scegli ...
+WIN_TEXT_CHOOSER_TITLE|Scegli il colore del testo
+WIN_TEXT_ALIGNMENT|Allineamento:
+WIN_TEXT_SCROLLING|Scrolling:
+WIN_TEXT_ATTR|Testo attributi# Video
+WIN_VIDEO_TITLE|Impostazioni video
+WIN_VIDEO_AUTORESIZE|AutoResize:
+WIN_VIDEO_AUTORESIZE_TIP|Indicare se la presentazione deve essere ridimensionate automaticamente per adattarsi alle dimensioni del video riprodotto.
+WIN_VIDEO_ATTR|Video attributi

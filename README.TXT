@@ -1,6 +1,10 @@
-﻿VLC Skin Editor release 0.8.6
+VLC Skin Editor
 -----------------------------------------------------------
 Changelog:
+-----------------------------------------------------------
+See http://d-gfx.kognetwork.ch/VLC/skineditor/
+-----------------------------------------------------------
+Changelog for major versions:
 -----------------------------------------------------------
 0.8.6  - Support for new skins2 features in VLC 1.1/1.2
            + cover art
@@ -142,6 +146,9 @@ Andrey Wolk for the Russian translation
 Marián Hikaník for the Slovak translation
 Daniel Nylander for the Swedish translation
 Kaya Zeren for the Turkish translation
+Lorenzo Marrocchi for the Italian translation
+Jiří Pešek for the Czech translation
+Alan for the Chinese Translation
 -----------------------------------------------------------
 Further credits:
 -----------------------------------------------------------

@@ -7,6 +7,7 @@ nl|Dutch - Nederlands|nl.txt
 en|English|en.txt
 fr|French - Français|fr.txt
 de|German - Deutsch|de.txt
+it|Italian - Italiano|it.txt
 ko|Korean - 한국어/조선말|ko.txt
 pl|Polish - Polski|pl.txt
 pt-br|Portuguese (Brasil) - Português (Brasil)|pt-br.txt
