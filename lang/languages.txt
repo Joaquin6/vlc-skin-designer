@@ -5,6 +5,7 @@ zh-tw|Chinese (Taiwanese Mandarin) - 國語|zh-tw.txt
 cz|Czech - Čeština|cz.txt
 nl|Dutch - Nederlands|nl.txt
 en|English|en.txt
+et|Estonian - Eesti keel|et.txt
 fr|French - Français|fr.txt
 de|German - Deutsch|de.txt
 it|Italian - Italiano|it.txt

@@ -1,0 +1,605 @@
+﻿#Estonian language file for VLC Skin Editor
+#Author/s: Olav Mägi
+
+#General strings
+CHOICE_YES|Jah
+CHOICE_NO|Ei
+CHOICE_CANCEL|Loobu
+BUTTON_OK|OK
+BUTTON_CANCEL|Loobu
+BUTTON_HELP|Abi
+
+#Item names
+THEME|Teema
+FONT|Font
+BITMAP|Pispilt
+SUBBITMAP|Alampisipilt
+WINDOW|Aken
+LAYOUT|Välimus
+ANCHOR|Kinnitus
+BUTTON|Nupp
+CHECKBOX|Märkekast
+GROUP|Grupp
+IMAGE|Pilt
+PANEL|Paneel
+PLAYTREE|Playtree
+RADIALSLIDER|Radiaalne liugur
+SLIDER|Liugur
+SLIDERBG|Liuguri tagaplaan
+TEXT|Tekst
+VIDEO|Video
+UNNAMED|Nimetu %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Fail
+MENU_FILE_MN|F
+MENU_FILE_NEW|Uus
+MENU_FILE_NEW_MN|U
+MENU_FILE_OPEN|Ava...
+MENU_FILE_OPEN_MN|A
+MENU_FILE_SAVE|Salvesta
+MENU_FILE_SAVE_MN|S
+MENU_FILE_TEST|Testi rüüd VLC-s
+MENU_FILE_TEST_MN|T
+MENU_FILE_VLT|Ekspordi VLT failina...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Salvesta praegune pilt eelvaatena...
+MENU_FILE_PNG_MN|p
+MENU_FILE_EXIT|Välju
+MENU_FILE_EXIT_MN|x
+MENU_EDIT|Muuda
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Võta tagasi
+MENU_EDIT_UNDO_MN|U
+MENU_EDIT_REDO|Võta edasi
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Rüü seaded
+MENU_EDIT_THEME_MN|S
+MENU_EDIT_VARS|Globaalsed muutujad
+MENU_EDIT_VARS_MN|G
+MENU_EDIT_PREFS|Atribuudid
+MENU_EDIT_PREFS_MN|A
+MENU_EDIT_UP|Liiguta valitud kirjet ülespoole
+MENU_EDIT_DOWN|Liiguta valitud kirjet allapoole
+MENU_EDIT_LEFT|Liiguta valitud kirjet vasakule
+MENU_EDIT_RIGHT|Liiguta valitud kirjet paremale
+MENU_HELP|Abi
+MENU_HELP_MN|A
+MENU_HELP_DOC|Veebiabi
+MENU_HELP_DOC_MN|V
+MENU_HELP_ABOUT|Info
+MENU_HELP_ABOUT_MN|I
+
+#The toolbar
+TOOLBAR_OPEN|Ava rüü...
+TOOLBAR_SAVE|Salvesta rüü kohandamised
+TOOLBAR_UNDO|Võta tagasi
+TOOLBAR_REDO|Võta edasi
+TOOLBAR_MOVE|Kirje liigutamise tööriist
+TOOLBAR_PATH|Liuguri muutmise tööriist
+
+#Resource Window
+WIN_RES_TITLE|Allikad
+WIN_RES_ADD_BMP|Lisa uus pisipilt või alampisipilt
+WIN_RES_ADD_FONT|Lisa uus font
+WIN_RES_COPY|Loo valitud allikast 
+WIN_RES_EDIT|Muuda valitud allikat
+WIN_RES_DELETE|Kustuta valitud allikat
+WIN_RES_PU_ADD_BMP|Lisa pispipilt/e
+WIN_RES_PU_ADD_SBMP|Lisa alampisipilt
+WIN_RES_BITMAPS|Pispildid
+WIN_RES_FONTS|Fondid
+
+#Windows window
+WIN_WIN_TITLE|Aknad
+WIN_WIN_ADD|Lisa uus aken
+WIN_WIN_ADD_LAY|Lisa valitud aknale uus välimus
+WIN_WIN_MOVE_UP|Liiguta valitud välimust hierarhiliselt ülespoole (viimane välimus on tavavälimus akna jaoks)
+WIN_WIN_MOVE_DOWN|Liiguta valitud välimust hierarhiliselt allapoole (viimane välimus on tavavälimus akna jaoks)
+WIN_WIN_COPY|Loo valitud aknast või välimusest  kopeering
+WIN_WIN_EDIT|Muuda valitud akent või välimust
+WIN_WIN_DELETE|Kustuta valitud aken või välimus
+
+#Items window
+WIN_ITEMS_TITLE|Kirjed
+WIN_ITEMS_ADD|Lisa uus kirje
+WIN_ITEMS_MOVE_UP|Liiguta valitud kirjet hierarhiliselt ülespoole
+WIN_ITEMS_MOVE_DOWN|Liiguta valitud kirjet hierarhiliselt allapoole
+WIN_ITEMS_COPY|Loo valitud kirjest kopeering
+WIN_ITEMS_EDIT|Muuda valitud kirjet
+WIN_ITEMS_DELETE|Kustuta valitud kirje
+WIN_ITEMS_PU_PANEL_ADD|Lisa valitud paneeli
+
+#Welcome dialog
+WELCOME_TITLE|Tere tulemast VLC Rüü Muutjasse
+WELCOME_MSG|Mida te sooviksite teha?
+WELCOME_NEW|Luua uut rüüd
+WELCOME_OPEN|Avada olemasolevat rüüd
+WELCOME_QUIT|Väljuda
+
+#Preferences window
+WIN_PREFS_TITLE|Atribuudid
+WIN_PREFS_UPDATE_L|Võimalda auto-uuendus:
+WIN_PREFS_LANG_L|Keel:
+WIN_PREFS_LAF_L|Programmi välimus:
+WIN_PREFS_TBAR_L|Näita tööriistariba:
+WIN_PREFS_RESTART_L|<html><i>Mõned seaded jõustavad ainult peale programmi taaskäivitumist.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Muuda alampisipilti
+ZOOM_FACTOR|Suurendustegur:
+
+#Global variables editing window
+WIN_VARS_TITLE|Globaalsed muutujad
+WIN_VARS_NOTE|<html>Need muutujad ainult mõjutavad eelvaadet.<br>Nad stimuleerivad VLC olekut.</html>
+WIN_VARS_SLIDER|Liuguri asukoht
+
+#Theme options window
+WIN_THEME_TITLE|Rüü seaded
+WIN_THEME_NAME|Nimi:
+WIN_THEME_AUTHOR|Autor:
+WIN_THEME_EMAIL|Autori e-post:
+WIN_THEME_WEB|Autori veebilehekülg:
+WIN_THEME_MAGNET|Magnet:
+WIN_THEME_MAGNET_TIP|Kui ekraani ääre ja akna kauguse vahemaa on väiksem kui see väärtus siis aken jääb 
+WIN_THEME_ALPHA|Läbipaistvus:
+WIN_THEME_ALPHA_TIP|Määrab akende alpha läbipaistvuse. Väärtus peab olema 1 (peaaegu täielik läbipaistvus) ja 255 (täielik läbipaistvus)vahel. Väikseid väärtusi peaks vältima.
+WIN_THEME_MOVEALPHA|Läbiüaistvus liigutamise ajal:
+WIN_THEME_MOVEALPHA_TIP|Määrab akende alpha läbipaistvuse nende liigutamise ajaks.
+WIN_THEME_INFO_TITLE|Teema informatsioon
+WIN_THEME_ATTR_TITLE|Teema atribuudid
+
+#Action Editor
+WIN_ACTIONS_TITLE|Muuda tegevuste arvu
+
+#Popup menu in the action editor
+ACTIONS_PU|Tegevused
+ACTIONS_DIALOGS|Näita dialoogi
+ACTIONS_PLAYLIST|Esitusloend
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Rüü
+ACTIONS_VLC_PLAY|Esita
+ACTIONS_VLC_PAUSE|Pausi
+ACTIONS_VLC_STOP|Peata
+ACTIONS_VLC_FASTER|Esita kiiremini
+ACTIONS_VLC_SLOWER|Esita aeglasemini
+ACTIONS_VLC_NEXTFRAME|Esita järgmist kaadrit
+ACTIONS_VLC_MUTE|Lülita heli välja
+ACTIONS_VLC_VOLUMEUP|Suurenda helitugevust
+ACTIONS_VLC_VOLUMEDOWN|Vähenda helitugevust
+ACTIONS_VLC_FULLSCREEN|Mine täisekraani olekusse
+ACTIONS_VLC_SNAPSHOT|Tee kuvatõmmis
+ACTIONS_VLC_TOGGLERECORD|Alusta salvestamist
+ACTIONS_VLC_ONTOP|Määra alati pealmiseks
+ACTIONS_VLC_MINIMIZE|Minimiseeri VLC
+ACTIONS_VLC_QUIT|Välju VLC-st
+ACTIONS_EQ_ENABLE|Luba ekvalaiser
+ACTIONS_EQ_DISABLE|Keela ekvalaiser
+ACTIONS_DIALOGS_CHANGESKIN|Muuda rüüd
+ACTIONS_DIALOGS_FILESIMPLE|Ava fail (lihtne)
+ACTIONS_DIALOGS_FILE|Ava fail (laiendatud)
+ACTIONS_DIALOGS_DIRECTORY|Ava kataloog
+ACTIONS_DIALOGS_DISC|Ava ketas
+ACTIONS_DIALOGS_NET|Ava internetilink
+ACTIONS_DIALOGS_MESSAGES|Teadete logi
+ACTIONS_DIALOGS_PREFS|Atribuudid
+ACTIONS_DIALOGS_FILEINFO|Faili informatsioon
+ACTIONS_DIALOGS_PLAYLIST|Mitterüütatud esitusloend
+ACTIONS_DIALOGS_STREAMINGWIZARD|Striimimise võlur
+ACTIONS_DIALOGS_POPUP|Täielik hüpikakna menüü
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio seadete hüpikakna menüü
+ACTIONS_DIALOGS_VIDEOPOPUP|Video seadete hüpikakna menüü
+ACTIONS_DIALOGS_MISCPOPUP|Mitmekülgsete seadete hüpikakna menüü
+ACTIONS_PLAYLIST_ADD|Lisa uus kirje
+ACTIONS_PLAYLIST_DEL|Eemalda valitud kirje
+ACTIONS_PLAYLIST_NEXT|Esita järgmist kirjet
+ACTIONS_PLAYLIST_PREVIOUS|Esita eelmist kirjet
+ACTIONS_PLAYLIST_SETRANDOM|Esita suvalises/normaalses järjekorras
+ACTIONS_PLAYLIST_SETLOOP|Korda esitusloendit/esita seda kord
+ACTIONS_PLAYLIST_SETREPEAT|Luba/keela praeguse kirje muutmist
+ACTIONS_PLAYLIST_SORT|Sorteeri tähestikulises järjekorras
+ACTIONS_PLAYLIST_LOAD|Lae failist
+ACTIONS_PLAYLIST_SAVE|Salvesta faili
+ACTIONS_DVD_NEXTTITLE|Järgmine pealkiri
+ACTIONS_DVD_PREVIOUSTITLE|Eelmine pealkiri
+ACTIONS_DVD_NEXTCHAPTER|Järgmine peatükk
+ACTIONS_DVD_PREVIOUSCHAPTER|Eelmine peatükk
+ACTIONS_DVD_ROOTMENU|Põhimenüü
+ACTIONS_WINDOWS_SHOW|Näita akent
+ACTIONS_WINDOWS_HIDE|Peida aken
+ACTIONS_WINDOWS_MAXIMIZE|Suurenda akent
+ACTIONS_WINDOWS_UNMAXIMIZE|Ära suurenda akent
+ACTIONS_WINDOWS_SETLAYOUT|Muuda akna välimust
+
+#Action descriptions
+ACTION_DESC_NONE|Ära tee midagi.
+ACTION_DESC_CHANGESKIN|Näita dialoogi, et laadida uut rüüd.
+ACTION_DESC_FILESIMPLE|Näita lihtsat "Ava fail" dialoogi.
+ACTION_DESC_FILE|Näita laiendatud "Ava fail" dialoogi.
+ACTION_DESC_DIRECTORY|Näita "Ava kataloog" dialoogi.
+ACTION_DESC_DISC|Näita "Ava ketas" dialoogi.
+ACTION_DESC_NET|Näita "Ava interneti striim" dialoogi.
+ACTION_DESC_MSG|Näita teadete logi dialoogi.
+ACTION_DESC_PREFS|Näita atribuutide dialoogi.
+ACTION_DESC_FILEINFO|Näita faili informatsiooni dialoogi.
+ACTION_DESC_PLAYLIST|Näita tavalist (mitterüütatud) esitusloendi akent.
+ACTION_DESC_WIZARD|Näita "Striimimise võlur" dialoogi.
+ACTION_DESC_POPUP|Näita täielikku hüpikakna menüüd.
+ACTION_DESC_AUDIOPU|Näita audio seadete hüpikakna menüüd.
+ACTION_DESC_VIDEOPU|Näita video seadete  hüpikakna menüüd.
+ACTION_DESC_MISCPU|Näita hüpikakna menüüd, mis sisaldab taasesituse juhtnuppe ja põhilisi valikuid.
+ACTION_DESC_EQENABLE|Luba  audio ekvalaiseri filter.
+ACTION_DESC_EQDISABLE|Keela audio ekvalaiseri filter.
+ACTION_DESC_PLAY|Esita praegust esitusloendi kirjet.
+ACTION_DESC_PAUSE|Pausi taasesitus.
+ACTION_DESC_STOP|Peata taasesitus.
+ACTION_DESC_FASTER|Esita kiiremini.
+ACTION_DESC_SLOWER|Esita aeglasemini.
+ACTION_DESC_NEXTFRAME|Arendab taasesitust ühe fraami võrra (fraam fraami järel taasesitus).
+ACTION_DESC_MUTE|Lülita sisse audio hääletuks.
+ACTION_DESC_VOLUP|Suurenda helitugevust.
+ACTION_DESC_VOLDOWN|Vähenda helituhevust.
+ACTION_DESC_FULLSCREEN|Mine täisekraani olekusse.
+ACTION_DESC_SNAPSHOT|Tee videost kuvatõmmis.
+ACTION_DESC_TOGGLERECORD|Lülitab sisse taasesituse salvestamise.
+ACTION_DESC_ONTOP|Lülita sisse "alati pealmine" olek.
+ACTION_DESC_MIN|Minimiseeri VLC.
+ACTION_DESC_QUIT|Välju VLC-st.
+ACTION_PL_ADD|Lisa uus kirje esitusloendisse.
+ACTION_PL_DEL|Eemalda valitud kirjed esitusloendist.
+ACTION_PL_NEXT|Esita järgmine kirje esitusloendist.
+ACTION_PL_PREV|Esita eelmine kirje esitusloendist.
+ACTION_PL_SORT|Sorteeri esitusloendist tähestikulises järjekorras.
+ACTION_PL_LOAD|Lae välimine esitusloendi fail.
+ACTION_PL_SAVE|Salvesta praegune esitusloend faili.
+ACTION_DVD_NEXTT|Mine järgmisesse pealkirja DVD-l.
+ACTION_DVD_PREVT|Mine eelmisesse pealkirja DVD-l.
+ACTION_DVD_NEXTC|Mine järgmisesse DVD peatükki.
+ACTION_DVD_PREVC|Mine eelmisesse DVD peatükki.
+ACTION_DVD_MENU|Mine DVD peamenüüsse.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Aktiveeri
+ACTION_DEACTIVATE|Keela
+ACTION_RANDOM|%s , et kirjed esitusloendis esitatakse suvaliselt.
+ACTION_LOOP|%s , et esitusloendit korratakse, kui see on lõpuni esitatud.
+ACTION_REPEAT|%s , et praegust kirjet korratakse peale selle lõpule jõudmist.
+ACTION_SHOW|Näita akent koos %i ID-ga
+ACTION_HIDE|Peida aken koos %i ID-ga
+ACTION_MAXIMIZE|Suurenda akent koos %i ID-ga
+ACTION_UNMAXIMIZE|Ära suurenda akent koos %i ID-ga
+ACTION_LAYOUT|Määra akna välimus koos %i ID-ga  %l´ks
+
+#Slider background generator
+SBGGEN_TITLE|Liuguri tagaplaani genereerija
+SBGGEN_PREV|< Eelmine
+SBGGEN_NEXT|Järgmine >
+SBGGEN_CANCEL|Loobu
+SBGGEN_FINISH|Lõpeta
+
+SBGGEN_DESCR|Tere tulemast liuguri tagaplaani genereerijasse. See aitab sul luua puhta luguri oma piltidest vaid mõne sammuga.
+SBGGEN_FIRST|Esimese sammuna, palun vali, kas liugur liigub vasakult paremale või alt ülesse ning kui suur tagaplaan peaks olema.
+SBGGEN_WIDTH|Laius:
+SBGGEN_HEIGHT|Kõrgus:
+SBGGEN_LEFT_M|Vasak äär:
+SBGGEN_RIGHT_M|Parem äär:
+SBGGEN_TOP_M|Ülemine äär:
+SBGGEN_BTM_M|Alumine äär:
+SBGGEN_SECOND|Järgmisena sa pead valima õiged pildifailid, mis on ühendatud sinu liuguri erinevate osadega.
+SBGGEN_NOTE|Pane tähele, et ikoonid on ainult näidised, mis kujutavad erinevate osade kujutust. Nad pole piltide eelvaated, mida kasutatakse  tagaplaani loomisel. 
+SBGGEN_IMAGE|Pildifail:
+SBGGEN_OPEN|Ava...
+SBGGEN_RESIZE|Taassuurenda käitumist:
+SBGGEN_TILE|Plaat
+SBGGEN_STRETCH|Venitus
+
+SBGGEN_BG|Tagaplaan
+SBGGEN_OVERLAY|Aplikatsiooni pilt
+SBGGEN_LEFT_E|Vasak äär
+SBGGEN_RIGHT_E|Parem äär
+SBGGEN_TOP_E|Ülemine äär
+SBGGEN_BTM_E|Alumine äär
+SBGGEN_MIDDLE|Keskmine osa
+
+SBGGEN_PROGRESS|Tagaplaani loomine...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|Info VLC Rüü Muutja %v kohta
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Autoriõigus 2007-%y VideoLAN´i Tiim</h3>Väljastatud GPL 2+ lepingu alusel<br><br><b>Põhiline programmeerija:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Veebisait:</b> %w<br><br><b>Tänud:</b><br>Timothy Gerard Endres registriga ühendumise ja TAR toetuse eest (Avalik domeen)<br>Tango! Töölaua Projekt (http://tango.freedesktop.org) mõnede ikoonide jaoks (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) ja Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) for the Boolean Expression Evaluator and Bezier code (GPL 2+)</html>
+VLT_EX_TITLE|VLT faili importimine
+#%f - name of the folder
+VLT_EX_MSG|VLT fail pakitakse lahti alamkausta, mille nimi on "%f".\nTahad jätkata?
+VLT_EX_YES|Jah, paki lahti
+VLT_EX_NO|Ei, loobu
+VLT_EX_PROGRESS|VLT faili lahtipakkimine...
+XML_PARSING_PROGRESS|XML´i parsimine...
+ADD_BMP_FILE_FILTER_DESC|*.png (Kaasaskantav võrgugraafika) XML failide kataloogi sees
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (Avatud & True tüüpi fondid) XML failide kataloogi sees
+DUPLICATE_MSG|Palun sisesta kordusobjektidele ümbernimetamisstruktuur.\n%oldid% asendatakse vana ID objektiga.
+DEL_CONFIRM_TITLE|Kustutamise kinnitus
+DEL_CONFIRM_MSG|Kas te tõesti tahate kustutada  "%n" ?
+EXIT_CONFIRM_TITLE|Sinu muudatusi ei salvestatud
+EXIT_CONFIRM_MSG|Kas te sooviksite salvestada oma rüüd enne väljumist?
+UPDATE_TITLE|Leiti uuendus
+UPDATE_MSG|Rüü muutjale on saadaval uuendus.\nSinu versioon: %v\nUusim versioon: %c\nKas te tahaksite uuendada Rüü muutjat praegu?
+VLT_PROGRESS|VLT faili loomine...
+VLT_SUCCESS_MSG|VLT fail on edukalt loodud.
+VLT_SUCCESS_TITLE|Loodi VLT fail
+DOWNLOAD_PROGRESS|Alllaadimine...
+CONNECT_PROGRESS|Ühendumine...
+UPDATE_SUCCESS_TITLE|Lõpetati uuendamine
+UPDATE_SUCCESS_MSG|Uuendus on edukalt allalaetud ja paigaldatud.\nVLC Rüü muutja taaskäivitub nüüd
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Faili avamisel ilmnev viga
+ERROR_FILENEXIST_MSG|"%f" faili pole olemas ning sellepärast seda ei saa avada!
+ERROR_VLT_UNPACK_TITLE|VLT faili ei suudetud lahti pakkida
+ERROR_VLT_UNPACK_MSG|VLT faili ei suudetud lahti pakkida!
+ERROR_VLT_NOTHEME_TITLE|Ei suudetud leida theme.xml faili
+ERROR_VLT_NOTHEME_MSG|Ei suudetud leida "theme.xml" faili VLT faili lahtipakitud sisu seast.\nProovi seda avada käsitsi.
+ERROR_VLC_LAUNCH_TITLE|Viga
+ERROR_VLC_LAUNCH_MSG|VLC meediaesitajat ei suudetud käivitada
+ERROR_BROWSE_TITLE|Ei suudetud käivitada brauserit
+ERROR_BROWSE_MSG|Brauserit ei suudetud käivitada.\nPalun mine järgnevasse URL-i ise:\n%u
+ERROR_ADD_SBMP_TITLE|Ei suudetud lisada alampisipilti
+ERROR_ADD_SBMP_NOBMP|Mitte ühtegi vanemat pisipilti pole valitud!
+ERROR_ADD_SBMP_NOTBMP|Valitud vahend pole pisipilt!
+ERROR_RES_DEL_TITLE|Ei suudetud kustutada vahendit
+ERROR_RES_DEL_INUSE|Vahend on hetkel kasutuses ning sellepärast ei saa seda hetkel kustutada.
+ERROR_ADD_LAYOUT_TITLE|Ei suudetud lisada välimust
+ERROR_ADD_LAYOUT_MSG|Vanemat akent ei valitud!
+ERROR_UPDATE_TITLE|Uuendamise ajal tekkis viga!
+ERROR_SAVEPNG_TITLE|Pildi salvestamisel tekkinud viga
+ERROR_SAVEPNG_MSG|Ei suudetud salvestada pilti.
+ERROR_NEWSKIN_TITLE|Viga ilmnes uue rüü faili loomise ajal!
+ERROR_NEWSKIN_MSG|Uut rüü faili ei suudetud luua.
+ERROR_HEADER_INVALID|Tundub, et fail pole korrektne VLC teema!\nVigane pealkiri:
+ERROR_SKIN_INVALID|Valitud fail ei kuulu korrektse VLC rüü faili hulka!
+ERROR_VERSION_UNSUPPORTED|See teema versioon valitud rüüs pole veel toetatud!
+ERROR_SAVE_TITLE|Rüü faili salvestamise ajal ilmnenud viga!
+ERROR_SAVE_MSG|Rüü faili ei suudetud salvestada.
+ERROR_ALPHA_TITLE|Läbipaistvuse väärtus pole õige
+ERROR_ALPHA_MSG|Palun sisesta õige väärtus! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Ei suudetud laadida keskmist pilti!\nVähemalt liuguri keskmist osa on vaja liuguri tagaplaani loomisel.
+ERROR_VLT_TITLE|VLT faili ei suudetud luua
+ERROR_VLT_MSG|VLT faili ei suudetud luua!
+ERROR_ID_INVALID_TITLE|ID pole õige
+ERROR_ID_INVALID_MSG|Palun sisesta õige ID!
+ERROR_ID_EXISTS_MSG|ID "%i" on juba olemas.\nPalun vali teistsugune.
+ERROR_WIDTH_INVALID_TITLE|Laius pole õige
+ERROR_WIDTH_INVALID_MSG|Palun sisesta õige laius!
+ERROR_HEIGHT_INVALID_TITLE|Kõrgus pole õige
+ERROR_HEIGHT_INVALID_MSG|Palun sisesta õige kõrgus!
+ERROR_FILE_INVALID_TITLE|Fail pole õige
+ERROR_FILE_INVALID_MSG|Palun vali õige fail!
+ERROR_BITMAP_INVALID_MSG|Antud pisipildi faili ei suudetud laadida!\nPalun vali teine.
+ERROR_NBFRAMES_TITLE|Vigane päisete number
+ERROR_NBFRAMES_MSG|Päisete number ei tohi olla ühest väiksem
+ERROR_OTF_TITLE|OTF pole toetatav
+ERROR_OTF_MSG|Sa oled valinud OpenType fondi, VLC kuvab seda õigesti aga Rüü Muutja ei saa seda kuvada.\nSa näed teist fonti eelvaates.
+ERROR_SIZE_INVALID_TITLE|Vale suurus
+ERROR_SIZE_INVALID_MSG|Palun sisesta õige suurus.
+ERROR_OUTSIDE_TITLE|Dimensioonid pole  õiged
+ERROR_OUTSIDE_MSG|Täpsustatud dimensioonid on väljaspool vana pisipilti!
+ERROR_BITMAP_NEXIST|%i pisipilti pole olemas.
+ERROR_BITMAP_NEXIST_TITLE|Pilt pole õige!
+ERROR_BITMAP_LOAD|Pildifaili %i pisipildi jaoks ei suudetud laadida.
+ERROR_BITMAP_LOAD_TITLE|Piltide laadimise ajal tekkis viga
+ERROR_NOSTATE|Palun andke teada olekust!
+ERROR_NOSTATE_TITLE|Olek pole õige
+ERROR_FONT_NEXIST| %i fonti pole olemas.
+ERROR_FONT_NEXIST_TITLE|Font pole õige!
+ERROR_POINTS_INVALID|Palun sisesta õige bezier´i punktid!
+ERROR_POINTS_INVALID_TITLE|Punktis pole õiged!
+ERROR_RADIALSLIDER|Radiaalsed liuguris pole veel toetatavad VLC Rüü Muutja poolt.
+ERROR_RADIALSLIDER_TITLE|Pole toetatud
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Nimetu teema
+THEMEINFO_AUTHOR_DEFAULT|Tundmatu autor
+THEMEINFO_EMAIL_DEFAULT|Tundmatu
+
+#History
+HIST_ITEM_ADD|Lisa %t
+HIST_ITEM_DEL|Kustuta %t
+HIST_ITEM_EDIT|Muuda %t
+HIST_ITEM_MOVE|Liiguta %t
+HIST_RES_DEL|Kustuta %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Omadus peab olema täpsustatud.
+
+#Common strings
+WIN_ITEM_GENERAL|Põhilised omadused
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|%t nimi ja identiteed. Peab olema unikaalne.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Laius:
+WIN_ITEM_HEIGHT|Kõrgus:
+WIN_ITEM_VISIBLE|Läbipaistvus:
+WIN_ITEM_LEFTTOP|Vasakultüleval:
+WIN_ITEM_LEFTTOP_TIP|Näitab, mis nurka see oleval vasakul olev kirje viitab, taassuurustamise puhul.
+WIN_ITEM_RIGHTBOTTOM|Allparemal:
+WIN_ITEM_RIGHTBOTTOM_TIP|Näitab, mis nurka see oleval all paremal olev kirje viitab, taassuurustamise puhul.
+WIN_ITEM_XKEEPRATIO|Hoia X raadius:
+WIN_ITEM_XKEEPRATIO_TIP|Kui lubatud siis horisontaalse taassuurustamise käitumist muudetakse.
+WIN_ITEM_YKEEPRATIO|Hoia Y raadius:
+WIN_ITEM_YKEEPRATIO_TIP|Kui lubatud siis vertikaalse taassuurustamise käitumist muudetakse.
+WIN_ITEM_HELP|Abitekst:
+WIN_ITEM_HELP_TIP|Muutujat '$H' laiendatakse selle väärtuseni, kui hiirega praeguse kontrolli pealt üle liigutada.
+WIN_ITEM_TOOLTIPTEXT|Spikker:
+FILE_INDIR|samas kaustas, kus asub XML fail
+
+#Bitmap
+WIN_BITMAP_TITLE|Pisipildi seaded
+WIN_BITMAP_FILE|Fail*:
+WIN_BITMAP_FILE_TIP|Näitab kasutatud pildifaili asukohta ja nime.
+WIN_BITMAP_OPEN|Ava...
+WIN_BITMAP_ALPHACOLOR|Alphavärv:
+WIN_BITMAP_ALPHACOLOR_TIP|Läbipaistvuse värv kuueteistkümnendsüsteemi formaadis. Kui sinu PNG fail täpsustab läbipaistvuse maski siis viiakse see kontole.
+WIN_BITMAP_CHOOSE|Vali...
+WIN_BITMAP_NBFRAMES|Fraamide koguarv:
+WIN_BITMAP_NBFRAMES_TIP|Seda tunnust vajatakse animeeritud pisipiltide defineerimiseks; see on fraamide koguarv (pildid), mis sisaldub sinu animatsioonis. Kõik erinevad raamid on pildid, mis asuvad vertikaalselt pispildis.
+WIN_BITMAP_FPS|Raame sekundi kohta:
+WIN_BITMAP_FPS_TIP|Ainult kasutatakse animeeritud pisipiltide puhul; see on animatsiooni raamide koguarv (pildid) sekundi kohta.
+WIN_BITMAP_ANIMATION|Animatsiooni atribuudid
+WIN_BITMAP_CHOOSER_TITLE|Vali alphavärv
+
+#SubBitmap
+WIN_SBMP_TITLE|Alampisipildi seaded
+WIN_SBMP_BOUNDS|Omaduste asukoht ja mõõde
+
+#Font
+WIN_FONT_TITLE|Fondi seaded
+WIN_FONT_FILE|Fail*:
+WIN_FONT_FILE_TIP|Fail, mis sisaldab kasutatud TrueType või OpenType fonti.
+WIN_FONT_OPEN|Ava...
+WIN_FONT_SIZE|Suurus:
+
+#Layout
+WIN_LAYOUT_TITLE|Välimuse seaded
+WIN_LAYOUT_GENERAL|Põhilised omadused
+WIN_LAYOUT_DIMENSIONS|Mõõtmed
+WIN_LAYOUT_WIDTH|Esialgne laius*:
+WIN_LAYOUT_WIDTH_TIP|Välimuse esialgne välimus.
+WIN_LAYOUT_HEIGHT|Esialgne kõrgus*:
+WIN_LAYOUT_HEIGHT_TIP|Välimue esialgne kõrgus.
+WIN_LAYOUT_MINWIDTH|Väikseim laius:
+WIN_LAYOUT_MINWIDTH_TIP|Välimuse väikseim laius. Ainult kasutatakse, kui välimust taassuurustatakse. Kui selle väärtus on "-1" siis esialgset laiust kasutatakse väikseima laiusena.
+WIN_LAYOUT_MINHEIGHT|Väikseim kõrgus:
+WIN_LAYOUT_MINHEIGHT_TIP|Välimuse väikseim kõrgus. Ainult kasutatakse, kui välimust taassuurustatakse. Kui selle väärtus on "-1" siis esialgset kõrgust kasutatakse  väikseima kõrgusena.
+WIN_LAYOUT_MAXWIDTH|Suurim laius:
+WIN_LAYOUT_MAXWIDTH_TIP|Välimuse suurim laius. Ainult kasutatakse, kui välimust taassuurustatakse. Kui selle väärtus on "-1" siis esialgset laiust kasutatakse suurima laiusena.
+WIN_LAYOUT_MAXHEIGHT|Suurim kõrgus:
+WIN_LAYOUT_MAXHEIGHT_TIP|Välimuse suurim kõrgus. Ainult kasutatakse, kui välimust taassuurustatakse. Kui selle väärtus on "-1" siis esialgset kõrgust kasutatakse suurima kõrgusena. 
+
+#Window
+WIN_WINDOW_TITLE|Akna seaded
+WIN_WINDOW_X_TIP|Vasakul olevas ekraanis asuva ekraani ja akna esialgne vahemaa.
+WIN_WINDOW_Y_TIP|Üleval ekraani ääres asuva ekraani ja akna esialgne vahemaa.
+WIN_WINDOW_VISIBLE_TIP|Osutab, kas akent peaks kuvama peale VLC käivitamist. Alates sellest, kui VLC mäletab rüü asukohta ja läbipaistvust, seda atribuuti kasutatakse ainult siis, kui seda rüüd käivitatakse esimesel korral.
+WIN_WINDOW_DD|Lohista ja aseta:
+WIN_WINDOW_DD_TIP|Näitab, kas meediafailide asetamine ja lohistamine on lubatud sellel aknal.
+WIN_WINDOW_PD|Esita peale asetamist:
+WIN_WINDOW_PD_TIP|Näitab, kas asetatud faili esitatakse otsekohe (võib) või pannakse ainult järjekorda (keelatud). Sellel atribuudil pole üldse funktsiooni, kui lohistaaseta on määratud "keelatud".
+WIN_WINDOW_DD_PANEL|Lohista ja aseta valikud
+
+#Anchor
+WIN_ANCHOR_TITLE|Ankuri seaded
+WIN_ANCHOR_POINTS|Punktid:
+WIN_ANCHOR_POINTS_TIP|Punktid, mis määravad Bezierikurvi peale ankrut. 
+WIN_ANCHOR_RANGE|Valik:
+WIN_ANCHOR_RANGE_TIP|Ankuri efekti  valik, pikslites.
+WIN_ANCHOR_PRIORITY|Prioriteet*:
+WIN_ANCHOR_PRIORITY_TIP|Igal ankrul on prioriteet (prioriteedi atribuudid) ja ankur, millel on suurim prioriteet on võitja.
+WIN_ANCHOR_BOUNDARIES|Piirid
+
+#Button
+WIN_BUTTON_TITLE|Nupu seaded
+WIN_BUTTON_UP|Normaalne pilt*:
+WIN_BUTTON_OVER|Pilt, kui hiirega sellest üle viia:
+WIN_BUTTON_DOWN|Pilt, kui hiirega selle peal klikkida:
+WIN_BUTTON_ACTION|Tegevus:
+WIN_BUTTON_ATTR|Nupu atribuudid
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Märkekasru seaded
+WIN_CHECKBOX_UP|Normaalne pilt*:
+WIN_CHECKBOX_OVER|Pilt, kui hiirega sellest üle viia:
+WIN_CHECKBOX_DOWN|Pilt, kui hiirega selle peal klikkida:
+WIN_CHECKBOX_ACTION|Tegevus:
+WIN_CHECKBOX_CONDITION|Tingimus:
+WIN_CHECKBOX_CONDITION_TIP|Tõeväärtuse väljend, mis täpsustab märkekasti olekut: keelatud -> olek #1, lubatud -> olek #2
+WIN_CHECKBOX_STATE|Märkekasti olek
+WIN_CHECKBOX_STATE1|Olek #1 (Olek pole täielik):
+WIN_CHECKBOX_STATE2|Olek #2 (Olek on täielik):
+
+#Image
+WIN_IMAGE_TITLE|Pildi seaded
+WIN_IMAGE_IMAGE|Pilt*:
+WIN_IMAGE_IMAGE_TIP|Pisipildi ID
+WIN_IMAGE_RESIZE|Taasuurustamise olek:
+WIN_IMAGE_RESIZE_TIP|Täpsusta pildi käitumist, kui seda taassuurustatakse.
+WIN_IMAGE_ACTION|Tegevus:
+WIN_IMAGE_ACTION_TIP|Tegevus käivitatakse pildi peal klikkamisega.
+WIN_IMAGE_ACTION2|Topeltklõpsu tegevus:
+WIN_IMAGE_ACTION2_TIP|Tegevus käivitatakse, kui tehakse topeltklõps pildi peal.
+WIN_IMAGE_ATTR|Pildi atribuudid
+WIN_IMAGE_ART|Asenda pilt kaanekujundusega, kui saadaval
+
+#Group
+WIN_GROUP_TITLE|Grupi seaded
+
+#Panel
+WIN_PANEL_TITLE|Paneeli seaded
+WIN_PANEL_DIMENSIONS|Mõõdud
+WIN_PANEL_WIDTH|Laius*:
+WIN_PANEL_HEIGHT|Kõrgus*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Mängupuu seaded
+WIN_PLAYTREE_FONT|Font*:
+WIN_PLAYTREE_BGIMAGE|Tagaplaani pildid:
+WIN_PLAYTREE_BGIMAGE_TIP|Pisipildi ID, kasutatakse tagaplaani pildiga. Kui pisipilti pole täpsustatud, tagaplaani täiustatakse kasutades  bgcolor1 ja bgcolor2 atribuute.
+WIN_PLAYTREE_BGCOLOR1|Tagaplaani värv #1:
+WIN_PLAYTREE_BGCOLOR2|Tagaplaani värv #2:
+WIN_PLAYTREE_SELCOLOR|Valiku värv:
+WIN_PLAYTREE_FGCOLOR|Tekstivärv:
+WIN_PLAYTREE_PLAYCOLOR|Tekstivärvide mängimine:
+WIN_PLAYTREE_FLAT|Tasane esitusloend:
+WIN_PLAYTREE_FLAT_TIP|Määrab, kas esitusloendit kuvatakse puu struktuurina või tasasena (ainult näita puu lehti).
+WIN_PLAYTREE_ITEMIMAGE|Kirje ikoon:
+WIN_PLAYTREE_OPENIMAGE|Ava kausta ikoon:
+WIN_PLAYTREE_CLOSEDIMAGE|Suletud kausta ikoon:
+WIN_PLAYTREE_SLIDER|Muuda esitusloendi liugurit (kerimisriba)
+WIN_PLAYTREE_ATTR|Mängupuu atribuudid
+WIN_PLAYTREE_CHOOSE|Vali...
+WIN_PLAYTREE_CHOOSER_TITLE|Vali värv
+
+#Slider
+WIN_SLIDER_TITLE|Liuguri seaded
+WIN_SLIDER_UP|Normaalne pilt*:
+WIN_SLIDER_OVER|Pilt, kui hiirega sellest üle viia:
+WIN_SLIDER_DOWN|Pilt, kui hiirega selle peal klikkida:
+WIN_SLIDER_POINTS|Punkte*:
+WIN_SLIDER_THICKNESS|Kitsus:
+WIN_SLIDER_VALUE|Väärtus*:
+WIN_SLIDER_VALUE_SCROLL|Mängupuu kerimine
+WIN_SLIDER_BG_ENABLE|Võimalda tagataust
+WIN_SLIDER_BG_EDIT|Muuda...
+WIN_SLIDER_ATTR|Liuguri atribuudid
+WIN_SLIDER_BG|Liuguri tagaplaanid
+
+#Slider background
+WIN_SBG_TITLE|Liuguri tausta seaded
+WIN_SBG_WIZARD|Ava liuguri tausta generaator...
+WIN_SBG_IMAGE|Pilt*:
+WIN_SBG_NBHORIZ|Horisontaalsed raamid:
+WIN_SBG_NBVERT|Vertikaalsed raamid:
+WIN_SBG_PADHORIZ|Horisontaalne täitematerjal:
+WIN_SBG_PADVERT|Vertikaalne täitematerjal:
+WIN_SBG_ATTR|Tausta atribuudid
+
+#Text
+WIN_TEXT_TITLE|Teksti seaded
+WIN_TEXT_TEXT|Tekst*:
+WIN_TEXT_FONT|Font:
+WIN_TEXT_COLOR|Värv:
+WIN_TEXT_CHOOSE|Vali...
+WIN_TEXT_CHOOSER_TITLE|Vali teksti värv
+WIN_TEXT_ALIGNMENT|Joondumine:
+WIN_TEXT_SCROLLING|Kerimine:
+WIN_TEXT_ATTR|Teksti atribuudid
+
+#Video
+WIN_VIDEO_TITLE|Video seaded
+WIN_VIDEO_AUTORESIZE|Autotaassuurustamine:
+WIN_VIDEO_AUTORESIZE_TIP|Määrab, kas välimust peaks automaatselt taassuurustama, et mahtuda esitatava video mõõdetesse.
+WIN_VIDEO_ATTR|Video atribuudid

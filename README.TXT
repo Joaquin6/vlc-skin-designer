@@ -129,7 +129,7 @@ Furthermore you can ask questions in the VideoLAN forum at
 -----------------------------------------------------------
 Copyright:
 -----------------------------------------------------------
-(c)2007-2010 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
+(c)2007-2011 Daniel Dreibrodt (daniel.dreibrodt@gmail.com) 
 See LICENSE.TXT for further details
 -----------------------------------------------------------
 Special thanks to:
@@ -139,6 +139,7 @@ Joseph S. for the Spanish translation
 "Alex64" and Jean-Baptiste Kempf for the French translation
 "Airplanez" for the Korean translation
 Myckel Habets for the Dutch translation
+Olav Mägi for the Estonian translation
 Michał Trzebiatowski for the Polish translation
 Sidney Doria for the Brasilian Portuguese translation
 Andrey Wolk for the Russian translation
