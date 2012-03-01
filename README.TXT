@@ -149,7 +149,8 @@ Daniel Nylander for the Swedish translation
 Kaya Zeren for the Turkish translation
 Lorenzo Marrocchi for the Italian translation
 Jiří Pešek for the Czech translation
-Alan for the Chinese Translation
+Alan for the Chinese translation
+Yaron Shahrabani for the Hebrew translation
 -----------------------------------------------------------
 Further credits:
 -----------------------------------------------------------

@@ -1,0 +1,606 @@
+﻿#Hebrew language file for VLC Skin Editor
+#Author/s: Yaron Shahrabani
+
+#General strings
+CHOICE_YES|כן
+CHOICE_NO|לא
+CHOICE_CANCEL|ביטול
+BUTTON_OK|אישור
+BUTTON_CANCEL|ביטול
+BUTTON_HELP|עזרה
+
+#Item names
+THEME|ערכת עיצוב
+FONT|גופן
+BITMAP|מפת סיביות
+SUBBITMAP|תת מפת סיביות
+WINDOW|חלון
+LAYOUT|פריסה
+ANCHOR|עוגן
+BUTTON|לחצן
+CHECKBOX|תיבת סימון
+GROUP|קבוצה
+IMAGE|תמונה
+PANEL|לוח
+PLAYTREE|עץ נגינה
+RADIALSLIDER|גלגלת מעגלית
+SLIDER|פס גלילה
+SLIDERBG|רקע פס הגלילה
+TEXT|טקסט וידאו
+VIDEO|וידאו
+UNNAMED|%t ללא שם מס׳ %i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|קובץ
+MENU_FILE_MN|ק
+MENU_FILE_NEW|חדש
+MENU_FILE_NEW_MN|ח
+MENU_FILE_OPEN|פתיחה...
+MENU_FILE_OPEN_MN|פ
+MENU_FILE_SAVE|שמירה
+MENU_FILE_SAVE_MN|ש
+MENU_FILE_TEST|בדיקת העיצוב ב־VLC
+MENU_FILE_TEST_MN|ב
+MENU_FILE_VLT|יצוא לקובץ VLT...
+MENU_FILE_VLT_MN|צ
+MENU_FILE_PNG|שמירת התצוגה הנוכחית כתמונה...
+MENU_FILE_PNG_MN|נ
+MENU_FILE_EXIT|יציאה
+MENU_FILE_EXIT_MN|י
+MENU_EDIT|עריכה
+MENU_EDIT_MN|ר
+MENU_EDIT_UNDO|ביטול
+MENU_EDIT_UNDO_MN|ב
+MENU_EDIT_REDO|ביצוע שוב
+MENU_EDIT_REDO_MN|ש
+MENU_EDIT_THEME|הגדרות ערכת העיצוב
+MENU_EDIT_THEME_MN|ע
+MENU_EDIT_VARS|משתנים גלובליים
+MENU_EDIT_VARS_MN|ג
+MENU_EDIT_PREFS|העדפות
+MENU_EDIT_PREFS_MN|ע
+MENU_EDIT_UP|העברת הפריט הנבחר למעלה
+MENU_EDIT_DOWN|העברת הפריט הנבחר למטה
+MENU_EDIT_LEFT|העברת הפריט הנבחר שמאלה
+MENU_EDIT_RIGHT|העברת הפריט הנבחר ימינה
+MENU_HELP|עזרה
+MENU_HELP_MN|ז
+MENU_HELP_DOC|עזרה מקוונת
+MENU_HELP_DOC_MN|ק
+MENU_HELP_ABOUT|על אודות
+MENU_HELP_ABOUT_MN|א
+
+#The toolbar
+TOOLBAR_OPEN|פתיחת קובץ עיצוב...
+TOOLBAR_SAVE|שמירת השינויים לערכת העיצוב
+TOOLBAR_UNDO|ביטול
+TOOLBAR_REDO|ביצוע שוב
+TOOLBAR_MOVE|כלי להעברת פריטים
+TOOLBAR_PATH|כלי לעריכת פס הגלילה
+
+#Resource Window
+WIN_RES_TITLE|משאבים
+WIN_RES_ADD_BMP|הוספת מפת סיביות או תת מפת סיביות חדשים
+WIN_RES_ADD_FONT|הוספת גופן חדש
+WIN_RES_COPY|יצירת עותק של המשאב הנבחר
+WIN_RES_EDIT|עריכת המשאב הנבחר
+WIN_RES_DELETE|מחיקת המשאב הנבחר
+WIN_RES_PU_ADD_BMP|הוספת מפה/ות סיביות
+WIN_RES_PU_ADD_SBMP|הוספת תת מפת סיביות
+WIN_RES_BITMAPS|מפות סיביות
+WIN_RES_FONTS|גופנים
+
+#Windows window
+WIN_WIN_TITLE|חלונות
+WIN_WIN_ADD|הוספת חלון חדש
+WIN_WIN_ADD_LAY|הוספת פריסה חדשה לחלון הנבחר
+WIN_WIN_MOVE_UP|העלאת הפריסה הנבחרת במעלה ההיררכיה (הפריסה האחרונה היא פריסת בררת המחדל של החלון)
+WIN_WIN_MOVE_DOWN|הורדת הפריסה הנבחרת במורד ההיררכה (הפריסה האחרונה היא פריסת בררת המחדל)
+WIN_WIN_COPY|יצירת עותק מהחלון או הפריסה הנבחרים
+WIN_WIN_EDIT|עריכת החלון או הפריסה הנבחרים
+WIN_WIN_DELETE|מחיקת החלון או הפריסה הנבחרים
+
+#Items window
+WIN_ITEMS_TITLE|פריטים
+WIN_ITEMS_ADD|הוספת פריט חדש
+WIN_ITEMS_MOVE_UP|העלאת הפריט הנבחר במעלה ההיררכיה
+WIN_ITEMS_MOVE_DOWN|הורדת הפריט הנבחר במורד ההיררכיה
+WIN_ITEMS_COPY|יצירת עותק מהפריט הנבחר
+WIN_ITEMS_EDIT|עריכת הפריט הנבחר
+WIN_ITEMS_DELETE|מחיקת הפריט הנבחר
+WIN_ITEMS_PU_PANEL_ADD|הוספה ללוח הנבחר
+
+#Welcome dialog
+WELCOME_TITLE|ברוך בואך לעורך ערכות העיצוב של VLC
+WELCOME_MSG|מה ברצונך לעשות?
+WELCOME_NEW|ליצור ערכת עיצוב חדשה
+WELCOME_OPEN|לפתוח ערכת עיצוב קיימת
+WELCOME_QUIT|לצאת
+
+#Preferences window
+WIN_PREFS_TITLE|העדפות
+WIN_PREFS_UPDATE_L|הפעלת עדכון אוטומטי:
+WIN_PREFS_LANG_L|שפה:
+WIN_PREFS_LAF_L|המראה והתחושה בתכנית:
+WIN_PREFS_TBAR_L|הצגת סרגל הכלים:
+WIN_PREFS_RESTART_L|<html dir="rtl">חלק מההגדרות ייכנסו לתוקף רק לאחר היציאה מהתכנית.</html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|עריכת תת מפת הסיביות
+ZOOM_FACTOR|מקדם התקריב:
+
+#Global variables editing window
+WIN_VARS_TITLE|משתנים גלובליים
+WIN_VARS_NOTE|<html dir="rtl">ערכים אלה משפיעים אך ורק על התצוגה המקדימה.<br>הם מדמים את המצב של VLC.</html>
+WIN_VARS_SLIDER|מיקום סרגל הגלילה
+
+#Theme options window
+WIN_THEME_TITLE|הגדרות ערכת העיצוב
+WIN_THEME_NAME|שם:
+WIN_THEME_AUTHOR|יוצר:
+WIN_THEME_EMAIL|כתובת הדוא״ל של היוצר:
+WIN_THEME_WEB|עמוד הבית של היוצר:
+WIN_THEME_MAGNET|מגנט:
+WIN_THEME_MAGNET_TIP|כאשר המרחק בין המסגרת של המסך והעוגן של החלון קטן מערך זה, החלון ייצמד למסגרת
+WIN_THEME_ALPHA|אטימות:
+WIN_THEME_ALPHA_TIP|הגדרת שקיפות האלפא של החלונות. הערך חייב להיות בין 1 (כמעט שקוף לחלוטין ) לבין 255 (אטום לחלוטין).  מומלץ להימנע מערכים נמוכים.
+WIN_THEME_MOVEALPHA|אטימות בעת תנועה:
+WIN_THEME_MOVEALPHA_TIP|הגדרת שקיפות האלפא של החלונות בעת תזוזתם.
+WIN_THEME_INFO_TITLE|פרטי ערכת העיצוב
+WIN_THEME_ATTR_TITLE|תכונות ערכת העיצוב
+
+#Action Editor
+WIN_ACTIONS_TITLE|עריכת רצף הפעולות
+
+#Popup menu in the action editor
+ACTIONS_PU|פעולות
+ACTIONS_DIALOGS|הצגת דו־שיח
+ACTIONS_PLAYLIST|רשימת השמעה
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|מעטפת
+ACTIONS_VLC_PLAY|נגינה
+ACTIONS_VLC_PAUSE|השהיה
+ACTIONS_VLC_STOP|עצירה
+ACTIONS_VLC_FASTER|נגינה מהירה יותר
+ACTIONS_VLC_SLOWER|נגינה אטית יותר
+ACTIONS_VLC_NEXTFRAME|נגינת השקופית הבאה
+ACTIONS_VLC_MUTE|השתקת השמע
+ACTIONS_VLC_VOLUMEUP|הגברת עצמת השמע
+ACTIONS_VLC_VOLUMEDOWN|הנמכת עצמת השמע
+ACTIONS_VLC_FULLSCREEN|הפעלה/נטרול מצב מסך מלא
+ACTIONS_VLC_SNAPSHOT|צילום המסך
+ACTIONS_VLC_TOGGLERECORD|הפעלה/נטרול הקלטה
+ACTIONS_VLC_ONTOP|הפעלה/נטרול תמיד עליון
+ACTIONS_VLC_MINIMIZE|מזעור VLC
+ACTIONS_VLC_QUIT|יציאה מ־VLC
+ACTIONS_EQ_ENABLE|הפעלת האקולייזר
+ACTIONS_EQ_DISABLE|נטרול האקולייזר
+ACTIONS_DIALOGS_CHANGESKIN|החלפת המעטפת
+ACTIONS_DIALOGS_FILESIMPLE|פתיחת קובץ (פשוט)
+ACTIONS_DIALOGS_FILE|פתיחת קובץ (מורחב)
+ACTIONS_DIALOGS_DIRECTORY|פתיחת תיקייה
+ACTIONS_DIALOGS_DISC|פתיחת דיסק
+ACTIONS_DIALOGS_NET|פתיחת תזרים רשת
+ACTIONS_DIALOGS_MESSAGES|יומן הודעות
+ACTIONS_DIALOGS_PREFS|העדפות
+ACTIONS_DIALOGS_FILEINFO|פרטי הקובץ
+ACTIONS_DIALOGS_PLAYLIST|רשימת השמעה ללא מעטפת
+ACTIONS_DIALOGS_STREAMINGWIZARD|אשף ההזרמה
+ACTIONS_DIALOGS_POPUP|תפריט קופץ מלא
+ACTIONS_DIALOGS_AUDIOPOPUP|תפריט קופת להגדרות שמע
+ACTIONS_DIALOGS_VIDEOPOPUP|תפריט קופץ להגדרות וידאו
+ACTIONS_DIALOGS_MISCPOPUP|תפריט קובץ להגדרות שונות
+ACTIONS_PLAYLIST_ADD|הוספת פריט חדש
+ACTIONS_PLAYLIST_DEL|הסרת הפריט הנבחר
+ACTIONS_PLAYLIST_NEXT|נגינת הפריט הבא
+ACTIONS_PLAYLIST_PREVIOUS|נגינת הפריט הקודם
+ACTIONS_PLAYLIST_SETRANDOM|נגינה בסדר רגיל/אקראי
+ACTIONS_PLAYLIST_SETLOOP|ניגון רשימת ההשמעה בלולאה/פעם אחת
+ACTIONS_PLAYLIST_SETREPEAT|הפעלה/נטרול חזרה על הפריט הנוכחי
+ACTIONS_PLAYLIST_SORT|סידור אלפביתי
+ACTIONS_PLAYLIST_LOAD|טעינה מקובץ
+ACTIONS_PLAYLIST_SAVE|שמירה לקובץ
+ACTIONS_DVD_NEXTTITLE|הכותר הבא
+ACTIONS_DVD_PREVIOUSTITLE|הכותר הקודם
+ACTIONS_DVD_NEXTCHAPTER|הפרק הבא
+ACTIONS_DVD_PREVIOUSCHAPTER|הפרק הקודם
+ACTIONS_DVD_ROOTMENU|התפריט הראשי
+ACTIONS_WINDOWS_SHOW|הצגת חלון
+ACTIONS_WINDOWS_HIDE|הסתרת חלון
+ACTIONS_WINDOWS_MAXIMIZE|הגדלת חלון
+ACTIONS_WINDOWS_UNMAXIMIZE|ביטול הגדלת חלון
+ACTIONS_WINDOWS_SETLAYOUT|שינוי פריסה של חלון
+
+#Action descriptions
+ACTION_DESC_NONE|אין לעשות דבר.
+ACTION_DESC_CHANGESKIN|הצגת תיבת דו־שיח לטעינת ערכת עיצוב חדשה.
+ACTION_DESC_FILESIMPLE|הצגת תיבת הדו־שיח הפשוטה לפתיחת קובץ.
+ACTION_DESC_FILE|הצגת תיבת הדו־שיח המורחבת לפתיחת קובץ.
+ACTION_DESC_DIRECTORY|הצגת תיבת הדו־שיח לפתיחת תיקייה.
+ACTION_DESC_DISC|הצגת תיבת הדו־שיח לפתיחת דיסק.
+ACTION_DESC_NET|הצגת תיבת הדו־שיח לפתיחת תזרים רשת.
+ACTION_DESC_MSG|הצגת תיבת הדו־שיח של יומן ההודעות.
+ACTION_DESC_PREFS|הצגת תיבת הדו־שיח של ההעדפות.
+ACTION_DESC_FILEINFO|הצגת תיבת הדו־שיח של פרטי הקובץ.
+ACTION_DESC_PLAYLIST|הצגת חלון רשימת ההשמעה המוגדר כבררת המחדל (ללא עיצוב).
+ACTION_DESC_WIZARD|הצגת תיבת הדו־שיח של אשף ההזרמה.
+ACTION_DESC_POPUP|הצגת התפריט המוקפץ במלואו.
+ACTION_DESC_AUDIOPU|הצגת תפריט הגדרות השמע המוקפץ במלואו.
+ACTION_DESC_VIDEOPU|הצגת תפריט הגדרות הווידאו המוקפץ במלואו.
+ACTION_DESC_MISCPU|הצגת תפריט מוקפץ המכיל את פקדי הנגינה ואפשרויות כלליות.
+ACTION_DESC_EQENABLE|הפעלת מסנן השמע מסוג אקולייזר.
+ACTION_DESC_EQDISABLE|נטרול מסנן השמע מסוג אקולייזר.
+ACTION_DESC_PLAY|נגינת הפריט הנוכחי ברשימת ההשמעה.
+ACTION_DESC_PAUSE|השהיית הנגינה.
+ACTION_DESC_STOP|עצירת הנגינה.
+ACTION_DESC_FASTER|נגינה מהירה יותר.
+ACTION_DESC_SLOWER|נגינה אטית יותר.
+ACTION_DESC_NEXTFRAME|קידום הנגינה בשקופית אחת (נגינה בשקופית אחר שקופית).
+ACTION_DESC_MUTE|השתקה/ביטול ההשתקה.
+ACTION_DESC_VOLUP|הגברת עצמת השמע.
+ACTION_DESC_VOLDOWN|הנמכת עצמת השמע.
+ACTION_DESC_FULLSCREEN|מסך מלא/רגיל.
+ACTION_DESC_SNAPSHOT|צילום תמונה מהווידאו.
+ACTION_DESC_TOGGLERECORD|הקלטה/נגינה.
+ACTION_DESC_ONTOP|הפעלת/כיבוי המצב „תמיד עליון“.
+ACTION_DESC_MIN|מזעור VLC.
+ACTION_DESC_QUIT|יציאה מ־VLC.
+ACTION_PL_ADD|הוספת פריט חדש לרשימת ההשמעה.
+ACTION_PL_DEL|הסרת הפריט הנבחר מרשימת ההשמעה.
+ACTION_PL_NEXT|נגינת הפריט הבא ברשימת ההשמעה.
+ACTION_PL_PREV|נגינת הפריט הקודם ברשימת ההשמעה.
+ACTION_PL_SORT|סידור רשימת ההשמעה לפי האלף בית.
+ACTION_PL_LOAD|טעינת קובץ רשימת השמעה חיצוני.
+ACTION_PL_SAVE|שמירת רשימת ההשמעה הנוכחית לקובץ.
+ACTION_DVD_NEXTT|מעבר לכותר הבא ב־DVD.
+ACTION_DVD_PREVT|מעבר לכותר הקודם ב־DVD.
+ACTION_DVD_NEXTC|מעבר לפרק הבא ב־DVD.
+ACTION_DVD_PREVC|מעבר לפרק הקודם ב־DVD.
+ACTION_DVD_MENU|מעבר לתפריט הראשי ב־DVD.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|הפעלת
+ACTION_DEACTIVATE|נטרול
+ACTION_RANDOM|%s המצב בו פריטי רשימת השמעה מנוגנים בסדר אקראי.
+ACTION_LOOP|%s המצב בו רשימת ההשמעה חוזרת מההתחלה לאחר ניגון הפריט האחרון.
+ACTION_REPEAT|%s המצב בו מתבצעת חזרה על הפריט הנוכחי לאחר שנגינתו מסתיימת.
+ACTION_SHOW|הצגת החלון עם המזהה %i
+ACTION_HIDE|הסתרת החלון עם המזהה %i
+ACTION_MAXIMIZE|הגדלת החלון עם המזהה %i
+ACTION_UNMAXIMIZE|ביטול הגדלת החלון עם המזהה %i
+ACTION_LAYOUT|הגדרת פריסת החלון עם המזהה %i ל־%l
+
+#Slider background generator
+SBGGEN_TITLE|מחולל רקע פסי הגלילה
+SBGGEN_PREV|< הקודם
+SBGGEN_NEXT|הבא >
+SBGGEN_CANCEL|ביטול
+SBGGEN_FINISH|סיום
+
+SBGGEN_DESCR|ברוך בואך למחולל רקע פסי הגלילה. מחולל זה יסייע לך ליצור פס גלילה מגניב מהתמונות שלך, במספר קטן של צעדים.
+SBGGEN_FIRST|כצעד ראשוני, נא לבחור האם פס הגלילה יעבור משמאל לימין או מלמטה למעלה ומה יהיה גודל הרקע.
+SBGGEN_WIDTH|רוחב:
+SBGGEN_HEIGHT|גובה:
+SBGGEN_LEFT_M|גבול שמאלי:
+SBGGEN_RIGHT_M|גבול ימני:
+SBGGEN_TOP_M|גבול עליון:
+SBGGEN_BTM_M|גבול תחתון:
+SBGGEN_SECOND|בצעד הקרוב עליך לבחור את קובצי התמונה הנכונים המשויכים לחלקים השונים של פס הגלילה שלך.
+SBGGEN_NOTE|נא לשים לב שהסמלים הם רק דוגמאות כדי להמחיש מה מייצגים החלקים השונים. אלו אינם תצוגה מקדימה של התמונות שישמשו ליצירת הרקע.
+
+SBGGEN_IMAGE|קובץ תמונה:
+SBGGEN_OPEN|פתיחה...
+SBGGEN_RESIZE|התנהגות בעת שינוי גודל:
+SBGGEN_TILE|פריסה
+SBGGEN_STRETCH|מתיחה
+
+SBGGEN_BG|רקע
+SBGGEN_OVERLAY|תמונה מכסה
+SBGGEN_LEFT_E|הצד השמאלי
+SBGGEN_RIGHT_E|הצד הימני
+SBGGEN_TOP_E|הצד העליון
+SBGGEN_BTM_E|הצד התחתון
+SBGGEN_MIDDLE|החלק האמצעי
+
+SBGGEN_PROGRESS|הרקע נוצר...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|על אודות עורך העיצובים ל־VLC %v
+#%y - current year
+#%w - website
+ABOUT_MSG|<html dir="rtl"><h3>כל הזכויות שמורות 2007-%y צוות VideoLAN</h3>מופץ בהתאם לזכויות הניתנות על ידי GPL 2+<br><br><b>מתכנת ראשי:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>אתר הבית:</b> %w<br><br><b>תודות:</b><br>Timothy Gerard Endres על הגישה לרישומי המערכת ותמיכה ב־TAR (ברשות הציבור)<br>מיזם שולחן העבודה Tango! (http://tango.freedesktop.org) על חלק מהסמלים (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) and Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) על מעריך הביטויים הבוליאניים וקוד הבזייה (GPL 2+)</html>
+VLT_EX_TITLE|יבוא קובץ VLT
+#%f - name of the folder
+VLT_EX_MSG|קובץ ה־VLT יתפרס לתוך תת־תיקייה בשם "%f".\nהאם להמשיך?
+VLT_EX_YES|כן, לפרוס
+VLT_EX_NO|לא, לבטל
+VLT_EX_PROGRESS|קובץ ה־VLT נפרס...
+XML_PARSING_PROGRESS|ה־XML מפוענח...
+ADD_BMP_FILE_FILTER_DESC|*.png (Portable Network Graphic) בתוך התיקייה בה נמצא קובץ ה־XML
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (גופני Open ו־True type) בתוך התיקייה בה נמצא קובץ ה־XML
+DUPLICATE_MSG|נא להזין את תבנית שינוי השם עבור הפריטים המשופכלים\n%oldid% יוחלף במזהה הישן של הפריט.
+DEL_CONFIRM_TITLE|אישור מחיקה
+DEL_CONFIRM_MSG|האם אכן למחוק את "%n"?
+EXIT_CONFIRM_TITLE|השינויים שלך לא נשמרו
+EXIT_CONFIRM_MSG|האם ברצונך לשמור את ערכת העיצוב שלך לפני היציאה?
+UPDATE_TITLE|נמצא עדכון
+UPDATE_MSG|קיים עדכון לעורך ערכות העיצוב\nהגרסה שלך: %v\nהגרסה העדכנית ביותר: %c\nהאם ברצונך לעדכן את עורך ערכות העיצוב כעת?
+VLT_PROGRESS|נוצר קובץ VLT...
+VLT_SUCCESS_MSG|קובץ ה־VLT נוצר בהצלחה.
+VLT_SUCCESS_TITLE|נוצר קובץ VLT
+DOWNLOAD_PROGRESS|בהורדה...
+CONNECT_PROGRESS|בהתחברות...
+UPDATE_SUCCESS_TITLE|העדכון הושלם
+UPDATE_SUCCESS_MSG|העדכון התקבל והותקן בהצלחה.\nעורך ערכות העיצוב של VLC יופעל מחדש כעת
+
+#Error messages
+ERROR_FILENEXIST_TITLE|אירעה שגיאה בעת פתיחת הקובץ
+ERROR_FILENEXIST_MSG|הקובץ „%f“ לא קיים ולכן לא ניתן לפתוח אותו!
+ERROR_VLT_UNPACK_TITLE|לא ניתן לפרוס את קובץ ה־VLT
+ERROR_VLT_UNPACK_MSG|לא ניתן לפרוס את קובץ ה־VLT!
+ERROR_VLT_NOTHEME_TITLE|לא ניתן למצוא את הקובץ theme.xml
+ERROR_VLT_NOTHEME_MSG|לא ניתן למצוא את „theme.xml“ בתוך התוכן שנפרס מתוך קובץ ה־VLT.\nנא לנסות לפתוח אותו ידנית.
+ERROR_VLC_LAUNCH_TITLE|שגיאה
+ERROR_VLC_LAUNCH_MSG|לא ניתן לפתוח את נגן המדיה VLC
+ERROR_BROWSE_TITLE|לא ניתן לטעון את הדפדפן
+ERROR_BROWSE_MSG|לא ניתן לפתוח חלון דפדפן.\nנא לגשת לכתובת הבאה ידנית:\n%u
+ERROR_ADD_SBMP_TITLE|לא ניתן להוסיף תת מפת סיביות
+ERROR_ADD_SBMP_NOBMP|לא נבחרה מפת סיביות כהורה!
+ERROR_ADD_SBMP_NOTBMP|המשאב הנבחר אינו מפת סיביות!
+ERROR_RES_DEL_TITLE|לא ניתן למחקו את המשאב
+ERROR_RES_DEL_INUSE|המשאב עדיין בשימוש בערכת העיצוב ולכן לא ניתן למחוק אותו.
+ERROR_ADD_LAYOUT_TITLE|לא ניתן להוסיף פריסה
+ERROR_ADD_LAYOUT_MSG|לא זוהה חלון הורה!
+ERROR_UPDATE_TITLE|אירעה שגיאה בעת העדכון!
+ERROR_SAVEPNG_TITLE|אירעה שגיאה בעת שמירת התמונה
+ERROR_SAVEPNG_MSG|לא ניתן לשמור את התמונה.
+ERROR_NEWSKIN_TITLE|אירעה שגיאה בעת יצירת קובץ ערכת עיצוב חדש!
+ERROR_NEWSKIN_MSG|לא ניתן ליצור את קובץ ערכת ערכת העיצוב החדש.
+ERROR_HEADER_INVALID|נראה שהקובץ אינו ערכת עיצוב תקנית של VLC!\nכותרת שגויה:
+ERROR_SKIN_INVALID|הקובץ אינו קובץ ערכת עיצוב תקני של VLC!
+ERROR_VERSION_UNSUPPORTED|גרסת העיצוב בה נעשה שימוש בערכת העיצוב אינה נתמכת!
+ERROR_SAVE_TITLE|אירעה שגיאה בעת שמירת קובץ ערכת העיצוב!
+ERROR_SAVE_MSG|לא ניתן לשמור את קובץ ערכת העיצוב.
+ERROR_ALPHA_TITLE|ערך האטימות שגוי
+ERROR_ALPHA_MSG|נא להזין ערך אטימות תקין! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|לא ניתן לטעון את תמונה האמצע!\nלפחות חלק האמצע של פס הגלילה נדרש כדי לייצר את רקע פס הגלילה.
+ERROR_VLT_TITLE|לא ניתן ליצור קובץ VLT
+ERROR_VLT_MSG|לא ניתן ליצור את קובץ ה־VLT!
+ERROR_ID_INVALID_TITLE|המזהה אינו תקני
+ERROR_ID_INVALID_MSG|נא להזין מזהה תקני!
+ERROR_ID_EXISTS_MSG|המזהה „%i“ כבר קיים.\nנא לבחור באחד אחר.
+ERROR_WIDTH_INVALID_TITLE|הרוחב אינו תקני
+ERROR_WIDTH_INVALID_MSG|נא להזין רוחב תקני!
+ERROR_HEIGHT_INVALID_TITLE|הגובה אינו תקני
+ERROR_HEIGHT_INVALID_MSG|נא להזין גובה תקני!
+ERROR_FILE_INVALID_TITLE|הקובץ אינו תקני
+ERROR_FILE_INVALID_MSG|נא לבחור בקובץ תקני!
+ERROR_BITMAP_INVALID_MSG|לא ניתן לטעון את מפת הסיביות שצוינה!\nנא לבחור באחת אחרת.
+ERROR_NBFRAMES_TITLE|מספר השקופיות שגוי
+ERROR_NBFRAMES_MSG|מספר השקופיות לא יכול להיות קטן מ־1
+ERROR_OTF_TITLE|אין תמיכה ב־OTF (גופן בתקן פתוח)
+ERROR_OTF_MSG|בחרת בגופן OpenType, VLC יציג את הגופן נכון אך עורך ערכות העיצוב לא יכול להציג אותו.\nבתצוגה המקדימה יופיע גופן אחר.
+ERROR_SIZE_INVALID_TITLE|גודל שגוי
+ERROR_SIZE_INVALID_MSG|נא להזין גודל תקני.
+ERROR_OUTSIDE_TITLE|הממדים שגויים
+ERROR_OUTSIDE_MSG|הממדים שצוינו נמצאים מחוץ למפת הסיביות המשמשת כהורה!
+ERROR_BITMAP_NEXIST|מפת הסיביות %i אינה קיימת.
+ERROR_BITMAP_NEXIST_TITLE|התמונה שגויה!
+ERROR_BITMAP_LOAD|לא ניתן לטעון את קובץ התמונה %i עבור מפת הסיביות.
+ERROR_BITMAP_LOAD_TITLE|אירעה שגיאה בעת טעינת התמונות
+ERROR_NOSTATE|נא לציין את תנאי המצב!
+ERROR_NOSTATE_TITLE|המצב אינו תקני
+ERROR_FONT_NEXIST|הגופן %i אינו קיים.
+ERROR_FONT_NEXIST_TITLE|הגופן אינו תקני!
+ERROR_POINTS_INVALID|נא להזין נקודות בזייה תקינות!
+ERROR_POINTS_INVALID_TITLE|הנקודות שגויות!
+ERROR_RADIALSLIDER|עורך ערכות העיצוב עדיין לא תומך בגלילה מעגלית.
+ERROR_RADIALSLIDER_TITLE|לא נתמכים
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|עיצוב ללא שם
+THEMEINFO_AUTHOR_DEFAULT|היוצר בלתי ידוע
+THEMEINFO_EMAIL_DEFAULT|לא ידוע
+
+#History
+HIST_ITEM_ADD|הוספת %t
+HIST_ITEM_DEL|מחיקת %t
+HIST_ITEM_EDIT|עריכת %t
+HIST_ITEM_MOVE|העברת %t
+HIST_RES_DEL|מחיקת %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* חובה לציין תכונה
+
+#Common strings
+WIN_ITEM_GENERAL|תכונות גלובליות
+WIN_ITEM_ID|מזהה*:
+WIN_ITEM_ID_TIP|השם והמזהה של %t. חייבים להיות יחודיים.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|רוחב:
+WIN_ITEM_HEIGHT|גובה:
+WIN_ITEM_VISIBLE|הצגה:
+WIN_ITEM_LEFTTOP|שמאל עליון:
+WIN_ITEM_LEFTTOP_TIP|הצבעה על איזו מהפינות של הפריסה תשמש בתור הפינה השמאלית העליונה להצמדה של הפריט הזה, במקרה של שינוי גודל.
+WIN_ITEM_RIGHTBOTTOM|ימין תחתון:
+WIN_ITEM_RIGHTBOTTOM_TIP|הצבעה על איזו מהפינות של הפריסה תשמש בתור הפינה הימנית התחתונה להצמדה של הפריט הזה, במקרה של שינוי גודל.
+WIN_ITEM_XKEEPRATIO|שמירה על יחס X:
+WIN_ITEM_XKEEPRATIO_TIP|כאשר מוגדר לאמת, ההתנהגות של שינוי הגודל באופן אופקי משתנה. לדוגמה, אם בהתחלה הרווח שלשמאל הפקד גדול פי שניים מהרווח שמימין, מצב זה יישאר זהה בכל שינוי גודל אופקי שהוא. רוחב הפקד נשאר קבוע.
+WIN_ITEM_YKEEPRATIO|שמירה על יחס Y:
+WIN_ITEM_YKEEPRATIO_TIP|כאשר מוגדר לאמת, ההתנהגות של שינוי הגודל באופן אנכי משתנה. לדוגמה, אם בהתחלה הרווח שמעל הפקד גדול פי שניים מהרווח שמתחתיו, מצב זה יישאר זהה בכל שינוי גודל אנכי שהוא. גובה הפקד נשאר קבוע.
+WIN_ITEM_HELP|טקסט העזרה:
+WIN_ITEM_HELP_TIP|המשתנה '$H' יורחב לערך זה כאשר העכבר עובר מעל הפקד הנוכחי.
+WIN_ITEM_TOOLTIPTEXT|חלונית עצה:
+FILE_INDIR|באותה תיקייה כמו קובץ ה־XML
+
+#Bitmap
+WIN_BITMAP_TITLE|הגדרות מפת סיביות
+WIN_BITMAP_FILE|קובץ*:
+WIN_BITMAP_FILE_TIP|הצבעה על הנתיב והשם של קובץ התמונה בו נעשה שימוש.
+WIN_BITMAP_OPEN|פתיחה...
+WIN_BITMAP_ALPHACOLOR|צבע שקיפות:
+WIN_BITMAP_ALPHACOLOR_TIP|צבע השקיפות של מפת הסיביות במבנה הקסדצימלי. אם קובץ ה־PNG שלך מציין מסכת שקיפות, גם הוא יילקח בחשבון.
+WIN_BITMAP_CHOOSE|בחירה...
+WIN_BITMAP_NBFRAMES|מספר השקופיות:
+WIN_BITMAP_NBFRAMES_TIP|תכונה זו נדרשת כדי להגדיר מפות סיביות מונפשות; זהו מספר השקופיות (תמונות) שנכללות בהנפשה שלך. כל השקופיות השונות הן פשוט תמונות שסודרו אנכית במפת הסיביות.
+WIN_BITMAP_FPS|שקופיות לשנייה:
+WIN_BITMAP_FPS_TIP|נעשה שימוש במפות סיביות מונפשות בלבד; זהו מספר השקופיות (תמונות) לשנייה של ההנפשה.
+WIN_BITMAP_ANIMATION|תכונות ההנפשה
+WIN_BITMAP_CHOOSER_TITLE|בחירת צבע שקיפות
+
+#SubBitmap
+WIN_SBMP_TITLE|הגדרות תת מפת סיביות
+WIN_SBMP_BOUNDS|תכונות מיקום וממדים
+
+#Font
+WIN_FONT_TITLE|הגדרות גופן
+WIN_FONT_FILE|קובץ*:
+WIN_FONT_FILE_TIP|הקובץ המכיל את גופן ה־TrueType או ה־OpenType בו נעשה שימוש.
+WIN_FONT_OPEN|פתיחה...
+WIN_FONT_SIZE|גודל:
+
+#Layout
+WIN_LAYOUT_TITLE|הגדרות הפריסה
+WIN_LAYOUT_GENERAL|תכונות כלליות
+WIN_LAYOUT_DIMENSIONS|ממדים
+WIN_LAYOUT_WIDTH|הרוחב הראשוני*:
+WIN_LAYOUT_WIDTH_TIP|רוחב הפריסה הראשוני.
+WIN_LAYOUT_HEIGHT|גובה ראשוני*:
+WIN_LAYOUT_HEIGHT_TIP|גובה הפריסה הראשוני.
+WIN_LAYOUT_MINWIDTH|הרוחב המזערי:
+WIN_LAYOUT_MINWIDTH_TIP|רוחב הפריסה המזערי. בערך זה נעשה שימוש רק בעת שינוי גודל הפריסה. אם ערך זה מוגדר ל„‎-1“, ייעשה שימוש ברוחב הראשוני בתור הרוחב המזערי.
+WIN_LAYOUT_MINHEIGHT|הגובה המזערי:
+WIN_LAYOUT_MINHEIGHT_TIP|גובה הפריסה המזערי. בערך זה נעשה שימוש רק בעת שינוי גודל הפריסה. אם ערך זה מוגדר ל„‎-1“, ייעשה שימוש בגובה הראשוני בתור הגובה המזערי.
+WIN_LAYOUT_MAXWIDTH|הרוחב המרבי:
+WIN_LAYOUT_MAXWIDTH_TIP|רוחב הפריסה המרבי. בערך זה נעשה שימוש רק בעת שינוי גודל הפריסה. אם ערך זה מוגדר ל„‎-1“, ייעשה שימוש ברוחב הראשוני בתור הרוחב המרבי.
+WIN_LAYOUT_MAXHEIGHT|הגובה המרבי:
+WIN_LAYOUT_MAXHEIGHT_TIP|גובה הפריסה המרבי. בערך זה נעשה שימוש רק בעת שינוי גודל הפריסה. אם ערך זה מוגדר ל„‎-1“, ייעשה שימוש בגובה הראשוני בתור הגובה המרבי.
+
+#Window
+WIN_WINDOW_TITLE|הגדרות החלון
+WIN_WINDOW_X_TIP|המרחק הראשוני של החלון מהדופן השמאלית של המסך.
+WIN_WINDOW_Y_TIP|המרחק הראשוני של החלון מהדופן העליונה של המסך.
+WIN_WINDOW_VISIBLE_TIP|הצבעה האם החלון אמור להופיע עם הפעלת VLC. מאחר ש־VLC זוכר את המיקום ומצב הגילוי של חלונות ערכת העיצוב, ייעשה שימוש בתכונה זו רק בפעם הראשונה שמופעלת ערכת הנושא.
+WIN_WINDOW_DD|גרירה והשלכה:
+WIN_WINDOW_DD_TIP|הצבעה האם מותר לגרור ולהשליך קובצי מדיה בחלון זה.
+WIN_WINDOW_PD|נגינה עם ההשלכה:
+WIN_WINDOW_PD_TIP|הצבעה האם קובץ שהושלך מנוגן ישירות (אמת) או נוסף לרשימה (שקר). לתכונה זו אין השפעה עם הגרירה וההשלכה מוגדרים ל„שקר“.o "false".
+WIN_WINDOW_DD_PANEL|אפשרויות גרירה והשלכה
+
+#Anchor
+WIN_ANCHOR_TITLE|הגדרות עוגן
+WIN_ANCHOR_POINTS|נקודות:
+WIN_ANCHOR_POINTS_TIP|הנקודות המגדירות את עקומת הבזייה ולאחריהן העוגן. אין שום צורך לשנות פרמטר זה אם כל שנחוץ לך הוא עוגן נקודתי.
+WIN_ANCHOR_RANGE|טווח:
+WIN_ANCHOR_RANGE_TIP|טווח אזור העוגן המשפיע, בפיקסלים.
+WIN_ANCHOR_PRIORITY|עדיפות*:
+WIN_ANCHOR_PRIORITY_TIP|לכל עוגן יש עדיפות (תכונת העדיפות), והעוגן עם העדיפות הגבוהה ביותר הוא המנצח, משמעות הדבר היא שבעת הזזת חלון כל שאר החלונות המעוגנים יזוזו גם כן. כדי לשבור את צורת ההתנהגות של עיגון שני חלונות, עליך להזיז את החלון שלעוגן שלו יש את העדיפות הנמוכה ביותר.
+WIN_ANCHOR_BOUNDARIES|גבולות
+
+#Button
+WIN_BUTTON_TITLE|הגדרות לחצן
+WIN_BUTTON_UP|תמונה רגילה*:
+WIN_BUTTON_OVER|תמונה בעת מעבר מעל:
+WIN_BUTTON_DOWN|תמונה בעת לחיצה:
+WIN_BUTTON_ACTION|פעולה:
+WIN_BUTTON_ATTR|תכונות הלחצן
+
+#Checkbox
+WIN_CHECKBOX_TITLE|הגדרות תיבת הסימון
+WIN_CHECKBOX_UP|תמונה רגילה*:
+WIN_CHECKBOX_OVER|תמונה בעת מעבר מעל:
+WIN_CHECKBOX_DOWN|תמונה בעת לחיצה:
+WIN_CHECKBOX_ACTION|פעולה:
+WIN_CHECKBOX_CONDITION|תנאי:
+WIN_CHECKBOX_CONDITION_TIP|ביטוי בוליאני המציין את מצב תיבת הבחירה: שקר -> מצב מס׳1, אמת -> מצב מס׳ 2
+WIN_CHECKBOX_STATE|מצב התיבה
+WIN_CHECKBOX_STATE1|מצב מס׳ 1 (התנאי מתקיים):
+WIN_CHECKBOX_STATE2|מצב מס׳ 2 (התנאי לא מתקיים):
+
+#Image
+WIN_IMAGE_TITLE|הגדרות תמונה
+WIN_IMAGE_IMAGE|תמונה*:
+WIN_IMAGE_IMAGE_TIP|מזהה מפת הסיביות
+WIN_IMAGE_RESIZE|מצב שינוי הגודל:
+WIN_IMAGE_RESIZE_TIP|הגדרת הפעולה של התמונה כשגודלה משתנה.
+WIN_IMAGE_ACTION|פעולה:
+WIN_IMAGE_ACTION_TIP|הפעולה שתתבצע בעת הלחיצה על התמונה.
+WIN_IMAGE_ACTION2|פעולת לחיצה כפולה:
+WIN_IMAGE_ACTION2_TIP|הפעולה שתתבצע עקב לחיצה כפולה על התמונה.
+WIN_IMAGE_ATTR|תכונות התמונה
+WIN_IMAGE_ART|החלפת התמונה בעטיפת האלבום כשיש כזאת
+
+#Group
+WIN_GROUP_TITLE|הגדרות קבוצה
+
+#Panel
+WIN_PANEL_TITLE|הגדרות הלוח
+WIN_PANEL_DIMENSIONS|ממדים
+WIN_PANEL_WIDTH|רוחב*:
+WIN_PANEL_HEIGHT|גובה*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|הגדרות עץ הנגינה
+WIN_PLAYTREE_FONT|גופן*:
+WIN_PLAYTREE_BGIMAGE|תמונת הרקע:
+WIN_PLAYTREE_BGIMAGE_TIP|מזהה של תמונה, משמש כתמונת הרקע. כאשר לא צוינה אף מפת סיביות, הרקע יתמלא באמצעות התכונות המופיעות תחת bgcolor1 ו־bgcolor2.
+WIN_PLAYTREE_BGCOLOR1|צבע רקע מס׳ 1:
+WIN_PLAYTREE_BGCOLOR2|צבע רקע מס׳ 2:
+WIN_PLAYTREE_SELCOLOR|צבע הבחירה:
+WIN_PLAYTREE_FGCOLOR|צבע הטקסט:
+WIN_PLAYTREE_PLAYCOLOR|צבע הטקסט המתנגן:
+WIN_PLAYTREE_FLAT|רשימת נגינה שטוחה:
+WIN_PLAYTREE_FLAT_TIP|הצבעה על האם רשימת ההשמעה צריכה להשתמש במבנה עץ או להיות לגמרי „שטוחה“ (להציג רק את העלים של העצים).
+WIN_PLAYTREE_ITEMIMAGE|סמל הפריט:
+WIN_PLAYTREE_OPENIMAGE|סמל תיקייה פתוחה:
+WIN_PLAYTREE_CLOSEDIMAGE|סמל תיקייה סגורה:
+WIN_PLAYTREE_SLIDER|Eעריכת פס הגלילה של רשימת ההשמעה (סרגל גלילה)
+WIN_PLAYTREE_ATTR|תכונות עץ הנגינה
+WIN_PLAYTREE_CHOOSE|בחירה...
+WIN_PLAYTREE_CHOOSER_TITLE|בחירת צבע
+
+#Slider
+WIN_SLIDER_TITLE|הגדרות פס הגלילה
+WIN_SLIDER_UP|תמונה רגילה*:
+WIN_SLIDER_OVER|התמונה כשעוברים עליה:
+WIN_SLIDER_DOWN|התמונה כשלוחצים עליה:
+WIN_SLIDER_POINTS|נקודות*:
+WIN_SLIDER_THICKNESS|עובי:
+WIN_SLIDER_VALUE|ערך*:
+WIN_SLIDER_VALUE_SCROLL|גלילת עץ נגינה
+WIN_SLIDER_BG_ENABLE|הפעלת רקע
+WIN_SLIDER_BG_EDIT|עריכה...
+WIN_SLIDER_ATTR|תכונות פס הגלילה
+WIN_SLIDER_BG|רקע פס הגלילה
+
+#Slider background
+WIN_SBG_TITLE|הגדרות רקע פס הגלילה
+WIN_SBG_WIZARD|פתיחת מחולל רקע פס הגלילה...
+WIN_SBG_IMAGE|תמונה*:
+WIN_SBG_NBHORIZ|שקופיות אופקיות:
+WIN_SBG_NBVERT|שקופיות אנכיות:
+WIN_SBG_PADHORIZ|מרווח אופקי:
+WIN_SBG_PADVERT|מרווח אנכי:
+WIN_SBG_ATTR|תכונות הרקע
+
+#Text
+WIN_TEXT_TITLE|הגדרות טקסט
+WIN_TEXT_TEXT|טקסט*:
+WIN_TEXT_FONT|גופן:
+WIN_TEXT_COLOR|צבע:
+WIN_TEXT_CHOOSE|בחירה...
+WIN_TEXT_CHOOSER_TITLE|בחירת צבע הטקסט
+WIN_TEXT_ALIGNMENT|יישור:
+WIN_TEXT_SCROLLING|גלילה:
+WIN_TEXT_ATTR|מאפייני טקסט
+
+#Video
+WIN_VIDEO_TITLE|הגדרות הווידאו
+WIN_VIDEO_AUTORESIZE|שינוי גודל אוטומטי:
+WIN_VIDEO_AUTORESIZE_TIP|הצבעה על האם הפריסה צריכה לשנות את גודלה אוטומטית כדי שתתאים לממדי הווידאו המתנגן.
+WIN_VIDEO_ATTR|תכונות הווידאו

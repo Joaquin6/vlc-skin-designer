@@ -4,6 +4,7 @@ ca|Catalan (Incomplete) - Català|ca.txt
 zh-tw|Chinese (Taiwanese Mandarin) - 國語|zh-tw.txt
 cz|Czech - Čeština|cz.txt
 nl|Dutch - Nederlands|nl.txt
+he|Hebrew - עִבְרִית|he.txt
 en|English|en.txt
 et|Estonian - Eesti keel|et.txt
 fr|French - Français|fr.txt
