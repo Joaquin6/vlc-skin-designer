@@ -1,5 +1,6 @@
 #Available languages
 #language code|Human-readable name|language file
+eu|Basque - Euskara|eu.txt
 ca|Catalan (Incomplete) - Català|ca.txt
 zh-tw|Chinese (Taiwanese Mandarin) - 國語|zh-tw.txt
 cz|Czech - Čeština|cz.txt

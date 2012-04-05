@@ -151,6 +151,7 @@ Lorenzo Marrocchi for the Italian translation
 Jiří Pešek for the Czech translation
 Alan for the Chinese translation
 Yaron Shahrabani for the Hebrew translation
+Xabier Aramendi for the Basque translation
 -----------------------------------------------------------
 Further credits:
 -----------------------------------------------------------

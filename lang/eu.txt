@@ -1,0 +1,614 @@
+#Basque language file for VLC Skin Editor
+#Author/s: Xabier Aramendi
+
+#General strings
+CHOICE_YES|Bai
+CHOICE_NO|Ez
+CHOICE_CANCEL|Ezeztatu
+BUTTON_OK|Ongi
+BUTTON_CANCEL|Ezeztatu
+BUTTON_HELP|Laguntza
+
+#Item names
+THEME|Gaia
+FONT|Iturria
+BITMAP|Bitmapa
+SUBBITMAP|AzpiBitmapa
+WINDOW|Leihoa
+LAYOUT|Geruza
+ANCHOR|Aingura
+BUTTON|Botoia
+CHECKBOX|Egiaztakutxa
+GROUP|Taldea
+IMAGE|Irudia
+PANEL|Panela
+PLAYTREE|Irakur-zuhaitza
+RADIALSLIDER|Irriskari radiala
+SLIDER|Irriskaria
+SLIDERBG|Irriskari Barrena
+TEXT|Idazkia
+VIDEO|Bideoa
+UNNAMED|Izengabea %t #%i
+
+#The Menu bar and its entries
+#The access key for a menu entry is defined by the MN (for Mnemonic) value
+MENU_FILE|Agiria
+MENU_FILE_MN|A
+MENU_FILE_NEW|Berria
+MENU_FILE_NEW_MN|B
+MENU_FILE_OPEN|Ireki...
+MENU_FILE_OPEN_MN|I
+MENU_FILE_SAVE|Gorde
+MENU_FILE_SAVE_MN|G
+MENU_FILE_TEST|Aztertu azala VLC-n
+MENU_FILE_TEST_MN|AZ
+MENU_FILE_VLT|Esportatu VLT bezala...
+MENU_FILE_VLT_MN|V
+MENU_FILE_PNG|Gorde uneko aurreikuspena irudi bezala...
+MENU_FILE_PNG_MN|K
+MENU_FILE_EXIT|Irten
+MENU_FILE_EXIT_MN|X
+MENU_EDIT|Editatu
+MENU_EDIT_MN|E
+MENU_EDIT_UNDO|Desegin
+MENU_EDIT_UNDO_MN|D
+MENU_EDIT_REDO|Berregin
+MENU_EDIT_REDO_MN|R
+MENU_EDIT_THEME|Azal ezarpenak
+MENU_EDIT_THEME_MN|Z
+MENU_EDIT_VARS|Aldaera orokorrak
+MENU_EDIT_VARS_MN|E
+MENU_EDIT_PREFS|Hobespenak
+MENU_EDIT_PREFS_MN|H
+MENU_EDIT_UP|Mugitu hautatutako gaia gora
+MENU_EDIT_DOWN|Mugitu hautatutako gaia behera
+MENU_EDIT_LEFT|Mugitu hautatutako gaia ezkerrera
+MENU_EDIT_RIGHT|Mugitu hautatutako gaia eskuinera
+MENU_HELP|Laguntza
+MENU_HELP_MN|L
+MENU_HELP_DOC|Online laguntza
+MENU_HELP_DOC_MN|O
+MENU_HELP_ABOUT|Honi buruz
+MENU_HELP_ABOUT_MN|U
+
+#The toolbar
+TOOLBAR_OPEN|Ireki azal bat...
+TOOLBAR_SAVE|Gorde azal aldaketak
+TOOLBAR_UNDO|Desegin
+TOOLBAR_REDO|Berregin
+TOOLBAR_MOVE|Gaia mugitzeko tresna
+TOOLBAR_PATH|Irriskari edizio tresna
+
+#Resource Window
+WIN_RES_TITLE|Baliabideak
+WIN_RES_ADD_BMP|Gehitu Bitmapa edo AzpiBitmapa berri bat
+WIN_RES_ADD_FONT|Gehitu Hizki berri bat
+WIN_RES_COPY|Sortu hautatutako baliabideen kopia bat 
+WIN_RES_EDIT|Editatu hautatutako baliabidea
+
+
+WIN_RES_DELETE|Ezabatu hautatutako baliabidea
+WIN_RES_PU_ADD_BMP|Gehitu Bitmapa/k
+WIN_RES_PU_ADD_SBMP|Gehitu AzpiBitmapa
+WIN_RES_BITMAPS|Bitmapak
+WIN_RES_FONTS|Hizkiak
+
+#Windows window
+WIN_WIN_TITLE|Leihoak
+WIN_WIN_ADD|Gehitu leiho berri bat
+WIN_WIN_ADD_LAY|Gehitu leiho berri bat hautatutako leihora
+WIN_WIN_MOVE_UP|Mugitu hautatuako asmoa gora hierarkian (azken asmoa da leihoarentzako berezko asmoa)
+WIN_WIN_MOVE_DOWN|Mugitu hautatutako asmoa behera hierarkian (azken asmoa da leihoarentzako berezko asmoa)
+WIN_WIN_COPY|Sortu hautatutako leihoaren edo asmoaren kopia bat
+WIN_WIN_EDIT|Editatu hautatutako leihoa edo asmoa
+WIN_WIN_DELETE|Ezabatu hautatutako leihoa edo asmoa
+
+
+
+
+
+
+
+#Items window
+WIN_ITEMS_TITLE|Gaiak
+WIN_ITEMS_ADD|Gehitu gai berria
+WIN_ITEMS_MOVE_UP|Mugitu haututako gaia gora hierarkian
+WIN_ITEMS_MOVE_DOWN|Mugitu haututako gaia behera hierarkian
+WIN_ITEMS_COPY|Sortu hautatutako gaiaren kopia bat
+WIN_ITEMS_EDIT|Editatu hautatutako gaia
+WIN_ITEMS_DELETE|Ezabatu hautatutako gaia
+WIN_ITEMS_PU_PANEL_ADD|Gehitu hautatutako Panelera
+
+#Welcome dialog
+WELCOME_TITLE|Ongi etorri VLC Azal Editatzailera
+WELCOME_MSG|Zer egitea nahi duzu?
+WELCOME_NEW|Sortu azal berri bat
+WELCOME_OPEN|Ireki badagoen azal bat
+WELCOME_QUIT|Utzi
+
+#Preferences window
+WIN_PREFS_TITLE|Hobespenak
+WIN_PREFS_UPDATE_L|Gaitu berez-eguneratzea:
+WIN_PREFS_LANG_L|Hizkuntza:
+WIN_PREFS_LAF_L|Programaren itxura:
+WIN_PREFS_TBAR_L|Erakutsi tresnabarra:
+WIN_PREFS_RESTART_L|<html><i>Ezarpen batzuek programa berrabiarazitakoan bakarrik dute eragina.</i></html>
+
+#SubBitmap Edit and Skin Preview window
+WIN_SBMP_EDIT_TITLE|Editattu AzpiBitmapa
+ZOOM_FACTOR|Zoom eragina:
+
+#Global variables editing window
+WIN_VARS_TITLE|Aldaera orokorrak
+WIN_VARS_NOTE|<html>Aldaera hauek aurreikuspenean bakarrik dute eragina.<br>VLC-ren egoera irudikatzen dute.</html>
+WIN_VARS_SLIDER|Irriskari kokapena
+
+#Theme options window
+WIN_THEME_TITLE|Azal ezarpenak
+WIN_THEME_NAME|Izena:
+WIN_THEME_AUTHOR|Egilea:
+WIN_THEME_EMAIL|Egilearen Post@:
+WIN_THEME_WEB|Egilearen webgunea:
+WIN_THEME_MAGNET|Erakarpena:
+WIN_THEME_MAGNET_TIP|Ikusleiho hertzaren eta leiho baten arteko hurruntasuna balio hau baino txikiagoa denean, leihoa hertzera itsatsiko da
+WIN_THEME_ALPHA|Argikaiztasuna:
+WIN_THEME_ALPHA_TIP|Leihoaran alfa gardentasuna ezartzen du. Balioa 1 (gardentasun osotik hurbil) eta 255 (argikaiztasun osoa) artekoa izan behar da. Balio txikiak saihestu behar dira.
+WIN_THEME_MOVEALPHA|Argikaiztasuna mugitzerakoan:
+WIN_THEME_MOVEALPHA_TIP|Ezarri leihoaren alpha gardentasuna mugitzerakoan.
+WIN_THEME_INFO_TITLE|Azalgai argibideak
+WIN_THEME_ATTR_TITLE|Azalgai ezaugarriak
+
+#Action Editor
+WIN_ACTIONS_TITLE|Editatu ekintza sekuentzia
+
+#Popup menu in the action editor
+ACTIONS_PU|Ekintzak
+ACTIONS_DIALOGS|Erakutsi elkarrizketa bat
+ACTIONS_PLAYLIST|Irakur-zerrenda
+ACTIONS_DVD|DVD
+ACTIONS_WINDOWS|Azala
+ACTIONS_VLC_PLAY|Irakurri
+ACTIONS_VLC_PAUSE|Pausatu
+ACTIONS_VLC_STOP|Gelditu
+ACTIONS_VLC_FASTER|Irakurri azkar
+ACTIONS_VLC_SLOWER|Irakurri astiro
+ACTIONS_VLC_NEXTFRAME|Irakurri hurrengo framea
+ACTIONS_VLC_MUTE|Mututu bolumena
+ACTIONS_VLC_VOLUMEUP|Handitu bolumena
+ACTIONS_VLC_VOLUMEDOWN|Gutxitu bolumena
+ACTIONS_VLC_FULLSCREEN|Aldatu ikusleiho-osoko modua
+ACTIONS_VLC_SNAPSHOT|Hartu ikusleiho-argazki bat
+ACTIONS_VLC_TOGGLERECORD|Aldatu grabaketa
+ACTIONS_VLC_ONTOP|Toggle always on top
+ACTIONS_VLC_MINIMIZE|Ikonotu VLC
+ACTIONS_VLC_QUIT|Utzi VLC
+ACTIONS_EQ_ENABLE|Gaitu Ekualizagailua
+ACTIONS_EQ_DISABLE|Ezgaitu Ekualizagailua
+ACTIONS_DIALOGS_CHANGESKIN|Aldatu azala
+ACTIONS_DIALOGS_FILESIMPLE|Irek agiria (arrunta)
+ACTIONS_DIALOGS_FILE|Ireki agiria (hedatua)
+ACTIONS_DIALOGS_DIRECTORY|Ireki zuzenbidea
+ACTIONS_DIALOGS_DISC|Ireki diska
+ACTIONS_DIALOGS_NET|Ireki sare jarioa
+ACTIONS_DIALOGS_MESSAGES|Mezu oharra
+ACTIONS_DIALOGS_PREFS|Hobespenak
+ACTIONS_DIALOGS_FILEINFO|Agiri argibideak
+ACTIONS_DIALOGS_PLAYLIST|Azalgabetutako irakur-zerrenda
+ACTIONS_DIALOGS_STREAMINGWIZARD|Jario Laguntzailea
+ACTIONS_DIALOGS_POPUP|Oharleiho menu osoa
+ACTIONS_DIALOGS_AUDIOPOPUP|Audio ezarpen oharleiho menua
+ACTIONS_DIALOGS_VIDEOPOPUP|Bideo ezarpen oharleiho menua
+ACTIONS_DIALOGS_MISCPOPUP|Askotariko ezarpen oharleiho menua
+ACTIONS_PLAYLIST_ADD|Gehitu gai berri bat
+ACTIONS_PLAYLIST_DEL|Kendu hautatutako gaia
+ACTIONS_PLAYLIST_NEXT|Irakurri hurrengo gaia
+ACTIONS_PLAYLIST_PREVIOUS|Irakurri aurrekoo gaia
+ACTIONS_PLAYLIST_SETRANDOM|Irakurri zorizko/arrunt hurrenkeran
+ACTIONS_PLAYLIST_SETLOOP|Bigiztatu irakur-zerrenda/irakurri behin
+ACTIONS_PLAYLIST_SETREPEAT|Gaitu/ezgaitu uneko gaiaren berregitea
+ACTIONS_PLAYLIST_SORT|Antolatu alfabetikoki
+ACTIONS_PLAYLIST_LOAD|Gertatu agiritik
+ACTIONS_PLAYLIST_SAVE|Gorde agirian
+ACTIONS_DVD_NEXTTITLE|Hurrengo izenburua
+ACTIONS_DVD_PREVIOUSTITLE|Aurreko izenburua
+ACTIONS_DVD_NEXTCHAPTER|Hurrengo atala
+ACTIONS_DVD_PREVIOUSCHAPTER|Aurreko atala
+ACTIONS_DVD_ROOTMENU|Menu nagusia
+ACTIONS_WINDOWS_SHOW|Erakutsi leiho bat
+ACTIONS_WINDOWS_HIDE|Ezkutatu leiho bat
+ACTIONS_WINDOWS_MAXIMIZE|Handiengotu leiho bat
+ACTIONS_WINDOWS_UNMAXIMIZE|Ez-handiengotu leiho bat
+ACTIONS_WINDOWS_SETLAYOUT|Aldatu leiho baten antolakuntza
+
+#Action descriptions
+ACTION_DESC_NONE|Ez egin ezer.
+ACTION_DESC_CHANGESKIN|Erakutsi elkarrizketa kutxa bat azal berri bat igotzeko.
+ACTION_DESC_FILESIMPLE|Erakutsi "Ireki Agiria" elkarrizketa kutxa arrunta.
+ACTION_DESC_FILE|Erakutsi "Ireki Agiria" elkarrizketa kutxa hedatua.
+ACTION_DESC_DIRECTORY|Erakutsi "Ireki Zuzenbidea" elkarrizketa kutxa.
+ACTION_DESC_DISC|Erakutsi "Ireki Diska".
+ACTION_DESC_NET|Erakutsi "Ireki Sare Jarioa".
+ACTION_DESC_MSG|Erakutsi mezu ohar elkarrizketa kutxa.
+ACTION_DESC_PREFS|Erakutsi hobespen elkarrizketa kutxa.
+ACTION_DESC_FILEINFO|Erakutsi agiri argibide elkarrizketa kutxa.
+ACTION_DESC_PLAYLIST|Erakutsi berezko (azalgabetuta) irakur-zerrenda leihoa.
+ACTION_DESC_WIZARD|Erakutsi "Jario Laguntzailea" elkarrizketa kutxa.
+ACTION_DESC_POPUP|Erakutsi oharleiho menu osoa.
+ACTION_DESC_AUDIOPU|Erakutsi audio ezarpen oharleiho menua.
+ACTION_DESC_VIDEOPU|Erakutsi bideo ezarpen oharleiho menua.
+ACTION_DESC_MISCPU|Erakutsi oharleiho menu bat irakur agintea eta aukera orokorrak dituena.
+ACTION_DESC_EQENABLE|Gaitu ekualizagailu audio iragazkia.
+ACTION_DESC_EQDISABLE|Ezgaitu ekualizagailu audio iragazkia.
+ACTION_DESC_PLAY|Irakurri uneko irakur-zerrenda gaia.
+ACTION_DESC_PAUSE|Pausatu irakurketa.
+ACTION_DESC_STOP|Gelditu irakurketa.
+ACTION_DESC_FASTER|Irakkurri azkar.
+ACTION_DESC_SLOWER|Irakurri astiro.
+ACTION_DESC_NEXTFRAME|Irakurketa frame bat aurreratzen du (framenkako irakurketa).
+ACTION_DESC_MUTE|Aldatu audio mutuketa.
+ACTION_DESC_VOLUP|Igo bolumena.
+ACTION_DESC_VOLDOWN|Jeitsi bolumena.
+ACTION_DESC_FULLSCREEN|Aldatu ikusleiho-osoko modua.
+ACTION_DESC_SNAPSHOT|Hartu bideoaren berehalako bat.
+ACTION_DESC_TOGGLERECORD|Irakurketaren grabaketa aldatzen du.
+ACTION_DESC_ONTOP|Aldatu "betik gainean" egoera.
+ACTION_DESC_MIN|Ikonotu VLC.
+ACTION_DESC_QUIT|Utzi VLC.
+ACTION_PL_ADD|Gehitu gai berri bat irakur-zerrendara.
+ACTION_PL_DEL|Kendu hautatutako gaiak irakur-zerrendatik.
+ACTION_PL_NEXT|Irakurri irakur-zerrendako hurrengo gaia.
+ACTION_PL_PREV|Irakurri irakur-zerrendako aurreko gaia.
+ACTION_PL_SORT|Antolatu irakur-zerrenda alfabetikoki.
+ACTION_PL_LOAD|Gertatu kanpoko irakur-zerrenda agiria.
+ACTION_PL_SAVE|Gorde uneko irakur-zerrenda agiri batean.
+ACTION_DVD_NEXTT|Joan DVD-ko hurrengo izenburura.
+ACTION_DVD_PREVT|Joan DVD-ko aurreko izenburura.
+ACTION_DVD_NEXTC|Joan DVD-ko hurrengo atalera.
+ACTION_DVD_PREVC|Joan DVD-ko aurreko atalera.
+ACTION_DVD_MENU|Joan DVD-ko erro menura.
+#%s = Selector with ACTION_ACTIVATE and ACTION_DEACTIVE as choices
+#%i = Window ID textfield
+#%l = Layout ID textfield
+ACTION_ACTIVATE|Eragin
+ACTION_DEACTIVATE|Eten
+ACTION_RANDOM|%s irakur-zerrendako gaiak zorizko hurrenkeran irakurtzen dira.
+ACTION_LOOP|%s irakur-zerrenda berregiten da amaiera erdietsitakoan.
+ACTION_REPEAT|%s uneko gaia berregiten da amaiera erdietsitakoan.
+ACTION_SHOW|Erakutsi ID %i leihoa
+ACTION_HIDE|Ezkutatu ID %i leihoa
+ACTION_MAXIMIZE|Handiengotu ID %i leihoa
+ACTION_UNMAXIMIZE|Ez-handiengotu ID %i leihoa
+ACTION_LAYOUT|Ezarri ID %i leihoaren antolakuntza honela %l
+
+#Slider background generator
+SBGGEN_TITLE|Irriskarri Barren Sortzailea
+SBGGEN_PREV|< Aurrekoa
+SBGGEN_NEXT|Hurrengoa >
+SBGGEN_CANCEL|Ezeztatu
+SBGGEN_FINISH|Amaitu
+
+SBGGEN_DESCR|Ongi etorri irriskari barren sortzailera. Honek zure irudientzako irriskari erakargarri bat sortzen lagunduko dizu, urrats gutxi batzuetan.
+SBGGEN_FIRST|Lehen urratsa, mesedez hautatu irriskaria ezkerretik eskuinera edo behetik gora doan, eta zein barren neurri izan behar duen.
+SBGGEN_WIDTH|Zabalera:
+SBGGEN_HEIGHT|Garaiera:
+SBGGEN_LEFT_M|Ezker bazterra:
+SBGGEN_RIGHT_M|Eskuin bazterra:
+SBGGEN_TOP_M|Goi bazterra:
+SBGGEN_BTM_M|Behe bazterra:
+SBGGEN_SECOND|Hurrengo urratsean zure irriskariaren atalekin elkartutako irudi agiri zuzenak hautatu behar dituzu.
+SBGGEN_NOTE|Ohartu ikurrak atal ezberdinek adierazten dutena argitzeko adibideak besterik ez direla. Ez dira barrenaren sortzean erabiliko diren irudien aurreikuspena.
+
+SBGGEN_IMAGE|Irudi agiria:
+SBGGEN_OPEN|Ireki...
+SBGGEN_RESIZE|Birneurritze jokabidea:
+SBGGEN_TILE|Izenburua
+SBGGEN_STRETCH|Luzera
+
+SBGGEN_BG|Barrena
+SBGGEN_OVERLAY|Gainjarri irudia
+SBGGEN_LEFT_E|Ezker hertza
+SBGGEN_RIGHT_E|Eskuin hertza
+SBGGEN_TOP_E|Goi hertza
+SBGGEN_BTM_E|Behe hertza
+SBGGEN_MIDDLE|Erdialdea
+
+SBGGEN_PROGRESS|Barrena sortzen...
+
+#Message dialogues
+#%v - version
+ABOUT_TITLE|VLC %v Azal Editatzaileari buruz 
+#%y - current year
+#%w - website
+ABOUT_MSG|<html><h3>Copyrighta 2007-%y VideoLAN Taldea</h3>GPL 2+ baldintzapean argitaratua<br><br><b>Programazio burua:</b> Daniel Dreibrodt (daniel.dreibrodt@googlemail.com)<br><b>Webgunea:</b> %w<br><br><b>Kreditoak:</b><br>Timothy Gerard Endres erregistro sarbidea eta TAR sostengua (Domeinu Publikoa)<br>Tango! Mahigain Egitasmoa (http://tango.freedesktop.org) ikono batzuk (Creative Commons BY-SA 2.5)<br>Cyril Deguet (asmax@via.ecp.fr) eta Olivier Teuli&egrave;re (ipkiss@via.ecp.fr) Boolean Adierazpen Aztertzailea eta Bezier kodea (GPL 2+)</html>
+VLT_EX_TITLE|VLT agiri inportazioa
+#%f - name of the folder
+VLT_EX_MSG|VLT agiria "%f" deituriko azpiagiritegi batera despaketatuko da.\nJarraitzea nahi duzu?
+VLT_EX_YES|Bai, despaketatu
+VLT_EX_NO|Ez, ezeztatu
+VLT_EX_PROGRESS|VLT agiria despaketatzen...
+XML_PARSING_PROGRESS|Aztertzen XML...
+ADD_BMP_FILE_FILTER_DESC|*.png (Sare Grafika Eramangarria) XML agirien zuzenbide barnera
+ADD_FONT_FILE_FILTER_DESC|*.otf/*.ttf (TrueType edo OpenType/Hizki-mota Ireki eta Egizkoak) XML agirien zuzenbide barnera
+DUPLICATE_MSG|Mesedez sartu bikoiztutako objetuentzako berreizendatze eredua.\n%oldid% ordeztua izango da objetuaren ID zaharrarekin.
+DEL_CONFIRM_TITLE|Ezabaketa baieztapena
+DEL_CONFIRM_MSG|Egitan nahi duzu "%n" ezabatzea?
+EXIT_CONFIRM_TITLE|Zure aldaketak ez dira gorde
+EXIT_CONFIRM_MSG|Zure azala gordetzea nahi duzu irten aurretik?
+UPDATE_TITLE|Eguneraketa aurkitu da
+UPDATE_MSG|Azal Editatzailearentzat eguneraketa bat eskuragarri dago.\nZure bertsioa: %v\nAzken bertsioa: %c\nAzal Editatzailea orain eguneratzea nahi duzu?
+VLT_PROGRESS|VLT agira sortzen...
+VLT_SUCCESS_MSG|VLT agira ongi sortu da.
+VLT_SUCCESS_TITLE|VLT agiria sortuta
+DOWNLOAD_PROGRESS|Jeisten...
+CONNECT_PROGRESS|Elkarketatzen...
+UPDATE_SUCCESS_TITLE|Eguneraketa amaituta
+UPDATE_SUCCESS_MSG|Eguneraketa ongi jeitsi eta ezarri da.\VLC Azal Editatzailea orain berrabiaraziko da
+
+#Error messages
+ERROR_FILENEXIST_TITLE|Akatsa agiria irekitzerakoan
+ERROR_FILENEXIST_MSG|"%f" agiria ez dago eta hortaz ezin da ireki!
+ERROR_VLT_UNPACK_TITLE|Ezinezkoa VLT agiria despaketatzea
+ERROR_VLT_UNPACK_MSG|VLT agiria ezin da despaketatu!
+ERROR_VLT_NOTHEME_TITLE|Ezinezkoa theme.xml aurkitzea
+ERROR_VLT_NOTHEME_MSG|Ezinezkoa"theme.xml" aurkitzea despaketatutako VLT agiriaren edukien barne.\nSaiatu eskuz irekitzen.
+ERROR_VLC_LAUNCH_TITLE|Akatsa
+ERROR_VLC_LAUNCH_MSG|VLC multimedia irakurgailua ezin da abiarazi
+ERROR_BROWSE_TITLE|Ezinezkoa Nabigatzailea abiaraztea
+ERROR_BROWSE_MSG|Nabigatzailea ezin da abiarazi.\nMesedez joan eskuz hurrengo URL-ra:\n%u
+ERROR_ADD_SBMP_TITLE|Ezinezkoa AzpiBitmapa gehitzea
+ERROR_ADD_SBMP_NOBMP|Ez da gaineko Bitmaparik hautatu!
+ERROR_ADD_SBMP_NOTBMP|Hautatutako baliabidea ez da Bitmapa bat!
+ERROR_RES_DEL_TITLE|Ezinezkoa baliabidea ezabatzea
+ERROR_RES_DEL_INUSE|Baliabidea orain azalean erabilia da, hortaz ezin da ezabatu.
+ERROR_ADD_LAYOUT_TITLE|Ezinezkoa antolakuntza gehitzea
+ERROR_ADD_LAYOUT_MSG|Ez da gaineko leihorik hautatu!
+ERROR_UPDATE_TITLE|Akatsa eguneratzerakoan!
+ERROR_SAVEPNG_TITLE|Akatsa irudia gordetzerakoan
+ERROR_SAVEPNG_MSG|Ezinezkoa irudia gordetzea.
+ERROR_NEWSKIN_TITLE|Akatsa azal agiri berria sortzerakoan!
+ERROR_NEWSKIN_MSG|Azal agiri berria ezin da sortu.
+ERROR_HEADER_INVALID|Agiria VLC Azalgai ez baliozko bezala agertzen da!\nIdazburu baliogabea:
+ERROR_SKIN_INVALID|Hautatutako agiria ez da VLC azal agiri baliozkoa!
+ERROR_VERSION_UNSUPPORTED|Hautatutako azalean erabilitako azalgaiaren bertsioa ez dago sostengatuta!
+ERROR_SAVE_TITLE|Akatsa azal agiria gordetzerakoan!
+ERROR_SAVE_MSG|Azal agiria ezin da gorde.
+ERROR_ALPHA_TITLE|Argikaiztasun balioa ez da baliozkoa
+ERROR_ALPHA_MSG|Mesedez sartu baliozko argikaiztasun bat! (0-255)
+ERROR_SBGGEN_MIDDLE_MSG|Ezinezkoa erdiko irudia gertatzea!\nGutxienez irriskariaren erdialdea behar da irriskari barrena sortzeko.
+ERROR_VLT_TITLE|Ezinezkoa VLT agiria sortzea
+ERROR_VLT_MSG|VLT agiria ezin da sortu!
+ERROR_ID_INVALID_TITLE|ID baliogabea
+ERROR_ID_INVALID_MSG|Mesedez sartu baliozko ID bat!
+ERROR_ID_EXISTS_MSG|"%i" ID-a jadanik badago.\nMesedez hautatu beste bat.
+ERROR_WIDTH_INVALID_TITLE|Zabalera baliogabea
+ERROR_WIDTH_INVALID_MSG|Mesedez sartu baliozko zabalera bat!
+ERROR_HEIGHT_INVALID_TITLE|Garaiera baliogabea
+ERROR_HEIGHT_INVALID_MSG|Mesedez sartu baliozko garaiera bat!
+ERROR_FILE_INVALID_TITLE|Agiri baliogabea
+ERROR_FILE_INVALID_MSG|Mesedez hautatu baliozko agiri bat!
+ERROR_BITMAP_INVALID_MSG|Emaniko bitmapa agiria ezin da gertatu!\nMesedez hautatu beste bat.
+ERROR_NBFRAMES_TITLE|Frame zenbateko baliogabea
+ERROR_NBFRAMES_MSG|Frame zenbatekoa ezin da 1 baino txikiagoa izan
+ERROR_OTF_TITLE|OTF ez dago sostengatuta
+ERROR_OTF_MSG|OpenType hizki-mota bat hautatu duzu, VLC-k zuzen erakutsi dezake baina Azal Editatzaileak ezin du erakutsi.\nBeste hizki-mota bat ikusiko duzu aurreikuspenean.
+ERROR_SIZE_INVALID_TITLE|Neurri baliogabea
+ERROR_SIZE_INVALID_MSG|Mesedez sartu baliozko neurri bat.
+ERROR_OUTSIDE_TITLE|Neurri baliogabeak
+ERROR_OUTSIDE_MSG|Adierazitako neurriak gaineko bitmapatik kanpoan daude!
+ERROR_BITMAP_NEXIST|%i bitmapa ez dago.
+ERROR_BITMAP_NEXIST_TITLE|Irudi baliogabea!
+ERROR_BITMAP_LOAD|%i bitmaparentzako irudi agiria ezin da gertatu.
+ERROR_BITMAP_LOAD_TITLE|Akatsa irudiak gertatzerakoan
+ERROR_NOSTATE|Mesedez eman egoera baldintza!
+ERROR_NOSTATE_TITLE|Egoera baliogabea
+ERROR_FONT_NEXIST|%i hizki-mota ez dago.
+ERROR_FONT_NEXIST_TITLE|Hizki-mota baliogabea!
+ERROR_POINTS_INVALID|Mesedez sartu baliozko bezier puntuak!
+ERROR_POINTS_INVALID_TITLE|Puntu baliogabeak!
+ERROR_RADIALSLIDER|Irriskari radialak oraindik ez daude Azal Editatzaileak sostengatuta.
+ERROR_RADIALSLIDER_TITLE|Ez dago sostengatuta
+
+#Other strings
+THEMEINFO_NAME_DEFAULT|Izengabeko Azalgaia
+THEMEINFO_AUTHOR_DEFAULT|Egile ezezaguna
+THEMEINFO_EMAIL_DEFAULT|Ezezaguna
+
+#History
+HIST_ITEM_ADD|Gehitu %t
+HIST_ITEM_DEL|Ezabatu %t
+HIST_ITEM_EDIT|Editatu %t
+HIST_ITEM_MOVE|Mugitu %t
+HIST_RES_DEL|Ezabatu %t "%i"
+
+#Editing dialogues
+#General strings
+NOTE_STARRED|* Ezagurria adierazi behar da.
+
+#Common strings
+WIN_ITEM_GENERAL|Ezaugarri orokorrak
+WIN_ITEM_ID|ID*:
+WIN_ITEM_ID_TIP|%t-ren izena eta nortasuna. Bakarra izan behar da.
+WIN_ITEM_X|X:
+WIN_ITEM_Y|Y:
+WIN_ITEM_WIDTH|Zabalera:
+WIN_ITEM_HEIGHT|Garaiera:
+WIN_ITEM_VISIBLE|Ikusgarritasuna:
+WIN_ITEM_LEFTTOP|Ezker-goian:
+WIN_ITEM_LEFTTOP_TIP|Adierazten du gai honen goi-ezkerra Antolakuntzaren zein bazterretara eransten den, birneurriratuz gero.
+WIN_ITEM_RIGHTBOTTOM|Eskuin-behean:
+WIN_ITEM_RIGHTBOTTOM_TIP|Adierazten du gai honen behe-eskuina Antolakuntzaren zein bazterretara eransten den, birneurriratuz gero.
+WIN_ITEM_XKEEPRATIO|Heutsi X Mailari:
+WIN_ITEM_XKEEPRATIO_TIP|Egia ezarritakoan, etzaneko birneurriketaren jokabidea aldatzen da. Adibidez, hasieran agintearen ezkerreko tartea eskuinekoa baino bi aldiz handiagoa bada, berdina izango da edozein etzaneko birneurriratzetan. Agintearen zabalera aldagaitza da.
+WIN_ITEM_YKEEPRATIO|Heutsi Y Mailari:
+WIN_ITEM_YKEEPRATIO_TIP|Egia ezarritakoan, zutikako birneurriketaren jokabidea aldatzen da. Adibidez, hasieran agintearen goiko tartea behekoa baino bi aldiz handiagoa bada, berdina izango da edozein zutikako birneurriratzetan. Agintearen garaiera aldagaitza da.
+WIN_ITEM_HELP|Laguntza idazkia:
+WIN_ITEM_HELP_TIP|'$H' aldaera hedatu egingo da balio honetara sagua uneko agintean dagoenean.
+WIN_ITEM_TOOLTIPTEXT|Tresna-oharra:
+FILE_INDIR|XML agiriaren agiritegi berdinean
+
+#Bitmap
+WIN_BITMAP_TITLE|Bitmapa ezarpenak
+WIN_BITMAP_FILE|Agiria*:
+WIN_BITMAP_FILE_TIP|Erabilitako irudi agiriaren helburua eta izena adierazten ditu.
+WIN_BITMAP_OPEN|Ireki...
+WIN_BITMAP_ALPHACOLOR|Alfamargoa:
+WIN_BITMAP_ALPHACOLOR_TIP|Bitmaparen gardentasun margoa heuskarri hexadezimalean. Zure PNG agiriak gardentasun mozorro bat adierazten badu, ere kontuan hartuko da.
+WIN_BITMAP_CHOOSE|Hautatu...
+WIN_BITMAP_NBFRAMES|Frame zenbatekoa:
+WIN_BITMAP_NBFRAMES_TIP|Ezaugarri hau beharrezkoa da animatutako bitmapak zehazteko; zure animazioak duen frame zenbatekoa da (irudiak). Frame ezberdin guztiak zutika jarritako irudiak bakarrik dira bitmapan.
+WIN_BITMAP_FPS|Frame segunduko:
+WIN_BITMAP_FPS_TIP|Bitmapa animatuetan bakarrik erabilia; animazioaren frame (irudi) segunduko zenbatekoa da.
+WIN_BITMAP_ANIMATION|Animazioaren ezaugarriak
+WIN_BITMAP_CHOOSER_TITLE|Hautatu alfamargoa
+
+#SubBitmap
+WIN_SBMP_TITLE|AzpiBitmapa ezarpenak
+WIN_SBMP_BOUNDS|Kokapen eta neurri ezaugarriak
+
+#Font
+WIN_FONT_TITLE|Hizki ezarpenak
+WIN_FONT_FILE|Agiria*:
+WIN_FONT_FILE_TIP|Erabilitako TrueType edo OpenType hizki-motak dituen agiria.
+WIN_FONT_OPEN|Ireki...
+WIN_FONT_SIZE|Neurria:
+
+#Layout
+WIN_LAYOUT_TITLE|Antolakuntza ezarpenak
+WIN_LAYOUT_GENERAL|Ezaugarri orokorrak
+WIN_LAYOUT_DIMENSIONS|Neurriak
+WIN_LAYOUT_WIDTH|Hasierako zabalera*:
+WIN_LAYOUT_WIDTH_TIP|Antolakuntzaren hasierako zabalera
+WIN_LAYOUT_HEIGHT|Hasierako garaiera*:
+WIN_LAYOUT_HEIGHT_TIP|Antolakuntzaren hasierako garaiera.
+WIN_LAYOUT_MINWIDTH|Gutxienezko zabalera:
+WIN_LAYOUT_MINWIDTH_TIP|Antolakuntzaren gutxienezko zabalera. Antolakuntza birneurritzerakoan bakarrik erabilia. Balio hau ezartzen bada "-1", hasierako zabalera erabiliko da gutxienezko zabalera bezala.
+WIN_LAYOUT_MINHEIGHT|Gutxieneko garaiera:
+WIN_LAYOUT_MINHEIGHT_TIP|Antolakuntzaren gutxienezko garaiera. Antolakuntza birneurritzerakoan bakarrik erabilia. Balio hau ezartzen bada "-1", hasierako garaiera erabiliko da gutxienezko garaiera bezala.
+WIN_LAYOUT_MAXWIDTH|Gehienezko zabalera:
+WIN_LAYOUT_MAXWIDTH_TIP|Antolakuntzaren gehienezko zabalera. Antolakuntza birneurritzerakoan bakarrik erabilia. Balio hau ezartzen bada "-1", hasierako zabalera erabiliko da gehienezko zabalera bezala.
+WIN_LAYOUT_MAXHEIGHT|Gehienezko garaiera:
+WIN_LAYOUT_MAXHEIGHT_TIP|Antolakuntzaren gehienezko garaiera. Antolakuntza birneurritzerakoan bakarrik erabilia. Balio hau ezartzen bada "-1", hasierako garaiera erabiliko da gehienezko garaiera bezala.
+
+#Window
+WIN_WINDOW_TITLE|Leiho ezarpenak
+WIN_WINDOW_X_TIP|Leihoaren hasierako hurruntasuna ikusleihoarekiko ezker hertzarekin.
+WIN_WINDOW_Y_TIP|Leihoaren hasierako hurruntasuna ikusleihoarekiko goi hertzarekin.
+WIN_WINDOW_VISIBLE_TIP|Adierazten du leihoa agertu behar den VLC abiatzerakoan. VLC-k azalaren leiho kokapena eta ikusgarritasuna gogoratzen dituenez, ezaugarri hau azala lehen aldiz abiarazterakoan bakarrik erabiltzen da.
+WIN_WINDOW_DD|Arrastatu eta askatu:
+WIN_WINDOW_DD_TIP|Adierazten du leihoan multimedia agirien arrastatu eta askatu ahalbidetzen den.
+WIN_WINDOW_PD|Irakurri askatzean:
+WIN_WINDOW_PD_TIP|Adierazten du arrastatutako agiria zuzenean irakurtzen den (egia) edo lerrokatu bakarrik (faltsua). Ezaugarri honek ez du eraginik arrastatu-askatu "faltsua" ezartzen bada.
+WIN_WINDOW_DD_PANEL|Arrastatu eta askatu aukerak
+
+#Anchor
+WIN_ANCHOR_TITLE|Aingura ezarpenak
+WIN_ANCHOR_POINTS|Puntuak:
+WIN_ANCHOR_POINTS_TIP|Puntuek aingurak jarraitutako Bezier bihurgunea adierazten dute. Ez duzu parametro hau aldatu beharrik nahi duzun guztia ainguratze puntual bat bada.
+WIN_ANCHOR_RANGE|Maila:
+WIN_ANCHOR_RANGE_TIP|Eragin eremuaren aingura maila, pixeletan.
+WIN_ANCHOR_PRIORITY|Lehentasuna*:
+WIN_ANCHOR_PRIORITY_TIP|Aingura bakoitzak lehentasuna du (lehentasun ezaugarria), eta lehentasun handieneko aingura da irabazlea, honek esanahi du leiho hauek mugitzerakoan ainguratutako beste leiho guztiak ere mugituko direla. Ainguratutako 2 leihoen eragina hausteko, lehentasun txikiena duen leihoa mugitu behar duzu.
+WIN_ANCHOR_BOUNDARIES|Mugak
+
+#Button
+WIN_BUTTON_TITLE|Botoi ezarpenak
+WIN_BUTTON_UP|Irudi arrunta*:
+WIN_BUTTON_OVER|Irudia egonean:
+WIN_BUTTON_DOWN|Irudia klikatuta:
+WIN_BUTTON_ACTION|Ekintza:
+WIN_BUTTON_ATTR|Botoi ezaugarriak
+
+#Checkbox
+WIN_CHECKBOX_TITLE|Hautakutxa ezarpenak
+WIN_CHECKBOX_UP|Irudi arrunta*:
+WIN_CHECKBOX_OVER|Irudia egonean:
+WIN_CHECKBOX_DOWN|Irudia klikatuta:
+WIN_CHECKBOX_ACTION|Ekintza:
+WIN_CHECKBOX_CONDITION|Baldintza:
+WIN_CHECKBOX_CONDITION_TIP|Boolean adierazpenak hautakutxaren egoera adierazten du: faltsua -> egoera #1, egia -> egoera #2
+WIN_CHECKBOX_STATE|Hautakutxa egoera
+WIN_CHECKBOX_STATE1|Egoera #1 (Baldintza betegabe)
+WIN_CHECKBOX_STATE2|Egoera #2 (Baldintza beteta)
+
+#Image
+WIN_IMAGE_TITLE|Irudi ezarpenak
+WIN_IMAGE_IMAGE|Irudia*:
+WIN_IMAGE_IMAGE_TIP|Bitmapa baten ID-a
+WIN_IMAGE_RESIZE|Berneurriratze modua:
+WIN_IMAGE_RESIZE_TIP|Irudia birneurriratua denean duen jokabidea adierazten du.
+WIN_IMAGE_ACTION|Ekintza:
+WIN_IMAGE_ACTION_TIP|Klik-bakarrak irudian duen eragina
+WIN_IMAGE_ACTION2|Klik-bikoitz ekintza:
+WIN_IMAGE_ACTION2_TIP|Klik-bikoitzak irudian duen eragina
+WIN_IMAGE_ATTR|Irudi ezaugarriak
+WIN_IMAGE_ART|Ordeztu irudia bilduma azalarekin, eskuragarri dagoenean
+
+#Group
+WIN_GROUP_TITLE|Multzo ezarpenak
+
+#Panel
+WIN_PANEL_TITLE|Panel ezarpenak
+WIN_PANEL_DIMENSIONS|Neurriak
+WIN_PANEL_WIDTH|Zabalera*:
+WIN_PANEL_HEIGHT|Garaiera*:
+
+#Playtree
+WIN_PLAYTREE_TITLE|Irakur-zuhaitz ezarpenak
+WIN_PLAYTREE_FONT|Hizki-mota*:
+WIN_PLAYTREE_BGIMAGE|Barren irudia:
+WIN_PLAYTREE_BGIMAGE_TIP|Bitmaparen ID-a, barren irudi bezala erabilia. Ez bitmapa adierazten denean, barrena brmargoa1 eta brmargoa2 ezaugarriak erabiliz beteko da.
+WIN_PLAYTREE_BGCOLOR1|Barren margoa #1:
+WIN_PLAYTREE_BGCOLOR2|Barren margoa #2:
+WIN_PLAYTREE_SELCOLOR|Hautapen margoa:
+WIN_PLAYTREE_FGCOLOR|Idazki margoa:
+WIN_PLAYTREE_PLAYCOLOR|Irakurketa idazki margoa:
+WIN_PLAYTREE_FLAT|Irakur-zerrenda osoa:
+WIN_PLAYTREE_FLAT_TIP|Adierazten du irakur-zerrendak zuhaitz egitura erabili behar duen edo osoa\"flat\" (zuhaitzaren orriak bakarrik erakusten dira).
+WIN_PLAYTREE_ITEMIMAGE|Gai ikurra:
+WIN_PLAYTREE_OPENIMAGE|Ireki agiritegi ikurra:
+WIN_PLAYTREE_CLOSEDIMAGE|Itxi agiritegi ikurra:
+WIN_PLAYTREE_SLIDER|Editatu Irakur-zerrendaren irriskaria (irriskaribarra)
+WIN_PLAYTREE_ATTR|Irakur-zuhaitz ezaugarriak
+WIN_PLAYTREE_CHOOSE|Hautatu...
+WIN_PLAYTREE_CHOOSER_TITLE|Hautatu margoa
+
+#Slider
+WIN_SLIDER_TITLE|Irriskari ezarpenak
+WIN_SLIDER_UP|Irudi arrunta*:
+WIN_SLIDER_OVER|Irudia egonean:
+WIN_SLIDER_DOWN|Irudia klikatuta:
+WIN_SLIDER_POINTS|Puntuak*:
+WIN_SLIDER_THICKNESS|Lodiera:
+WIN_SLIDER_VALUE|Balioa*:
+WIN_SLIDER_VALUE_SCROLL|Irakur-zuhaitz irriskapena
+WIN_SLIDER_BG_ENABLE|Gaitu Barrena
+WIN_SLIDER_BG_EDIT|Editatu...
+WIN_SLIDER_ATTR|Irriskari ezaugarriak
+WIN_SLIDER_BG|Irriskari barrena
+
+#Slider background
+WIN_SBG_TITLE|Irriskari barren ezarpenak
+WIN_SBG_WIZARD|Ireki Irriskari Barren Sortzailea...
+WIN_SBG_IMAGE|Irudia*:
+WIN_SBG_NBHORIZ|Etzaneko frameak:
+WIN_SBG_NBVERT|Zutikako frameak:
+WIN_SBG_PADHORIZ|Etzaneko betegarria:
+WIN_SBG_PADVERT|Zutikako betegarria:
+WIN_SBG_ATTR|Barren ezaugarriak
+
+#Text
+WIN_TEXT_TITLE|Idazki ezarpenak
+WIN_TEXT_TEXT|Idazkia*:
+WIN_TEXT_FONT|Hizkia:
+WIN_TEXT_COLOR|Margoa:
+WIN_TEXT_CHOOSE|Hautatu...
+WIN_TEXT_CHOOSER_TITLE|Hautatu hizki margoa
+WIN_TEXT_ALIGNMENT|Lerrokatzea:
+WIN_TEXT_SCROLLING|Irriskatzen:
+WIN_TEXT_ATTR|Idazki ezaugarriak
+
+#Video
+WIN_VIDEO_TITLE|Bideo ezarpenak
+WIN_VIDEO_AUTORESIZE|Berez-neurritu:
+WIN_VIDEO_AUTORESIZE_TIP|Adierazten du antolakuntza berezgaitasunez birneurriratu behar den irakurritako bideoaren neurriarekin egokitzeko
+WIN_VIDEO_ATTR|Bideo Ezaugarriak
