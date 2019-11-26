@@ -22,6 +22,7 @@
 
 package vlcskineditor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -176,7 +177,19 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(System.getProperty("os.name").indexOf("Mac")!=-1) {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("com.apple.mrj.application.apple.menu.about.name", "TeacherTool Desktop");
-        com.apple.eawt.Application.getApplication().setDockIconImage(createIcon("icons/icon.png").getImage());
+
+        try {
+            /* MacOSX specific shim to set the application logo in the Dock. */
+            Object application = Class.forName("com.apple.eawt.Application")
+                .getMethod("getApplication")
+                .invoke(null);
+            application.getClass()
+                .getMethod("setDockIconImage")
+                .invoke(application, createIcon("icons/icon.png").getImage());
+        } catch(ClassNotFoundException | NoSuchMethodException |
+                IllegalAccessException | InvocationTargetException e) {
+            /* TODO: log that we cannot set icon */
+        }
     }
 
 
