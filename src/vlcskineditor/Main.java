@@ -102,7 +102,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   /** Buttons in the items window */
   private JButton items_add, items_up, items_down, items_duplicate, items_edit, items_del;
   /** The popup menu that is shown when the "add item" button is clicked */
-  private JPopupMenu items_add_pu;  
+  private JPopupMenu items_add_pu;
   private JMenuItem items_add_pu_anchor, items_add_pu_button, items_add_pu_checkbox;
   private JMenuItem items_add_pu_image, items_add_pu_panel;
   private JMenuItem items_add_pu_playtree, items_add_pu_slider, items_add_pu_text, items_add_pu_video;
@@ -141,7 +141,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   public static ImageIcon windows_icon = createIcon("icons/windows.png");
   public static ImageIcon items_icon = createIcon("icons/items.png");
   public static ImageIcon preview_icon = createIcon("icons/preview.png");
-    
+
   /** IDs of selected objects */
   private String selected_resource, selected_in_windows, selected_window, selected_layout, selected_item;
 
@@ -152,14 +152,14 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   /** Specifies whether changes were made without having saved the skin. */
   public boolean saved = false;
   /** Specifies whether a file is currently being opened */
-  boolean opening = false;  
+  boolean opening = false;
   /** Specifies if a file was opened */
   boolean opened = false;
   /** Handles undoing and redoing of actions */
   public History hist;
   /** Textfield width for all editing dialogs */
   public static final int TEXTFIELD_WIDTH = 200;
-  
+
    /**
    * Launches the skin editor and initializes the GUI.
    * @param args Command line arguments passed by the console.
@@ -167,7 +167,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    */
   public Main(String[] args) {
     Config.setMainInstance(this);
-    
+
     setTitle("VLC Skin Editor "+VERSION);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     addWindowListener(this);
@@ -182,7 +182,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
 
     //Menubar creation
     mbar = new JMenuBar();
-    
+
     //For cross-platform feel (CTRL on Win & Linux, APPLE/COMMAND on Mac OS)
     int mask = java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 
@@ -198,21 +198,21 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     m_file_open.setIcon(open_icon);
     m_file_open.setMnemonic(Language.get("MENU_FILE_OPEN_MN").charAt(0));
     m_file_open.setAccelerator(KeyStroke.getKeyStroke('O',mask));
-    m_file_open.addActionListener(this);    
+    m_file_open.addActionListener(this);
     m_file_save = new JMenuItem(Language.get("MENU_FILE_SAVE"));
     m_file_save.setIcon(save_icon);
     m_file_save.setMnemonic(Language.get("MENU_FILE_SAVE_MN").charAt(0));
-    m_file_save.setAccelerator(KeyStroke.getKeyStroke('S',mask));   
+    m_file_save.setAccelerator(KeyStroke.getKeyStroke('S',mask));
     m_file_save.addActionListener(this);
     m_file_test = new JMenuItem(Language.get("MENU_FILE_TEST"));
     m_file_test.setIcon(vlc_icon);
     m_file_test.setMnemonic(Language.get("MENU_FILE_TEST_MN").charAt(0));
     m_file_test.setAccelerator(KeyStroke.getKeyStroke('T',mask+InputEvent.SHIFT_DOWN_MASK));
-    m_file_test.addActionListener(this);    
+    m_file_test.addActionListener(this);
     m_file_vlt = new JMenuItem(Language.get("MENU_FILE_VLT"));
     m_file_vlt.setIcon(vlt_icon);
     m_file_vlt.setMnemonic(Language.get("MENU_FILE_VLT_MN").charAt(0));
-    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke('V',mask+InputEvent.SHIFT_DOWN_MASK));   
+    m_file_vlt.setAccelerator(KeyStroke.getKeyStroke('V',mask+InputEvent.SHIFT_DOWN_MASK));
     m_file_vlt.addActionListener(this);
     m_file_png = new JMenuItem(Language.get("MENU_FILE_PNG"));
     m_file_png.setMnemonic(Language.get("MENU_FILE_PNG_MN").charAt(0));
@@ -225,7 +225,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       m_file_quit.setAccelerator(KeyStroke.getKeyStroke("alt F4"));
       m_file_quit.addActionListener(this);
     }
-    
+
     m_file.add(m_file_new);
     m_file.addSeparator();
     m_file.add(m_file_open);
@@ -249,7 +249,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     m_edit_undo.addActionListener(this);
     m_edit_redo = new JMenuItem(Language.get("MENU_EDIT_REDO"));
     m_edit_redo.setIcon(edit_redo_icon);
-    m_edit_redo.setMnemonic(Language.get("MENU_EDIT_REDO_MN").charAt(0));    
+    m_edit_redo.setMnemonic(Language.get("MENU_EDIT_REDO_MN").charAt(0));
     m_edit_redo.setAccelerator(KeyStroke.getKeyStroke('Y',mask));
     m_edit_redo.addActionListener(this);
     m_edit_theme = new JMenuItem(Language.get("MENU_EDIT_THEME"));
@@ -263,13 +263,13 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     m_edit_vars.addActionListener(this);
     m_edit_prefs = new JMenuItem(Language.get("MENU_EDIT_PREFS"));
     m_edit_prefs.setIcon(editor_icon);
-    m_edit_prefs.setMnemonic(Language.get("MENU_EDIT_PREFS_MN").charAt(0));    
+    m_edit_prefs.setMnemonic(Language.get("MENU_EDIT_PREFS_MN").charAt(0));
     m_edit_prefs.addActionListener(this);
     m_edit_up = new JMenuItem(Language.get("MENU_EDIT_UP"));
     m_edit_up.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UP,mask));
     m_edit_up.addActionListener(this);
     m_edit_down = new JMenuItem(Language.get("MENU_EDIT_DOWN"));
-    m_edit_down.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,mask));    
+    m_edit_down.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,mask));
     m_edit_down.addActionListener(this);
     m_edit_left = new JMenuItem(Language.get("MENU_EDIT_LEFT"));
     m_edit_left.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,mask));
@@ -283,7 +283,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else
         m_edit_del.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
     m_edit_del.addActionListener(this);
-    
+
     m_edit.add(m_edit_undo);
     m_edit.add(m_edit_redo);
     m_edit.addSeparator();
@@ -301,16 +301,16 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
 
     //Initializing of the help menu
     m_help = new JMenu(Language.get("MENU_HELP"));
-    m_help.setMnemonic(Language.get("MENU_HELP_MN").charAt(0));    
+    m_help.setMnemonic(Language.get("MENU_HELP_MN").charAt(0));
     m_help_doc = new JMenuItem(Language.get("MENU_HELP_DOC"));
     m_help_doc.setIcon(help_icon);
     m_help_doc.setMnemonic(Language.get("MENU_HELP_DOC_MN").charAt(0));
     m_help_doc.addActionListener(this);
-    m_help_doc.setAccelerator(KeyStroke.getKeyStroke("F1"));    
+    m_help_doc.setAccelerator(KeyStroke.getKeyStroke("F1"));
     m_help_about = new JMenuItem(Language.get("MENU_HELP_ABOUT"));
     m_help_about.setMnemonic(Language.get("MENU_HELP_ABOUT_MN").charAt(0));
     m_help_about.addActionListener(this);
-    
+
     m_help.add(m_help_doc);
     m_help.add(m_help_about);
 
@@ -318,22 +318,22 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     mbar.add(m_file);
     mbar.add(m_edit);
     mbar.add(m_help);
-    
+
     setJMenuBar(mbar);
 
     //Resources, window and item windows
-       
+
     jdesk = new JDesktopPane();
-    
+
     s = new Skin(this);
-    
-    resources = new JInternalFrame(Language.get("WIN_RES_TITLE"),true,false);    
+
+    resources = new JInternalFrame(Language.get("WIN_RES_TITLE"),true,false);
     resources.setFrameIcon(resources_icon);
-    resources.setMinimumSize(new Dimension(190,200));    
+    resources.setMinimumSize(new Dimension(190,200));
     SpringLayout res_layout = new SpringLayout();
-    resources.setLayout(res_layout);     
+    resources.setLayout(res_layout);
     res_tree_model = new DefaultTreeModel(s.getResourcesTree());
-    res_tree = new JTree(res_tree_model);    
+    res_tree = new JTree(res_tree_model);
     ToolTipManager.sharedInstance().registerComponent(res_tree);
     res_tree.setCellRenderer(tree_renderer);
     res_tree.setRootVisible(false);
@@ -342,13 +342,13 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     res_tree.addTreeSelectionListener(this);
     res_tree.addMouseListener(this);
     JScrollPane res_tree_sp = new JScrollPane(res_tree);
-    resources.add(res_tree_sp);       
-    res_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
+    resources.add(res_tree_sp);
+    res_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
     res_add_bitmap = new JButton("",add_bitmap_icon);
     res_add_bitmap.setToolTipText(Language.get("WIN_RES_ADD_BMP"));
     res_add_bitmap.setMaximumSize(new Dimension(24,24));
     res_add_bitmap.setPreferredSize(new Dimension(24,24));
-    res_add_bitmap.addActionListener(this);    
+    res_add_bitmap.addActionListener(this);
     res_add_font = new JButton("",add_font_icon);
     res_add_font.setToolTipText(Language.get("WIN_RES_ADD_FONT"));
     res_add_font.setMaximumSize(new Dimension(24,24));
@@ -372,15 +372,15 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     resources.add(res_add_font);
     resources.add(res_duplicate);
     resources.add(res_edit);
-    resources.add(res_del);        
-    
-    res_layout.putConstraint(SpringLayout.WEST, res_tree_sp,5,SpringLayout.WEST, resources.getContentPane());   
-    res_layout.putConstraint(SpringLayout.NORTH, res_tree_sp,5,SpringLayout.NORTH, resources.getContentPane());        
+    resources.add(res_del);
+
+    res_layout.putConstraint(SpringLayout.WEST, res_tree_sp,5,SpringLayout.WEST, resources.getContentPane());
+    res_layout.putConstraint(SpringLayout.NORTH, res_tree_sp,5,SpringLayout.NORTH, resources.getContentPane());
     res_layout.putConstraint(SpringLayout.NORTH, res_add_bitmap,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_add_font,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_duplicate,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_edit,5,SpringLayout.SOUTH, res_tree_sp);
-    res_layout.putConstraint(SpringLayout.NORTH, res_del,5,SpringLayout.SOUTH, res_tree_sp);    
+    res_layout.putConstraint(SpringLayout.NORTH, res_del,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_add_bitmap,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_add_font,5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, res_edit,5,SpringLayout.SOUTH, res_tree_sp);
@@ -389,22 +389,22 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     res_layout.putConstraint(SpringLayout.WEST, res_add_font,5,SpringLayout.EAST, res_add_bitmap);
     res_layout.putConstraint(SpringLayout.WEST, res_duplicate,5,SpringLayout.EAST, res_add_font);
     res_layout.putConstraint(SpringLayout.WEST, res_edit,5,SpringLayout.EAST, res_duplicate);
-    res_layout.putConstraint(SpringLayout.WEST, res_del,5,SpringLayout.EAST, res_edit);    
+    res_layout.putConstraint(SpringLayout.WEST, res_del,5,SpringLayout.EAST, res_edit);
     res_layout.putConstraint(SpringLayout.SOUTH, resources.getContentPane(),24+5+5,SpringLayout.SOUTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.NORTH, resources.getContentPane(),5,SpringLayout.NORTH, res_tree_sp);
     res_layout.putConstraint(SpringLayout.EAST, resources.getContentPane(),5,SpringLayout.EAST, res_tree_sp);
-    
+
     resources.pack();
     resources.setSize(Config.getInt("win.res.width"),Config.getInt("win.res.height"));
-    resources.setVisible(true);    
-    
-    windows = new JInternalFrame(Language.get("WIN_WIN_TITLE"),true,false); 
+    resources.setVisible(true);
+
+    windows = new JInternalFrame(Language.get("WIN_WIN_TITLE"),true,false);
     windows.setFrameIcon(windows_icon);
-    windows.setMinimumSize(new Dimension(190,150));   
+    windows.setMinimumSize(new Dimension(190,150));
     SpringLayout win_layout = new SpringLayout();
-    windows.setLayout(win_layout);     
+    windows.setLayout(win_layout);
     win_tree_model = new DefaultTreeModel(s.getWindowsTree());
-    win_tree = new JTree(win_tree_model);    
+    win_tree = new JTree(win_tree_model);
     ToolTipManager.sharedInstance().registerComponent(win_tree);
     win_tree.setCellRenderer(tree_renderer);
     win_tree.setRootVisible(false);
@@ -413,8 +413,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     win_tree.addTreeSelectionListener(this);
     win_tree.addMouseListener(this);
     JScrollPane win_tree_sp = new JScrollPane(win_tree);
-    windows.add(win_tree_sp);       
-    win_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
+    windows.add(win_tree_sp);
+    win_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
     win_add_window = new JButton("",add_window_icon);
     win_add_window.setToolTipText(Language.get("WIN_WIN_ADD"));
     win_add_window.setMaximumSize(new Dimension(24,24));
@@ -458,16 +458,16 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     windows.add(win_edit);
     windows.add(win_layout_up);
     windows.add(win_layout_down);
-    windows.add(win_del);        
-    
-    win_layout.putConstraint(SpringLayout.WEST, win_tree_sp,5,SpringLayout.WEST, windows.getContentPane());   
-    win_layout.putConstraint(SpringLayout.NORTH, win_tree_sp,5,SpringLayout.NORTH, windows.getContentPane());        
+    windows.add(win_del);
+
+    win_layout.putConstraint(SpringLayout.WEST, win_tree_sp,5,SpringLayout.WEST, windows.getContentPane());
+    win_layout.putConstraint(SpringLayout.NORTH, win_tree_sp,5,SpringLayout.NORTH, windows.getContentPane());
     win_layout.putConstraint(SpringLayout.NORTH, win_add_window,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_add_layout,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_layout_up,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_layout_down,0,SpringLayout.SOUTH, win_layout_up);    
+    win_layout.putConstraint(SpringLayout.NORTH, win_layout_down,0,SpringLayout.SOUTH, win_layout_up);
     win_layout.putConstraint(SpringLayout.NORTH, win_duplicate,5,SpringLayout.SOUTH, win_tree_sp);
-    win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);    
+    win_layout.putConstraint(SpringLayout.NORTH, win_edit,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, win_del,5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.WEST, win_add_window,5,SpringLayout.WEST, windows.getContentPane());
     win_layout.putConstraint(SpringLayout.WEST, win_add_layout,5,SpringLayout.EAST, win_add_window);
@@ -475,22 +475,22 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     win_layout.putConstraint(SpringLayout.WEST, win_layout_down,5,SpringLayout.EAST, win_add_layout);
     win_layout.putConstraint(SpringLayout.WEST, win_duplicate,5,SpringLayout.EAST, win_layout_up);
     win_layout.putConstraint(SpringLayout.WEST, win_edit,5,SpringLayout.EAST, win_duplicate);
-    win_layout.putConstraint(SpringLayout.WEST, win_del,5,SpringLayout.EAST, win_edit);    
+    win_layout.putConstraint(SpringLayout.WEST, win_del,5,SpringLayout.EAST, win_edit);
     win_layout.putConstraint(SpringLayout.SOUTH, windows.getContentPane(),24+5+5,SpringLayout.SOUTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.NORTH, windows.getContentPane(),5,SpringLayout.NORTH, win_tree_sp);
     win_layout.putConstraint(SpringLayout.EAST, windows.getContentPane(),5,SpringLayout.EAST, win_tree_sp);
-    
+
     windows.pack();
     windows.setSize(Config.getInt("win.win.width"),Config.getInt("win.win.height"));
-    windows.setVisible(true);   
-    
-    items = new JInternalFrame(Language.get("WIN_ITEMS_TITLE"),true,false);   
+    windows.setVisible(true);
+
+    items = new JInternalFrame(Language.get("WIN_ITEMS_TITLE"),true,false);
     items.setFrameIcon(items_icon);
-    items.setMinimumSize(new Dimension(190,150));   
+    items.setMinimumSize(new Dimension(190,150));
     SpringLayout items_layout = new SpringLayout();
-    items.setLayout(items_layout);     
+    items.setLayout(items_layout);
     items_tree_model = new DefaultTreeModel(s.getItemsTree());
-    items_tree = new JTree(items_tree_model);    
+    items_tree = new JTree(items_tree_model);
     ToolTipManager.sharedInstance().registerComponent(items_tree);
     items_tree.setCellRenderer(tree_renderer);
     items_tree.setRootVisible(false);
@@ -502,8 +502,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items_tree.setShowsRootHandles(true);
     items_tree.addMouseListener(this);
     JScrollPane items_tree_sp = new JScrollPane(items_tree);
-    items.add(items_tree_sp);       
-    items_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));    
+    items.add(items_tree_sp);
+    items_tree_sp.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
     items_add = new JButton("",add_icon);
     items_add.setToolTipText(Language.get("WIN_ITEMS_ADD"));
     items_add.setMaximumSize(new Dimension(24,24));
@@ -539,10 +539,10 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items.add(items_down);
     items.add(items_duplicate);
     items.add(items_edit);
-    items.add(items_del);        
-    
-    items_layout.putConstraint(SpringLayout.WEST, items_tree_sp,5,SpringLayout.WEST, items.getContentPane());   
-    items_layout.putConstraint(SpringLayout.NORTH, items_tree_sp,5,SpringLayout.NORTH, items.getContentPane());           
+    items.add(items_del);
+
+    items_layout.putConstraint(SpringLayout.WEST, items_tree_sp,5,SpringLayout.WEST, items.getContentPane());
+    items_layout.putConstraint(SpringLayout.NORTH, items_tree_sp,5,SpringLayout.NORTH, items.getContentPane());
     items_layout.putConstraint(SpringLayout.NORTH, items_add,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_up,5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items_down,0,SpringLayout.SOUTH, items_up);
@@ -553,28 +553,28 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items_layout.putConstraint(SpringLayout.WEST, items_up,5,SpringLayout.EAST, items_add);
     items_layout.putConstraint(SpringLayout.WEST, items_down,5,SpringLayout.EAST, items_add);
     items_layout.putConstraint(SpringLayout.WEST, items_duplicate,5,SpringLayout.EAST, items_up);
-    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_duplicate);    
-    items_layout.putConstraint(SpringLayout.WEST, items_del,5,SpringLayout.EAST, items_edit);    
+    items_layout.putConstraint(SpringLayout.WEST, items_edit,5,SpringLayout.EAST, items_duplicate);
+    items_layout.putConstraint(SpringLayout.WEST, items_del,5,SpringLayout.EAST, items_edit);
     items_layout.putConstraint(SpringLayout.SOUTH, items.getContentPane(),24+5+5,SpringLayout.SOUTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.NORTH, items.getContentPane(),5,SpringLayout.NORTH, items_tree_sp);
     items_layout.putConstraint(SpringLayout.EAST, items.getContentPane(),5,SpringLayout.EAST, items_tree_sp);
-    
+
     items.pack();
     items.setSize(Config.getInt("win.items.width"),Config.getInt("win.items.height"));
-    items.setVisible(true); 
-    
+    items.setVisible(true);
+
     pvwin = new PreviewWindow(this);
-    
+
     jdesk.add(resources);
     jdesk.add(windows);
-    jdesk.add(items);    
+    jdesk.add(items);
     jdesk.add(pvwin.frame);
-    
+
     resources.setLocation(Config.getInt("win.res.x"),Config.getInt("win.res.y"));
     windows.setLocation(Config.getInt("win.win.x"),Config.getInt("win.win.y"));
     items.setLocation(Config.getInt("win.items.x"),Config.getInt("win.items.y"));
     pvwin.frame.setLocation(250,0);
-    
+
     res_add_bitmap_pu = new JPopupMenu();
     res_add_bitmap_pu_b = new JMenuItem(Language.get("WIN_RES_PU_ADD_BMP"));
     res_add_bitmap_pu_b.addActionListener(this);
@@ -583,7 +583,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     res_add_bitmap_pu_s.addActionListener(this);
     res_add_bitmap_pu.add(res_add_bitmap_pu_s);
     jdesk.add(res_add_bitmap_pu);
-    
+
     items_add_pu = new JPopupMenu();
     items_add_pu_tp = new JMenu(Language.get("WIN_ITEMS_PU_PANEL_ADD"));
     items_add_pu_tp_anchor = new JMenuItem(Language.get("ANCHOR"));
@@ -622,7 +622,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items_add_pu_button.addActionListener(this);
     items_add_pu.add(items_add_pu_button);
     items_add_pu_checkbox = new JMenuItem(Language.get("CHECKBOX"));
-    items_add_pu_checkbox.addActionListener(this);    
+    items_add_pu_checkbox.addActionListener(this);
     items_add_pu.add(items_add_pu_checkbox);
     items_add_pu_image = new JMenuItem(Language.get("IMAGE"));
     items_add_pu_image.addActionListener(this);
@@ -642,7 +642,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     items_add_pu_video = new JMenuItem(Language.get("VIDEO"));
     items_add_pu_video.addActionListener(this);
     items_add_pu.add(items_add_pu_video);
-    jdesk.add(items_add_pu);         
+    jdesk.add(items_add_pu);
 
     //Main window layout
     layout = new BorderLayout();
@@ -656,7 +656,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
 
     setMinimumSize(new Dimension(640,480));
-        
+
     setSize(Config.getInt("win.main.width"),Config.getInt("win.main.height"));
     if(Config.get("win.main.x")==null) setLocationRelativeTo(null);
     else {
@@ -665,7 +665,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(Boolean.parseBoolean(Config.get("win.main.maximized"))) {
       setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-    
+
     setVisible(true);
 
     update();
@@ -711,7 +711,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
 
     if(vlc_skins_dir==null) vlc_skins_dir = "";
-    
+
     if(base_fc==null) base_fc = new JFileChooser();
     if(Config.get("open.folder")==null) base_fc.setCurrentDirectory(new File(vlc_skins_dir));
     else base_fc.setCurrentDirectory(new File(Config.get("open.folder")));
@@ -745,7 +745,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   }
 
   private void initToolbar() {
-    tbar = new JToolBar();    
+    tbar = new JToolBar();
     //tbar.setFloatable(false);
 
     //Toolbar elements
@@ -787,12 +787,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   private void saveToolbarState() {
     if(tbar!=null && layout.getConstraints(tbar)!=null && !layout.getConstraints(tbar).equals("null"))
       Config.set("toolbar.constraints", layout.getConstraints(tbar));
-    
+
     Config.set("toolbar.orientation", tbar.getOrientation());
 
     if(((BasicToolBarUI)tbar.getUI()).isFloating()) {
       Component c = tbar;
-      while( !c.getClass().toString().endsWith("ToolBarDialog") ) {        
+      while( !c.getClass().toString().endsWith("ToolBarDialog") ) {
         c = c.getParent();
       }
       System.out.println(c.getClass().toString());
@@ -824,7 +824,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else {
       saved = true;
       exit();
-    } 
+    }
   }
 
   /**
@@ -834,9 +834,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     opening = true;
     String[] exts = { "xml","vlt" };
     if(System.getProperty("os.name").indexOf("Mac")==-1) {
-      base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin), *.vlt (VLC Theme)",false,vlc_dir));      
+      base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin), *.vlt (VLC Theme)",false,vlc_dir));
       int returnVal = base_fc.showOpenDialog(this);
-      if(returnVal == JFileChooser.APPROVE_OPTION) {      
+      if(returnVal == JFileChooser.APPROVE_OPTION) {
         openFile(base_fc.getSelectedFile());
         opening = false;
       }
@@ -850,8 +850,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       fd.setMode(FileDialog.LOAD);
       fd.setFilenameFilter(new FilenameFilter() {
         @Override
-        public boolean accept(File dir, String name) { 
-          return name.toUpperCase().endsWith(".XML"); 
+        public boolean accept(File dir, String name) {
+          return name.toUpperCase().endsWith(".XML");
         }
       });
       fd.setVisible(true);
@@ -864,7 +864,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         opening = false;
         if(!opened) showWelcomeDialog();
       }
-      
+
     }
   }
 
@@ -882,7 +882,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(pvwin!=null) {
       pvwin.clearLayout();
     }
-    ProgressWindow pwin = new ProgressWindow(this,"");  
+    ProgressWindow pwin = new ProgressWindow(this,"");
     if(f.toString().toLowerCase().endsWith(".vlt")) {
       String vltname = f.getName().replaceAll(".vlt","");
       Object[] options= {Language.get("VLT_EX_YES"), Language.get("VLT_EX_NO")};
@@ -891,23 +891,23 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(n!=0) {
         showWelcomeDialog();
       }
-      File unpackfolder = new File(f.getParent(),vltname+"_unpacked");            
+      File unpackfolder = new File(f.getParent(),vltname+"_unpacked");
       unpackfolder.mkdirs();
       boolean unpacked=false;
-      pwin.setText(Language.get("VLT_EX_PROGRESS"));      
-      pwin.setVisible(true);        
+      pwin.setText(Language.get("VLT_EX_PROGRESS"));
+      pwin.setVisible(true);
       // <editor-fold defaultstate="collapsed" desc="zip">
-      try {          
-        ZipFile zip = new ZipFile(f);         
+      try {
+        ZipFile zip = new ZipFile(f);
         Enumeration entries = zip.entries();
-        while(entries.hasMoreElements()) {            
+        while(entries.hasMoreElements()) {
           ZipEntry ze = (ZipEntry)entries.nextElement();
           File zef = new File(unpackfolder,ze.getName());
           if(ze.getName().endsWith("theme.xml")) f=zef;
           if(ze.isDirectory()) zef.mkdirs();
-          else {                
+          else {
             InputStream zeis = zip.getInputStream(ze);
-            BufferedInputStream zebis = new BufferedInputStream(zeis);              
+            BufferedInputStream zebis = new BufferedInputStream(zeis);
             zef.getParentFile().mkdirs();
             FileOutputStream fos = new FileOutputStream(zef);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -921,8 +921,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         unpacked=true;
       }
       catch (IOException ex) {
-        System.out.println("VLT file is not a valid ZIP file. Trying tar.gz now...");                 
-      }      
+        System.out.println("VLT file is not a valid ZIP file. Trying tar.gz now...");
+      }
       // </editor-fold>
       // <editor-fold defaultstate="collapsed" desc="tar.gz">
       if(!unpacked) {
@@ -931,19 +931,19 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
           FileInputStream fis = new FileInputStream(f);
           GZIPInputStream gzis = new GZIPInputStream(fis);
           //BufferedInputStream bis = new BufferedInputStream(gzis);
-          TarInputStream tis = new TarInputStream(gzis);                   
-          for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {              
+          TarInputStream tis = new TarInputStream(gzis);
+          for(TarEntry te=null;(te=tis.getNextEntry())!=null;) {
             File tef = new File(unpackfolder,te.getName());
             if(te.getName().endsWith("theme.xml")) f=tef;
             if(te.isDirectory()) tef.mkdirs();
-            else {                                
-              BufferedInputStream tebis = new BufferedInputStream(tis);                
+            else {
+              BufferedInputStream tebis = new BufferedInputStream(tis);
               tef.getParentFile().mkdirs();
               FileOutputStream fos = new FileOutputStream(tef);
               BufferedOutputStream bos = new BufferedOutputStream(fos);
               for(int b=0;(b=tebis.read())!=-1;) bos.write((byte)b);
               bos.close();
-              fos.close();                              
+              fos.close();
             }
           }
           tis.close();
@@ -954,7 +954,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         catch(IOException ex) {
           ex.printStackTrace();
         }
-      }        
+      }
       //</editor-fold>
       if(!unpacked) {
         pwin.setVisible(false);
@@ -967,23 +967,23 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_NOTHEME_MSG"),Language.get("ERROR_VLT_NOTHEME_TITLE"),JOptionPane.ERROR_MESSAGE);
         opening=false;
         return;
-      }      
-      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));      
+      }
+      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     pwin.setText(Language.get("XML_PARSING_PROGRESS"));
     pwin.setVisible(true);
     setTitle(f.toString()+" - VLC Skin Editor "+VERSION);
     m_file_png.setEnabled(false);
     s = new Skin(this);
-    s.open(f);                  
+    s.open(f);
     selected_resource = null;
     selected_in_windows = null;
     selected_window = null;
     selected_item = null;
-    saved = true;      
+    saved = true;
     opening = false;
     opened = true;
-    pwin.setVisible(false);    
+    pwin.setVisible(false);
     pwin.dispose();
     hist = new History(this);
     s.gvars.sendUpdate();
@@ -993,16 +993,16 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    * Shows a dialog to specify the new skin's location and creates an empty skin.
    */
   private void createNew() {
-      base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));      
-      int returnVal=base_fc.showSaveDialog(this);        
+      base_fc.setFileFilter(new CustomFileFilter(base_fc,"xml","*.xml (VLC XML-Skin Files)",false,vlc_dir));
+      int returnVal=base_fc.showSaveDialog(this);
       if(returnVal != JFileChooser.APPROVE_OPTION) {
-        if(!opened) showWelcomeDialog();     
+        if(!opened) showWelcomeDialog();
       }
       else {
         File f = base_fc.getSelectedFile();
         if(!f.getPath().toLowerCase().endsWith(".xml")) f = new File(f.getPath()+".xml");
         setTitle(f.getPath()+" - VLC Skin Editor "+VERSION);
-        s.createNew(f);                  
+        s.createNew(f);
         selected_resource = null;
         selected_in_windows = null;
         selected_window = null;
@@ -1019,16 +1019,16 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    // <editor-fold defaultstate="collapsed" desc="New File"> 
+    // <editor-fold defaultstate="collapsed" desc="New File">
     if(e.getSource().equals(m_file_new)) {
       createNew();
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Open File"> 
+    // <editor-fold defaultstate="collapsed" desc="Open File">
     else if(e.getSource().equals(m_file_open)||e.getSource().equals(tbar_open_btn)) {
       openFile();
     }
-    // </editor-fold>    
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Save File">
     else if(e.getSource().equals(m_file_save)||e.getSource().equals(tbar_save_btn))  {
       s.save();
@@ -1038,7 +1038,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     // <editor-fold defaultstate="collapsed" desc="Test Skin">
     else if(e.getSource().equals(m_file_test))  {
       s.save();
-      saved=true;            
+      saved=true;
       String[] command = { vlc_dir+"vlc", "-I", "skins2", "--skins2-last="+s.skinfile.toString(), /*"--skins2-config=\"\"",*/"--skins2-systray" };
       try {
         Runtime.getRuntime().exec(command);
@@ -1049,7 +1049,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Export VLT">
-    else if(e.getSource().equals(m_file_vlt))  {      
+    else if(e.getSource().equals(m_file_vlt))  {
       if(vlt_fc==null) {
         vlt_fc = new JFileChooser();
         vlt_fc.setCurrentDirectory(new File(vlc_skins_dir));
@@ -1061,12 +1061,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(returnVal == JFileChooser.APPROVE_OPTION) {
         f = vlt_fc.getSelectedFile();
         if(!f.getPath().toLowerCase().endsWith(".vlt")) f = new File(f.getPath()+".vlt");
-      }      
+      }
       else return;
-      ProgressWindow pwin = new ProgressWindow(this,"");  
+      ProgressWindow pwin = new ProgressWindow(this,"");
       pwin.setText(Language.get("VLT_PROGRESS"));
       pwin.setVisible(true);
-      try {        
+      try {
         TarGzOutputStream tgz = new TarGzOutputStream(new FileOutputStream(f));
         TarEntry sf = new TarEntry(s.skinfile);
         sf.setName("theme.xml");
@@ -1075,15 +1075,15 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         while(true) {
           int cb = xmlfis.read();
           if(cb==-1) break;
-          tgz.write(cb);          
-        }  
+          tgz.write(cb);
+        }
         xmlfis.close();
         tgz.closeEntry();
         java.util.List<String> files = new LinkedList<String>();
         for(int i=0;i<s.resources.size();i++) {
           if(s.resources.get(i).getClass().equals(Bitmap.class)) {
             try {
-              Bitmap b = (Bitmap)s.resources.get(i);              
+              Bitmap b = (Bitmap)s.resources.get(i);
               String fn = s.skinfolder+b.file;
               if(!files.contains(fn)) { //To avoid double files (e.g. one font file used by several font objects)
                 File file = new File(fn);
@@ -1108,8 +1108,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
                 while(true) {
                   int cb = fis.read();
                   if(cb==-1) break;
-                  tgz.write(cb);          
-                }   
+                  tgz.write(cb);
+                }
                 fis.close();
                 tgz.closeEntry();
                 files.add(fn);
@@ -1119,47 +1119,47 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
               ex.printStackTrace();
               pwin.setVisible(false);
               JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);
-            }       
+            }
             catch (Exception ex){}
           }
           else if(s.resources.get(i).getClass().equals(vlcskineditor.resources.Font.class)) {
             try {
-              vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)s.resources.get(i);              
-              String fn = s.skinfolder+fnt.file;              
+              vlcskineditor.resources.Font fnt = (vlcskineditor.resources.Font)s.resources.get(i);
+              String fn = s.skinfolder+fnt.file;
               if(!files.contains(fn)) { //To avoid double files (e.g. one font file used by several font objects)
                 tgz.putNextEntry(new TarEntry(fnt.file));
                 FileInputStream fis = new FileInputStream(fn);
                 while(true) {
                   int cb = fis.read();
                   if(cb==-1) break;
-                  tgz.write(cb);          
-                }   
+                  tgz.write(cb);
+                }
                 fis.close();
                 tgz.closeEntry();
                 files.add(fn);
               }
             }
-            catch (IOException ex) {              
+            catch (IOException ex) {
               ex.printStackTrace();
               pwin.setVisible(false);
               JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);
             }
           }
-        }   
-        
+        }
+
         tgz.close();
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,Language.get("VLT_SUCCESS_MSG"),Language.get("VLT_SUCCESS_TITLE"),JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(this,Language.get("VLT_SUCCESS_MSG"),Language.get("VLT_SUCCESS_TITLE"),JOptionPane.INFORMATION_MESSAGE);
       }
-      catch (Exception ex) {        
+      catch (Exception ex) {
         ex.printStackTrace();
         pwin.setVisible(false);
-        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);        
+        JOptionPane.showMessageDialog(this,Language.get("ERROR_VLT_MSG"),Language.get("ERROR_VLT_TILE"),JOptionPane.ERROR_MESSAGE);
         return;
-      }   
+      }
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Save Preview"> 
+    // <editor-fold defaultstate="collapsed" desc="Save Preview">
     else if(e.getSource().equals(m_file_png)) {
       JFileChooser png_fc = new JFileChooser();
       png_fc.setAcceptAllFileFilterUsed(false);
@@ -1167,13 +1167,13 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       int i = png_fc.showSaveDialog(this);
       if(i==JFileChooser.APPROVE_OPTION) {
         File f = png_fc.getSelectedFile();
-        if(!f.getPath().toLowerCase().endsWith(".png")) 
+        if(!f.getPath().toLowerCase().endsWith(".png"))
           f = new File(f.getPath()+".png");
         pvwin.savePNG(f);
       }
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Quit"> 
+    // <editor-fold defaultstate="collapsed" desc="Quit">
     else if(e.getSource().equals(m_file_quit)) {
       exit();
     }
@@ -1181,24 +1181,24 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else if(e.getSource().equals(m_edit_theme)) s.showThemeOptions();
     else if(e.getSource().equals(m_edit_vars)) s.gvars.showOptions();
     else if(e.getSource().equals(m_edit_prefs)) Config.showOptions();
-    // <editor-fold defaultstate="collapsed" desc="Open Help"> 
+    // <editor-fold defaultstate="collapsed" desc="Open Help">
     else if(e.getSource().equals(m_help_doc)) {
       Helper.browse("http://www.videolan.org/vlc/skinedhlp/");
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="About"> 
+    // <editor-fold defaultstate="collapsed" desc="About">
     else if(e.getSource().equals(m_help_about)) {
       JOptionPane.showMessageDialog(this,Language.get("ABOUT_MSG").replaceAll("%w", "http://www.videolan.org/vlc/skineditor.html").replaceAll("%y", String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).replaceAll("%v", VERSION)),
             Language.get("ABOUT_TITLE").replaceAll("%v", VERSION), JOptionPane.INFORMATION_MESSAGE,icon);
     }
-    // </editor-fold>    
+    // </editor-fold>
     else if(e.getSource().equals(res_add_bitmap)) res_add_bitmap_pu.show(res_add_bitmap,0,0);
     // <editor-fold defaultstate="collapsed" desc="Add Bitmap">
     else if(e.getSource().equals(res_add_bitmap_pu_b)) {
       if(bitmap_adder==null) {
         bitmap_adder = new JFileChooser();
         bitmap_adder.setFileFilter(new CustomFileFilter(bitmap_adder,"png",Language.get("ADD_BMP_FILE_FILTER_DESC"),true,s.skinfolder));
-        bitmap_adder.setCurrentDirectory(new File(s.skinfolder));   
+        bitmap_adder.setCurrentDirectory(new File(s.skinfolder));
         bitmap_adder.setAcceptAllFileFilterUsed(false);
         bitmap_adder.setMultiSelectionEnabled(true);
       }
@@ -1211,7 +1211,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         }
         s.updateResources();
         if(last_added!=null) s.expandItem(last_added.id);
-      }      
+      }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add SubBitmap">
@@ -1221,12 +1221,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         if(r!=null) {
           if(r.getClass()==Bitmap.class) {
             Bitmap b = (Bitmap)r;
-            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
+            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));
           }
           else if(r.getClass()==SubBitmap.class) {
             SubBitmap sb = (SubBitmap)r;
             Bitmap b = sb.getParentBitmap();
-            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));  
+            b.SubBitmaps.add(new vlcskineditor.resources.SubBitmap(s,b));
           }
           else {
             JOptionPane.showMessageDialog(this,Language.get("ERROR_ADD_SBMP_NOTBMP"),Language.get("ERROR_ADD_SBMP_TITLE"),JOptionPane.INFORMATION_MESSAGE);
@@ -1247,7 +1247,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         font_adder = new JFileChooser();
         String[] ext = { "ttf" , "otf" };
         font_adder.setFileFilter(new CustomFileFilter(font_adder,ext,Language.get("ADD_FONT_FILE_FILTER_DESC"),true,s.skinfolder));
-        font_adder.setCurrentDirectory(new File(s.skinfolder));   
+        font_adder.setCurrentDirectory(new File(s.skinfolder));
         font_adder.setAcceptAllFileFilterUsed(false);
         font_adder.setMultiSelectionEnabled(true);
       }
@@ -1260,7 +1260,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         }
         s.updateResources();
         if(last_added!=null) s.expandItem(last_added.id);
-      }    
+      }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Duplicate resource">
@@ -1270,7 +1270,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(r==null) return;
       String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
       if(r.getClass()==Bitmap.class) {
-        Bitmap b = (Bitmap)r;        
+        Bitmap b = (Bitmap)r;
         Bitmap b2 = new Bitmap((Bitmap)b);
         b2.renameForCopy(p);
         s.resources.add(b2);
@@ -1278,7 +1278,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         s.expandResource(b.id);
       }
       else if(r.getClass()==SubBitmap.class) {
-        SubBitmap sb = (SubBitmap)r;        
+        SubBitmap sb = (SubBitmap)r;
         SubBitmap sb2 = new SubBitmap(sb);
         sb2.renameForCopy(p);
         sb.getParentBitmap().SubBitmaps.add(sb2);
@@ -1286,7 +1286,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         s.expandResource(sb.id);
       }
       else {
-        vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;        
+        vlcskineditor.resources.Font f = (vlcskineditor.resources.Font)r;
         vlcskineditor.resources.Font f2 = new vlcskineditor.resources.Font((vlcskineditor.resources.Font)f);
         f2.renameForCopy(p);
         s.resources.add(f2);
@@ -1323,7 +1323,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
         if(getSelectedItem()==null) return;
         String p = JOptionPane.showInputDialog(this, Language.get("DUPLICATE_MSG"), "%oldid%_copy");
         Item i = s.getItem(getSelectedItem());
-        if(i==null) return;        
+        if(i==null) return;
         if(i.getClass()==Anchor.class) {
             Anchor a = new Anchor((Anchor)i);
             a.renameForCopy(p);
@@ -1351,7 +1351,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
             s.getParentListOf(i.id).add(g);
             s.updateItems();
             s.expandItem(g.id);
-        }        
+        }
         else if(i.getClass()==vlcskineditor.items.Image.class) {
             vlcskineditor.items.Image im = new vlcskineditor.items.Image((vlcskineditor.items.Image)i);
             im.renameForCopy(p);
@@ -1391,12 +1391,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
             }
             else {
                 //The selected slider seems to be in a playtree
-                JOptionPane.showMessageDialog(this,"A PlayTree cannot contain more than one slider!","Slider could not be duplicated",JOptionPane.INFORMATION_MESSAGE); 
-            }            
+                JOptionPane.showMessageDialog(this,"A PlayTree cannot contain more than one slider!","Slider could not be duplicated",JOptionPane.INFORMATION_MESSAGE);
+            }
         }
         else if(i.getClass()==SliderBackground.class) {
            //A slider can only have one slider background!
-           JOptionPane.showMessageDialog(this,"A slider cannot contain more than one background!","SliderBackgrounds cannot be duplicated",JOptionPane.INFORMATION_MESSAGE); 
+           JOptionPane.showMessageDialog(this,"A slider cannot contain more than one background!","SliderBackgrounds cannot be duplicated",JOptionPane.INFORMATION_MESSAGE);
         }
         else if(i.getClass()==Text.class) {
             Text t = new Text((Text)i);
@@ -1411,14 +1411,14 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
             s.getParentListOf(i.id).add(v);
             s.updateItems();
             s.expandItem(v.id);
-        }        
+        }
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Resource edit">
     else if(e.getSource().equals(res_edit)) {
       if(getSelectedResource()!=null) {
         Resource r = s.getResource(getSelectedResource());
-        if(r!=null) r.showOptions();        
+        if(r!=null) r.showOptions();
       }
     }
     // </editor-fold>
@@ -1429,7 +1429,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add window">
     else if(e.getSource().equals(win_add_window)) {
-      s.windows.add(new Window(s));      
+      s.windows.add(new Window(s));
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Add layout">
@@ -1447,9 +1447,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else if(e.getSource().equals(win_layout_up)) {
       Window w = s.getWindow(getSelectedWindow());
       Layout l = w.getLayout(getSelectedLayout());
-      if(l==null) return;      
+      if(l==null) return;
       int index = w.layouts.indexOf(l);
-      if(index<=0) return;      
+      if(index<=0) return;
       w.layouts.set(index,w.layouts.set(index-1,l));
       s.updateWindows();
       s.expandLayout(l.id);
@@ -1457,9 +1457,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else if(e.getSource().equals(win_layout_down)) {
       Window w = s.getWindow(getSelectedWindow());
       Layout l = w.getLayout(getSelectedLayout());
-      if(l==null) return;      
+      if(l==null) return;
       int index = w.layouts.indexOf(l);
-      if(index>=w.layouts.size()-1) return;      
+      if(index>=w.layouts.size()-1) return;
       w.layouts.set(index,w.layouts.set(index+1,l));
       s.updateWindows();
       s.expandLayout(l.id);
@@ -1473,7 +1473,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       }
       else if(getSelectedWindow()!=null) {
         Window w = s.getWindow(getSelectedWindow());
-        if(w!=null) w.showOptions();        
+        if(w!=null) w.showOptions();
       }
     }
     // </editor-fold>
@@ -1489,12 +1489,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(getSelectedItem()!=null) {
         Item i = s.getItem(getSelectedItem());
         if(i!=null) {
-          if(i.getClass().equals(Group.class)) items_add_pu_tp.setEnabled(true);                            
-          if(i.getClass().equals(vlcskineditor.items.Panel.class)) items_add_pu_tp.setEnabled(true);                            
-        }         
+          if(i.getClass().equals(Group.class)) items_add_pu_tp.setEnabled(true);
+          if(i.getClass().equals(vlcskineditor.items.Panel.class)) items_add_pu_tp.setEnabled(true);
+        }
       }
       items_add_pu.setSelected(null);
-      items_add_pu.show(items_add,0,0);  
+      items_add_pu.show(items_add,0,0);
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Move item">
@@ -1504,9 +1504,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       java.util.List<Item> l = s.getParentListOf(getSelectedItem());
       if(l==null) return;
       int index = l.indexOf(i);
-      if(index<=0) return;      
+      if(index<=0) return;
       l.set(index,l.set(index-1,i));
-      s.updateItems();      
+      s.updateItems();
       s.expandItem(getSelectedItem());
     }
     else if(e.getSource().equals(items_down)) {
@@ -1514,9 +1514,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       if(i==null) return;
       java.util.List<Item> l = s.getParentListOf(getSelectedItem());
       int index = l.indexOf(i);
-      if(index>=l.size()-1) return;      
+      if(index>=l.size()-1) return;
       l.set(index,l.set(index+1,i));
-      s.updateItems();      
+      s.updateItems();
       s.expandItem(getSelectedItem());
     }
     //</editor-fold>
@@ -1524,100 +1524,100 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     else if(e.getSource().equals(items_edit)) {
       if(getSelectedItem()!=null) {
         Item i = s.getItem(getSelectedItem());
-        if(i!=null) i.showOptions();        
+        if(i!=null) i.showOptions();
       }
     }
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Add Item popups">
-    else if(e.getSource().equals(items_add_pu_anchor)) {      
+    else if(e.getSource().equals(items_add_pu_anchor)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new Anchor(s));           
+      i.add(new Anchor(s));
     }
-    else if(e.getSource().equals(items_add_pu_button)) {      
+    else if(e.getSource().equals(items_add_pu_button)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new vlcskineditor.items.Button(s));           
+      i.add(new vlcskineditor.items.Button(s));
     }
-    else if(e.getSource().equals(items_add_pu_checkbox)) {      
+    else if(e.getSource().equals(items_add_pu_checkbox)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new vlcskineditor.items.Checkbox(s));           
+      i.add(new vlcskineditor.items.Checkbox(s));
     }
-    else if(e.getSource().equals(items_add_pu_panel)) {      
+    else if(e.getSource().equals(items_add_pu_panel)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new vlcskineditor.items.Panel(s));           
+      i.add(new vlcskineditor.items.Panel(s));
     }
-    else if(e.getSource().equals(items_add_pu_image)) {      
+    else if(e.getSource().equals(items_add_pu_image)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new vlcskineditor.items.Image(s));           
+      i.add(new vlcskineditor.items.Image(s));
     }
-    else if(e.getSource().equals(items_add_pu_playtree)) {      
+    else if(e.getSource().equals(items_add_pu_playtree)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new Playtree(s));           
+      i.add(new Playtree(s));
     }
-    else if(e.getSource().equals(items_add_pu_slider)) {      
+    else if(e.getSource().equals(items_add_pu_slider)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new Slider(s));           
+      i.add(new Slider(s));
     }
-    else if(e.getSource().equals(items_add_pu_text)) {      
+    else if(e.getSource().equals(items_add_pu_text)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new Text(s));           
+      i.add(new Text(s));
     }
-    else if(e.getSource().equals(items_add_pu_video)) {      
+    else if(e.getSource().equals(items_add_pu_video)) {
       java.util.List<Item> i = null;
       if(getSelectedItem()!=null ) i = s.getParentListOf(getSelectedItem());
       if(i==null) i = s.getWindow(getSelectedWindow()).getLayout(getSelectedLayout()).items;
-      i.add(new Video(s));           
+      i.add(new Video(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_anchor)) {      
+    else if(e.getSource().equals(items_add_pu_tp_anchor)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Anchor(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Anchor(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_button)) {      
+    else if(e.getSource().equals(items_add_pu_tp_button)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Button(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Button(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_checkbox)) {      
+    else if(e.getSource().equals(items_add_pu_tp_checkbox)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Checkbox(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Checkbox(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_image)) {      
+    else if(e.getSource().equals(items_add_pu_tp_image)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Image(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Image(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_panel)) {      
+    else if(e.getSource().equals(items_add_pu_tp_panel)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Panel(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Panel(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_playtree)) {      
+    else if(e.getSource().equals(items_add_pu_tp_playtree)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Playtree(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Playtree(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_slider)) {      
+    else if(e.getSource().equals(items_add_pu_tp_slider)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Slider(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Slider(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_text)) {      
+    else if(e.getSource().equals(items_add_pu_tp_text)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Text(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Text(s));
     }
-    else if(e.getSource().equals(items_add_pu_tp_video)) {      
+    else if(e.getSource().equals(items_add_pu_tp_video)) {
       java.util.List<Item> l = s.getListOf(getSelectedItem());
-      if(l!=null) l.add(new vlcskineditor.items.Video(s));           
+      if(l!=null) l.add(new vlcskineditor.items.Video(s));
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Item delete">
@@ -1753,12 +1753,12 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       }
     }
   }
-  
+
   /**
    * Reacts to tree selections
    */
   @Override
-  public void valueChanged(TreeSelectionEvent e) {    
+  public void valueChanged(TreeSelectionEvent e) {
     if(opening) return;
     if(e.getSource().equals(res_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
@@ -1785,8 +1785,8 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
           m_file_png.setEnabled(true);
           win_layout_up.setEnabled(true);
           win_layout_down.setEnabled(true);
-        }        
-      }      
+        }
+      }
     }
     else if(e.getSource().equals(items_tree)) {
       String selection = e.getPath().getLastPathComponent().toString();
@@ -1805,7 +1805,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     if(pvwin==null) return;
     if(pvwin.fu==null) {
       pvwin.fu = new FrameUpdater(pvwin,5);
-      pvwin.fu.start();      
+      pvwin.fu.start();
     }
   }
   @Override
@@ -1818,7 +1818,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   public void windowDeiconified(WindowEvent e) {
     if(pvwin.fu==null) {
       pvwin.fu = new FrameUpdater(pvwin,5);
-      pvwin.fu.start();      
+      pvwin.fu.start();
     }
   }
   @Override
@@ -1837,7 +1837,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       else if(e.getSource().equals(items_tree)) actionPerformed(new ActionEvent(items_edit,ActionEvent.ACTION_FIRST,"Doubleclick"));
     }
     else {
-      if(e.getSource().equals(res_tree)) {        
+      if(e.getSource().equals(res_tree)) {
         TreePath tp = res_tree.getPathForLocation(e.getX(),e.getY());
         if(tp==null) return;
         if(res_tree.isExpanded(tp)) res_tree.collapsePath(tp);
@@ -1907,7 +1907,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       java.awt.Image img = null;
       try {
         img = Toolkit.getDefaultToolkit().createImage(Main.class.getResource(filename));
-        return new ImageIcon(img);  
+        return new ImageIcon(img);
       } catch (Exception ex) {
         ex.printStackTrace();
         return null;
@@ -1951,7 +1951,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
             File tempfile = File.createTempFile("vlcse_update", ".zip");
             tempfile.deleteOnExit();
             RandomAccessFile file = new RandomAccessFile(tempfile,"rw");
-            
+
 
             InputStream stream = connection.getInputStream();
             int downloaded = 0;
@@ -1968,7 +1968,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
               } else {
                 buffer = new byte[size - downloaded];
               }
-              
+
               int read = stream.read(buffer);
               if (read == -1)
                 break;
@@ -2038,7 +2038,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
       }
       else if(n==1) {
         doExit();
-      }     
+      }
       else {
         return;
       }
@@ -2078,7 +2078,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     Config.save();
     System.exit(0);
   }
-  
+
   /**
    * Creates a new instance of Main and thus launches the editor
    * @param args the command line arguments
@@ -2086,20 +2086,20 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
   public static void main(String[] args) {
     //Post update code, only executed after update
     if(new File(".updated").exists()) {
-      
+
       new File(".updated").delete();
     }
 
-    //Normal program code    
+    //Normal program code
     Config.load();
     Language.loadLanguageByCode(Config.get("language"));
-    
-    try {	
+
+    try {
       String laf = Config.get("swing.laf");
       String lafClass = laf;
       if(laf!=null) {
         if(laf.equals("System")) {
-          lafClass = UIManager.getSystemLookAndFeelClassName();          
+          lafClass = UIManager.getSystemLookAndFeelClassName();
         }
         if(laf.equals("Metal: Steel")) {
           lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
@@ -2108,15 +2108,15 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
           lafClass = UIManager.getCrossPlatformLookAndFeelClassName();
           MetalLookAndFeel.setCurrentTheme(new OceanTheme());
         }
-      }      
+      }
       UIManager.setLookAndFeel(lafClass);
-    } 
+    }
     catch (Exception ex) {
       ex.printStackTrace();
     }
-    
+
     JFrame.setDefaultLookAndFeelDecorated(true);
-    
+
     new Main(args);
   }
 
