@@ -715,7 +715,7 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     			if(cmdLine.contains("InstallDir")) {
     				int index = cmdLine.lastIndexOf("REG_SZ");
     				if(index !=-1) {
-    					vlc_dir = cmdLine.substring(index+6).trim();
+    					vlc_dir = cmdLine.substring(index+6).trim()+"\\";
     					vlc_skins_dir = vlc_dir+"skins\\";
     					break;
     				}
