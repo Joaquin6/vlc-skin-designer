@@ -35,7 +35,6 @@ import javax.swing.border.*;
 import java.util.zip.*;
 import vlcskineditor.items.*;
 import com.ice.tar.*;
-import com.ice.jni.registry.*;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import javax.swing.plaf.metal.*;
 import vlcskineditor.history.*;
@@ -707,13 +706,22 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
           vlc_dir = f.getPath();
           vlc_skins_dir = new File(f, "skins").getPath();
       } else {
-          try {
-            RegistryKey vlc_key = Registry.openSubkey(Registry.HKEY_LOCAL_MACHINE,"Software\\VideoLAN\\VLC",RegistryKey.ACCESS_READ);
-            String installDir = vlc_key.getStringValue("InstallDir");
-            vlc_dir = installDir+File.separator;
-            vlc_skins_dir = vlc_dir+"skins\\";
-          }
-          catch (Exception e) {
+    	 try {
+    		// An improvement upon the unnecessary ICE_JNIRegistry.dll which may not work on all Windows systems (yikes!)
+    		Process regProcess = Runtime.getRuntime().exec("REG QUERY \"HKEY_LOCAL_MACHINE\\Software\\VideoLAN\\VLC\" /v InstallDir"); 
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(regProcess.getInputStream()));
+    		String cmdLine;
+    		while((cmdLine=reader.readLine()) !=null) {
+    			if(cmdLine.contains("InstallDir")) {
+    				int index = cmdLine.lastIndexOf("REG_SZ");
+    				if(index !=-1) {
+    					vlc_dir = cmdLine.substring(index+6).trim()+"\\";
+    					vlc_skins_dir = vlc_dir+"skins\\";
+    					break;
+    				}
+    			} 
+    		}
+    	 } catch (Exception e) {
             System.err.println("Could not read VLC installation directory from Registry. VLC might not be properly installed.");
             e.printStackTrace();
           }
@@ -847,6 +855,9 @@ public class Main extends JFrame implements ActionListener, TreeSelectionListene
     opening = true;
     String[] exts = { "xml","vlt" };
     if(System.getProperty("os.name").indexOf("Mac")==-1) {
+      if(base_fc == null) {
+        base_fc = new JFileChooser(); // Initialize base_fc if it's null
+      }
       base_fc.setFileFilter(new CustomFileFilter(base_fc,exts,"*.xml (VLC XML-Skin), *.vlt (VLC Theme)",false,vlc_dir));
       int returnVal = base_fc.showOpenDialog(this);
       if(returnVal == JFileChooser.APPROVE_OPTION) {
